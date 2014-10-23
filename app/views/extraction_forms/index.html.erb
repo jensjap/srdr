@@ -1,0 +1,55 @@
+<div id='left_column'>
+
+</div>
+<div id='right_column'>
+<%= render "layouts/info_messages" %>
+<h1>Extraction Forms</h1>
+
+To view an extraction form, click on its title in the list below. To edit a form, edit the project it belongs to. <br/>
+<strong>In the future, you will be able to copy forms from this list for use in your own projects.</strong>
+
+<br/><br/>
+
+
+<% @extraction_forms.each do |extraction_form| %>
+ 
+  <div class="summary_heading">
+  
+	<%= image_tag "Table-silk.png", :alt => "Table" %>  <%= link_to extraction_form.title, "", :id => "preview_extform_" + extraction_form.id.to_s %>
+
+	<div class="right" style="float: right">
+	
+	<script>
+		$("#preview_extform_<%= extraction_form.id.to_s %>").live("click", function(e){
+			e.preventDefault();
+			$("#preview_div").load("<%= extraction_form_path(extraction_form) %>");					
+			$("#preview_div").dialog('open');			
+		});
+	</script>
+	
+	<%# if User.current_user_has_extraction_form_edit_privilege(extraction_form.id, current_user) %>
+	<%# @project = Project.find(extraction_form.project_id) %>
+	 <%# "| "%><%# link_to "Edit", edit_project_extraction_form_path(@project, extraction_form), :remote => true, :alt => "Click to edit this extraction form", :class => "tooltip_edit" %>
+	 <%# end %>
+	 
+	</div>
+	
+	</div>
+	
+	
+	
+<% end %>
+
+<br/><br/>
+		<div id="preview_div">
+		</div>
+		<script type="text/javascript">
+		$("#preview_div").dialog({
+			autoOpen: false,
+			minWidth: 600,
+			position: 'top',
+			title: "Viewing Extraction Form"
+		});
+		</script>
+		
+		</div>

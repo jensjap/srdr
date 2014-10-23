@@ -1,0 +1,53 @@
+<% form_tag "results/assign_data_point_attributes", :remote=>true do%>
+<div style="padding:10px;">
+	<input type='hidden' name='datapoint_id' value="<%= @datapoint.id %>">
+	<input type='hidden' name='datapoint_type' value="<%= @dp_type %>">
+	<input type='hidden' name='outcome_id' value="<%= @outcome_id %>">
+	<input type='hidden' name='subgroup_id' value="<%= @subgroup_id %>">
+	<input type='hidden' name='selected_timepoints' value="<%= @selected_timepoints %>">
+	<input type='hidden' name='field_id' value="<%= @field_id %>">
+	<strong>The data in this cell is: </strong><br/>
+	<input title="Choose that this is not a calculated field." type="radio" name="is_calculated" value="0" <%= @datapoint.is_calculated ? "" : "checked" %>> 	  not calculated (straight from the article)<br>
+	<input type="radio" title="Choose that this is a calculated field." name="is_calculated" value="1" <%= @datapoint.is_calculated ? "checked" : "" %>> 
+    calculated  
+  <br/><br/>
+	<strong>Footnote Text:</strong></br>
+	<textarea rows=4 cols=50 id="footnote_text_area" name="footnote"><%=@datapoint.footnote%></textarea>
+  <br/>
+	Characters remaining: 
+	<span id='chars_remaining'>
+		<% if @datapoint.footnote.nil? %>
+		  255
+		<% else %>
+		  <%= 255 - @datapoint.footnote.length %>
+		<% end %>
+	</span>
+	
+</div>
+<br/>
+	<center>
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+			<%= image_tag "Add.png", :alt => "Add" %> Save
+		</button>
+		<button class="negative" onClick="event.preventDefault();$('#data_point_option_div').dialog('close');">
+			<%= image_tag "Cancel.png", :style=>"vertical-align:text-top;", :alt => "Cancel" %> Cancel
+		</button>
+	</center>
+<% end %>
+<script type='text/javascript'>
+<!--
+$("#footnote_text_area").bind('keyup change',function(){
+	var max = 255;
+	var current = $(this).val().toString().length
+	remaining = max - current;
+	if(remaining < 0){
+		var thisval = $(this).val()
+		thisval = thisval.substring(0,max);
+		$(this).val(thisval);
+		remaining = 0;
+	}
+	$("#chars_remaining").html(remaining)
+})
+
+-->
+</script>

@@ -1,0 +1,27 @@
+<% unless arms.length < 1 %>
+	<% i = 1 %>
+	<table class="result_table" summary="Table Displaying Completed Arms List" id="completed_arms_list_table">
+	<thead>
+	<th width="15">Number</th>
+	<th>
+		Title
+	</th>
+	<th>
+		Description
+	</th>
+	<th width="50">Comments</th>
+	</thead>
+    <% for onearm in arms %>
+	<tr><td class="label"><%= i.to_s %></td>
+	<td><%= onearm.title %></td>
+	<td><%= onearm.description %></td>
+	<td class="comment_td">
+			<%= render :partial => "comments/field_comments", :locals => {:section_name => "arms", :section_id => onearm.id, :field_name => "arms", :study_id => study.id, :project_id => project.id} %>			
+		</td>		
+	</tr>
+	<% i = i + 1 %>
+		<% end %>
+			</table>
+<% else %>
+No arms have been defined in this extraction form.
+<% end %>

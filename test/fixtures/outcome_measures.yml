@@ -1,0 +1,45 @@
+# == Schema Information
+#
+# Table name: outcome_measures
+#
+#  id                    :integer          not null, primary key
+#  outcome_data_entry_id :integer
+#  title                 :string(255)
+#  description           :text
+#  unit                  :string(255)
+#  note                  :string(255)
+#  measure_type          :integer          default(0)
+#  created_at            :datetime
+#  updated_at            :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+ocm1:
+  id: 1
+  outcome_data_entry_id: 1
+  title: Mean Height
+  unit: in.
+  note: mean height
+
+ocm2:
+  id: 2
+  outcome_data_entry_id: 1
+  title: Mean Weight
+  unit: lbs.
+  note: mean weight
+
+ocm3:
+  id: 3
+  outcome_data_entry_id: 1
+  title: StdDev (height)
+  unit: NA
+  note: standard deviation of height
+
+# used for testing remove_extracted_data in extraction_form
+ef100_ocm1:
+  id: 4
+  outcome_data_entry_id: 2
+  title: EF100 Testing
+  unit: NA
+  note: standard stuff

@@ -1,0 +1,12 @@
+// Refresh the question list
+$("#<%= @model_name %>_extraction_form_preview_table").html("<%= escape_javascript(render :partial=>'question_builder/extraction_form_preview')%>");
+
+// The pop-up editing window
+$("#<%= @model_name %>_fields_entry").html("<%= escape_javascript(render :partial=>'question_builder/edit_form') %>");
+$("#<%= @model_name %>_fields_entry").dialog("option", "title", "Editing <%= @model_title %>");
+$("#<%= @model_name %>_fields_entry :button").removeAttr("disabled");
+$("#<%= @model_name %>_fields_entry").dialog("option","modal",true);
+$("#<%= @model_name %>_fields_entry").dialog("open");
+
+// get rid of the spinner (waiting icon)
+$("#waitingGIF").remove();

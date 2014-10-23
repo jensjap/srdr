@@ -1,0 +1,74 @@
+<script type='text/javascript'>
+	var is_edit_page=false;
+</script>
+
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial => "sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+	<%= render :partial => "page_title", :locals => {:page_title => "Managing Users"} %>
+	<div id="user_project_roles_table">
+	<div class="indent_block">
+		<%= form_tag url_for(:controller => 'user_project_roles', :action => 'saveinfo', :project_id => @project.id) do %>
+				<% if @project_users.length > 0 %>
+				<h2>Change or Remove User Roles</h2><br/>
+			<table class="list_table" id="projects_manage_users_table" summary="projects manage users table - user list">
+			<thead>
+			<tr>
+			<th>Name</th>
+			<th>Username</th>
+			<th>Lead</th>
+			<th>Collaborator</th>
+			<th>Remove</th>
+			</thead>
+			</tr>
+			<tbody>
+			<% for role in @project_users %>
+			<% if role.user_id != current_user.id %>
+			<tr class="<%= cycle("even", "odd") %>"><td>
+				<% @user = User.find(role.user_id) %>
+					<%= @user.fname %> <%= @user.lname %> 
+			</td>
+			<td>
+			<%= @user.login %>
+			</td>
+			<td><%= radio_button_tag("roles_" + role.user_id.to_s, "lead", role.role == "lead" ? true : false, :class => "cbox") %></td>
+			<td><%= radio_button_tag("roles_" + role.user_id.to_s, "editor", role.role == "editor" ? true : false, :class => "cbox") %></td>
+			<td><%= radio_button_tag("roles_" + role.user_id.to_s, "delete", false, :class => "cbox") %></td>
+			</tr>
+			<% end %>
+			<% end %>
+	
+	</td></tr>
+	</tbody></table>
+	<br/><br/>
+					<div class="actions">
+						<button type="submit" class="positive" data-remote="true" data-method="post" onClick="do_confirm(event, 'Are you sure you want to alter user roles?')"><%= image_tag "Accept.png", :alt => "Accept"  %>Update User Roles</button>
+					</div>
+							<% else %>
+			There are currently no other users attached to this project.
+			<% end %>
+		<% end %>
+		</div>
+		<br/><br/>
+			<h1>Add a New Collaborator</h1><br/>
+		<%= form_tag url_for(:controller => 'user_project_roles', :action => 'add_new_user', :project_id => @project.id) do %>
+		<div class="form_content">
+		<div class="field">
+					<label for="Enter email address or SRDR username:">Enter email address or SRDR username:</label> <%=text_field_tag "new_user", "" %>
+					</div>
+						<div class="field">
+					<label for="Role to assign">Role to assign:</label> <br/>
+					<%= radio_button_tag("new_role", "lead", {}, :class => "inline-field cbox") %>  <label for="Lead">Lead (allows the user to edit project details and extraction forms associated with this project)</label><br/>
+					<%= radio_button_tag("new_role", "editor", {}, :class => "inline-field cbox") %> <label for="Editor">Collaborator (allows the user to extract study data to the project)</label>
+					</div>
+	
+			<div class="actions">
+				<button type="submit" class="positive" data-remote="true" data-method="post" onClick="do_confirm(event, 'Are you sure you want to add this user?')"><%= image_tag "Accept.png", :alt => "Accept"  %>Add User to Project</button>
+			</div>
+							</div>
+		<% end %>
+	</div>
+	<br/>
+	  <%= render :partial=>'extraction_forms/back_and_continue_buttons', :locals=>{:previous_url=>"extraction_forms",:next_url=>"studies",:previous_title=>"Create Extraction Forms",:next_title=>"Add Studies"} %>	
+	</div> <!-- END RIGHT COLUMN DIV -->

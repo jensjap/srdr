@@ -1,0 +1,274 @@
+<%#-----------------------------------------%>
+<%# NOW START ADDING WITHIN ARM COMPARISONS %>
+<%#-----------------------------------------%>
+<% next_wac_comparator_id = -1 %>
+<% wa_select_options = [["Choose a Timepoint", "0"], ["Chris","1"]]%>
+<%# UNLESS THEY'RE EMPTY, BUILD THE WITHIN-ARM COMPARISON TABLE %>
+<% unless @wa_comparisons.empty? || @timepoints.length < 2 %>
+  <%#  BUILD THE TITLE ROW %>
+  <tr class='wa_comparison_title_row wa_comparison'>
+  	<th class='wa_comparison' colspan="<%= @arms.length + 2 %>">
+  		Within-Arm Comparisons
+  	</th><%#-----------------------------------------%>
+		  		<%# NOW START ADDING WITHIN ARM COMPARISONS %>
+		  		<%#-----------------------------------------%>
+		  		<% next_wac_comparator_id = -1 %>
+	  			<% wa_select_options = [["Choose a Timepoint", "0"], ["Chris","1"]]%>
+		  		<%# UNLESS THEY'RE EMPTY, BUILD THE WITHIN-ARM COMPARISON TABLE %>
+		  		<% unless @wa_comparisons.empty? || @timepoints.length < 2 %>
+		  		  <%#  BUILD THE TITLE ROW %>
+		  		  <tr class='wa_comparison_title_row wa_comparison'>
+		  		  	<th class='wa_comparison' colspan="<%= @arms.length + 2 %>">
+		  		  		Within-Arm Comparisons
+		  		  	</th>
+		  		  </tr>
+		  		  <%# ADD ANOTHER SET OF COLUMN HEADERS %>
+		  		  <tr class='wa_comparison'>
+		  		  	<th class='wa_comparison'>
+		  		  		Comparison
+		  		  	</th>
+		  		  	<th class='wa_comparison'>
+		  		  		Measure
+		  		  	</th>
+		  		  	<% @arms.each do |arm|%>
+		  		  		<th class='wa_comparison'>
+		  		  			<%= arm.title %>
+		  		  		</th>
+		  		  	<% end %>
+		  		  </tr>
+		  		  <% wac_select_options = @timepoints.collect{|x| ["#{x.number} #{x.time_unit}", x.id]}%>
+		  		  <% wac_select_options = [["--Choose a Timepoint--",0]] + wac_select_options %>
+		  		  
+		  		  <% @wa_comparisons.each_with_index do |wac, i|%>
+		  		    <% wac_measures = @wa_measures[wac.id] %>
+		  		    <% wac_comparator = @wa_comparators[wac.id].first %>
+		  		    <tr wac_row="<%= i+1 %>" class='wa_comparison'>
+		  		     	<td rowspan="<%= wac_measures.length %>">
+		  		     		<% unless wac_comparator.nil? %>
+		  		     		  <% comparator_parts = wac_comparator.comparator.split("_")%>
+		  		     		  
+		  		     		  <% comparator_parts.each_with_index do |e,iter| %>
+				        			<%= select_tag "wac_comparators[#{wac.id}[#{wac_comparator.id}[#{iter}]]]",options_for_select(wac_select_options,e) %>
+				        			<% unless iter == comparator_parts.length - 1 %>
+							        	vs <br/>
+							      	<% end %>
+							      <% end %>
+		  		     		<% else %>
+		  		     		  <%= select_tag "wac_comparators[#{wac.id}[#{next_wac_comparator_id}[0]]]",options_for_select(wac_select_options) %> vs.<br/>
+		  		     		  <%= select_tag "wac_comparators[#{wac.id}[#{next_wac_comparator_id}[1]]]",options_for_select(wac_select_options) %>
+		  		     		  <% next_wac_comparator_id -= 1%>
+		  		     		<% end %>
+		  		     	</td>
+		  		     	<% wac_measures.each do |m|%>
+		  		        <% unless wac_measures.index(m) == 0 %>
+		  		          <tr class='wa_comparison'>
+		  		        <% end %>
+		  		        <td><%= m.title%></td>
+		  		        <% @arms.each do |arm|%>
+		  		          <td> 
+		  		          	<% unless wac_comparator.nil? %>
+			  		          	<% val = @wa_datapoints[wac.id][wac_comparator.id][m.id][arm.id] %>
+			  		          	<% val = val.nil? ? "" : "value='#{val.value}'"%>
+		  		          	<% else %>
+		  		          	  <% val = ""%>
+		  		          	<% end %>
+		  		          	<input type='text' name="<%= "wac_datapoints[#{wac.id}[#{wac_comparator.nil? ? (next_wac_comparator_id + 1) : wac_comparator.id}[#{m.id}[#{arm.id}]]]]" %>" <%= val %>/>
+		  		          </td>
+		  		        <% end %>
+		  		        </tr>
+		  		     	<% end %>
+		  		  <% end %>
+		  		<% end %>
+		  		
+		  		<input type="hidden" id="next_wac_comparator_id" value="<%= next_wac_comparator_id %>">
+				  <input type="hidden" id="next_wac_row" value="<%= @wa_comparisons.length + 1 %>">
+
+		  		<tr id="show_hide_wa_row">
+		  			<td class='th' id="show_hide_wa_links" colspan="<%= @arms.length + 2 %>">
+		  			<% if @wa_comparisons.empty? %> 
+		  			  <% if @timepoints.length > 1 %>
+				  			<a href="#" id="wa_comparison_link">Create Within-Arm Comparison</a>
+				  	  <% end %>
+  					<% else %>
+  						<a href="#" id="show_hide_wa_link">Hide</a> | 
+  						<a href="#" id="clear_wa_comparisons_link">Remove Within-Arm Comparisons</a> | 
+  						<a href="#" id="add_wa_comparison_row_link">Add Another Row</a>
+  					<% end %>
+  					</td>
+		  		</tr>
+		  		<tr id="wa_save_button_row" >
+		  			<td colspan="<%= (2 + @arms.length) + (@num_comparators + 1) %>" align='center' style='position:relative;' class='comparison_btn_row'>
+			  			<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>' >
+								<%= image_tag "Add.png", :alt => "Add" %>Save Table Data
+							</button>
+						</td>
+					</tr>
+  </tr>
+  <%# ADD ANOTHER SET OF COLUMN HEADERS %>
+  <tr class='wa_comparison'>
+  	<th class='wa_comparison'>
+  		Comparison
+  	</th>
+  	<th class='wa_comparison'>
+  		Measure
+  	</th>
+  	<% @arms.each do |arm|%>
+  		<th class='wa_comparison'>
+  			<%= arm.title %>
+  		</th>
+  	<% end %>
+  </tr>
+  <% wac_select_options = @timepoints.collect{|x| ["#{x.number} #{x.time_unit}", x.id]}%>
+  <% wac_select_options = [["--Choose a Timepoint--",0]] + wac_select_options %>
+  
+  <% @wa_comparisons.each_with_index do |wac, i|%>
+    <% wac_measures = @wa_measures[wac.id] %>
+    <% wac_comparator = @wa_comparators[wac.id].first %>
+    <tr wac_row="<%= i+1 %>" class='wa_comparison'>
+     	<td rowspan="<%= wac_measures.length %>">
+     		<% unless wac_comparator.nil? %>
+     		  <% comparator_parts = wac_comparator.comparator.split("_")%>
+     		  
+     		  <% comparator_parts.each_with_index do |e,iter| %>
+      			<%= select_tag "wac_comparators[#{wac.id}[#{wac_comparator.id}[#{iter}]]]",options_for_select(wac_select_options,e) %>
+      			<% unless iter == comparator_parts.length - 1 %>
+		        	vs <br/>
+		      	<% end %>
+		      <% end %>
+     		<% else %>
+     		  <%= select_tag "wac_comparators[#{wac.id}[#{next_wac_comparator_id}[0]]]",options_for_select(wac_select_options) %> vs.<br/>
+     		  <%= select_tag "wac_comparators[#{wac.id}[#{next_wac_comparator_id}[1]]]",options_for_select(wac_select_options) %>
+     		  <% next_wac_comparator_id -= 1%>
+     		<% end %>
+     	</td>
+     	<% wac_measures.each do |m|%>
+        <% unless wac_measures.index(m) == 0 %>
+          <tr class='wa_comparison'>
+        <% end %>
+        <td><%= m.title%></td>
+        <% @arms.each do |arm|%>
+          <td> 
+          	<% unless wac_comparator.nil? %>
+	          	<% val = @wa_datapoints[wac.id][wac_comparator.id][m.id][arm.id] %>
+	          	<% val = val.nil? ? "" : "value='#{val.value}'"%>
+          	<% else %>
+          	  <% val = ""%>
+          	<% end %>
+          	<input type='text' name="<%= "wac_datapoints[#{wac.id}[#{wac_comparator.nil? ? (next_wac_comparator_id + 1) : wac_comparator.id}[#{m.id}[#{arm.id}]]]]" %>" <%= val %>/>
+          </td>
+        <% end %>
+        </tr>
+     	<% end %>
+  <% end %>
+<% end %>
+
+<input type="hidden" id="next_wac_comparator_id" value="<%= next_wac_comparator_id %>">
+<input type="hidden" id="next_wac_row" value="<%= @wa_comparisons.length + 1 %>">
+
+<tr id="show_hide_wa_row">
+	<td class='th' id="show_hide_wa_links" colspan="<%= @arms.length + 2 %>">
+	<% if @wa_comparisons.empty? %> 
+	  <% if @timepoints.length > 1 %>
+			<a href="#" id="wa_comparison_link">Create Within-Arm Comparison</a>
+	  <% end %>
+	<% else %>
+		<a href="#" id="show_hide_wa_link">Hide</a> | 
+		<a href="#" id="clear_wa_comparisons_link">Remove Within-Arm Comparisons</a> | 
+		<a href="#" id="add_wa_comparison_row_link">Add Another Row</a>
+	<% end %>
+	</td>
+</tr>
+<tr id="wa_save_button_row" >
+	<td colspan="<%= (2 + @arms.length) + (@num_comparators + 1) %>" align='center' style='position:relative;' class='comparison_btn_row'>
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>' >
+			<%= image_tag "Add.png", :alt => "Add" %>Save Table Data
+		</button>
+	</td>
+</tr>
+
+<script type='text/javascript'>
+<!-- 
+//------------------------------------------------------
+// CODE BELOW THIS POINT IS FOR WITHIN ARM COMPARISONS
+//------------------------------------------------------
+$("#wa_comparison_link").bind("click",function(event){
+	event.preventDefault();
+	$.ajax({
+		type: 'POST',
+		url: "results/create_within_arm_comparisons",
+		data:({
+			selected_timepoints: "<%= @selected_timepoints %>",	
+			outcome_id: "<%= @outcome.id %>",
+		})
+	})
+})
+$("#show_hide_wa_link").bind("click",function(event){
+	event.preventDefault();
+	element = $(".wa_comparison")[0];
+	if($(element).css("display") == "none"){
+		$(".wa_comparison").show();
+		/*
+		$("#show_hide_wa_links").html("<a href='#' id='show_hide_wa_link'>Hide</a> | 
+  						<a href='#' id='clear_wa_comparisons_link'>Remove Within-Arm Comparisons</a> | 
+  						<a href='#' id='add_wa_comparison_row_link'>Add Another Row</a>'")
+		*/
+		$("#show_hide_wa_link").html("Hide");
+	}else{
+		$(".wa_comparison").hide();
+		$("#show_hide_wa_link").html("Show");
+	}
+})
+
+$("#clear_wa_comparisons_link").unbind("click")
+$("#clear_wa_comparisons_link").bind("click",function(event){
+	event.preventDefault();
+	// this is the pretty confirm dialog
+	$("#delete_confirm_modal").html("This action will permanently remove the within-arm comparison data above. Are you sure you want to do this?")
+  $("#delete_confirm_modal").dialog({
+  	resizable: false,
+  	height: 160,
+  	modal: true,
+  	buttons: {
+  		"Cancel": function(){
+  			$(this).dialog("close");
+  		},
+  		"Yes, I'm sure": function(){
+  			$.ajax({
+					type: 'POST',
+					url: "results/clear_comparisons",
+					data:({
+						selected_timepoints: "<%= @selected_timepoints %>",
+						outcome_id: "<%= @outcome.id %>",
+						study_id: "<%= @study_id %>",
+						extraction_form_id: "<%= @extraction_form_id %>",
+						comparison_type: "within"
+					})
+				})
+				$(this).dialog("close")
+  		}
+  	}
+	})
+})
+
+$("#add_wa_comparison_row_link").bind("click",function(event){
+	event.preventDefault()
+	row_num = parseInt($("#next_wac_row").val())
+	comparator_id = parseInt($("#next_wac_comparator_id").val())
+	$("#next_wac_comparator_id").val(comparator_id - 1)
+	$("#next_wac_row").val(row_num + 1)
+	
+	$.ajax({
+		type: 'POST',
+		url: "results/add_within_arm_comparison_row",
+		data:({
+			outcome_id: "<%= @outcome.id %>",
+			study_id: "<%= @study_id %>",
+			ef_id: "<%= @extraction_form_id %>",
+			group_id: row_num,
+			comparator_id: comparator_id,
+			timepoints: "<%= @timepoints.collect{|x| x.id}.join('_') %>"
+		})
+	})
+})
+-->
+</script>

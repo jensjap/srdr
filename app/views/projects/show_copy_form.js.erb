@@ -1,0 +1,6 @@
+$("#modal_div").html("<%= escape_javascript(render :partial=>"/projects/copy_form")%>");
+$("#modal_div").dialog("option","modal",true);
+$("#modal_div").dialog("option","title","Copy The Project: <%= @project.title %>");
+$("#modal_div").dialog("option","width",550);
+$("#modal_div").dialog("option","minHeight",450);
+$("#modal_div").dialog("open");

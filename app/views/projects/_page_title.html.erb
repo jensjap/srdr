@@ -1,0 +1,54 @@
+<%
+	in_ef = in_ef.nil? ? false : in_ef
+%>
+<div style='position:relative; width:100%; min-height:35px;' id='page_title_div'>
+	<h1>
+	<% if !session[:project_title].nil? || (defined?(@project) && !@project.nil?)  %>
+		<% if session[:project_title].nil? %>
+			<div style='width:80%'><h1>Project: <%= @project.title %></h1></div>
+		<% else %>
+			<div style='width:80%'><h1>Project: <%= session[:project_title] %></h1></div>
+		<% end %>
+		<% if @project.nil? %>
+			<% if session[:project_status].match('Published') %>
+				<span class="status" style='position:absolute;right:30px; top:3px;'>
+		            Public Report <span class="complete">Complete</span>
+		            <br/><br/>
+	            </span>
+			<% else %>
+				<span class="status" style='position:absolute;right:30px; top:3px;'>Private Report 
+					<span class="incomplete">Incomplete</span>
+				</span>
+			<% end %>
+		<% else %>
+			<% if @project.is_public %>
+				<span class="status" style='position:absolute;right:30px; top:3px;'>
+	            	Public Report 
+	            	<span class="complete">Complete</span>
+	            	<br/><br/>
+	            </span>
+			<% else %>
+				<span class="status" style='position:absolute;right:30px; top:3px;'>
+					Private Report <span class="incomplete">Incomplete</span>
+				</span>
+				<br/><br/>
+			<% end %>
+		<% end %>
+
+	<% else %>
+		Create New Project
+	<% end %>
+	</h1>
+	<br/>
+	<div class='hr'></div>
+	<br/>
+	<!-- <span class='page_heading' style='float:left;'><%= page_title %></span> -->
+	<h3 style='float:left;'><%= page_title %></h3>
+	
+	<!-- THIS SPOT CAN BE USEFUL FOR PLACING ACCESSORY ITEMS ABOVE THE TABS -->
+	<div class='' style='position:absolute; right:5px;'>
+		<% if in_ef == true %>
+			<div id="extraction_form_button_div"></div>	
+		<% end %>
+	</div>
+</div>

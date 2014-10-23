@@ -1,0 +1,103 @@
+<%
+    # Get the total number of adverse events items - assume this is the same across all the studies being compared
+    n_items = @compareset.getNumDistinctAdverseEvents()
+    n_arms =  @compareset.getNumDistinctArms()
+    if (!@compareset.sameEFIDs())
+%>
+    <b>Note: </b>The studies selected were compiled from different Extraction Forms, the adverse events below are presented for review but will not
+    be updated in the consensus study record.
+    <p/>
+<%
+    end
+%>
+    <input type="hidden" name="merge_adve_n_items" value="<%= n_items %>">
+    <input type="hidden" name="merge_adve_n_arms" value="<%= n_arms %>">
+    <table class="compare_studies_table">
+        <tr>
+            <th>Data</th>
+<%
+    for studyidx in (0..@compareset.size() - 1)
+%>
+            <th class="compare_studies_title">
+            <!--[Study ID <%= @compareset.getStudyID(studyidx).to_s %>]-->
+            <span class='comparator_col_head'>Study <%= @alphabet[studyidx] %></span><br/>
+            Created by <%= User.get_name(@compareset.getCreatorID(studyidx)) %><br/>
+            <input type="checkbox" name="select_study_adv_<%= studyidx.to_s %>" value="1" onclick="selectAllAdverse(<%= studyidx.to_s %>,<%= @compareset.size() %>,<%= (n_items * n_arms).to_s %>)" title="Select all Adverse Event information for Study <%= @alphabet[studyidx]%>"> Select This Study
+            </th>
+<%
+    end    
+%>
+            <th class="compare_studies_title">&nbsp;</th>
+            <th class="compare_studies_title">Consensus<br>Value</th>
+        </tr>
+<%
+    rcolor = ["#FFFFFF","#EAEAEA"]
+    ridx = 0
+    for adveidx in 0..n_items - 1
+        dispname = @compareset.getAdverseEventsName(adveidx)
+        # Note armidx == n_arms return the total value since arms.id == 0 is already used to indicate total in various tables. Not exactly clean but works ok
+        for armidx in 0..n_arms
+%>
+        <tr bgcolor="<%= rcolor[ridx % 2] %>">
+            <td class="compare_studies_item">
+            [<%= adveidx.to_s %>] <%= dispname %><br/>Arm: <%= @compareset.getArmName(armidx) %>  
+            </td>
+<%
+            # Determine if there are any differences
+            if !dispname.nil?
+                ndiff = @compareset.distinctAdverseEvents(dispname,@compareset.getArmName(armidx))
+            else
+                ndiff = 1
+            end
+
+            # Now display values across studies horizontally
+            for studyidx in (0..@compareset.size() - 1)
+                dispvalue = @compareset.getAdverseEventsValue(studyidx,dispname,@compareset.getArmName(armidx))
+                if dispvalue.nil?
+                    dispvalue = "-"
+                end
+                # remove any line feeds, convert to simple space
+                dispvalue = dispvalue.gsub( /\r\n/m, " " )
+
+                if ndiff <= 1
+                    # No difference across studies - just display value
+%>
+            <td class="compare_studies_data">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_default<%= studyidx.to_s %>" value="<%= dispvalue.to_s %>">
+            <%= dispvalue.to_s %>
+            </td>
+<%
+                else
+%>
+            <td class="compare_studies_data">
+            <input type="radio" name="merge_adve_<%= ridx.to_s %>" value="<%= dispvalue.to_s %>" onclick="selectAdverse(<%= studyidx.to_s %>,<%= ridx.to_s %>,'<%= dispvalue.to_s %>',<%= @compareset.size() %>)", title="Choose Adverse Event: <%= dispvalue %> for Study <%= @alphabet[studyidx]%>">&nbsp;
+            <%= dispvalue.to_s %>
+            </td>
+<%
+                end
+            end
+            consensus_value = "Select value"
+            if (ndiff <= 1) &&
+                !dispname.nil?
+                consensus_value = @compareset.getAdverseEventsValue(0,dispname,@compareset.getArmName(armidx))
+            end
+%>
+            <td class="compare_studies_adata">
+            <img src="/images/action_forward.gif" border="0" alt="The merged consensus adverse event data will appear in the cell to the right upon selection">
+            </td>
+            <td class="compare_studies_data">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_id" value="<%= @compareset.getAdverseEventsIDByStudy(0,adveidx).to_s %>">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_cid" value="<%= @compareset.getAdverseEventColumnIDByStudy(0,adveidx).to_s %>">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_rid" value="<%= @compareset.getAdverseEventResultIDByStudy(0,adveidx).to_s %>">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_name" value="<%= dispname %>">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_arm" value="<%= @compareset.getArmName(armidx) %>">
+            <input type="hidden" name="merge_adve_<%= ridx.to_s %>_armid" value="<%= @compareset.getArmID(armidx) %>">
+            <%= text_area_tag "merge_adve_"+ridx.to_s+"_text", consensus_value, :value=>consensus_value %>
+            </td>
+        </tr>
+<%
+            ridx = ridx + 1
+        end
+    end
+%>
+    </table>

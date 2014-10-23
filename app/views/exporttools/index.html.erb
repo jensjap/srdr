@@ -1,0 +1,101 @@
+<%
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    if @project.nil?
+        puts "Export tools index.html on nil @project"
+    end
+    if @project.id.nil?
+        puts "Export tools index.html on nil @project.id"
+    end
+    urlhistory.setCurrentPage("Export Tools","Export Tools","/projects/exporttools.html?prjid="+@project.id.to_s)
+    session[:urlhistory] = urlhistory
+
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+    excel_cache_path = siteproperties.getProjectCachePath()
+
+    puts "Export tools index.html on project id = "+@project.id.to_s
+    puts "Extraction form size - "+@extraction_forms.size().to_s
+
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+<div id='content' tabindex=200>
+<h2>Export Data Tools:</h2>
+<hr width="100%">
+<p/><br/>
+<h2>Project: <%= @project.title %></h2>
+&nbsp;<p/>
+&nbsp;<p/>
+<strong>Note: </strong>The SRDR Report Builder is an interactive application which uses JavaScript and styling browser technologies. As such some functions
+may not work properly on older version of web browsers. We recommend you use Mozilla.com's Firefox version 22 or later and you must have JavaScript enabled
+on your browser.
+&nbsp;<p/>
+&nbsp;<p/>
+<strong>Simple Data Export</strong> spreadsheets are checked for new data/changes and rendered every <strong>60</strong> minutes. If you have made changes
+to your project, please return in an hour before downloading from the <strong>Simple Data Export</strong> or use the <strong>Advance Data Export</strong>
+tool instead.
+&nbsp;<p/>
+<table id="export_data_tools_table">
+    <tr>
+        <td class="simple">
+        <span id="export_tools_title">Simple Data Export (one-click):</span>
+        <p/><br/>
+        <span id="export_tools_link"><%= link_to "Export Data Tool", "exporttools/simpleexport?prjid="+@project.id.to_s,{:tabindex=>1,:class=>'form_link', :title=>"Export Data Tool"} %></span><br/>
+        <p/><br/>
+        To perform a quick data dump of your entire data set, simply click the button below. 
+        </td>
+        <td class="advance">
+        <span id="export_tools_title">Advanced Data Export:</span>
+        <p/><br/>
+        <span id="export_tools_link"><%= link_to "Report Builder", siteproperties.getReportBuilderURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Report Builder"} %></span><br />
+    
+    <% if current_user.is_admin? %>
+    <form method="post" action="http://<%= siteproperties.getSiteURL() %>:8080/srdrj/advanceddataexport">
+        <input type="hidden" name="start_process" value="true" />
+        <input type="hidden" name="user.login" value="<%= current_user.login %>" />
+        <input type="hidden" name="prj_id" value="<%= @project.id.to_s %>" />
+        <input type="submit" name="enter_button" value="Start Process" /> 
+    </form>
+    <% end %>
+
+<br/>
+        <p/><br/>
+        This option provides a variety of choices for customizing what data gets exported. You may select individual 
+        fields one at a time or entire data collection instruments to export. 
+        </td>
+        <td class="advance">
+        <span id="export_tools_title">Project Reports:</span>
+        <p/><br/><span id="export_tools_link"><%= link_to "Manage Reports", siteproperties.getSRDRJURL()+"?page=REPORTMGR&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>3,:class=>'form_link', :title=>"Manage Reports"} %></span><br/>
+        <p/><br/>
+        This option allows you to manage your exported and uploaded report files associated with this project. 
+        </td>
+    </tr>
+</table>
+<p/>&nbsp;<br/>
+<strong>Please Note:</strong> The Report Builder feature is evolving quickly as we get valuable feedback/suggestions from the diverse SRDR user 
+community regarding how and what form/format reports are produced. The user interface layout will continue to change somewhat as we and our 
+users experiment with different reporting concepts and functionality.
+<P/><br/>  
+<strong>Report Builder Tip of the Day</strong><p/><br/>
+We will also be compiling user notes and helpful hints regarding how to manage and manipulate the reports produced from the Report Builder. For example
+it is impossible to anticipate how SRDR data needs to be coded for project analysis. Data coding can easily be done using the EXCEL formula:
+<P/><br/>  
+<strong>if(EXCACT(&lt;cell ID&gt;,&lt;target value&gt;),&lt;true code&gt;,&lt;false code&gt;)</strong>
+<P/><br/>  
+To test and code the EXCEL at C1 for the value "Yes" (coded as 1), otherwise coded as 0:
+<P/><br/>  
+<strong>if(EXCACT(C1,"Yes"),1,0)</strong>
+<P/><br/>  
+More helpful hints and methods will be found here in the future.
+<P/><br/>  
+</div>

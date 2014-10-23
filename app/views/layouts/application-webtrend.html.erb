@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+
+<head>
+    <%= javascript_include_tag 'jquery.min',
+                               'jquery-ui-1.8.12.custom',
+                               'rails',
+                               'browser_check',
+                               'application',
+                               'navigation',
+                               'nested_form',
+                               'jquery.printelement.min',
+                               'jquery.qtip.min',
+                               'comments_dropdown',
+                               'webtrends' %>
+    <%= stylesheet_link_tag "pagination_styles",
+                            "jquery.qtip",
+                            "ahrqstyle_new",
+                            "introjs.min",
+                             :media => "screen" %>
+    <%= csrf_meta_tag %>
+
+    <script type='text/javascript'>assignStylesheet();</script>
+    <meta charset="UTF-8">
+
+    <%= favicon_link_tag "favicon.ico" %>
+
+    <title>
+        SRDR - Systematic Review Data Repository | <%= content_for(:title) %>
+    </title>
+</head>
+
+
+<body>
+    <div id="message_div"></div>
+     <noscript>Your web browser does not support Javascript, or you have it turned off. Please turn on Javascript or use a Javascript-compatible web browser to take advantage of the full functionality of SRDR.</noscript> 
+    <div id="page-wrap">
+        <!--################################################################ -->
+        <!-- THE AHRQ BANNER MARKUP                                          -->
+        <!--#################################################################-->
+        <%= render :partial=>'shared/ahrq_head' %>
+        <br/>
+        <div id='inside'>
+            <!--################################################################ -->
+            <!-- USER LINKS                                                      -->
+            <!--#################################################################-->
+
+
+            <!--################################################################ -->
+            <!-- SRDR BANNER MARKUP                                              -->
+            <!--#################################################################-->
+            <%= render :partial=>"shared/srdr_head" %>
+
+            <!--################################################################ -->
+            <!-- THE MAIN LINKS BAR                                              -->
+            <!--#################################################################-->
+            <%= render :partial=>"shared/horizontal_nav" %>
+
+
+            <!--################################################################ -->
+            <!-- THE BREADCRUMBS BAR                                             -->
+            <!--#################################################################-->
+            <%= render :partial=>"shared/breadcrumbs" %>
+
+            <!--################################################################ -->
+            <!-- THE MEAT OF THE PAGE                                            -->
+            <!--#################################################################-->
+            <div id="container">
+                <div id="feedback_form" style="display:none">
+                    <%= render :partial => "feedback_items/feedback_form" %>
+                </div>
+                <%= yield %>
+            </div>
+            <div style="clear: both;"></div>
+
+            <div id="footer">
+                <!--################################################################ -->
+                <!-- THE AHRQ FOOTER                                                 -->
+                <!--#################################################################-->
+                <%= render :partial=>"shared/ahrq_foot" %>
+                <!--<br/>
+                <span><a href='#' id='keypress_test'>Test Key Press</a><br/>-->
+            </div>
+
+        </div>
+    </div>
+    <div id='exiting_modal' style='display:none;'>
+        <h2>Exit Disclaimer</h2><br/>
+        <ul class='normal_list exit_disclaimer'>
+            <li>This graphic notice, <img src='/images/exit_disclaimer.gif' alt='Exit Disclaimer Logo'/>, means that you are leaving this Federal Government Web site and entering a non-Federal Web site.</li>
+            <li>This external link provides additional information that is consistent with the intended purpose of a Federal site.</li>
+            <li>Linking to a non-Federal site does not constitute an endorsement by the Department of Health and Human Services (HHS) or any of its employees of the sponsors or the information and products presented on the site.</li>
+            <li>HHS cannot attest to the accuracy of information provided by this link.</li>
+            <li>You will be subject to the destination site's privacy policy when you follow the link.</li>
+        </ul><br/>
+    </div>
+<script type='text/javascript'>
+<!--
+$(document).ready(function(){
+    var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+    // Default values...
+    myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+    myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+    myMenu.oneSmOnly = false;             // One expanded submenu at a time
+    myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+    myMenu.init();
+
+    $("a.nav_active").first().addClass("nav-active");
+    $("a.nav_active").first().addClass("nav-selected");
+
+
+    // add a click handler to all links
+    // that point to same-page targets (href="#...")
+    $(".skip > li > a[href^='#']").unbind();
+    $(".skip > li > a[href^='#']").click(function() {
+      // get the href attribute of the internal link
+      // then strip the first character off it (#)
+      // leaving the corresponding id attribute
+      $("#"+$(this).attr("href").slice(1)+"")
+        // give that id focus (for browsers that didn't already do so)
+        .focus()
+        // add a highlight effect to that id (comment out if not using)
+        //.effect("highlight", {}, 3000);
+    });
+
+    // add a pop-up notifier for any links that are in need of an exit disclaimer
+    $(".needs_exit_disclaimer").unbind();
+    $(".needs_exit_disclaimer").live("click",function(event){
+        event.preventDefault();
+        var url = $(this).attr("href");
+        $("#exiting_modal").dialog({
+            resizable: false,
+            title: "Exit Disclaimer",
+            width: 550,
+            modal: true,
+            buttons:{
+                "Return to SRDR":function(){
+                    $(this).dialog("close");
+                },
+                "Continue to External Site": function(){
+                    $(this).dialog("close");
+                    window.open(url,"_blank");
+                    //document.location.href = $(this).attr("href");
+                }
+            }
+        })
+    })
+
+    // test the key press functionality in javascript
+    //$("#keypress_test").keydown(function(event){
+    //  event.preventDefault();
+    //  if(event.which == 13){
+    //      alert("You pressed enter.");
+    //  }
+    //})
+
+});
+-->
+</script>
+<!-- START OF SmartSource Data Collector TAG for SRDR.AHRQ.GOV -->
+<!-- Copyright (c) 1996-2013 Webtrends Inc.  All rights reserved. -->
+<!-- Version: 9.4.0 -->
+<!-- Tag Builder Version: 4.1  -->
+<!-- Created: 6/3/2013 10:08:52 PM -->
+<!-- *********************************************************************************** -->
+<!-- Warning: The two script blocks below must remain inline. Moving them to an external -->
+<!-- JavaScript include file can cause serious problems with cross-domain tracking.      -->
+<!-- *********************************************************************************** -->
+<script type="text/javascript">
+//<![CDATA[
+var _tag=new WebTrends();
+_tag.dcsGetId();
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+_tag.dcsCustom=function(){
+// Add custom parameters here.
+//_tag.DCSext.param_name=param_value;
+}
+_tag.dcsCollect();
+//]]>
+</script>
+<noscript>
+<div><img alt="DCSIMG" id="DCSIMG" width="1" height="1" src="//sdc2.ahrq.gov/dcsulnsdnalq1tvppx89yhhqp_6i6o/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=9.4.0&amp;dcssip=www.srdr.ahrq.gov"/></div>
+</noscript>
+<!-- END OF SmartSource Data Collector TAG -->
+</body>
+</html>

@@ -1,0 +1,258 @@
+<%= form_for(@project, :remote => true) do |f| %>
+    <%# @test %>
+<%= f.hidden_field :creator_id, :value => @project.creator_id.nil? ? current_user.id : @project.creator_id %>
+<input type='hidden' name='project_id', value="<%= @project.id.nil? ? (current_user.id * -1) : @project.id %>"/>
+<table class='form_table with_comment_rows' id='new_project_form' summary='New Project Form'>
+    <tr>
+        <td colspan='2'>
+            Use this form to modify your project, then click the "Save and Continue"
+            button to follow the process shown at the right.
+        </td>
+        <tr>
+
+            <tr>
+                <td colspan='2'>
+                    <font color = "red" size=+2 >*</font> required fields.
+                </td>
+            </tr>
+            <!-- THE PROJECT TITLE ROW -->
+            <tr>
+                <td class="label top" for='project_title'>
+                    <div><label for='project_title' >Project Title<font color = "red" size=+1 >*</font>:</label></div>
+                </td>
+                <td class='input top'>
+                    <%= f.text_field :title, :class=> "editable_field" %>
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "title", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
+
+            <!-- THE PROJECT DESCRIPTION ROW -->
+            <tr>
+                <td class="label">
+                    <div><label for="project_description">
+                            Project Description:
+                        </label>
+                    </div>
+                </td>
+                <td class="proj_desc input">
+                    <%= f.text_area :description, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td' colspan='2'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "description", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
+
+
+            <!-- Contributors ROW -->
+            <tr >
+                <td class="label">
+                    <div><label for="project_contributors">
+                            Contributor(s):
+                        </label>
+                    </div>
+                </td>
+                <td class="proj_contributors input">
+
+                    <%= f.text_area :contributors, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
+
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "contributors", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
+
+            <!-- Methodology ROW -->
+            <tr >
+                <td class="label">
+                    <div><label for="project_methodology">
+                            Methodology Description:
+                        </label>
+                    </div>
+                </td>
+                <td class="proj_methodology input">
+
+                    <%= f.text_area :methodology, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
+
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "methodology", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+            <!-- Search Strategy Row -->
+            <% unless @project.search_strategy_filepath.blank? %>
+            <tr >
+                <td class="label">
+                    <div><label for="project_search_strategy">
+                            Search Strategy:
+                        </label>
+                    </div>
+                </td>
+                <td class="proj_search_strategy">
+
+                    
+                  <a href= "/downloads/search_strategies/<%= @project.search_strategy_filepath %>" style='font-size:15px;' >Download the search strategy</a>
+
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "methodology", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+            <% end %>
+            <!-- PROSPERO ROW -->
+            <tr >
+                <td class="label">
+                    <div><label for="project_prospero">
+                            PROSPERO Protocol:
+                        </label>
+                    </div>
+                </td>
+                <td class="proj_prospero input">
+
+                    Prospero ID: <%= f.text_field :prospero_id, :rows => 4, :style => "width: 20em", :class=>"editable_field" %><br/>
+                    <% if @project.prospero_id.blank? %>
+                    <span style='font-size:smaller;'>(This ID will be used to generate a link to your PROSPERO entry)</span>
+                    <% else %>
+                    (<a href="http://www.crd.york.ac.uk/prospero/display_record.asp?ID=<%= @project.prospero_id %>" target="_blank">http://www.crd.york.ac.uk/prospero/display_record.asp?ID=<%=@project.prospero_id%></a>)
+                    <% end %>
+
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "methodology", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
+            <!-- THE PROJECT NOTES ROW -->
+            <tr>
+                <td class="label">
+                    <div>
+                        <label for="project_notes">
+                            Project Notes:
+                        </label>
+                    </div>
+                </td>
+                <td class="proj_notes input">
+
+                    <%= f.text_area :notes, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
+
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "notes", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
+
+            <!-- THE FUNDING SOURCE ROW -->
+            <tr >
+                <td class="label">
+                    <div><label for="project_funding_source">
+                            Funding Source:
+                        </label>
+                    </div>
+                </td>
+                <td class='input'>
+                    <%= f.text_field :funding_source, :class => "editable_field" %>
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "funding", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
+
+            <!-- THE KEY QUESTIONS SECTION -->
+            <tr>
+                <td class="label">
+                    <div><label for="key_questions_table">
+                            Key Questions<font color = "red" size=+1 >*</font>:
+                    </label></div>
+                </td>
+                <td class="subtable">
+                    <div id="key_questions_table">
+                        <%= render :partial => "key_questions/table", :locals => {:key_questions => @key_questions} %>
+                    </div>
+                    <br/>
+                    <!--<div id="add_keyquestion_button" style="border: none; height: 20px; border-top:0px; text-align: center; padding-bottom: 10px;">-->
+                    <div class="actions" style='margin-top: 5px; text-align: left;'>
+                        <button class="positive" id="add_kq_button">
+                            <%= image_tag "Add.png", :alt => "Add" %>Add Key Question
+                        </button>
+                        <div class="saved" id="saved_indicator_kqs" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+                        <div class="saved" id="deleted_indicator_kqs" style='display:none;'>  Deleted Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+
+                    </div>
+                    <!--</div>-->
+                </td>
+            </tr>
+            <tr><td colspan=2>
+                    <div class='hr'></div><br/>
+            </td></tr>
+            <tr>
+                <td>
+                    <div class="saving">
+                        <button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" alt="Save and continue the project creation process">
+                            <%= image_tag "Accept.png", :alt => "Accept" %> SAVE
+                        </button>
+
+                        <div class="saved" id="project_save_message" style='display:none;'>Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+                    </div>
+                </td>
+                <td align='right'>
+                    <% continue_style = @project.id.nil? ? "display:none;" : "" %>
+                    <br/>
+                    <div id='continue_button_div' class='actions' style="<%= continue_style %>">
+                        <% className = @project.id.nil? ? "unsaved_project" : "" %>
+                        <a id="page_flip_btn" class="<%= className %>" href="/projects/<%= @project.id.to_s %>/extraction_forms">
+                            Continue to Extraction Forms
+                            <%= image_tag "Silk_bullet_go.png", :alt => "Continue to Extraction Forms" %>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table><br/>
+        <br/><br/>
+    <% end %>
+

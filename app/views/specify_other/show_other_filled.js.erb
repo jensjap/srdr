@@ -1,0 +1,8 @@
+<% if @field_size == "small" %>
+	$("#<%= @field_id %>").after("<%= escape_javascript(render :partial=>"specify_other/other_field_compact") %>");
+<% elsif @field_size == "medium" %>
+	$("#<%= @field_id %>").after("<%= escape_javascript(render :partial=>"specify_other/other_textArea") %>");
+<% end %>
+$("#<%= @field_id %>").val("Other");
+$("#<%= @field_id %>_input").val("<%= @value %>");
+$("#<%= @field_id %>_input").attr("name", "<%= @name %>");

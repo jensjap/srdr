@@ -1,0 +1,95 @@
+<%
+    resultset = session[:search_results]
+    filtgroup = params[:filtergroup]
+    filtname = params[:filtername]
+    filtvalue = params[:filtervalue]
+    
+    filt_categories = resultset[filtgroup]
+    filt_list = filt_categories[filtname]
+    idx_list = filt_list[filtvalue]
+%>
+<script>
+  $(document).ready(function() {
+      var accOpts = {
+          active: false,
+          fillSpace: false,
+          collapsible: true
+      }
+      $("#filt_accordion").accordion(accOpts);
+  });
+</script>
+<h2>Selected SR-Level Results - <%= filtvalue %></h2><br/>
+<div id="filt_accordion">
+<%
+    projects = resultset["projects"]
+    idx_list.each do |idx|
+        projrec = projects[idx]
+        hitscore = projrec[0]
+        proj = projrec[1] 
+        qtext = projrec[2] 
+        study = projrec[3] 
+        publist = projrec[4] 
+        matchloc = projrec[5] 
+        userinfo = projrec[6] 
+        
+        header_text = idx.to_s+". Project: "+proj.title
+        
+        
+        proj_info = ""
+        if proj.funding_source.nil? ||
+           proj.funding_source.length == 0
+            proj_info = proj_info + "<i><b>Funded by</b> na</i>"
+        else
+            proj_info = proj_info + "<i><b>Funded by</b> "+proj.funding_source+"</i>"
+        end
+        if proj.is_public?
+            proj_info = proj_info + ", <b>Published</b> "+proj.updated_at.strftime("%b/%Y")
+        else
+            proj_info = proj_info + ", <b>Created</b> "+proj.created_at.strftime("%b/%Y")
+        end
+%>
+    <h3><a href="#" class="heading"><div id="search_project_title"><%= raw header_text %></div>
+    <%= raw proj_info %><br/>
+    [Match found in <%= matchloc %> - "<%= raw qtext %>"]</a></h3> 
+    <div id="advsearch_project_<%= idx %>">
+    <%= link_to image_tag('/images/Folder_table.png'), '/projects/'+proj.id.to_s %><B>Description:</B> <%= proj.description %><br/>
+<%      if !userinfo.nil? %>
+    <br/>
+    <b>Created By: </b><%= userinfo.lname %>, <b>Organization: </b><%= userinfo.organization %>, <b>Create Date: </b><%= proj.created_at %>, <b>Published: </b><%= proj.is_public.to_s.gsub("true","Yes").gsub("false","No") %>
+<%      end %>
+<%      if !publist.nil? && publist.length > 0 %>
+    <br/>&nbsp;
+    <br/>&nbsp;
+<%
+            if publist.length > 1
+%>
+    <b><%= publist.length %> Primary Publications</b><br/>
+<%
+            else
+%>
+    <b>Primary Publication</b><br/>
+<%
+            end
+%>
+    <table id='results_table' name='results_table' class="list_table" summary="systematic review search results table">
+        <th>PubMed ID</th>
+        <th>Title</th>
+        <th>Author(s)</th>
+        <th>Year</th>
+        <th>Journal</th>
+<%          for pub in publist %>
+        <tr class="<%= cycle("even", "odd") %>">	
+            <td><%= pub.pmid %></td>
+            <td><%= pub.title %></td>
+            <td><%= pub.author %></td>
+            <td><%= pub.year %></td>
+            <td><%= pub.journal %></td>
+        </tr>
+<%          end %>
+    </table>
+<%      end %>
+    </div>
+<% 
+    end    
+%>
+</div>

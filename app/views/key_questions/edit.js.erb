@@ -1,0 +1,33 @@
+var str = "<%= @has_extraction_form %>" ;
+var has_study_data = (str === 'true');
+if(has_study_data)
+	{
+		var message = "One or more extraction forms have been created that answer this question. Changing this question will change it for these extraction forms and their associated studies as well. Are you sure you want to continue?";
+		if (confirm(message))
+		{
+					$("#add_keyquestion_box").html("<%= escape_javascript(render "key_questions/form", :locals => {:key_question => @key_question}) %>");
+					$("#add_keyquestion_box").dialog("option", "title", "Editing Key Question");	
+					$("#add_keyquestion_box").dialog("option", "modal", true);	
+					//$("textarea").tinymce({theme: 'advanced',
+					//theme_advanced_toolbar_location : "top",
+					//theme_advanced_buttons1 : "bold,italic,underline,bullist, numlist",
+					//theme_advanced_buttons2: "",
+					//theme_advanced_buttons3: ""});			
+					$("#add_keyquestion_box").dialog('open');
+
+		}
+}
+else
+{
+		$("#add_keyquestion_box").html("<%= escape_javascript(render "key_questions/form", :locals => {:key_question => @key_question}) %>");
+		$("#add_keyquestion_box").dialog("option", "title", "Editing Key Question");		
+					//$("textarea").tinymce({theme: 'advanced',
+					//theme_advanced_toolbar_location : "top",
+					//theme_advanced_buttons1 : "bold,italic,underline,bullist, numlist",
+					//theme_advanced_buttons2: "",
+					//theme_advanced_buttons3: ""});		
+		$("#add_keyquestion_box").dialog('open');	
+
+}
+
+

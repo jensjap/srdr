@@ -1,0 +1,114 @@
+<% wac_select_options = @timepoints.collect{|x| ["#{x.number} #{x.time_unit}", x.id]}%>
+<% wac_select_options = [["--Choose a Timepoint--",0]] + wac_select_options %>
+<% wac_measures = @wa_measures[@comparison_id] %>
+<tr wac_row="<%= @comparison.group_id %>" class='wa_comparison'>
+ 	<td rowspan="<%= wac_measures.length %>">
+ 		  <%= select_tag "wac_comparators[#{@comparison_id}[#{@comparator_id}[0]]]",options_for_select(wac_select_options) %> vs.<br/>
+ 		  <%= select_tag "wac_comparators[#{@comparison_id}[#{@comparator_id}[1]]]",options_for_select(wac_select_options) %>
+ 		 <br>
+		 <a href="#" id="<%= "remove_wa_comparison_#{@comparison_id}_link" %>" wac_id="<%= @comparison_id %>" title="Remove Within-Arm Comparison Row">Remove Row</a>
+ 	</td>
+ 	<% wac_measures.each do |m|%>
+    <% unless wac_measures.index(m) == 0 %>
+      <tr class='wa_comparison'>
+    <% end %>
+    <td><%= m.title%></td>
+    <% @arms.each do |arm|%>
+      <td> 
+      	<% val = ""%>
+      	<input type='text' name="<%= "wac_datapoints[#{@comparison_id}[#{@comparator_id}[#{m.id}[#{arm.id}]]]]" %>" <%= val %>/>
+      </td>
+    <% end %>
+    </tr>
+  <% end %>
+<%# THE EDIT MEASURES BUTTON FOR WACs %>
+<tr wac_row="<%= @comparison.group_id %>" class='wa_comparison'>
+	<td class='th' colspan="<%= @arms.length + 2 %>" align='center'>
+		<a href="#" id="<%="edit_wac_#{@comparison_id}_measures_btn"%>" wac_id="<%= @comparison_id %>" title="Edit Within-Arm Comparison Row Measures">Edit Measures</a>
+	</td>
+</tr>     
+<script type='text/javascript'>
+var id = '#remove_wa_comparison_' + "<%= @comparison_id %>" + '_link'
+$(id).bind("click",function(event){
+	event.preventDefault();
+	wac_id = $(this).attr("wac_id")
+	$("#delete_confirm_modal").html("This action will permanently remove this row from the within-arm comparison table. Are you sure you want to proceed?")
+  $("#delete_confirm_modal").dialog({
+  	resizable: false,
+  	height: 160,
+  	modal: true,
+  	buttons: {
+  		"Cancel": function(){
+  			$(this).dialog("close");
+  		},
+  		"Yes, I'm sure": function(){
+  			$.ajax({
+					type:'POST',
+					url: 'results/remove_within_arm_comparison_row',
+					data:({
+						outcome_id: "<%= @outcome_id %>",
+						subgroup_id: "<%= @subgroup_id %>",
+						wac_id: "<%= @comparison_id %>",
+						selected_timepoints: "<%= @selected_timepoints %>"
+					})
+				})
+				$(this).dialog("close");
+  		}
+  	}
+	})
+})
+	
+// EDITING WAC MEASURES
+// First, display the measure form table
+var id_to_edit = "<%= "#edit_wac_#{@comparison_id}_measures_btn" %>";
+$(id_to_edit).bind("click",function(event){
+	event.preventDefault();
+	could_lose_information = has_data();
+	if(could_lose_information){
+		$("#confirmation_modal").html("To avoid losing data, please press the 'Save' button before creating comparisons");
+		$("#confirmation_modal").dialog({
+		 	resizable: false,
+			height: 160,
+			modal: true,
+			buttons: {
+				"Cancel": function(){
+					$("#confirmation_modal").dialog("close");
+				},
+				"Continue without saving": function(){
+					$("#confirmation_modal").dialog("close");
+					$("#modal_div").dialog({
+						title: "Editing Within-Arm Comparison Measures",
+					})
+					$.ajax({
+						type: 'POST',
+						url: "results/show_within_arm_comparison_measures",
+						data:({
+							comparison_id: "<%= @comparison_id %>",
+							outcome_id: "<%= @outcome_id %>",
+							outcome_type: "<%= @outcome_type %>",
+							subgroup_id: "<%= @subgroup_id %>",
+							selected_timepoints: "<%= @selected_timepoints %>" 
+						})
+					})
+				}
+			}	
+	  })
+	}else{
+		
+		$("#modal_div").dialog({
+			title: "Editing Within-Arm Comparison Measures",
+		})
+		$.ajax({
+			type: 'POST',
+			url: "results/show_within_arm_comparison_measures",
+			data:({
+				comparison_id: "<%= @comparison_id %>",
+				outcome_id: "<%= @outcome_id %>",
+				outcome_type: "<%= @outcome_type %>",
+				subgroup_id: "<%= @subgroup_id %>",
+				selected_timepoints: "<%= @selected_timepoints %>" 
+			})
+ 		})
+ 	}
+})
+</script>

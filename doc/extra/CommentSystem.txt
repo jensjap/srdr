@@ -1,0 +1,51 @@
+# @markup rdoc
+# @title Commenting System
+= Commenting System
+== Public vs. Private Comments
+
+Comments can be public or private. When comments are added before a project is published, the comment will be saved as a Private comment, which can only be viewed by users listed as project collaborators. When a project is published, all comments posted after publishing, whether by collaborators or commentators, will be marked as public.
+
+== Types of Comments
+
+There are two types of comments: Regular Comments and Flags. Currently comment dialog windows show both comments and flags in the same list. 
+
+== Including Comments for a Section
+
+To add a comment to a section or data field, include the partial "comments/field_comments.html.erb" and send it the following variables:
+- section_name: (string) the name of the general section where the field is (example: projects, arms, studies, adverseevents, designdetails, baselinecharacteristics, keyquestions, primarypublications, secondarypublications, qualitydimensions, qualityratings)
+- section_id: (integer) the item_id of the section. (example: project id, keyquestion id, arm id)
+- field_name: (string) the name of the field where the comment will be (example: [project] title, [keyquestion] question)
+- study_id: (integer) the id of the study where the field is (-1 if the field is in a project)
+- project_id: (integer) the id of the project where the field is.
+
+These variables should be passed in to any comment partial being rendered as they determine what comments are shown and how the comment is saved.
+
+== Example Usage
+Example inclusion of comment partial:
+  <%= render :partial => "comments/field_comments", :locals => {:section_name => "arms", :section_id => arm.id, 
+  :field_name => "arms", :study_id => arm.study_id, :project_id => @project.id} %>
+
+== Partials
+
+These are the .html.erb files contained in app/views/comments.
+_field_comments.html.erb:: Used for including comments for a particular field. See "Including Comments for a Section" above. Included directly in a page to show the comment and flag numbers, and view links.
+_field_flags.html.erb:: Used in comments/create.js.erb, for updating the div that shows a number of flags in a comment section when a new comment is created.
+_summary_comments.html.erb:: Used for showing a comment summary, specifically on the published projects page. Included directly in a page to show the comment and flag numbers, and view summary links.
+_myprojects_comments.html.erb:: Used for showing a comment summary that is specifically formatted for the my projects/my work page. Included directly in a page to show the comment and flag numbers, and view myproject comment links.
+_comment_form.html.erb:: Contains the form for adding a new comment. This form is shown using the jquery-qTip plugin.
+_flag_form.html.erb:: Contains the form for adding a new flag-comment. This form is shown using the jquery-qTip plugin.
+_reply_form.html.erb:: Contains the form for adding a new flag-comment. This form is shown inline within the comment thread using jquery.
+_thread.html.erb:: Contains buttons to post comments and flags and the comment thread for a particular page. This is the partial that is displayed when the view comment window is opened.
+_summary_thread.html.erb:: Contains a comment thread for a particular page, altered to show summary partials only. This is the partial that is displayed when the view comment summary window is opened.
+_sort_menu.html.erb:: Shows the list of sorting links for a comment thread. Used in the thread partial.
+_summary_sort_menu.html.erb:: Shows the list of sorting links for a comment summary thread. Used in the summary_thread partial.
+_single_comment.html.erb:: Shows a single comment and its replies. Used in the thread partial.
+_single_summary_comment.html.erb:: Shows a single comment and its replies with summary information. Used in the summary_thread partial.
+
+==Dialog setup
+The comment dialog is shown using the qtip2 jquery tooltip library. The show, show_summary, new, and new_flag controller functions are all called from jquery-ajax calls that use this library to open a dialog window.
+Code for opening the dialogs is located in public/js/comments_dropdown.js. this file is included across all pages and opens the comment window based on the DOM ID of the comment link. The DOM ID is based on the variables passed to the partial (explained above). The jquery bind functions in this file must be called again when the partial containing the comments link (i.e. a table or form partial) is reloaded (for example, in key_questions/create.js.erb).
+
+This plugin is used because standard jquery-ui dialogs cannot open a dialog window on top of a dialog window  (needed to pop up the comments form over the comments list).
+
+More information on how to use the qtip2 library can be found at {craigsworks.com/projects/qtip2}[http://craigsworks.com/projects/qtip2]. 

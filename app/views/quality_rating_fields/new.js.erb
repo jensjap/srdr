@@ -1,0 +1,4 @@
+$("#new_qr_entry").html("<%= escape_javascript(render :partial=>'quality_rating_fields/form')%>");
+$("#new_qr_entry :button").removeAttr("disabled");
+$("#new_qr_entry").dialog("option", "title", "New Quality Rating Item");		
+$('#new_qr_entry').dialog('open');	

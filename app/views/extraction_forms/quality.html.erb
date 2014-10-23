@@ -1,0 +1,147 @@
+<div class='tab-div'><br/>
+    <%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Create Study Quality Form"} %>
+
+<div class="extraction_form_options">
+   <%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+		<% unless @donors.empty? %> 
+			<%= render :partial=>'extraction_form_section_copies/imported_message'%>
+		<% else %>
+			Would you like to include the <strong>quality dimensions</strong> section in your extraction form? 
+			<%= select("ef_included_" + @extraction_form_section.id.to_s, "quality", options_for_select([["Yes", true], ["No", false]], @extraction_form_section.included),{ :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+			<div class="inline" id="saved_display_section_quality"></div>
+		<% end %>
+  <% end %>
+  <br/>
+  <!-- user-defined EF instructions -->
+  <%  @ef_user_instructions = @extraction_form_quality_instr.nil? ? nil : @extraction_form_quality_instr.instructions %> 
+    <div id="quality_user_instructions">
+        <%= render :partial=>"extraction_forms/instructions" %>
+    </div>
+  <a href='#' class="positive add_quality_ef_instr_<%= @extraction_form_section.id.to_s %> add_quality_instr_button" id="add_quality_instr_button" alt="Click to add user instructions">Add/Edit Instructions</a>
+
+</div>
+<% display = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %> 
+<div id="extraction_form_section_quality" class='data' style='display: <%= display %>;'>
+
+<br/><br/>
+
+    <div class='page_heading'>Quality Dimensions Data Table</div>
+    <div id="quality_dimension_fields_table">
+        <%= render 'quality_dimension_fields/table' %>
+    </div>
+
+    <br/>
+
+    <div class="actions">
+        <button type="submit" class="positive" id="add_qd_button" alt="Click to open Add New Quality Dimension Form Dialog">
+             <%= image_tag "Add.png", :alt => "Add" %>Add a New Quality Dimension Field
+        </button>	
+        <div class="saved" id="saved_item_indicator_dim" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+        <div class="saved" id="removed_item_indicator_dim" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+    </div>	
+    <br/>
+    <div class='hr'>&nbsp;</div>
+    <br/>
+
+    <div class='page_heading'>Adjust Quality Rating Scale</div>    
+    <div id="quality_rating_fields_table">
+        <%= render 'quality_rating_fields/table' %>
+    </div>
+    <br/>
+    
+    
+    <div class="actions">
+        <button type="submit" class="positive" id="add_qr_button" alt="Click to open Add New Quality Rating Form Dialog">
+            <%= image_tag "Add.png", :alt => "Add" %>Add a New Quality Rating Field
+        </button>
+        
+		
+        <div class="saved" id="saved_item_indicator_rtg" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>		
+        <div class="saved" id="removed_item_indicator_rtg" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>		
+    </div>
+</div>
+
+<div id="new_qd_entry">
+    <%= render 'quality_dimension_fields/form' %>
+</div>
+
+<script>
+    $(".select_with_other").bind("load", function(){
+        alert("HI ");
+    });	
+</script>
+
+
+
+<div id="new_qr_entry">
+    <%= render 'quality_rating_fields/form' %>
+</div>
+<div id = "new_quality_instr_entry">
+    <%= render 'extraction_form_quality/instr_form'%>
+</div>
+
+<br/>
+
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"extraction_forms/" + @extraction_form.id.to_s + "/quality",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "",:previous_title=>"Adverse Events",:next_title=>"Form Summary"} %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+<script type="text/javascript">
+
+    $("#new_qr_entry").dialog({
+        autoOpen: false,
+	   minWidth: 600,
+       modal: true
+    });
+    
+    $("#add_qr_button").bind("click", function() {
+        $.ajax({
+            url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/quality_rating_fields/new',
+            type: "POST"
+        });
+    });
+	
+    $("#new_qd_entry").dialog({
+        autoOpen: false,
+        minWidth: 600,
+        modal: true
+    });
+
+    $("#add_qd_button").bind("click", function() {
+        $.ajax({
+            url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/quality_dimension_fields/new',
+            type: "POST"
+        });
+    });
+
+    $("#new_quality_instr_entry").dialog({
+        autoOpen: false,
+        modal: true,
+    	minWidth: 600,
+        modal: true
+    });
+
+    $("#add_quality_instr_button").bind("click", function(event)
+    {
+        event.preventDefault();
+    	$.ajax({
+    	  url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_quality/add_instr',
+    	  type: "POST"
+    	});
+    });
+
+    $(".quality_rating_moveup").die();
+    $(".quality_rating_moveup").live("click",function(event){
+        event.preventDefault();
+        var qrfid = $(this).attr("qrf_id");
+        $.ajax({
+            url: 'quality_rating_fields/'+qrfid+'/moveup',
+            data:({
+                extraction_form_id: "<%=@extraction_form.id%>",
+                quality_rating_field_id: qrfid
+            })
+        });
+    });
+
+</script>
+</div> <!-- end tab-div -->

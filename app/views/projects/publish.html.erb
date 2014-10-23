@@ -1,0 +1,126 @@
+<div id='left-navigation-div' tabindex=100>
+<%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "publish"} %>
+</div>
+<div id='content' tabindex=200>
+<%= render :partial => "page_title", :locals => {:page_title => "Publish this Project"} %>
+
+
+<script type='text/javascript'>
+	function confirm_submit(){
+	var agree = confirm("Are you sure you want to publish this project? Once you publish a project it cannot be reversed.");
+	  if (agree){ return true;}
+	  else{ return false;}
+	  }
+</script>
+
+
+<% unless @project.is_public %>
+This section allows you to finalize your project and
+		make it available for viewing to the SRDR user population. <br/><br/>
+		<strong>Please note</strong> that this cannot
+		be reversed; these changes are final. You may still make edits to your project
+		after it has been published, but all changes will be tracked and made available via
+		the SRDR wiki.
+
+		<br/><br/>
+ 		<%= form_for @project, :url => "set_to_published" do |f| %>
+ 			<%= hidden_field_tag "publishing","", :value=>true %>
+ 			
+ 			<div class='field'>
+ 				<h4>Project Status:</h4><br/>
+ 				<%= f.radio_button "is_public",false, :class => "cbox", :selected=>true %>Incomplete (<em>May be viewed and edited only by project team members.</em>)<br/>
+ 				<br/><%= f.radio_button "is_public",true, :class => "cbox" %>Published (<em>May be searched for and viewed by other users. Edits can be made, but will be tracked.</em>)
+ 				<br/><br/><br/>
+
+ 				<h4>Set Data Availability</h4><br/>
+ 				By setting this option to "Make Public", you are agreeing to allow users to download the "Simple Export" format of your data. To mandate that users first ask your permission to download the data, you should set this option to "Require My Permission".<br/><br/>
+ 				
+ 				<%= f.radio_button "public_downloadable",false, {:class => "cbox",:selected=>true} %>Require My Permission (<em>User requests for download will be emailed to you</em>)<br/><br/>
+ 				<%= f.radio_button "public_downloadable",true, :class => "cbox" %>Make Public (<em>Registered users can download an Excel document representing the extracted data found in your project. All downloads will be recorded and viewed from your user profile.</em>)
+ 			</div><br/>
+            <div class='field'>
+                <hr width="100%">
+                <h2>SRDR Usage Agreement</h2><br/><br/>
+                <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank" class='needs_exit_disclaimer' tabindex=112 title="Creative Commons License"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/80x15.png" /><img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/> Creative Commons</a>
+                <br/>I understand that all contributions made to the SRDR are made freely available to the public in accordance with the 
+                <a href="/home/policies">SRDR's Open Access policy</a>, under the terms of a Creative Commons license.
+                <p/><br/>
+                <input type="checkbox" name="user_agreement" value="1"> I agree to the SRDR <a href="home/policies">Terms of Use Policy</a>
+            </div><br/>
+ 			<div class="actions">
+				<button type="submit" class="positive" id="publish_project_button" alt="publish this project">
+					<%= image_tag "Add.png", :alt => "Add" %>Save
+				</button>
+			</div>
+			
+ 		<% end %>
+
+<% else %>
+
+		<br/><br/>
+		This project has been published and may be viewed by the SRDR user community. If this was not your intention please contact us at <a href="mailto: SRDR@ahrq.hhs.gov">SRDR@ahrq.hhs.gov</a>.
+		<br/><br/>
+		However, you may update the access level of your data below:<br/><br/>
+		<%= form_for @project, :url => "set_to_published" do |f| %>
+ 			<%= hidden_field_tag "publishing","", :value=>true %>
+ 			
+ 			<div class='field'>
+ 				<h4>Set Data Availability</h4><br/>
+ 				By setting this option to "Make Public", you are agreeing to allow users to download the "Simple Export" format of your data. To mandate that users first ask your permission to download the data, you should set this option to "Require My Permission".<br/><br/>
+ 				
+ 				<%= f.radio_button "public_downloadable",false, {:class => "cbox",:selected=>@project.public_downloadable} %>Require My Permission (<em>User requests for download will be emailed to you</em>)<br/><br/>
+ 				<%= f.radio_button "public_downloadable",true, {:class => "cbox", :selected=>@project.public_downloadable} %>Make Public (<em>Registered users can download an Excel document representing the extracted data found in your project. All downloads will be recorded and viewed from your user profile.</em>)
+ 			</div><br/>
+ 			<div class="actions">
+				<button type="submit" class="positive" id="publish_project_button" alt="publish this project">
+					<%= image_tag "Add.png", :alt => "Add" %>Save
+				</button>
+			</div>
+ 		<% end %>
+
+<% end %>
+<br/><br/>
+<!--
+<table id="bottom_nav" summary="bottom page navigation table">
+	<tr>
+		<td align='left'>
+			<a href="<%= '/projects/' + @project.id.to_s %>">
+				<img alt="" src="/images/Silk_bullet_back.png" style="border:0px; vertical-align:text-top"/>
+  			Back to Project Summary	
+			</a>
+		</td>
+		<td align="right">
+			<a href="/">
+  			
+  			<img alt="" src="/images/Computer-silk.png" style="border:0px; vertical-align:text-top"/>
+  			Go to My Work
+  		</a>
+  	</td>
+ </tr>
+</table>
+-->
+
+
+</div><br/><br/>
+</div> <!-- END RIGHT COLUMN DIV -->
+<script>
+var is_edit_page = false;
+$("#publish_project_button").bind("click", function(e){
+	e.preventDefault();
+	if (($("#project_is_public_true").attr("checked") != "undefined") && ($("#project_is_public_true").attr("checked") == "checked"))
+	{
+		if (confirm('Are you sure? Once you publish your project to the system, this action cannot be undone.'))
+		{
+			$(this).closest("form").submit();
+		}
+	}
+	else
+	{
+			$(this).closest("form").submit();	
+	}
+	
+});
+</script>
+
+
+

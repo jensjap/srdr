@@ -1,0 +1,956 @@
+/* ---------------------- List Table -------------------------- */
+table.list_table {
+    width: 100%;
+    color: #000;
+    background:none;
+    border: 1px solid #aaa;
+    border-collapse: separate;
+}
+table.list_table td, table.list_table th {
+    text-align: left;
+    vertical-align: top;
+    padding: 5px;
+}
+table.list_table th.header_bar{
+    /* apply a gradient */
+    height:45px;
+    color: #fff;
+    background: -webkit-gradient(linear, left top,left bottom, from(#065191), to(#0e297d));
+    background: -moz-linear-gradient(bottom,  #065191,  #0e297d);
+    background-image: linear-gradient(to bottom, #065191 0%, #0e297d 100%);
+    background-image: -ms-linear-gradient(to bottom, #065191 0%, #0e297d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#065191', endColorstr='#0e297d');
+    padding: 5px;
+    text-align:middle;
+}
+
+table.list_table td.status {
+    color: #000;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table.list_table td.label {
+    color: #3366FF;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;	
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table.list_table td.data {
+    background-image: url(/images/table-bg.png);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    padding: 10px;
+    line-height:18px;
+    position:relative;
+}
+
+table.list_table td.controls {
+    color: #fff;
+    text-align: right;
+    background-image: url(/images/table-bg2.png);
+    background-repeat: repeat-x;
+}
+
+table.list_table td input {
+    width: 90%;
+}
+table.tab-list-table td input{
+    width: 50%;
+}
+
+table.list_table td input.cbox, input.question_checkbox_input, input.question_radio_input, .cbox, table.form_table input[type="checkbox"], table.form_table input[type="radio"]{
+    border: 0px;
+    display: inline;
+    width: auto;
+    background: none;
+    margin: 2px !important; padding: 0 !important;
+}
+
+table.list_table tr td.actions{
+    padding-top: 10px;
+    text-align: right;
+    margin-left: 5px;
+}
+
+table.list_table tr td.subtable{
+padding: 0px;
+}
+table.list_table tr th{
+	background-color: #f6f6f6;
+	border-left: solid 1px #9B9B9B;
+	border-bottom: solid 1px #9B9B9B;
+	font-weight: bold;
+	text-align:left;
+}
+
+/*---------------- classic table style 1-----------------*/
+table.classic-a{
+    width: 100%;
+    border: solid 1px #aaa;
+    border-collapse: collapse;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size:12px;
+}
+table.classic-a th, .table_head{
+    background: url('/images/left_nav/leftNav_innerShadow.png') right center repeat-y, -webkit-gradient(linear, left top,left bottom, from(#858585), to(#262b30));
+    background: url('/images/left_nav/leftNav_innerShadow.png') right center repeat-y, -moz-linear-gradient(bottom,  #858585, #262b30  );
+     background-image: linear-gradient(to bottom, #858585 0%, #262b30 100%);
+    background-image: -ms-linear-gradient(to bottom, #858585 0%, #262b30 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#858585', endColorstr='#262b30');
+    color: white !important;
+    font-size:15px;
+    padding: 5px;
+}
+table.classic-a td{
+    padding: 5px;
+    text-align:center;
+    vertical-align:middle;
+    color: #000;
+    border-bottom: solid 1px #aaa;
+}
+.odd{
+    background-color: #f4f4f4 !important;
+}
+.even{
+    background-color: #fff !important;
+}
+/*---------------- table creator style -----------------*/
+table.tc_preview_table {
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+}
+table.tc_preview_table td.tc_preview_title {
+    font-size: 1.1em;
+    color: #FFFFFF;
+    background-color: #353A3E;
+    text-align: left;           
+    padding: 5px 3px 5px 3px;
+}
+table.tc_preview_table td.tc_preview_subtitle {
+    font-size: 1.0em;
+    color: #000000;
+    background-color: #B1B2B3;
+    text-align: center;
+    padding: 5px 1px 5px 1px;
+}
+table.tc_preview_table td.tc_preview_pubinfo {
+    font-size: 1.0em;
+    padding: 1px 3px 1px 3px;
+    text-align: left;           
+    vertical-align: top;
+}
+table.tc_preview_table td.tc_preview_data {
+    font-size: 0.95em;
+    padding: 1px 3px 1px 3px;
+    text-align: center;           
+    vertical-align: top;
+}
+table.tc_options_table {
+    width: 100%;
+    padding: 2px 3px 2px 3px;
+    font-size: 1.2em;
+    font-family: Tahoma;
+    background-color: #fff;
+}
+table.tc_options_table td.tc_options_checkbox {
+    text-align: center;           
+    vertical-align: top;
+    padding: 2px 3px 2px 3px;
+    font-size: 1.0em;
+    font-family: Tahoma;
+}
+table.tc_options_table td.tc_options_title {
+    text-align: left;           
+    vertical-align: top;
+    padding: 2px 3px 2px 3px;
+    font-size: 0.95em;
+    font-family: Tahoma;
+}
+table.tc_options_table td.tc_options_data {
+    text-align: left;           
+    vertical-align: top;
+    padding: 2px 3px 2px 3px;
+    font-size: 0.80em;
+    font-family: Tahoma;
+}
+/*---------------- Data comparator table style -----------------*/
+table.compare_studies_table {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    border: solid 1px #2B447E;
+}
+table.compare_studies_table th.compare_studies_title {
+    font-size: 1.1em;
+    color: #FFFFFF;
+    background-color: #353A3E;
+    text-align: center;           
+    padding: 5px 3px 5px 3px;
+
+}
+table.compare_studies_table td.compare_studies_item {
+    font-size: 1.0em;
+    color: #000000;
+    background-color: #B1B2B3;
+    text-align: left;
+    padding: 2px 5px 2px 2px;
+}
+table.compare_studies_table td.compare_studies_arm {
+    font-size: 1.0em;
+    color: #000000;
+    background-color: #E0E0E0;
+    text-align: right;
+    padding: 2px 5px 2px 2px;
+}
+table.compare_studies_table td.compare_studies_adata {
+    font-size: 1.0em;
+    color: #000000;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
+    vertical-align: middle;
+}
+table.compare_studies_table td.compare_studies_data {
+    font-size: 1.0em;
+    color: #000000;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
+    vertical-align: top;
+}
+/*---------------- Data comparator data matrix table style -----------------*/
+#compare_maxtrix_table {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding: 5px 5px 5px 5px;
+    border: solid 1px #2B447E;
+}
+#compare_maxtrix_table th.header {
+    font-size: 1.0em;
+    color: #FFFFFF;
+    background-color: #353A3E;
+    text-align: center;           
+    padding: 5px 3px 5px 3px;
+
+}
+div#compare_studies_accordion {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#compare_studies_accordion h3 {
+    background-color: #B1B2B3;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#compare_studies_accordion a.heading {
+    background-color: #3b3b3b;
+    font-size: 1.0em;
+    color: #ffffff;
+    display: block;  
+}
+div#compare_studies_accordion a.heading:hover {
+    background-color: #cfcfcf;
+    font-size: 1.1em;
+    color: #000000;
+}
+div#compare_studies_accordion a {
+    border-bottom: 1px solid #00B9D2; 
+    color: #025185; 
+    text-decoration: none;
+}  
+div#compare_studies_accordion a:hover {
+    border-bottom: none;
+}
+div#compare_studies_accordion div#compare_pub {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#compare_studies_accordion div#compare_dd {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#compare_studies_accordion div#compare_bl {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#compare_studies_accordion div#compare_outc {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#compare_studies_accordion div#compare_adv {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#compare_studies_accordion div#compare_qualdim {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+#content.study_summary {
+    padding: 10px;
+    font-size: 0.5em;
+    font-family: Tahoma;
+    font-weight: normal;
+    border: solid 1px #2B447E;
+}
+/*---------------- jQuery Accordion table style -----------------*/
+div#prj_accordion {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#prj_accordion h3 {
+    background-color: #B1B2B3;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#prj_accordion a.heading {
+    background-color: #3b3b3b;
+    font-size: 1.0em;
+    color: #ffffff;
+    display: block;  
+}
+div#prj_accordion a.heading:hover {
+    background-color: #cfcfcf;
+    font-size: 1.1em;
+    color: #000000;
+}
+div#prj_accordion a {
+    border-bottom: 1px solid #00B9D2; 
+    color: #025185; 
+    text-decoration: none;
+}  
+div#prj_accordion a:hover {
+    border-bottom: none;
+}
+div#prj_accordion div#advsearch_project_0 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_1 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_2 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_3 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_4 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_5 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_6 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_7 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_8 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_9 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#prj_accordion div#advsearch_project_10 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+/* ----------- Publication jQuery Accordion ------------ */
+div#pub_accordion {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#pub_accordion h3 {
+    background-color: #B1B2B3;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#pub_accordion a.heading {
+    background-color: #3b3b3b;
+    font-size: 1.0em;
+    color: #ffffff;
+    display: block;  
+}
+div#pub_accordion a.heading:hover {
+    background-color: #cfcfcf;
+    font-size: 1.1em;
+    color: #000000;
+}
+div#pub_accordion a {
+    border-bottom: 1px solid #00B9D2; 
+    color: #025185; 
+    text-decoration: none;
+}  
+div#pub_accordion a:hover {
+    border-bottom: none;
+}
+div#pub_accordion div#advsearch_pub_0 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_1 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_2 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_3 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_4 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_5 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_6 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_7 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_8 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_9 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#pub_accordion div#advsearch_pub_10 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+/* ---------------- Filtered Search jQuery Accordion Style ---------- */
+div#filt_accordion {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#filt_accordion h3 {
+    background-color: #B1B2B3;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#filt_accordion a.heading {
+    background-color: #3b3b3b;
+    font-size: 1.0em;
+    color: #ffffff;
+    display: block;  
+}
+div#filt_accordion a.heading:hover {
+    background-color: #cfcfcf;
+    font-size: 1.1em;
+    color: #000000;
+}
+div#filt_accordion a {
+    border-bottom: 1px solid #00B9D2; 
+    color: #025185; 
+    text-decoration: none;
+}  
+div#filt_accordion a:hover {
+    border-bottom: none;
+}
+div#filt_accordion div#advsearch_project_0 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_1 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_2 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_3 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_4 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_5 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_6 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_7 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_8 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_9 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filt_accordion div#advsearch_project_10 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#filtpub_accordion h3 {
+    background-color: #B1B2B3;
+    font-size: 1.0em;
+    color: #fff;
+}
+div#filtpub_accordion a.heading {
+    background-color: #3b3b3b;
+    font-size: 1.0em;
+    color: #ffffff;
+    display: block;  
+}
+div#filtpub_accordion a.heading:hover {
+    background-color: #cfcfcf;
+    font-size: 1.1em;
+    color: #000000;
+}
+div#filtpub_accordion a {
+    border-bottom: 1px solid #00B9D2; 
+    color: #025185; 
+    text-decoration: none;
+}  
+div#filtpub_accordion a:hover {
+    border-bottom: none;
+}
+div#filtpub_accordion div#advsearch_pub_0 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_1 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_2 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_3 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_4 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_5 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_6 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_7 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_8 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_9 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+div#filtpub_accordion div#advsearch_pub_10 {
+    background-color: #ffffff;
+    font-size: 1.0em;
+    color: #000000;
+}
+/* ---------------- Accordion Style ---------- */
+.openaccdicon {
+    background-image: url('images/Open_acoordion.png') !important;
+    width: 25px;
+    height: 25px;
+}
+.closeaccdicon {
+    background-image: url('images/Close_acoordion.png') !important;
+    width: 25px;
+    height: 25px;
+}
+/* ---------------- SRDR Events Style ---------- */
+#events_table {
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #e0e0e0;
+    background: #fff none;
+}         
+#events_table td.header {   
+    font-size: 1.0em;
+    color: #fff;
+    padding-left: 10px;
+    background-image: url(/images/homepage/events_header.png);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    text-align: left;
+    vertical-align: bottom;
+    height: 35px;
+}         
+#events_table th {
+    align: left;
+    font-size: 1.0em;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: bold;
+}         
+/* ---------------- Primary Publication Identifiers Style ---------- */
+#ppiform_table {
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #e0e0e0;
+    background: #fff none;
+}         
+#ppiform_table td.ppi_header {   
+    font-size: 1.0em;
+    color: #fff;
+    padding-left: 10px;
+    background-image: url(/images/homepage/events_header.png);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    text-align: left;
+    vertical-align: bottom;
+    height: 35px;
+}         
+/* ---------------- Users Guide Style ---------- */
+.document_chapter {   
+    font-size: 1.6em;
+    font-family: Tahoma;
+    font-weight: bold;
+}         
+.document_chtitle {   
+    font-size: 1.2em;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-style: italic;
+}         
+.document_title {   
+    font-size: 1.4em;
+    font-family: Tahoma;
+    font-weight: bold;
+}         
+.document_subtitle {   
+    font-size: 1.2em;
+    font-family: Tahoma;
+    font-weight: normal;
+}         
+.document_toc {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    width: 100%;
+}         
+.document_toc td.document_toc_title {   
+    font-size: 1.2em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+}         
+.document_toc td.document_toc_topic {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: left;
+}         
+.document_toc td.document_toc_ref {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: right;
+}         
+.document_figure {   
+    font-size: 1.1em;
+    font-family: Tahoma;
+    font-weight: bold;
+    font-style: italic;
+}         
+.document_instr_table {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    width: 100%;
+}         
+.document_instr_table td.bullet {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}         
+.document_instr_table td.data {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: left;
+    padding: 5px;
+}         
+/*---------------- Creative Commons table style -----------------*/
+table.cc_notice {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: solid 1px #e0e0e0;
+}
+/*---------------- Table Creator Matrix Details table style -----------------*/
+table.tc_config_matrix {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: solid 1px #e0e0e0;
+}
+table.tc_config_matrix td.tc_config_armname {   
+    background: #a0a0a0 none;
+    font-size: 0.85em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+table.tc_config_matrix td.tc_config_colname {   
+    background: #e0e0e0 none;
+    font-size: 0.75em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+table.tc_config_matrix td.tc_config_rowname {   
+    background: #e0e0e0 none;
+    font-size: 0.75em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px;
+}         
+table.tc_config_matrix td.tc_config_data {   
+    background: #fff none;
+    font-size: 0.75em;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: center;
+    padding: 5px;
+}         
+/*---------------- Table Creator Baseline table style -----------------*/
+#preview_bl_table {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: solid 1px #e0e0e0;
+}
+#preview_bl_table td.header {   
+    background: #08296b none;
+    color: #ffffff;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+#preview_bl_table td.title {   
+    background: #ffffff none;
+    color: #000000;
+    font-size: 0.9em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+}         
+#preview_bl_table td.data {   
+    background: #ffffff none;
+    color: #000000;
+    font-size: 0.9em;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: center;
+    padding: 2px;
+}         
+#preview_blmaxtrix_table {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: solid 1px #e0e0e0;
+}
+#preview_blmaxtrix_table td.header {   
+    background: #08296b none;
+    color: #ffffff;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+#preview_blmaxtrix_table td.label {   
+    background: #ffffff none;
+    color: #000000;
+    font-size: 0.9em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+}         
+#preview_blmaxtrix_table td.data {   
+    background: #ffffff none;
+    color: #000000;
+    font-size: 0.9em;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: center;
+    padding: 2px;
+}         
+/*---------------- Table Creator BAC table style -----------------*/
+table.preview_bac_table {
+    width: 100%;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: solid 1px #e0e0e0;
+}
+table.preview_bac_table td.bac_header {   
+    background: #08296b none;
+    color: #ffffff;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+table.preview_bac_table td.bac_title {   
+    background: #ffffff none;
+    color: #000000;
+    font-size: 0.9em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+}         
+table.preview_bac_table td.bac_data {   
+    background: #ffffff none;
+    color: #000000;
+    font-size: 0.9em;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: center;
+    padding: 2px;
+}         

@@ -1,0 +1,31 @@
+<br/><hr><br/>
+<strong>Step 2:</strong> What type of analysis is this?
+<br/><br/>
+<input type='radio' name='within_or_between', value='within', class='within_or_between', id='w_or_b_within' tabindex="2" /><label for="Within Arms">Within Arms</label>
+<br/>
+<span class='smallText'>(Add a comparison between timepoints found in a particular study arm for this outcome.)</span>
+<br/><br/>
+<input type='radio' name='within_or_between', value='between' class='within_or_between' id='w_or_b_between' tabindex="3" /><label for="Between Arms">Between Arms</label>
+<br/>
+<span class='smallText'>(Add a comparison between the study arms for this outcome.)</span>
+
+
+<script type="text/javascript">
+  $(".within_or_between").bind("change",function(){
+  	var selected = $(this).val();
+  	var outcome = $("#outcome_selector").val();
+  	var study_id = $("#study_id").val();
+  	var extraction_form_id = $("#extraction_form_id").val();
+  	$.ajax({
+			type: "POST",
+			url: 'comparison_data_points/show_group_selector',
+			data: {
+				within_or_between : selected,
+				outcome_id : outcome,
+				study_id : study_id,
+				extraction_form_id : extraction_form_id
+			}
+		});
+  });
+
+</script>

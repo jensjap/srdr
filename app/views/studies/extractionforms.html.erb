@@ -1,0 +1,51 @@
+<%= render :partial => "sidebars/study_edit" %>
+<h2>Manage Extraction Forms</h2>
+
+<br/><br/>
+
+
+ 		    
+	<% if !@extraction_form_list_array.nil? && @extraction_form_list_array.length > 0 %>
+			
+					  <div id="current_extraction_forms">
+				<%= render "studies/current_extraction_forms_edit", :locals => {:ext_forms_list => @ext_forms_list} %>
+
+		  </div>
+					  <br/>
+			
+	<%= form_for(@study_extraction_form, :remote => true) do |f| %>
+		<div class="form_content">
+		
+		<%= hidden_field :project_id, :value => params[:project_id] %>
+
+		
+		
+		<div class="field">
+			Choose an extraction form to add to this study:<br/>
+				<%= f.select :extraction_form_id, options_for_select(@extraction_form_list_array), :class => "inline_field editable_field" %><br/>
+		</div>
+
+		<div class="field">
+			Notes about this form:<br/>
+				<%= f.text_field :notes, :class => "inline_field editable_field" %><br/>
+		</div>
+		 
+		   <div class="actions">
+		<button type="submit" class="positive" id="submit_extraction_form_to_study">
+			<%= image_tag "Add.png", :alt => "Accept" %>Add Form to Study
+		</button>
+				  <div id="saved_extform_section" class="inline">
+		  </div>
+	  </div>		 
+		 
+		 
+		 </div>
+	<% end %>
+		  <% end %><br/>
+		  
+<% this_page = request.request_uri %>
+<% current = this_page.split("/").last %>
+<%= create_back_and_continue_for_study(@study_extforms[0].extraction_form_id, current)%>
+
+<%= render 'shared/make_editable_and_confirm' %>
+

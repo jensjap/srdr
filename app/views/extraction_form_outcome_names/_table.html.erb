@@ -1,0 +1,35 @@
+<br/>
+<table class="classic-a" id="outcome_names_table" summary="extraction form outcome names table">
+	<thead><tr>
+		<th scope='col'>Title</th>
+		<th scope='col'>Description</th>
+		<th scope='col'>Data Type</th>
+		<th scope='col'>Actions</th>
+	</tr></thead>
+	<tbody>
+	<% unless @saved_names.empty? %>
+		
+	  <% for oc_name in @saved_names %>
+	    <tr>
+	    	<td scope='col'><%= oc_name.title %></td>
+	    	<td scope='col'><%= oc_name.note %></td>
+	    	<td scope='col'><%= oc_name.outcome_type %></td>
+	    	<td scope='col'>
+	    		<%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt=>"Edit") + "Edit Outcome Suggestion", edit_extraction_form_outcome_name_path(oc_name), {:remote=>true, :class=>"tooltip_edit", :title=>"Edit Suggested Outcome: #{oc_name.title}"} %><br/>
+	    		<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Outcome Suggestion",extraction_form_outcome_name_path(oc_name), {:remote=>true, :confirm=>'Are you sure?', :method=>:delete, :class=>"tooltip_delete", :title=>"Remove Suggested Outcome: #{oc_name.title}"} %>
+			  </td>    	
+	    </tr>
+	  <% end %>
+
+
+	<% end %>
+	</tbody>
+		</table>
+
+	<% if @saved_names.empty? %>		
+<br/>
+You may specify a list of outcome names for this project by clicking the "Add Outcome" button below.
+
+	<% end %>
+
+<br/>

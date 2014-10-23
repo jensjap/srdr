@@ -1,0 +1,7 @@
+<%# remove any existing forms %>
+$("#q_builder_form").remove();
+<%# IF WE'RE IN THE EXTRACTION FORM, THE STUDY INSTANCE IS NOT THERE %>
+$('#<%= @model_name %>_fields_entry').html("<%= escape_javascript(render :partial => "question_builder/form") %>");
+$("#<%= @model_name %>_fields_entry :button").removeAttr("disabled");	
+$("#<%= @model_name %>_fields_entry").dialog("option", "title", "New <%= @model_title %>");		
+$("#<%= @model_name %>_fields_entry").dialog('open');	

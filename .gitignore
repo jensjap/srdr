@@ -1,0 +1,22 @@
+# Do not track files in the following folders
+tmp/
+log/
+
+# Do not track the following files
+tags
+coverage
+Gemfile.lock
+
+# Annoying mac files
+.DS_Store
+._.DS_Store
+
+# Ignore vim swap files
+*.swp
+
+# Ignore configuration files
+config/application.rb
+config/database.yml
+config/environment.rb
+properties/gui.properties
+

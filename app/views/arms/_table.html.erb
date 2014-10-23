@@ -1,0 +1,95 @@
+<div id="arm_validation_message"></div>
+<% if !@arms.nil? %>
+<% unless @arms.length < 1 %>
+	
+  <table class="classic-a" id="study_arms_table" summary="Table Displaying List of Arms for this Study">
+  <thead><tr>
+  	<th scope='col'>#</th>
+	<th scope='col'>Arm Title</th>
+  	<th scope='col'>Arm Description</th>
+  	<!--<th>Intention to Treat?</th>-->
+  	<th scope='col'>Actions</th>
+	</tr></thead>
+    <% for onearm in @arms %>
+      <tr id="arm_row_<%=onearm.id.to_s %>">
+				<td scope='row'><%= onearm.display_number %></td>
+				<td scope='row'><%= onearm.title %></td>
+				<td scope='row'><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
+				<!--<td><% if onearm.is_intention_to_treat%>Yes<% else %> No <% end %></td>-->
+				<td scope='row'>
+						<% if !onearm.display_number.nil? && onearm.display_number > 1 %>
+							<%= link_to image_tag("Silk_arrow_up.png", :style=>"border:0px") + "Move Up Arm", {:controller => "arms", :arm_id => onearm.id, :study_id => params[:study_id], :project_id => session[:project_id], :action => "moveup", :extraction_form_id => session[:extraction_form_id]}, :remote=>true, :class => "tooltip_moveup",:title=>"Move #{onearm.title} up the list" %><br/>
+						<% end %>
+				<% unless onearm.is_suggested_by_admin %>
+					<%= link_to image_tag("Pencil.png", :style=>"border:0px") + "Edit Arm", edit_study_arm_path(onearm.study_id,onearm, :extraction_form_id => session[:extraction_form_id], :project_id=>session[:project_id]), :remote=>true, :class => "tooltip_edit", :title=>"Edit Arm: #{onearm.title}" %><br/>
+				<% end %>
+				<%= link_to image_tag("Bin_closed.png", :style=>"border:0px") + "Delete Arm", study_arm_path(onearm.study_id, onearm,  :extraction_form_id => session[:extraction_form_id], :project_id=>session[:project_id]), :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "tooltip_delete", :title=>"Remove Arm: #{onearm.title}" %><br/>
+		<%= render :partial => "comments/field_comments", :locals => {:section_name => "arms", :section_id => onearm.id, :field_name => "arms", :study_id => onearm.study_id, :project_id => session[:project_id]} %>
+		</td>
+<% end %>
+					</tr>
+	</table>
+<% else %>
+<em>There are no arms associated with this study. Please use the form below to add a new arm.</em>
+<% end %>
+<% end %>
+
+
+<script type="text/javascript">
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });
+</script>

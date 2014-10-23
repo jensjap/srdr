@@ -1,0 +1,31 @@
+<% if defined?(@message_div) %>
+	$("#<%= @message_div %>").show().delay(1000).fadeOut(300);
+	<% if defined?(@error_div) %>
+		$("#<%= @error_div.to_s %>").html("");	
+	<% end %>
+<% end %>
+
+<% if defined?(@error_div) %>
+	<% if @saved %>
+		$("#<%= @error_div.to_s %>").html("");		
+	<% else %>
+		$("#<%= @error_div.to_s %>").html("<%= escape_javascript(render :partial=>@error_partial) %>");		
+	<% end %>
+<% end %>
+/*
+	$("#study_citation_info").html("<%= escape_javascript(render :partial => "studies/citation_info", :locals => {:study => @study}) %>");
+*/
+$("#study_citation").html("<%= render :inline=> @new_citation %>");
+$("a.nav-selected").html("<%= render :inline => @author %>");
+// hide the unsaved error message
+$(".unsaved_div").css("display","none");
+
+// unset form and field 'unsaved' indicators
+forms = $(".unsaved_form");
+for(i=0; i < forms.length; i++){
+	$(forms[i]).removeClass("unsaved_form");
+}
+fields = $(".edited_field")
+for(i=0; i < fields.length; i++){
+$(fields[i]).removeClass("edited_field");
+}

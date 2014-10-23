@@ -1,0 +1,32 @@
+<%
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Forgot Password","Forgot Password","/forgot_password")
+    session[:urlhistory] = urlhistory
+%>
+<div id='left-navigation-div' tabindex=100>
+</div>
+<div id='content' tabindex=200>
+    <h1>Forgot Password</h1>
+    <br/>
+    Fill out the form below and instructions to reset your password will be emailed to you.
+    <br />
+    <br />
+    <% form_tag password_resets_path do %>
+    <div class="form_content">
+        <div class="field">
+        <label class="inline">Your Email Address: </label>
+        <%= text_field_tag "email", "", :size => 50 %>
+        </div>
+        <div class="actions">
+      		<button type="submit">
+    			Reset My Password
+    		</button>
+        </div>
+    </div>
+    <% end %>
+</div>
+

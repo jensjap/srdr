@@ -1,0 +1,91 @@
+<%
+    # Get the total number of arm detail items - assume this is the same across all the studies being compared
+    num_arms = @compareset.getNumDistinctArms()
+    n_items = @compareset.getNumDistinctArmDetails()
+    if (!@compareset.sameEFIDs())
+%>
+    <b>Note: </b>The studies selected were compiled from different Extraction Forms, the arm details below are presented for review but will not
+    be updated in the consensus study record.
+    <p/>
+<%
+    end
+    if (num_arms == 0) ||
+        (n_items == 0)
+%>
+    <b>Note: </b>No Arms or Arm Details specified within this project.
+    <p/>
+<%
+    else
+%>
+    <input type="hidden" name="merge_armds_n_items" value="<%= n_items %>">
+    <table class="compare_studies_table">
+        <tr>
+            <th class="compare_studies_title">Arm Detail (by Arm)</th>
+<%
+        for studyidx in (0..@compareset.size() - 1)
+%>
+            <th class="compare_studies_title">
+            <!--[Study ID <%= @compareset.getStudyID(studyidx).to_s %>]-->
+            <span class='comparator_col_head'>Study <%= @alphabet[studyidx] %></span>
+            <br/>
+            Created by <%= User.get_name(@compareset.getCreatorID(studyidx)) %><br/>
+            <input type="checkbox" name="select_study_armd_<%= studyidx.to_s %>" value="1" onclick="selectAllDD(<%= studyidx.to_s %>,<%= @compareset.size() %>,<%= n_items.to_s %>)" title="Select all Arm Detail Information for Study <%= @alphabet[studyidx]%>"> Select This Study
+            </th>
+<%
+        end    
+%>
+            <th class="compare_studies_title">&nbsp;</th>
+            <th class="compare_studies_title">Consensus<br>Value</th>
+        </tr>
+<%
+        rcolor = ["#FFFFFF","#EAEAEA"]
+        ridx = 0
+        for armd_idx in 0..n_items - 1
+            for arm_idx in 0..num_arms - 1
+                arm_name = @compareset.getArmName(arm_idx)
+                armd_name = @compareset.getArmDetailName(armd_idx)
+                # Determine if there are any differences
+                isdiffvalues = @compareset.differentArmDetails(arm_name,armd_name)
+%>
+        <tr bgcolor="<%= rcolor[ridx % 2] %>">
+            <td class="compare_studies_item">
+            <%= armd_name %> (<%= arm_name %>)  
+            </td>
+<%
+                # Now display values across stucies horizontally
+                for sidx in 0..@compareset.size() - 1
+                    puts "study["+sidx.to_s+"] contains arm "+arm_name+" = "+@compareset.containsArmName(sidx,arm_name).to_s
+                    puts "study["+sidx.to_s+"] contains armd "+armd_name+" = "+@compareset.containsArmDetail(sidx,armd_name).to_s
+                    if @compareset.containsArmName(sidx,arm_name) &&
+                        @compareset.containsArmDetail(sidx,armd_name)
+                        arm_id = @compareset.getArmIDByName(sidx,arm_name)
+                        armd_id = @compareset.getArmDetailIDByName(sidx,armd_name)
+                        dispvalue = CompareStudiesHelper.renderArmDetailsHTMLSelection(sidx,@compareset,isdiffvalues,arm_idx,arm_id,arm_name,armd_idx,armd_id,armd_name)
+                    else
+                        dispvalue = "na"
+                    end
+%>
+            <td class="compare_studies_data">
+            <%= raw dispvalue %>
+            </td>
+<%
+                end
+                # Consensus value
+                consensus_value = CompareStudiesHelper.renderArmDetailsHTMLConsensus(sidx,@compareset,isdiffvalues,arm_idx,arm_name,armd_idx,armd_name)
+%>
+            <td class="compare_studies_adata">
+            <img src="/images/action_forward.gif" border="0" alt="The merged consensus arm detail data will appear in the cell to the right upon selection">
+            </td>
+            <td class="compare_studies_data">
+            <%= raw consensus_value %>
+            </td>
+        </tr>
+<%
+                ridx = ridx + 1
+            end
+        end
+%>
+    </table>
+<%
+    end
+%>

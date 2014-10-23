@@ -1,0 +1,102 @@
+<!-- the list of templates available -->
+<!-- MY FORM TEMPLATES -->
+<div style='width:100%; padding:5px; background-color:#f2f2f2; color:black; font-size:15px; font-weight:bolder;border-bottom:solid 1px #AAA;border-left:solid 1px #AAA;'>My Form Templates (<%= @my_forms.length %>)</div>
+<% unless @my_forms.empty? %>
+	<% @my_forms.each do |mf| %>
+	<div id="<%= "form_#{mf.id}_div" %>">
+		<strong>Title: </strong><%= mf.title %><br/>
+		<strong>Description: </strong><%= mf.description %><br/>
+		<a href='#' class='preview_link' efid="<%= mf.id %>">Preview</a> | 
+		<a href='#' class='remove_template_link' bank_id="<%= mf.id %>">Remove</a> 
+		<% if defined? @project %>
+			|
+			<a href='#' class='add_to_project_link' projid="<%= @project.id %>" efid="<%= mf.id %>">
+				Add to Project...
+			</a>
+		<% end %>
+		<br/><br/>
+	</div>
+	<% end %>
+<% else %>
+  <i>You have defined no extraction form templates.</i><br/><br/>
+<% end %>
+
+<!-- COLLABORATOR FORM TEMPLATES -->
+<div style='width:100%; padding:5px; background-color:#f2f2f2; color:black; font-size:15px; font-weight:bolder;border-bottom:solid 1px #AAA;border-left:solid 1px #AAA;'>Collaborator Templates (<%= @collab_forms.length %>)</div>
+<% unless @collab_forms.empty? %>
+	<% @collab_forms.each do |cf| %>
+		<div id="<%= "form_#{cf.id}_div" %>">
+		<strong>Title: </strong><%= cf.title %><br/>
+		<strong>Description: </strong><%= cf.description %><br/>
+		<a href='#' class='preview_link' efid="<%= cf.id %>">Preview</a> 
+		<% if defined? @project %>
+			|
+			<a href='#' class='add_to_project_link' projid="<%= @project.id %>" efid="<%= cf.id %>">
+				Add to Project...
+			</a>
+		<% end %>
+		<br/><br/>
+		</div>
+	<% end %>
+<% else %>
+  <i>None of your collaborators have defined extraction form templates.</i><br/><br/>
+<% end %>
+
+<!-- ALL OTHER FORM TEMPLATES -->
+<div style='width:100%; padding:5px; background-color:#f2f2f2; color:black; font-size:15px; font-weight:bolder;border-bottom:solid 1px #AAA;border-left:solid 1px #AAA;'>All Other Templates (<%= @world_forms.length %>)</div>
+<% unless @world_forms.empty? %>
+	<% @world_forms.each do |wf| %>
+	<div id="<%= "form_#{wf.id}_div" %>">
+		<strong>Title: </strong><%= wf.title %><br/>
+		<strong>Description: </strong><%= wf.description %><br/>
+		<a href='#' class='preview_link' efid="<%= wf.id %>">Preview</a>  
+		<% if defined? @project %>
+			|
+			<a href='#' class='add_to_project_link' projid="<%= @project.id %>" efid="<%= wf.id %>">
+				Add to Project...
+			</a>
+			<% end %>
+		<br/><br/>
+	</div>
+	<% end %>
+<% else %>
+  <i>There are no additional extraction form templates available at this time.</i><br/><br/>
+<% end %>
+
+<script type='text/javascript'>
+	$(".preview_link").bind("click",function(event){
+		event.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: "extraction_form_templates/preview_form_template",
+			data:({
+				eft_id: $(this).attr("efid")
+			})
+		})
+	})
+
+	$(".remove_template_link").bind("click",function(event){
+		event.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: "extraction_form_templates/remove",
+			data:({
+				called_from: "bank",
+				item_removed: $(this).parent("div").attr("id"),
+				bank_id: $(this).attr("bank_id")
+			})
+		})
+	})
+	
+	$(".add_to_project_link").bind("click",function(event){
+		event.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: 'extraction_form_templates/project_setup_form',
+			data:({
+				project_id: $(this).attr("projid"),
+				bank_id: $(this).attr("efid")
+			})
+		})
+	})
+</script>

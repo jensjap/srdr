@@ -1,0 +1,3 @@
+$("#edit_tp_list").html("<%= escape_javascript(render :partial => "outcome_timepoints/edit_timepoints_all", :locals => {:timepoint => @timepoint, :outcome_timepoints => @outcome_timepoints}) %>");
+$("#tp_<%= @timepoint.id.to_s %>_div").html("lalalala");
+$("#tp_<%= @timepoint.id.to_s %>_div").html("<%= escape_javascript(render :partial => "outcome_timepoints/one_timepoint_edit", :locals => {:timepoint => @timepoint}) %>");

@@ -1,0 +1,1358 @@
+<%# The width to use for the comparator select boxes %>
+<% select_width = "175px" %>
+
+<!--<div style='display:block; width:auto; border-top: solid 1px #C5CACE; margin-top:10px;padding-top:3px'>
+</div>--><br/>
+<strong>Note:</strong> After successfully saving data to the table, you may double-click on the cell containing data to set footnotes and other options. 
+<% outcome_tabindex = 1000 %>
+<% bac_tabindex = 2000 %>
+<% wac_tabindex = 3000 %>
+<div style='display:block; width:95%; overflow:auto;' id='entry_div'>
+  <% comparator_ids = Hash.new%>
+	<%= form_tag url_for(:controller=>:outcome_data_points, :action=>:create), :remote=>true do %>
+
+		<input type='submit' value='Submit'/>
+		<input type='hidden' name='subgroup_id' value="<%= @subgroup.nil? ? 0 : @subgroup.id %>">
+  	<input type='hidden' name='outcome_id' value="<%= @outcome_id %>">
+  	<input type="hidden" name="selected_timepoints" value="<%= @selected_timepoints %>">
+    <center><%= render :partial=>"save_indicators/default" %></center><br/>
+
+    <table class='data_entry_table' id="result_table" >
+    <%#-----------------------------------------------------------%>
+    <%# BUILD THE TABLE HEADERS                                   %>
+    <%#-----------------------------------------------------------%>
+    <tr id="header_tr">
+      <th scope='col' colspan=999 class='table_head'>
+        <strong>Outcome:</strong> <%= "#{@outcome.title} (#{@outcome.units})"%>
+        &nbsp;&nbsp;
+        <strong>Description:</strong> <%="#{@outcome.description}" %>
+        &nbsp;&nbsp;
+        <strong>Population:</strong><%=@subgroup.title%>
+      </th> 
+    </tr>
+    <tr>
+      <th  scope='col' colspan="<%= 2 + @arms.length %>" class='title_row'>
+        <strong>Descriptive Statistics</strong>
+      </th>
+      <% unless @comparisons.empty? %>
+      <th  scope='col' id='btw_arm_comparison_title_row' class='btwn_arm_comparison' colspan="<%= @all_comparators.length == 0 ? 2 : 1 + @all_comparators.length %>" >
+        Between-Arm Comparisons
+      </th>
+      <% end %>
+      <th rowspan="999" id="between_comparison_tab" style='margin:0px;padding:0px;vertical-align:middle;'>
+        <center>
+        
+          <% if @comparisons.empty? %> 
+            <% if @arms.length > 1 %>
+            <div style='width:30px;height:auto;'>
+              <a href="#" id="between_arms_comparison_link" tabindex="<%= bac_tabindex %>">
+                <img alt="" src='/images/bac_button.png' title='Create Between-Arm Comparisons'/>
+              </a>
+            </div>
+            <% end %>
+          <% else %>
+            <div style='width:30px;height:auto;' class='rotate'>
+              <a href="#" id="show_hide_btw_arms_link" tabindex="<%= bac_tabindex %>" title='Show/Hide Between-Arm Comparisons'>Hide</a>
+            </div>
+          <% end %>
+          <% bac_tabindex += 1%>
+        </center>
+      </th>
+    </tr>
+    <%#------------------------------------------------------------%>
+    <%# BUILD THE FIRST ROW COLUMN TITLES AND COMPARISON DROPDOWNS %>
+    <%#------------------------------------------------------------%>
+    <tr id='btw_arm_table_header_row'>
+      <th  scope='col' class='head_col' style='min-width:100px;'>Time Point</th>
+      <th  scope='col' class='head_col'>Measure</th>
+      <% @arms.each do |arm| %>
+        <th  scope='col' class='head_col'><%= arm.title %></th>
+      <% end %>
+      
+      <%# CREATE THE SELECT BOXES TO DEFINE THE COMPARISONS                           %>
+      <%#-----------------------------------------------------------------------------%>
+      <% unless @comparisons.empty? %>
+        <th  scope='col' class='head_col btwn_arm_comparison'>Measure</th>
+        
+        <%# BUILD THE OPTIONS FOR ARM SELECTORS %>
+        <% select_options = @arms.collect{|x| [x.title,x.id]} %>
+        <% select_options = [["--Choose an Arm--",'0']] + select_options %>
+        <%# include combinations of arms to be used in crossover analyses %>
+        <% unless @arms.length < 3 %>
+          <% @arms.each_with_index do |a, i| %>
+            <% for j in i+1..@arms.length - 1 %>
+              <% select_options << ["#{a.title} AND #{@arms[j].title}", "#{a.id}&#{@arms[j].id}"] %>
+            <% end %>
+          <% end %>
+        <% end %>
+          
+        <% unless @all_comparators.empty? %>
+          <% @all_comparators.each_with_index do |c,indx| %>
+            <% anova = false %>
+            <th  scope='col' class='btwn_arm_comparison' column="<%= @all_comparators.index(c) + 1 %>">
+              <% elements = c.split("_") %> 
+              <% j = 0 %>
+              
+              <% elements.each do |e| %>
+                <%# include an option for 'all arms' %>
+                <% s_options = elements.index(e) == 0 ? select_options + [['All Arms (ANOVA)','000']] : select_options  %>
+                <% display = anova ? "none" : "inline" %>
+                <%= select_tag "comparator[#{@all_comparators.index(c)}[#{j}]]",options_for_select(s_options ,e),{:tabindex=>bac_tabindex, :comparator_piece=>elements.index(e), :class=>"comparator_selector", :column=>indx + 1, :style=>"display: #{display}; width:#{select_width};"} %>
+                <% bac_tabindex += 1 %>
+                <% unless j == elements.length - 1 && elements.length > 1 %>
+                  <span class='comparator_selector' column="<%= indx + 1%>" <%= "style = 'display:none;'" if elements.length == 1 %>>vs</span><br/>
+                <% end %>
+                <% j += 1 %>
+                <% anova = true if elements.length == 1 %> <%# signal that other dropdowns should be hidden %>
+              <% end %>
+              <% if elements.length == 1 %>
+                <%= select_tag "comparator[#{@all_comparators.index(c)}[#{j}]]",options_for_select(select_options),{:tabindex=>bac_tabindex, :comparator_piece=>1, :class=>"comparator_selector", :column=>indx + 1, :style=>"display: none; width: #{select_width};"} %>
+                 <br/>
+                <span style='float:right; display:none;' class='comparator_selector' column="1">
+                  <a href='#' column="1" class="add_comparator">+</a> 
+                  / 
+                  <a href='#' column="1" class="remove_comparator comparator_selector">-</a>
+                </span>
+              <% else %>
+                <br/>
+              <span style='float:right; display: <%= anova ? 'none;' : 'inline;'%>' class='comparator_selector' column="<%= indx + 1 %>">
+                <a href='#' column="<%= indx + 1 %>" class="add_comparator">+</a> 
+                / 
+                <a href='#' column="<%= indx + 1 %>" class="remove_comparator">-</a>
+              </span>
+               <% end %>
+            </th>
+          <% end %><%# end @all_comparators.each do %>
+          
+        <%# IF NO COMPARATORS ARE PREVIOUSLY DEFINED, FILL IN A PLACEHOLDER             %>
+        <%#-----------------------------------------------------------------------------%>  
+        <% else %> <%# else if they are empty %>
+          <th  scope='col' column="1" class='btwn_arm_comparison'>
+            <center>
+            <%= select_tag "comparator[0[0]]",options_for_select(select_options + [["All Arms (ANOVA)","000"]]),:class=>"comparator_selector",:tabindex=>bac_tabindex, :column=>1, :style=>"width:#{select_width};"%> 
+            <span class='comparator_selector' column='1'>vs</span><br/>
+            <%= select_tag "comparator[0[1]]",options_for_select(select_options),:class=>"comparator_selector",:tabindex=>bac_tabindex + 1, :column=>1, :style=>"width: #{select_width};" %>
+            </center>
+            <span style='float:right;' class='comparator_selector' column="1">
+              <a href='#' column="1" class="add_comparator">+</a> 
+              / 
+              <a href='#' column="1" class="remove_comparator">-</a>
+            </span>
+            <% bac_tabindex += 2%>
+          </th>
+        <% end %> <%# end unless @all_comparators.empty? %>
+      <% end %>
+    </tr>
+
+    <%# FOR EACH DATA ENTRY ELEMENT, CREATE A ROW %>
+    <% next_new_comparator_id = -1%>
+    
+    <% @OCDEs.each do |myOCDE|%>
+      <%# GET CORRESPONDING DATA ITEMS %>
+      <% timepoint = @timepoints[@OCDEs.index(myOCDE)]%>
+      <% measures = @measures[myOCDE.id]%>
+      <% rows_required = measures.length %>
+      <%# GET WITHIN-ARM COMPARISONS FOR THIS TIMEPOINT %>
+      <% comparison=nil%>
+      <% comparison_measures=nil%>
+      <% comparators=nil%>
+      <% unless @comparisons.empty? %>
+        <% comparison = @comparisons[timepoint.id] %>
+        <% print "Looping through and comparison id is now #{comparison.id}\n\n"%>
+        <% comparison_measures = @comparison_measures[comparison.id]%>
+        <% comparators = @comparators[comparison.id] %>
+        <% rows_required = [measures.length, comparison_measures.length].max %>
+        <%# KEEP A RECORD OF WHAT MEASURES ARE CONTAINED IN EACH COMPARISON%>
+        <%#-----------------------------------------------------------------------------%>
+        <input type="hidden" name="<%= "comparison_measures[#{comparison.id}]"%>" value="<%= comparison_measures.collect{|x| x.id}.join('_') %>">
+        <% unless !comparator_ids[comparison.id].nil?%>
+          <% comparator_ids[comparison.id] = Hash.new() %>
+        <% end %>
+        <% comparators = @comparators[comparison.id]%>
+        <% comparator_id_strings = comparators.collect{|x| x.comparator} %>
+        <% unless @all_comparators.empty? %>
+          <% colnum = 1%>
+          <% @all_comparators.each do |ac|%>
+            <% if comparator_id_strings.include?(ac) %>
+              <% comparator_ids[comparison.id][colnum] = comparators[comparator_id_strings.index(ac)].id %>
+            <% else %>
+              <% comparator_ids[comparison.id][colnum] = next_new_comparator_id%>
+              <% next_new_comparator_id -= 1%>
+            <% end %>
+            <% colnum += 1 %>
+          <% end %>
+        <% else %>
+          <% comparator_ids[comparison.id][1] = next_new_comparator_id%>
+          <% next_new_comparator_id -= 1%>
+        <% end %>
+      <% end %> <%# end unless comparisons.empty? %>
+      <tr class='comparison_measure_row'>
+        <!-- THE TIME POINT -->
+        <td scope='row' rowspan="<%= rows_required %>" align='center'>
+          <br/>
+          <%# GIVE THE USER THE ABILITY TO SORT THE OCDE ROWS USING A DROPDOWN %>
+          <strong><%= timepoint.number %> <%= timepoint.time_unit %></strong><br/><br/>
+          <a href="#" class='remove_ocde_link' title="<%= "Remove the #{timepoint.number} #{timepoint.time_unit} data row"%>" ocde_id="<%= myOCDE.id %>" tabindex="<%= outcome_tabindex + 1 %>">Remove</a><br/>
+          <% outcome_tabindex += 1 %>
+          <% unless @OCDEs.length < 2 %>
+            <span style='font-size:11px;'>Order:</span> <select class="ocde_sort_selector" title="Adjust the row order" ocde_id="<%= myOCDE.id %>" style="height:20px;width:40px;font-size:11px;" tabindex="<%= outcome_tabindex %>">
+              <% for i in 1..@OCDEs.length %>
+                <% sel = (i == (@OCDEs.index(myOCDE) + 1)) ? "selected" : "" %>
+                <option value="<%= i %>" <%= sel %>><%= i %></option>
+              <% end %>
+            </select><br/>
+            <% outcome_tabindex += 2 %>
+          <% end %>
+        </td>
+        <%# ADD MEASURE ROWS AND ANY EXTRAS REQUIRED %>
+        <% for i in 0..rows_required-1 %>
+          <% unless i == 0 %>
+            <tr class='comparison_measure_row'>
+          <% end %>
+          <td scope='row' ><%= measures[i].nil? ? "" : measures[i].title %></td>
+          
+          <!-- ADDING COLUMNS FOR EACH ARM -->
+          <% for j in 1..@arms.length %>
+            <% unless measures[i].nil? %>
+              <% measure = measures[i] %>
+              <% key = "#{@outcome.id}_#{timepoint.id}_#{@arms[j-1].id}_#{measure.id}"%>
+              <% dp_is_nil = @datapoints[myOCDE.id][key].nil? %>
+              <% value = dp_is_nil ? "" : "#{@datapoints[myOCDE.id][key][0]}" %>
+              <% td_style = dp_is_nil ? "" : (@datapoints[myOCDE.id][key][1] == true ? "style='background-color:yellow !important;'" : "style='background-color:#fff;'") %>
+              <% tabindex = outcome_tabindex + (rows_required * (j-1)) %>
+              <td <%= td_style %> scope='row'  >
+                <% fieldID = "datapoints__#{key}" %>
+                
+                <div class='hidden-label'><label for="<%= fieldID %>"><%= "Data Point for Timepoint: #{timepoint.number} #{timepoint.time_unit}, Arm: #{@arms[j-1].title}, Measure: #{measure.title}"%> </label></div><input type='text' name='<%= "datapoints[#{key}]" %>' id="<%= fieldID %>" class="editable_field" value='<%= value %>' tabindex="<%= tabindex %>" />
+                <% unless dp_is_nil %>
+                  <% fnum = @datapoints[myOCDE.id][key][2] %>
+                  <% unless fnum == 0 %>
+                    <span class='footnote_tag'><%= fnum %></span>
+                  <% end %>
+                <% end %>
+              </td>
+            <% else %>
+              <td scope='row' ></td>
+            <% end %>
+          <% end %>
+          <% outcome_tabindex += 1%>
+          <%#-----------------------------------------%>
+          <%# NOW START ADDING BETWEEN ARM COMPARISONS %>
+          <%#-----------------------------------------%>
+          <%# ADD THE MEASURES TITLE %>
+          <% unless @comparisons.empty? %>
+            <% print "\n\n--- Beginning to add comparison info for comparison #{comparison.id} ---\n"%>
+            <% comparison_measure = comparison_measures[i].nil? ? nil : comparison_measures[i] %>
+            <td scope='row' class='btwn_arm_comparison'><%= comparison_measure.nil? ? "" : comparison_measure.title %></td>
+            <% unless @all_comparators.empty? %>
+              <% col = 1 %>
+              <% tabindex = bac_tabindex %>
+              <% @all_comparators.each do |c| %>
+                <%# IF THE COMPARISON MEASURE HERE IS NIL %>
+                <% unless comparison_measure.nil? %>
+                  <% myComparatorID = comparator_ids[comparison.id][col] %>
+                  <%# print "Comparator id for comparison #{comparison.id} column #{col} is #{comparator_ids[comparison.id][col]}\n\n"%>
+                  
+                  <% value = "" %>
+                  <% td_style = "" %>
+                  <% dp = nil %>
+                  <% if myComparatorID.to_i > 0 %>
+                    <% dp = @comparison_datapoints[comparison.id][myComparatorID][comparison_measure.id] %>
+                    <% unless dp.nil? %>
+                      <% value = dp.value.empty? ? "" : "#{dp.value}" %>
+                      <% td_style = dp.is_calculated == true ? "style='background-color:yellow !important;'" : "style='background-color:#fff;'" %>
+                    <% end %>
+                  <% end %>
+                  <td scope='row' class='btwn_arm_comparison' column="<%= @all_comparators.index(c) + 1 %>" <%= td_style %>>
+                  <% tabindex += (comparison_measures.length * col-1)%>
+                  <% fieldID = "comparison_datapoints__#{comparison.id}_#{comparator_ids[comparison.id][col]}_#{comparison_measure.id}" %>
+                  <div class='hidden-label'><label for="<%= fieldID %>"><%= "Comparison Data Point for Timepoint: #{timepoint.number} #{timepoint.time_unit}, Comparator #{col}, Measure: #{comparison_measure.title}"%></label></div>
+                  <input type='text' class='editable_field bac_data' name="<%= "comparison_datapoints[#{comparison.id}[#{comparator_ids[comparison.id][col]}[#{comparison_measure.id}]]]" %>" id="<%= fieldID %>" value='<%= value %>' tabindex="<%= tabindex %>" >
+                  <% unless dp.nil? %>
+                    <% fnum = dp.footnote_number %>
+                    <% unless fnum == 0 %>
+                      <span class='footnote_tag'><%= fnum %></span>
+                    <% end %>
+                  <% end %>
+                  <% tabindex += 1 %>
+                  <% col += 1%>
+                <%# IF THE COMPARISON MEASURE HERE IS NOT NIL %>
+                <% else %>
+                  <td  scope='row' class='btwn_arm_comparison' column="<%= @all_comparators.index(c) + 1 %>">
+                <% end %> 
+              </td>
+              <% end %><%# end all_comparators.each do |c| %>
+              <% bac_tabindex += ( (@all_comparators.length - 1) * comparison_measures.length )%>  
+            <% else %>
+              <td  scope='row' class='btwn_arm_comparison' column="1">
+                <% unless comparison_measure.nil? %>
+                  <% fieldID = "comparison_datapoints__#{comparison.id}_#{comparator_ids[comparison.id][1]}_#{comparison_measure.id}" %>
+                  <div class='hidden-label'><label for="<%= fieldID %>"><%= "Comparison Data Point for Timepoint: #{timepoint.number} #{timepoint.time_unit}, Comparator 1, Measure: #{comparison_measure.title}"%></label></div>
+                  <input type='text' class='editable_field bac_data' tabindex="<%= bac_tabindex %>" name="<%= "comparison_datapoints[#{comparison.id}[#{comparator_ids[comparison.id][1]}[#{comparison_measure.id}]]]" %>" id="<%= fieldID %>" value="" /> 
+                <% end %>
+              </td>
+              <% bac_tabindex += 1 %>  
+            <% end %>
+          <% end %> <%# END unless @comparisons.empty? %>
+          </tr>
+        <% end %> <%# END for i in num_rows_required %>
+        <% outcome_tabindex += (rows_required * (@arms.length - 1))%>
+      <tr>
+        <!-- THE EDIT MEASURE BUTTONS -->
+        <%# FOR RAW DATA %>
+        <td  scope='row' colspan=<%=2 + @arms.length %> align='center' style='position:relative;' class='th' id='edit_raw_measures'>
+          <a href='#' class='edit_measures_btn' title="<%= "Edit measures for the #{timepoint.number} #{timepoint.time_unit} data row"%>" ocde="<%=myOCDE.id%>" tpid="<%=timepoint.id%>" tabindex="<%= outcome_tabindex %>">Edit Measures </a>
+          <% outcome_tabindex += 1 %>
+        </td>
+        <%# FOR COMPARISONS %>
+        <% unless comparison.nil? %>
+          <td  scope='row' class='btwn_arm_comparison comparison_btn_row th' id='edit_comparison_measure' comparison_id="<%= comparison.id %>" colspan="<%= @num_comparators+1%>" align='center' style='position:relative;'>
+            <a href='#' class="edit_comparison_measures_btn" tpid="<%= timepoint.id %>" tabindex="<%= bac_tabindex %>" title="<%= "Edit comparison measures for the #{timepoint.number} #{timepoint.time_unit} comparison row"%>" comparison_id="<%= comparison.id %>">Edit Measures</a>
+            <% bac_tabindex += 1%>
+          </td>
+        <% end %> <%# end unless comparison.nil?%>
+      
+      
+      <% if @OCDEs.index(myOCDE) == @OCDEs.length-1%>
+        <%# THE REMOVE COLUMN BUTTONS FOR WITHIN ARM COMPARISONS %>
+        <% unless comparison.nil? %>
+          <tr class='remove_column_link_row'>
+            <% numTDs = 2 + @arms.length %>
+            <td  scope='row' colspan="<%= numTDs %>"></td>
+            <td  scope='row' class='btwn_arm_comparison'></td>
+            <% unless @all_comparators.empty? %>
+              <% for i in 1..@all_comparators.length %>
+                <% if i == 1%>
+                  <td  scope='row' class='btwn_arm_comparison' column="1"></td>
+                <% else %>
+                  <td  scope='row' class='btwn_arm_comparison' column="<%=i%>">
+                    <a class="remove_comparison_column_btn" col_num="<%= i %>" href='#'>Remove Column</a>
+                  </td>
+                <% end %>
+              <% end %>
+            <% else %>
+              <td class='btwn_arm_comparison' column="1"></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <% unless @comparisons.empty? %>  
+        <tr>
+          <%# num_comp_cols = @all_comparators.nil? ? 1 : @all_comparators.length %>
+          <%# num_cols_for_save = 2 + @arms.length + 1 + num_comp_cols %>
+          <td  scope='row' colspan="<%= 2 + @arms.length %>" align='center' style='position:relative;'>
+            
+          </td>
+          
+          <td  scope='row' class='btwn_arm_comparison comparison_btn_row th' colspan="<%= @num_comparators + 1 %>">
+            <a href='#' class="positive" id="add_comparison_column_btn" title='Add a Comparison Column'>
+              Add Column
+            </a>  |  
+            <a href='#' id="clear_btwn_arms_link" title='Remove all Between-Arm Comparisons'>
+              Remove Comparisons
+            </a>
+          </td>
+        </tr>
+        <% end %>
+        <%# THE WITHIN ARM COMPARISON ROWS %>
+        <%#-----------------------------------------%>
+        <%# NOW START ADDING WITHIN ARM COMPARISONS %>
+        <%#-----------------------------------------%>
+        <% unless ['Survival','Time to Event'].include?(@outcome.outcome_type) %>
+          <% next_wac_comparator_id = -1 %>
+          <% wa_select_options = [["Choose a Timepoint", "0"], ["Chris","1"]]%>
+          <%# UNLESS THEY'RE EMPTY, BUILD THE WITHIN-ARM COMPARISON TABLE %>
+          <% unless @wa_comparisons.empty? || @timepoints.length < 2 %>
+            <%#  BUILD THE TITLE ROW %>
+            <tr class='wa_comparison_title_row wa_comparison'>
+              <th scope='col' class='wa_comparison' colspan="<%= @arms.length + 2 %>">
+                Within-Arm Comparisons
+              </th>
+            </tr>
+            <%# ADD ANOTHER SET OF COLUMN HEADERS %>
+            <tr class='wa_comparison'>
+              <th scope='col' class='wa_comparison'>
+                Comparison
+              </th>
+              <th scope='col' class='wa_comparison'>
+                Measure
+              </th>
+              <% @arms.each do |arm|%>
+                <th scope='col' class='wa_comparison'>
+                  <%= arm.title %>
+                </th>
+              <% end %>
+            </tr>
+            <% wac_select_options = @timepoints.collect{|x| ["#{x.number} #{x.time_unit}", x.id]}%>
+            <% wac_select_options = [["--Choose a Timepoint--",0]] + wac_select_options %>
+            
+            <% @wa_comparisons.each_with_index do |wac, i|%>
+              <% wac_measures = @wa_measures[wac.id] %>
+              <% wac_comparator = @wa_comparators[wac.id].first %>
+              <tr wac_row="<%= wac.group_id %>" class='wa_comparison'>
+                <td scope='row' rowspan="<%= wac_measures.length %>">
+                  <% unless wac_comparator.nil? %>
+                    <% comparator_parts = wac_comparator.comparator.split("_")%>
+                    
+                    <% comparator_parts.each_with_index do |e,iter| %>
+                      <%= select_tag "wac_comparators[#{wac.id}[#{wac_comparator.id}[#{iter}]]]",options_for_select(wac_select_options,e) %>
+                      <% unless iter == comparator_parts.length - 1 %>
+                        vs <br/>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= select_tag "wac_comparators[#{wac.id}[#{next_wac_comparator_id}[0]]]",options_for_select(wac_select_options) %> vs.<br/>
+                    <%= select_tag "wac_comparators[#{wac.id}[#{next_wac_comparator_id}[1]]]",options_for_select(wac_select_options) %>
+                    <% next_wac_comparator_id -= 1%>
+                  <% end %>
+                  <% unless i == 0 %>
+                    <br>
+                    <a href="#" class="remove_wa_comparison_link" wac_id="<%= wac.id %>" title="<%= "Remove Within-Arm Comparison Row #{i+1}"%>">Remove Row</a>
+                  <% end %>
+                </td>
+                <% wac_measures.each do |m|%>
+                  <% unless wac_measures.index(m) == 0 %>
+                    <tr class='wa_comparison'>
+                  <% end %>
+                  <td scope='row' ><%= m.title%></td>
+                  <% @arms.each do |arm|%>
+                    <% unless wac_comparator.nil? %>
+                      <% val = @wa_datapoints[wac.id][wac_comparator.id][m.id][arm.id] %>
+                      <% td_style = val.nil? ? "" : (val.is_calculated == true ? "style='background-color:yellow !important;'" : "") %>
+                      <% data_value = val.nil? ? "" : (val.value.empty? ? "" : "#{val.value}")%>
+                    <% else %>
+                      <% val = ""%>
+                      <% td_style = ""%>
+                    <% end %>
+                    <td scope='row' <%= td_style %>>
+                      <% fieldID = "wac_datapoints__#{wac.id}_#{wac_comparator.nil? ? (next_wac_comparator_id + 1) : wac_comparator.id}_#{m.id}_#{arm.id}" %>
+                      <div class='hidden-label'><label for="<%= fieldID %>"><%= "Comparison Data Point for Row: #{i+1}, Measure: #{m.title}, Arm: #{arm.title}"%></label></div>
+                      <input type='text' class='editable_field' name="<%= "wac_datapoints[#{wac.id}[#{wac_comparator.nil? ? (next_wac_comparator_id + 1) : wac_comparator.id}[#{m.id}[#{arm.id}]]]]" %>" id="<%= fieldID %>"  value='<%= data_value %>' />
+                      <% unless wac_comparator.nil? || val.nil? %>
+                        <% fnum = val.footnote_number %>
+                        <% unless fnum == 0 %>
+                          <span class='footnote_tag'><%= fnum %></span>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                  </tr>
+                <% end %>
+                <%# THE EDIT MEASURES BUTTON FOR WACs %>
+                <tr wac_row="<%= wac.group_id %>" class='wa_comparison'>
+                  <td scope='row' class='th' colspan="<%= @arms.length + 2 %>" align='center'>
+                    <a href="#" class='edit_wac_measures_btn' wac_id="<%= wac.id %>" title="<%= "Edit Measures for Within-Arm Comparison Row #{i+1}"%>">Edit Measures</a>
+                  </td>
+                </tr>       
+            <% end %>
+          <% end %>
+          
+          <input type="hidden" id="next_wac_comparator_id" value="<%= next_wac_comparator_id %>">
+          <input type="hidden" id="next_wac_row" value="<%= @wa_comparisons.length + 1 %>">
+
+          <tr id="show_hide_wa_row" class='wa_comparison'>
+            <td scope='row' class='th' id="show_hide_wa_links" colspan="<%= @arms.length + 2 %>">
+            <% if @wa_comparisons.empty? %> 
+              <% if @timepoints.length > 1 %>
+                <a href="#" id="wa_comparison_link">
+                  <img alt="" src='/images/wac_button.png' title='Create Within-Arm Comparisons'/>
+                </a>
+              <% end %>
+            <% else %>
+              <span id='wa_comparison_links_when_showing'>
+                <a href="#" class="show_hide_wa_link" title='Show/Hide Within-Arm Comparisons'>Hide</a> | 
+                <a href="#" id="clear_wa_comparisons_link" title="Remove All Within-Arm Comparisons">Remove Within-Arm Comparisons</a> | 
+                <a href="#" id="add_wa_comparison_row_link" title="Add Another Within-Arm Comparison Row">Add Another Row</a> 
+              </span>
+              <span id='wa_comparison_links_when_hiding' style='display:none;'>
+                <!--<a href="#" class="show_hide_wa_link">Show Within-Arm Comparisons</a>-->
+                <a href="#" class="show_hide_wa_link" title="Show Within-Arm Comparisons">Show</a>
+              </span>
+              
+            <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <tr id="wa_save_button_row" >
+          <td scope='row' colspan="<%= (2 + @arms.length) + (@num_comparators + 1) %>" align='center' style='position:relative;' class='comparison_btn_row'>
+            <button id="save" type="submit" title="Save Outcome Results Table Data" class="saving" data-disable-with='<%= ajax_wait_msg %>' >
+              <%= image_tag "Add.png", :alt => "Add" %>Save Table Data
+            </button>
+          </td>
+        </tr>
+      <% end %> <%# end if OCDEs.index ... %>
+    <% end %> <%# end OCDEs.each do %>
+    </table>
+    <%# FOOTNOTES %>
+    <div id='footnotes_div' style='margin-top:8px;'>
+      <%# render :partial=>'outcome_data_entries/footnotes' %>
+    </div>
+    
+    <input type="hidden" id="next_comparator_id" value="<%= next_new_comparator_id %>">
+    <input type="hidden" id="num_comparisons" value="<%= @timepoints.length %>">
+
+	<% end %> <!-- END FORM -->
+</div> <!-- END ENTRY DIV -->
+
+<div id='confirmation_modal' style='display:none;' title='Warning!'>
+	This action will remove this row along with <strong>all</strong> associated comparison data, and 
+	<strong>cannot be undone.</strong> Are you sure?
+</div>
+
+<script type='text/javascript'>
+<!--
+
+function document_init() {
+  try{
+    checkDivLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+  prepareForm();
+  } catch( err ) {
+    setTimeout('document_init()', 200);
+  }
+}
+
+function checkDivLoaded() {
+  if ( $('#confirmation_modal').length == 0) $jquery.error( 'not ready' );
+} 
+
+function has_data(){
+  forms = $("form");
+  var has_data = false;
+  for(i=1; i<forms.length; i++){
+    if($(forms[i]).hasClass('unsaved_form')){
+      has_data = true;
+    }
+  }
+  return(has_data);
+}
+
+function show_loading_icon(){
+  width = $("#result_table").width() + 5;
+  height = $("#result_table").height();
+  $("#result_table").before("<div id='loading_div' style='width:"+width+"px; height:"+height+"px; opacity:0.8;filter:alpha(opacity=80);z-index:2000; padding-top: 150px; background-color:#fff;position:absolute;'><center><img alt='loading...' align='center' style='margin:auto' src='/images/loading_gif.gif'/></center></div>");
+}
+
+function prepareForm(){
+
+  $("#save").on("click", function() {
+    forms = $(".unsaved_form");
+    for(i=0; i < forms.length; i++){
+      $(forms[i]).removeClass("unsaved_form")
+    }
+    fields = $(".edited_field")
+    for(i=0; i < fields.length; i++){
+      $(fields[i]).removeClass("edited_field");
+    }
+  });
+  
+  $("#modal_div").dialog({
+    title: "Editing Outcome Data Measures",
+    modal: true,
+    height: 700,
+    width: 800,
+    position: ['center','center'],
+    resizable: true,
+    autoOpen: false
+  })
+
+  $("#data_point_option_div").dialog({
+    title: "Data Point Option Setup",
+    modal: true,
+    minHeight: 300,
+    minWidth: 540,
+    position: ['center','center'],
+    resizable: true,
+    autoOpen: false
+  })
+
+  $(".editable_field").unbind();
+  $(".editable_field").bind('change',function(){
+    $(this).addClass('edited_field');
+    var form = $(this).parents('form:first');
+    form.addClass("unsaved_form");
+    /*$(".unsaved_div").css("display","block");*/
+  });
+
+  /* Bind a double-click listener on editable fields which will allow the
+     user to set options for that field after data is saved. */
+  
+  $(".editable_field").unbind("dblclick");
+  $(".editable_field").bind("dblclick",function(){
+    var field_id = $(this).attr("id").toString();
+    var value = $(this).val();
+    if(value == ""){
+      $("#confirmation_modal").html("You must save a value for this field before any options can be set.")
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          }
+        }
+      })
+    }else{
+      $("#data_point_option_div").dialog({
+        title: "Set Up Field Options",
+        modal:true
+      })
+      $.ajax({
+        type: 'POST',
+        url: "results/show_data_point_options_form",
+        data:({
+          field_id: field_id,
+          outcome_id: "<%= @outcome.id %>",
+          outcome_type: "<%= @outcome.outcome_type %>",
+          subgroup_id: $("#subgroup_selector").val(),
+          selected_timepoints: "<%= @selected_timepoints %>" 
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+  // Assign the double click listener the first pass through 
+  //bind_dbl_click_listener();
+
+  // Add a click event handler to the edit measures button
+  $(".edit_measures_btn").unbind();
+  $(".edit_measures_btn").bind("click", function(event){
+    event.preventDefault()
+    $("#modal_div").dialog({
+      title: "Editing Outcome Data Measures",
+      modal: true,
+      height: 700,
+      width: 800,
+      position: ['center','center'],
+      resizable: true,
+      autoOpen: false
+    });
+
+    ocde_id = $(this).attr("ocde");
+    timepoint_id = $(this).attr("tpid");
+    could_lose_information = has_data();
+    if(could_lose_information){
+      $("#confirmation_modal").html("To avoid losing data, please save any current changes before editing measures.")
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          },
+          "Continue without saving": function(){
+            $(this).dialog("close");
+            $.ajax({
+              type: 'POST',
+              url: "results/show_measures_form",
+              data:({
+                ocde_id: ocde_id,
+                timepoint_id: timepoint_id,
+                outcome_type: "<%= @outcome.outcome_type %>",
+                study_id: "<%= @study_id %>",
+                extraction_form_id: "<%= @extraction_form_id %>",
+                selected_timepoints: "<%= @selected_timepoints %>",
+                subgroup_id: $("#subgroup_selector").val()
+              }),
+              success: function(){
+                $("#loading_div").remove();
+              }
+            })
+            show_loading_icon();
+          }
+        }
+      })
+    }else{
+      $.ajax({
+        type: 'POST',
+        url: "results/show_measures_form",
+        data:({
+          ocde_id: ocde_id,
+          timepoint_id: timepoint_id,
+          outcome_type: "<%= @outcome.outcome_type %>",
+          study_id: "<%= @study_id %>",
+          extraction_form_id: "<%= @extraction_form_id %>",
+          selected_timepoints: "<%= @selected_timepoints %>",
+          subgroup_id: $("#subgroup_selector").val()
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+  $("#between_arms_comparison_link").bind("click",function(event){
+    event.preventDefault();
+    could_lose_information = has_data();
+    if(could_lose_information){
+      $("#confirmation_modal").html("To avoid losing data, please press the 'Save' button before creating comparisons");
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          },
+          "Continue without saving": function(){
+            $.ajax({
+              type: 'POST',
+              url: "results/create_between_arm_comparisons",
+              data:({
+                selected_timepoints: "<%= @selected_timepoints %>", 
+                outcome_id: "<%= @outcome.id %>",
+                subgroup_id: $("#subgroup_selector").val()
+              }),
+              success: function(){
+                $("#loading_div").remove();
+              }
+            })
+            $(this).dialog("close")
+            show_loading_icon();
+          }
+        } 
+      })
+    }else{
+      $.ajax({
+        type: 'POST',
+        url: "results/create_between_arm_comparisons",
+        data:({
+          selected_timepoints: "<%= @selected_timepoints %>", 
+          outcome_id: "<%= @outcome.id %>",
+          subgroup_id: $("#subgroup_selector").val()
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+
+  $("#show_hide_btw_arms_link").bind("click",function(event){
+    event.preventDefault();
+    element = $(".btwn_arm_comparison")[0];
+    if($(element).css("display") == "none"){
+      $(".btwn_arm_comparison").show();
+      $("#show_hide_btw_arms_link").html("Hide")
+    }else{
+      $(".btwn_arm_comparison").hide();
+      /*$("#show_hide_btw_arms_link").html("Show Between-Arm Comparisons")*/
+      $("#show_hide_btw_arms_link").html("Show")
+      
+    }
+  })
+  $(".remove_ocde_link").bind("click",function(event){
+    event.preventDefault();
+    ocde_id = $(this).attr("ocde_id")
+    // this is the delete confirm dialog
+    $("#confirmation_modal").html("This action will remove this row along with <strong>all</strong> associated comparison data, and <strong>cannot be undone.</strong> Are you sure?");
+    $("#confirmation_modal").dialog({
+      resizable: false,
+      height: 160,
+      modal: true,
+      buttons: {
+        "Cancel": function(){
+          $(this).dialog("close");
+        },
+        "Yes, I'm sure": function(){
+          $.ajax({
+            type: 'POST',
+            url: "results/remove_data_entry",
+            data:({
+              selected_timepoints: "<%= @selected_timepoints %>",
+              outcome_id: "<%= @outcome.id %>",
+              subgroup_id: $("#subgroup_selector").val(),
+              study_id: "<%= @study_id %>",
+              extraction_form_id: "<%= @extraction_form_id %>",
+              ocde_id: ocde_id
+            }),
+            success: function(){
+              $("#loading_div").remove();
+            }
+          })
+          $(this).dialog("close")
+          show_loading_icon();
+        }
+      }
+    })
+  })
+  //------------------------------------------------------
+  // CODE BELOW THIS POINT IS FOR BETWEEN ARM COMPARISONS
+  //------------------------------------------------------
+  // EDITING COMPARISON MEASURES
+  $(".edit_comparison_measures_btn").unbind("click")
+  $(".edit_comparison_measures_btn").bind("click",function(event){
+    event.preventDefault();
+    $("#modal_div").dialog({
+      title: "Editing Between-Arm Comparison Measures",
+      modal: true,
+      height: 700,
+      width: 800,
+      position: ['center','center'],
+      resizable: true,
+      autoOpen: false
+    });
+    could_lose_information = has_data();
+    if(could_lose_information){
+      var measures_link = $(this);
+      $("#confirmation_modal").html("To avoid losing data, please save any current changes before editing measures.")
+      
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          },
+          "Continue without saving": function(){
+            $(this).dialog("close");
+            $("#modal_div").dialog({
+              title: "Editing Between-Arm Comparison Measures",
+            })
+            $.ajax({
+              type: 'POST',
+              url: "results/show_comparison_measures",
+              data:({
+                timepoint_id: $(measures_link).attr("tpid"),
+                comparison_id: $(measures_link).attr("comparison_id"),
+                outcome_id: "<%= @outcome.id %>",
+                subgroup_id: $("#subgroup_selector").val(),
+                outcome_type: "<%= @outcome.outcome_type %>",
+                study_id: "<%= @study_id %>",
+                extraction_form_id: "<%= @extraction_form_id %>",
+                selected_timepoints: "<%= @selected_timepoints %>" 
+              }),
+              success: function(){
+                $("#loading_div").remove();
+              }
+            })
+            show_loading_icon();
+          }
+        }
+      })
+    }else{
+      $.ajax({
+        type: 'POST',
+        url: "results/show_comparison_measures",
+        data:({
+          timepoint_id: $(this).attr("tpid"),
+          comparison_id: $(this).attr("comparison_id"),
+          outcome_id: "<%= @outcome.id %>",
+          subgroup_id: $("#subgroup_selector").val(),
+          outcome_type: "<%= @outcome.outcome_type %>",
+          study_id: "<%= @study_id %>",
+          extraction_form_id: "<%= @extraction_form_id %>",
+          selected_timepoints: "<%= @selected_timepoints %>" 
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+  // ADDING A NEW COLUMN TO THE COMPARISON TABLE
+  $("#add_comparison_column_btn").unbind();
+  $("#add_comparison_column_btn").bind("click",function(event){
+    event.preventDefault();
+    // The next negative number to be used for a temporary id
+    next_comparator_id = $("#next_comparator_id").val();
+    num_comparisons = $("#num_comparisons").val();
+    
+    // Get the html in the most current column header and modify it for the new one
+    html = $("#btw_arm_table_header_row > th:last").html();
+    col_num = parseInt($("#btw_arm_table_header_row > th:last").attr("column")) + 1;
+    new_comparator_num = 0;
+    current_num = html.match(/id=\"?comparator_.{1,3}_.{1,3}\"?/);
+    current_num = current_num[0].split("_")[1];
+    reg1 = new RegExp("comparator_" + current_num, "g");
+    reg2 = new RegExp("comparator\\[" + current_num, "g");
+    reg3 = new RegExp("column=\"?.{1,3}\"?", "g");
+    html = html.replace(reg1, "comparator_" + (parseInt(current_num) + 1));
+    html = html.replace(reg2, "comparator[" + (parseInt(current_num) + 1));
+    html = html.replace(reg3, "column=\"" + (parseInt(current_num) + 2) + "\"");
+    
+    // Extend the title colspan
+    current_span = parseInt($("#btw_arm_comparison_title_row").attr("colspan"));
+    $("#btw_arm_comparison_title_row").attr("colspan",current_span+1);
+    // Add the TH to the header row
+    inserting = "<th class='btwn_arm_comparison' column='"+col_num+"'>"+html+"</th>";
+    $("#btw_arm_table_header_row > th:last").after(inserting);
+    // Make sure defaults are selected
+    $("#btw_arm_table_header_row > th:last select:first").val(0);
+    $("#btw_arm_table_header_row > th:last select:last").val(0);
+    // For each row containing measures...
+    measure_rows = $(".comparison_measure_row");
+    current_id = 0;
+    for(i=0; i<measure_rows.length; i++){
+      // get the html for the last column's inputs and parse out the comparator_id
+      myrow = measure_rows[i];
+      input = $(myrow).find("td:last").html().trim();
+      input = input.replace(/\<span class=\"footnote_tag\"\>.*\<\/span\>/,"");
+      // get the html for the last column's inputs and parse out the comparator_id
+      //.html();
+      //myrow = myrow.replace(/\s+/g,"");
+      //colFinder = new RegExp("\<td.*class=\"?between_arm_comparison\"?.*\>.*\<\/td\>","igm");
+      //input = myrow.match(colFinder);
+      //alert("html for row " + i.toString() + " is " + myrow);
+      //alert("and without white space: " + myrow.replace(/\s+/g,""));
+      //alert("myrow html is " + $(myrow).html());
+      //
+      //input = myrow.match(colFinder);
+      //alert("input is " + input);
+      //alert("found " + input.length);
+
+      if(input != ""){
+        //update the id attribute of the input box
+        comparison_id = input.match(/\"?comparison_datapoints__\d*_.*_\d*\"?/);
+        comparison_id = comparison_id[0].split("_");
+        this_id = parseInt(comparison_id[4]);
+        if(current_id == 0){ current_id = this_id;}
+        if(this_id != current_id){
+          next_comparator_id = next_comparator_id - 1;
+          current_id = this_id;
+        }
+        //assign the new comparator id      
+        comparison_id[4] = next_comparator_id;
+        comparison_id = comparison_id.join("_");
+        input = input.replace(/\"?comparison_datapoints__\d*_.*_\d*\"?/,comparison_id);
+        input = input.replace(/value=\"?.*\"?\s*/,'');
+
+        //update the name attribute on the input box
+        comparison_name = input.match(/\"?comparison_datapoints\[\d*\[.*\[\d*\]\]\]\"?/)
+        comparison_name = comparison_name[0].split("[");
+        comparison_name[2] = next_comparator_id;
+        comparison_name = comparison_name.join("[");
+        input = input.replace(/\"?comparison_datapoints\[\d*\[.*\[\d*\]\]\]\"?/,comparison_name);
+        // substitute the new id for the old
+        input = "<td class='btwn_arm_comparison' column='"+col_num+"'>"+input+"</td>";
+        
+        
+      }else{
+        input = "<td class='btwn_arm_comparison' column='"+col_num+"'></td>"; 
+      }
+      $(myrow).find("td:last").after(input);
+      
+    }
+    // Add the new 'Remove Column' link td
+    rm_btn = "<a class='remove_comparison_column_btn' href='#' col_num='"+col_num+"'>Remove Column</a>"
+    rm_btn = "<td class='btwn_arm_comparison' column='"+col_num+"'>"+rm_btn+"</td>";
+    $(".remove_column_link_row > td:last").after(rm_btn);
+    
+    // For each row containing links/buttons, simply increase the colspan by 1
+    button_rows = $(".comparison_btn_row");
+    for(i=0;i<button_rows.length;i++){
+      current_row = $(".comparison_btn_row")[i]
+      current_span = $(current_row).attr('colspan');
+      new_span = parseInt(current_span) + 1;
+      $(current_row).attr('colspan',new_span);
+    }
+    // Decrement the next_comparator_id
+    $("#next_comparator_id").val(next_comparator_id - 1);
+
+    // Add the double-click handler to the new cells
+    bind_dbl_click_listener();
+  })
+
+  // REMOVING A COLUMN FROM THE COMPARISON TABLE
+  $(".remove_comparison_column_btn").unbind("click");
+  $(".remove_comparison_column_btn").live("click",function(event){
+    event.preventDefault();
+    
+    col_num = $(this).attr("col_num");
+    search_string = "[column="+col_num.toString()+"]";
+    
+    // remove this column using the column attribute that is tags all elements
+    $(search_string).remove();
+  //Done. 
+  })
+  $("#clear_btwn_arms_link").unbind("click")
+  $("#clear_btwn_arms_link").bind("click",function(event){
+    event.preventDefault();
+    $("#delete_confirm_modal").html("This action will permanently remove the between-arm comparison data above. Are you sure you want to do this?")
+    // this is the pretty confirm dialog
+    $("#delete_confirm_modal").dialog({
+      resizable: false,
+      height: 160,
+      modal: true,
+      buttons: {
+        "Cancel": function(){
+          $(this).dialog("close");
+        },
+        "Yes, I'm sure": function(){
+          $.ajax({
+            type: 'POST',
+            url: "results/clear_comparisons",
+            data:({
+              selected_timepoints: "<%= @selected_timepoints %>",
+              outcome_id: "<%= @outcome.id %>",
+              subgroup_id: $("#subgroup_selector").val(),
+              study_id: "<%= @study_id %>",
+              extraction_form_id: "<%= @extraction_form_id %>",
+              comparison_type: "between"
+            }),
+            success: function(){
+              $("#loading_div").remove();
+            }
+          })
+          $(this).dialog("close")
+          show_loading_icon();
+          }
+        }
+    })
+  })
+  //------------------------------------------------------
+  // CODE BELOW THIS POINT IS FOR WITHIN ARM COMPARISONS
+  //------------------------------------------------------
+  $("#wa_comparison_link").bind("click",function(event){
+    event.preventDefault();
+    could_lose_information = has_data();
+    if(could_lose_information){
+      $("#confirmation_modal").html("To avoid losing data, please press the 'Save' button before creating comparisons");
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          },
+          "Continue without saving": function(){
+            $.ajax({
+              type: 'POST',
+              url: "results/create_within_arm_comparisons",
+              data:({
+                selected_timepoints: "<%= @selected_timepoints %>", 
+                outcome_id: "<%= @outcome.id %>",
+                subgroup_id: $("#subgroup_selector").val()
+              }),
+              success: function(){
+                $("#loading_div").remove();
+              }
+            })
+            show_loading_icon();
+          }
+        }
+      })
+    }else{
+      $.ajax({
+        type: 'POST',
+        url: "results/create_within_arm_comparisons",
+        data:({
+          selected_timepoints: "<%= @selected_timepoints %>", 
+          outcome_id: "<%= @outcome.id %>",
+          subgroup_id: $("#subgroup_selector").val()
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+  $(".show_hide_wa_link").bind("click",function(event){
+    event.preventDefault();
+    element = $(".wa_comparison")[0];
+    if($(element).css("display") == "none"){
+      $(".wa_comparison").show();
+      $("#wa_comparison_links_when_showing").show()
+      $("#wa_comparison_links_when_hiding").hide()
+    }else{
+      $(".wa_comparison").hide();
+      $("#wa_comparison_links_when_showing").hide()
+      $("#wa_comparison_links_when_hiding").show()
+    }
+  })
+
+  $("#clear_wa_comparisons_link").unbind("click")
+  $("#clear_wa_comparisons_link").bind("click",function(event){
+    event.preventDefault();
+    // this is the pretty confirm dialog
+    $("#delete_confirm_modal").html("This action will permanently remove ALL within-arm comparison data above. Are you sure you want to do this?")
+    $("#delete_confirm_modal").dialog({
+      resizable: false,
+      height: 160,
+      modal: true,
+      buttons: {
+        "Cancel": function(){
+          $(this).dialog("close");
+        },
+        "Yes, I'm sure": function(){
+          $.ajax({
+            type: 'POST',
+            url: "results/clear_comparisons",
+            data:({
+              selected_timepoints: "<%= @selected_timepoints %>",
+              outcome_id: "<%= @outcome.id %>",
+              subgroup_id: $("#subgroup_selector").val(),
+              study_id: "<%= @study_id %>",
+              extraction_form_id: "<%= @extraction_form_id %>",
+              comparison_type: "within"
+            }),
+            success: function(){
+              $("#loading_div").remove();
+            }
+          })
+          $(this).dialog("close")
+          show_loading_icon();
+        }
+      }
+    })
+  })
+
+  $("#add_wa_comparison_row_link").bind("click",function(event){
+    event.preventDefault()
+    row_num = parseInt($("#next_wac_row").val())
+    comparator_id = parseInt($("#next_wac_comparator_id").val())
+    $("#next_wac_comparator_id").val(comparator_id - 1)
+    $("#next_wac_row").val(row_num + 1)
+    
+    $.ajax({
+      type: 'POST',
+      url: "results/add_within_arm_comparison_row",
+      data:({
+        outcome_id: "<%= @outcome.id %>",
+        subgroup_id: $("#subgroup_selector").val(),
+        outcome_type: "<%= @outcome.outcome_type %>",
+        study_id: "<%= @study_id %>",
+        ef_id: "<%= @extraction_form_id %>",
+        group_id: row_num,
+        comparator_id: comparator_id,
+        selected_timepoints: "<%= @selected_timepoints %>"
+      }),
+      success: function(){
+        $("#loading_div").remove();
+      }
+    })
+    show_loading_icon();
+  })
+  $(".remove_wa_comparison_link").bind("click",function(event){
+    event.preventDefault();
+    wac_id = $(this).attr("wac_id")
+    $("#delete_confirm_modal").html("This action will permanently remove this row from the within-arm comparison table. Are you sure you want to proceed?")
+    $("#delete_confirm_modal").dialog({
+      resizable: false,
+      height: 160,
+      modal: true,
+      buttons: {
+        "Cancel": function(){
+          $(this).dialog("close");
+        },
+        "Yes, I'm sure": function(){
+          $.ajax({
+            type:'POST',
+            url: 'results/remove_within_arm_comparison_row',
+            data:({
+              outcome_id: "<%= @outcome.id %>",
+              subgroup_id: $("#subgroup_selector").val(),
+              wac_id: wac_id,
+              selected_timepoints: "<%= @selected_timepoints %>"
+            }),
+            success: function(){
+              $("#loading_div").remove();
+            }
+          })
+          $(this).dialog("close");
+          show_loading_icon();
+        }
+      }
+    })
+  })
+  // EDITING WAC MEASURES
+  // First, display the measure form table
+  $(".edit_wac_measures_btn").unbind()
+  $(".edit_wac_measures_btn").bind("click",function(event){
+    var comparison_id = $(this).attr("wac_id")
+
+    event.preventDefault();
+    could_lose_information = has_data();
+    if(could_lose_information){
+      $("#confirmation_modal").html("To avoid losing data, please press the 'Save' button before creating comparisons");
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          },
+          "Continue without saving": function(){
+            $(this).dialog("close");
+            $("#modal_div").dialog({
+              title: "Editing Within-Arm Comparison Measures",
+            })
+            $.ajax({
+              type: 'POST',
+              url: "results/show_within_arm_comparison_measures",
+              data:({
+                comparison_id: comparison_id,
+                outcome_id: "<%= @outcome.id %>",
+                subgroup_id: $("#subgroup_selector").val(),
+                outcome_type: "<%= @outcome.outcome_type %>",
+                selected_timepoints: "<%= @selected_timepoints %>" 
+              }),
+              success: function(){
+                $("#loading_div").remove();
+              }
+            })
+            show_loading_icon();
+          }
+        }
+      })
+    }else{
+      $("#modal_div").dialog({
+        title: "Editing Within-Arm Comparison Measures",
+      })
+      $.ajax({
+        type: 'POST',
+        url: "results/show_within_arm_comparison_measures",
+        data:({
+          comparison_id: comparison_id,
+          outcome_id: "<%= @outcome.id %>",
+          subgroup_id: $("#subgroup_selector").val(),
+          outcome_type: "<%= @outcome.outcome_type %>",
+          selected_timepoints: "<%= @selected_timepoints %>" 
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+  $(".comparator_selector").unbind();
+  $(".comparator_selector").live("change",function(){
+    val = $(this).val()
+    if(val == '000'){
+      // get all comparators for this column that are not the first
+      selectors = $(".comparator_selector[column=" + $(this).attr("column") + "]");
+      for(i = 0; i < selectors.length; i++){
+        if(i > 0){
+          $(selectors[i]).css("display","none");
+        }
+      }
+    }else{
+      selectors = $(".comparator_selector[column=" + $(this).attr("column") + "]");
+      $(selectors).css("display","inline");
+    }
+
+  })
+
+  // Allow the user to add another comparator dropdown when creating the comparator
+  // this will only work if the current number of displayed comparator selections is already > 1,
+    // which indicates that ANOVA is not selected
+  $(".add_comparator").die();
+  $(".add_comparator").live("click",function(event){
+    event.preventDefault();
+    colnum = $(this).attr("column");
+    //alert("Column " + colnum.toString());
+    inputs = $("select[class='comparator_selector'][column='"+colnum+"']");
+    //alert("Found " + inputs.length.toString() + " inputs.");
+    // make sure there last element is not hidden, and if so proceed
+    last = inputs.last()
+    if($(last).css("display") == "inline-block"){
+      clone = last.clone();
+      // get the pieces of information that will need updating
+      clone_id = clone.attr("id").split("_");
+      clone_name = clone.attr("name").split("[");
+
+      // take care of the ID first
+      new_id = parseInt(clone_id[2]) + 1
+      clone.attr("id", clone_id[0] + "_" + clone_id[1] + "_" + new_id.toString());
+      //alert("new id is " + clone.attr("id"));
+      // now the name
+      clone.attr("name", clone_name[0] + "[" + clone_name[1] + "[" + new_id.toString() + "]]");
+      //alert("new name is " + clone.attr("name"));
+      // now the comparator_piece
+      clone.attr("comparator_piece",new_id.toString());
+      clone.val("");
+
+      // now put the pieces into place
+      last.after(clone);
+      clone.before("<br/><span class='comparator_selector' column='" + colnum + "'>vs.</span><br/>");
+    }
+  })
+  // Allow the user to remove a comparator dropdown from the end of the list for a particular comparison
+  // This will only be possible if there is more than one comparator remaining
+  $(".remove_comparator").die();
+  $(".remove_comparator").live("click",function(event){
+    event.preventDefault();
+    colnum = $(this).attr("column");
+    inputs = $("select[class='comparator_selector'][column='"+colnum+"']");
+    if(inputs.length > 2){
+      lastkept = inputs[inputs.length - 2];
+      $(lastkept).next().remove();  // remove a <br/>
+      $(lastkept).next().remove();  // remove the vs. span
+      $(lastkept).next().remove();  // remove another <br/>
+      $(lastkept).next().remove();  // remove the final dropdown
+    }
+  })
+
+  /* Allow the user to re-order the ocde rows as they see fit */
+  $(".ocde_sort_selector").bind("change",function(){
+    var ocde_id = $(this).attr("ocde_id");
+    var new_position = $(this).val()
+    
+    could_lose_information = has_data();
+    if(could_lose_information){
+      $("#confirmation_modal").html("To avoid losing data, please press the 'Save' button re-ordering the rows.");
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          },
+          "Continue without saving": function(){
+            $(this).dialog("close");
+
+            $.ajax({
+              type: 'POST',
+              url: "results/order_results_rows",
+              data:({
+                outcome_id: "<%= @outcome.id %>",
+                subgroup_id: $("#subgroup_selector").val(),
+                outcome_type: "<%= @outcome.outcome_type %>",
+                selected_timepoints: "<%= @selected_timepoints %>",
+                new_position: new_position,
+                ocde_id: ocde_id
+              }),
+              success: function(){
+                $("#loading_div").remove();
+              }
+            })
+            show_loading_icon();
+          }
+        }
+      })
+    }else{
+      $.ajax({
+        type: 'POST',
+        url: "results/order_results_rows",
+        data:({
+          outcome_id: "<%= @outcome.id %>",
+          subgroup_id: $("#subgroup_selector").val(),
+          outcome_type: "<%= @outcome.outcome_type %>",
+          selected_timepoints: "<%= @selected_timepoints %>",
+          new_position: new_position,
+          ocde_id: ocde_id
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();  
+    } 
+  })
+} // end prepareForm
+
+document_init();
+// -->
+</script>

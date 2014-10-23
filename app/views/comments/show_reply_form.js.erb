@@ -1,0 +1,2 @@
+$(".comment_reply_area").html("");
+$("#reply_area_<%= @replying_to.id.to_s %>").html("<%= escape_javascript(render :partial=>"comments/reply_form", :locals=>{:comment_reply=>@comment_reply, :study_id => @study_id, :replying_to => @replying_to, :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :value_at_comment_time => @value_at_comment_time, :project_id => @project_id, :project => @project}) %>");

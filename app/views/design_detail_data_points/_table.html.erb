@@ -1,0 +1,108 @@
+<%= form_for(@design_detail_data_point, :remote => true) do |f| %>
+	<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
+	<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
+	<%= f.hidden_field :study_id, :value=>params[:study_id] %>
+	
+	<%# ------------------------------------------------------------------------------------ %>
+	<%#          GO THROUGH DESIGN DETAILS ----- TEMPLATE FIELDS ----- 						 					 %>
+	<%# ------------------------------------------------------------------------------------ %>
+	<% num_questions = @design_detail_extraction_form_fields.length %>
+	<% unless @design_detail_extraction_form_fields.empty? %>
+	  <table class='list_table tab-list-table' style='margin-left:0px;'>
+	  <% @design_detail_extraction_form_fields.each do |one_question| %>
+	    
+		<tr>
+			<td class='data' style='min-width:450px; max-width:950px;'>
+				<div style='min-width:450px; max-width:950px !important; overflow:auto;'>
+
+				<strong><%= one_question.question_number.to_s %>. <%= one_question.question %></strong><br/>
+				<%= render :inline=>create_input(one_question.id, "design_detail")%>
+				<%# DISPLAY THE INSTRUCTIONS %>
+				<% unless one_question.instruction.nil? || one_question.instruction == "" %>
+					<br/>
+				  <span class="smallText" style='font-style:italic;'><%= one_question.instruction %></span>
+				<% end %>
+				<br style='clear:both;'/>
+				<br/>
+				<div style='font-size:12px;'>
+					<%= render :partial => "comments/field_comments", :locals => {:section_name => "designdetails", :section_id => one_question.id, :field_name => "design", :study_id => @study.id, :project_id => params[:project_id]} %>	
+				</div>
+				</div><!-- end overflow div -->
+			</td>
+		</tr>
+						
+		<% end %>
+		</table>
+		<br/>
+
+		<button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Save Data
+		</button>
+		<div class="saved" id="saved_indicator_1" style='display:none;'>  
+			Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
+		</div>
+	<% end %>
+		
+<% end %>
+
+<script type="text/javascript">
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });
+</script>
+
+
+

@@ -1,0 +1,5 @@
+<%= (measure.measure_name.nil? || (measure.measure_name == "")) ? "-" : measure.measure_name %> <%= (measure.unit.nil? || (measure.unit == "")) ? "-" : "(" + measure.unit + ")" %>
+	<div class="measure_edit_buttons">
+		<%= image_tag "Pencil.png", :id => "edit_measure_" + measure.id.to_s, :class => "edit_measure_btn", :alt => "Edit"  %>
+		<%= image_tag "Bin_closed.png", :id => "delete_measure_" + measure.id.to_s, :class => "delete_measure_btn", :alt => "Delete"  %>
+	</div>

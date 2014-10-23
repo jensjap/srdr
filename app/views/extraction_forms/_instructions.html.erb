@@ -1,0 +1,11 @@
+<strong>User Instructions</strong><br/>
+<%  if !@ef_user_instructions.nil? %>
+  
+  <% if @ef_user_instructions.blank? %>
+ 	 You may add specific instructions for data extractors using the link below. 
+  <% else %>
+  	<strong>Additional User Instructions:</strong> <%= @ef_user_instructions %>
+  <% end %>
+<%  else %>
+	You may add specific instructions for data extractors using the link below. 
+<% end %>

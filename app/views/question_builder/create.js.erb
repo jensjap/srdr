@@ -1,0 +1,10 @@
+<% if @saved %>
+$("#<%= @model_name %>_fields_entry").html("<%= escape_javascript(render :partial=>"question_builder/form", :locals => {:model_obj => @model_obj}) %>");
+$("#<%= @model_name %>_extraction_form_preview_table").html("<%= escape_javascript(render :partial=>"question_builder/extraction_form_preview") %>");
+$("#<%= @model_name %>_fields_entry").dialog('close');
+$("#saved_item_indicator").show().delay(500).fadeOut(300);
+$("#validation_message").html("");
+$("#waitingGIF").remove();
+<% else %>
+	$("#validation_message_<%= @model_name %>").html("<%= escape_javascript( render :inline=>@error_html ) %>");
+<% end %>

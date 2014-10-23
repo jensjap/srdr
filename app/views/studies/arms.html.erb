@@ -1,0 +1,31 @@
+<div class='tab-div'>
+<br/>
+<h2>Study Arms</h2><br/><br/>
+<% instruction = @extraction_form_arm_instr.nil? ? "" : @extraction_form_arm_instr.instructions %>
+<% unless instruction.blank? %>
+	<div class='user_instruction' id="arms_user_instr">
+		<strong>Note:</strong> <%= instruction %>
+	</div>
+	<br/>
+	<br/>
+<%  end %>
+<div id="arms_table">
+<%= render 'arms/table' %>
+</div><br/>
+
+	<div class="actions">
+	<button type="submit" class="positive" id="add_arm_button" alt="Click to open the New Arm dialog and add a new arm to the study">
+			<%= image_tag "Add.png", :alt => "Add" %>Add Arm
+	</button>
+		
+	<div class="saved" id="saved_item_indicator" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+	</div>		
+<br/>
+<%= render :partial=>'section_complete_status', :locals=>{:section=>"arms"} %>
+<br/>
+<br/>
+
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+</div><!-- end tab div -->

@@ -1,0 +1,41 @@
+<div id="quality_rating_fields_validation_message"></div>
+<% if !@quality_rating_fields.nil? %>
+	<% unless @quality_rating_fields.length < 1 %>
+	  <table class="classic-a" id="quality_rating_fields_list" summary="quality rating fields list">
+	  <thead>
+	  <tr>
+		<th scope='col'>Display Order</th>
+	  	<th scope='col'>Rating Item</th>
+		 <th scope='col'>Actions</th>
+	 	</tr></thead>
+	  <% for rating in @quality_rating_fields %>
+	    <tr class="<%= cycle("even", "odd") %>" id="qdr_row_<%=rating.id.to_s %>">
+				<td scope='row'><%= rating.display_number %></td>
+				<td scope='row'><%= rating.rating_item %></td>
+				<td scope='row'>
+				<% if !rating.display_number.nil? && rating.display_number > 1 %>
+					<%= link_to image_tag("Silk_arrow_up.png", :style=>"border:0px") + "Move Up Rating Option",'#',:class => "tooltip_moveup quality_rating_moveup",:qrf_id=>rating.id %><br/>
+				<% end %>
+				<%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt => "Edit") + "Edit Rating Option", edit_quality_rating_field_path(rating, :extraction_form_id=>@extraction_form.id), :remote=>true, :class=>"tooltip_edit" %><br/>
+				<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Rating Option", {:controller => "quality_rating_fields", :action => "confirm_delete", :id => rating.id, :extraction_form_id => @extraction_form.id}, :remote=>true, :class => "tooltip_delete" %></td>
+			  </td>
+			</tr>
+		<% end %>
+		</table>
+		
+		<br/>
+		<div class="form_content">
+		<div class="field">
+		Rating scale selection box preview: 
+		<%= select_tag :current_overall_rating, options_for_select(@quality_rating_fields.collect{|f| f.rating_item}), :class => "inline-field", :title => "ratings selection box example" %>
+		</div>
+		</div>
+
+		
+		
+	<% else %>
+	  <span style='font-style:italic;'>There are no quality rating items specified.</span>
+	<% end %>
+<% else %>
+	
+<% end %>

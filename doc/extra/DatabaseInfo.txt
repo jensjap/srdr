@@ -1,0 +1,20 @@
+# @markup rdoc
+# @title Database Information
+
+===Database information
+
+== Overview 
+
+SRDR is using a SQLite database in development and a PostgreSQL database in the production system (on heroku).
+
+The default development database type in Ruby on Rails is a SQLite database, which is a single database file. It can be viewed using a SQLite database viewer application on Windows, Mac OS, or Linux.
+
+The development site (srdr-dev), and all default free Heroku applications, use a shared database. The production site (srdr.heroku.com) uses a for-pay dedicated database. From the heroku page, as of 5/12/2011:
+
+The shared plan is suitable for development and staging applications. It runs PostgreSQL 8.3. The dedicated plans are suitable for production scale applications. In addition, the dedicated databases offer a number of advantages, including direct access (via psql or any native postgresql library), stored procedures, and PostgreSQL 9 support.
+
+More information on Heroku's database can be found at http://devcenter.heroku.com/articles/database
+
+== Database Diagram
+
+To be created when information to be stored is finalized.

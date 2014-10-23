@@ -1,0 +1,54 @@
+<%= form_for @user_session, :url => {:controller => "user_sessions", :action => "create", :name => "userlogin_form"} do |f| %>
+<table class="login_table register_table" id="user_login_form_table" summary="user login form table">
+    <tr class="field">
+        <td colspan="2">
+        <label for='user_session_login'>Username:</label>&nbsp;<%= f.text_field :login, :size => 30 %><br/>
+        </td>
+    </tr>
+    <tr class="field">
+        <td colspan="2">
+        <label for='user_session_password'>Password: </label>&nbsp;<%= f.password_field :password, :size => 30 %><br/>
+        </td>
+    </tr>
+    <tr class="field">
+        <td colspan="2">
+            <%= f.check_box :remember_me, :class => "cbox", :style=>"align:right;"%><label for='user_session_remember_me'>Remember Me</label>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan='2'>
+            <div class='actions'>
+        <!--<input class="image-submit" src="images/homepage/btn_submit_off.gif" type="image" />-->
+            <button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg("Login") %>' >Log In</button>
+                <button class="negative" id="forgot_password">Forgot Password</button>
+                <%# link_to "Forgot password?", "/forgot_password", :class => "regular" %>
+            </div>
+        </td>
+    </tr>
+</table>
+<% end %>
+<span id='login_end'></span>
+<script type='text/javascript'>
+//<!--
+function login_init() {
+  try{
+    checkLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    set_login_js();
+  } catch( err ) {
+    setTimeout('login_init()', 200);
+  }
+}
+function checkLoaded() {
+    if ( $('#login_end').length == 0) $jquery.error( 'not ready' );
+}
+function set_login_js(){
+    $("#forgot_password").unbind();
+    $("#forgot_password").bind("click",function(event){
+        event.preventDefault();
+        window.location.replace("/forgot_password");
+    });
+}
+login_init();
+    
+//-->
+</script>

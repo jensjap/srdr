@@ -1,0 +1,66 @@
+<div id='q_builder_form'>
+<div id="validation_message_bc">
+<%= render "layouts/modal_info_messages" %>
+</div>
+<%= form_for(@baseline_characteristic, :remote=>true) do |f| %>
+	<%= hidden_field_tag "page_name","baseline_characteristic" %>
+	<%= hidden_field_tag "baseline_characteristic[extraction_form_id]", @extraction_form.id %>
+	<%# start form_content DIV %>
+	<div class="form_content">
+		This form allows you to generate a new extraction form item for baseline characteristics, 
+		along with an optional set of suggested responses. Responses can be designated as drop down lists, radio buttons or check boxes, or text fields. Data extractors will be able to choose whether to repeat questions for each arm and for total values.
+	
+		<br/>
+		<%# start question text %>
+		<div class='field'>
+			<label for="Question Text">Question text:</label> <%= f.text_area :question, :size=>"50x2", :class=> "editable_field", :tabindex=> 1 %><br/>
+			<label for="Instructions for Extractor">Instructions for Extractor (optional):</label> <%= f.text_area :instruction, :size=>"50x2", :class=>"editable_field", :tabindex => 2, :title => "instructions for extractor" %>
+		</div>
+		<%# end question name field %>
+	
+		<%# start field type %>
+		<div class='field' id='type_selector_baseline_characteristic'>
+			<label for="Please choose an answer type">Please choose an answer type:</label><br/>
+			<span class='smallText'>You may choose 'Yes/No' to build a Yes/No radio button for you.</span>
+			<br/>
+			<% options = [["Text (user will enter their own value)","text"],["Select (choose from a dropdown list, with an 'Other' option)","select"],["Radio Button (select one of the defined options)","radio"],["Check Box (choose more than one answer)","checkbox"],["Yes/No (quickly construct a Yes/No radio button)","yesno"]] %>
+			<%= f.select :field_type, options_for_select=options, {}, :class => "editable_field", :tabindex => 3, :title => "choose an answer type" %>
+		</div>
+		<%# end field type %>
+		 <div class='field' id='subquestion_div_baseline_characteristic'> <%# start subquestion div %>
+    </div> <%# end subquestion div%>
+
+	</div>
+	
+    	<%# start submit button%>
+
+		<div class='actions'>
+				<button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>">
+					<%= image_tag "Add.png", :alt => "Add"  %>Save
+				</button>
+				<button class="negative" onClick="event.preventDefault();$('#baseline_characteristic_fields_entry').dialog('close');" id="form_close_btn">
+					<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+				</button>
+		</div>
+		<%# end submit button %>
+
+<% end %>
+
+<script type='text/javascript'>
+	$(document).ready(function() {
+		$("#baseline_characteristic_field_type").unbind();
+  	$("#baseline_characteristic_field_type").change(function() {
+    	$.ajax({
+    		url: 'question_builder/show_input_options',
+    		data: {"selected":this.value,"field_name":this.name,"field_id":this.id,"page_name":"baseline_characteristic" }
+    	});		
+  	});
+	});
+	
+	$("#form_close_btn").bind("click", function(event)
+{
+event.preventDefault();
+$('#baseline_characteristic_fields_entry').dialog('close');
+});	
+</script>
+</div>

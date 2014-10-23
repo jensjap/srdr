@@ -1,0 +1,24 @@
+	<% if defined?(@message_div) %>
+		$("#<%= @message_div %>").show().delay(500).fadeOut(300);
+		<% if defined?(@error_div) %>
+			$("#<%= @error_div.to_s %>").html("");	
+		<% end %>
+	<% end %>
+
+	<% if defined?(@error_div) %>
+		<% if @saved %>
+			$("#<%= @error_div.to_s %>").html("");		
+		<% else %>
+			$("#<%= @error_div.to_s %>").html("<%= escape_javascript(render :partial=>@error_partial) %>");		
+		<% end %>
+	<% end %>
+	
+		// unset form and field 'unsaved' indicators
+	forms = $(".unsaved_form");
+  for(i=0; i < forms.length; i++){
+  	$(forms[i]).removeClass("unsaved_form")
+  }
+  fields = $(".edited_field")
+  for(i=0; i < fields.length; i++){
+    $(fields[i]).removeClass("edited_field");
+  }

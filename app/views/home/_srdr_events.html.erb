@@ -1,0 +1,31 @@
+<table id="events_table">
+    <tr>
+        <td class="header">
+        Links
+        </td>
+    </tr>
+<%
+    for idx in (0..@events.size()-1)
+        title = @events.getHTMLTitle(idx)
+        desc = @events.getHTMLDescription(idx)
+        url = @events.getURL(idx)
+        evtdate = @events.getDate(idx)
+        postdate = @events.getPostDate(idx)
+%>
+    <tr>
+        <td align="LEFT" style="border-bottom: 1px solid #9e9e9e;">
+        <br/>
+        <%= title.html_safe %>
+<%
+        if desc.size > 0
+%>
+        <br/><%= desc %>
+<%
+        end
+%>
+        </td>
+    </tr>
+<%
+    end
+%>
+</table>

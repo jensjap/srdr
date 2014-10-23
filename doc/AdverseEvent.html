@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: AdverseEvent
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (A)</a> &raquo; 
+    
+    
+    <span class="title">AdverseEvent</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: AdverseEvent
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">AdverseEvent</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/adverse_event.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+This model handles single adverse events, which are essentially a row in
+the table in the adverse event study data entry section.  It includes
+title, description, study id, and extraction form ID in order to identify a
+uniquely created adverse event. 
+</p>
+<p>
+An adverse event can be specified for each arm in the system, for all arms
+(total), or both. This option is specified in the extraction form. The view
+that handles the adverse event arm/total specification is
+&#8220;adverse_events/_extraction_form_settings.html.erb&#8221;.
+</p>
+<p>
+An adverse event contains title and description fields by default. The
+adverse event may also contain a number of columns specified in the
+extraction form.  These columns are handled in the adverse_event_columns
+files. An adverse event table may have many rows with many custom columns. 
+Because of this each table cell data point is called an
+&#8220;adverse_event_result&#8221; which is specified by its column_id and
+adverse_event_id.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_adverse_events_by_arm-class_method" title="get_adverse_events_by_arm (class method)">+ (Array) <strong>get_adverse_events_by_arm</strong>(arm_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+return adverse events depending on the arm input.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_related_study_arms-class_method" title="get_related_study_arms (class method)">+ (Array) <strong>get_related_study_arms</strong>(study_id, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get arms related to a study (based on study_id and extraction_form_id
+inputs).
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="get_adverse_events_by_arm-class_method">
+  
+    + (<tt>Array</tt>) <strong>get_adverse_events_by_arm</strong>(arm_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+return adverse events depending on the arm input
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>arm_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the array of adverse events
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/adverse_event.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_adverse_events_by_arm'>get_adverse_events_by_arm</span><span class='lparen'>(</span><span class='id identifier rubyid_arm_id'>arm_id</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='const'>AdverseEvent</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span> <span class='symbol'>:conditions</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>arm_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_arm_id'>arm_id</span> <span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_related_study_arms-class_method">
+  
+    + (<tt>Array</tt>) <strong>get_related_study_arms</strong>(study_id, extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get arms related to a study (based on study_id and extraction_form_id
+inputs)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>study_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array of arms
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/adverse_event.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_related_study_arms'>get_related_study_arms</span><span class='lparen'>(</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span> <span class='symbol'>:conditions</span> <span class='op'>=&gt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>study_id = ? and extraction_form_id = ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:order</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>display_number ASC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:48 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

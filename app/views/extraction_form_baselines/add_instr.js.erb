@@ -1,0 +1,4 @@
+$("#new_baselines_instr_entry").html("<%= escape_javascript(render :partial=>'extraction_form_baselines/instr_form')%>");
+$("#new_baselines_instr_entry :button").removeAttr("disabled");
+$("#new_baselines_instr_entry").dialog("option", "title", "Enter Baseline Characteristic Instructions");		
+$("#new_baselines_instr_entry").dialog('open');

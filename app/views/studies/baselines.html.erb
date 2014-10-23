@@ -1,0 +1,29 @@
+<div class='tab-div'>
+	<h2>Baseline Characteristics</h2><br/><br/>
+	<% unless @ef_instruction.blank? %>
+		<div class='user_instruction'>
+			<strong>Note:</strong> <%= @ef_instruction %>
+		</div>
+	<%  end %>
+	<br/>
+<div id="baseline_characteristic_fields_table">
+<%= render 'baseline_characteristic_data_points/table' %>
+</div>
+
+<br/><br/>
+<%= render :partial=>'section_complete_status', :locals=>{:section=>"baselines"} %>
+<br/><br/>
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+<script type="text/javascript">
+
+$("#baseline_characteristic_fields_entry").dialog({
+  	autoOpen: false,
+	minWidth: 600
+});
+	
+
+</script>
+</div><!-- end tab div -->

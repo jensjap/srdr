@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: outcome_data_entries
+#
+#  id                 :integer          not null, primary key
+#  outcome_id         :integer
+#  extraction_form_id :integer
+#  timepoint_id       :integer
+#  study_id           :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  display_number     :integer          default(1)
+#  subgroup_id        :integer          default(0)
+#
+
+ode1:
+    id: 1
+    outcome_id: 5
+    extraction_form_id: 100
+    timepoint_id:
+    study_id: 100
+    display_number:
+    subgroup_id:
+
+ode2:
+    id: 2
+    outcome_id: 6
+    extraction_form_id: 100
+    timepoint_id:
+    study_id: 100
+    display_number:
+    subgroup_id:

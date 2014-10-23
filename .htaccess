@@ -1,0 +1,3 @@
+# for TinyMCE and images folder
+RewriteRule ^js/tiny_mce/plugins/imagemanager/(.*)$ - [L]
+RewriteRule ^images/(.*)$ - [L]

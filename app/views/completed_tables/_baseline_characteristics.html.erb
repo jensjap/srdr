@@ -1,0 +1,123 @@
+<% unless baseline_characteristic_extraction_form_fields.empty? %>
+
+<table class="list_table" id="bcdp_table_<%= extraction_form.id.to_s %>" summary="baseline characteristic data points table - completed">
+		
+		<%# CREATE TABLE HEADERS %>
+		<thead>
+		<tr>
+		<th rowspan=2 align='center'>Question</th>
+		<% @study_arms.each do |sa| %>
+		  <th colspan=2 align='center'><%= sa.title %></th>
+		<% end %>
+		<th colspan=2 align='center'>Total</th>
+		<th rowspan="2">Comments</th>		
+		</tr>
+		<tr>
+			<% @study_arms.each do |sa| %>
+			  <th>Answer</th><th>Follow-up</th>
+			<% end %>
+			<th>Answer</th><th>Follow-up</th> <%# for the Total...%>
+		</tr>
+		</thead>
+		
+		<%# ------------------------------------------------------------------------------------ %>
+		<%#          GO THROUGH BASELINE CHARACTERISTICS ----- TEMPLATE FIELDS ----- 						 %>
+		<%# ------------------------------------------------------------------------------------ %>
+		
+		<%#  IF THERE ARE BASELINE CHARACTERISTIC QUESTIONS DEFINED %>
+		<% unless baseline_characteristic_extraction_form_fields.empty? %>
+			<%# ITERATE THROUGH EACH OF THE QUESTIONS%>
+			<% baseline_characteristic_extraction_form_fields.each do |popchar| %>
+			  
+				<% answers = Hash.new() #KEEP TRACK OF ANSWERS FOR EACH ARM %>
+				<% max_answer_count = 0 #HOLDS THE GREATEST NUMBER OF ROWS REQUIRED %>
+				<% has_data = false     #FLAG IN CASE NO DATA IS ENTERED %>
+				
+				<%# ITERATE THROUGH THE STUDY ARMS %>
+				<% @study_arms.each do |sa| %>
+				<% answers[sa.id] = [] %>
+				  <%# GET ANY RESULTS ASSOCIATED WITH THAT ARM FOR THIS QUESTION %>
+				  <% arm_data = BaselineCharacteristicDataPoint.get_result(popchar,@study.id,sa.id) %>
+				  <%# IF THERE ARE DATA POINTS FOR THE ARM %>
+				  <% unless arm_data.empty? %>
+				    <% has_data = true        # SET THE FLAG TO TRUE%>
+				  	<%# UPDATE THE MAXIMUM NUMBER OF ROWS REQUIRED%>
+				  	<% max_answer_count = arm_data.length if arm_data.length > max_answer_count %>
+				  	
+				  	<%# FOR EACH DATA POINT%>
+				    <% arm_data.each do |ad| %>
+				      <%# %>
+				      <% answers[sa.id] << [ad.value, ad.subquestion_value] %>
+				    <% end %>
+				  <% end %>
+				<% end %>
+				<%# GET DATA POINTS FOR THE TOTAL ARM %>
+				<% arm_data = BaselineCharacteristicDataPoint.get_result(popchar,@study.id,0) %>
+				<% answers[0] = [] %>
+			  <% unless arm_data.empty? %>
+			    <% has_data = true %>
+			  	<% max_answer_count = arm_data.length if arm_data.length > max_answer_count %>
+			    <% arm_data.each do |ad| %>
+			      <% val = ad.value.nil? ? "" : ad.value %>
+			      <% sub = ad.subquestion_value.nil? ? "" : ad.subquestion_value %>
+			      <% answers[0] << [val, sub] %>
+			    <% end %>
+			  <% end %>
+				
+				<tr id="pop_char_row_<%=popchar.id.to_s %>">
+					<% rowspan = max_answer_count > 0 ? max_answer_count : 1%>
+					<% if has_data %>
+						<td rowspan=<%= rowspan %> ><%= popchar.question.to_s %></td>
+						<% for i in 0..max_answer_count - 1 %>
+							<% if i > 0 %><tr><% end %>
+							<% @study_arms.each do |sa| %>
+							  <td style='text-align:left;'>
+							  	<% unless answers[sa.id].empty? %>
+								  	<% answer = answers[sa.id][i].nil? ? "" : answers[sa.id][i][0]%>
+								  	<%= answer %>
+								  <% end %>
+							  </td>
+								<td>
+									<% unless answers[sa.id].empty? %>
+										<% sq = answers[sa.id][i].nil? ? "" : answers[sa.id][i][1]%>	
+										<%= sq %>
+									<% end %>
+								</td>
+							<% end %>
+							<%# AND NOW FOR THE TOTAL VALUES...%>
+							<% if answers.keys.include?(0) %>
+								<td style='text-align:left;'>
+							  		<% answer = answers[0][i].nil? ? "" : answers[0][i][0]%>
+							  		<%= answer %>
+							  </td>
+								<td>
+									<% sq = answers[0][i].nil? ? "" : answers[0][i][1]%>	
+									<%= sq %>
+								</td>
+							<% else %>
+								<td></td><td></td>
+							<% end %>
+						<td class="comment_td">
+							<%= render :partial => "comments/field_comments", :locals => {:section_name => "baselinecharacteristics", :section_id => popchar.id, :field_name => "baselines", :study_id => @study.id, :project_id => @project.id} %>		
+						</td>										
+							</tr>
+						<% end %>
+					<% else %>
+					  <% colspan = 2 * (@study_arms.length + 1) %>
+					  <td rowspan='<%= rowspan %>'><%= popchar.question.to_s %></td>
+					  <td colspan='<%=colspan%>'>No data entered.</td>
+					<% end %>
+			
+				</tr>
+			<% end %>
+		<%# END unless - baseline_characteristic_extraction_form_fields.empty? %>
+		<% end %>
+	
+		
+	</table>
+	
+	<% else %>
+	
+	No baseline characteristics have been defined for this extraction form.
+	
+	<% end %>

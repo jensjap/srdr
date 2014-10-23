@@ -1,0 +1,146 @@
+<script>
+  $(document).ready(function() {
+      var accOpts = {
+          icons: { 'header': 'ui-icon-circle-plus', 'headerSelected': 'ui-icon-circle-minus' },
+          active: false,
+          fillSpace: false,
+          collapsible: true,
+          change: function(e,ui) {
+               $(".notify").remove();
+               htext = ui.newHeader.find("a").text();
+               ui.newHeader.find("a").text(htext.replace("[OPEN]","[CLOSE]"));
+               htext = ui.oldHeader.find("a").text();
+               ui.oldHeader.find("a").text(htext.replace("[CLOSE]","[OPEN]"));
+          }
+      }
+      $("#pub_accordion").accordion(accOpts);
+  });
+</script>
+<h2>Study Matches</h2><br/>
+<%
+    if !@resultslist["publications"].empty?
+%>
+<div id="pub_accordion">
+<% 
+        count = 1
+        @resultslist["publications"].each do |projrec|
+            puts ">>>> findings "+projrec.to_s
+            hitscore = projrec[0]
+            proj = projrec[1] 
+            qtext = projrec[2] 
+            study = projrec[3] 
+            publist = projrec[4] 
+            matchloc = projrec[5] 
+            userinfo = projrec[6] 
+            # Pick up array of associated projects if available
+            assocprjs = nil
+            if projrec.length > 7
+                assocprjs = projrec[7] 
+            end
+            pub = publist[0] 
+            header_txt = count.to_s+". "
+            if pub.pmid.nil?
+                header_txt = header_txt + "[<b>PubMId:</b> na]"
+            else
+                header_txt = header_txt + "[<b>PubMId:</b> "+pub.pmid+"]"
+            end            
+            if !pub.author.nil?
+                if pub.author.length > 10
+                    header_txt = header_txt + " <i>"+pub.author[0..10]+"...et al</i>"
+                else
+                    header_txt = header_txt + " <i>"+pub.author+"</i>"
+                end
+            end            
+            if pub.title.length > 70
+                header_txt = header_txt + ", <b>"+pub.title[0..70]+"...</b>"
+            else
+                header_txt = header_txt + ", <b>"+pub.title+"</b>"
+            end
+            publication_txt = ""
+            if pub.journal.nil?
+                publication_txt = publication_txt + "<i>No Journal info</i>"
+            else
+                publication_txt = publication_txt + "<i>"+pub.journal+"</i>"
+            end
+            if pub.volume.nil?
+                publication_txt = publication_txt + ",Vol"
+            else
+                publication_txt = publication_txt + ",Vol "+pub.volume
+            end
+            if pub.issue.nil?
+                publication_txt = publication_txt + ",Issue"
+            else
+                publication_txt = publication_txt + ", "+pub.issue
+            end
+            publication_txt = publication_txt + ", "+pub.year
+
+            proj_list = " "
+            if !assocprjs.nil?
+                if assocprjs.length == 1
+                    proj_list = proj_list + "<b>Associated Project:</b> "
+                else 
+                    proj_list = proj_list + "<b>Associated Projects:</b> "
+                end
+                n = 0
+                assocprjs.each do |aproj|
+                    prj = aproj[0]
+                    userinfo = aproj[1]
+                    if n > 0
+                        proj_list = proj_list + ", "
+                    end    
+                    proj_list = proj_list + prj.title+" (<i>"+prj.created_at.year.to_s+"</i>)"
+                end
+            end
+%>
+    <h3><a href="#" class="heading" title="Study Result: <%= pub.title %> (CTRL + ENTER to open)"><div id="search_project_title">[OPEN] <%= raw header_txt %></div>
+    <%= raw publication_txt %><br/>
+    [Match found in <%= matchloc %> = "<%= raw qtext %>"] <%= raw proj_list %></a> </h3> 
+        <div id="advsearch_pub_<%= count %>">
+        <%= link_to image_tag('/images/Folder_table.png'), '/projects/'+proj.id.to_s+'/studies/'+study.id.to_s %>&nbsp;<%= pub.title %>
+        <br/>
+        <b>PubMed ID: </b><%= pub.pmid %><br/>
+        <b>Authors: </b><%= pub.author %><br/>
+        <b>Year: </b><%= pub.year %><br/>
+        <b>Country: </b><%= pub.country %><br/>
+<%          if defined?(current_user) && !current_user.nil? %>
+        <i>[Coming soon - copy study to another project] </i><%= link_to image_tag('/images/Note_go.png'), '#' %><br/>
+<%
+            end
+            if !assocprjs.nil?
+                if assocprjs.length == 1
+                    prj = assocprjs[0][0]
+                    userinfo = assocprjs[0][1]
+%>
+        <br/>
+        <div id="search_project_title2"><b>Associated Project: </b><%= proj.title %></div>
+        <%= link_to image_tag('/images/Folder_table.png'), '/projects/'+proj.id.to_s %><B>Description:</B> <%= proj.description %>
+        <br/>
+        <b>Created By: </b><%= userinfo.lname %>, <b>Organization: </b><%= userinfo.organization %>, <b>Create Date: </b><%= proj.created_at.strftime("%b %d, %Y %I:%M %p") %>, <b>Published: </b><%= proj.is_public.to_s.gsub("true","Yes").gsub("false","No") %>
+<%       
+                else
+%>
+        <b><%= assocprjs.length %>Associated Projects: </b><br/>
+
+<%
+                    assocprjs.each do |aproj|
+                        prj = aproj[0]
+                        userinfo = aproj[1]
+%>
+        <br/><div id="search_project_title2"><%= prj.title %></div>
+        <%= prj.description %>
+        <br/>
+        <b>Created By: </b><%= userinfo.lname %>, <b>Organization: </b><%= userinfo.organization %>, <b>Create Date: </b><%= prj.created_at %>, <b>Published: </b><%= prj.is_public.to_s.gsub("true","Yes").gsub("false","No") %>
+<%
+                    end
+                end
+            end
+            count = count + 1
+%>
+        </div>
+<%      end %>
+</div>
+<%  else %>
+<div class="indent_block">
+<em>Your search criteria did not match any SRDR studies/publications</em>
+</div>
+<%  end %>

@@ -1,0 +1,35 @@
+<div class='tab-div'>	
+	<br/>
+	<h2>Study Quality</h2><br/><br/>
+	<% instruction = @extraction_form_quality_instr.nil? ? "" : @extraction_form_quality_instr.instructions %>
+	<% unless instruction.blank? %>
+		<div class='user_instruction'>
+			<strong>Note:</strong> <%= instruction %>
+		</div>
+		<br/>
+	<%  end %>
+	<h2>Enter Quality Dimensions</h2>
+	<br/>
+	<div id="quality_dimension_fields_table" class='editable_field'>
+	<%= render 'quality_dimension_data_points/table' %>
+	</div>
+
+	<br/>
+
+	<hr width="100%" color="#cccccc">
+	<br/>
+	<h2>Adjust Quality Rating</h2>
+	<br/><br/>
+	<div id="quality_rating_data_points_table">
+	<%# render 'quality_rating_data_points/table' %>
+	</div><br/><br/>
+
+
+	<%= render 'quality_rating_data_points/form' %>
+	
+	<br/><br/>
+	<%= render :partial=>'section_complete_status', :locals=>{:section=>"quality"} %>
+	<br/><br/>
+	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:last=>false} %>
+	
+</div><!-- end tab div -->

@@ -1,0 +1,134 @@
+<%# find out how many questions there are total for this particular list %>
+<% obj_type = get_camel_caps(@model) %>
+<% max_num = eval(obj_type).where(:extraction_form_id=>@extraction_form.id).maximum("question_number") %>
+<% max_num = max_num.nil? ? 1 : max_num %>
+<% num_options = (1..max_num).to_a.collect{|x| [x,x]} %>
+<% display = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %>
+
+<%# CREATE THE LIST OF QUESTIONS AND ANSWERS JUST LIKE THEY WOULD APPEAR IN AN EXTRACTION FORM. %>
+
+<% unless @questions.empty? %>
+	<table class='list_table tab-list-table'>
+	<% if @donor_length == 0 %>
+		<h3>Extraction Form Preview</h3><br/>
+		<div class="indent_block">
+			<span class='smallText'>Please note, this is an <em>inactive</em> form and cannot be submitted.</span>
+		</div>
+		<br/>
+	<% end %>
+	<% @questions.each do |q| %>
+		<tr>
+			<td class='data' style='display:<%= display %>'>
+			<div id="<%= 'question_' + q.question_number.to_s + '_edit_div' %>" style="display: none"></div>
+			<div class='field question_preview' style='min-width: 450px; max-width: 950px;'id="<%= 'question_' + q.question_number.to_s + '_div' %>">
+				
+				
+				<%= select_tag "question_number_" + q.question_number.to_s, options_for_select(num_options,q.question_number), :class=>'question_number_switch', :title => "#{q.question_number.to_s}. #{q.question}" %>. <strong><%= q.question %> </strong>
+				
+
+				<div class="indent_block" style='overflow:auto;' >
+					<%= render :inline=>create_input(q.id, @model) %>
+					<br/>
+					<% unless q.instruction.nil? %>
+						<span class="smallText" style='font-style:italic;'><%= q.instruction %></span>
+					<% end %>
+				</div>
+			</div>
+			<div style='margin-bottom: 10px;'>
+					<!--<div style='position:absolute; top: 4px; right: 2px;'>-->
+						
+						<%= link_to image_tag("copy.png", :style=>"border-style:none;vertical-align:middle;", :alt => "Copy") + "Copy Question", {:controller=>'question_builder', :action=>'copy_question', :page_name=>@model_name, :qid=>q.id, :efid=>q.extraction_form_id}, {:remote=>true, :class=>'tooltip_edit question_link', :title=>"Copy Question: #{q.question}"} %> &nbsp;|&nbsp;
+						<%= link_to image_tag("Pencil.png", :style=>"border-style:none;vertical-align:middle;", :alt => "Edit") + "Edit Question", {:controller=>'question_builder', :action=>'edit_question', :page_name=>@model_name, :qid=>q.id, :qnum=>q.question_number}, {:remote=>true, :class=>'tooltip_edit question_link', :title=>"Edit Question: #{q.question}"} %>&nbsp;|&nbsp;
+						<%= link_to image_tag("Bin_closed.png", :style=>"border-style:none;vertical-align:middle;", :alt => "Delete") + "Delete Question", {:controller=>'question_builder', :action=>'remove_question', :page_name=>@model, :qid=>q.id}, {:method=>:delete, :remote=>true, :class=>'tooltip_delete', :confirm=>"Are you sure?",:title=>"Remove Question: #{q.question}"} %>
+				</div>
+			</td>
+		</tr>
+	<% end %>
+	</table>
+	<div id='final_div'></div>
+	<script type='text/javascript'>
+	    // <!--
+		function preview_init(){
+		  try{
+		    checkPreviewLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+		    preparePreview();
+		  } catch( err ) {
+		    setTimeout('preview_init()', 200);
+		  }
+		}
+
+		function checkPreviewLoaded(){
+		    if ($('#final_div').length == 0) $jquery.error( 'not ready' );
+		}
+
+		function preparePreview(){
+			
+			// for switching up question numbers
+			$(".question_number_switch").unbind();
+			$(".question_number_switch").bind("change",function(){
+				$.ajax({
+					type: "POST",
+					url: 'question_builder/shift_numbers',
+					data: {
+						selector_id: $(this).attr("id"),
+						new_row_num: $(this).val(),
+						page_name: "<%= @model.to_s %>",
+						extraction_form_id: "<%= @extraction_form.id %>"
+					}
+				})
+			})
+			// some listeners for the question builder to display subquestions for radio elements
+			$(".question_radio_input").bind("change",function(){
+				$.ajax({
+					type: "POST",
+					url: "question_builder/show_subquestion",
+					data:{
+						model: "<%= @model.to_s %>",
+						option_id: $(this).attr("option_id"),
+						obj_id: $(this).attr("obj_id"),
+						input_type: $(this).attr("type")
+					}
+				});
+			});
+			
+			// some listeners for the question builder to apply subquestions for checkbox elements
+			$(".question_checkbox_input").bind("click",function(){
+				$.ajax({
+					type: "POST",
+					url: "question_builder/show_subquestion",
+					data:{
+						model: "<%= @model.to_s %>",
+						option_id: $(this).attr("option_id"),
+						obj_id: $(this).attr("obj_id"),
+						input_type: $(this).attr("type"),
+						checked: $(this).attr("checked")
+					}
+				});
+			});
+			
+			// listener for question builder to apply subquestion to select element
+			$(".question_select_input").bind("change", function(){
+				$.ajax({
+					type:"POST",
+					url:"question_builder/show_subquestion",
+					data:{
+						model: "<%= @model.to_s %>",
+						option_id: $(this).val(),
+						obj_id: $(this).attr("obj_id"),
+						input_type: $(this).attr("type")
+					}
+				});
+			});
+			$(".question_link").unbind();
+			$(".question_link").bind("click",function(){
+				$(this).after("<img alt='' id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+			});
+
+		}
+		preview_init();
+		// -->
+	</script>
+	
+<% else %>
+
+<% end %>

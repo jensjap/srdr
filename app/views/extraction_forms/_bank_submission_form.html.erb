@@ -1,0 +1,101 @@
+<h2>The Extraction Form Bank</h2>
+<br/>
+<% if @extraction_form.bank_id.nil? %>
+	<div class='extraction_form_options'>Use the form below to store this extraction form as a template for future use.</div> <br/><br/>
+	<% form_tag "/projects/#{@extraction_form.project_id}/extraction_forms/#{@extraction_form.id}/send_to_bank", :remote=>true do %>
+		<table class='form_table tab-list-table'>
+			<tr>
+				<td class='label' style='width:50px;'><div><label for="title for form bank">Name</label></div></td>
+				<td class='data'>
+					<input type='text' name="extraction_form_bank[title]" size=30>
+				</td>
+			</tr>
+			<tr>
+				<td class='label' style='width:50px;'><div><label for="form_description">Description:</label></div></td>
+				<td class='data'><textarea id="form_description" name="extraction_form_bank[description]" rows='2' cols='60'/></textarea></td>
+			</tr>
+			
+			<tr>
+				<td class='label' style='width:50px;'><div>Options</div></td>
+				<td class='data'>
+					<input class='cbox' type='checkbox' id="show_to_team" name="extraction_form_bank[show_to_team]">
+					<label for="show_to_team">Make available to my team</label>
+					<br/><br/>
+					<input class='cbox' type='checkbox' id="show_to_world" name="extraction_form_bank[show_to_world]">
+					<label for="show_to_world">Make available to the world</label>
+				</td>
+			</tr>
+		</table><br/>
+		<div class='actions'>
+			<button type='submit' class='positive' data-disable-with='<%= ajax_wait_msg %>'>Send To the Bank</button>
+		</div>
+	<% end %>
+<% else %>
+  <% template = ExtractionFormTemplate.find(@extraction_form.bank_id) %>
+	<div class='extraction_form_options'>
+		This extraction form has been added to the extraction form bank as a template that may be added to future projects. <br/><br/>
+
+		The version in the extraction form bank was last updated on: <%= template.updated_at %><br/><br/>
+
+		Use the form below to make changes to this submission.
+	</div><br/><br/>
+	<% form_tag "/projects/#{@extraction_form.project_id}/extraction_forms/#{@extraction_form.id}/update_bank", :remote=>true do %>
+		<input type='hidden' name='extraction_form_bank_id' value="<%= template.id %>"/>
+		<table class='form_table tab-list-table'>
+			<tr>
+				<td class='label' style='width:50px;'><div><label for="title for form bank">Name</label></div></td>
+				<td class='data'>
+					<input type='text' name="extraction_form_bank[title]" size=30 value="<%= template.title %>">
+				</td>
+			</tr>
+			<tr class='small-spacer'><td></td></tr>
+			<tr>
+				<td class='label' style='width:50px;'><div><label for="form_description">Description:</label></div></td>
+				<td class='data'><textarea id="form_description" name="extraction_form_bank[description]" rows='2' cols='60'><%= template.description %></textarea></td>
+			</tr>
+			<% team_checked = template.show_to_local == true ? "checked" : "" %>
+			<% world_checked = template.show_to_world == true ? "checked" : "" %>
+			<tr>
+				<td class='label' style='width:50px;'><div>Options</div></td>
+				<td class='data'>
+					<input class='cbox' type='checkbox' id="show_to_team" name="extraction_form_bank[show_to_team]" <%= team_checked %>>
+					<label for="show_to_team">Make available to my team</label>
+					<br/><br/>
+					<input class='cbox' type='checkbox' id="show_to_world" name="extraction_form_bank[show_to_world]" <%= world_checked %>>
+					<label for="show_to_world">Make available to the world</label>
+					<br/><br/>
+					<input class='cbox' type='checkbox' id="update_ef_data" name="extraction_form_bank[update_data]">
+					<label for="update_ef_data">Re-Submit each Extraction Form section to the Bank</label><br/><br/>
+				</td>
+			</tr>
+			<tr><td colspan=2>
+				<div class='actions'>
+					<button type='submit' class='positive' data-disable-with='<%= ajax_wait_msg %>'>Update the Bank</button>  
+					&nbsp;
+					<button id="remove_from_bank_link" class='negative' >Remove From The Bank</button>
+				</div>
+				</td>
+			</tr>
+		</table>
+		
+	<% end %>
+	<% unless @extraction_form.bank_id.nil? %>
+	<script type='text/javascript'>
+		// <!--
+		$("#remove_from_bank_link").unbind("click");
+		$("#remove_from_bank_link").bind("click",function(event){
+				event.preventDefault();
+				$.ajax({
+					type: 'POST',
+					url: "extraction_form_templates/remove",
+					data:({
+						ef_id: "<%= @extraction_form.id %>",
+						bank_id: "<%= @extraction_form.bank_id %>",
+						called_from: "extraction_form"
+					})
+				})
+			})
+		// -->	
+	</script>
+<% end %>
+<% end %>

@@ -1,0 +1,23 @@
+<% unless @study_questions.empty? %>
+<% if key_questions.length > 0 %>
+<table class="result_table" id="key_questions_completed_table" summary="key questions completed table">
+<% for keyq in key_questions %>
+<tr>
+<td class="label" width="50">
+<%= keyq.question_number %>
+</td>
+<td>
+ <%= render :inline => keyq.question %>
+</td>
+		<td class="comment_td">
+			<%= render :partial => "comments/field_comments", :locals => {:section_name => "keyquestions", :section_id => keyq.id, :field_name => "question", :study_id => -1, :project_id => @project.id} %>	
+		</td>
+</tr>
+
+<% end %>
+
+</table>
+<% end %>
+	<% else %>
+		There are no key questions associated with this study.<br/>
+	<% end %>

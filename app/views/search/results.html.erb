@@ -1,0 +1,28 @@
+<%                                    
+    user_input = params["user_input"]
+    # Top-level - Reset and set bread crumb to current page
+    urlhistory = Breadcrumb.new
+    urlhistory.setCurrentPage("Home","Home","/")
+    urlhistory.setCurrentPage("Search Results","Search Results","/search/results?&user_input="+user_input.to_s)
+    session[:urlhistory] = urlhistory
+%>
+<div id='left_column'>
+</div>
+<div id='content' tabindex=200>
+<%= render :partial => "shared/page_title", :locals => {:page_title => "Search Results"} %>
+<%
+    # TODO - only show this if there are more than 5 items found
+    if !@resultslist.nil? &&
+        ((!@resultslist["projects"].nil? && (@resultslist["projects"].size > 0)) ||
+         (!@resultslist["publications"].nil? && (@resultslist["publications"].size > 0)))
+%>
+<%= render 'filters' %>
+<hr width="100%">
+&nbsp;<p/>
+<%  end %>
+<%= render 'systematic_review_search_result' %>
+<br/>
+<hr width="80%" align="center">
+<br/>
+<%= render 'study_search_result' %>
+</div>

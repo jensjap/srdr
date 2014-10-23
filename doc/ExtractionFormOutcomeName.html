@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: ExtractionFormOutcomeName
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (E)</a> &raquo; 
+    
+    
+    <span class="title">ExtractionFormOutcomeName</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: ExtractionFormOutcomeName
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">ExtractionFormOutcomeName</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/extraction_form_outcome_name.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_outcomes_array-class_method" title="get_outcomes_array (class method)">+ (Object) <strong>get_outcomes_array</strong>(extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_outcomes_array return a unique list of all outcomes that have been
+entered under a given extraction_form.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_studies-instance_method" title="#update_studies (instance method)">- (Object) <strong>update_studies</strong>(previous_title) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+update_studies when an extraction form outcome name suggestion is updated,
+the changes should be carried out to any studies that may have already used
+that name in associated studies.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="get_outcomes_array-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_outcomes_array</strong>(extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_outcomes_array return a unique list of all outcomes that have been
+entered under a given extraction_form
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form_outcome_name.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_outcomes_array'>get_outcomes_array</span><span class='lparen'>(</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_ocs'>ocs</span> <span class='op'>=</span>  <span class='const'>ExtractionFormOutcomeName</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>title</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>note</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>outcome_type</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_titles'>titles</span> <span class='op'>=</span> <span class='id identifier rubyid_ocs'>ocs</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_oc'>oc</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+	<span class='id identifier rubyid_titles'>titles</span><span class='period'>.</span><span class='id identifier rubyid_sort!'>sort!</span>
+	<span class='id identifier rubyid_descriptions'>descriptions</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	
+	<span class='comment'># now set up hashes to hold the description and type info based on outcome title
+</span>	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_ocs'>ocs</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>	    
+		<span class='id identifier rubyid_ocs'>ocs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_oc'>oc</span><span class='op'>|</span>
+			<span class='kw'>if</span> <span class='id identifier rubyid_descriptions'>descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_descriptions'>descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+				<span class='id identifier rubyid_descriptions'>descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span><span class='comma'>,</span> <span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_outcome_type'>outcome_type</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Categorical</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_outcome_type'>outcome_type</span><span class='rbracket'>]</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+		<span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_titles'>titles</span><span class='comma'>,</span><span class='id identifier rubyid_descriptions'>descriptions</span><span class='rbracket'>]</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="update_studies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_studies</strong>(previous_title) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+update_studies when an extraction form outcome name suggestion is updated,
+the changes should be carried out to any studies that may have already used
+that name in associated studies
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form_outcome_name.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_studies'>update_studies</span><span class='lparen'>(</span><span class='id identifier rubyid_previous_title'>previous_title</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_outcome_title'>outcome_title</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+	<span class='id identifier rubyid_outcome_note'>outcome_note</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span>
+	<span class='id identifier rubyid_ef_id'>ef_id</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	
+	<span class='comment'># get studies associated with this extraction form
+</span>	<span class='id identifier rubyid_studies'>studies</span> <span class='op'>=</span> <span class='const'>StudyExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	
+	<span class='comment'># for each of the studies using this form, get this default outcome
+</span>	<span class='kw'>unless</span> <span class='id identifier rubyid_studies'>studies</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_studies'>studies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_study'>study</span><span class='op'>|</span>
+
+			<span class='comment'># get the outcome
+</span>			<span class='id identifier rubyid_to_edit'>to_edit</span> <span class='op'>=</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study'>study</span><span class='period'>.</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='symbol'>:title</span><span class='op'>=&gt;</span><span class='id identifier rubyid_previous_title'>previous_title</span><span class='rparen'>)</span>
+			<span class='kw'>unless</span> <span class='id identifier rubyid_to_edit'>to_edit</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+				<span class='id identifier rubyid_to_edit'>to_edit</span> <span class='op'>=</span> <span class='id identifier rubyid_to_edit'>to_edit</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+
+				<span class='comment'># update the attributes
+</span>				<span class='id identifier rubyid_to_edit'>to_edit</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_title'>outcome_title</span>
+				<span class='id identifier rubyid_to_edit'>to_edit</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_note'>outcome_note</span>
+				<span class='id identifier rubyid_to_edit'>to_edit</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:52 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

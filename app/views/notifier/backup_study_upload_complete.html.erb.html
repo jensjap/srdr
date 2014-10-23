@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	<title>File Upload Results</title>
+</head>
+<body>
+<br/>
+This is an automated message from the Systematic Review Data Repository
+<br/><br/>
+<% if @problem_lines.empty? %>
+You'll be happy to know that <strong>all <%= @num_successful %> studies uploaded were successfully created</strong>, and can now be accessed from your study list. 
+<% unless @warning_lines.empty? %>
+<br/><br/>
+However, we wanted to make you aware of the following warnings that came up:
+<ul>
+<% @warning_lines.each do |w| %>
+    <li>Line <%= w[0] %>: <%= w[1] %></li>
+<% end %>
+</ul>
+<% end %>
+<% else %>
+We experienced <strong>problems while attempting to create some studies</strong> in your list.
+
+<strong># Submitted:</strong> <%= @num_successful + @problem_lines.length %><br/>
+<strong># Created:</strong> <%= @num_successful %>
+<br/><br/>
+Studies found on the following lines of the upload file could not be created:<br/>	
+<ul>
+<% @problem_lines.each do |p| %>
+    <li><strong><%= p[0] %></strong>:  <%= p[1] %></li>
+<% end %>
+</ul>
+<br/><br/>
+<% unless @warning_lines.empty? %>
+In addition, some lines of your file produced the following <strong>warnings</strong>:
+<ul>		
+<% @warning_lines.each do |w| %>
+<li><strong>Line <%= w[0] %></strong>: <%= w[1] %></li>
+<% end %>
+</ul>
+<% end %>
+<% end %>
+<br/><br/>
+If you have any questions, please write to us at <a href='mailto: srdr@ahrq.hhs.gov'>SRDR@ahrq.hhs.gov</a> or call 401.863.5791.
+<br/><br/>
+Thank you,
+<br/><br/>
+The SRDR Team
+</body>
+</html>

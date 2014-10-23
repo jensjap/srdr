@@ -1,0 +1,21 @@
+<div class="indent_block">			
+			<ul>
+		<% if !@ext_forms_list.nil? && @ext_forms_list.length > 0 %>
+			<% i = 0 %>
+		  <% for list_item in @ext_forms_list %>
+				<li>
+					<% @item = ExtractionForm.find(list_item) %>
+					<%= @item.title %>
+					<% if !@ext_form_notes[i].nil? && @ext_form_notes[i] != "" %>
+						(<%= @ext_form_notes[i] %>)
+					<% end %>
+					<%= link_to image_tag("Bin_closed.png", :style => "border:0;vertical-align:text-top"), {:controller => :studies, :action => "extraction_form_remove", :number => i, :ext_forms_list => ActiveSupport::JSON.encode(@ext_forms_list), :ext_form_notes => ActiveSupport::JSON.encode(@ext_form_notes)}, :remote => true, :class => "tooltip_delete_extform" %>
+				</li>
+				<% i = i + 1 %>
+		  <% end %>
+		  <% else %>
+			There are currently no extraction forms associated with this study. Use the form below to add extraction forms to associate with this study.
+		  <% end %>
+		  </ul>
+		  
+</div>

@@ -1,0 +1,48 @@
+<div id="add_measure_modal" style="display:none;">
+	<div id="edit_measures_list">
+		<%= render :partial => "outcome_measures/edit_measures_all", :locals => {:outcome_measures => @outcome_measures} %>
+	</div>
+		
+	<br/><br/>
+	<div class="actions" style="text-align:right">
+		<button class="positive" style="vertical-align: middle" id="add_measure_form_btn">
+			<%= image_tag "Add.png", :alt => "Add" %>Add a New Outcome Measure
+		</button>
+		<button class="negative" onClick="event.preventDefault();$('#add_measure_modal').dialog('close');">
+			<%= image_tag "Cancel.png", :alt => "Cancel" %>Close Window
+		</button>	
+	</div>
+
+	<div id="new_outcome_measure_dialog">
+		<%= render "outcome_measures/item_form" %>
+	</div>
+</div>	
+	<script type="text/javascript">
+		$("#new_outcome_measure_dialog").dialog({
+      autoOpen: false,
+			minWidth: 660,
+			title: "Add New Outcome Measure"
+		});
+		
+		$("#add_measure_form_btn").unbind("click");
+		$("#add_measure_form_btn").bind("click", function(){
+			$("#new_outcome_measure_dialog").html("<%= escape_javascript(render :partial => "outcome_measures/item_form", :locals => {:outcome_measure => OutcomeMeasure.new}) %>");		
+			$("#new_outcome_measure_dialog").dialog('open');
+		});
+		
+		$("#add_measure_modal").dialog({
+	    autoOpen: false,
+			minWidth: 600,
+			title: "Manage Outcome Measures",
+			open: function(){
+				var outcome_id = $("#outcome_selection_id").val();
+				$.ajax({
+					type: "POST",
+					url: 'outcome_measures/update_measure_window',
+					data:{
+						outcome_id: outcome_id
+					}
+				});
+			}
+  	});
+	</script>

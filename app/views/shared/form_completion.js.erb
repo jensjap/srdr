@@ -1,0 +1,50 @@
+<%# Set up the names of the form elements that need to be updated. %>
+<%# (we will set values for all of these)  %>
+<% title_id = "#"+@pub_type + "_title" %>
+<% author_id = "#"+@pub_type + "_author" %>
+<% country_id = "#"+@pub_type + "_country" %>
+<% year_id = "#"+@pub_type + "_year" %>
+<% pmid = "#" + @pub_type + "_pmid" %>
+<% journal_id = "#"+@pub_type + "_journal" %>
+<% volume_id = "#" + @pub_type + "_volume" %>
+<% issue_id = '#'+@pub_type+"_issue" %>
+<% abstract_id = "#"+@pub_type+"_abstract" %>
+
+<%# assign values to their fields %>
+<%# array loc			 description %>
+<%#   0					 title %>
+<%#   1					 authors string %>
+<%#   2					 country %>
+<%#   3            		 year %>
+<%#   4					 journal title %>
+<%#   5					 volume %>
+<%#   6				     issue %>
+<%#   7                  abstract %>
+$("<%= title_id %>").val("<%= @pub_information[0] %>");
+$("<%= author_id %>").val("<%= @pub_information[1] %>");
+$("<%= country_id %>").val("<%= @pub_information[2] %>");
+$("<%= year_id %>").val("<%= @pub_information[3] %>");
+
+$("<%= journal_id %>").val("<%= @pub_information[4] %>");
+$("<%= volume_id %>").val("<%= @pub_information[5] %>");
+$("<%= issue_id %>").val("<%= @pub_information[6] %>");
+$("<%= abstract_id %>").val("<%= @pub_information[7] %>");
+
+<%# this sets the value of a hidden field to keep track of pubmed id after auto-retrieval %>
+$("<%= pmid %>").val("<%= @pmid %>"); 
+
+
+
+<%# this is to mark the form as edited and  %>
+<%# create an alert when users try to  %>
+<%# leave the page without saving %>
+
+$("<%= title_id %>").attr("class", "edited_field");
+$("<%= author_id %>").attr("class", "edited_field");
+$("<%= country_id %>").attr("class", "edited_field");
+$("<%= year_id %>").attr("class", "edited_field");
+$("<%= journal_id %>").attr("class", "edited_field");
+$("<%= volume_id %>").attr("class", "edited_field");
+$("<%= issue_id %>").attr("class", "edited_field");
+$("<%= abstract_id %>").attr("class", "edited_field");
+$("<%= year_id %>").parents("form:first").attr("class", "unsaved_form");

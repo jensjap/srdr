@@ -1,0 +1,94 @@
+<br/><hr><br/>
+<strong>Step 5.</strong> <label for="Timepoint vs. Timepoint Comparison for <%= @outcome.title %> Outcome">Timepoint vs. Timepoint Comparison for <%= @outcome.title %> Outcome</label><br/><br/>
+<span class='smallText'>You may also define measurements by clicking the "Add/Edit/Delete Measures" button at the right
+	side of the form.</span><br/>
+(<%= @timepoints[0].number.to_s + " " + @timepoints[0].time_unit %> vs. <%= @timepoints[1].number.to_s + " " + @timepoints[1].time_unit %>)<br/><br/>
+<%= form_tag @comparison_data_point, :remote=>true do%>
+	<%= hidden_field_tag "comparison_id", @comparison.id %>
+	<%= hidden_field_tag "comparison_type", @comparison.within_or_between %>
+	<%= hidden_field_tag "study_id", @study.id %>
+	<%= hidden_field_tag "extraction_form_id", @extraction_form.id %>
+	<%= hidden_field_tag "outcome_id", @outcome.id %>
+	
+<% @timepoints.each do |tp| %>
+	  <%= hidden_field_tag "objects[obj_"+tp.id.to_s+"]", tp.id.to_s %>
+	<% end %>
+<table class='formatted_table' id="within_arm_comparisons_table" summary="within arm comparisons table">
+	<tr>
+		<th id="outcome_timepoints_header"><%= @timepoints[0].number.to_s + " " + @timepoints[0].time_unit %><br/>vs.<br/><%= @timepoints[1].number.to_s + " " + @timepoints[1].time_unit %></th>
+		<% i = 1%>
+		<% unless @comparison_measures.empty? %>
+			<% @comparison_measures.each do |metric| %>
+				<th><%= hidden_field_tag "metrics[metric_"+metric.id.to_s+"]", metric.id %><%= metric.title %>
+				</th>
+				<% i += 1%>
+			<% end %>
+		<% end %>
+		<th id="manage_measures_header_btn"><div class='actions'>
+	<button type='submit' class='positive' id='add_measure_button'>
+		Manage Measures
+	</button>
+</div></th>
+	</tr>
+	<tr>
+	<td></td>
+			<% unless @comparison_measures.empty? %>
+		  <% j=1 %>
+			<% @comparison_measures.each do |measure| %>
+				<% entry_val = "" %>
+				<% unless @comparison_data_points.empty? || @comparison_data_points[measure.id].nil? %>
+					<% datapoint = @comparison_data_points[measure.id] %>
+					<% entry_val = datapoint.value %>
+				<% end %>
+				<td><%= text_field_tag "values[value_" + (j+1).to_s + "]", entry_val, :class=>'data_entry_field' %></td>
+				<% j+= 1%>
+			<% end %>
+		<% end %>
+		<td></td>
+	</tr>
+</table>
+	<div class="actions buttons">
+		<br/>
+		<% if @is_new_comparison == true %>
+			<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+				<%= image_tag "Accept.png", :alt => "Accept" %>Save
+			</button>
+		<% else %>
+			<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+				<%= image_tag "Accept.png", :alt => "Accept" %>Save
+			</button>
+		<% end %>
+		<button class="negative" id="cancel_dp_button">
+			<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel &amp; Delete
+		</button>
+<div class="saved" id="saved_indicator_1" style='display:none;'>  Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+	</div>
+
+
+<% end %> <%# END FORM %>
+
+<script type="text/javascript">
+  $("#cancel_dp_button").bind("click",function(event){
+  	event.preventDefault();
+  	var comparison_id = $("#comparison_id").val();
+  	$.ajax({
+			type: "POST",
+			url: 'comparison_data_points/cancel_comparison_creation',
+			data: {
+				comparison_id : comparison_id,
+			}
+		});
+  });
+  $("#add_measure_button").unbind("click");
+	$("#add_measure_button").bind("click", function(event){
+		event.preventDefault();
+		$("#add_measure_modal").dialog("open");
+	});
+	
+	$(".data_entry_field").unbind("keypress");
+	$(".data_entry_field").bind("keypress",function(){
+		var td_id = "<%= '#'+@comparison.comparators %>";
+		$(td_id).html("Editing...");
+		$(td_id).attr("style","background-color:#ffd540;text-align:center;");
+	});
+</script>

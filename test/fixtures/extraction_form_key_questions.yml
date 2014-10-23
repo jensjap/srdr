@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: extraction_form_key_questions
+#
+#  id                 :integer          not null, primary key
+#  extraction_form_id :integer
+#  key_question_id    :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  extraction_form_id: 1
+  key_question_id: 1
+
+two:
+  id: 2
+  extraction_form_id: 2
+  key_question_id: 2
+
+#three:
+#  id: 3
+#  extraction_form_id: 4
+#  key_question_id: 3
+
+#four:
+#  id: 4
+#  extraction_form_id: 4
+#  key_question_id: 4
+
+#five:
+#  id: 5
+#  extraction_form_id: 4
+#  key_question_id: 5

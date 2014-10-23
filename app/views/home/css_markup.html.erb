@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<title>SRDR HOME DESIGN</title>
+	
+	<%= stylesheet_link_tag "ahrqstyle_new", "jquery-ui-1.8.12.custom" %>
+	<%= stylesheet_link_tag "test_style" %>
+	<%= javascript_include_tag 'jquery.min', 'jquery-ui-1.8.12.custom', 'rails', 'application' %>
+	
+	<!--[if lt IE 7]>
+		<link rel="stylesheet" type="text/css" href="style-ie.css" />
+	<![endif]-->
+</head>
+
+<body>
+
+	<div id="page-wrap">	
+		<!--################################################################ -->
+		<!-- THE AHRQ BANNER MARKUP                                  		 -->
+		<!--#################################################################-->	
+		<div id="ahrqbanner"> 
+			<div class="hhsportion"> 
+				<a class="skipnav" href="#main_content">Skip Navigation</a>
+				<a href="http://www.hhs.gov/" title="U.S. Department of Health and Human Services">
+					<%= image_tag "ahrq/hhs_banner.gif", :alt=>"U.S. Department of Health and Human Services" %>
+				</a>
+				<a href="http://www.hhs.gov/" title="www.hhs.gov/" class="hhsright">
+					<%= image_tag "ahrq/hhs_link.gif", :alt=>"www.hhs.gov/" %>
+				</a>
+			</div>
+				
+			<div class="ahrqportion">
+				<a href="http://www.ahrq.gov/" title="Agency for Healthcare Research Quality">
+					<%= image_tag "ahrq/ahrq_banner.gif", :alt=>"Agency for Healthcare Research Quality"%>
+				</a>
+				<form name="searchForm" method="get" action="http://search.ahrq.gov/search" id="banner_searchform"> 
+					<label for="search" style="z-index:-1;position:relative;margin-right:-65px; font-size:0px;">Search</label>
+					<input name="q" type="text" value=" Search AHRQ" size="11" onfocus="this.value='';" class="gotext" id="search" title="ahrq search" />
+			        <input type="hidden" name="entqr" value="0" />
+			        <input type="hidden" name="output" value="xml_no_dtd" />
+			        <input type="hidden" name="proxystylesheet" value="AHRQ_GOV" />
+			        <input type="hidden" name="client" value="AHRQ_GOV" />
+		  	        <input type="hidden" name="site" value="default_collection" />
+					<input src="/images/ahrq/topbn_gobutton.gif" class="gobtn" name="Submit" onclick="javascript:document.searchForm.submit();" type="image" alt="Go" />            		
+				</form>
+				<a href="/" class="ahrqright">www.ahrq.gov</a>
+		</div> 
+		
+		<div class="ahrqlinks">
+			<a href="/">AHRQ Home</a> | 
+			<a href="https://info.ahrq.gov/cgi-bin/ahrq.cfg/php/enduser/std_alp.php">Questions?</a> | 
+			<a href="http://www.ahrq.gov/info/customer.htm">Contact Us</a> | 
+			<a href="http://www.ahrq.gov/sitemap.htm">Site Map</a> | 
+			<a href="http://www.ahrq.gov/whatsnew.htm">What's New</a> | 
+			<a href="/browse/">Browse</a> | 
+			<a href="http://www.ahrq.gov/consumer/espanoix.htm">Información en español</a> | 
+			<%= image_tag "ahrq/envelope1.jpg", :alt=>"", :style => "padding-left: 4px; padding-right: 3px; padding-bottom: 4px; vertical-align:middle" %> 
+			<a href="https://subscriptions.ahrq.gov/service/multi_subscribe.html?code=USAHRQ">
+				E-mail Updates
+			</a>
+		</div>
+	 
+		<div id="PrintBanner">
+			<%= image_tag "ahrq/PrintBanner.gif", :alt=>"www.ahrq.gov/", :width=>"100%" %>
+		</div>
+	
+		<br/>
+			
+		<div id="inside">
+			<!--################################################################ -->
+			<!-- SRDR BANNER MARKUP                                  		     -->
+			<!--#################################################################-->
+			<div id="header">
+				<img src='images/homepage/top_corner_left.png' style='position:absolute; left:-25px;'/>
+				<img src='images/homepage/top_corner_right.png' style='position:absolute; right:-26px;'/>
+				
+				<a href="#" style='position:absolute; left:0px; top:0px;'>
+					<img src="images/homepage/top_header_left.png" alt="header"  />
+				</a>
+				<img src="images/homepage/top_header_right2.jpg" style='position:absolute; right:0px;'s>
+				<div id="account-links" style='position: absolute; top: 10px; right: 15px;'>
+					Logged in as admin | 
+					<a href="#">Log Out</a> | 
+					<a href="#">Register</a> | 
+					<a href="#">Feedback</a> | 
+					<a href="#">Help</a>
+				</div>
+				
+			</div>
+			<!--################################################################ -->
+			<!-- THE MAIN LINKS BAR                                 		     -->
+			<!--#################################################################-->
+			<div id="horizontal-nav">
+				<ul>
+					<li id='current'><a href="#">Home</a></li>
+					<li><a href="#">My Projects</a></li>
+					<li><a href="#">Published Projects</a></li>
+				</ul>
+				<a href='/adv_search' style='position:absolute; right:15px; top: 5px;'>Advanced Search</a>
+			</div>
+			<!--################################################################ -->
+			<!-- THE BREADCRUMBS BAR                                 		     -->
+			<!--#################################################################-->
+			<div id="breadcrumbs-div">
+				<ul class='breadcrumb'>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Projects</a></li>
+					<li><a href="#">Prostate Cancer 2009</a></li>
+					<li><a href="#">Editing: My Cancer Study</a></li>
+					<li><a href="#">Foo</a></li>
+				</ul>
+			</div>
+			<div id='container'>  <!-- contains the main content on pages having a side navigation -->
+			<!--################################################################ -->
+			<!-- THE LEFT NAVIGATION                                		     -->
+			<!--#################################################################-->
+			
+				<div id='left-navigation-div' tabindex=100>
+					<br/><br/>
+					<br/>
+					<div class='left-nav-menu' id="nav-menu">
+						<p>PROJECT SETUP</p>
+						<a href='#'>Project Information</a>
+						<div>
+						<span>Extraction Forms</span>
+						<a href='#'>My First Form</a>
+						<a href='#'>My Second Form</a>
+						</div>
+						<a href='#' style='border-top: solid 1px #999;'>Manage Users</a>
+						
+						<p>PROJECT STUDY DATA</p>
+						<a href='#'>Study List</a>
+						<a href='#'>Add New Study</a>
+						<div>
+						<span>Edit Study</span>
+						<a href='#'>My First Study</a>
+						<a href='#'>My Second Study</a>
+						</div>
+
+						<p>PROJECT TOOLS</p>
+						<a href='#'>View Summary</a>
+						<a href='#'>Publish Externally</a>
+						<a href='#'>Data Import Tool</a>
+						<a href='#'>Data Export Tool</a>
+						<a href='#'>Data Comparison Tool</a>
+						<a href='#'>File Repository</a>
+						<a href='#'>Graphical Data View &amp; Stats</a>
+						<a href='#'>Report Builder</a>
+						
+
+						<p>HELP INFORMATION</p>
+						<a href='#'>Help and FAQ</a>
+						<a href='#'>Video Tutorials</a>
+						<a href='#'>Feedback</a>
+						
+					</div>
+				</div>
+				<!-- THE MAIN CONTENT AREA FOR THE PAGE -->
+				<div id='content' tabindex=200>
+					
+					<div id="tabs">
+						<ul>
+							<li><a href="#tabs-1">Title &amp; KQs</a></li>
+							<li><a href="#tabs-2">Publications</a></li>
+							<li><a href="#tabs-3">Study Arms</a></li>
+							<li><a href="#tabs-4">Study Design</a></li>
+							<li><a href="#tabs-5">Baseline Data</a></li>
+							<li><a href="#tabs-6">Outcomes</a></li>
+							<li><a href="#tabs-7">Adverse Events</a></li>
+							<li><a href="#tabs-8">Quality</a></li>
+							<li><a href="#tabs-9">Finalize</a></li>
+							
+						</ul>
+						<div id="tabs-1">
+							<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
+						</div>
+						<div id="tabs-2">
+							<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+						</div>
+						<div id="tabs-3">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+						<div id="tabs-4">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+						<div id="tabs-5">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+						<div id="tabs-6">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+						<div id="tabs-7">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+						<div id="tabs-8">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+						<div id="tabs-9">
+							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+			
+			<div id="footer">
+				<!-- Footer graphic 1.3-->
+				<div id="ftrimgs">
+					<span><%= image_tag "ahrq/bottom_ahrq_1.jpg", {:class=>"ftrimglft", :width=>125, :alt=>"AHRQ"} %><%= image_tag "ahrq/space.gif", {:class=>"ftrimgctr", :alt=>""} %><%= image_tag "ahrq/bottom_ahrq_2.gif", {:class=>"ftrimgrt", :alt=>"Advancing Excellence in Health Care", :width=>310, :height=>34} %></span>
+				</div>
+				<!-- Footer links section -->
+				<div id="banner_Footer3"><a href="/">AHRQ  Home</a> | <a href="https://info.ahrq.gov/cgi-bin/ahrq.cfg/php/enduser/std_alp.php" class="footer_navlink">Questions?</a> | <a href="http://www.ahrq.gov/info/customer.htm" class="footer_navlink">Contact AHRQ</a> | <a href="http://www.ahrq.gov/sitemap.htm" class="footer_navlink">Site Map</a> | <a href="http://www.ahrq.gov/accessibility.htm" class="footer_navlink">Accessibility</a> | <a href="http://www.ahrq.gov/news/privacy.htm" class="footer_navlink">Privacy
+				 Policy</a> | <a href="http://www.ahrq.gov/news/foia.htm" class="footer_navlink">Freedom of Information Act</a> | <a href="http://www.ahrq.gov/news/disclaim.htm" class="footer_navlink">Disclaimers</a> | <a href="http://www.hhs.gov/open/recordsandreports/plainwritingact/index.html"  class="footer_navlink">Plain Writing Act</a><br/>
+				 <a href="http://www.hhs.gov/" class="footer_navlink">U.S. Department of Health &amp; Human Services</a> | <a href="http://www.whitehouse.gov/" class="footer_navlink">The White House</a> | <a href="http://www.usa.gov/" class="footer_navlink">USA.gov: The U.S. Government's Official Web Portal</a>
+				</div>
+				<div id="banner_Footeraddress">Agency for Healthcare Research and Quality <%= image_tag "ahrq/bottom_dot.gif", {:alt=>""} %> 540 Gaither Road Rockville, MD 20850 <%= image_tag "ahrq/bottom_dot.gif", {:alt=>""} %> Telephone: (301) 427-1364</div>
+						<br/>
+				  </div></div>
+				<!-- End of Footer links section -->
+			</div>
+		
+		</div>
+		
+		<div style="clear: both;"></div>
+	
+	</div>
+
+</body>
+
+
+<script type='text/javascript'>
+<!--
+
+function SDMenu(id) {
+	if (!document.getElementById || !document.getElementsByTagName)
+		return false;
+	this.menu = document.getElementById(id);
+	this.submenus = this.menu.getElementsByTagName("div");
+	this.remember = true;
+	this.speed = 3;
+	this.markCurrent = true;
+	this.oneSmOnly = false;
+}
+SDMenu.prototype.init = function() {
+	var mainInstance = this;
+	for (var i = 0; i < this.submenus.length; i++)
+		this.submenus[i].getElementsByTagName("span")[0].onclick = function() {
+			mainInstance.toggleMenu(this.parentNode);
+		};
+	if (this.markCurrent) {
+		var links = this.menu.getElementsByTagName("a");
+		for (var i = 0; i < links.length; i++)
+			if (links[i].href == document.location.href) {
+				links[i].className = "current";
+				break;
+			}
+	}
+	if (this.remember) {
+		var regex = new RegExp("sdmenu_" + encodeURIComponent(this.menu.id) + "=([01]+)");
+		var match = regex.exec(document.cookie);
+		if (match) {
+			var states = match[1].split("");
+			for (var i = 0; i < states.length; i++)
+				this.submenus[i].className = (states[i] == 0 ? "collapsed" : "");
+		}
+	}
+};
+SDMenu.prototype.toggleMenu = function(submenu) {
+	if ($(submenu).hasClass("collapsed"))
+		this.expandMenu(submenu);
+	else
+		this.collapseMenu(submenu);
+};
+SDMenu.prototype.expandMenu = function(submenu) {
+	var fullHeight = submenu.getElementsByTagName("span")[0].offsetHeight;
+	var links = submenu.getElementsByTagName("a");
+	for (var i = 0; i < links.length; i++)
+		fullHeight += links[i].offsetHeight;
+	var moveBy = Math.round(this.speed * links.length);
+	
+	var mainInstance = this;
+	var intId = setInterval(function() {
+		var curHeight = submenu.offsetHeight;
+		var newHeight = curHeight + moveBy;
+		if (newHeight < fullHeight)
+			submenu.style.height = newHeight + "px";
+		else {
+			clearInterval(intId);
+			submenu.style.height = "";
+			$(submenu).removeClass('collapsed');
+			mainInstance.memorize();
+		}
+	}, 30);
+	this.collapseOthers(submenu);
+};
+SDMenu.prototype.collapseMenu = function(submenu) {
+	var minHeight = submenu.getElementsByTagName("span")[0].offsetHeight;
+	var moveBy = Math.round(this.speed * submenu.getElementsByTagName("a").length);
+	var mainInstance = this;
+	var intId = setInterval(function() {
+		var curHeight = submenu.offsetHeight;
+		var newHeight = curHeight - moveBy;
+		if (newHeight > minHeight)
+			submenu.style.height = newHeight + "px";
+		else {
+			clearInterval(intId);
+			submenu.style.height = "";
+			$(submenu).addClass("collapsed");
+			mainInstance.memorize();
+		}
+	}, 30);
+};
+SDMenu.prototype.collapseOthers = function(submenu) {
+	if (this.oneSmOnly) {
+		for (var i = 0; i < this.submenus.length; i++)
+			if (this.submenus[i] != submenu && this.submenus[i].className != "collapsed")
+				this.collapseMenu(this.submenus[i]);
+	}
+};
+SDMenu.prototype.expandAll = function() {
+	var oldOneSmOnly = this.oneSmOnly;
+	this.oneSmOnly = false;
+	for (var i = 0; i < this.submenus.length; i++)
+		if (this.submenus[i].className == "collapsed")
+			this.expandMenu(this.submenus[i]);
+	this.oneSmOnly = oldOneSmOnly;
+};
+SDMenu.prototype.collapseAll = function() {
+	for (var i = 0; i < this.submenus.length; i++)
+		if (this.submenus[i].className != "collapsed")
+			this.collapseMenu(this.submenus[i]);
+};
+SDMenu.prototype.memorize = function() {
+	if (this.remember) {
+		var states = new Array();
+		for (var i = 0; i < this.submenus.length; i++)
+			states.push(this.submenus[i].className == "collapsed" ? 0 : 1);
+		var d = new Date();
+		d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
+		document.cookie = "sdmenu_" + encodeURIComponent(this.menu.id) + "=" + states.join("") + "; expires=" + d.toGMTString() + "; path=/";
+	}
+};
+$(document).ready(function(){
+	var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+	// Default values...
+	myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+	myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+	myMenu.oneSmOnly = false;             // One expanded submenu at a time
+	myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+
+	myMenu.init();
+
+
+	// SEPARATE FROM THE MENU ITSELF...
+	$(function() {
+		$( "#tabs" ).tabs();
+
+	});
+	$(".left-nav-menu").children("a").bind("click",function(event){
+		event.preventDefault();
+		$(".nav-selected").removeClass("nav-selected");
+		$(this).addClass("nav-selected");
+
+		section_title = $(this).prevAll("p").first();
+		if(!$(section_title).hasClass("nav-active")){
+			$(".nav-active").removeClass("nav-active");
+			$(section_title).addClass("nav-active");
+			go = true;
+			current = section_title;
+			while(go){
+				if($(current).next().length > 0){
+					sib = $(current).next();
+				
+					if(!($(sib).get(0).tagName === "P")){
+						$(sib).addClass("nav-active");
+						current = sib;
+					}else{
+						go = false;
+					}
+				}else{
+					go = false
+				}
+			}
+
+		}
+	});
+	$(".left-nav-menu").children("div").children("a").bind("click",function(event){
+		event.preventDefault();
+		$(".nav-selected").removeClass("nav-selected");
+		$(this).addClass("nav-selected");
+		menu_div = $(this).parent();
+		$(this).prevAll("span").first().addClass("nav-selected");
+		$(this).prevAll("span").first().addClass("nav-selected");
+
+		section_title = $(menu_div).prevAll("p").first();
+		if(!$(section_title).hasClass("nav-active")){
+			$(".nav-active").removeClass("nav-active");
+			$(section_title).addClass("nav-active");
+			go = true;
+			current = section_title;
+			while(go){
+				if($(current).next().length > 0){
+					sib = $(current).next();
+				
+					if(!($(sib).get(0).tagName === "P")){
+						$(sib).addClass("nav-active");
+						current = sib;
+					}else{
+						go = false;
+					}
+				}else{
+					go = false
+				}
+			}
+
+		}
+
+	});
+})
+-->
+</script>
+
+</html>

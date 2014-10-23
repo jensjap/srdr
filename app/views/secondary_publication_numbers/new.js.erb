@@ -1,0 +1,35 @@
+if ($("#sp_identifier_list_blocks .form_table").last().length > 0){
+	var div_id = $("#sp_identifier_list_blocks .form_table").last().attr('id');
+	var split_id = div_id.split("_");
+	var num = parseInt(split_id[4]);
+}
+else
+{
+	var num = 0;
+}
+
+<% @num = 0 %>
+
+$("#sp_identifier_list_blocks").append("<%= escape_javascript(render :partial => "secondary_publication_numbers/form_append", :locals => { :one_spi => @secondary_publication_number, :secondary_publication => @secondary_publication, :num => @num, :study => @study}) %>");
+
+$("#sp_identifier_list_blocks .form_table").last().attr('id', 'sp_form_identifier_table_' + (num + 1).toString());
+$("#sp_identifier_list_blocks .form_table .remove_spi_button").last().attr('id', 'remove_spi_button_' + (num + 1).toString());
+
+// set input id and input name for :time_unit and :number fields
+$("#sp_identifier_list_blocks .form_table .number_field").last().attr('id', 'secondary_publication_numbers_attributes_' + (num + 1).toString() + "_number");
+$("#sp_identifier_list_blocks .form_table .number_field").last().attr('name', 'secondary_publication_numbers_attributes[' + (num + 1).toString() + "][number]");
+$("#sp_identifier_list_blocks .form_table .number_type_field").last().attr('id', 'secondary_publication_numbers_attributes_' + (num + 1).toString() + "_number_type");
+$("#sp_identifier_list_blocks .form_table .number_type_field").last().attr('name', 'secondary_publication_numbers_attributes[' + (num + 1).toString() + "][number_type]");
+$("#sp_identifier_list_blocks .form_table .id_field").last().attr('id', 'secondary_publication_numbers_attributes_' + (num + 1).toString() + "_id");
+$("#sp_identifier_list_blocks .form_table .id_field").last().attr('name', 'secondary_publication_numbers_attributes[' + (num + 1).toString() + "][id]");
+
+$("#sp_identifier_list_blocks .form_table .number_type_field").last().bind("change", function(event) {
+$.ajax({	
+	url: "/application/show_other",
+	data: {
+		"field_id":this.id,
+		"field_name":this.name,
+		"selected":this.value
+		}
+	});
+});

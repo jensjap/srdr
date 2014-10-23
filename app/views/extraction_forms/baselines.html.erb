@@ -1,0 +1,119 @@
+<div class='tab-div'>
+	<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Create Baseline Characteristics Form"} %>
+
+	<div class="extraction_form_options">
+		<strong>Please Note:</strong>
+		This page allows you to generate extraction form questions for <strong>baseline characteristics</strong>, each with an optional set of suggested responses.
+		<br/><br/>
+		Responses can be designated as drop down lists, radio buttons or check boxes, or text fields.
+		<br><br/>
+
+		<%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+			<% unless @donors.empty? || @donor_info.empty? %>
+				<%= render :partial=>'extraction_form_section_copies/imported_message'%>
+			<% else %> 
+		   Would you like to include the <strong>baseline characteristics</strong> section in your extraction form? 
+			<%= select("ef_included_" + @extraction_form_section.id.to_s, "baselines", options_for_select([["Yes", true], ["No", false]], @extraction_form_section.included),
+		  { :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+		  <div class="inline" id="saved_display_section_baselines"></div>
+		  <% end %>
+		<% end %>
+		<br/>
+		<!-- user-defined EF instruction -->
+        <%  @ef_user_instructions = @extraction_form_baselines_instr.nil? ? nil : @extraction_form_baselines_instr.instructions %>
+        <div id="baselines_user_instructions">
+            <%= render :partial=>"extraction_forms/instructions" %>
+        </div>
+        <a href="#" class="add_baselines_ef_instr_<%= @extraction_form_section.id.to_s %> add_baselines_instr_button" id="add_baselines_instr_button" class="add_baselines_instr_button" alt="Click to add user instructions to Baseline Characteristics">Add/Edit Instructions</a>
+	</div>
+	<div id='new_baselines_instr_entry' style='display:none;'></div>
+
+<% if !@extraction_form_section.nil? && @extraction_form_section.included == true %>
+	<div id="extraction_form_section_baselines">
+<% else %>
+	<div id="extraction_form_section_baselines" class="disabled">
+<% end %>
+
+	<br/>
+	<% if @donor_info.nil? || @donor_info.empty? %>
+
+		<div id="extraction_form_preview_table_bc">
+			<%= render 'question_builder/extraction_form_preview' %>	
+		</div>
+
+	<% else %>
+		<div id="imported_questions_table">
+			<%= render 'question_builder/extraction_form_imported_preview'%>
+		</div>
+	<% end %>
+
+</div>
+<!-- baseline characteristics modals -->
+<div id='baseline_characteristic_fields_entry' style='display:none;'></div>
+
+<br/>
+<div class="actions">
+<button type="submit" class="positive" id="add_bc_button" alt="Click to open Add New Baseline Characteristic Form Dialog">
+			<%= image_tag "Add.png", :alt => "Add" %>Add a New Baseline Characteristic
+		</button>
+		
+		<div class="saved" id="saved_item_indicator_bc" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>
+		<div class="saved" id="removed_item_indicator_bc" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>
+</div>
+<br/>
+
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"extraction_forms/" + @extraction_form.id.to_s + "/design",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/outcomes",:previous_title=>"Design Details",:next_title=>"Outcome Setup"} %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+</div> <!-- end tab-div -->
+
+<script type='text/javascript'>
+// <!--
+
+//------------------------------------
+// 	BASELINE CHARACTERISTICS PAGE
+//------------------------------------
+function document_init(){
+  try{
+    checkDivLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	prepareForm();
+  } catch( err ) {
+    setTimeout('document_init()', 200);
+  }
+}
+
+function checkDivLoaded(){
+	if ( $('#add_bc_button').length == 0) $jquery.error( 'not ready' );
+}
+
+function prepareForm(){
+	$("#baseline_characteristic_fields_entry").dialog({
+		autoOpen: false,
+		modal: true,
+		minWidth: 600
+	});
+
+	$("#add_bc_button").bind("click", function(){
+		$.ajax({
+		  url: '/projects/<%= @extraction_form.project_id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/baseline_characteristics/new',
+		  type: "POST"
+		});
+	});
+	$("#new_baselines_instr_entry").dialog({
+        autoOpen: false,
+        modal: true,
+        minWidth: 600
+    });
+
+    $("#add_baselines_instr_button").bind("click", function(event){   
+        event.preventDefault();
+        $.ajax({
+            url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_baselines/add_instr',
+            type: "POST"
+        });
+    });
+}
+document_init();
+// -->
+</script>

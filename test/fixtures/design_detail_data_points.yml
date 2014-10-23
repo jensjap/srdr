@@ -1,0 +1,44 @@
+# == Schema Information
+#
+# Table name: design_detail_data_points
+#
+#  id                     :integer          not null, primary key
+#  design_detail_field_id :integer
+#  value                  :text
+#  notes                  :text
+#  study_id               :integer
+#  extraction_form_id     :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#  subquestion_value      :string(255)
+#  row_field_id           :integer          default(0)
+#  column_field_id        :integer          default(0)
+#  arm_id                 :integer          default(0)
+#  outcome_id             :integer          default(0)
+#
+
+ddf1_dp1:
+  id: 1
+  design_detail_field_id: 1
+  value: ABC
+  notes:
+  study_id: 1
+  extraction_form_id: 1
+  subquestion_value: it's easy as 1-2-3
+
+# this is being used to test remove_extracted_data in extraction_form
+ef_100_dd_1:
+  id: 2
+  design_detail_field_id: 1
+  value: ABC
+  notes:
+  study_id: 100
+  extraction_form_id: 100
+
+ef_100_dd_2:
+  id: 3
+  design_detail_field_id: 1
+  value: DEF
+  notes:
+  study_id: 100
+  extraction_form_id: 100

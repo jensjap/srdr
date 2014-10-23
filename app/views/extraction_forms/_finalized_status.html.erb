@@ -1,0 +1,31 @@
+<% status = @extraction_form.is_ready == true ? "Finalized" : "Incomplete (Private)" %>
+<% style = status == "Finalized" ? "style='color:green;'" : "style='color:red;'"%>
+<br/>
+<span style='font-size:16px;'><strong>Current Status:</strong> <span <%= style %>><%= status %></span></span><br/>
+<br/>
+	<div class='actions'>
+	<% if status == 'Finalized'%>
+		<button id="finalize_ef_link" type='submit' title="Label this form as incomplete" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+				Label this form as Incomplete
+		</button>
+	<% else %>
+		<button id="finalize_ef_link" type='submit' title="Finalize This Extraction form" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+				Finalize this Extraction Form
+		</button>
+	<% end %>		
+	</div>
+</a>
+<script type='text/javascript'>
+// <!--
+//--------------------------------
+// THE FINALIZE TAB
+//--------------------------------
+$("#finalize_ef_link").bind("click",function(event){
+	event.preventDefault();
+	$.ajax({
+		type: 'POST',
+		url: "/projects/<%= @extraction_form.project_id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/toggle_finalized",
+	});
+});
+// -->
+</script>

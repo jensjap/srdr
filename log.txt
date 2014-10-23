@@ -1,0 +1,5996 @@
+commit 2ce124a79e2d429248a03d8d389283bdf721f281
+Merge: 473f816 47e65e2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 30 11:23:48 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 473f8167199061072a5f225f9a356f347f41fef6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 30 11:23:31 2011 -0500
+
+    fixed the problem with the excel exporter when studies do not have a primary publication
+
+commit 47e65e2a679e6f86a543f7c0905531455fa2493e
+Merge: 2944fd3 5d090ce
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 23 15:50:02 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 2944fd308dea87249d40574d6ab4abfce7fb7953
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 23 15:48:16 2011 -0500
+
+    finishing comments - should be working mostly on project and study previews
+
+commit 5d090ce995dca9be40441812dd9923a127a5bd1e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 23 14:49:40 2011 -0500
+
+    updated quality dimension data points to select saved values and created the prostate project rake file
+
+commit 007ef6689d1cf4a9338399f0db399daebff9fc6a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 23 10:38:54 2011 -0500
+
+    updated the create_input functions to add a default for select and so that it would no longer create the 'other' field automatically
+
+commit 9a3c31a67517dc4879d1d3ea9396b0b9bc7b59ff
+Merge: 7673d3d af2dd9b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 23 09:35:28 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 7673d3d7144e6e81ba219afd4945ca6759ea6516
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 22 17:08:14 2011 -0500
+
+    modified the extraction form model to destroy dependents and worked on auto-loading the prostate project.
+
+commit af2dd9b5fa263f56d5d2a954884d5974baf94c09
+Merge: d1386ba b81d28e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Dec 22 15:56:46 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d1386ba170e5daf493aea882dd3f6f35a7cef3dc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Dec 22 15:55:23 2011 -0500
+
+    updating adverse event columns
+
+commit b81d28e6d08d8b8750747a504125c3bb62f169d4
+Merge: c755579 bee1c24
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 21 17:11:56 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c755579111ca3cbf13dba2d25ff5aa7c169d91bc
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 21 17:11:12 2011 -0500
+
+    starting to make updates to outcome data entry
+
+commit bee1c242b85b89e1ea38df6ddc4faf45ab6275ac
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 16:58:20 2011 -0500
+
+    fixed comments and added email functionality
+
+commit 2c2eaf0008af0741ae83f67f7aacd4ec865e99a1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 16:42:15 2011 -0500
+
+    fixed comments and added email functionality
+
+commit 93b1b485747ebb8c7cd1742699f422958578e6b2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 11:16:37 2011 -0500
+
+    updating comments form again
+
+commit 8998495533feb7f3aea21cb670e4f16ed9c7246b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 10:13:58 2011 -0500
+
+    updating comments form again
+
+commit 626a1ebdf26b20c6e0738a8014b50e15a8458163
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 10:08:12 2011 -0500
+
+    adding initial comments code
+
+commit a449329cebfa348e004852c37a02d05c81314121
+Merge: c81868a 4eebd4c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 10:03:50 2011 -0500
+
+    adding initial comments code
+
+commit c81868ab2f28969457fc122f3a738d44edc753d0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 21 09:56:09 2011 -0500
+
+    adding initial comments code
+
+commit 4eebd4c552a2b369b397ba174896270b080da82d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 20 18:08:05 2011 -0500
+
+    updated outcomes to allow for outcome subgroup generation
+
+commit 1a17cff326852572fc3582865c02ff7284caaead
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Dec 19 19:33:31 2011 -0500
+
+    footnotes and is-calculated are working on outcomes. just need some minor tweaks now
+
+commit df01ec73100cc594de182a09abfe55ff7f188f61
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 16 16:30:04 2011 -0500
+
+    updated results entry to start on footnotes. now just need to display footnotes under table
+
+commit d2958e54d2fee6347d5ece95c1875f80ae51c58a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 15 16:59:47 2011 -0500
+
+    updating the outcomes table to allow for datapoint options
+
+commit b03081e28496b69da9d8136ae36f9267a1859b3d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 14 17:21:46 2011 -0500
+
+    fixed up the results table a bit
+
+commit 8e199e2f0b7dfcd9fcd08619178d9c7ce0374fd1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 14 15:58:48 2011 -0500
+
+    fixed the problem for empty display numbers on srdr-dev as well as the issue of getting predefined measures for different outcome types
+
+commit d542ed9c73995b082bf31047cd6493b3226983aa
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 18:15:57 2011 -0500
+
+    switched the measure window items around and updated measure assignments for the various object types
+
+commit 6413f522924123e27bec36e615887e956b26369c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 15:02:04 2011 -0500
+
+    added default display number for outcome data entry
+
+commit 1e665d5283c5cf2ef710d349df108bbf0335a88b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 14:57:16 2011 -0500
+
+    starting on tabindex for outcome results
+
+commit 1ae1db26973a301c3182abf44f4e7376c6cdac72
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 13:29:08 2011 -0500
+
+    some slight changes to the outcome results table to build in the border cells. Now starting on tab indexing
+
+commit ba965cb037f7594a10511215845f4e8faa8bb641
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 12:31:15 2011 -0500
+
+    added a new user-defined measure button
+
+commit 054b49088870f0ae97a63e5ee3338e324b7e53ad
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 12:13:58 2011 -0500
+
+    finished the initial version of user-defined measures and row sorting for outcome data entries
+
+commit f4f368818386b4562e0b0cbe1994c9ee46abb69e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 13 10:46:09 2011 -0500
+
+    fixed the problem with generating display numbers for outcome data entries
+
+commit 20579ebda3a006aaa5355e491722b0087876182a
+Merge: c241bb2 4dc3791
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Dec 12 17:03:19 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c241bb2acb2b70a431f12dbd751cd74b66a205e4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Dec 12 17:03:06 2011 -0500
+
+    updating the results table to allow user-defined measures
+
+commit 4dc3791e93abe86c301a3a96aa83f1459268e5c4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Dec 12 09:32:59 2011 -0500
+
+    test pushing
+
+commit 2489263ebfd522709adc8378620bbd56b19f51d1
+Merge: 78747c1 5b79622
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 9 17:39:41 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 78747c14cec4b05b559d13e6ffc8fec4ba76d567
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 9 17:39:25 2011 -0500
+
+    started allowing users to define measures for outcomes
+
+commit 5b79622c7c9cb1b70f13842e54ae70e13217a843
+Merge: f9e1932 502018a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 14:00:38 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit f9e193295cfbd9dd099f5df9bb73bf9c2a04b74c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 13:59:47 2011 -0500
+
+    updating question builder
+
+commit 502018ae193ff645b83b9bef96450721851e72b0
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 9 13:53:50 2011 -0500
+
+    modified results entry to pull measures from previously entered outcomes.
+
+commit 5da02e7455f9c21ff7799d396c5cdb3a2a9650a9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 12:51:23 2011 -0500
+
+    updating question builder
+
+commit 05decf19595af07fcf20be731693507e4100de73
+Merge: d90cc95 094f8da
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 11:48:43 2011 -0500
+
+    updating this gemfile problem thing
+
+commit 094f8dac6847cb8206d2735f390a1aeb690c4d0c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 9 11:19:52 2011 -0500
+
+    fixed the select dropdown creator in question builder
+
+commit d90cc9500e1368b8299734a159da9e9f19f539fe
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 11:04:59 2011 -0500
+
+    updating question builder
+
+commit 6837e7346c5bc2befa9285d3643730cfc4bcf13f
+Merge: ef08552 6e9ee97
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 11:02:20 2011 -0500
+
+    updating question builder
+
+commit ef085522ca22e9296be056c71338096ce5f865d4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Dec 9 11:01:19 2011 -0500
+
+    updating question builder
+
+commit 6e9ee9735ecbac752bf4095ef4fadc28d8358fcf
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 16:01:27 2011 -0500
+
+    trying to get nokogiri to work on heroku...
+
+commit bc7659c89922571892e618acf03fb96f4c503f4c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 15:58:33 2011 -0500
+
+    trying to add nokogiri to the secondary pubs page
+
+commit cdd00df6166f1eb0f50f2c2a79dcc61da3aa8f47
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 15:46:49 2011 -0500
+
+    removed require nokogiri from secondary publications
+
+commit f3c117beb22f1ab2de5435b94abe147f2c0a9d2a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 14:46:56 2011 -0500
+
+    requiring rubygems and nokogiri in secondary publications in order to try and fix the problem
+
+commit 60ed87c6fc3541f1314a555ac4b99c380ea70853
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 14:41:44 2011 -0500
+
+    debugging the pmid fetch utility
+
+commit 86aa8157246d63898058498599d993f7de7ade55
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 13:38:22 2011 -0500
+
+    removed gem nokogiri from the secondary publication model
+
+commit 23b85c0e35e8d7407e4c86a23f502f502ec5473a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 13:35:50 2011 -0500
+
+    added gem nokogiri to the secondary publication model
+
+commit 692a45120d7b1aebbec566c9edb3c2e13b846a3a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 13:30:15 2011 -0500
+
+    trying to determine why the pubmed collection isn't working on heroku
+
+commit b5a6136d7d1f66c8e329e6b14c4ae452d0e0d1e9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 13:16:50 2011 -0500
+
+    fixed the template for creating new studies
+
+commit 06473ba6f8b4dc775ff2c976210d56ae29f0606b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:37:55 2011 -0500
+
+    fixed a tiny issue with between-arm comparison tables
+
+commit 0f1b05af1b5fce365baa626d2bef8c99cb191bb1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:31:57 2011 -0500
+
+    fixed the within-arm comparison problem in the create_comparisons function. removed debugging print statements
+
+commit 015e0b8ea04f6794f29b9c414f4c353fe2a49996
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:28:02 2011 -0500
+
+    still debugging within-arm comparisons for results...
+
+commit 2d1210c455f642bd3b8ec7dfec7a8f0ae28e9bef
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:22:58 2011 -0500
+
+    still debugging within-arm comparisons for results...
+
+commit d7cbfdd146407e4fdb6ddea5775b61ef21863745
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:16:05 2011 -0500
+
+    changed database call .count to .length... should fix the problem I hope...
+
+commit 3dffa907bb399be61df11afa00c21cc6a4fc616f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:12:03 2011 -0500
+
+    more debugging messages to fix results entry...
+
+commit e002d20bd25ec9548516fb8186f2bbe8cb55032f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 12:02:19 2011 -0500
+
+    adding comments for debugging within-arm comparisons on heroku
+
+commit 2fed9a85303f80fd492ce6a05b8b73733df69072
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 11:37:32 2011 -0500
+
+    added images to the results table
+
+commit 052f51e74a92d35a78390bf654c702f85aacf460
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Dec 8 10:09:03 2011 -0500
+
+    quick update to the study preview to stop it from loading the study_edit navigation
+
+commit 850eb918196ae92a70ba48e473f5bb36cdcf0747
+Merge: 62e74d4 2d24279
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 7 14:48:42 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 62e74d42377eea4a0a685166640106439d875ae9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 7 14:48:23 2011 -0500
+
+    more changes to results measure selection
+
+commit 2d24279216dc39fdd2c6905a3944a6906c0ce249
+Merge: d5ee401 bb67858
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 7 11:50:10 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d5ee4015f24e64d2daa162f0f0733135e40a6058
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 7 11:49:51 2011 -0500
+
+    updating some 508 compliance titles in form fields
+
+commit bb6785896f1f86462afaa365de2afc3c61560e62
+Merge: e6cdc7d 6531ae1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 7 11:38:31 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit e6cdc7db9b977d7fb73ee81b8367eded3009594d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Dec 7 11:38:12 2011 -0500
+
+    put the default measure definitions into a rake file called default_result_measures
+
+commit 6531ae1373687c431d81c6e010a4671879eb6220
+Merge: dae5dad 3f188d2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 7 09:51:05 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit dae5dad997e30d5e094c4ffd3d3927b3ec21ad49
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Dec 7 09:50:32 2011 -0500
+
+    updating some 508 compliance items
+
+commit d8c971d5e750336209647fa0a460fc04305161b5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 6 16:43:09 2011 -0500
+
+    adding load notification to results
+
+commit 3f188d21fca8441e444758ab4c43908db8dc19cd
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 6 14:42:49 2011 -0500
+
+    updated results to notify the user that they have unsaved changes before adding comparisons, editing measures, etc.
+
+commit a0c04540b7d6793974da940d6e2036443f4adba7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Dec 6 13:04:46 2011 -0500
+
+    fixed measurement assignments when updating the raw data table rows. Also made within-arm comparisons delete when the associted timepoint was removed from the raw data table.
+
+commit 82d78202932b6f824fac816b7ee4a6df10577dbf
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Dec 5 16:47:19 2011 -0500
+
+    results are finished but need polishing. also updated the layouts for studies in order to include the info_messages div
+
+commit 252b92fb755309becc026d56f65033513d3c8c74
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Dec 2 17:10:15 2011 -0500
+
+    more work on the outcome results entry.
+
+commit 83eea82c57f5f3e80b95f4101ba88019160618fe
+Merge: 1188f48 6b75032
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Nov 30 17:00:49 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 1188f484a19e3a8f0f0ffe9a8c0c47b1d7238622
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Nov 30 17:00:35 2011 -0500
+
+    updated the results page to begin on within-arm comparisons. now need to make it save.
+
+commit 6b75032cf8383e9149d707f3e576f78d0dca52e0
+Merge: 99722c7 b66b0f6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Nov 30 16:31:42 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 99722c70943baf1fc2335baee48d5903f3ba7a4b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Nov 30 16:31:05 2011 -0500
+
+    Minimal changes and fixes for 508
+
+commit b66b0f6da7e413bc8586d55a2f0325fd3bdf1cef
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 29 17:09:12 2011 -0500
+
+    moved entry table prep code into the model
+
+commit 36cdc1614f60ff8412c9750b46cff70394c7fc2c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 29 16:19:15 2011 -0500
+
+    fixed a silly mistake in the previous push
+
+commit a9b516f847cbb22e746ea88ebd5ab41c3cdf6c2d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 29 16:17:44 2011 -0500
+
+    finished between-arm comparisons using the new timepoint checkbox selection method
+
+commit 40c26ab25d1691668d60528e6585b6886e51a4ff
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 29 10:38:18 2011 -0500
+
+    fixed the default adverse event column creator to not use the header anymore
+
+commit 0b245834b3d4cfb93480a91ec1dec62f0d615e35
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Nov 28 10:26:31 2011 -0500
+
+    fixed adding and deleting arms from the study
+
+commit 2c6e5af694d9be29168e61397c294348b3de65de
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Nov 22 17:08:24 2011 -0500
+
+    fixing feedback form
+
+commit 31cfd23bff9525ab722713b3d781f25f48856ce8
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 22 09:37:32 2011 -0500
+
+    added prompt when removing between arm comparison
+
+commit 4eaaf186be5d55d31f9edcce81ed6b261ebeb1ad
+Merge: e9172e1 aea1c22
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Nov 21 17:14:54 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit e9172e1fb67f9b0f9e68c9ffac1dae992a36fe28
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Nov 21 17:14:41 2011 -0500
+
+    between arm comparisons almost complete
+
+commit aea1c22e8ef537b22e783e9f74d1374266a8aba5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Nov 21 11:12:42 2011 -0500
+
+    small fixes to adverse events
+
+commit 8412fcc82d24fc998b22f9f2e7c94c90eb4511f2
+Merge: 5d97da7 a881dc7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Nov 21 10:02:07 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 5d97da73fb074b932e67a3cdac2a5d08176941d2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Nov 21 10:01:12 2011 -0500
+
+    adding feedback button to right side of screen
+
+commit a881dc721f5f773922e012eb32c858e13a21daa7
+Merge: 9d94bc0 457c764
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Nov 18 17:27:55 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 9d94bc0d6c525b2d3ae9644f4447fcac99dd23d9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Nov 18 17:27:41 2011 -0500
+
+    MERGING BETWEEN-ARM COMPARISONS INTO THE RESULTS TABLE
+
+commit 457c7644bfb51b4da56333a05c14bfd4ad33d4aa
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 18 15:05:58 2011 -0500
+
+    update to adverse events saving data
+
+commit 1d97ec905b530d6e050a3bf6494e9a6a44a7cc8c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 18 10:04:55 2011 -0500
+
+    updating gemfile blablabla
+
+commit b483d05f36330ab04e8177343cebf525bdc85db7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 18 10:03:25 2011 -0500
+
+    updating gemfile blablabla
+
+commit d79724d18d42fd58e5566c75d13e949fd27f7e9a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 18 09:58:50 2011 -0500
+
+    updating gemfile blablabla
+
+commit 9cfe2815c0221a4a5683812e148dbf61eff05ba3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 18 09:48:27 2011 -0500
+
+    updating gemfile blablabla
+
+commit b06a9b17f4d55b173c73c059328d5468815485c9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Nov 17 17:11:37 2011 -0500
+
+    finished adverse events
+
+commit 02efd48f65df070ae39d542c99ee1594455b7253
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Nov 17 16:50:57 2011 -0500
+
+    finished adverse events
+
+commit 6b217d35b4bc7824d71abe85bf06821712d9013d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Nov 17 16:48:12 2011 -0500
+
+    finished adverse events
+
+commit 2bef55e68541164df1cb0ba7496b4712a36f234f
+Merge: 26febde ecd6e9c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Nov 17 15:56:12 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 26febdec4a2a0950773d72b4358357bfed41f48a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Nov 17 15:55:50 2011 -0500
+
+    Finished adverse events table updating
+
+commit ecd6e9c2fc0a29f39ea080df8284917de4fe647a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Nov 17 14:29:44 2011 -0500
+
+    between arm comparisons is working but is a separate form from the results entry
+
+commit 18da291e7f2f1792e0717185784256d35ea80b9e
+Merge: 4e5a1e8 6548f07
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Nov 16 16:06:06 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 4e5a1e815c8615d8db00c463099fcf8e1162f96a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Nov 16 16:05:40 2011 -0500
+
+    updates to the results pages. between-arm comparisons are saving
+
+commit 6548f071063cc6d8d4c0bd964cff9d3ac63c82e6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Nov 16 14:22:57 2011 -0500
+
+    updating primary and secondary publications pages - identifiers
+
+commit 33754a48cbb59972cb7be7a4e1dd54d4fb8c6997
+Merge: 1086e50 cdf085f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Nov 14 13:13:26 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 1086e50ebde79993f16497ad30e30fea68222ba8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Nov 14 13:12:15 2011 -0500
+
+    updating outcome timepoints completely hooray
+
+commit cdf085f9132fef9a2c93b698607b5bc80dd2b0d9
+Merge: b3b2437 e8f6fa0
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Nov 11 16:42:19 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b3b243762cb6bd89f11e8171b04889b1b0a56d7a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Nov 11 16:42:04 2011 -0500
+
+    updated results page. within-arm comparisons are now saving properly.
+
+commit e8f6fa0e56714b200aa1c5623b2e3c73a8ae56cb
+Merge: 873028b 4921948
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 11 15:36:27 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 873028bae3e2b010e02de5667ab4883a881e67cb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 11 15:36:07 2011 -0500
+
+    outcome timepoints work wonderfully now
+
+commit 49219487b1668f09c68c9abba72c775f7e249a14
+Merge: cfffddf 9b34aec
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Nov 7 17:46:07 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cfffddf778d963371ccb7ed11bcb63b24bd7b41f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Nov 7 17:45:53 2011 -0500
+
+    updating the results/comparison interface
+
+commit 9b34aec53e6fb411020f1f4aef3d7aa741849584
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 4 11:05:29 2011 -0400
+
+    fixing footer on study edit
+
+commit 601250a3a890c264e273f13738735fafeb421681
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 4 10:29:01 2011 -0400
+
+    cleaning up sidebar tabs
+
+commit 4805a890a0f730b9b9041ca8a655eed50946efa3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 4 09:59:32 2011 -0400
+
+    small layout adjustment to merge
+
+commit 9d468fae0d79a96e5373195bcb93302f6823cba1
+Merge: d4022f1 52b5543
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 4 09:45:28 2011 -0400
+
+    I forgot what I changed  but I just want to merge
+
+commit d4022f120b90e68cd459ced610578dfc143dacb4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Nov 4 09:42:24 2011 -0400
+
+    I forgot what I changed  but I just want to merge
+
+commit 52b5543180ecdbe5c21f63e40eea340617564ff8
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Nov 3 15:44:37 2011 -0400
+
+    removed the old export link and STARTING ON THE NEW OUTCOMES NEXT COMMIT
+
+commit f03be9efa65eb98b6d14313d0895423f43e43057
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Nov 3 11:29:43 2011 -0400
+
+    MAKING CHANGES TO LAYOUT, HIDING AHRQ HEADER
+
+commit 451c7eb3722f2b62df6d8d7a1d4286ccc5bd0fd6
+Merge: 9361864 00448b6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 1 16:08:56 2011 -0400
+
+    working with stylesheets
+
+commit 93618647baf969a93f226f9c42721daf63f1f7da
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Nov 1 16:04:31 2011 -0400
+
+    working with stylesheets
+
+commit 00448b6951dd811fe77ad605933ccd1ac2f66a27
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Nov 1 14:15:36 2011 -0400
+
+    updating layout - sidebars and footer
+
+commit d7ebfa8fa5cd45a2c3054b1e5bf748bd33c25792
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Nov 1 13:58:05 2011 -0400
+
+    updating layout - sidebars and footer
+
+commit 7dfb353a00cfb47fbaa4507ac88f3cef34a732dd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Nov 1 11:51:57 2011 -0400
+
+    updating layout again - fixing sidebar
+
+commit 8287a7ac0da8d6b3bfb91bbfdb4af222560a53cb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Nov 1 11:47:33 2011 -0400
+
+    fixing layout - still needs to be tested
+
+commit a3119e96a807543c077c7215247dc86865c96d4a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Nov 1 11:22:46 2011 -0400
+
+    fixing banner links on srdr section
+
+commit 4b46dca1eca85ded73de6a9b7d04d6f6b22eea5d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Oct 31 16:48:51 2011 -0400
+
+    small change to layout - footer
+
+commit e19cf22c92c5d5b7ee9e710b92aa61b317259e8a
+Merge: 90b845a ff03502
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Oct 31 16:30:42 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 90b845a748ceda0b87ae4bdc71b78098f38de83d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Oct 31 16:29:37 2011 -0400
+
+    small change to layout -  fixed notes on the side bar
+
+commit ff03502404fcee8657ce3a38268b589b5691b860
+Merge: 6336e3e b272fcf
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Oct 31 15:11:23 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b272fcfbf362ba7d6e64ff43d8db0c13be6c01f8
+Merge: 88a0a94 6789c96
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Oct 31 15:09:17 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 88a0a94025e57a0c94240af3db00e871a121e47b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Oct 31 15:08:54 2011 -0400
+
+    adding small layout and pilot study fixes
+
+commit 6336e3ee52435f6609984e63eca21a1d1c34d914
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Oct 31 15:07:29 2011 -0400
+
+    fixed the exporter and updated the study preview
+
+commit 6789c96246d994a5a9cd94c00fb2c13640a6fba5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 27 12:42:07 2011 -0400
+
+    fixed designdetaildatapoint.rb, as it was trying to destroy datapoints that were nil
+
+commit 8a42ba7ed2e9b9c3b2831bc35d84066801e220ff
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Oct 26 10:36:07 2011 -0400
+
+    updated the exporter to provide one file only so that it will work on heroku
+
+commit ab081838a10285fa54a23688718c600dc3602417
+Merge: c2e9a2a 6fddbcc
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 17:08:29 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c2e9a2aa92053554ed781bdb6454fbe1eb486b46
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 17:08:21 2011 -0400
+
+    added quality exporting to the excel_export model
+
+commit 6fddbcc8e129fc760441756109ae58cf62e03350
+Merge: 8196292 ad9b07c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Oct 25 15:46:45 2011 -0400
+
+    fixing layout in chrome
+
+commit 8196292dc0ca54f0fe9d661259d5e8ce03ca117f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Oct 25 15:45:33 2011 -0400
+
+    fixing layout in chrome
+
+commit ad9b07c0ccbe47ba4b5a9ec262ef0fec306ca6c3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 15:33:52 2011 -0400
+
+    fixed key question error reporting and removed tinymce for now
+
+commit 25034635fe0ecc377b458203734bb893eac79316
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 12:31:54 2011 -0400
+
+    updated the baseline characteristics page to remove arm vs total options.
+
+commit c5a188d9c6e7273b292ae7bedc248bf93476c575
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 12:27:31 2011 -0400
+
+    another change to the study preview
+
+commit 8655bd99fecfd3b2ee3e7b5b2eabd14e05c18f0e
+Merge: fa33157 928a580
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 12:17:08 2011 -0400
+
+    updated the study preview for design details and baseline characteristics
+
+commit fa33157bb552277da20ca9e3ca9e2baab65bee5c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 25 12:09:39 2011 -0400
+
+    updated the study preview for design details and baseline characteristics
+
+commit 928a580a1236d0cfe57bfac4ab6fdea108c00ac2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Oct 24 16:18:36 2011 -0400
+
+    updating layout info for 508 compliance
+
+commit ad8b56cb03949e02269df852416de3e414311d06
+Merge: 62aa473 7ff1d18
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Oct 21 17:24:15 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 62aa47336867505a8df09ac6a991b741d5e68264
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Oct 21 17:21:29 2011 -0400
+
+    adding ahrq branding
+
+commit 7ff1d18fded1c9ebd143126879c59d9a98b474e7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Oct 21 11:57:18 2011 -0400
+
+    updated question builders to show subquestions without having to click on them.
+
+commit a3f80f5231e6eb3c55c5a194d7b7275cd529a787
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 20 15:49:48 2011 -0400
+
+    updated more save notifiers
+
+commit 48686427aed6686154b14203ea5d3d607570f746
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 20 12:51:03 2011 -0400
+
+    more changes to save indicators
+
+commit 83e6e292aa4ede3df92dc0430b2e5e3a380e0c16
+Merge: 570169b 528e2d9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 20 12:30:47 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 570169b9be0241c75854fbf339a4e04bf660cafa
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 20 12:30:35 2011 -0400
+
+    Checking for saved data before leaving any study edit page.
+
+commit 528e2d9f03711e9f689b4a6fae2b7f1e2f4a2672
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Oct 19 15:03:21 2011 -0400
+
+    fixing overflow issues with the sidebar and toolbars
+
+commit 10cb7c37a51252245552646509ab3e13c8dcda81
+Merge: d5513b9 e1ff259
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Oct 19 14:11:14 2011 -0400
+
+    updating to fix quality results page
+
+commit d5513b9fd9db4d20f9932a5974b0a374f87f71c4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Oct 19 14:07:52 2011 -0400
+
+    updating to fix quality results page
+
+commit e1ff2598094a78473b80a38d8b483ea7645b5b18
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Oct 19 13:32:16 2011 -0400
+
+    changed the way text boxes look in the design details and baseline characteristics (much larger)
+
+commit b6712620bb26479f3cf3845a8d99c0a73030c019
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Oct 19 10:45:43 2011 -0400
+
+    made login credentials lower case at all times and updated error reporting for registrations
+
+commit 82db7f7be24de2c031be0e0e46c0dea6acb141f4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 18 16:43:47 2011 -0400
+
+    switched exporting to involve functions for each section completed thus far.
+
+commit 6915b1096e22342798020282030d0b0b321c1ee2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Oct 17 16:48:25 2011 -0400
+
+    excel exporting is finished up to outcome results.
+
+commit 58bf51d3ff0310cb722695221668da364238ce0f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Oct 14 15:52:54 2011 -0400
+
+    baseline characteristics working in exporter
+
+commit 6384f1f10f19ced57d538d310e05866a98a6af75
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 13 17:27:51 2011 -0400
+
+    updated the exporter. almost done with baselines.
+
+commit cc5b79a4fe416fe7dcc88c7c52ba3d1ac9438ec9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Oct 12 17:37:02 2011 -0400
+
+    changed session to params in baseline characteristics creation and still working on the excel_export model.
+
+commit 97c1a87b7cc03217706dc9f37cb841812a9e21f9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Oct 6 17:06:43 2011 -0400
+
+    baseline characteristics headers are being exported. now for data...
+
+commit 77c931f311d5c92d0e44d4593f6586f836e51f56
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 4 16:44:50 2011 -0400
+
+    updated exporter for design details and arms to work.
+
+commit ff4e7c397997c963316e3b0e6b126d6e94b5cb0e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 4 14:50:51 2011 -0400
+
+    updated the users controller to lowercase all emails and logins upon registration
+
+commit 8baa66387854abc0793faddfbe75800508fe301a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Oct 4 12:45:32 2011 -0400
+
+    fixed the user registration form tab index and missing apostrophe to save the submit button
+
+commit 5659bd047a19ccac240b7a092045c9177ab5344d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Sep 28 16:43:23 2011 -0400
+
+    updating doctype to test html w3 standards validation
+
+commit e46e388ae08d4f1464cb9d69bad4fd83e1dc6f06
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Sep 28 16:34:01 2011 -0400
+
+    updating doctype to test html w3 standards validation
+
+commit e86b77545c6a95906241cdaf60590e904f50618f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Sep 28 16:28:30 2011 -0400
+
+    updating doctype to test html w3 standards validation
+
+commit 40b52195fb56141b8e1cfac4afaa7b4012e7843a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Sep 28 14:19:13 2011 -0400
+
+    updating 508 compliance changes, tabindex and headers to tables
+
+commit bae6dea1bb2024ecab35152108587bcda4f3b3f8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Sep 26 16:48:26 2011 -0400
+
+    updating 508 compliance changes
+
+commit 9ced097a663f5501e0300f29cf78ebf34b79bb88
+Merge: 592b5d7 e7744fb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Sep 26 16:15:27 2011 -0400
+
+    updating 508 compliance changes
+
+commit 592b5d72eab5a7245480b4e198ece1b6619ebef4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Sep 26 16:14:22 2011 -0400
+
+    updating 508 compliance changes
+
+commit e7744fbde43f6c90005cd57b47c2d5ae0fe8f192
+Merge: f14e09e 3b0892b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Sep 15 15:26:22 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 3b0892be859ddf46e2e6a9acb703f80aaebf3600
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Sep 15 15:18:29 2011 -0400
+
+    removing railties folder, sorry
+
+commit f14e09ebac5a4805834748830343e8ccc7d67301
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Sep 15 15:08:25 2011 -0400
+
+    merging.
+
+commit ac7018245ff1bf0c20f3b7ed3e204becd4b215a6
+Merge: 46461aa 52061e7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Sep 15 15:00:52 2011 -0400
+
+    fixing key questions problem
+
+commit 46461aad93f66793edd346411f36d65016182b51
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Sep 15 14:58:23 2011 -0400
+
+    fixing key questions problem
+
+commit 52061e70b41ce2c8042b5f266e6c130c89cd5abb
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Sep 15 13:13:54 2011 -0400
+
+    updated the nav menu on key question page after it is updated. made sure data is deleted when key questions unassigned from a project that no longer uses the extraction form. updated excel_export to get design_details working
+
+commit 82fbda8aca41e5e886d9ce04ca0d49415111ff98
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Sep 15 12:01:25 2011 -0400
+
+    updated data removal upon key question un-assignment and added unit tests for this functionality. Also updated the excel exporter to get design details working properly.
+
+commit 36a578b231a3eb0aeb0c767b89df0551cb917469
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Sep 13 17:10:02 2011 -0400
+
+    udpated the excel exporter and hoping to fix the problems with project edit page by merging
+
+commit 2d9d004c4894fd077faa6d9958ee43ac52804975
+Merge: 284888d df8f5c0
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Sep 13 14:14:51 2011 -0400
+
+    updated arms to incorporate the intention_to_treat clause
+
+commit 284888df7606851c3b059a895aad084dcc158db5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Sep 13 14:08:24 2011 -0400
+
+    updated arms to incorporate the intention_to_treat clause
+
+commit df8f5c02b8a17d8f2e17eaf79bc68ac185dfc638
+Merge: e7c0061 2d7e084
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Sep 13 11:38:07 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit e7c00618877505ca9128bc7c1926fcb21e4b3e2c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Sep 13 11:37:30 2011 -0400
+
+    updating some 508 compliance issues such as labels
+
+commit 2d7e08443f7c6f6f4a1547dbd67f1662a137f82d
+Merge: d4895ec 44f0710
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Sep 9 14:51:44 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d4895ec765dae3d02057211156ab1b1fd4122db3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Sep 9 14:51:32 2011 -0400
+
+    updated exporter for excel
+
+commit 44f071093d72f95ebacdd9201137d3ba280067a0
+Merge: 19c8d28 56a2498
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Sep 8 13:32:25 2011 -0400
+
+    removing wysiwyg text editors
+
+commit 19c8d28a35b5ddbd8cc1515ec54e7c589886d29a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Sep 8 13:31:15 2011 -0400
+
+    removing wysiwyg text editors
+
+commit 56a2498bf60a57fae0d85c83e3e2cfa425fab573
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Sep 7 15:29:30 2011 -0400
+
+    updated the comparisons page to fix the show_comparison_table to handle if items were deleted immediately before trying to enter measures for another.
+
+commit 392a0f756e2500776eda092ff8a903886990a122
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Sep 7 14:04:24 2011 -0400
+
+    updated arm page of data extraction to fix editing and error message when the user does not select a proper title.
+
+commit 9633466f47dfee9c916ece98ff18a7e313e579bc
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Aug 31 09:25:54 2011 -0400
+
+    updated the publications database tables to change the title field from a string to text
+
+commit 4d65f7fb0f834eeb615ac11a0c1055c7f2d16de4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Aug 30 15:25:16 2011 -0400
+
+    changed nothing.
+
+commit 83b3a1aa0a6c4a1f7bf095222d89c2f2c2df9418
+Merge: c7eb073 07dc102
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Aug 11 16:13:25 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c7eb073795eea747db1c1fc671ff420ea2a7ed7d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Aug 11 16:13:09 2011 -0400
+
+    design detail testing done.
+
+commit 07dc10274f2b2ab1e8d836f84f4eafceb34dde84
+Merge: 4fc56db fc8ee1b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Aug 11 15:56:11 2011 -0400
+
+    removing tinyMCE adding CKeditor
+
+commit 4fc56db6b994027814e19f8d1c241414db5be830
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Aug 11 15:48:55 2011 -0400
+
+    removing tinyMCE adding CKeditor
+
+commit fc8ee1bba1e9756a79537f337fec8f4f313dfb03
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Aug 11 13:59:01 2011 -0400
+
+    finished testing for outcome.rb
+
+commit 93a7c1ce66c5ef4c3c3bff955155a4ebc9764984
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Aug 9 14:49:08 2011 -0400
+
+    more testing...
+
+commit ea235851fcc50a3a93116deafc3169a8a171f2b9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Aug 9 11:20:06 2011 -0400
+
+    more testing.
+
+commit b346410e4b89b4fa00ecb1767652aa0da116048c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Aug 8 09:43:50 2011 -0400
+
+    writing unit tests...
+
+commit 0a51053095af834712d1ced24062596ef79a4dc3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Aug 1 17:05:08 2011 -0400
+
+    fixed a couple small database query changes
+
+commit e7eb8263775a52e1e0adba86fd63f4b2cc361d7e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 28 11:13:06 2011 -0400
+
+    more changes to study export with excel
+
+commit d2c5537c849d1ea20149d04c2140b806cb58f611
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 27 16:05:09 2011 -0400
+
+    minor fix to comparison page
+
+commit 1a85bb1c3ea8c206d079bed54b4f9db9769e7135
+Merge: bceb5d5 4c230ed
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 27 11:27:56 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit bceb5d5d3da853fe5c6e459410471a202fd019eb
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 27 11:27:42 2011 -0400
+
+    fixed outcome comparison
+
+commit 4c230ed8a6ba27368696905a047c54ac0b660471
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 27 09:46:12 2011 -0400
+
+    fixing a typo
+
+commit c6cb9976f46f73b040abe339c23b3480958517c4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 27 09:38:26 2011 -0400
+
+    fixing a typo
+
+commit 021ba2b44d45d4076d6c35724bdb989d29fdc003
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 17:04:00 2011 -0400
+
+    removing excess wkhtmltopdf binaries
+
+commit f775b9fcd5c1245ac1bbd72647ebbad974125765
+Merge: a838249 bbe4f0a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 26 17:01:11 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a838249f4d626e35d0ed59315140aa7817faa27e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 26 16:57:37 2011 -0400
+
+    updating the study export functionality
+
+commit bbe4f0a2261ddfc9d0a0617ff691d55c6ca1aa40
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 15:56:26 2011 -0400
+
+    push to get gems working
+
+commit 03ae77ad70d9032d5f2ac8138b7ea33538796266
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 15:45:44 2011 -0400
+
+    push to get gems working
+
+commit 5245f499e4e6d61bfec40107ca484271947c1d14
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 15:43:55 2011 -0400
+
+    push to get gems working
+
+commit 9b984ce899bd9a472afdf1d2c85f17023c87dad8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 15:41:36 2011 -0400
+
+    push to get gems working
+
+commit b94d0ecfe76e18a198fea4d5a1db77c68a4f4eb9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 15:37:17 2011 -0400
+
+    push to get gems working
+
+commit 37514c052a753314dfda9e1017a698957ef9d25f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 15:02:31 2011 -0400
+
+    push to get gems working
+
+commit 4184ebe0b51caa925982199e7e414ca4cc81fac0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:56:03 2011 -0400
+
+    push to get gems working
+
+commit d62d27b68e910d03bd4712cf777b9708ef0e15dc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:52:20 2011 -0400
+
+    push to get gems working
+
+commit eec7a93b2ae176a5840283c9c3cc404f06502f31
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:48:19 2011 -0400
+
+    push to get gems working
+
+commit 0617b523ba173980774bcc1f1fc4931f307e1d84
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:37:33 2011 -0400
+
+    push to get gems working
+
+commit cee31d4221b0b88c844f721c4bbda5a64ef6a60b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:24:53 2011 -0400
+
+    push to get gems working
+
+commit 1282c5f31ae7cda7ff20cb9c13a1f0978d31baaf
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:23:02 2011 -0400
+
+    push to test pdf looks
+
+commit d3df41653404215b8055e79d7da978230326286b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 14:18:48 2011 -0400
+
+    push to test pdf looks
+
+commit 7546428413d24edeccadd64a7c0ad920187b1533
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 13:37:48 2011 -0400
+
+    push to test pdf looks
+
+commit 07b4877c206a559e928191a5e96913dfd25c9098
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 26 12:35:35 2011 -0400
+
+    push to get gems working
+
+commit b74fbae5a35d137f3b7b4644d9e34691b8b5cd2c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 14:58:21 2011 -0400
+
+    sdlfkas;dlfka
+
+commit 445001205d0aea9a9a7d2cd6b9613a59e6dc71d8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 14:13:55 2011 -0400
+
+    adding to dev to test PDFing
+
+commit da061fab5665eba1f5fae90fbe8516339ac52854
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 12:48:27 2011 -0400
+
+    adding to dev to test PDFing
+
+commit 5eb4a014eb87a8ded5f67b4c35163bb9bc0f9655
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 12:37:29 2011 -0400
+
+    adding to dev to test PDFing
+
+commit 5fce00e8f3db93684038740408ffd41b74e24151
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 12:31:32 2011 -0400
+
+    adding to dev to test PDFing
+
+commit 5f25bb86d485a7b6d958bb76a4bb2c7e4db1f9dd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 11:58:21 2011 -0400
+
+    adding to dev to test PDFing
+
+commit 4235a2b4ac334e7201bf99ebc69c7bbd5fdac0ba
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 25 11:51:24 2011 -0400
+
+    adding to dev to test PDFing
+
+commit b9cf66f140926950d2e81f99c3f4e1e30924cee9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 22 17:20:36 2011 -0400
+
+    GRRRR
+
+commit e8ca5a374ddeec513b29937db037cee3b24297ac
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 22 17:03:38 2011 -0400
+
+    attempting wicked_pdf again
+
+commit 280b6448ad43a47e2edfec3be495d7097b28b64f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 22 14:57:26 2011 -0400
+
+    undoing wicked pdf attempts
+
+commit a44698d32fe3e05c3d38e09cc5e62b22001cfc42
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 22 12:29:25 2011 -0400
+
+    testing wkhtmltopdf
+
+commit 818895ee0a1fedf190287dc64d063b853c27eebd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 22 12:18:51 2011 -0400
+
+    testing wkhtmltopdf
+
+commit 44b169a02c2bef8e1ffc96ad55b09b8aa09ef3c3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 22 11:42:26 2011 -0400
+
+    added back in ability to delete notes and replies
+
+commit d455dd95f31d46046f1438c4ac6e2a946e0ea287
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 16:48:52 2011 -0400
+
+    fixing issue on quality dimensions values
+
+commit 0ae991ceefcedd5aa07c2ea066fb432519131b4b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 16:30:49 2011 -0400
+
+    updating quality dimensions display on study preview
+
+commit 93daff60630fecf303553d513b47d46fa577d3b7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:56:30 2011 -0400
+
+    updating advev
+
+commit ce595f81e19905e382f3158c021508a3b5b510a4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:54:49 2011 -0400
+
+    updating advev
+
+commit 04a28cf9ac195fa4049fa08cc4bc75b4e3f9f925
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:54:14 2011 -0400
+
+    updating advev
+
+commit 3a6adf83f71a68a26b1a16baecb56b2cb168e992
+Merge: 03c96c6 2f27472
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:49:28 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 03c96c6fb5f2acd32e9cabe6c95364320d1d3ebf
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:48:57 2011 -0400
+
+    updating advev
+
+commit 2f27472986fe1d49ec3c0021896147d665d059b2
+Merge: 10206f5 8aaad55
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 21 15:39:21 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 10206f5b446a0a6576b110d722a8c87a80c89e1d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 21 15:39:08 2011 -0400
+
+    fixed outcome results.
+
+commit 8aaad55a2ec7fbed5398e20acc61a35ccceb4f1e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:30:48 2011 -0400
+
+    updating advev
+
+commit ac939dd26eb3bb690d57a3caffec11daefbd14b3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:27:27 2011 -0400
+
+    updating advev
+
+commit 52700a51fbe1cb755829363c1fb9b8dc8b294fe8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:16:29 2011 -0400
+
+    updating advev
+
+commit 88f61d05b31df9428e2fcc68ab9a692f1cfb4cc5
+Merge: 6527c04 d8068ce
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:11:50 2011 -0400
+
+    updating adverse events situation
+
+commit 6527c043f150a547a351e14ce71f10272e4667e3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 15:10:53 2011 -0400
+
+    updating adverse events situation
+
+commit d8068ce8dd74715cd9e31fbe5ec3d5f2891651b4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 21 14:28:03 2011 -0400
+
+    database update for baseline and design data point size
+
+commit 9ed9e64e23584adbbd34aa8e689a3b61a2af08e9
+Merge: f42b976 3bff284
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 21 11:28:13 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit f42b976b7c39570b3b9e51e25eaafc7066d56b3f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 21 11:27:59 2011 -0400
+
+    updated outcome results pages to fix modal and continuous vs categorical problems
+
+commit 3bff28497562db8e5c3cb10a7a23b65f09999846
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 11:26:31 2011 -0400
+
+    updating ability to add adverse event arm and total columns
+
+commit b7eb4588413cea94d1f878a6943e84a5594878e6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 11:23:20 2011 -0400
+
+    updating ability to add adverse event arm and total columns
+
+commit 6e0648642a98757b0eb46c69596b413f91add3a1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 11:08:58 2011 -0400
+
+    updating ability to add adverse event arm and total columns
+
+commit 2c506b016f7b83fdecb4566e0cbf2e4f2cc76af2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 10:52:21 2011 -0400
+
+    updating ability to add adverse event arm and total columns
+
+commit 4e1ca1280a9a82529d85ceb2f13e936b59a0a9a9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 10:49:46 2011 -0400
+
+    updating ability to add adverse event arm and total columns
+
+commit d7576f961d086bcac708b966e96debd171eaf40b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 10:15:44 2011 -0400
+
+    updating adverse event arm columns
+
+commit 242ae32ff2409dd356364ac4402de364f7103a4d
+Merge: 049914a 74a2d6d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 10:02:42 2011 -0400
+
+    updating adverse event arm columns
+
+commit 049914ad94bbaf8dd9dd4837824562ff01a5dca0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 21 10:01:44 2011 -0400
+
+    updating adverse event arm columns
+
+commit 74a2d6db6e41d3da875e65ffc14999aa018dd497
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 20 16:08:49 2011 -0400
+
+    updated quality pages for moveup, edit and delete to work
+
+commit 78f4e087f51a2cf7bfeafa89f9321abdd963e5ae
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 20 15:13:41 2011 -0400
+
+    fixed destroy function on studies
+
+commit 0af26cfa3fd5edb3a2ebcf1bd6cfdbeae707101b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 20 14:57:01 2011 -0400
+
+    fixed study results
+
+commit b3ef1217a3c5f3689e5d2e44e719c5afa5c9d9b3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 20 12:05:49 2011 -0400
+
+    added study info to mywork and started fiddling with excel exporting
+
+commit 60ed279c923eeeaa19911883aca4d69ec6bc2c4e
+Merge: d0015e8 1c2dcb0
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 20 10:25:54 2011 -0400
+
+    added user manual pdf and word downloads to the help page.
+
+commit d0015e84ad7916538ca38840ccab65e85a716ef4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 20 10:24:30 2011 -0400
+
+    added user manual pdf and word downloads to the help page.
+
+commit 1c2dcb03c1eed0c61fee6b809db9d247c4640d98
+Merge: 872c95c 21e3b15
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 16:35:17 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 872c95caf79988e0419c6c36334b20cce5f818b5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 16:34:45 2011 -0400
+
+    minor changes to help page
+
+commit 21e3b158d9dc750a2c89e225b8bd073107a20161
+Merge: fee4868 e3c5b98
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 19 15:36:03 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit fee4868bc7f80ebaf901d172a1a644b31e10bb99
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 19 15:35:29 2011 -0400
+
+    updated deletion of extraction forms and controllers to remove baselines and design details
+
+commit e3c5b9810360be22b3b7609a6936503b54f7ee3d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 14:49:53 2011 -0400
+
+    updating deletion of projects and adding time lengths to help demo thingies
+
+commit 763cbc1f7223fc6966d7ecde4c26f49a9209cacc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 13:49:32 2011 -0400
+
+    final push of final features to final dev
+
+commit 896a6094986192912c59cf75d2c7a9fc438fcc23
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 13:48:40 2011 -0400
+
+    final push of final features to final dev
+
+commit 9aaf6d8e79531ae9bc934655316f107f709793a5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 12:17:13 2011 -0400
+
+    testing pdf functionality
+
+commit 7cbc0875ef6f2cb395e8fe069a5f1799baddd002
+Merge: 214b3dd ef46fb4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 11:54:12 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 214b3dd0e9f153486f30a8d9517c9b2bc0579455
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 19 11:53:14 2011 -0400
+
+    testing pdf functionality
+
+commit ef46fb40453303fe7a23663f02af290b98272055
+Merge: f04c894 ac8e82d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 19 11:25:09 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit f04c8948998e9c0f35f2586c1ac87f4de132842b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 19 11:24:54 2011 -0400
+
+    when editing a text question and changing it from text to any of the other types, options were not deleting properly. Fixed it
+
+commit ac8e82d3a5256f1284e792c531458a4727c9b98f
+Merge: dfaad6c 0f24419
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 18 16:57:54 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit dfaad6c9d9ffca0403a08a3d6db2d631c153c1a9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 18 16:57:40 2011 -0400
+
+    updating preview of published projects
+
+commit 0f24419674fb41cf9767f2dbcb56ec5ab2e6bfd7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 16:55:03 2011 -0400
+
+    updated study edit side navigation to describe key question numbers
+
+commit 37e1a84422c5e3d04f513866f20dc90e6d774935
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 16:20:52 2011 -0400
+
+    may have fixed the problems with adding options to questions.
+
+commit d7b24385af93a0c025aefb327d846c9f7cf4ea4b
+Merge: 673df94 1ecb9af
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 15:48:59 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 673df94b8db2622a3db6a53854a6439e6c347304
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 15:48:47 2011 -0400
+
+    fixed the baseline characteristic problem
+
+commit 1ecb9af802423fb5d602d1f092715096cee3ed0b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 18 15:06:14 2011 -0400
+
+    updating preview of published projects
+
+commit e8b5da1b640d5d4869d1decfb55d7d8458b3ae70
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 18 14:24:04 2011 -0400
+
+    updating videos, publishing, admin viewing of projects, editing results tables
+
+commit 89d1bc16ab3ad08db7524ee3168a579cf0fca178
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 13:50:17 2011 -0400
+
+    saving project to assure creator ID is saved in create function of projects controller
+
+commit 39624942d7f2e7ed3a5e558318bbb9713b6e439d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 12:17:06 2011 -0400
+
+    removed analytics tracker from srdr-dev
+
+commit a3cd7e884d1ee4b8c4ab52197b9af9be11bc7406
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 12:07:45 2011 -0400
+
+    working with google analytics
+
+commit 0ecc3d7f0b9c45d0d3d1e38bf10cfbe3fc17b833
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 11:44:51 2011 -0400
+
+    trying to fix baseline characteristic problem
+
+commit 828264223f0844a964ccbb0824dbc882d27635c9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 11:29:46 2011 -0400
+
+    trying to fix baseline characteristic problem
+
+commit 12a834e01addd0f67828e38b76d23d92b0dbccb9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 11:24:06 2011 -0400
+
+    commenting out the extraction form preview for a moment...
+
+commit ba06d2a121d76f79c37378b6f6e51f5bc1525fa1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 18 11:00:40 2011 -0400
+
+    fixed a small issue with baseline characteristics and design details concerning adding more options. Still more work to be done, but basic functionality is back
+
+commit 87a5789009d437a5d9072676b072ebcbb9d4ae9f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 15 17:18:20 2011 -0400
+
+    updating videos, baseline characteristics, and publish page
+
+commit 23d8efa308d4030ddd1bde0d0f8a19ca09440299
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jul 14 11:38:54 2011 -0400
+
+    Ability to delete tables from results page
+
+commit f5d03bb0f098a5019d3b5be457f4a152ffc2adbd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 13 15:19:03 2011 -0400
+
+    various changes and fixes, style and publication functionality
+
+commit f42a06f7e08370e8f06f5f5d40f4219a7245efba
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 13 09:50:59 2011 -0400
+
+    fixing login thing
+
+commit b7e52118e4648a04eead4759e06272dd5f57ecbd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 13 09:41:11 2011 -0400
+
+    fixing login thing
+
+commit 0fc07e57cc1cda4710c963a3bb8ab25e2d208da9
+Merge: ab5c2bb 84f691b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 12 16:54:41 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ab5c2bbf9b5b8ba0466f3799e14fb019fcefaf88
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 12 16:54:12 2011 -0400
+
+    small update to results preview of tables
+
+commit 84f691bf4dfc3b8d34e6cdc3cca6abde68d6b2af
+Merge: 304dc01 b001f3b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 12 16:52:01 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b001f3bc56636fb241f46c73ede6d0cc735c72bf
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 12 16:24:03 2011 -0400
+
+    adding preview to results page and adding tables to study summary
+
+commit 8b80a7668ccfa18dc18b0f20d905a58ab7326944
+Merge: d6ece6b 8ad3f78
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 12 15:18:22 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d6ece6b4abb155fd24a203cb6ee8c641fb2c5c47
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 12 15:17:39 2011 -0400
+
+    updating measures styles and setup for consistency and fixing misc form problems as well as finishing outcome measures forms other option
+
+commit 304dc01445845245b60170b1900836ad103c5fa5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 12 13:45:22 2011 -0400
+
+    set it so that arms and outcomes cannot be removed until any associated results or comparisons are also removed
+
+commit 8ad3f78c66d20131bffffe5d83661acf6fbdeaef
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 12 12:46:49 2011 -0400
+
+    fixed outcomes so that they cannot be deleted if they contain comparisons or results
+
+commit 4fd4b845220b43041871b6c95ec5fe7f7cc9a8cb
+Merge: 19c6ddb a7d6487
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 12 10:30:28 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 19c6ddb2ebb827194a1cd8478b8af92dc58f6192
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 12 10:30:16 2011 -0400
+
+    updated baseline characteristics and design details to allow for longer questions and instructions
+
+commit a7d6487365f789fac578eb4f8ea73af8571899aa
+Merge: a25ca09 776f7b9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 11 17:17:17 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a25ca0926fe1f6541bfc58762ab9b67665f6a849
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 11 17:17:00 2011 -0400
+
+    Updating summary tables, updating measures form
+
+commit 776f7b9969e9805315b70437cb833b1c28376f12
+Merge: 5fe7809 830956c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 11 15:19:48 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 5fe78097d6d06a294564c6536a26990e5c06047a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 11 15:19:37 2011 -0400
+
+    set comparisons, measures and data points to delete properly
+
+commit 830956c675aef0da94256d23145292ecae688834
+Merge: 01c5b19 d18100c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 11 15:07:36 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 01c5b199eb3880f833967c047a4e8543d78ee3d8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jul 11 15:07:13 2011 -0400
+
+    Updating displays for summaries and fixing lots of errors
+
+commit d18100cc3fa4da8f9e9226da5f722f9d231b723a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 11 12:01:18 2011 -0400
+
+    showing time point and arm comparisons within the matrices
+
+commit e77cbaae2108e8e5b124d0cb531e4465493c6ec9
+Merge: dd05345 bcb37b4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 11 11:25:36 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit dd05345d1a715e81e12e621a79ffc1345996230a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jul 11 11:25:25 2011 -0400
+
+    Finished comparisons page for now
+
+commit bcb37b40af7e671daab24539ae99c808b13f2467
+Merge: 9bc4060 d0a0b7d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 17:48:02 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 9bc40600e0eeb0bfcacb2b5ef8ffc8f8a460a498
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 17:47:54 2011 -0400
+
+    Fixed measure display, timepoints still broken
+
+commit 5826732904b88d34a4f870b9796fa39dedf74043
+Merge: 7543250 39fc1e7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 17:32:09 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d0a0b7dfd7bc7814a27a54da58631fa1a25f637a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 8 17:31:52 2011 -0400
+
+    lots of updates to comparisons. Almost perfect.
+
+commit 75432506d57da71fceb4bd81da4a4b7f718aae8e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 17:31:28 2011 -0400
+
+    Fixed measure display, timepoints still broken
+
+commit 39fc1e74b64924438717761e91e5a9ec67b75bba
+Merge: d4d25f5 dc6a1f7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 8 15:25:30 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d4d25f5112ef3c72c99f6ab2eb4612638f3c6edb
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 8 15:25:20 2011 -0400
+
+    changed text to followup question, working on comparisons
+
+commit dc6a1f7da443dfe2f9c384148a4281d4602d1419
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 14:57:29 2011 -0400
+
+    Fixed arm thing for nira - still broke timepoint entry
+
+commit 9465e6a5a46816ad4a97e5afdbb72d4c5fccae65
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 14:53:45 2011 -0400
+
+    Fixed arm thing for nira - still broke timepoint entry
+
+commit 86077149db9a80d8f05bc43a47314660380346b3
+Merge: 9a7f43f 690e70b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 14:35:15 2011 -0400
+
+    Fixed other viewing on quality dimensions page, but broke timepoint entry
+
+commit 9a7f43f7a24a3cb3e4ae052a5acf9049a8ab3d90
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 8 14:30:41 2011 -0400
+
+    Fixed other viewing on quality dimensions page, but broke timepoint entry
+
+commit 690e70b0ca2a6fe4f871ad9212bfdd34714c1984
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 8 11:20:55 2011 -0400
+
+    minor fixes to terminology on design detail and baseline characteristic pages
+
+commit 59d8f69857ef3f5e8928fcad6d751036d8330a41
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 17:06:21 2011 -0400
+
+    put comparison indicators in arms matrix
+
+commit d1db6a567c2544b12f8842da5602b9b60656c399
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 16:48:04 2011 -0400
+
+    key questions must now be present to save a project.
+
+commit 157a50cfb0ab63d09f53b3eb154d88b88d556e94
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 14:56:07 2011 -0400
+
+    removed current user information from user management page
+
+commit 02b05d30f8507a141276b0c02b10b79c3de23877
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 14:54:24 2011 -0400
+
+    added options to comparison measures dropdown and the results page
+
+commit 23eb0d91e8eb440f7cac36203c29a7aaa60e9571
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 12:51:38 2011 -0400
+
+    added save/cancel buttons to account management
+
+commit ee93f09857c3ea2266c82e536fee849a3e2d41c7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 12:32:13 2011 -0400
+
+    set so users cannot add themselves to additional project roles. also, users cannot upgrade their user names and the extraction form title can now be updated
+
+commit 24eb528c9637a02bdd9cddcb24ba3003a9af14d3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jul 7 11:30:21 2011 -0400
+
+    fixed extraction form to make sure user selects at least one key question when updating
+
+commit 4f238aebb3a268539ead22270f5db89fb6a9bbb2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 6 17:17:27 2011 -0400
+
+    fixed problem with baseline characteristic and design details. can now add many items with each even with tabs.
+
+commit 9a3b41b836be58bb505151132f40ffad75ded92c
+Merge: c1f7964 13709f7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 6 14:05:25 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c1f7964f4d50c26d2519c26ef945a52ffb030185
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 6 14:05:14 2011 -0400
+
+    update to instruction text for dd and bc
+
+commit 13709f78fadf9be6e57b7da0e4abf38984465343
+Merge: 35c7c08 7034c87
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 6 13:18:04 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 35c7c08478f9f3a042de775a928ef98b945e310b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jul 6 13:17:49 2011 -0400
+
+    adding publication image to extraction form section and making sure things don't work on disabled divs
+
+commit 7034c87ed693f8ff150abfb748269b4bc146e415
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 6 12:04:29 2011 -0400
+
+    fixed the other field for extraction form preview
+
+commit edb0a68b50395a83cfa7b0cb09b8d8acecb7ca43
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jul 6 11:25:02 2011 -0400
+
+    added instructions to design details and baseline characteristics
+
+commit 8c6eab23ea2523e66ddea56eec96cb234c573650
+Merge: a9d64e1 30fb711
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 5 17:31:36 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a9d64e15887eee43fe0d0904bcb7a0205fb1e327
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jul 5 17:31:03 2011 -0400
+
+    fixed notes
+
+commit 30fb711b6b2ffbc3f6137a783ba9d83e963df466
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 17:08:23 2011 -0400
+
+    trying to fix DD and BC
+
+commit 21a70bbbe48d1e0370b6f3fe3f64dd08f2347303
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 17:04:20 2011 -0400
+
+    trying to fix DD and BC
+
+commit 9683386879884e8fb534a61ea3cb1c5a8c75bf02
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 16:59:12 2011 -0400
+
+    trying to fix DD and BC
+
+commit 788093c845d25ecd334915d058ff60e93e3c4746
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 16:56:17 2011 -0400
+
+    trying to fix DD and BC
+
+commit dc07df31dfe4a374a8da10b8ef7197e7aa05aab2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 16:52:41 2011 -0400
+
+    trying to fix DD and BC
+
+commit 0d110e6b1513b6a1adbef3e152cd5aac4340d06b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 16:41:37 2011 -0400
+
+    updated the clean_kq_input function to strip off additional paragraph tags during creation and update
+
+commit 1de5828d5a752fcbde1ce008ffc8bbb17e0395a6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 16:19:18 2011 -0400
+
+    update to comparisons page.
+
+commit f5599732112c933515c083bdf3897025bf4921af
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jul 5 13:13:57 2011 -0400
+
+    removed a <<< HEAD conflict from quality
+
+commit 9cc34c96d1cc80a64760633b2435fb8a5fc2955e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 16:15:54 2011 -0400
+
+    fixing error page messages
+
+commit f9f12363c87b95e7f927d2ce15b7cc9068b91c7f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 16:14:58 2011 -0400
+
+    fixing error page redirects
+
+commit ae8ce5aeded1c5bbcdd3751325352f268fc8df53
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 15:56:17 2011 -0400
+
+    fixing error page redirects
+
+commit 21d24e9f71661d6926f10e01b4c35aee5e749960
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 15:53:32 2011 -0400
+
+    fixing display messages
+
+commit a35890a80708543c35d31fd6b725841585960164
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 14:55:33 2011 -0400
+
+    updating schema so it works with heroku
+
+commit cb9566b125d74b15ac38e82b2144f3d4268cc394
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 14:46:24 2011 -0400
+
+    updating schema so it works with heroku
+
+commit 03fc6ae5d5d99276019464ff4be0b86301970d35
+Merge: dcb9894 c3c4fc9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 1 14:07:46 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit dcb9894ed2b628d24dea2f485debf306d7ace5d6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 1 14:07:31 2011 -0400
+
+    fixed error on quality page.
+
+commit c3c4fc95df54166dba223933f125efc866326580
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 14:02:22 2011 -0400
+
+    fixing errors for IE and postgres
+
+commit 3914e6bcc3be4b4558d7cf6c036e0fab55d3a388
+Merge: e233652 fceed0c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 11:16:42 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit e233652de633347c1dfd548b877592c7a27d5bce
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 11:15:16 2011 -0400
+
+    Fixing update project redirect
+
+commit fceed0c233b4561fbbda9d8d4035dd9dad920375
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 1 11:13:53 2011 -0400
+
+    trying to fix baselines on heroku
+
+commit 363a3e20204872083560696e9293cf9e1f3fd7e0
+Merge: c200297 15d92da
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 1 10:34:06 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c2002979072103b70cb2397b43ef80b1f26b6833
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jul 1 10:33:30 2011 -0400
+
+    trying to fix baseline characteristics
+
+commit 15d92da0b81322f8ff25e3fd3c50ee5925c69ce1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 10:31:19 2011 -0400
+
+    Fixing update project redirect
+
+commit 2608a1ccc11ed30807949f03520459a9609b82f8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jul 1 10:06:37 2011 -0400
+
+    Fixing update project redirect
+
+commit 0fd351936bb2e7f07a5f881310546089f634fb8f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:40:49 2011 -0400
+
+    attempting to fix error displaying
+
+commit ee2285ca1f00d006dc82b0c752a28b29c05a74c5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:31:51 2011 -0400
+
+    attempting to fix error displaying
+
+commit 1f935e6f8454923a79b90c665f8735b4c622f2db
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:23:07 2011 -0400
+
+    attempting to fix error displaying
+
+commit d98e465ceb4e538da087926e31be07d3b20eeb08
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:19:53 2011 -0400
+
+    attempting to fix error displaying
+
+commit 382cccfb23beb625f584f0534c4c91954dd5c381
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:17:31 2011 -0400
+
+    attempting to fix error with publish page
+
+commit d02cf13d3f6807290864cb8c19fdc7db57c940ca
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:14:13 2011 -0400
+
+    attempting to fix error with publish page
+
+commit 4d9622c931d32d8ee28e2f51a5cd592f61d8394d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:10:08 2011 -0400
+
+    attempting to fix error with publish page
+
+commit 656de34b0e3b3f9b42d0b065e80cbab5b9b3dc0d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 17:07:50 2011 -0400
+
+    attempting to fix error rendering
+
+commit f29e9e1e38172b8150882621381636c4b22a3c49
+Merge: ac9545c b8e2744
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 17:01:32 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ac9545c808cc2d38d51921f362667ce65ec8a53a
+Merge: 2c5b9dd 7dc325f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 17:01:02 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 2c5b9ddbf2a975eed18377769238473538495c42
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 17:00:52 2011 -0400
+
+    finished fixing baseline characteristics and design details on extraction form. They are DONE.
+
+commit b8e27442e2e83f8b771c6a93cb268b51ec2c8683
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 16:59:08 2011 -0400
+
+    A few remaining fixes, plus making decent styles
+
+commit 7dc325f532e975737ec5677c31619b7477002373
+Merge: cfdc830 2a9343a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 15:18:23 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cfdc8300ed5ad04ec1681a7b72d18dce5c33a6a3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 15:18:09 2011 -0400
+
+    fixed error when you dont name a project
+
+commit 2a9343a3bccb9892604412aa27bd5082e958117b
+Merge: 12f60d3 4ef2e56
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:59:12 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 12f60d3810bb0f85fb68edda03247da3c62e3483
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:58:51 2011 -0400
+
+    fixed a problem with the outcome page.
+
+commit 4ef2e56f17dbdf6497cb755985c5ebb36ebf8916
+Merge: dc003b7 2a383ca
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 14:56:46 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit dc003b74ac387ef413cda63db9ff1f690d5d5129
+Merge: ba14b77 bb0d661
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 14:54:23 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ba14b771d1fba0f06338e6e02457b208804bf405
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 14:54:09 2011 -0400
+
+    fixed other option on timepoints in outcomes on study side
+
+commit 2a383ca29778b16feb07fcb1aee5ca4cce0e6549
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:53:56 2011 -0400
+
+    fixed a problem with the outcome page.
+
+commit bb0d661f3ab605aaf451239afbae5ea89d5d3c09
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:48:16 2011 -0400
+
+    fixed a problem with the outcome page.
+
+commit 0769b1f1c73692edb9a4883157f4769c3a1cb610
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:45:15 2011 -0400
+
+    fixed a problem with the outcome page.
+
+commit 67d658ee0e7c1bf5c8964a9481c7959b5efead7d
+Merge: 681d502 92a57bb
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:29:24 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 681d502c365d3a5b9bc2b3f1f3cdcb4acd1473aa
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:29:10 2011 -0400
+
+    fixed primary publication and citation problem
+
+commit 92a57bbbe7681e916e434d90135b20771407c8b8
+Merge: 100932b fbda96c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 14:21:32 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 100932b8d693041e04165afd0034d9eb3f1c2182
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 14:21:15 2011 -0400
+
+    fixing errors in extraction form sections saving
+
+commit fbda96cab9e97e0abb5d43b912f582267177b4a1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 14:03:03 2011 -0400
+
+    made new baseline and design window to be modal
+
+commit a60508277d624a37c644a80586789000100f068c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 13:55:40 2011 -0400
+
+    updated design details and baseline characteristics. Haven't tested thoroughly but I think everything is working properly now.
+
+commit f62f7a06f0f5b91e804ff3220b146658c1395cf2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 13:45:37 2011 -0400
+
+    updated design details and baseline characteristics. Haven't tested thoroughly but I think everything is working properly now.
+
+commit 279ca5149346b78ff7699dff78b8ced910a357f6
+Merge: 897d2c8 7c4b5c1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 13:23:54 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 897d2c886632b0b24a38e9b891248c04e3815793
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 30 13:23:44 2011 -0400
+
+    fixed design details and baseline characteristics on extraction form
+
+commit 7c4b5c1a63cef27e71a84291c8357d377823eac6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 12:53:08 2011 -0400
+
+    making sure srdr-dev is up to date
+
+commit b5fa0cea49e7b02eb0634f0b4a882843d382cfe5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 30 11:41:46 2011 -0400
+
+    fixing baseline, design, and quality forms
+
+commit a2433f0de1a539b1e90394f392d0bda10996fd92
+Merge: a555592 a86acc4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 17:48:30 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a555592d8decd75dc74506b38c03855a29abe3cb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 17:48:12 2011 -0400
+
+    fixing question builder, almost done
+
+commit a86acc42a445724e39495b6d074173534f8919cf
+Merge: c61704c 6a5b54f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 16:58:01 2011 -0400
+
+    merged.
+
+commit c61704cd43b27430da2cbb2434ec4ab4456a11d5
+Merge: 93924ca a7f69e1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 16:48:02 2011 -0400
+
+    mering
+
+commit 40fd900f7a1c47c49e4aee3634fac3e61c58f756
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 16:04:50 2011 -0400
+
+    styling boxes
+
+commit 6a5b54fcde741318cf9d6576293dcb4a8a1a6b0d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 16:01:42 2011 -0400
+
+    adding study preview on pages
+
+commit caa65f1ea41459ecb4adb1ba71d8f892aecd9f62
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 15:57:10 2011 -0400
+
+    fixing baseline char add/edit
+
+commit 93924ca8037d2e411f0c517f297d4903eefe4ce7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 15:55:43 2011 -0400
+
+    t
+
+commit f4762b6692779b1db92cf778d73cb5a2a64d1c6c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 15:55:05 2011 -0400
+
+    fixing baseline char add/edit
+
+commit a7f69e1bd569ec5fcd9111285f904d8b563ef60a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 15:53:19 2011 -0400
+
+    adding study preview on pages
+
+commit 0cb4b562d7ffa74fa2819d494b400e057bbd2d16
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 15:36:38 2011 -0400
+
+    adding study preview on pages
+
+commit 8a61e048bbb0e07f794f73c399d6beb3e9027445
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 15:20:30 2011 -0400
+
+    adding study preview on pages
+
+commit 48ee51a2551cd30c014bf1ee0305328bd7398dcc
+Merge: 8d50a32 7bec491
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 15:08:21 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 8d50a329dd2f31624050d3bb414c32cc3e05a826
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 15:08:05 2011 -0400
+
+    fixing design details and baseline characteristics
+
+commit 7bec4917e89ddba236b154ad199b5745e8631e8b
+Merge: 10c36ed 820beec
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 14:58:15 2011 -0400
+
+    fixing pop up forms in study data extraction
+
+commit 10c36eda01e8a36071230c4ea13703b19d9cd3d3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 14:54:48 2011 -0400
+
+    fixing pop up forms in study data extraction
+
+commit 820beec5e625a1fb484e9bea5ee1e5332495f13c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 13:55:59 2011 -0400
+
+    updated study edit navigation
+
+commit 00c3375e234204c75c2c93af387409fbcc04d486
+Merge: b555b32 4e69298
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 13:06:41 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b555b32c796a3caf182d913e165938111ad29665
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 13:06:26 2011 -0400
+
+    fixed study creation
+
+commit 4e692989e4980118e99269225e8e05d6c407c1e4
+Merge: 72e4851 229d764
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 12:59:09 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 72e4851979676a0e466c34dfea62fd9da43aaf7e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 12:58:31 2011 -0400
+
+    fixing ids on baselines and design details, also fixing popup form titles
+
+commit 229d76416084de5a9842e177e3a55e15c49d8a80
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 12:14:01 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 2bcfaefc2a3e50b9b62802a0aba67aa9463a1b41
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 12:04:15 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 8be39f35332e67659260a29e072fa0470ee92afe
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 12:01:35 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 7aafe9cf827e17935aa80017a30c6ddebaa633ec
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:56:59 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 44a723ea57f1bc5788c9dd894c40f6af8d7a6f48
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:55:25 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit cc1dcef93565f4d570fe0567840f50c35dfe838d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:51:29 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 2f735bf392c3cdefa382724992d147a59d7a30ab
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:48:35 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 63ebfadeed762ba63011071dafce55217c2bcdfc
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:44:10 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit f46e9a730b3e5bd17b62ee8dec6a19702a4b0dea
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:40:09 2011 -0400
+
+    updated create.js.erb for extraction forms
+
+commit 312385f3ea0fe29139f5c40a483b9e1cfa03e5dc
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:28:24 2011 -0400
+
+    breaking down the js response
+
+commit bbaf76332dcad6e5267a716dcb2004b5381cfcd6
+Merge: 5694b23 b37a3a9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:09:58 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 5694b23105fdb73b46f27a46e82729c7874338fe
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 11:09:46 2011 -0400
+
+    removed data-disable_with from new EF form
+
+commit b37a3a9dd1b5ff195bad4a346b1fdc7bf91cb860
+Merge: 6340bd2 a0c6260
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:58:07 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 6340bd21b81ae42f1f2beeab4dbdf950b77321d0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:57:15 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit a0c6260fcc71b3842204034007b6222ae626de1c
+Merge: 8c17735 5cadf77
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 10:56:13 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 8c17735243e83d9c26528f97930e4dda0a05ccf5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 29 10:55:56 2011 -0400
+
+    commented the javascript to automatically focus on the first form field
+
+commit 5cadf770338429638b5df3e915bd31f7797a8597
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:54:10 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit a0685be0321a5e554066beb1196b623c460812b1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:50:03 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit b7f0041d5bff772949a003920dd797aebc4ce6fc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:46:31 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit 74116f3dcb9e3651631410a5f44c262da3a44d12
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:44:26 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit 11eda00d79dc840b903bdb666fc8a552c429e2f7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:42:22 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit 88efb5cdacdf0248d9277d7f82890c47ebe531ea
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 10:00:40 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit eb97410ffa9bee6c545a9d3175b1f6da4964acc8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 09:55:03 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit 6e84594e378bf8492224cb834c27ae745316755f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 09:51:48 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit e8535d34518788d1a4579593db8368df9377fc26
+Merge: 556a44c f4ce339
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 09:45:46 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 556a44c8aa92d8cca253f874a84593855cc75b50
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 29 09:44:43 2011 -0400
+
+    trying to fix ext forms on heroku
+
+commit f4ce339564396b9beb18a20b841df826d6836584
+Merge: 01f95bf 858038e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 28 17:38:05 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 01f95bf41cccf0ee4b0a57673fabe4156bb27f47
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 28 17:37:55 2011 -0400
+
+    edit comparisons now working
+
+commit 858038eaf4bf72ed55661f72f4ba1e27522adefe
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 17:02:31 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit e62c2ec3bb502fd1c9b3835b8f89e70d80b4fbcf
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 16:51:39 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit aa1c756dd05eb5e42b88c15feca4afc2935b5f44
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 16:35:10 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 190f7c067708c46e6f2e52e089c4905d67134389
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 16:31:14 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 48c1c78667b94d8736358260b4f2fa9e86cac342
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 16:26:29 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 44be59960dce320894b4231c3c63560b1da5be9c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 16:11:47 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 7aed47b5c54ebf485b122bbd3055ee8df19f5312
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 16:04:58 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit ad949312d767c59386f65d25c2b36d4270a34931
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:58:48 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 34743ed3a1bcd6552b948063a63d4da1568478a5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:51:28 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 3976bbda3fac35072cdebb9ed558c5b21072ee2b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:43:22 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 2bc083247f49e1925cefad46d2d9fbe4231159c4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:39:12 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit 438e9baecf2bd71381a84fc9daed10e161226f7d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:32:56 2011 -0400
+
+    trying to fix extraction form titles in srdr-dev
+
+commit cbeadb24807812c5d034c5c9168477856f06f5a0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:22:02 2011 -0400
+
+    adding multiple extraction forms
+
+commit 3b21e43c7c8e05365e39ca54d2e5dafec9c46e3e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 15:15:25 2011 -0400
+
+    updated missing layouts
+
+commit d006131065745d9df02066fe96bb3c2e36f6d953
+Merge: 19f3eea dec2ab1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 14:37:40 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 19f3eead9471921e879e4a9137373d03413ee70b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 14:37:15 2011 -0400
+
+    updated key question and extraction form creation
+
+commit dec2ab158e1cadfeddd563451da945408f079cf1
+Merge: ac50a28 65a4a97
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 28 14:27:19 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ac50a28a0a9921c6106098c51ae4d5798444790a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 28 14:27:06 2011 -0400
+
+    working on previewing comparisons and fixed the results/comparisons inclusion problem for Nira
+
+commit 65a4a973853fcc5d9c200b3b2efe2613847c233a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 28 11:32:05 2011 -0400
+
+    fixing background colors
+
+commit 3f1047a43fdc87bff43dadb0e84012fd966208ef
+Merge: 78801bd 6add60f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 27 17:49:33 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 78801bd8a21b4956877aab5fe81479859e43e9d6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 27 17:48:27 2011 -0400
+
+    fixing titles and key questions
+
+commit 6add60fdde265fe3ec79646bbbb2abe44c3eb45f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 27 17:11:33 2011 -0400
+
+    made updates to outcome results
+
+commit 09dd7a7eee0771a36e67b008517322e43c181028
+Merge: cf49215 94e9c75
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 27 14:58:55 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cf492156d6a26747e2c565a1abdf5063a1688a61
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 27 14:58:44 2011 -0400
+
+    baseline characteristic subquestions done?
+
+commit 94e9c759f91237548e0b86f9f67952e05f97aaec
+Merge: cce8bb3 dbc7079
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 27 13:49:39 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cce8bb3bb4e978c8fbdf6f167fea7105da00b3ba
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 27 13:48:10 2011 -0400
+
+    fixing styles and setup of projects
+
+commit dbc70796cc802da863035b03db46278b276b5b8d
+Merge: b4b7cc9 7870ad3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jun 24 17:14:06 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b4b7cc91396290a563d73166ad0f41d40ae0f317
+Merge: 5a65612 61263f0
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jun 24 17:11:34 2011 -0400
+
+    updated baseline characteristics to get subquestions. However, checkboxes still not working correctly
+
+commit 7870ad3a72b4fae9b8043c5341f10e7958a6e039
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jun 24 17:08:17 2011 -0400
+
+    finishing up extraction forms and prettifying mywork and jquery
+
+commit 5a65612c1651dc10d9793ebf8e309af2bf7e6b72
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jun 24 17:04:07 2011 -0400
+
+    updated baseline characteristics to get subquestions. However, checkboxes still not working correctly
+
+commit 61263f0703d7bc5148a92538c9dfef06201f8135
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 23 16:47:28 2011 -0400
+
+    small changes with project extraction forms
+
+commit 8cfc7124694f9088a2054f57e78ab01c7044d194
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 23 16:21:13 2011 -0400
+
+    converting extraction form section to tabs
+
+commit ef298d0fcfc66b0de0841d7f993f1523b647f862
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 22 15:46:37 2011 -0400
+
+    fixing key question forms - removing qtip, simplifying things
+
+commit e39de3bcfd3811c0e25cb44a5bc066b28264f928
+Merge: d630244 a5c95a0
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 22 10:24:16 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d63024448f2a46b0394e7db94d4876d1255decda
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 22 10:23:51 2011 -0400
+
+    merging with sarah
+
+commit a5c95a0b60898163d0a9a0d7564ba749fb1e6882
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 21 17:16:25 2011 -0400
+
+    Fixing header setup
+
+commit d79f51139cc2abd26d1a47dc5b3813be941abd4f
+Merge: 74b1da8 6c54466
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 21 17:03:07 2011 -0400
+
+    Fixing links on extraction forms section
+
+commit 74b1da8bc8d0574c68f1c0dccafcf9f6234567f6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Jun 21 17:01:47 2011 -0400
+
+    Fixing links on extraction forms section
+
+commit 581dbc75f3fefd5dc31e5f69456b7f89a82863be
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 21 15:50:47 2011 -0400
+
+    REMOVED OLD COMPARISON METHOD FROM STUDIES CONTROLLER
+
+commit 6c54466e666aa6b1b5fe8731f59438a9c3f0b70b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 21 15:39:09 2011 -0400
+
+    more changes to design details, arms, etc
+
+commit e2dc5707242a419a0bcaa22e88fd464b1f8338df
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 21 12:26:28 2011 -0400
+
+    starting work on baseline characteristics
+
+commit 312ee7ceda4d2904a36fa90247ca4d3c64714fa3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 21 11:42:34 2011 -0400
+
+    updated the question builder for design details. Subquestion answers are now saving and being shown properly
+
+commit 655bd860e30fff1f5dbc11a6167aeca96559c84e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 21 10:12:59 2011 -0400
+
+    fixed arm and outcome entry on study side.
+
+commit 22ddb1b1dbe5aabe52f749eb9da3680088842390
+Merge: 891e094 227422d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 17:12:48 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 891e094f0e102ca7e4273eb21ffccdb04e1c86e2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 17:12:39 2011 -0400
+
+    more changes to study nav
+
+commit 227422d48e37ecc0fbba13071121c514a3f79ea5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 20 16:59:58 2011 -0400
+
+    more fixes to extraction form setup forms
+
+commit 5b0d7a0266c5086cd1861fa1dc4cbf6b14970a9a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 20 14:24:35 2011 -0400
+
+    fixed extraction form editing
+
+commit 26084ca86d580517d42088bd2ae94ba949d4efe4
+Merge: a90ce3e 67a3552
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 13:51:13 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a90ce3e957e121b99e01e4835d9e686dd83ee677
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 13:50:53 2011 -0400
+
+    udpate to study side navigation
+
+commit 67a35526c8076d224e2b14ac66381ebe7d955a3f
+Merge: be7f0c9 3032822
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 20 13:48:29 2011 -0400
+
+    popup window on extraction forms
+
+commit be7f0c93f7a2a6b2f2a4fd4d32c2cc98b82c8e45
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Jun 20 13:47:12 2011 -0400
+
+    popup window on extraction forms
+
+commit 3032822ba241fd75a921a9b0efd1c1dbef43a801
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 12:09:45 2011 -0400
+
+    working on study edit navigation menu
+
+commit fd0f3fe8998ff5f02e5c815c0dafdbb7da7f8d3e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 09:22:16 2011 -0400
+
+    messing around with styles for study entry
+
+commit ce614c85a8b7d56f8809ed5983e4ef6758b175b6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 20 09:22:09 2011 -0400
+
+    messing around with styles for study entry
+
+commit 940e9b954ac34bb82fc7f32a701fc8c3d410e69d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 16 14:44:50 2011 -0400
+
+    updating my work page
+
+commit 68092695cb955787411aee581967a0ba084df9f7
+Merge: 6aad773 348addb
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 16 09:57:43 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 348addb3dfdfbd819407861bdfdf4b83f338c1cf
+Merge: df94e59 503853e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 16 09:54:32 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit df94e59f544690622a25a40555931fd779ca080c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 16 09:53:28 2011 -0400
+
+    starting on karen's css changes
+
+commit 6aad773c9e58cf95bee38c80517094670167fe96
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Jun 16 09:52:28 2011 -0400
+
+    working on showing yes/no inputs
+
+commit 503853ec060d1ffc03cde571a7c9bf94dd0416b4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Jun 14 16:57:33 2011 -0400
+
+    subquestions working on design details
+
+commit ea51126d65b950d4011bfe250cd18aee930c9569
+Merge: 62db248 42c2ac0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jun 10 17:46:12 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 62db248689df89bf3d0dfff0c13f8eb2db2ddbac
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jun 10 17:45:43 2011 -0400
+
+    making a lot of changes. nothing works right now. css and otherwise.
+
+commit 42c2ac0a6d4af051fd126a676abf2c3eac8ec726
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jun 10 16:59:46 2011 -0400
+
+    saving subquestions now works on study side. still need to work on display and editing
+
+commit 5346071c23e978ec591b25efc526a8ddd864b10f
+Merge: f63a7c1 f127ef1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jun 10 14:07:45 2011 -0400
+
+    fixed question reordering and have subquestions displaying for all input types other than text
+
+commit f63a7c1ed3701b02d12179f8b68f85ba8e5fce3a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Jun 10 14:06:09 2011 -0400
+
+    fixed question reordering and have subquestions displaying for all input types other than text
+
+commit f127ef1528333d9a98a256bd15dbc1917e833a30
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 9 10:56:58 2011 -0400
+
+    reverting or some shit
+
+commit e057e1d116a5e5a8846b299b73f2d0e2b443ac74
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 9 10:53:42 2011 -0400
+
+    REALLY PISSED OFF
+
+commit a07fe10c082dc2a9bac886ec6f3cac6bf7cf54dc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jun 9 10:31:07 2011 -0400
+
+    added comparisons and results small updates for dr. lau's test
+
+commit 69b3b45a06af1c936a2e34206b21b1d53fd3d95f
+Merge: f1b9d4d 27df0ad
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 8 16:26:48 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit f1b9d4d9838a6ea0176bf5b409b0321b9cd1122d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 8 16:26:38 2011 -0400
+
+    working on subquestion
+
+commit 27df0ad4a5430fa18827fcc319235d0a52d21a3e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 8 15:38:50 2011 -0400
+
+    fixed rake versions
+
+commit 7caba0d69d9df2f95ce7439390a8e5e2af2bb638
+Merge: 1a2d98a 884a754
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 8 15:06:45 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 1a2d98a511e2f5fbf0de6789976105a5efc48f69
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 8 15:06:30 2011 -0400
+
+    merging with sarah...
+
+commit 884a754c6943544a995a1cb5419689af1d143a9d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 8 15:03:38 2011 -0400
+
+    updating migrations
+
+commit 22bf6be9e4d13945b17a89dacc9c7b8a12993d82
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 8 14:59:11 2011 -0400
+
+    adding require dsl line to rakefile
+
+commit 3705e5f0e8b1bca9a627b6317132a6e974437ffb
+Merge: a8cc9db 918595d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 8 12:18:14 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a8cc9db0228259a2607a6e038cf610e9ddfbe987
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jun 8 12:17:56 2011 -0400
+
+    Lots of changes to outcome results page
+
+commit 918595d7c12a5f6951b85d3063d8a9f4a35873da
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Jun 8 12:11:56 2011 -0400
+
+    mostly finished the comparison entry
+
+commit afa3658f21be9541052305cb1e970f122379bc75
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 6 17:15:00 2011 -0400
+
+    editing measures now working.
+
+commit 4e6bd8d5a8b7ee863622cbc2feb608b3d761019c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Jun 6 14:17:42 2011 -0400
+
+    got a start on outcome comparisons
+
+commit c0dc148bf31287929950e140d91fbfb55194db0e
+Merge: 0c3ac69 23b6dc3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 25 15:41:56 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 0c3ac6945dda2f2a8e421486742c31f78d79ada5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 25 15:41:28 2011 -0400
+
+    arms and outcomes will now update across studies when changed in the extraction form.
+
+commit 23b6dc3d215e17e49ca86797443311de5b4cfdf1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue May 24 15:43:05 2011 -0400
+
+    fixed wysiwyg editors on project edit page
+
+commit c28015b49dd547438b8f73e93be9e06d4a3a3a76
+Merge: 1834cfc 579c6cd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue May 24 15:29:00 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 1834cfc15fb4e7cf208b5318c61b4c783549c6f4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue May 24 15:26:04 2011 -0400
+
+    fixed save ability on outcome raw data tables page
+
+commit 579c6cd26b40011c5dff199bc9662c8e31c0049e
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue May 24 15:25:45 2011 -0400
+
+    fixed problems Ramon encountered.
+
+commit 94f9b758d497d0ca67014e71bb91622dc3dfc850
+Merge: 7b8d265 602087b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 17:20:54 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 7b8d2656425dd6b7850e49ba229907a6e2e7c1c5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 17:20:16 2011 -0400
+
+    fixed dropdown questions for extraction form sections to have the check mark appear and then disappear after 1.5 seconds
+
+commit 602087b41fee622dd760d8afa07c3ba79e5e6f6d
+Merge: 9ad4b5c cdb6bb6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri May 20 17:17:40 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 9ad4b5c53e309022d03487f6f5b5307fd42ceacd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri May 20 17:17:27 2011 -0400
+
+    Added save functionality to outcome results table
+
+commit 55bda7c35c731f084f23016b7bcabe2596cecbf7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 16:31:03 2011 -0400
+
+    added data-disable-with to baseline characteristics
+
+commit cdb6bb63b592fa261abc9fd85741a2d1e10ca349
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 16:20:12 2011 -0400
+
+    small fix to design detail page.
+
+commit 7a2e5dca025067bc642a2fb3871c233ebfac5060
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 15:14:00 2011 -0400
+
+    minor update to new extraction form view
+
+commit 0d681237fce4e27ee3f2b0cebbfff188f85b166d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 14:39:24 2011 -0400
+
+    fixed secondary publication form resetting
+
+commit 9de22e40e8def4f15be065d2286266c63926d25f
+Merge: 1b9b7cb c0fa6ee
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 11:53:45 2011 -0400
+
+    updated publication entry to include the processing... indicators
+
+commit 1b9b7cbf5a68389e31bea9d523422407bedc06e2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 11:46:56 2011 -0400
+
+    updated publication entry to include the processing... indicators
+
+commit c0fa6ee0febb1867d015da6ae059a7928ac2183f
+Merge: cc93bd4 117c0c1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri May 20 11:46:11 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cc93bd44698a71334b99ad3ada2a8ec248564f5e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri May 20 11:45:51 2011 -0400
+
+    fixing form on secondary_publications
+
+commit 117c0c17a54fb747174aeb7c42003287a41a5a98
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 20 11:06:58 2011 -0400
+
+    finished disabling buttons for extraction form and study forms.
+
+commit fe91bba70a29ab75f6a514935773a6558fe2b470
+Merge: 1052c1d ca30eeb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu May 19 17:11:37 2011 -0400
+
+    fixed quality dimensions saving... most of the way, anyway
+
+commit 1052c1d6a6eb6c4222231260975421cbc31141d6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu May 19 17:10:29 2011 -0400
+
+    fixed quality dimensions saving... most of the way, anyway
+
+commit ca30eebf54471f7351385bebd089258045b67699
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu May 19 17:04:41 2011 -0400
+
+    added processing notifications to all study-side buttons
+
+commit ea186ddc834f457bc4100ace956554e7f274c933
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu May 19 14:54:07 2011 -0400
+
+    updated study arms to pull in data from all extraction forms and previously defined custom project arms.
+
+commit 76c9fa4a33e8ee8af980ec08360b2b0123774f3c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu May 19 13:44:01 2011 -0400
+
+    finished updating the outcome pages on study side.
+
+commit cf4fcce05f7ae7da5159cbf588f3870f70c3e093
+Merge: 34f745a 9457aaf
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 18 17:10:11 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 34f745a809ee2129a5700f12aeb125cba76a33b2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 18 17:09:59 2011 -0400
+
+    Almost done with outcome setup for ef and study side.
+
+commit 9457aaf9030c8504c1900de03fcbe2d76d5d439d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 18 16:59:04 2011 -0400
+
+    Finished measures add and edit to outcome results new table
+
+commit 83b80265b9e535bf1f8e4c3988a04b1798460fc2
+Merge: fc90795 451c472
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 18 15:46:50 2011 -0400
+
+    Starting basic tables for outcome_results new design
+
+commit fc907954b963829ad6deb15f2113312013a83ea6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 18 15:45:59 2011 -0400
+
+    Starting basic tables for outcome_results new design
+
+commit 451c472f8df43969f841b192b20587c61d60b1e5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 18 15:39:06 2011 -0400
+
+    done with study-side arms entry.
+
+commit 0b4e70742bf448ec0ca64e050ed17b738b9d73e3
+Merge: d4998c4 4e2ef0a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 18 14:09:53 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d4998c4225ae4c35a2f347cd064b4ddd4d51309c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 18 14:09:40 2011 -0400
+
+    updated arm entry method
+
+commit 4e2ef0a7915495efc80bc6f2b841c23f3c1771a9
+Merge: 9450631 500c6ba
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 18 09:16:16 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 9450631aa37b194d5ade0d54a8e13df151679eb9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 18 09:15:48 2011 -0400
+
+    removing all popbox references
+
+commit 500c6ba58196304f94f53cd930c598e2462a1dcd
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue May 17 16:03:24 2011 -0400
+
+    added ajax wait notifications and started updating extraction form arm creation
+
+commit 8fa3706b907b538b311fd96c95f1df1a47a04ae9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 16 16:46:21 2011 -0400
+
+    Started to implement disabled submit buttons on click. This does not include Ajax submissions.
+
+commit 9187306e81e690d9f759763bca6cd6dfdc6635d9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 16 13:39:19 2011 -0400
+
+    fixed study key questions section saving and js.erb stuff
+
+commit 1a954d8f1c9f909d41fdca9670d2267c0db6ce9b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 16 13:25:29 2011 -0400
+
+    fixing sticky notes
+
+commit b811c2acf03e799cb18e8447cdbd5f83c6b7a973
+Merge: c6c11bb 6e4ac52
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 16 12:36:14 2011 -0400
+
+    updated batch creation and study side nav
+
+commit c6c11bb9a2e921bf4e762327f1eba5a026eb6f5b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 16 12:30:41 2011 -0400
+
+    fixed batch addition of studies and the study side nav key question indicator for each section.
+
+commit 6e4ac52b4342957092555a3461f1a244d7141293
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 16 12:12:30 2011 -0400
+
+    fixed problem with retrieving pubmed data js.erb file
+
+commit 70d72a728d2a7189abeec831583f7d57278db55e
+Merge: d65e017 71a300a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 16 11:08:11 2011 -0400
+
+    Replaced rjs with js.erb, fixed 'other' boxes in quality dimensions, fixed other issues with forms
+
+commit d65e017ba08650008ef180b7eefd3e28a56930b1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 16 11:03:29 2011 -0400
+
+    Replaced rjs with js.erb, fixed 'other' boxes in quality dimensions, fixed other issues with forms
+
+commit 71a300aa335f229fdad7572011c2504d8e19e721
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 13 14:02:05 2011 -0400
+
+    fixed outcome names form and added the type parameter.
+
+commit cac832d776fe2493e8738ee32b6ce100bcd10dfb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri May 6 11:19:14 2011 -0400
+
+    fixing armpage for testing
+
+commit 265f454f09895d245bb79891ac35d5563550c1f6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri May 6 11:06:50 2011 -0400
+
+    minor change to outcome results page
+
+commit 50bacd8ca6f30616b80b6c2b48df272f705797da
+Merge: 366055e fb47eff
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu May 5 16:51:21 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 366055e58b7ca451e26150af1a497f8f382c9282
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu May 5 16:51:06 2011 -0400
+
+    more on extraction form importing
+
+commit fb47eff37ba73a5982096f655d3941bf7345ab2f
+Merge: 1b4647c 48a34a8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 4 14:26:40 2011 -0400
+
+    Alerting users when they try to change extraction form fields for which a study already has data
+
+commit 1b4647cc4dd41cf1aaf6b5afa19e8fcd9223f6be
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed May 4 14:23:45 2011 -0400
+
+    Alerting users when they try to change extraction form fields for which a study already has data
+
+commit 48a34a860ef952f6f44d9bf11407afa71f8cf38f
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed May 4 14:16:03 2011 -0400
+
+    extraction form importing is beginning to work a little better...
+
+commit acbf9aa480feccec0e442ce20877a5b8380c4ec0
+Merge: 6b79d7e f4efc34
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 16:38:34 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 6b79d7edc8a9bbe5346b26473db062850f538880
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 16:38:24 2011 -0400
+
+    trying to fix importing.
+
+commit f4efc3436013eee694c2c804a266bd99023cdc11
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 16:36:07 2011 -0400
+
+    fixing error message display
+
+commit 4dfdc98e473d13b29f9efca0ec57b19e8428e724
+Merge: fcfba64 95ab7a4
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 16:29:19 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit fcfba644d108158ec0e101c86800c9d054654dde
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 16:29:10 2011 -0400
+
+    more work with importing, having trouble with flash[:notice]
+
+commit 95ab7a4d8e630f15a68a1d76d530baa4a7418ff9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 16:26:21 2011 -0400
+
+    fixing notice messages
+
+commit 9e73fc7cfe6fe37050168b9dbc9b8a07a521ad55
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 16:00:19 2011 -0400
+
+    fixing including section on baseline characteristics extraction form page
+
+commit 0b61292eb841eed5ecedb8561664403c0b121449
+Merge: 563e090 1f48b66
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 15:39:05 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 563e09056f286e00e4438dc67dd4a2d5025009dc
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 15:38:55 2011 -0400
+
+    updated project deletion. testing out new importing code.
+
+commit 1f48b66482d4391d393f55d4392e74db206bfce9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 15:36:03 2011 -0400
+
+    fixing add arms to extraction forms
+
+commit 8f43fce4bb11f71925334e8241b59bc69b83e40d
+Merge: 366b9fe 038bbce
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 11:51:03 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 366b9feb6a1068544a9d7d2c91889c1d55239b08
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 11:50:32 2011 -0400
+
+    fixed projects sidebar css
+
+commit 038bbce1fc44a43bbca0ce184f3bc8e5a3a83f90
+Merge: 60a79fc a0be2fb
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 11:18:43 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 60a79fc88d18659669545ed4793f9d4f032e2a78
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon May 2 11:18:27 2011 -0400
+
+    updated the extraction form import page to stop showing extra form sections
+
+commit a0be2fb9a884653124ce764be0798bcebf879b2e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon May 2 11:05:56 2011 -0400
+
+    added error messages to all modal forms
+
+commit ea5c49bec2fcdcba9cea057f9b640f6b59f09002
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 29 10:35:06 2011 -0400
+
+    updated study side_nav to show key questions assigned to each extraction form section
+
+commit 5e8e44af5ca23dfd02bb063b2af24cb56a9a0b4e
+Merge: a048a55 a99e91d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 28 10:28:23 2011 -0400
+
+    borrowing extraction form sections
+
+commit a048a55efa08b47ed21e51b9d1e836c51ae24728
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 28 10:17:57 2011 -0400
+
+    borrowing extraction form sections
+
+commit a99e91dbacd5c22114a8d9c462d7ef2dd6193d9e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 27 16:56:16 2011 -0400
+
+    Finishing modal dialogs
+
+commit 27a26fce218de676f70c50832d7a9c06989d8139
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 27 16:14:07 2011 -0400
+
+    Finishing modal dialogs, cleaning up controllers and views somewhat
+
+commit db17933c63bd5919eaff5dcdac853873408e8a57
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 27 09:32:44 2011 -0400
+
+    fixed up outcomes page in studies section
+
+commit fc264b789b4278c7fd5e31ad1d0959b0ca631559
+Merge: 3990dec ed480d6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 26 12:17:51 2011 -0400
+
+    modal dialogs for most forms
+
+commit 3990dec085c498a1eb3ed6869ebb13b8305e0053
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 26 11:41:43 2011 -0400
+
+    modal dialogs for most forms
+
+commit ed480d6b1874ed154b76333703a2c90ded0343b7
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 25 17:10:15 2011 -0400
+
+    small changes to side nav, extraction forms controller, studies controller
+
+commit 7871a04b63b0614d8401fb9fdfa728ce1d8ac4af
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 25 15:23:34 2011 -0400
+
+    updated a bunch of things in the extraction form creation process. Can now import information from other forms but they will not yet show up in the study side.
+
+commit 36991f0e0c5db3561646205c82dc2c59912cfb54
+Merge: 455c7ce a7f2018
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 25 09:39:50 2011 -0400
+
+    started working on extraction form section imports
+
+commit 455c7ce7b5d7cc985ccd38780425b08b3b557f4b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 25 09:36:20 2011 -0400
+
+    started working on extraction form section imports
+
+commit d5f3aadf8683cd85ca5209877685cd06fce96679
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 21 11:14:47 2011 -0400
+
+    updated study citation view for the last time.
+
+commit f25929b2002499502a6d0b93e26b8d37c8880f45
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 21 10:55:14 2011 -0400
+
+    finished up the study citation on each page.
+
+commit a7f2018a083fd68019b4942d4ccd3aae9fbc9b4c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 20 17:35:16 2011 -0400
+
+    making sure users get a confirm if they try to leave the page - via any means- without saving first
+
+commit ff40c77662b0227c623b185c7558ab2a2c19247c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 20 17:31:23 2011 -0400
+
+    fixed first link from study publications to extraction form first available section
+
+commit 3ad3f2d586e12ea1d29cf259963d13549709ff63
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 20 17:04:27 2011 -0400
+
+    removing my add-arm migration
+
+commit a270be023e649b7a3831ee2e233d65487fe30c93
+Merge: 9d7b508 d337fc1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 20 16:50:59 2011 -0400
+
+    small confirm fixes, database migration for baseline_characteristic_data_points.arm_id for Sarah
+
+commit 9d7b50813b083727fbddf3869d4bdd5f56095097
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 20 16:46:42 2011 -0400
+
+    small confirm fixes, database migration for baseline_characteristic_data_points.arm_id for Sarah
+
+commit d337fc19b0f4db8658b9ccbf822146293802ab62
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 20 16:25:27 2011 -0400
+
+    minor change to citation
+
+commit 778a2c9753a69a14600273453ee25fd8ac63fc33
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 20 16:22:34 2011 -0400
+
+    put study citation on every study editing page.
+
+commit c086573e2a5e20e55f2426ff61ee0b1cc5d3c1f2
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 20 15:29:52 2011 -0400
+
+    updated the pubmed function to incorporate additional information
+
+commit c6d86fed91a146342cdddbd0c971954ca9d6c43a
+Merge: fc719f6 92bd30b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 20 13:55:43 2011 -0400
+
+    blah?
+
+commit fc719f63176b25d952e7fff583e75a423da47dbe
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 20 13:51:18 2011 -0400
+
+    updated the function to get info by pubmed id, and was trying to figure out problem with study deletion.
+
+commit 28e7b42cfb25f8dee85cee85e1adcae956b1c6c3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 20 13:50:37 2011 -0400
+
+    updated the function to get info by pubmed id, and was trying to figure out problem with study deletion.
+
+commit 92bd30b4756d124112c8715fa75252da9b82bcba
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 20 13:35:12 2011 -0400
+
+    fixed the deleting study issue - make sure to define is_edit_study on all pages with application.js
+
+commit b0abb63c477f6b3184ec759571871ff87af2fe1c
+Merge: 078e7fb d55d421
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 19 17:17:03 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 078e7fb5ebbcd952c80d14c1fa966ee9c81e69be
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 19 17:16:38 2011 -0400
+
+    small changes
+
+commit d55d421bdd6dfb38fbb9605ae29a6655903de117
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 19 17:09:00 2011 -0400
+
+    fixed the question number ordering problem when creating new studies.
+
+commit bf91a8b50d705d571f3df95f8351cbab3b90c8e1
+Merge: 234a6cf 13895a3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 19 16:57:23 2011 -0400
+
+    fixed the first few problems from Dr. Laus meeting
+
+commit 234a6cfed32279fd741c36c7c50a03adc7e6bacd
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 19 16:54:49 2011 -0400
+
+    fixed the first few problems from Dr. Laus meeting
+
+commit 13895a38b4210e94b1de278be4bee1dab033a345
+Merge: 743d9ca cdd3a1e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 19 15:01:34 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 743d9ca39b140a936b304514e11d124f122efe46
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 19 15:01:11 2011 -0400
+
+    save alerts and fixes
+
+commit cdd3a1edd18ac12e8e1eb1d0e5399d9f2fc47ace
+Merge: f63c1a5 2d41410
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 18 16:08:47 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit f63c1a5f065ac1a73a3877683a3264fad87b21c5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 18 16:08:34 2011 -0400
+
+    fixed the breadcrumbs
+
+commit 2d41410d5703a7341656349a4f87e94d663ceac9
+Merge: 6a66fbd f520d8e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 15 17:12:28 2011 -0400
+
+    Adding confirms to project, study, and extform edit pages
+
+commit 6a66fbda6ebe60d9ec4ac95d86709e9af9408871
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 15 17:11:18 2011 -0400
+
+    Adding confirms to project, study, and extform edit pages
+
+commit f520d8ec90bee541bce5a1c7d48d96c2afbf6656
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 15 15:56:25 2011 -0400
+
+    put extraction form title on every page
+
+commit 9d5e5cdb725266f6088be6d946c0004d74c154d6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 15 15:08:18 2011 -0400
+
+    made minor changes discussed in meeting
+
+commit 6daf616f0f8e334ddcb3a6dd050437fa316e211d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 15 12:09:11 2011 -0400
+
+    fixed summary page
+
+commit 6107df0017fad316ae41625df3994de45bdb4ee9
+Merge: fe7b272 80733a8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 15 11:10:25 2011 -0400
+
+    removing arms image
+
+commit 80733a86637f083318520352c0862649d780d00a
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 15 11:03:29 2011 -0400
+
+    updated extraction form arms, editing, deletion and associated studies will also be handled.
+
+commit 5a1c60465654ecb5963d7850989371158d28cd40
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 16:44:14 2011 -0400
+
+    updated the default for is_suggested_by_admin in arms
+
+commit 4dc17cf14ce28574ee2817d445b72ecc96cfe86b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 16:41:13 2011 -0400
+
+    updated the default for is_suggested_by_admin in arms
+
+commit d0fce9290a4586aea4f324ff85bce2e7c48bab17
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 16:32:57 2011 -0400
+
+    study arms can now be suggested from the extraction form. Once they are created, they are immediately added to any existing studies. Also, the arms will be automatically added whenever a study is created that uses an extraction form that has arms defined
+
+commit fe7b2725e9e6cd7ea2df61788fd7045a56067f47
+Merge: e96a501 33b6ac1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Apr 14 11:31:17 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit e96a501495fe10f7e7248333e3d394bd7c7bd625
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Apr 14 11:30:53 2011 -0400
+
+    changes to form styles and editing
+
+commit 33b6ac1f10152871805716025de35bd3d3e50c8c
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 11:27:05 2011 -0400
+
+    updated side nav for extraction form edits
+
+commit 131d71eda75b1a394c94143fa2b955bd9d2591d5
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 11:16:18 2011 -0400
+
+    fixed breadcrumb list
+
+commit 0af4eef6ed8dce3173c8056ce8ad8d7483e45c69
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 10:56:42 2011 -0400
+
+    fixed side nav indicators for study
+
+commit e7cd9d2cf1fe718391c11dc7cebf006fb5b10018
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 14 10:30:23 2011 -0400
+
+    limited the ability to add extraction forms if all key questions have already been answered by other forms.
+
+commit 86b52f816cc775f557189c3859c44cf5d09c6603
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 13 16:59:35 2011 -0400
+
+    fixed a few problems with broken links.
+
+commit 04a27be78c5f35d7da7b740bbe565222da22b4b3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 13 15:02:11 2011 -0400
+
+    updated some links, fixed publications, key questions entry. put in limits so that users cannot uncheck all of the key questions, and cannot create a study without selecting a key question.
+
+commit d9700b6ffa16215f284f472a6c0bc4d8c29df2b7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 13 10:23:13 2011 -0400
+
+    commit from yesterday
+
+commit 20661f88807f54a034d7d42de635245107b2cc57
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 12 16:53:19 2011 -0400
+
+    adding javascript line to set up edit warnings to all pages in study section
+
+commit e129ce5db6de9fdc18f3caeef15a3a6bc2e5ea1a
+Merge: 8d3836e d48f7c0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 12 16:49:19 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 8d3836e7e611d07e0ff1c2c7d49f9abcc0915d7b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 12 16:49:03 2011 -0400
+
+    making arms sections include extraction_form_id; rearranging study display to reflect new extraction form requirements; fixing small errors
+
+commit d48f7c0c5fa062a1510fe5243908aad2b00d02c9
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 12 16:24:36 2011 -0400
+
+    updated links to avoid the extraction form list on the study entry side
+
+commit 8cc7eca03fe4878118b43a3eeee4335b4dd52f81
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 12 15:36:54 2011 -0400
+
+    updated the key question selector to not provide those without an extraction form.
+
+commit f742ce2eeb48c1e0665fa927adb08b99a71fd7fd
+Merge: 458e23b 55ab158
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 12 12:32:19 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 458e23bf69faa60d54587f5a586fa4d0d6e5100b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 12 12:28:38 2011 -0400
+
+    fixing problems in extraction form setup
+
+commit 55ab158492427d394254499dae4cb9b9882d5c22
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 12 11:57:26 2011 -0400
+
+    more fixes regarding study creation and extraction form assignment.
+
+commit 2516dd8f8686c90b266e61c6e43557f865c2ec91
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 12 10:17:00 2011 -0400
+
+    fixed study index page error and updated key question assignment to update the extraction forms
+
+commit 22ec4b6bd0e648d1b353ff455b9e3c4131920723
+Merge: ae005ec 128fa1d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 11 17:22:35 2011 -0400
+
+    when key questions added/removed, the extraction form junction updates accordingly
+
+commit ae005ecda73879f18ebe2e62d6638e5623c9a6b8
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 11 17:21:39 2011 -0400
+
+    when key questions added/removed, the extraction form junction updates accordingly
+
+commit 128fa1d7174640a1f21ca987ad8dd00050a7eaa1
+Merge: 383fd3e 7f638b1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Apr 11 15:14:18 2011 -0400
+
+    changes to extraction form / key question flow
+
+commit 383fd3edd28d2a427a74e15187345c5ba23473b7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Apr 11 15:05:47 2011 -0400
+
+    changes to extraction form / key question flow
+
+commit 7f638b11795d73b143b6b4722ad78b8f9750b1af
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 11 15:01:10 2011 -0400
+
+    changed the way studies assign extraction forms (through key questions). Many things to figure out still...
+
+commit 6e381e511c4d3250147b311ada95460f8e0aef7b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 11 14:46:05 2011 -0400
+
+    updating extraction form process
+
+commit 5645bd42a1013731aac6b7b770ba89b784883cdb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 8 13:56:05 2011 -0400
+
+    fixing small issue on extraction_forms page
+
+commit 667a20bd1b186c200a8f12f58226d00d468b7cad
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 8 13:50:07 2011 -0400
+
+    creating extraction_form_key_question model
+
+commit 61ec8277f8944a51bc9337113087f400f47c7f6d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 7 17:03:15 2011 -0400
+
+    made a bunch of small changes to get things working. fixed yes/no selector to include in extraction form and updated nav bar on side
+
+commit caefb654eae4280f1b231918adf89fad2d6cea61
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Thu Apr 7 13:44:42 2011 -0400
+
+    fixed key questions editing page.
+
+commit d99b95fdf9e39ba51608ad472a036a4a05af0b65
+Merge: 4c9ed6f ef1ef81
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 6 17:08:58 2011 -0400
+
+    fixed some minor changes including the extraction forms menu right side
+
+commit 4c9ed6f105caccb1868ce5f36b34135c7fae8dd1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 6 17:04:48 2011 -0400
+
+    updated the side bar in extraction form and some other minor changes
+
+commit ef1ef8126f2fd978de0b2091bed346e999a3189f
+Merge: 53367f7 3966e45
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 6 17:03:25 2011 -0400
+
+    Making extraction forms a part of creating a project
+
+commit 53367f72194b08bcd022dc581b32f5f5a22e698c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Apr 6 17:01:26 2011 -0400
+
+    Making extraction forms a part of creating a project
+
+commit 3966e450fc1d01f78f66f49a41ebdd525b2f84e8
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Wed Apr 6 10:53:07 2011 -0400
+
+    changed categorical continuous dropdown to a radio button
+
+commit 553f46e7b0eb964b61e8c598a21a38b42e8dac46
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 5 17:25:52 2011 -0400
+
+    fixed a problem with baseline characteristics display
+
+commit 1922dda21484dbab70e446ccdd5e5dbb795c1e82
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 5 16:51:45 2011 -0400
+
+    updated schema for loading
+
+commit ef8022721fd30a692e087813cc6990a985aefc8c
+Merge: 6bd6386 e1ff12b
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 5 16:38:15 2011 -0400
+
+    updated the baseline characteristic and design detail pages for study extraction.
+
+commit 6bd6386fd0687c7499b290b7aa00d48fd0946f58
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Tue Apr 5 16:35:57 2011 -0400
+
+    updated the baseline characteristic and design detail pages for study extraction.
+
+commit e1ff12b84483ea5fa17f9da067d5c1eeb0b60a2b
+Merge: 08f9f64 677323c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 5 13:33:04 2011 -0400
+
+    adding tiny_mce to key questions and projects, fixing views for key questions and projects, and some other id-saving issues
+
+commit 08f9f64f9d7de664095e3328cd7b27d78b600905
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Apr 5 13:26:44 2011 -0400
+
+    adding tiny_mce to key questions and projects, fixing views for key questions and projects, and some other id-saving issues
+
+commit 677323cda694d86e50ffc4335ac86e939b512fe6
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 16:12:59 2011 -0400
+
+    fixed the design detail and baseline characteristic question generators to use session variable again. without it, it breaks.
+
+commit ef1b9bdd0943dc7b80c4a45724b4e733fec5f904
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 13:58:23 2011 -0400
+
+    added session assignments back to studies controller
+
+commit 5a91c968a0eac1b40e34c323a14cf46b43b9bc1d
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 13:38:08 2011 -0400
+
+    under construction edits.
+
+commit 23155ff30596319d62339345e3e41a344d455936
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 13:01:04 2011 -0400
+
+    fixed validator in key question
+
+commit de98bf40772c0c7b5096b5b34f4ccce0926a64f1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 12:36:21 2011 -0400
+
+    fixed a problem in study creation
+
+commit d537589a527a2cbeceef9ca8e27ed865d0081ff3
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 12:15:08 2011 -0400
+
+    fixed default_design_details call in extraction form create
+
+commit 27fde38d269b1768a17c95a92d74fae4af869baf
+Merge: b8b9e8e c223eee
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Apr 4 11:52:06 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b8b9e8e85f66a957a22df37eb39b5d99385c4796
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Apr 4 11:51:39 2011 -0400
+
+    adding tiny_mce
+
+commit c223eee363923f29ba880c4a9f1fb56cc2b90cf1
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Mon Apr 4 11:17:30 2011 -0400
+
+    updated some database fields from strings to text fields with appropriate limits.
+
+commit 949c8db810f9c60d4bcc4c92f4f228221fafc750
+Merge: 03bfe5d 64d788c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Apr 4 09:28:04 2011 -0400
+
+    small whitespace change for testing
+
+commit 03bfe5d78c61d921572dfa29d051b6d269ba7a7e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Apr 4 09:26:29 2011 -0400
+
+    small whitespace change for testing
+
+commit 64d788c5cc6bb81aa7dc41773d7e909cc8051066
+Author: Sarah Keefe <sarahkeefe@sarahkeefe.local>
+Date:   Fri Apr 1 18:31:49 2011 -0400
+
+    trivial whitespace change to adverseeventcolumnscontroller
+
+commit 984b588ea4cc022c9ecd2c32ed556a3da0e8796b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 13:12:27 2011 -0400
+
+    took out the tiny_mce stuff to see if that does anything
+
+commit 0bde7b405493a975fb5becc016b8c6109d3e365a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 13:07:56 2011 -0400
+
+    took out the tiny_mce stuff to see if that does anything
+
+commit b8792f4cf3911a7e9982b943ede579db3f1086dd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 13:06:21 2011 -0400
+
+    took out the tiny_mce stuff to see if that does anything
+
+commit f19526429199628a8e0901b3f1f5d91fda792784
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 13:00:29 2011 -0400
+
+    updating gemfile to see if that will fix anything
+
+commit 2fa0933730a6eaac6db534a5469a37bb74b3bcbd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 12:32:11 2011 -0400
+
+    trying to push the schema
+
+commit 7d73f19f7364ccb718adc459209ec85c0380f4df
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 12:27:22 2011 -0400
+
+    adding the fixed schema
+
+commit 6c8beb046620bed6d58fad8992d5682717890a33
+Merge: e3e1de2 550a16d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 12:15:34 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit e3e1de2981c2f180d5f597315cfd906a74861f65
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 12:14:35 2011 -0400
+
+    trying to push the schema
+
+commit 550a16d4f9b3f110c0639bb3c56696aaf2538405
+Merge: 7e40738 83ca007
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 1 12:03:13 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 7e407385885cc0a8ecdf46492273f8a2e2f80482
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 1 12:02:55 2011 -0400
+
+    updated the keyquestions table to accommodate more characters.
+
+commit 83ca0074c180b89fc45205085a62069dfa0ad426
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 11:45:41 2011 -0400
+
+    adding tiny_mce gem
+
+commit c79e2cbdfa9a4689571f3d68876c24a4aa3806ee
+Merge: a0da5f5 0b76b08
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 11:06:37 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit a0da5f5b10fefed46562cf9adddaab37f21a0e9e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Apr 1 10:40:56 2011 -0400
+
+    organization changes and commenting
+
+commit 0b76b0836823146f2ec2f3112a1238eeed172a02
+Merge: ae56a92 1168c57
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 1 10:40:38 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ae56a92b598cd92c57b78e9c590c5aedf9624856
+Author: Nira Hadar <nhadar@tuftsmedicalcenter.org>
+Date:   Fri Apr 1 10:40:15 2011 -0400
+
+    not sure what i am committing
+
+commit 1168c5750e013e2b6b97beadcf90a4f4fd6ea107
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 30 11:34:58 2011 -0400
+
+    fixing a linking error on the my work page
+
+commit 3b8c14b1647c63ae54703ac9abc0488d4c717249
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 29 16:43:23 2011 -0400
+
+    cleaning up routes and unused functions, did some commenting, and fixed some small errors
+
+commit dea283a0494f0fe38b48a8dff8f6c2edcc1316a1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 25 14:46:28 2011 -0400
+
+    updates for tabletools multitable export testing
+
+commit b37f1b5ae8ff4a65e25fbf367eceb6e5f3383fea
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 25 12:37:14 2011 -0400
+
+    Small routing fix to outcome_comparisons
+
+commit b0e539b5f79ce68a0c8f1396270d093f02cb69f7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 25 12:16:13 2011 -0400
+
+    Lots of changes to model names and the database schema - general cleanup and consistency fixing
+
+commit 564a1de245b4df0242b2474c82d6c0275cad81ad
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 24 13:32:57 2011 -0400
+
+    updating schema to reflect the most recent tables
+
+commit 154b4e9c73b5355702a8fe587c3e2e3d704135be
+Merge: 7599b5e c13fff0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 23 16:32:27 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 7599b5e64b21ebce59245531011214dd2e46894f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 23 16:32:16 2011 -0400
+
+    adding new partial for study section progress
+
+commit c13fff00e2c40d4bf1d78d6f1708c6af7b16d515
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 23 16:17:58 2011 -0400
+
+    fixed sticky note deletion so that all replies are also deleted.
+
+commit d192aef455ec7f3f3ff26772994327dbd69b4063
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 23 16:09:18 2011 -0400
+
+    another small change to note form.
+
+commit 672ae845e90f9af0b01ab4d9ab5f38d9f2f60b39
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 23 16:05:39 2011 -0400
+
+    changed note styles and added cancel button
+
+commit 5e2ae8a1efa1b43ffdbe20daa0c74998ce9bc7f1
+Merge: 031fada 61713b7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 23 15:36:49 2011 -0400
+
+    adding new partial for study section progress
+
+commit 031fada97fbc12843368ae0369018874c116751b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 23 15:34:56 2011 -0400
+
+    adding new partial for study section progress
+
+commit 61713b7e0db851a39e980914fcf92e54627071cc
+Merge: 69051fa 0fb5583
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 23 15:32:05 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 69051fa6fdc61ff2321a3fc2f29c1d3255ed9639
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 23 15:31:56 2011 -0400
+
+    added communication via notes for all users on a project.
+
+commit 0fb5583dbbb65151ee619cf3473b0f2bc7d999ff
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 23 14:09:09 2011 -0400
+
+    Adding small note about flash for export on studies page (still in progress), added faded icons for non-included section on extraction form edit sidebar
+
+commit 799a1318b7d4175f68ed0c14ef425ff2f91c32fa
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 23 09:43:26 2011 -0400
+
+    Testing the alerts on datatables
+
+commit 2eec3c456c7eebef8580bb1f63c4507ce6daa1b7
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 22 17:06:46 2011 -0400
+
+    made improvements to user notes.
+
+commit 8e2b3c65cee90646de1d99fc289c09a534d6b410
+Merge: 5b52a47 7140233
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 22 12:13:16 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 5b52a47110510566e2c18612311e20eff707e095
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 22 12:12:55 2011 -0400
+
+    starting on notes section
+
+commit 7140233fb0afb98e573e07185ca2208cb869b5b9
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 21 16:58:26 2011 -0400
+
+    added project status notifiers to project pages
+
+commit 8d7c4663cd8989a78b5e222c81dfb8b9d1d2047b
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 21 15:21:38 2011 -0400
+
+    fixed the search because it was finding hidden projects
+
+commit 7f71fe06ec0682f3c6cd4caa784a72f6c90276e5
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 21 14:06:44 2011 -0400
+
+    added more security so that you can't access things via the URL
+
+commit 6f02a3fe74dd8101005563fbf541527b8a1eb310
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 18 16:58:26 2011 -0400
+
+    more on public/private projects.
+
+commit 9a9705aeb7fe9b23b52791cdb9eca5c773befd85
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 18 16:46:53 2011 -0400
+
+    more changes to project publish page.
+
+commit 9e7bea14f6eda247a0e045d30086862784d21027
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 18 16:27:12 2011 -0400
+
+    We now have the ability to make projects public or private in the SRDR
+
+commit 27c631af39f8ee0a8841759d5ee2d8399cf7fc47
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 16 14:11:20 2011 -0400
+
+    Adding data table example and fixing a mimetype problem
+
+commit f853b9f11b2836b247e4578fa52d7237d13fb9e9
+Merge: d7ac09f 2c46d79
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 16 09:52:29 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit d7ac09f5ad93a26cf771b91285111725920b2d44
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 16 09:52:19 2011 -0400
+
+    css changes
+
+commit 2c46d7973a53bc780f4a89449f49207410e2f842
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 17:35:50 2011 -0400
+
+    commented out tracker on development site
+
+commit 5280dc2cf43773c23c8b05c04696284695694469
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 17:34:15 2011 -0400
+
+    added google analytic tracker
+
+commit baf875835020c6db85560bc868e14521668f64f9
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 17:30:23 2011 -0400
+
+    added google webdeveloper meta tag
+
+commit 76b5203661e5ea375f595dd66d4a12dce1ea8719
+Merge: ff71596 826cc9b
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 15:36:51 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ff7159646b92bdebb8360ab631d6ae064138eee1
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 15:36:32 2011 -0400
+
+    added links to tutorial videos in flash
+
+commit 826cc9ba7ec1f89222efff7f0e9e9f4e1a03c6fa
+Merge: 1e12f17 5180101
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 13:05:52 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 1e12f1729dd53da087be66ed9ea20432f7f2db1b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 13:05:09 2011 -0400
+
+    Fixed password testing for nil values
+
+commit 5180101b78db9112c7104c1d36d6300687f5a140
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 12:55:06 2011 -0400
+
+    fixed key question buttons at bottom of page.
+
+commit d2fe24decdf905b126313cb9e997793b5a25bff4
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 15 12:46:58 2011 -0400
+
+    added help page message about videos
+
+commit 6118820f0fa2773062658343319289e59d49168b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 12:17:03 2011 -0400
+
+    Fixed user management access and small css changes
+
+commit 14ce0cd6a4068b7b6fec89d3a31cde9e60bea64f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:51:22 2011 -0400
+
+    Fixing password reset and moving location of error and notice messages
+
+commit 262ca3a88d803d450792686b5a2b87dd2e438a86
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:38:21 2011 -0400
+
+    Fixing password reset - removing an error
+
+commit bff051ab5375ab4441ec9d86b64ab3863a1955a4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:33:46 2011 -0400
+
+    Fixing password reset - removing an error
+
+commit 871f7648395771b9544bc2c01a317bef0170325c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:29:38 2011 -0400
+
+    Fixing password reset - removing an error
+
+commit 4270186673d12f9250d12ac2c434b6cdeb71e02b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:22:14 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit e9eb91b3652ed4d690acf9b8ea697ea7e729723e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:18:51 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 15ba889c5de37b964dedfad41bbb771cfc3b0d9b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 11:00:14 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 9a44e954166e773e3550813a53e9c31a9bd671a2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:56:53 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit b20b76719080075c5dcaa63874ae2b72d482fa46
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:55:30 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 618b6edd1424f370143a3a301cdaa92e2dec16e7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:49:57 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 9de7c82025005f8e7260998de8377727809418b8
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:37:38 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 2b72b55b68322788c2b7a898adc01e84685f9436
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:30:44 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 7cfbd2b53f7d9435b4fd1590c949bf768e7dfcd0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:22:45 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 77643110e6554be9ff027008a931220b6aa2699f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 15 10:15:11 2011 -0400
+
+    Fixing password reset - trying to make the mailer mail
+
+commit 4228b29a3bb75c39b761f86ad4e889c71cb2b1ae
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 17:14:26 2011 -0400
+
+    Fixing password reset
+
+commit 53ef237974f4f6aa850da2699d559cb856b55890
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 17:11:04 2011 -0400
+
+    Fixing password reset
+
+commit 9f1276a8c5b9cf4b8a97d5bb401d49a4dd46739f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 17:03:14 2011 -0400
+
+    Adding password reset-ability and made sure users can only manage projects they lead
+
+commit 7992ed3ad6602c80858c894e9a48d139be9458ff
+Merge: 5a32571 c44a62a
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 14 12:19:15 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 5a325711e9c43c361c552f71d49026ef1ecf00e4
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 14 12:19:06 2011 -0400
+
+    fixed batch creation problem
+
+commit c44a62acc3073deaabe0bf1146450c0187930b1e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 12:06:49 2011 -0400
+
+    creating a layout called studies to satisfy safari
+
+commit ebed8a49d084f1fc18832489c5fdc70e382dea59
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 12:03:07 2011 -0400
+
+    Removing wicked-pdf plugin
+
+commit d1026dbd1c6c2a82d4812ec96ba6d21190a39db6
+Merge: c9f4966 80b2337
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 11:59:37 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c9f4966bc102ed91de89b5cff248093438b30dc1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Mar 14 11:59:07 2011 -0400
+
+    Removing wicked-pdf plugin
+
+commit 80b2337c55900ca4de02b23a344d1d57a715719c
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 14 11:43:23 2011 -0400
+
+    fixed one more thing on the buttons
+
+commit bec87ed257c992b29c0303eb1a4fb5baaa7c1559
+Merge: eb304be aaae4c1
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 14 11:36:00 2011 -0400
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit eb304be365d88858a1078fa9b235b3ec1d5ac8b7
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Mar 14 11:35:39 2011 -0400
+
+    fixed batch creation and updated continue and back buttons.
+
+commit aaae4c1fafd86a0311669348340af49ed06916f4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 16:53:46 2011 -0500
+
+    Small fix with table sizing
+
+commit e3266a868811c404af99d4d097ff2072d3063fa7
+Merge: c1980e9 96ff9b3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 16:49:17 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 96ff9b3c355cd63a7f76ef95104f810766a36392
+Merge: af8b73b 8aaa4e6
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 11 16:48:05 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit af8b73b81d2730646e2efff724670da62f193632
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 11 16:47:53 2011 -0500
+
+    removed other option text from question builder
+
+commit c1980e90a353bd69f0cc6ca924ff52878b47838d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 16:47:19 2011 -0500
+
+    Adding in note truncation, fixing 'nil' in next-previous link generator, and adjusting table sizes slightly
+
+commit 8aaa4e63c2f000aceccf3baec545f0285665f136
+Merge: 3f6bd3f c57d01c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 15:18:31 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 3f6bd3f6fe5e8c3845d7c61394333837cbf2aef9
+Merge: 8b12649 611e3e4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 15:10:52 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 8b1264946a3b204542bdbdfdc12df1e8cd2ff810
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 15:10:31 2011 -0500
+
+    hiding info icons on sidebars
+
+commit c57d01cf7c66f3641dce3f1a3db72086ac06366c
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 11 15:10:11 2011 -0500
+
+    Fixed problem with batch study creation.
+
+commit 611e3e48b5cd8d26f9ad6b6040b68e43806ce18d
+Merge: cb4d528 7c16328
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 11 13:24:34 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cb4d5287699ab6503d8b776b1c878fac2b205823
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 11 13:24:22 2011 -0500
+
+    updated all back and continue buttons
+
+commit 7c1632807fbb94ec3c7e841e907ecdee449c64ac
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 12:12:01 2011 -0500
+
+    small cosmetic fixes before video
+
+commit 0db1a82e8d356e06900426db1f16fbd186f4c931
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 10:58:15 2011 -0500
+
+    wtf rake task
+
+commit 1dc72305e0710e5db2aee154b5ed4e9528cbe8d0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 10:52:46 2011 -0500
+
+    fixing rake task
+
+commit fcfb0bf4ba15db4825e804b515d3c429b78a8b9e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 10:47:22 2011 -0500
+
+    small cosmetic changes before making the video
+
+commit e8a20a545f9684ec8633e99916dace471ead681f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 10:39:21 2011 -0500
+
+    Small cosmetic changes to the front page
+
+commit e090b3e23dcd83b36d0cca4b0e87f2c8b3ab1d94
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 11 10:37:59 2011 -0500
+
+    Small cosmetic changes to front page
+
+commit e078289b9e0731fcf16dff339d3e9dea9f9b91b2
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 11 10:23:56 2011 -0500
+
+    pushing correct version?
+
+commit c53b7d57eb4d7628b876975106a272e47673d2dc
+Merge: ed153a3 3168a1a
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 16:30:26 2011 -0500
+
+    fixed merge errors for back and continue buttons.
+
+commit ed153a37af650b0f3c480f428806e3462487b03d
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 16:28:43 2011 -0500
+
+    added back and continue buttons to all extraction form pages.
+
+commit 3168a1acc12aaf0107183ec9c3df496dc47a6789
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 10 15:43:30 2011 -0500
+
+    changing to css in template section
+
+commit 90a4d073736bdba9442a253359bac1426ec7d4ff
+Merge: 7e3c498 22034a8
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 15:12:55 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 7e3c498fbbe3b89942ab658075963e18b75acbcd
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 15:12:45 2011 -0500
+
+    working on adding arrows to each button
+
+commit 22034a8b7752ae020ccb2635305bac238e50155e
+Merge: ef75c52 cb28d46
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 10 15:11:47 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit ef75c524bd52e3d9c5b914dd7b471adcf14fbb37
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 10 15:11:34 2011 -0500
+
+    Changed study edit page and created a separate extraction form management page, and other small css and formatting changes
+
+commit cb28d461865a1608682ebb72cecc25ad4b22a887
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 14:40:37 2011 -0500
+
+    updated outcome results entry and outcome comparisons on extraction page
+
+commit 5b3d45b773d6b3b13cf904e2b790f5590d4a685d
+Merge: eb048c4 3d196a5
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 12:28:17 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit eb048c4883ded3146173e1b45eacc4442e71e1dc
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 10 12:28:04 2011 -0500
+
+    updated outcome datatable to be split into two entry forms.
+
+commit 3d196a5a014c385f5149dfc84892576334a1b7c6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 10 11:30:56 2011 -0500
+
+    fixed table CSS
+
+commit 5fbfda470e3288e9fe94bba3a65ed28d60c4633f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 10 10:33:49 2011 -0500
+
+    Fixing display of results on study preview page
+
+commit 57949fc4d8d7590b1ebc253c7e55cccd3f8100f0
+Merge: e697eb7 a2e5560
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 9 17:22:43 2011 -0500
+
+    Changing buttons to images
+
+commit e697eb7c60f9eed187700af772be5c20fe29c836
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 9 17:19:35 2011 -0500
+
+    Changing buttons to images
+
+commit a2e5560ab3d10b90f6709f9dc0b305d1f5315735
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 9 16:56:37 2011 -0500
+
+    working on results entry and comparisons
+
+commit d79eeb34164b5df6f9f05ad358cdd55fc48d9a9c
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 9 15:47:48 2011 -0500
+
+    updated the question builder to allow for yes/no
+
+commit 8376f32b9d22cd8a2beb1ac0483b42f54f09150e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 9 14:26:59 2011 -0500
+
+    Small fixes before testing - layout and css mostly
+
+commit 6a952f33b596c1350a7834452f004284e9791f50
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Mar 9 13:14:00 2011 -0500
+
+    updated extraction form generation
+
+commit f5234c72ceddfdb188b9d9d5bca587fa702b8d51
+Merge: d4f8821 5f7ef31
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 8 17:17:20 2011 -0500
+
+    updating extraction form entry methods
+
+commit d4f8821a7079d2a394535f26d3b4003b5778b00c
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 8 17:15:29 2011 -0500
+
+    can no longer add extraction form of the same name
+
+commit f3a051fc3592b2148ba54b269eef6c7147467402
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 8 16:52:04 2011 -0500
+
+    More of Ramon's changes
+
+commit 5f7ef31c8163cb3c49e90cdb1d21da588bfbee3d
+Merge: ded2716 3de9d33
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 8 16:08:46 2011 -0500
+
+    Making some of Ramon's changes
+
+commit ded27162e5e220b4402e7974f334b9abbc20acbf
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 8 16:07:22 2011 -0500
+
+    Making some of Ramon's changes
+
+commit 3de9d3360cd91dcea825de66fb623820e8890d69
+Merge: 4071a7e 53c3067
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 8 13:09:31 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 4071a7eb7f05e385ffec1c1bbe4890fcab37e6d2
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 8 13:09:04 2011 -0500
+
+    making Ramons suggested changes.
+
+commit 53c30672f70fcafa2049b6845ef718065abe7571
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 8 10:00:35 2011 -0500
+
+    testing out table setups
+
+commit 8eec43e8b1664f371ed4fa071b9679a21f698689
+Merge: b681109 5762f8e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 4 16:45:49 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 5762f8e2f46e1fe1d40e45f3c2387d44159dd293
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 4 16:44:27 2011 -0500
+
+    updated review and extraction form links
+
+commit b6811093ca87d4fb3a63a4da029872fdd580059e
+Merge: 292c727 cd30f46
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 4 16:36:39 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 292c7273c9a70827b36b1e6a411ce6efe9199f00
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Mar 4 16:36:23 2011 -0500
+
+    Added a help page, changed the appearance of the homepage modal window
+
+commit cd30f46716d5532ca62c70461e93cb1a4d4d63ea
+Merge: 31de2c5 e8cef82
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 4 13:45:03 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 31de2c5de74e165b5d6fc269d4889b1aff52b593
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Mar 4 13:44:45 2011 -0500
+
+    fixed search capability
+
+commit a6885ddd6f39379eeb80aa73c8321e4d70949a25
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 3 16:45:26 2011 -0500
+
+    Adding stylesheet for print layout
+
+commit e8cef82066e0205412c9246f32471e40276f45c3
+Merge: b8f6526 cee073a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 3 14:38:09 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit b8f6526f874b2eabaa6f8c2718692765ea270ffe
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Mar 3 14:37:58 2011 -0500
+
+    testing pdf generation
+
+commit cee073aadf3191e4f92a7003e08f76d6d9d49eb3
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 3 14:05:06 2011 -0500
+
+    footnotes are working again on outcome results entry page.
+
+commit 20c32f939fd13d2a02c9f87aaf4534984e9135a3
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 3 10:40:36 2011 -0500
+
+    commented out error reports in save_choices code
+
+commit b9422e6cd6284568bc96e61d1a3595b277dded5d
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Mar 3 10:36:02 2011 -0500
+
+    fixed the question builder. working on footnotes.
+
+commit f31cd4ff48f1bc3f67a51d7fbc3f6299ce945511
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 16:19:53 2011 -0500
+
+    fixing an error to get the heroku site working
+
+commit 57b2892d7b18f3ea0809a1cb6d3f5a5f6ed81a9f
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 16:13:54 2011 -0500
+
+    updating migrations for database
+
+commit 60ce35b1eff24ee62b5ae4aa69285a7cd17dff84
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 16:09:13 2011 -0500
+
+    testing error message display
+
+commit e5e69f104376df0a7e9dc96ab63e48853ff629fa
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 16:04:50 2011 -0500
+
+    trying to get error pages to show up on heroku
+
+commit 3a0497bb73d0cea7b3a9e8bb08b8ebfa7f08b678
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 16:03:28 2011 -0500
+
+    trying to get error pages to show up on heroku
+
+commit 15e8fadaaab8aed0d69dcef9556ba2a1515bcfa6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 16:00:39 2011 -0500
+
+    trying to get error pages to show up on heroku
+
+commit e3de06ac305c20eab071da55860fe72cdd99c4a2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:50:58 2011 -0500
+
+    testing error message display
+
+commit 0a2a90114f5f82f671ef8b84b4c3a886a043ba34
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:48:57 2011 -0500
+
+    testing error message display
+
+commit 70f612af5a6fb3e3bd05a5f0895e79f23415ce15
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:44:31 2011 -0500
+
+    testing error message display
+
+commit a754e24cba8280aad88a6b2a714108b8a1baacb2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:42:13 2011 -0500
+
+    trying to get error pages to show up on heroku
+
+commit 5532a322e07006bc1ec56457826e82ad74e7573a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:40:33 2011 -0500
+
+    trying to get error pages to show up on heroku
+
+commit a350a753e2d8994416d1e0de38bab5966ca7ae79
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:39:37 2011 -0500
+
+    testing error message display
+
+commit 5a50fab2660e22616749e097df2daf1da34a885c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:36:53 2011 -0500
+
+    testing error message display
+
+commit 1400d9c487e2b4c6d26b545564a46fbebdb6c8b0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:31:38 2011 -0500
+
+    testing error message display
+
+commit 70a82bc6ff7d0162547a9789dab377cdc03e5ae5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:30:45 2011 -0500
+
+    testing error message display
+
+commit 4a6e2007a46d29d745f3dfea394081a8ccc7eaad
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 15:25:17 2011 -0500
+
+    testing error message display
+
+commit b72dbf1ba8f65a610c8abbcc4969790b25dd0447
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 14:54:23 2011 -0500
+
+    trying to get error pages to show up on heroku
+
+commit d78d9c06c1dc88ef2114d84778f7592c83efd50a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 14:30:43 2011 -0500
+
+    testing error display
+
+commit 3955ea0a68384b83aac799b5af4c0e6463d9c342
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 14:18:22 2011 -0500
+
+    testing error display
+
+commit 5e5dbc589d9c4ac94b022e4eed829c7d4ceef8f7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 14:04:14 2011 -0500
+
+    testing error display
+
+commit 482c487f07587aee126f21a55ea6935765703625
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Mar 2 13:23:42 2011 -0500
+
+    Updates to study quality template setup page
+
+commit a213386ba762752d80ed3ce12054334c6e01b3f9
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 1 17:14:33 2011 -0500
+
+    small fixes to front page
+
+commit 7093271b88a0e942962f05b76b2f7e631f8e0479
+Merge: c7a1157 95d67b6
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 1 16:58:28 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit c7a1157dc02901d040e787a7aa34d61d23621bf5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Mar 1 16:57:58 2011 -0500
+
+    help dialogs and tooltips, as well as summary fixes
+
+commit 95d67b68ae5556862a776ffe185f72a7685c282f
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 1 16:42:14 2011 -0500
+
+    updated all study entry forms but quality. fixed other dropdown and wherever pages were disappearing upon update.
+
+commit 2bb5b9c0a7011b6f6ce7dd0b2c43b973a9fc000a
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Mar 1 14:59:19 2011 -0500
+
+    updated design details and baseline characteristics pages to use question builder code.
+
+commit 17868973b35c4e1810c5b05265d84595d730c9b9
+Merge: 1ed2f0c 30e9166
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 25 17:04:16 2011 -0500
+
+    Testing and fixing problems within templates, projects, and studies
+
+commit 1ed2f0cdd5e8c4fd14aac1663f2e880ee7ad62d3
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 25 17:00:33 2011 -0500
+
+    Testing and fixing problems within templates, projects, and studies
+
+commit 30e916617f6aee5a3f2aa1623e62ecab4151e0cc
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 25 12:29:46 2011 -0500
+
+    question editing is ALMOST working correctly.
+
+commit 90cd64f91d52727b07d30205dabc6914be3b103f
+Merge: affe7e2 a02ead2
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 23 17:03:31 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit affe7e2dfa261be9d5a7e9f7439c280bb2e2adc1
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 23 17:03:19 2011 -0500
+
+    working with baseline characteristic question creation. can now edit and delete but need to be able to add rows and change type while editing.
+
+commit a02ead21bf0fd51bd20f1b55d48e31413f74de0c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 23 12:39:57 2011 -0500
+
+    Fixed the outer breadcrumb div I added
+
+commit 86f5703294f69854b27ea9cb441a93ee5001bda7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 23 12:25:37 2011 -0500
+
+    Changed layout slightly so as not to confuse users
+
+commit 5d91c104151985b4cfcc74e9555f5a31524ae837
+Merge: 309c078 42c2d0e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 22 17:12:56 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 309c078734a1a2ec801fdb4dac6e57f581b57863
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 22 17:12:44 2011 -0500
+
+    CSS experiments with top tabs
+
+commit 42c2d0e2c588f39aa49e32f09b029703ed1fc6c2
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 22 15:06:16 2011 -0500
+
+    fixed add/edit/delete for publications pages
+
+commit 45008d740717be9e4a28f01300243cf0d5f3b40a
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 22 12:08:13 2011 -0500
+
+    added pubmed id to the database for publications and primary publications. Also got the retrieve functionality working. Now need to update the edit functionality on the secondary publications.
+
+commit f4062be569bae4944680d456f3255f03b4d12d40
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 22 10:24:44 2011 -0500
+
+    updated a small problem in the question builder for rearranging question numbers.
+
+commit d26222fdea0d47a2a1686475e5ab025c0f324c61
+Merge: f8ca170 a79afb4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 18 17:09:34 2011 -0500
+
+    fixing errors with adjusting to multiple templates in study data entry: Not yet complete
+
+commit f8ca170998a3622e926ac6c9bea1038494d14bea
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 18 17:08:22 2011 -0500
+
+    fixing errors with adjusting to multiple templates in study data entry: Not yet complete
+
+commit a79afb4cc2f01fdfe3827078139c47e606169f67
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 18 16:51:40 2011 -0500
+
+    updated routes to allow for the Other option to work
+
+commit a1a76daf061e7443f3bc75354982ada617ec9574
+Merge: 46ee439 56ac463
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 18 16:41:14 2011 -0500
+
+    made sure the question generation is working again with the ability to re-order questions. also gave template creator the ability to lock the users from creating new items.
+
+commit 46ee439bd8bb83c30f5123751476fff6a1b5cb15
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 18 13:50:01 2011 -0500
+
+    updated the question builder code to re-order questions as well as delete questions. this code should be very flexible and can be used with almost any of our tables that have a question_number field.
+
+commit 56ac463093293582beab3077ce2ab7e96642d64d
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 18 13:08:33 2011 -0500
+
+    fixing multiple template per study - sections
+
+commit 5baec4e6ea084a6cace259b414b82e3dbee65a96
+Merge: 46854b7 b17c012
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Feb 17 16:26:05 2011 -0500
+
+    added dropdown for selecting whether or not to lock sections and improved question builder to allow for question deletion.
+
+commit 46854b71aede58f4023c443c21fbd2df7f578ad9
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Feb 17 16:11:42 2011 -0500
+
+    updated the question_builder and can now delete questions.
+
+commit b17c012da57be72f86f663bb7ac7222319d76a83
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Feb 17 09:55:59 2011 -0500
+
+    fixing merge issues in template views
+
+commit 91dfdb9281c3ac0bb569cfa6299989272d375aeb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Feb 17 09:30:58 2011 -0500
+
+    Fixing a merge issue in study-templates-controller
+
+commit 77f4567b94d4e75e456122eca30b1af7d583b14e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 16 17:20:23 2011 -0500
+
+    finished adding multiple extraction forms to a study
+
+commit cf7bae0e123af0ba195ee370865f417cc6274ab1
+Merge: 10dd025 fe1a134
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 16 17:15:46 2011 -0500
+
+    finished adding multiple extraction forms to a study
+
+commit 10dd025a88b13f35724a69607d19c01cf6530eee
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 16 17:14:03 2011 -0500
+
+    finished adding multiple extraction forms to a study
+
+commit fe1a13480d7c6c2f0b13cc9b38b127ea6f17abb6
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 16 16:11:21 2011 -0500
+
+    allow users to select whether or not to include custom user entry in the study sections.
+
+commit fab5a654e63bd9c82e1f246896463d24eee0e76d
+Merge: 3edeeb0 9928a30
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 16 11:41:11 2011 -0500
+
+    working on adding multiple templates per study
+
+commit 3edeeb0aa5304f2725189aaebf67d5824de2c3df
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 16 11:29:53 2011 -0500
+
+    working on adding multiple templates per study
+
+commit 9928a3056cb2a3ff0628d6802c7510ee8e295353
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 15 16:39:57 2011 -0500
+
+    fixed a few merge conflicts that were still unresolved.
+
+commit bf6ddb88ee4ba7c21f34248b6511c23be8e92988
+Merge: c4c8574 8f84ab5
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 15 15:46:48 2011 -0500
+
+    added question creation to baseline characteristics and design details. also fixed the option for choosing other
+
+commit c4c8574c1298d638958c61f87026fa88f848e458
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 15 14:24:57 2011 -0500
+
+    added question creation to baseline characteristics and design details. also fixed the option for choosing other
+
+commit 8f84ab5ed448ba3dbea6b4e90f8f68f30867c85e
+Merge: 7daade3 0e5e7b1
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Feb 14 13:20:18 2011 -0500
+
+    Added the ability to require only certain sections of a study template
+
+commit 7daade3bac45baf543bd6346ec7544aec4bb06f7
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Mon Feb 14 13:18:40 2011 -0500
+
+    Added the ability to require only certain sections of a study template
+
+commit 0e5e7b10f9450b4befe4362793ae60fb790a676d
+Merge: dc9d392 8d2d194
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 11 17:16:32 2011 -0500
+
+    question creation appears to be working on multiple forms. Should be easy to implement across the templates now.
+
+commit dc9d392d38d1b330cd29194b25a534226f4b1a38
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 11 17:12:33 2011 -0500
+
+    question creation appears to be working on multiple forms. Should be easy to implement across the templates now.
+
+commit 8d2d194496ed6d74b7c4e306e16be698dafe0fc2
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 11 16:05:23 2011 -0500
+
+    Finished fixing adverse event table!
+
+commit 826ebb309b4ae5a67e6873bc0ba252422d96e7b6
+Merge: 56a4195 670a7fe
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 11 10:20:36 2011 -0500
+
+    merged with sara and working on generic question builder
+
+commit 56a4195ba3419357858055a3bb4807855efb6f27
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 11 10:19:09 2011 -0500
+
+    working on creating a generic question generator
+
+commit 670a7fee631fc8cd6672f4d4179678f6a1992292
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Feb 11 10:17:58 2011 -0500
+
+    fixing some typos in jquery calls
+
+commit af27aeaa405ece3e64d43b3126beae0251ddf085
+Merge: bd659b6 955f13b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Feb 10 17:10:48 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit bd659b65c2ebc3955a382017028c3c4d85a57c5a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Feb 10 17:10:34 2011 -0500
+
+    moving to jquery only... hold your breath and hope it works
+
+commit 955f13ba8abf6d2d374cd478e0361eb437814c58
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 9 12:01:49 2011 -0500
+
+    re-added the feedback_items variable to the home index action so that logging in with admin will not break. Also fixed the feedback form to not use the id of page for the select box.
+
+commit 81d72ae6739bf96051980b634830423058c6e596
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 8 16:37:09 2011 -0500
+
+    Fixing main page view
+
+commit 87b14f8dec0fe9155242d639077b2ee4593270fc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 8 16:19:32 2011 -0500
+
+    Added banner to view the current project being worked on
+
+commit 218d16a8af799f1a95e9d17afc52ee25d639fac0
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 8 15:38:38 2011 -0500
+
+    Added links to create new project and extraction forms on their respective pages
+
+commit e8b55b1dc1c15933489847d9529c01a5e3ec9520
+Merge: 7888e41 0a0d570
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 8 14:59:35 2011 -0500
+
+    Huge layout changes, but may have broken some things
+
+commit 7888e41a337bba665c9ae47716e260fd1c7ea0f4
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 8 14:23:01 2011 -0500
+
+    huge huge layout changes, also potentially broke some things
+
+commit 0a0d57000d106a800baabdcbe80d77ce49161411
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 8 12:48:03 2011 -0500
+
+    updated git ignore for gemfile.lock, added a link and form to report a problem, added the problems to administrator login pages
+
+commit 933524ffa423402b0b05fdcbc780f45bab926340
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 8 10:22:41 2011 -0500
+
+    working on a user feedback form
+
+commit ca3e0710c4b2bd89b0b77782ae25781f2ed536bd
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Feb 7 13:48:35 2011 -0500
+
+    playing with the gemfile
+
+commit c2c5b678f7b9ab1eb6e039735cf7a745dddae76d
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Feb 7 12:26:11 2011 -0500
+
+    fixed footnotes for outcome data page to work on heroku
+
+commit 340911106d3cd6015eaed83ee13184a02b081812
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Feb 7 12:11:41 2011 -0500
+
+    fixed footnotes and adverse events
+
+commit b44747fa89f22bc67652683d54e16b2b2e73cfee
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Feb 4 16:10:48 2011 -0500
+
+    batch creation of studies based on list of pubmed ids
+
+commit d10a27a8b250f2ac1729754965a7cdfb1dd4232b
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Feb 3 16:56:47 2011 -0500
+
+    put breadcrumbs back in for templates
+
+commit 2d92e7c525a7e0247bef28763b05cb56a6adf38f
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Feb 3 16:29:06 2011 -0500
+
+    put in logic to home screen to limit add new study button when no template available
+
+commit 25ff6d2928a822c065598bc45a4c39dd358bc9b9
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Feb 3 14:17:43 2011 -0500
+
+    outcome setup now working properly when adding and editing timepoints
+
+commit 3efd21a982976b759ec423cb6743dc9115fc6d3d
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Feb 3 10:41:36 2011 -0500
+
+    fixed weird authlogic problem.
+
+commit ba06fe3795dc4cde84ce6d1f0d9ae49795538f78
+Merge: 5840746 244f653
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 2 17:13:25 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 58407460083c85fe7a86e817777936c409ab03e5
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 2 17:13:15 2011 -0500
+
+    the choice of other is now workin on the design details page for select boxes. also, tried it out on outcome setup page.
+
+commit 244f653eadbefa5d7af0b80b2061f4df37bc7989
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 2 14:16:58 2011 -0500
+
+    escaped question marks and ampersands in the template using javascript escape()
+
+commit bb905aec7dd30713b29c2d202ecdcfbd099e1678
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 2 14:04:33 2011 -0500
+
+    Oops, left a merge line in there
+
+commit b24f0badcf09777cc0760008d7ba3bf9abc5e65b
+Merge: 331d28d 75b7f0a
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 2 13:55:45 2011 -0500
+
+    fixed multiple choice template creation - can view saved items now
+
+commit 331d28de727179ba0cf2178f54df60d14b346d56
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Feb 2 13:53:59 2011 -0500
+
+    fixed multiple choice template creation - can view saved items now
+
+commit 75b7f0a570a2751133dd09864278c0faf3357acd
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 2 11:08:24 2011 -0500
+
+    updated data point deletion method to handle template fields as well. still need to integrate this though.
+
+commit 9624fdafc68f3e854bf119295721ffe017f34b38
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Feb 2 10:45:00 2011 -0500
+
+    deleting design detail points for custom fields when they're deleted.
+
+commit 6fe16756b9d27a4054045f11c6616ee4e35a87c6
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 1 17:55:35 2011 -0500
+
+    additional code to design details to make sure multiple selections saved correctly
+
+commit b265dff3bf43fc549b6460ff1a1e72ad0f823a26
+Merge: db366f1 c0dc940
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 1 16:58:51 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit db366f18c44b62e74b35435132478e77ccae8307
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 1 16:58:27 2011 -0500
+
+    design details entry form now working properly.
+
+commit c0dc940155f606e4a750d0595b9427d97b94247d
+Merge: 9e33687 1655aeb
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 1 11:56:01 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 9e33687fefebd8dd404b0ead1ee3a385ebe72a4b
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 1 11:55:47 2011 -0500
+
+    Added delete button to questions in design_details
+
+commit 1655aebee47018207f5202302d23585628cfb730
+Merge: cf7b4c0 b10877c
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 1 11:14:51 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit cf7b4c04ca30c331460ecad3555813f4999278e2
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Feb 1 11:14:40 2011 -0500
+
+    added the ability to retrieve pubmed data for secondary publications.
+
+commit b10877cb30b5681bb9a069129f2f030457864a5e
+Merge: af85e87 b96874c
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 1 09:48:49 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit af85e87a40a763f89632c8d56dfd644b4237a9b5
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Tue Feb 1 09:48:32 2011 -0500
+
+    design_details templating - multiple choice field form
+
+commit b96874c4fc57751284852c4acc6dca979eb89c5d
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Jan 31 16:52:52 2011 -0500
+
+    started on the function to create inputs and got the pubmed retrieval working
+
+commit 1e24e450da709324de6bdd8bc5c28cd917075e14
+Merge: 383879d e727014
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Jan 28 17:09:33 2011 -0500
+
+    Merge branch 'master' of heroku.com:srdr-dev
+
+commit 383879d6770c5c6d53382dc345e44449c79b0cb0
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Jan 28 17:09:24 2011 -0500
+
+    sort-of working pubmed import on primary publication
+
+commit e727014e1ee54762a4fdabe9a33746513bf3eb35
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Fri Jan 28 15:39:43 2011 -0500
+
+    fixed issues with design_details study page and some display issues
+
+commit a54777a69f9b9bdae17f18d21a132a554d241cdc
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jan 27 16:57:46 2011 -0500
+
+    fixed errors with database changes
+
+commit 654a4199b3ac4f2529fa29268af1bfc5c973c94e
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jan 27 15:37:32 2011 -0500
+
+    Finishing touches to the database schema
+
+commit 731e6fac77147f918ccbee755dd9bbda2b7b28dd
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jan 27 15:27:59 2011 -0500
+
+    Almost complete database restructuring and some code cleanup, too
+
+commit a85dc5eb90f694a5e4da90f82bf495bfda218918
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jan 27 10:00:03 2011 -0500
+
+    adverse event template setting controller changes again
+
+commit 134d03a443e034cf5dc1c498071e69cf6b044910
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Thu Jan 27 09:55:43 2011 -0500
+
+    fixes to adverse event page and style
+
+commit d9279085f02c5637fa83a4ae6f07f88c4e6da5ff
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jan 26 16:40:22 2011 -0500
+
+    Adding all files to update as of 1-26-11
+
+commit 10c67680b7ae99d8bc43cb54f534f7282c234899
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jan 26 16:40:17 2011 -0500
+
+    Adding all files to update as of 1-26-11
+
+commit 01bb3be8c2f9aa0ddfdb1f7e89f9a285df0550ef
+Author: unknown <sarahjanekeefe@gmail.com>
+Date:   Wed Jan 26 16:16:39 2011 -0500
+
+    updating to current srdr files as of 1-26-2011
+
+commit da88757ee0be23c03ba4827fb07d679f1a55e8bd
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Oct 21 16:49:22 2010 -0400
+
+    Changed the Title for Bamboo
+
+commit 4c3377a9a43f2a6e64ee1e1dac807823adfe35fe
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Oct 21 16:41:19 2010 -0400
+
+    added population characteristics and have it adding to arms only. right now study population characteristics are not being linked. Might as well incorporate Sarah's stuff into it first...
+
+commit ce735650a043ed3de92c74e4f32c38a8b74cd3ad
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Oct 21 12:46:46 2010 -0400
+
+    Projects, Key Questions, Studies and study arms are being added to the database. Questions can be associated with studies through a junction table and deletions, etc. are being handled.
+
+commit 0d55005c7ea5b0ff3a1be32b8788a0260c4e40b4
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Thu Oct 21 12:24:15 2010 -0400
+
+    projects, studies, key questions now entered into the database and updating properly. studies_key_questions table also keeps track of which questions are associated with the studies.
+
+commit 5de897fb976070a4d5fbaba5202ddbe25f0271c7
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Oct 20 15:50:58 2010 -0400
+
+    adding key questions but problem with showing the entire questions array when trying to associate studies with key questions.
+
+commit 4332f452191f5e2b172a364785d800f88e2bfecd
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Wed Oct 20 12:18:30 2010 -0400
+
+    KeyQuestions mostly working except for the destroy function. Keeps giving me strange routing error.
+
+commit 1edc5c35cb7a5b623b04df75db11810683005c52
+Author: Chris Parkin <chris.d.parkin@gmail.com>
+Date:   Tue Oct 19 16:23:19 2010 -0400
+
+    Changed the process so that we only store current ID, UI and title in the session instead of the full objects.
+
+commit 3680822594e6588a60cacdcde6c7dd3de98f9c7e
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Oct 19 15:05:18 2010 -0400
+
+    projects, studies and arms are being added and current objects are stored in session variables, which I will change now.
+
+commit 9f54cadca793a5e73360f4eb36460b6a62af0e98
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Tue Oct 19 11:28:19 2010 -0400
+
+    projects and studies are being added to the database
+
+commit 00e9289d3e338b1060e699c03d73b2d33aad25b0
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Oct 18 13:52:52 2010 -0400
+
+    added studies resource to fix error
+
+commit 54d93752e3009b83f292f973e42b386e31af61cb
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Mon Oct 18 13:50:51 2010 -0400
+
+    Added project_id to studies and projects are being added
+
+commit bc15b2263e95fb4a945614fb4e5a773d90df7193
+Author: Chris <cparkin@tuftsmedicalcenter.org>
+Date:   Fri Oct 15 15:34:05 2010 -0400
+
+    created the database and associations between projects, studies and arms
+
+commit d70c951b7f3e6a587bc2be0b9b4c4bd01e86b8e6
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Oct 15 15:15:24 2010 -0400
+
+    added project, study and arm scaffolds
+
+commit a61c1f3e18f00846cf2f6b396a1d497c3f2ddd9f
+Author: unknown <cparkin@.tufts-nemc.org>
+Date:   Fri Oct 15 15:01:13 2010 -0400
+
+    my first srdrv2 commit

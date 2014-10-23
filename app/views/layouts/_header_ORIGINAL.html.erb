@@ -1,0 +1,90 @@
+<!-- AHRQ HEADER -->
+
+<% display = (session[:ahrq_header] == 'hide') ? 'display:none;' : ""%>
+<div id="header" style='<%= display %>'>
+	<div id="ahrq_header">
+		<%= render "shared/ahrq_header" %>
+	</div>
+</div>
+
+<!-- SRDR HEADER -->
+<div id='srdr_title_bar'>
+	<div id='srdr_title'>
+		Systematic Review Data Repository
+	</div>
+	<div id='search_bar'>
+		<%= render "search/form" %>
+	</div>
+</div>
+<div id="nav_bar">
+	
+	<ul id="top_nav" style='text-align:center;'>
+		<li class='nav_btn'>
+			<% show_or_hide = (session[:ahrq_header] == 'hide') ? 'Exit Full Screen' : 'Full Screen Mode'%>
+			<a id='full_screen_toggle' href='#'><%= show_or_hide %></a>
+		</li>
+		
+		<li class="nav_btn <%= set_as_current(request.fullpath, "home") %>">
+			<%= link_to "SRDR Home", root_path %>
+		</li>		
+		
+	<% if !current_user %>
+	
+		<li class="nav_btn <%= set_as_current(request.fullpath, "login") %>">
+			<%= link_to "Login", "/login" %>
+		</li>
+		
+		<li class="nav_btn <%= set_as_current(request.fullpath, "register") %>">
+			<%= link_to "Register", "/register" %>
+		</li>
+		
+	<% else %>
+	
+		<li class="nav_btn <%= set_as_current(request.fullpath, "myprojects") %>">
+			<%= link_to "My Projects", url_for(:controller=>:projects, :action=>:index) %>
+		</li>		
+		
+	<% end %>
+
+		<li class="nav_btn <%= set_as_current(request.fullpath, "published") %>">
+			<%= link_to "Published Projects", url_for(:controller=>:projects, :action=>:published) %>			
+		</li>	
+		
+		<% if current_user %>
+			<li class="nav_btn <%= set_as_current(request.fullpath, "forms") %>">
+				<%= link_to "Extraction Form Bank", url_for(:controller=>:extraction_form_templates, :action=>:index) %>
+			</li>
+			<% if current_user.user_type == 'admin' %>
+			<li class="nav_btn <%= set_as_current(request.fullpath, "feedback") %>">
+				<%= link_to 'Feedback', url_for(:controller=>'home', :action=>'feedback') %>
+			</li>
+			<% end %>
+			<li class="nav_btn <%= set_as_current(request.fullpath, "help") %>">
+				<%= link_to "Help", "/help" %>
+			</li>
+			<li class="nav_btn <%= set_as_current(request.fullpath, "account") %>">
+				<%= link_to "Logged in as " + current_user.login, "/account" %>
+			</li>			
+			<li class="nav_btn">
+				<%= link_to "Log Out", "/logout" %>
+			</li>
+		<% end %>
+	
+
+	</ul>			
+			
+</div> <!-- END div id=nav_bar -->
+
+<!-- SOME JAVASCRIPT TO HANDLE THE HIDE/SHOW HEADER -->	
+<script type='text/javascript'>
+<!--
+$("#full_screen_toggle").bind("click",function(event){
+	event.preventDefault();
+	$.ajax({
+  	url: "/application/go_full_screen",
+  	type: "POST",
+  	data: {display: $("#header").css("display")}
+	});
+});
+-->
+</script>

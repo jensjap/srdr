@@ -1,0 +1,34 @@
+<a name="studynav"></a>
+<% page = request.fullpath.split("/") %>
+<% page_name = page[page.length - 1]%>
+<% unless @study.id.nil? %>
+	<%= render :partial=>"projects/page_title", :locals=>{:page_title=>"Editing Study:"} %>	
+	<%= render :inline=> @study.get_citation %>
+	<% is_extforms = request.fullpath.split("/")[5] %>
+	<% extraction_form_id = request.fullpath.split("/")[6].to_i %>
+	<% 
+        puts "*********** @extraction_forms = "+@extraction_forms.to_s
+        extraction_form_id = @extraction_forms[0].id if extraction_form_id==0 
+    %>
+	<% form_ids = @extraction_forms.collect{|x| x.id}%>
+	<% thisEF = ExtractionForm.find(extraction_form_id) %>
+	<div style='float:right;'>
+		<strong>Extracting Data to Form:</strong> <select tabindex="201">
+		<option selected value="<%= extraction_form_id %>"><%= thisEF.title %> (KQs <%= ExtractionForm.get_assigned_question_numbers(thisEF.id).join(", ") %>)</option>
+		<% @extraction_forms.each do |ef| %>
+			<% unless ef.id == extraction_form_id %>
+			<option value="<%= ef.id %>"><%= ef.title %> (KQs <%= ExtractionForm.get_assigned_question_numbers(thisEF.id).join(", ") %>)</option>
+			<% end %>
+		<% end %>
+	</select>
+	</div><br/>
+	<br/>
+
+	<div id="tabs">
+		<%= render :partial=>"tab_links",:locals=>{:efID=>extraction_form_id} %>
+	</div>	
+	<div id="tabs-1">
+		
+	</div>	
+<% end %>
+

@@ -1,0 +1,30 @@
+<div id='left-navigation-div' tabindex=100>
+
+</div>
+<div id='content' tabindex=200>
+<%= render "layouts/info_messages" %>
+
+<h1>User Profile for <%= @user.login %></h1>
+<br/>
+
+<div class="indent_block">
+  <b>Name:</b>  <%=h @user.fname %>   <%=h @user.lname %><br/>
+  <b>Organization:</b>   <%=h @user.organization %><br/>
+  <br/>
+  <b>Login count:</b>
+  <%=h @user.login_count %>
+	<br/>
+  <b>Last seen:</b>
+  <%=h (Time.now - @user.last_request_at).to_i %> seconds ago
+	<br/>
+  <b>Level:</b> <%= @user.user_type %>
+	<br/>
+
+	<br/>
+	<div class="actions buttons">
+		<%= link_to image_tag("Add.png", :alt => "Edit Profile") + " Edit Your Profile", '/account/edit' %>
+		<%= link_to image_tag("Cancel.png", :alt => "Cancel") + " Cancel", '/' %>		
+	</div>
+</div>
+</div>
+

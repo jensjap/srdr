@@ -1,0 +1,14 @@
+<% if @saved %>
+
+$("#secondary_publication_entry").html("<%= escape_javascript(render :partial=>'secondary_publications/form', :locals => {:secondary_publication=> @secondary_publication}) %>");
+$("#secondary_publication_table").html("<%= escape_javascript(render :partial=>"secondary_publications/table", :locals => {:secondary_publications => @secondary_publications}) %>");
+$("#secondary_publication_entry").dialog('close');
+
+<% end %>
+
+	<% if defined?(@message_div) %>
+		$("#<%= @message_div %>").show().delay(500).fadeOut(300);
+		<% if defined?(@error_div) %>
+			$("#<%= @error_div.to_s %>").html("");	
+		<% end %>
+	<% end %>

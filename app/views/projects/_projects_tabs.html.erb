@@ -1,0 +1,48 @@
+<%# stylesheet_link_tag "lists" %>
+<!--<div id='modal_div'>
+</div>
+-->
+<div class='actions' style="float:right; margin-top:5px; z-index:100px; position:relative;">
+        <%= link_to image_tag("Add.png", :style=>"border-style:none;vertical-align:middle;") + " Create a New Project", "/projects/new", :id => "new_project_btn", :title=>"Click to Create a New Project", :style=>"position:relative; z-index:100;" %>
+</div>
+<div id="tabs" style='margin-top: -3px;'>
+    <ul>
+        <li><a href="#mw-tabs-1" title="Projects that I lead">Lead Role</a></li>
+        <li><a href="#mw-tabs-2" title="Projects that I collaborate on">Collaborator</a></li>
+<% if User.hasAdminRights(current_user) %>
+	<li><a href="#mw-tabs-3" title="All Projects created by SRDR system users">All Projects</a></li>
+<% end %>
+    </ul>
+    <div id="mw-tabs-1">
+<% if !@lead_projects.nil? && @lead_projects.length > 0 %>	
+        <div id='project_list_div'>
+        <%= render :partial=>'projects/project_list' %>
+        </div><!-- end project list div -->
+<% else %>
+You do not currently lead any projects.
+<% end %>
+    </div>
+
+    <div id="mw-tabs-2">
+<% if !@collab_projects.nil? && @collab_projects.length > 0 %>
+        <div id='project_list_div'>
+        <%= render :partial=>'projects/collab_project_list' %>
+        </div><!-- end project list div -->
+<% else %>
+You are not currently listed as a collaborator on any projects.
+<% end %>
+    </div>
+
+<% if User.hasAdminRights(current_user) %>
+    <div id="mw-tabs-3">
+<%     if defined?(@all_projects) && !@all_projects.nil? && (@all_projects.length > 0) %>
+        <div id='project_list_div'>
+        <%= render :partial=>'projects/all_project_list' %>
+        </div><!-- end project list div -->
+<%     else %>
+No projects available.
+<%     end %>
+    </div>
+<% end %>
+
+</div> <!-- END my_work_tabs div --> 

@@ -1,0 +1,23 @@
+You currently have <strong><%= pluralize(Project.get_num_ext_forms(@project), "Extraction Form") %></strong> covering <strong><%= pluralize(Project.get_num_kqs_with_ext_forms(@project), "Key Question") %></strong>, and <strong><%= pluralize(Project.get_num_kqs_without_ext_forms(@project), "Key Question") %></strong> that do not yet have an Extraction Form.  Use the button below to create a new extraction form.
+<br/>
+			<% has_privilege = User.current_user_has_project_edit_privilege(@project.id, current_user) %>
+			<% if has_privilege %>
+		<br/>
+		<div class="actions">
+			<% if @no_more_extraction_forms %>
+				<strong>You cannot create additional extraction forms for this project because all key questions have
+					already been accounted for.</strong>
+			<% else %>
+				<a href="/projects/<%= @project.id %>/extraction_forms/new"><img src="/images/Add.png" style="border-style:none;vertical-align:middle%;"/> Add Extraction Form</a>
+				<%# link_to image_tag("Add.png", :style=>"border-style:none;vertical-align:middle%;") + " Add Extraction Form", {}, :id => "add_new_extraction_form", :alt => "Click this button to add a new extraction form" %>
+			  <% if @templates_available %>
+					<%= link_to image_tag("Add.png", :style=>"border-style:none;vertical-align:middle%;") + " Browse Form Templates", {}, :id => "browse_extraction_forms", :alt => "Click Here to browse the extraction form template list" %>
+				<% end %>
+			<% end %>
+		</div>
+		
+		<% end %>
+<br/>
+<div id="extraction_form_table">
+<%= render "projects/extractionforms_table" %> 
+</div>

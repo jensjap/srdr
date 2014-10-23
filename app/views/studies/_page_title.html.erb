@@ -1,0 +1,31 @@
+<% @project = Project.find(params[:project_id]) %>
+<% if defined?(@project) && !@project.nil? %>
+	<h1>Editing Study in Project: <%= @project.title %>
+		<div class="status">(Project Status: Incomplete and Private)</div>
+	</h1>
+<% else %>
+	<h1>Editing Study</h1>
+<% end %>
+
+<div id="study_citation_info">
+<%= render "studies/citation_info" %>
+</div>
+
+<hr/>
+<h2>
+	<%# if the a local variable named page_title is passed in, use it %>
+	<% if !defined?(page_title) %>
+		<% page_title = get_page_title %>
+	<%# otherwise, get it from the url (application helper) %>
+	<% else %>
+		<%= get_page_title %>
+	<% end %>
+</h2>
+
+<%= render "studies/study_buttons" %>
+
+<center>
+<span class="unsaved_div" style="display:none; color:red; font: 12px verdana;">
+	Please remember to save your changes before leaving this page.
+</span>
+</center>

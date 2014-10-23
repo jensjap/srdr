@@ -1,0 +1,3 @@
+$("#add_keyquestion_box").html("<%= escape_javascript(render "key_questions/form", :locals => {:key_question => @key_question, :project_id => @project_id}) %>");
+$("#add_keyquestion_box").dialog('open');
+$("#key_question_question").focus();

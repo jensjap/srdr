@@ -1,0 +1,13 @@
+<div id='matrix_setup_<%= @model %>' matrix_type='<%= @input_type %>'>
+<br/>
+<label for='<%=@model%>_matrix_rows'>Enter row options, one per line:</label><br/>
+<textarea name="<%=@model%>_matrix[rows]" id="<%=@model%>_matrix_rows" title='Enter row values, one per line.' rows=4></textarea>
+<br/><br/>
+<label for='<%=@model%>_matrix_columns'>Enter column options, one per line:</label><br/>
+<textarea name="<%=@model%>_matrix[columns]" id="<%=@model%>_matrix_columns" title='Enter column values, one per line.' rows=4></textarea>
+<br><br/>
+<input type='checkbox' name="<%=@model%>_matrix[allow_other_row]" id="<%= @model %>_matrix_allow_other_row" title="Include a row named 'Other' for additional input"/><label for='<%= @model %>_matrix_allow_other_row'>Include a row for 'Other'</label><br/><br/>
+<!--<input type='checkbox' name="<%=@model%>_matrix[allow_other_column]" id="<%= @model %>_matrix_allow_other_column" title="Include a column named 'Other' for additional input"/><label for='<%= @model %>_matrix_allow_other_column'>Include a column for 'Other'</label>
+-->
+</div><%# END the matrix_setup div %>
+

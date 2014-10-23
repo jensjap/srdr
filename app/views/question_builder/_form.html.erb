@@ -1,0 +1,138 @@
+<div id='q_builder_form'>
+<div id="validation_message_<%= @model_name %>">
+<%# render "layouts/modal_info_messages" %>
+</div>
+<div style='float:right;'><strong>Need assistance building your form?</strong><br/><a href='http://www.youtube.com/watch?v=CvRPv4XG6Rc&feature=youtu.be' class='needs_exit_disclaimer' target='_blank'>Click Here for a training video  <img alt='WARNING: this link will direct you away form our site.' src="/images/exit_disclaimer.gif"/></a> or <br/><%= link_to "Visit the 'Using Question Builder' section of our FAQ", "/help?selected=4#question_builder_faq", {:target=>"blank"} %></div><br/>
+<%# submit_destination = @editing ? "question_builder/update" : "question_builder/create" %>
+<%= form_tag "question_builder/create", :remote=>true do %>
+	<%= hidden_field_tag "page_name", @model_name %>
+	<%= hidden_field_tag "page_title", @model_title %>
+	<%= hidden_field_tag "#{@model_name}[extraction_form_id]", @extraction_form.id %>
+	<%= hidden_field_tag "extraction_form_id", @extraction_form.id %>
+	<%# start form_content DIV %>
+<div class="form_content">
+	  This form allows you to generate a new extraction form item for <%= @model_name.gsub("_"," ")%>s, 
+		along with an optional set of suggested responses. Responses can be designated as drop down lists, radio or check boxes, or text fields.<br/><br/>
+		<div class='hr'></div><br/><br/>
+		<table class='form_table tab-list-table'>
+
+		<%# start question text %>
+			<tr>
+				<td class='label top'>
+					<label for="Question Text">Question text:</label> 
+				</td>
+				<td class='input top'>
+					<textarea id='<%= @model_name%>_question' name='<%= @model_name %>[question]' size='50x2' class='editable_field' title='Enter the Question Text.'></textarea>
+					<%# f.text_area :question, :size=>"50x2", :class=> "editable_field", :title => "question text" %>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class='label'>
+					<label for="Instructions for Extractor">Instructions for Extractor (optional):</label> 
+				</td>
+				<td class='input'>
+					<textarea id='<%= @model_name%>_instruction' name='<%= @model_name%>[instruction]' size='50x2' class='editable_field' title='Enter instructions for the data extractors.'></textarea>
+					<%# f.text_area :instruction, :size=>"50x2", :class=>"editable_field", :title => "instructions for data extractor" %>
+				</td>
+			</tr>
+			
+			
+		
+		<%# end question name field %>
+			<tr>
+				<td class='label'>
+					<label for="type_selector_<%= @model_name %>">Please choose a question type:</label>
+				</td>		
+				<td class='input'>
+					<div class='field' id='type_selector_<%= @model_name %>'> <%# start field type %>
+			
+						<% options = [["Text (user will enter their own value)","text"],["Dropdown Menu (choose from a dropdown list, with an 'Other' option)","select"],["Multiple Choice (Only One Answer Allowed)","radio"],["Multiple Choice (Select More Than One Answer)","checkbox"],["Matrix of Choices (Only One Answer Allowed)","matrix_radio"],["Matrix of Choices (Select More Than One Answer)","matrix_checkbox"],
+							["Matrix of Dropdowns (Specify options in each cell)","matrix_select"]] %>
+						<%= select_tag "#{@model_name}[field_type]", options_for_select(options, ""), {:id=>"field_type",:class=> "editable_field", :title => "Select a Question Type"} %>
+					</div> <%# end field type %>
+					<div class='field' id='subquestion_div_<%= @model_name %>'> <%# start subquestion div %>
+    				
+    				</div> <%# end subquestion div%>
+				</td>
+			</tr>
+			
+			<%# column options %>
+			<tr style='display:none;'>
+				<td class='label'>
+					<label>Define Matrix Columns</label>
+				</td>
+				<td class='input'>
+
+				</td>
+			</tr>
+		</table>
+		<br clear='all'><br/><br/><br/><br/>
+		<div class='popup-footer actions'>
+			<button type='submit' class='saving' data-disable-with="<%= ajax_wait_msg %>">
+				<%= image_tag "Add.png", :alt => "Add" %>Save
+			</button>
+			<button class="negative" id="close_form_btn">
+				<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+			</button>
+		</div>
+		
+</div>
+<% end %>
+
+<script type='text/javascript'>
+// <!--
+	function question_build_init(){
+		  try{
+		    checkLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+		    prepareQBuild();
+		  } catch( err ) {
+		    setTimeout('question_build_init()', 200);
+		  }
+		}
+
+	function checkLoaded(){
+	    if ($('#close_form_btn').length == 0) $jquery.error( 'not ready' );
+	}
+
+	function prepareQBuild(){
+		//var field_type_var = "#<%=@model_name%>_field_type"
+		$("#field_type").unbind();
+		//$(field_type_var).unbind();
+		//$(field_type_var).change(function() {
+		$("#field_type").change(function(){
+	    	$.ajax({
+	    		url: 'question_builder/show_input_options',
+	    		data: {"selected":this.value,"field_name":this.name,"field_id":this.id,"page_name":"<%= @model_name %>" }
+	    	});	
+	  	});
+
+		$("#close_form_btn").unbind();
+		$("#close_form_btn").bind("click", function(event){
+			event.preventDefault();
+			$('#<%= @model_name %>_fields_entry').dialog('close');
+		});	
+
+		// Handle when a user wants to build a matrix-style question.
+		$("#<%= @model_name %>_is_matrix").unbind();
+		$("#<%= @model_name %>_is_matrix").bind("click",function(event){
+			var checked = false;
+			if($(this).attr("checked") == "checked"){
+				checked = true;
+			}
+			$.ajax({
+				url: 'question_builder/show_matrix_options',
+				data: {"checked":checked,
+					   "field_name":this.name,
+					   "field_id":this.id,
+					   "page_name":"<%= @model_name %>"}
+			});
+			//alert("the value is " + $(this).attr("checked"));
+		});
+	}
+	question_build_init();
+// -->	
+</script>
+
+
+</div>

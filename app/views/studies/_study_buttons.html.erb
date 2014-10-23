@@ -1,0 +1,30 @@
+<br/>
+		<div class="actions centered" id="study_buttons">
+			<% if !@study.id.nil? %>
+			<%= link_to image_tag("Note_go.png", :style=>"border-style:none;vertical-align:middle;") + " View Study Preview", {}, :id => "view_preview_btn", :class => "positive" %>
+			<% end %>
+		</div>
+		
+		<div class="centered"><a href="#studynav" class="small_link">Access Study Navigation</a></div>
+		
+		<div id="preview_div">
+			<br/><br/><br/>
+			<center><img src='/images/loading_gif.gif' alt='Loading...'></center>
+		</div>
+					<% if !@study.id.nil? %>
+					<% @project = Project.find(params[:project_id]) %>
+		<script type="text/javascript">
+		$("#preview_div").dialog({
+			autoOpen: false,
+			minWidth: 900,
+			height: 650,
+			position: 'top',
+			resizable: true,
+			 open: function() {
+				$("#preview_div").load("<%= project_study_path(@project, @study) %>");
+				window.scrollTo(0, 0);
+				},
+				title: "Preview Study"
+		});
+		</script>
+		<% end %>

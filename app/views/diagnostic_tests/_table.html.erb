@@ -1,0 +1,22 @@
+
+<% table_id = title.split(" ")[0].downcase + "_test_table" %>
+<table class='list_table' style="padding:0;margin:0;" id="<%= table_id %>">
+	<tr><th colspan=5><center><%= title %></center></th></tr>
+	<% unless tests.empty? %>
+		<tr><th>Title</th><th>Description</th><th>Notes</th><th>Thresholds</th><th>Actions</th></tr>
+		<% tests.each do |test| %>
+			<tr>
+				<td><%= test.title %></td>
+				<td><%= test.description %></td>
+				<td><%= test.notes.nil? ? "---" : test.notes.empty? ? "---" : test.notes %></td>
+				<td><%= test.diagnostic_test_thresholds.collect{|x| x.threshold}.join(", ") %></td>
+				<td>
+					<%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt => "Edit") + "Edit", "/diagnostic_tests/#{test.id}/edit", :remote=>true, :class => "tooltip_edit edit_btn edit_arm" %><br/>
+					<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete", test, :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "tooltip_delete" %>
+				</td>
+			</tr>
+		<% end %>
+	<% else %>
+		<tr><td colspan=3>There are no <%= title.downcase %> defined for this extraction form.</td></tr>
+	<% end %>
+</table>

@@ -1,0 +1,93 @@
+<% if !defined?(@sections_list) || @sections_list.nil? || @sections_list.length == 0 %>
+	The creator of this extraction form did not include any of the available sections.
+  <% else %>
+
+  
+  <% end %>
+  <div class="extform_preview_div">
+ 	<% if @sections_list.include?("questions") %>
+  	<!-- KEY QUESTIONS DIV SECTION -->
+<div id="extraction_form_view_questions" style="display:block">
+	<div class="summary_heading">Key Questions</div>
+	<div id="keyqs_text"><br/>
+
+<%= render "key_questions/extraction_form_list" %>
+	</div>	
+
+	<br/>
+	
+	</div>
+<% end %>
+
+	
+	<% if @sections_list.include?("arms") %>
+  	<!-- ARMS DIV SECTION -->
+	<div id="extraction_form_view_arms" style="display:block">
+	<div class="summary_heading">Arm Name Suggestions</div>
+	<div id="arms_text">
+	<%= render 'arms_table_completed' %>
+	</div>
+  <br/>
+	</div>
+  <% end %>
+
+	<% if @sections_list.include?("design") %>
+  	<!-- DESIGN DETAILS DIV SECTION -->
+	<% @questions = DesignDetail.where(:extraction_form_id => @extraction_form.id, :study_id => nil).order("question_number ASC") %>
+	<div id="extraction_form_view_design" style="display:block">
+	<div class="summary_heading">Design Details and Enrollment</div>
+	<div id="design_detail_text"><br/>
+	<% @model = "design_detail" %>
+	<%= render 'question_builder/extraction_form_preview_noedit' %>
+	</div>
+  <br/>
+	</div>
+  <% end %>
+
+  	<% if @sections_list.include?("baselines") %>
+	<!-- BASELINE CHARACTERISTICS DIV SECTION -->
+	<% @questions = BaselineCharacteristic.where(:extraction_form_id => @extraction_form.id, :study_id => nil).order("question_number ASC")%>	
+	<div id="extraction_form_view_baselines" style="display:block">
+	<div class="summary_heading">Baseline Characteristics Fields</div>
+	<div id="pop_char_text"><br/>
+	<% @model = "baseline_characteristic" %>
+	<%= render 'question_builder/extraction_form_preview_noedit' %>
+	</div>
+<br/>	
+	</div>
+	<% end %>
+
+		<% if @sections_list.include?("outcomes") %>
+  	<!-- OUTCOME SETUP DIV SECTION -->
+	<div id="extraction_form_view_outcomes" style="display:block">
+	<div class="summary_heading">Outcome Name Suggestions</div>
+	<div id="outcome_setup_text"><br/>
+	<%= render 'extraction_form_outcome_names/completed_table' %>
+	</div>
+<br/>
+	</div>
+<% end %>
+
+
+		<% if @sections_list.include?("adverse") %>
+	  	<!-- ADVERSE EVENTS DIV SECTION -->
+	<div id="extraction_form_view_adverse" style="display:block">
+	<div class="summary_heading">Adverse Events</div>
+	<div id="adverse_events_text"><br/>
+	<%= render 'adverse_event_columns/example_table' %>
+	</div>
+	<br/>
+	</div>
+	<% end %>
+
+	<% if @sections_list.include?("quality") %>
+	<!-- QUALITY ASSESSMENT SECTION -->
+	<div id="extraction_form_view_quality" style="display:block">
+	<div class="summary_heading">Quality Dimension Fields</div>
+	<div id="qa_text"><br/>
+		<%= render 'quality_dimension_data_points/example_table' %>
+		<%= render 'quality_rating_fields/example_table' %>	
+	</div>
+	</div>
+	<% end %>
+</div>

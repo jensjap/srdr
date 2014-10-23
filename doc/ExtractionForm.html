@@ -1,0 +1,2918 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: ExtractionForm
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (E)</a> &raquo; 
+    
+    
+    <span class="title">ExtractionForm</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: ExtractionForm
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">ExtractionForm</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/extraction_form.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+An extraction form must answer one or more key questions.  The key
+questions are then answered by a study, which uses the extraction form id
+to identify data.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#adverse_event_settings_alter_existing_columns_by_studies-class_method" title="adverse_event_settings_alter_existing_columns_by_studies (class method)">+ (Object) <strong>adverse_event_settings_alter_existing_columns_by_studies</strong>(extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+call this after each extraction_form setting is adjusted.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_default_outcome_measures-class_method" title="create_default_outcome_measures (class method)">+ (Object) <strong>create_default_outcome_measures</strong>(outcome_data_entry_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+creates the default outcome measures in the database.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_default_questions-class_method" title="create_default_questions (class method)">+ (Object) <strong>create_default_questions</strong>(extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+create the default questions and fields in the database.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create_included_section_fields-class_method" title="create_included_section_fields (class method)">+ (Object) <strong>create_included_section_fields</strong>(extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+create_included_section_fields create a section in the
+extraction_form_sections table for each page when the extraction form is
+created.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_arms_array-class_method" title="get_arms_array (class method)">+ (array) <strong>get_arms_array</strong>(ef_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the array of arms for an extraction form, based on extraction_form_arms
+(suggestions).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_assigned_key_questions-class_method" title="get_assigned_key_questions (class method)">+ (array) <strong>get_assigned_key_questions</strong>(efid) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+determine which key questions have already been assigned to a given
+extraction form.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_assigned_question_numbers-class_method" title="get_assigned_question_numbers (class method)">+ (array) <strong>get_assigned_question_numbers</strong>(ef_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the assigned key questions by question number.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_available_questions-class_method" title="get_available_questions (class method)">+ (array) <strong>get_available_questions</strong>(projid, efid) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+determine which key questions are available to be assigned.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_camel_caps-class_method" title="get_camel_caps (class method)">+ (String) <strong>get_camel_caps</strong>(input) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+a camelcaps function to accept the model as input and return a
+representation that can be called  with eval to hit the database table.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_kqs_covered-class_method" title="get_kqs_covered (class method)">+ (string) <strong>get_kqs_covered</strong>(ef_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+return a printable list of the key questions covered by an extraction form.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_next_question_number-class_method" title="get_next_question_number (class method)">+ (integer) <strong>get_next_question_number</strong>(obj_type, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_next_question_number return the number of the next question for a
+section specified by obj_type obj_type should be a string such as
+DesignDetail, BaselineCharacteristic, etc.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_outcomes_array-class_method" title="get_outcomes_array (class method)">+ (array) <strong>get_outcomes_array</strong>(ef_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the array of outcomes for an extraction form, based on
+extraction_form_outcomes (suggestions).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#no_sections_are_included-class_method" title="no_sections_are_included (class method)">+ (boolean) <strong>no_sections_are_included</strong>(ef_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+return true if all extraction_form_sections are marked false, i.e.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_extracted_data-class_method" title="remove_extracted_data (class method)">+ (Object) <strong>remove_extracted_data</strong>(ef_id, study_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+remove all data from an extraction form for a particular study.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#shift_questions-class_method" title="shift_questions (class method)">+ (Object) <strong>shift_questions</strong>(current_num, new_num, obj_type, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+shift_questions when a extraction_form creator updates the order of
+questions in their list,  this method is called.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_question_numbers_after_delete-class_method" title="update_question_numbers_after_delete (class method)">+ (Object) <strong>update_question_numbers_after_delete</strong>(obj, obj_id, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+update_question_numbers_after_delete after a question is deleted, shift the
+question numbers to accommodate this.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#can_be_removed%3F-instance_method" title="#can_be_removed? (instance method)">- (boolean) <strong>can_be_removed?</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+determine whether or not the extraction form is capable of being removed 1.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_assigned_kq_objects-instance_method" title="#get_assigned_kq_objects (instance method)">- (array) <strong>get_assigned_kq_objects</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the assigned key questions objects ordered by question number.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public deprecated">
+  <span class="summary_signature">
+    
+      <a href="#get_borrowers-instance_method" title="#get_borrowers (instance method)">- (array) <strong>get_borrowers</strong>(section) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  <span class="deprecated note title">Deprecated</span>
+  
+
+  
+    <span class="summary_desc"><strong>Deprecated.</strong> <div class='inline'><p>
+possibly?
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#is_title_unique_for_user-instance_method" title="#is_title_unique_for_user (instance method)">- (boolean) <strong>is_title_unique_for_user</strong>(new_title, user, updating) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+is_title_unique_for_user Determine if the proposed new title of the
+extraction form exists in the database for the same user updating lets us
+know if it&#8217;s an update or a new entry.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="adverse_event_settings_alter_existing_columns_by_studies-class_method">
+  
+    + (<tt>Object</tt>) <strong>adverse_event_settings_alter_existing_columns_by_studies</strong>(extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+call this after each extraction_form setting is adjusted.  this will remove
+all existing columns or re-add them based on the new settings.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form to update
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+396
+397
+398
+399
+400
+401</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 396</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_adverse_event_settings_alter_existing_columns_by_studies'>adverse_event_settings_alter_existing_columns_by_studies</span><span class='lparen'>(</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@study_with_extraction_form</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>for</span> <span class='id identifier rubyid_study'>study</span> <span class='kw'>in</span> <span class='ivar'>@study_with_extraction_form</span>
+		<span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_create_adverse_event_study_columns'>create_adverse_event_study_columns</span><span class='lparen'>(</span><span class='id identifier rubyid_study'>study</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_default_outcome_measures-class_method">
+  
+    + (<tt>Object</tt>) <strong>create_default_outcome_measures</strong>(outcome_data_entry_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+creates the default outcome measures in the database. pulls the default
+outcome measure information from default_questions.yml
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>outcome_data_entry_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the id of the outcome data entry to create defaults for
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 358</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_default_outcome_measures'>create_default_outcome_measures</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_data_entry_id'>outcome_data_entry_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_fn'>fn</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/../../config/default_questions.yml</span><span class='tstring_end'>'</span></span>
+	<span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='const'>YAML</span><span class='op'>::</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_fn'>fn</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_defaults'>defaults</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+		<span class='comment'># outcome measures			
+</span>		<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>outcome-measures</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+			<span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>outcome-measures</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_outcome_measure'>outcome_measure</span><span class='op'>|</span>				
+				<span class='ivar'>@new_measure</span> <span class='op'>=</span> <span class='const'>OutcomeMeasure</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_measure_title'>measure_title</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_measure'>outcome_measure</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>measure-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_measure'>outcome_measure</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>description</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_unit'>unit</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_measure'>outcome_measure</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>unit</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_note'>note</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_measure'>outcome_measure</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>note</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_measure_type'>measure_type</span> <span class='op'>=</span> <span class='id identifier rubyid_outcome_measure'>outcome_measure</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>measure-type</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+				<span class='ivar'>@new_measure</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_default_questions-class_method">
+  
+    + (<tt>Object</tt>) <strong>create_default_questions</strong>(extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+create the default questions and fields in the database. pulls default
+question information from default_questions.yml.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the id of the extraction form to create defaults for
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 299</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_default_questions'>create_default_questions</span><span class='lparen'>(</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@existing_ef_studies</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='ivar'>@existing_ef_adverse</span> <span class='op'>=</span> <span class='const'>AdverseEventColumn</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='ivar'>@existing_ef_design</span> <span class='op'>=</span> <span class='const'>DesignDetail</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='ivar'>@existing_ef_qualityrating</span> <span class='op'>=</span> <span class='const'>QualityRatingField</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='id identifier rubyid_fn'>fn</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/../../config/default_questions.yml</span><span class='tstring_end'>'</span></span>
+	<span class='id identifier rubyid_defaults'>defaults</span> <span class='op'>=</span> <span class='const'>YAML</span><span class='op'>::</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_fn'>fn</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@existing_ef_studies</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='ivar'>@existing_ef_adverse</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>  <span class='lparen'>(</span><span class='ivar'>@existing_ef_design</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span>  <span class='lparen'>(</span><span class='ivar'>@existing_ef_qualityrating</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_defaults'>defaults</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+			<span class='comment'># design details		
+</span>			<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>design-details</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+				<span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>design-details</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+					<span class='ivar'>@design_detail</span> <span class='op'>=</span> <span class='const'>DesignDetail</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+					<span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_question'>question</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question-text</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_field_type'>field_type</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>field-type</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_field_note'>field_note</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>notes</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question-number</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+					<span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>			
+					<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+						<span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span><span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span>
+							<span class='ivar'>@design_detail_field</span> <span class='op'>=</span> <span class='const'>DesignDetailField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+							<span class='ivar'>@design_detail_field</span><span class='period'>.</span><span class='id identifier rubyid_design_detail_id'>design_detail_id</span> <span class='op'>=</span> <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+							<span class='ivar'>@design_detail_field</span><span class='period'>.</span><span class='id identifier rubyid_option_text'>option_text</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>option</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+							<span class='ivar'>@design_detail_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+						<span class='kw'>end</span>
+					<span class='kw'>end</span>
+				<span class='kw'>end</span>
+			<span class='kw'>end</span>
+		
+			<span class='comment'># adverse event columns
+</span>			<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>adverse-event-columns</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>			
+				<span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>adverse-event-columns</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_adverse_event_column'>adverse_event_column</span><span class='op'>|</span>
+					<span class='ivar'>@new_col</span> <span class='op'>=</span> <span class='const'>AdverseEventColumn</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+					<span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_adverse_event_column'>adverse_event_column</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>column-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_adverse_event_column'>adverse_event_column</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>description</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+					<span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+				<span class='kw'>end</span>
+			<span class='kw'>end</span>
+			
+			<span class='comment'># quality rating fields
+</span>			<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>quality-rating-fields</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>				
+				<span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>quality-rating-fields</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_quality_rating_field'>quality_rating_field</span><span class='op'>|</span>
+					<span class='ivar'>@new_field</span> <span class='op'>=</span> <span class='const'>QualityRatingField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+					<span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_rating_item'>rating_item</span> <span class='op'>=</span> <span class='id identifier rubyid_quality_rating_field'>quality_rating_field</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>field-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_display_number'>display_number</span> <span class='op'>=</span> <span class='id identifier rubyid_quality_rating_field'>quality_rating_field</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>display-number</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+					<span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+					<span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+				<span class='kw'>end</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>	
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create_included_section_fields-class_method">
+  
+    + (<tt>Object</tt>) <strong>create_included_section_fields</strong>(extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+create_included_section_fields create a section in the
+extraction_form_sections table for each page when the extraction form is
+created
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 230</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_create_included_section_fields'>create_included_section_fields</span><span class='lparen'>(</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='comment'># key questions
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>questions</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+	
+	<span class='comment'># publications
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>publications</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+	
+	<span class='comment'># arms
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>arms</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+	
+	<span class='comment'>#enrollment_details
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>design</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+	<span class='comment'>#baseline_characteristics
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>baselines</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+	<span class='comment'># outcome_setup
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>outcomes</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>		
+	
+	<span class='comment'># outcome_raw_data
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>results</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+
+	<span class='comment'>#adverse_events
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>adverse</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>		
+	
+	<span class='comment'>#study_quality
+</span>	<span class='ivar'>@efs</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>quality</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='ivar'>@efs</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>		
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_arms_array-class_method">
+  
+    + (<tt>array</tt>) <strong>get_arms_array</strong>(ef_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the array of arms for an extraction form, based on extraction_form_arms
+(suggestions). if there are no arms, return [&#8220;example arm 1&#8221;,
+&#8220;example arm 2&#8221;] for example table display
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ef_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form arms (strings)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 439</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_arms_array'>get_arms_array</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@ef_arms</span> <span class='op'>=</span> <span class='const'>ExtractionFormArm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='ivar'>@ef_arms</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='ivar'>@arr</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+		<span class='kw'>for</span> <span class='id identifier rubyid_arm'>arm</span> <span class='kw'>in</span> <span class='ivar'>@ef_arms</span>
+			<span class='ivar'>@arr</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_arm'>arm</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span>
+		<span class='kw'>end</span>
+		<span class='kw'>return</span> <span class='ivar'>@arr</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Example Arm 1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Example Arm 2</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_assigned_key_questions-class_method">
+  
+    + (<tt>array</tt>) <strong>get_assigned_key_questions</strong>(efid) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+determine which key questions have already been assigned to a given
+extraction form
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>efid</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array of key question ids
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+142
+143
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 142</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_assigned_key_questions'>get_assigned_key_questions</span> <span class='id identifier rubyid_efid'>efid</span>
+	<span class='id identifier rubyid_kqids'>kqids</span> <span class='op'>=</span> <span class='const'>ExtractionFormKeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_efid'>efid</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>key_question_id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_kqids'>kqids</span> <span class='op'>=</span> <span class='id identifier rubyid_kqids'>kqids</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_id'>id</span><span class='op'>|</span> <span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_key_question_id'>key_question_id</span><span class='rbrace'>}</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_kqids'>kqids</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_assigned_question_numbers-class_method">
+  
+    + (<tt>array</tt>) <strong>get_assigned_question_numbers</strong>(ef_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the assigned key questions by question number
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ef_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array of question numbers
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+151
+152
+153
+154
+155
+156
+157
+158
+159</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 151</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_assigned_question_numbers'>get_assigned_question_numbers</span> <span class='id identifier rubyid_ef_id'>ef_id</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_kqs'>kqs</span> <span class='op'>=</span> <span class='id identifier rubyid_get_assigned_key_questions'>get_assigned_key_questions</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_kqs'>kqs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_kq'>kq</span><span class='op'>|</span>
+		<span class='id identifier rubyid_tmp'>tmp</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_kq'>kq</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_available_questions-class_method">
+  
+    + (<tt>array</tt>) <strong>get_available_questions</strong>(projid, efid) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+determine which key questions are available to be assigned. they are not
+available if they have already been assigned to a different form in the
+same project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>projid</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+project id
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>efid</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 177</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_available_questions'>get_available_questions</span><span class='lparen'>(</span><span class='id identifier rubyid_projid'>projid</span><span class='comma'>,</span> <span class='id identifier rubyid_efid'>efid</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_efid'>efid</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='id identifier rubyid_efid'>efid</span> <span class='op'>=</span> <span class='int'>0</span>
+	<span class='kw'>end</span>
+	
+	<span class='comment'># get a list of question ids for all questions in the project
+</span>	<span class='id identifier rubyid_all_questions'>all_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_projid'>projid</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='id identifier rubyid_all_questions'>all_questions</span> <span class='op'>=</span> <span class='id identifier rubyid_all_questions'>all_questions</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_id'>id</span><span class='op'>|</span> <span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	
+	<span class='comment'># get a list of questions already assigned to other extraction forms
+</span>	<span class='id identifier rubyid_assigned'>assigned</span> <span class='op'>=</span> <span class='const'>ExtractionFormKeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span><span class='symbol'>:conditions</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>extraction_form_id &lt;&gt; ? AND key_question_id IN (?)</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='id identifier rubyid_efid'>efid</span><span class='comma'>,</span> <span class='id identifier rubyid_all_questions'>all_questions</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>key_question_id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>extraction_form_id</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	
+	<span class='comment'># create an array to hold those that are not previously assigned
+</span>	<span class='id identifier rubyid_available'>available</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='semicolon'>;</span>
+	
+	<span class='kw'>unless</span> <span class='id identifier rubyid_assigned'>assigned</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='comment'># get the key question ids of the previously assigned questions
+</span>		<span class='id identifier rubyid_assigned_kqs'>assigned_kqs</span> <span class='op'>=</span> <span class='id identifier rubyid_assigned'>assigned</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_record'>record</span><span class='op'>|</span> <span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_key_question_id'>key_question_id</span><span class='rbrace'>}</span>
+		<span class='id identifier rubyid_i'>i</span> <span class='op'>=</span> <span class='int'>0</span>
+		<span class='id identifier rubyid_all_questions'>all_questions</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_q'>q</span><span class='op'>|</span>
+			<span class='comment'># for each question, if it's already assigned then remove it from the available
+</span>			<span class='comment'># questions array
+</span>			<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_assigned_kqs'>assigned_kqs</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_q'>q</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_available'>available</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_q'>q</span><span class='semicolon'>;</span>
+			<span class='kw'>end</span>
+			<span class='id identifier rubyid_i'>i</span><span class='op'>+=</span><span class='int'>1</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+		<span class='id identifier rubyid_available'>available</span> <span class='op'>=</span> <span class='id identifier rubyid_all_questions'>all_questions</span>
+	<span class='kw'>end</span>
+	
+	<span class='id identifier rubyid_kq_map'>kq_map</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+	<span class='id identifier rubyid_assigned'>assigned</span> <span class='op'>=</span> <span class='id identifier rubyid_assigned'>assigned</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_record'>record</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_key_question_id'>key_question_id</span><span class='comma'>,</span> <span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+	
+	<span class='comment'># if there are some assigned, we want to tell the user what extraction form they
+</span>	<span class='comment'># have already been assigned to
+</span>	<span class='kw'>unless</span> <span class='id identifier rubyid_assigned'>assigned</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_assigned'>assigned</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arr'>arr</span><span class='op'>|</span>
+			<span class='id identifier rubyid_ef'>ef</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>title</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+			<span class='kw'>unless</span> <span class='id identifier rubyid_ef'>ef</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+				<span class='id identifier rubyid_kq_map'>kq_map</span><span class='lbracket'>[</span><span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_ef'>ef</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+			<span class='kw'>else</span>
+				<span class='id identifier rubyid_kq_map'>kq_map</span><span class='lbracket'>[</span><span class='id identifier rubyid_arr'>arr</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>ERROR: Could not find extraction form title.</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='comment'># create a hash that tells us the title of the form for each previously assigned key question
+</span>	<span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_available'>available</span><span class='comma'>,</span> <span class='id identifier rubyid_kq_map'>kq_map</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_camel_caps-class_method">
+  
+    + (<tt>String</tt>) <strong>get_camel_caps</strong>(input) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+a camelcaps function to accept the model as input and return a
+representation that can be called  with eval to hit the database table. for
+example: design_detail would give DesignDetail.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+camel_caps_string
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+384
+385
+386
+387
+388
+389
+390
+391</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 384</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_camel_caps'>get_camel_caps</span> <span class='id identifier rubyid_input'>input</span>
+<span class='id identifier rubyid_tmp'>tmp</span> <span class='op'>=</span> <span class='id identifier rubyid_input'>input</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span>
+	<span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_downcase!'>downcase!</span>
+	<span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_capitalize!'>capitalize!</span>
+<span class='kw'>end</span>
+<span class='kw'>return</span> <span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_kqs_covered-class_method">
+  
+    + (<tt>string</tt>) <strong>get_kqs_covered</strong>(ef_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+return a printable list of the key questions covered by an extraction form
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ef_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+list of key questions&#8217; numbers, in readable format
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 419</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_kqs_covered'>get_kqs_covered</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_ef_kqs'>ef_kqs</span> <span class='op'>=</span> <span class='const'>ExtractionFormKeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>for</span> <span class='id identifier rubyid_q'>q</span> <span class='kw'>in</span> <span class='id identifier rubyid_ef_kqs'>ef_kqs</span>
+		<span class='id identifier rubyid_kq'>kq</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_q'>q</span><span class='period'>.</span><span class='id identifier rubyid_key_question_id'>key_question_id</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_str'>str</span> <span class='op'>+=</span> <span class='id identifier rubyid_kq'>kq</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+	
+	<span class='kw'>if</span> <span class='id identifier rubyid_ef_kqs'>ef_kqs</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='id identifier rubyid_str'>str</span> <span class='op'>=</span> <span class='id identifier rubyid_str'>str</span><span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span> <span class='id identifier rubyid_str'>str</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>-</span> <span class='int'>2</span><span class='rbracket'>]</span>
+	<span class='kw'>end</span>
+	
+	<span class='kw'>return</span> <span class='id identifier rubyid_str'>str</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_next_question_number-class_method">
+  
+    + (<tt>integer</tt>) <strong>get_next_question_number</strong>(obj_type, extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_next_question_number return the number of the next question for a
+section specified by obj_type obj_type should be a string such as
+DesignDetail, BaselineCharacteristic, etc. and  should correspond to the
+database table.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object_type</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the type of object (model name)
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the next question number
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79
+80
+81
+82</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_next_question_number'>get_next_question_number</span> <span class='id identifier rubyid_obj_type'>obj_type</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='id identifier rubyid_next_num'>next_num</span> <span class='op'>=</span> <span class='int'>1</span>
+	<span class='id identifier rubyid_last'>last</span> <span class='op'>=</span> <span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj_type'>obj_type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>question_number ASC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_last'>last</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='id identifier rubyid_next_num'>next_num</span> <span class='op'>=</span> <span class='id identifier rubyid_last'>last</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>+</span> <span class='int'>1</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_next_num'>next_num</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_outcomes_array-class_method">
+  
+    + (<tt>array</tt>) <strong>get_outcomes_array</strong>(ef_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the array of outcomes for an extraction form, based on
+extraction_form_outcomes (suggestions). if there are no outcomes, return
+[&#8220;example outcome 1&#8221;, &#8220;example outcome 2&#8221;] for
+example table display
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ef_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form outcomes (strings)
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 457</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_outcomes_array'>get_outcomes_array</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@ef_names</span> <span class='op'>=</span> <span class='const'>ExtractionFormOutcomeName</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='ivar'>@ef_names</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='ivar'>@arr</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+		<span class='kw'>for</span> <span class='id identifier rubyid_name'>name</span> <span class='kw'>in</span> <span class='ivar'>@ef_names</span>
+			<span class='ivar'>@arr</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+		<span class='kw'>end</span>
+		<span class='kw'>return</span> <span class='ivar'>@arr</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Example Outcome 1</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Example Outcome 2</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="no_sections_are_included-class_method">
+  
+    + (<tt>boolean</tt>) <strong>no_sections_are_included</strong>(ef_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+return true if all extraction_form_sections are marked false, i.e. no
+extraction form sections are included
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ef_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id to check
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+has_no_sections
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+406
+407
+408
+409
+410
+411
+412
+413
+414</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 406</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_no_sections_are_included'>no_sections_are_included</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@ef_sections</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='ivar'>@ef_sections</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_section'>section</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_section'>section</span><span class='period'>.</span><span class='id identifier rubyid_included'>included</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_extracted_data-class_method">
+  
+    + (<tt>Object</tt>) <strong>remove_extracted_data</strong>(ef_id, study_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+remove all data from an extraction form for a particular study.  includes:
+arms, design details, baseline characteristics, outcomes, results,
+comparisons, adverse events, study quality
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>ef_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form id
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>study_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+study id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 485</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_remove_extracted_data'>remove_extracted_data</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='comma'>,</span> <span class='id identifier rubyid_study_id'>study_id</span><span class='rparen'>)</span>
+  <span class='comment'># get arm IDs and outcome IDs for use later when possible
+</span>	<span class='id identifier rubyid_armIDs'>armIDs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_outcomeIDs'>outcomeIDs</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='comment'># remove any arm data
+</span>  <span class='id identifier rubyid_arms'>arms</span> <span class='op'>=</span> <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>id</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+  <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_arms'>arms</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='comment'># remove design detail data
+</span>	<span class='id identifier rubyid_dds'>dds</span> <span class='op'>=</span> <span class='const'>DesignDetailDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='const'>DesignDetailDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_dds'>dds</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='comment'># remove baseline characteristic data
+</span>	<span class='id identifier rubyid_bcs'>bcs</span> <span class='op'>=</span> <span class='const'>BaselineCharacteristicDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='const'>BaselineCharacteristicDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_bcs'>bcs</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+
+	<span class='comment'># remove outcomes
+</span>	<span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>=</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_outcomeIDs'>outcomeIDs</span> <span class='op'>=</span> <span class='id identifier rubyid_outcomes'>outcomes</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	<span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_outcomes'>outcomes</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+   
+	<span class='comment'># remove results
+</span>	<span class='id identifier rubyid_result_measures'>result_measures</span> <span class='op'>=</span> <span class='const'>OutcomeMeasure</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_outcomeIDs'>outcomeIDs</span><span class='rparen'>)</span>
+	<span class='const'>OutcomeMeasure</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_result_measures'>result_measures</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='id identifier rubyid_result_datapoints'>result_datapoints</span> <span class='op'>=</span> <span class='const'>OutcomeDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_outcomeIDs'>outcomeIDs</span><span class='comma'>,</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='const'>OutcomeDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_result_datapoints'>result_datapoints</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='comment'># remove comparisons
+</span>	<span class='comment'># also need to remove measures and datapoints (taken care of by associations)
+</span>	<span class='id identifier rubyid_comparisons'>comparisons</span> <span class='op'>=</span> <span class='const'>Comparison</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='const'>Comparison</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_comparisons'>comparisons</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='comment'># remove adverse events
+</span>	<span class='id identifier rubyid_adverseEvents'>adverseEvents</span> <span class='op'>=</span> <span class='const'>AdverseEvent</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='const'>AdverseEvent</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_adverseEvents'>adverseEvents</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='comment'># remove quality metrics and data points
+</span>	<span class='id identifier rubyid_quality_rating_dps'>quality_rating_dps</span> <span class='op'>=</span> <span class='const'>QualityRatingDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='const'>QualityRatingDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_quality_rating_dps'>quality_rating_dps</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+	
+	<span class='id identifier rubyid_quality_dimension_dps'>quality_dimension_dps</span> <span class='op'>=</span> <span class='const'>QualityDimensionDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+	<span class='const'>QualityDimensionDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span> <span class='id identifier rubyid_quality_dimension_dps'>quality_dimension_dps</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:id</span><span class='rparen'>)</span>
+			
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="shift_questions-class_method">
+  
+    + (<tt>Object</tt>) <strong>shift_questions</strong>(current_num, new_num, obj_type, extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+shift_questions when a extraction_form creator updates the order of
+questions in their list,  this method is called
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>current_num</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the original number of the question choice
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>new_new</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the number they&#8217;d like to change it to
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>obj_type</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+DesignDetail or BaselineCharacteristic, etc.
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>template_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the id of the extraction_form they&#8217;re working on
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 91</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_shift_questions'>shift_questions</span><span class='lparen'>(</span><span class='id identifier rubyid_current_num'>current_num</span><span class='comma'>,</span> <span class='id identifier rubyid_new_num'>new_num</span><span class='comma'>,</span> <span class='id identifier rubyid_obj_type'>obj_type</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_current_num'>current_num</span> <span class='op'>=</span> <span class='id identifier rubyid_current_num'>current_num</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+	<span class='id identifier rubyid_new_num'>new_num</span> <span class='op'>=</span> <span class='id identifier rubyid_new_num'>new_num</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+	<span class='id identifier rubyid_question_to_change'>question_to_change</span> <span class='op'>=</span> <span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj_type'>obj_type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='comma'>,</span> <span class='symbol'>:question_number</span><span class='op'>=&gt;</span><span class='id identifier rubyid_current_num'>current_num</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_question_to_change'>question_to_change</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_new_num'>new_num</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_current_num'>current_num</span>
+			<span class='id identifier rubyid_n'>n</span> <span class='op'>=</span> <span class='id identifier rubyid_current_num'>current_num</span> <span class='op'>-</span> <span class='int'>1</span>
+			<span class='kw'>while</span><span class='lparen'>(</span><span class='id identifier rubyid_n'>n</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_new_num'>new_num</span><span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span>
+				<span class='id identifier rubyid_tmp'>tmp</span> <span class='op'>=</span> <span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj_type'>obj_type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='comma'>,</span> <span class='symbol'>:question_number</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+				<span class='kw'>unless</span> <span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+					<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>=</span> <span class='id identifier rubyid_n'>n</span> <span class='op'>+</span> <span class='int'>1</span>
+					<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+				<span class='kw'>end</span>
+				<span class='id identifier rubyid_n'>n</span><span class='op'>-=</span><span class='int'>1</span>
+			<span class='kw'>end</span>
+		<span class='kw'>elsif</span> <span class='id identifier rubyid_new_num'>new_num</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_current_num'>current_num</span>
+			<span class='kw'>for</span> <span class='id identifier rubyid_n'>n</span> <span class='kw'>in</span> <span class='id identifier rubyid_current_num'>current_num</span><span class='op'>+</span><span class='int'>1</span><span class='op'>..</span><span class='id identifier rubyid_new_num'>new_num</span>
+				<span class='id identifier rubyid_tmp'>tmp</span><span class='op'>=</span><span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj_type'>obj_type</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='comma'>,</span><span class='symbol'>:question_number</span><span class='op'>=&gt;</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+				<span class='kw'>unless</span> <span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+					<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>=</span> <span class='id identifier rubyid_n'>n</span><span class='op'>-</span><span class='int'>1</span>
+					<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+				<span class='kw'>end</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+		<span class='id identifier rubyid_question_to_change'>question_to_change</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>=</span> <span class='id identifier rubyid_new_num'>new_num</span>
+		<span class='id identifier rubyid_question_to_change'>question_to_change</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_question_numbers_after_delete-class_method">
+  
+    + (<tt>Object</tt>) <strong>update_question_numbers_after_delete</strong>(obj, obj_id, extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+update_question_numbers_after_delete after a question is deleted, shift the
+question numbers to accommodate this
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>object</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>object_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 125</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_update_question_numbers_after_delete'>update_question_numbers_after_delete</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='comma'>,</span> <span class='id identifier rubyid_obj_id'>obj_id</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='comment'># get the question number of the object being deleted
+</span>	<span class='id identifier rubyid_q'>q</span> <span class='op'>=</span> <span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_obj_id'>obj_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_current'>current</span> <span class='op'>=</span> <span class='id identifier rubyid_q'>q</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+	<span class='id identifier rubyid_max'>max</span> <span class='op'>=</span> <span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_maximum'>maximum</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>question_number</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span>
+	<span class='kw'>for</span> <span class='id identifier rubyid_n'>n</span> <span class='kw'>in</span> <span class='id identifier rubyid_current'>current</span><span class='op'>+</span><span class='int'>1</span><span class='op'>..</span><span class='id identifier rubyid_max'>max</span>
+		<span class='id identifier rubyid_tmp'>tmp</span> <span class='op'>=</span> <span class='id identifier rubyid_eval'>eval</span><span class='lparen'>(</span><span class='id identifier rubyid_obj'>obj</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='comma'>,</span> <span class='symbol'>:question_number</span><span class='op'>=&gt;</span><span class='id identifier rubyid_n'>n</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span>
+		<span class='kw'>unless</span> <span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+			<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>=</span> <span class='id identifier rubyid_n'>n</span><span class='op'>-</span><span class='int'>1</span>
+			<span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="can_be_removed?-instance_method">
+  
+    - (<tt>boolean</tt>) <strong>can_be_removed?</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+determine whether or not the extraction form is capable of being removed
+</p>
+<ol>
+<li><p>
+does it have any associated studies
+</p>
+</li>
+<li><p>
+are any other extraction forms borrowing information from it?
+</p>
+</li>
+</ol>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+can_be_removed
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 26</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_can_be_removed?'>can_be_removed?</span> 
+	<span class='id identifier rubyid_bool'>bool</span> <span class='op'>=</span> <span class='kw'>true</span>
+	
+	<span class='comment'># find any studies
+</span>	<span class='id identifier rubyid_studies'>studies</span> <span class='op'>=</span> <span class='const'>StudyExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_studies'>studies</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_bool'>bool</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	
+	<span class='comment'># find any extraction forms associated with it
+</span>	<span class='id identifier rubyid_forms'>forms</span> <span class='op'>=</span> <span class='const'>ExtractionFormSectionCopy</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:copied_from</span> <span class='op'>=&gt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_forms'>forms</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_bool'>bool</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_bool'>bool</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_assigned_kq_objects-instance_method">
+  
+    - (<tt>array</tt>) <strong>get_assigned_kq_objects</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the assigned key questions objects ordered by question number
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+key questions array
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_assigned_kq_objects'>get_assigned_kq_objects</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_kqs'>kqs</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_get_assigned_key_questions'>get_assigned_key_questions</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_kqs'>kqs</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_kqs'>kqs</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_kqs'>kqs</span><span class='comma'>,</span><span class='symbol'>:order</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>question_number ASC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_kqs'>kqs</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_borrowers-instance_method">
+  
+    - (<tt>array</tt>) <strong>get_borrowers</strong>(section) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <div class="note deprecated"><strong>Deprecated.</strong> <div class='inline'><p>
+possibly?
+</p>
+</div></div>
+<p>
+get a list of extraction forms that are borrowing information from a given
+section  in the form
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>section</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the section name to get borrowed sections from
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+an array of extraction form ids
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+476
+477
+478
+479</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 476</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_borrowers'>get_borrowers</span><span class='lparen'>(</span><span class='id identifier rubyid_section'>section</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_borrowers'>borrowers</span> <span class='op'>=</span> <span class='const'>ExtractionFormSectionCopy</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:section_name</span><span class='op'>=&gt;</span><span class='id identifier rubyid_section'>section</span><span class='comma'>,</span> <span class='symbol'>:copied_from</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>copied_to</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_borrowers'>borrowers</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_copied_to'>copied_to</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="is_title_unique_for_user-instance_method">
+  
+    - (<tt>boolean</tt>) <strong>is_title_unique_for_user</strong>(new_title, user, updating) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+is_title_unique_for_user Determine if the proposed new title of the
+extraction form exists in the database for the same user updating lets us
+know if it&#8217;s an update or a new entry
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>new_title</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+title string to check if unique
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="User.html" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+user to test title for
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>updating</span>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+true if updating extraction form
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+retVal true if the title is unique, false otherwise
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/extraction_form.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_is_title_unique_for_user'>is_title_unique_for_user</span> <span class='id identifier rubyid_new_title'>new_title</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='comma'>,</span> <span class='id identifier rubyid_updating'>updating</span>
+	<span class='id identifier rubyid_creator'>creator</span> <span class='op'>=</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+	<span class='id identifier rubyid_id'>id</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_updating'>updating</span>
+		<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lower(title)=? AND creator_id=? AND id!=?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_new_title'>new_title</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='comma'>,</span> <span class='id identifier rubyid_creator'>creator</span><span class='comma'>,</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='kw'>else</span>
+		<span class='id identifier rubyid_query'>query</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lower(title)=? AND creator_id=?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='id identifier rubyid_new_title'>new_title</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='comma'>,</span><span class='id identifier rubyid_creator'>creator</span><span class='rparen'>)</span>
+	<span class='kw'>end</span>
+
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_query'>query</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:48 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

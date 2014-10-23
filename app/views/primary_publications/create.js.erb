@@ -1,0 +1,16 @@
+	<% if defined?(@message_div) %>
+		$("#<%= @message_div %>").show().delay(500).fadeOut(300);
+		<% if defined?(@error_div) %>
+			$("#<%= @error_div.to_s %>").html("");	
+		<% end %>
+	<% end %>
+
+	<% if defined?(@error_div) %>
+		<% if @saved %>
+			$("#<%= @error_div.to_s %>").html("");		
+		<% else %>
+			$("#<%= @error_div.to_s %>").html("<%= escape_javascript(render :partial=>@error_partial) %>");		
+		<% end %>
+	<% end %>
+
+	$("#study_citation_info").html("<%= escape_javascript(render :partial => "studies/citation_info", :locals => {:study => @study}) %>");

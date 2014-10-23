@@ -1,0 +1,12 @@
+<% unless @donor_info.empty? %>
+	<span class='smallText indent_block'>Please note, this is an <em>inactive</em> form and cannot be submitted.</span><br/>
+	<% i = 1 %>
+	<% @donor_info.each do |donor| %>
+		<div class='field'>
+			<div style='float:right;'><em>(imported)</em></div>
+			<strong>Import <%=i%>. <%= donor.question %></strong><br/>
+				<%= render :inline=>create_input(donor.id, @model)%>
+			</div>
+			<% i+= 1 %>
+	<% end %>
+<% end %>

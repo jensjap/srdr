@@ -1,0 +1,36 @@
+<% if !@study.id.nil?  %>
+	<% details = Study.get_page_header_details(@study.id)%>
+	<% citation_study_id = @study.id %>
+	<% citation_author = details[0].nil? ? "" : details[0] %>
+	<% citation_title = details[1].nil? ? "" : details[1] %>
+	<% citation_year = details[2].nil? ? "" : details[2] %>
+	<% citation_journal = details[3].nil? ? "" : details[3] %>
+	<% citation_volume = details[4].nil? ? "" : details[4] %>
+	<% citation_issue = details[5].nil? ? "" : details[5] %>
+<% end %>
+
+<% bad = ["-- Not Found --", "", " ",nil] %>
+<% if !(bad.include?(citation_title) && bad.include?(citation_author) && bad.include?(citation_year) && bad.include?(citation_journal)) %>
+	
+	<div class="study_citation">
+		<div class="label inline">
+		Current Study:
+		</div>
+		<%= citation_author %> <em><%= citation_title %></em><%= "(#{citation_year})" %>
+		<%= citation_journal %> 
+		
+		<% if !(bad.include?(citation_volume))%>
+			<%= "Vol. " + citation_volume %> 
+		<% end %>
+		<% if !(bad.include?(citation_issue)) %>
+			<%= "Issue " + citation_issue %>
+		<% end %>
+	</div>
+<% else %>
+	<div class="study_citation">
+		<div class="label inline">
+			Current Study:
+		</div>
+		No Primary Publication Specified
+	</div>
+<% end %>

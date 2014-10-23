@@ -1,0 +1,4 @@
+<% if Comment.get_number_of_flags(section_name, section_id, field_name, study_id, project_id, show_both) > 0 %>
+	<%= image_tag "Flag_red.png", :alt => "This section has flags" %> Flags (<div style="display:inline" id="flags_number_<%= section_name.to_s %>_id_<%= section_id.to_s %>_field_<%= field_name %>_study_<%= study_id.to_s %>_project_<%= project_id.to_s %>"><%= Comment.get_number_of_flags(section_name, section_id, field_name, study_id, project_id, show_both) %></div>)
+<% end %>
+

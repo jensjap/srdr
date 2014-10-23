@@ -1,0 +1,82 @@
+<div id="validation_message_dim">
+<%= render "layouts/modal_info_messages" %>
+</div>
+
+	<%= form_for(@quality_dimension_field, :remote=> true, :update => "quality_dimension_fields_table", :html => {:id => "quality_dimension_field_form"}) do |f| %>
+
+			
+	<div class="form_content">
+
+		<%= render :inline => attach_listener_for_other("quality_dimension_field_title", "medium") %>
+	  	<table class='form_table'>
+	  		<% form_type = @extraction_form.is_diagnostic == true ? "diagnostic" : "RCT" %>
+	  		<% @quality_dimension_list = QualityDimensionField.get_dimension_list(form_type) %>
+			<tr>
+				<td class='label top'>
+					<label for="Dimension Name">Dimension Name:</label>
+				</td>
+				<td class='input top'>
+					<%= f.select :title, @quality_dimension_list, {}, {:class => "editable_field", :title => "title", :style => "width: 300px;"} %>
+					<% if @editing %>
+						<% show_other = !@quality_dimension_list.include?(@quality_dimension_field.title) %>
+						<% if show_other %>
+							<script type="text/javascript">
+							    //<!--
+							    //alert("The title was " + "<%= @quality_dimension_field.title %>");
+							    //alert("The list is " + "<%= @quality_dimension_list.to_json %>");
+							    //alert("The index is " + "<%= @quality_dimension_list.index(@quality_dimension_field.title) %>");
+								$.ajax({url: "/application/show_other_filled",
+											type: "POST",
+											data: {
+												"field_name": "quality_dimension_field[title]", 						
+												"field_size": "medium",
+												"field_id": "quality_dimension_field_title", 
+												"value": "<%= @quality_dimension_field.title %>"
+											}
+										});
+								//-->
+							</script>
+						<% end %>
+					<% end %>
+				</td>
+			</tr>
+
+			
+			<tr>
+				<td class='label'>
+				    <label for="Field Notes">Instructions:</label>
+				</td>
+				<td class='input'>
+		    		<%= f.text_area :field_notes, :rows => 4, :cols => 40, :class => "editable_field", :title => "field notes" %>
+		    	</td>
+		    </tr>
+		</table>
+  		<%= f.hidden_field :extraction_form_id, :value => @extraction_form.id %>
+  		<br/><br/><br/><br/>
+	  <div class="popup-footer actions">
+			<% unless @editing %>
+					<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" >
+						<%= image_tag "Add.png", :alt => "Add" %>Save
+					</button>
+			<% else %>
+			  <button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" >
+					<%= image_tag "Accept.png", :alt => "Accept" %>Save Edits
+				</button>
+			<% end %>
+				<button class="negative" id="close_dim_btn">
+						<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+				</button>
+
+	  </div>
+ </div>
+<% end %>
+
+<script type="text/javascript">
+
+$("#close_dim_btn").bind("click", function(event)
+{
+event.preventDefault();
+$('#new_qd_entry').dialog('close');
+});
+
+</script>

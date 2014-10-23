@@ -1,0 +1,10 @@
+<% @categorical_outcomes = Outcome.where(:study_id =>  params[:study_id], :outcome_type => "Categorical", :extraction_form_id => params[:extraction_form_id]).all %>
+<% @continuous_outcomes = Outcome.where(:study_id =>  params[:study_id], :outcome_type => "Continuous", :extraction_form_id => params[:extraction_form_id]).all %>
+<% @study = Study.find(params[:study_id]) %>
+<%= render :partial => "outcome_data_points/saved_results" %>
+<br/>
+	<div class="actions" style="text-align:right">
+		<button class="negative" onClick="event.preventDefault();$('#saved_results').dialog('destroy');">
+			<%= image_tag "Cancel.png", :style=>"vertical-align:text-top;", :alt => "Cancel" %> Close Window
+	  </button>
+	</div>

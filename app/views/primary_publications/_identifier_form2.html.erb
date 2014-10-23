@@ -1,0 +1,84 @@
+<% form_tag url_for(:controller=>'primary_publications',:action=>'update_ppi'),:remote=>true, :name=>"ppiform" do %>
+<input type="hidden" name="n_ppi" value="<%= @primary_publication_numbers.size().to_s %>">
+<%
+    sopts = ["Choose Identifier Type", "Pubmed", "Cochrane", "NCT", "ClinicalTrials\.gov", "Other"]
+%>
+<table id="ppiform_table">
+<%
+    if @primary_publication_numbers.size() > 0
+        # List table of identifiers already entered for this publication
+%>
+    <tr bgcolor="#e0e0e0">
+        <td id="ppi_header">
+        <strong>Number</strong>
+        </td>
+        <td id="ppi_header">
+        <strong>Number Type</strong>
+        </td>
+        <td id="ppi_header">
+        &nbsp;
+        </td>
+    </tr>
+<%
+        ppi_idx = 0
+        @primary_publication_numbers.each do |ppi|
+%>
+    <tr>
+        <td id="ppi_data">
+        <input type="hidden" name="ppi_id_<%= ppi_idx.to_s %>" value="<%= ppi.id.to_s %>">
+        <input type="text" size="20" name="ppi_number_<%= ppi_idx.to_s %>" value="<%= ppi.number %>">
+        </td>
+        <td id="ppi_data">
+        <select name="ppi_type_<%= ppi_idx.to_s %>">
+<%
+            for i in 0..sopts.size() - 1
+                if ppi.number_type == sopts[i]
+%>
+            <option value="<%= sopts[i] %>" SELECTED><%= sopts[i] %></option>
+<%
+                else
+%>
+            <option value="<%= sopts[i] %>"><%= sopts[i] %></option>
+<%
+                end
+            end
+%>
+        </select>
+        </td>
+        <td id="ppi_data">
+        <input type="checkbox" name="ppi_remove_<%= ppi_idx.to_s %>" value="1">Remove
+        </td>
+    </tr>
+<%
+            ppi_idx = ppi_idx + 1
+        end
+    end     # if size()
+%>
+    <tr bgcolor="#e0e0e0">
+        <td id="new_ppi_data" colspan="3">
+        Add Publication Identifier
+        </td>
+    </tr>
+    <tr>
+        <td id="new_ppi_data">
+        <input type="text" size="20" name="ppi_number_new" value="">
+        </td>
+        <td id="new_data">
+        <select name="ppi_type_new">
+<%
+        for i in 0..sopts.size() - 1
+%>
+            <option value="<%= sopts[i] %>"><%= sopts[i] %></option>
+<%
+        end
+%>
+        </select>
+        </td>
+        <td id="new_ppi_data">
+        <input type="submit" value="ADD" size="40">
+        </td>
+    </tr>
+</table>
+<%
+%>
+<% end %>

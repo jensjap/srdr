@@ -1,0 +1,237 @@
+<% editing = defined?(@editing) ? true : false %>
+<div id='matrix_setup_<%= @model %>' style='overflow: auto; width: 93%;' matrix_type='matrix_select'>
+<% default_rows = 2; default_cols = 3; existing_rows=Array.new(); existing_cols=Array.new();%>
+<%# if this is during an edit, set the column and row numbers based on the question %>
+<% if editing %>
+	<% 
+	existing_rows = @fields.select{|x| x.row_number > 0}
+	existing_columns = @fields.select{|x| x.column_number > 0}
+	existing_rows = existing_rows.sort{|a,b| a.row_number <=> b.row_number}
+	existing_columns = existing_columns.sort{|a,b| a.column_number <=> b.column_number}
+	default_rows = existing_rows.length
+	default_cols = existing_columns.length
+	include_other = @fields.select{|x| x.row_number < 0 && x.column_number == 0}.length > 0 
+	%>
+<% end %>
+
+<br/>
+<table class='matrix_question'>
+	<tr>
+		<td colspan="<%= 1 + default_cols %>" id='<%=@model%>_table_resize_td'>
+			<label for='<%= @model %>_matrix_num_rows'>Number of Rows:</label>
+			<input type='text' name='<%= @model %>_matrix[num_rows]' id='<%= @model %>_matrix_num_rows' size=2 style='width:25px !important;' value='<%= default_rows %>' disabled='disabled'/> &nbsp;&nbsp;&nbsp;&nbsp;
+			<label for='<%= @model %>_matrix_num_rows'>Number of Columns:</label> 
+			<input type='text' name='<%= @model %>_matrix[num_columns]' id='<%= @model %>_matrix_num_columns' size=2 style='width:25px !important;' value='<%= default_cols %>'  disabled='disabled'/><br/>
+			<a href='#' class='<%= @model %>_row_and_column_updater' type='row' direction='increase'>Rows ++</a> | 
+			<a href='#' class='<%= @model %>_row_and_column_updater' type='row' direction='decrease'>Rows --</a> | 
+			<a href='#' class='<%= @model %>_row_and_column_updater' type='column' direction='increase'>Cols ++</a> | 
+			<a href='#' class='<%= @model %>_row_and_column_updater' type='column' direction='decrease'>Cols --</a> | 
+		</td>
+	</tr>
+
+	<%# THE COLUMNS %>
+	<tr>
+		<td class='heading'></td>
+		<% for i in 1..default_cols %>
+			<% value = "" %>
+			<td scope='col' id='matrix_column_<%= i.to_s %>' class='heading <%=@model%>_matrix_column_<%= i.to_s %>' style='width:60px !important;'>
+				<center>
+				<label for='<%=@model%>_matrix_column_<%= i.to_s %>' class='hidden-label'>
+					Enter column title for column <%= i.to_s %>
+				</label>
+				<%# get the column value %>
+				<% if editing %>
+					<% value = "#{existing_columns[i-1].option_text}" %>
+				<% end %>
+				<%# done getting the column value %>
+				
+				<input type='text' name="<%= @model %>_matrix[columns][<%= i.to_s %>]" id="<%=@model%>_matrix_column_<%= i.to_s %>" title='Enter column title for column <%= i.to_s %>' style='width:60px !important;' value="<%= value %>" />
+				</center>
+			</td>
+		<% end %>
+	</tr>
+	<%# FOR EACH ROW %>
+	<% for i in 1..default_rows %>
+		<% value = "" %>
+		<tr id='<%= @model %>_matrix_row_<%= i.to_s %>' class='<%= cycle('odd','even') %>'>
+			<td class='th' scope='row' class='heading <%=@model%>_matrix_column_1'>
+				<label for='<%=@model%>_matrix_row_<%= i.to_s %>' class='hidden-label'>
+					Enter row title for row <%= i.to_s %>
+				</label>
+				<%# get the row value %>
+				<% if editing %>
+					<% value = "#{existing_rows[i-1].option_text}" %>
+				<% end %>
+				<%# done getting the row value %>
+				<input type='text' name='<%=@model%>_matrix[rows][<%= i.to_s %>]' id='<%=@model%>_matrix_row_<%= i.to_s %>' title='Enter row title for row <%= i.to_s %>' style='width:60px !important;' value="<%= value %>" />
+			</td>
+			<%# FOR EACH COLUMN, PROVIDE A TEXT AREA FOR ENTERING OPTIONS %>
+			<% for j in 1..default_cols %>
+				<td scope='row' class='<%=@model%>_matrix_column_<%= j.to_s%>'>
+					<%# Now get any dropdown options that were previously entered %>
+					<% value = "" %>
+					<% if editing %>
+						<% 
+							value = MatrixDropdownOption.where(:row_id=>existing_rows[i-1].id, :column_id=>existing_columns[j-1].id, :model_name=>@model).order("option_number ASC")
+							value = value.collect{|x| x.option_text}.join("\r\n")
+						%>
+					<% end %>
+					<center>
+					<textarea name='<%=@model%>_matrix[dropdown_options][<%= i.to_s %>_<%= j.to_s %>]' id='<%=@model%>_matrix_dropdown_options_<%= i.to_s %>_<%=j.to_s%>' title='Enter dropdown options for row <%= i.to_s %>, column <%= j.to_s %>' cols=4 rows=2><%= value %></textarea>	
+					</center>
+				</td>
+			<% end %>
+		</tr>
+	<% end %>
+	
+	
+</table><br/>
+Note that leaving options blank for any one cell will result in an empty text box for data entry.
+<br><br/>
+<% checked = "" %>
+<% if editing %>
+	<% if @question.include_other_as_option == true %>
+		<% checked = "checked" %>
+	<% else %>
+		<% checked = "" %>
+	<% end %>
+<% end %>
+
+<input type='checkbox' name='<%= @model %>_matrix[include_other_as_option]' id='<%= @model %>_matrix_include_other_as_option' title="Include an option named 'Other' for the user to specify an option not defined in the dropdown menus"  <%= checked %>/><label for='<%= @model %>_matrix_include_other_as_option'>Include options named 'Other' for each dropdown box in the table.</label><br/><br/>
+<% if editing %>
+	<% if include_other %>
+		<% checked = "checked" %>
+	<% else %>
+		<% checked = "" %>
+	<% end %>
+<% end %>
+
+<input type='checkbox' name='<%= @model %>_matrix[allow_other_row]' id='<%= @model %>_matrix_allow_other_row' title="Include a row named 'Other' for additional input" <%= checked %>/><label for='<%= @model %>_matrix_allow_other_row'>Include a row for 'Other'</label><br/><br/>
+<span id='matrix_dd_form_marker'></span>
+<script type='text/javascript'>
+<!--
+// Bind an event for the cancel button
+function matrix_dd_form_init(){
+  try{
+    checkDDMarkerLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	attachDDListener();
+  } catch( err ) {
+    setTimeout('matrix_dd_form_init()', 200);
+  }
+}
+
+function checkDDMarkerLoaded(){
+	if ( $('#matrix_dd_form_marker').length == 0) $jquery.error( 'not ready' );
+}
+
+function attachDDListener(){
+	var className = ".<%= @model %>_row_and_column_updater";
+	$(className).die();
+	$(className).live("click",function(event){
+		//alert("row and columns being watched.");
+		event.preventDefault();
+		// resize the table cell for adding/removing rows and columns
+		table_resize_span = parseInt($("#<%=@model%>_table_resize_td").attr("colspan"));
+
+		type = $(this).attr("type");
+		direction = $(this).attr("direction");
+		row_count = $("#<%= @model %>_matrix_num_rows").val()
+		column_count = $("#<%= @model %>_matrix_num_columns").val()
+		item_count = "#<%= @model %>_matrix_num_" + type + "s";
+		//alert("the current field is " + item_count);
+		current_count = $(item_count).val().toString();
+		
+		//alert("Type: " + type + ", Direction: " + direction + ", CurrentCount: " + current_count);
+		current_item_selector = "<%=@model%>_matrix_"+type+"_"+current_count;
+
+		if(direction == 'decrease'){
+			if(parseInt(current_count) > 1){
+				if(type == 'row'){
+					$("#"+current_item_selector).remove();
+				}else{
+					$("."+current_item_selector).remove();
+					// remove one to the colspan attribute of the table_resize_td
+					$("#<%=@model%>_table_resize_td").attr("colspan", table_resize_span - 1);
+				}
+				$(item_count).val(parseInt(current_count) - 1)
+			}
+		}else{
+		// IF WE'RE ADDING AN ITEM (ROW OR COLUMN)...
+			if(type == 'row'){
+				current_item_selector = "#" + current_item_selector;
+				next_class = 'odd';
+				if($(current_item_selector).attr("class") == "odd"){
+					next_class = 'even';
+				}
+				count_int = parseInt(current_count);
+				var html = "<tr id='<%=@model%>_matrix_row_" + (count_int + 1).toString() + "' class='" + next_class + "'>";
+				var previous_html = $(current_item_selector).html();
+				//alert("previous_html is " + previous_html);
+				// Adjust row ids
+				var reg1 = new RegExp("matrix_row_" + current_count, "g");
+				var reg2 = new RegExp("_matrix\\[rows\\]\\[" + current_count, "g");
+				var reg3 = new RegExp("title for row " + current_count, "g");
+				var reg4 = new RegExp("Row .");
+				var reg5 = new RegExp("value=\".*\"");
+				var new_html = previous_html.replace(reg1, "matrix_row_" + (count_int + 1));
+				new_html = new_html.replace(reg2, "_matrix[rows][" + (count_int + 1));
+				new_html = new_html.replace(reg3, "title for row " + (count_int + 1));
+				new_html = new_html.replace(reg4, "");
+				new_html = new_html.replace(reg5, "value=''");
+				// Adjust option box ids
+				for(var i=1; i<=parseInt(column_count); i++){
+					//alert("copying options for row " + (count_int + 1).toString() + " and column " + i.toString());
+					var reg_name = new RegExp("_matrix\\[dropdown_options\\]\\[.{1,3}_"+i.toString()+"\\]", "g");
+					var reg_id = new RegExp("_matrix_dropdown_options_.{1,3}_"+i.toString(), "g");
+					var reg_title = new RegExp("options for row .*, column " + i.toString(), "g");
+					new_html = new_html.replace(reg_name, "_matrix[dropdown_options]["+(count_int+1)+"_"+i.toString()+"]");
+					new_html = new_html.replace(reg_id, "_matrix_dropdown_options_"+(count_int+1)+"_"+i.toString());
+					new_html = new_html.replace(reg_title, "options for row " + (count_int+1) + ", column " + i.toString());
+					//alert("New HTML Now: " + new_html);
+				}
+				//alert("new_html is " + new_html);
+				html += new_html;
+				html += "</tr>";
+				//alert("html is " + html); 
+				$(current_item_selector).after(html);
+				$(item_count).val(count_int + 1);
+			}else{
+				colClass = ".<%=@model%>_matrix_column_" + current_count;
+				matrix_columns = $(colClass);
+				// add one to the colspan attribute of the table_resize_td
+				$("#<%=@model%>_table_resize_td").attr("colspan", table_resize_span + 1);
+				for(var i=0; i<matrix_columns.length; i++){
+					new_col_number = parseInt(current_count) + 1;
+					html="";
+					colItem = matrix_columns[i];
+					if(i == 0){
+						html += "<td scope='col' id='<%=@model%>_matrix_column_"+new_col_number.toString()+"' class='heading <%=@model%>_matrix_column_"+new_col_number.toString()+"' style='width:60px !important;'>";
+
+						html += "<center><label for='<%=@model%>_matrix_column_"+new_col_number.toString()+"' class='hidden-label'>Enter column title for column " + new_col_number.toString() + "</label><input type='text' name='<%=@model%>_matrix[columns]["+new_col_number.toString()+"]' id='<%=@model%>_matrix_column_"+new_col_number.toString()+"' title='Enter column title for column "+new_col_number.toString()+"' style='width:60px !important;' value=''/></center>";
+					}else{
+					    var colHTML = colItem.innerHTML;
+						html += "<td scope='row' class='<%=@model%>_matrix_column_"+new_col_number.toString()+"'>";
+						reg_name = new RegExp("_matrix\\[dropdown_options\\]\\[._"+current_count+"\\]");
+						reg_id = new RegExp("_matrix_dropdown_options_._"+current_count);
+						reg_title = new RegExp("options for row ., column " + current_count);
+						new_html = colHTML.replace(reg_name, "_matrix[dropdown_options]["+i.toString()+"_"+new_col_number.toString()+"]");
+						new_html = new_html.replace(reg_id, "_matrix_dropdown_options_"+i.toString()+"_"+new_col_number.toString());
+						new_html = new_html.replace(reg_title, "options for row " + i.toString() + ", column " + new_col_number.toString());
+						html += new_html;
+					}
+					html += "</td>";
+					$(colItem).after(html);
+				}
+				$(item_count).val(parseInt(current_count) + 1);
+			}
+		}
+	});
+}
+matrix_dd_form_init();
+//-->
+</script>
+
+</div><%# END the matrix_setup div %>
+<br style='clear:all;'/><br/>
+
+

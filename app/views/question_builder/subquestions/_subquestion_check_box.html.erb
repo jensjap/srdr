@@ -1,0 +1,26 @@
+<%= check_box_tag "has_subquestion_" + params[:page_name] %> I would like to include a subquestion.
+    	
+<div id="subquestion_text_div" class='field'>
+</div>
+
+<script type='text/javascript'>
+	$("#has_subquestion").bind("change", function(){
+		//var num_options = $(".question_option").length;
+		//var page_name = $("#page_name");
+		//if($(this).attr("checked")){
+		//	$.ajax({
+		//		type: "POST",
+		//		url: 'question_builder/show_subquestion_assignment',
+		//		data: {
+		//			num_options:num_options,
+		//		}
+		//	});
+		if ($(this).attr("checked")){
+			$(".sq_assignment_cbox").css("display","in-line");
+			$("#sq_text_div").css("display","in-line");
+		}else{
+			$(".sq_assignment_cbox").css("display","none");
+			$("#sq_text_div").css("display","none");
+		}
+	});
+</script>

@@ -1,0 +1,11 @@
+<div class='comments_div'>
+	<%# render :partial => "comments/field_comments", :locals => {:section_name => "study", :section_id => @study.id, :field_name => "qualityrating", :study_id => @study.id, :project_id => @project.id} %>
+</div>
+
+<% if !@quality_rating.nil? %>
+<h5>Overall Rating of Study:</h5><%= @quality_rating.current_overall_rating %>
+<br/>
+<h5>Quality Guideline Used in Assessment:</h5> <%= @quality_rating.guideline_used %>
+<% else %>
+No quality rating assigned has been assigned to this study yet.
+<% end %>

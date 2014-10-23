@@ -1,0 +1,60 @@
+design-details:
+  - question: 
+    question-text: "Study type"
+    notes: "Created by default"
+    field-type: "checkbox"
+    options:
+      - option: "RCT"
+      - option: "Prospective Cohort"
+      - option: "Cross-Sectional"
+      - option: "Case Control"
+      - option: "Retrospective Cohort"
+      - option: "Other"
+    question-number: 1
+  - question: 
+    question-text: "Inclusion criteria"
+    notes: "Created by default"
+    field-type: "text"
+    question-number: 2
+  - question: 
+    question-text: "Exclusion criteria"
+    notes: "Created by default"
+    field-type: "text"
+    question-number: 3
+
+adverse-event-columns:
+  - column:
+    column-title: "Timeframe"
+    description: "Created by default"
+  - column:
+    column-title: "Is event serious?"
+    description: "Created by default"
+  - column:
+    column-title: "Definition of serious"
+    description: "Created by default"
+  - column:
+    column-title: "Number affected"
+    description: "Created by default"
+  - column:
+    column-title: "Number at risk"
+    description: "Created by default"
+
+quality-rating-fields:
+  - field:
+    field-title: "Good"
+    display-number: 1
+  - field:
+    field-title: "Fair"
+    display-number: 2
+  - field:
+    field-title: "Poor"
+    display-number: 3
+
+
+#outcome-measures:
+ # measure:
+  #  measure-title:
+   # description:
+    #unit:
+    #note:
+    #measure-type:	

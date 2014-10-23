@@ -1,0 +1,305 @@
+<!-- CREATE THE FORM -->
+<%= form_tag url_for(:controller=>:comparison_data_points, :action=>:create), :remote=>true, :id=>"comparison_form" do %>
+<br/>
+<input type='hidden' name='outcome_id' value="<%= @outcome_id %>">
+<input type='hidden' name='study_id' value="<%= @study_id %>">
+<input type='hidden' name='extraction_form_id' value="<%= @extraction_form_id %>">
+<input type='hidden' name='selected_timepoint_id' value="<%= @selected_timepoint_id %>">
+
+<table class='list_table' id='between_arm_comparison_table' style='width:auto;min-width:250px;'>
+	<!-- THE TABLE HEADERS -->
+	<tr >
+		<th class='title_row' id='btw_arm_comparison_title_row' colspan="<%= 1 + (@all_comparators.length > 0 ? @all_comparators.length : 1)  %>">
+			Within-Arm Comparisons
+		</th>	
+		
+  </tr>
+	<tr id='btw_arm_table_header_row'>
+		<%#-----------------------------------------------------------------------------%>
+		<%# ADD COLUMN HEADERS (MEASURE FOLLOWED BY ONE COL FOR EACH ARM COMPARISON)%>
+		<%#-----------------------------------------------------------------------------%>
+  	<th>Measure</th>
+  	<% select_options = @arms.collect{|x| [x.title,x.id]}%>
+  	<% select_options = [["--Choose an Arm--",'0']] + select_options %>
+  	<%# a hash to keep track of which comparators are in which columns when data is saved%>
+  	<% comparator_ids = Hash.new%>
+  	
+  	<% comparison = @comparisons[@timepoints.first.id]%>
+  	<input type="hidden" name="comparison_type" value="<%= comparison.within_or_between %>">
+	  <% measures = @measures[comparison.id] %>
+
+		<%# CREATE THE SELECT BOXES TO DEFINE THE COMPARISONS                           %>
+		<%#-----------------------------------------------------------------------------%>
+	  <% unless @all_comparators.empty?%>
+	  	<% @all_comparators.each do |c| %>
+		    <th column="<%= @all_comparators.index(c) + 1 %>">
+		      <% elements = c.split("_") %>	
+		      <% j = 0 %>
+		      <% elements.each do |e| %>
+		        <%= select_tag "comparator[#{@all_comparators.index(c)}[#{j}]]",options_for_select(select_options,e), :title => "comparator" %>
+		        <% unless j == elements.length - 1 %>
+		        	vs <br/>
+		      	<% end %>
+		      	<% j += 1 %>
+		      <% end %>
+		    </th>
+		  <% end %><%# end @all_comparators.each do %>
+		  
+		<%# IF NO COMPARATORS ARE PREVIOUSLY DEFINED, FILL IN A PLACEHOLDER             %>
+		<%#-----------------------------------------------------------------------------%>  
+	  <% else %> <%# end unless @all_comparators.empty? %>
+		  <th column="1">
+		  	<center>
+		  	<%= select_tag "comparator[0[0]]",options_for_select(select_options), :class=>"comparator_selector", :title => "comparator 1" %> <br/>vs.<br/>
+		  	<%= select_tag "comparator[0[1]]",options_for_select(select_options),:class=>"comparator_selector", :title => "comparator 2" %>
+		    </center>
+		  </th>
+		<% end %>
+  </tr>
+  
+  <%#-----------------------------------------------------------------------------%>
+	<%# FOR EACH TIMEPOINT, GENERATE A TABLE ROW REPRESENTING A COMPARISON          %>
+	<%#-----------------------------------------------------------------------------%>
+	<%# VARIABLE TO KEEP TRACK OF ANY TEMPORARY COMPARATORS WE CREATE %>
+  <% next_new_comparator_id = -1%>
+	<% @timepoints.each do |timepoint|%>
+	  <% comparison = @comparisons[timepoint.id]%>
+	  <% measures = @measures[comparison.id] %>
+
+		<%# KEEP A RECORD OF WHAT MEASURES ARE CONTAINED IN EACH COMPARISON%>
+		<%#-----------------------------------------------------------------------------%>
+	   <input type="hidden" name="<%= "comparison_measures[#{comparison.id}]"%>" value="<%= measures.collect{|x| x.id}.join('_') %>">
+	  <% unless !comparator_ids[comparison.id].nil?%>
+	    <% comparator_ids[comparison.id] = Hash.new() %>
+	  <% end %>
+	  <% comparators = @comparators[comparison.id]%>
+	  <% comparator_id_strings = comparators.collect{|x| x.comparator} %>
+	  <% unless @all_comparators.empty? %>
+	    <% colnum = 1%>
+	    <% @all_comparators.each do |ac|%>
+	      <% if comparator_id_strings.include?(ac) %>
+	        <% comparator_ids[comparison.id][colnum] = comparators[comparator_id_strings.index(ac)].id %>
+	      <% else %>
+	        <% comparator_ids[comparison.id][colnum] = next_new_comparator_id%>
+	        <% next_new_comparator_id -= 1%>
+	      <% end %>
+	      <% colnum += 1 %>
+	    <% end %>
+	  <% else %>
+	    <% comparator_ids[comparison.id][1] = next_new_comparator_id%>
+	    <% next_new_comparator_id -= 1%>
+	  <% end %>
+	  
+  	<tr class='comparison_measure_row'>
+  		<!-- ADDING THE MEASURE ROWS -->
+  		<% colnum = 1%>
+  		<% measures.each do |measure| %>
+  		  <% unless measures.index(measure) == 0 %>
+  		    <tr class='comparison_measure_row'>
+  		  <% end %>
+  		  <td><%= measure.title %></td>
+  		    		  
+  		  <% unless @all_comparators.empty? %>
+	  		  <% @all_comparators.each do |c| %>
+	  		  <td  column="<%= @all_comparators.index(c) + 1 %>">
+	  		  	<% myComparatorID = comparator_ids[comparison.id][@all_comparators.index(c) + 1] %>
+	  		  	
+	  		  	<% value = "" %>
+	  		  	<% if myComparatorID.to_i > 0 %>
+	  		  	  <% dp = @comparison_datapoints[comparison.id][myComparatorID][measure.id] %>
+	  		  	  <% unless dp.nil? %>
+	  		  	    <% value = "value = #{dp.value}" %>
+	  		  	  <% end %>
+	  		  	<% end %>
+	  		  	<input type='text' title="comparison data point" name="<%= "comparison_datapoints[#{comparison.id}[#{comparator_ids[comparison.id][@all_comparators.index(c) + 1]}[#{measure.id}]]]" %>" <%=value%> />
+	  		  </td>
+	  		  <% end %>
+	  		<% else %>
+	  		  <td column="1">
+	  		  	<input type='text' title="comparison data point" name="<%= "comparison_datapoints[#{comparison.id}[-1[#{measure.id}]]]" %>" value=""/>
+	  		  </td>
+  		  <% end %>
+  		</tr>
+  		<% end %>
+  	
+  	<tr class='comparison_btn_row' >
+  		<!-- THE EDIT AND SAVE BUTTONS -->
+  		<td comparison_id="<%= comparison.id %>" colspan="<%= 1 + (@all_comparators.length > 0 ? @all_comparators.length : 1)  %>" align='right' style='position:relative;'>
+  			<a href='#' class="edit_comparison_measures_btn" tpid="<%= timepoint.id %>" comparison_id="<%= comparison.id %>" title="edit measures">Edit Measures</a>
+  		</td>
+  	</tr>
+  	
+  	<% if @timepoints.index(timepoint) == @timepoints.length - 1 %>
+  	<tr class='remove_column_link_row'>
+  		<td></td>
+  		<% unless @all_comparators.empty? %>
+  		  <td column="1"></td>
+	  	  <% for i in 2..@all_comparators.length %>
+	  		  <td column="<%=i%>"><a class="remove_comparison_column_btn" col_num="<%= i %>" href='#' title="remove column">Remove Column</a></td>
+	  	  <% end %>
+	  	<% else %>
+	  	  <td></td>
+	  	<% end %>
+  	</tr>
+  	</tr>
+  	<tr class='comparison_btn_row comparison_save_data_row'>
+  		<td colspan="<%= 1 + (@all_comparators.length > 0 ? @all_comparators.length : 1)  %>">
+  			<center>
+	  			<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+						<%= image_tag "Add.png", :alt => "Add" %>Save Table Data
+				</button>
+				|
+				<button type="submit" class="positive" id="add_comparison_column_btn">
+					<%= image_tag "Add.png", :alt => "Add" %>Add a Column
+				</button>
+	      	</center>
+  		</td>
+  	</tr>
+  	<% end %>
+	<% end %>
+</table>
+
+<input type="hidden" id="next_comparator_id" value="<%= next_new_comparator_id %>">
+<input type="hidden" id="num_comparisons" value="<%= @timepoints.length %>">
+<% end %> <!-- END THE FORM -->
+<script type='text/javascript'>
+<!--
+//--------------------------------------------------------------------
+// BELOW THIS LINE ARE HANDLERS FOR THE BETWEEN-ARM-COMPARISONS TABLE 
+//--------------------------------------------------------------------
+
+// SHOWING/HIDING THE COMPARISON TABLE
+$("#minimize_between_comparison").bind("click",function(event){
+	event.preventDefault();
+	$("#between_comparison_tab").html("<a href='#' id='between_arms_comparison_link'>=></a>");
+})
+
+// EDITING COMPARISON MEASURES
+$(".edit_comparison_measures_btn").unbind()
+$(".edit_comparison_measures_btn").bind("click",function(event){
+	event.preventDefault();
+	$("#modal_div").dialog({
+		title: "Editing Comparison Data Measures",
+		modal: true,
+		minHeight: 700,
+		minWidth: 700,
+		position: ['center','center'],
+		resizable: "true",
+		autoOpen: false
+	})
+	$.ajax({
+		type: 'POST',
+		url: "results/show_comparison_measures_form",
+		data:({
+			timepoint_id: $(this).attr("tpid"),
+			comparison_id: $(this).attr("comparison_id"),
+			outcome_id: "<%= @outcome.id %>",
+			outcome_type: "<%= @outcome.outcome_type %>",
+			study_id: "<%= @study_id %>",
+			extraction_form_id: "<%= @extraction_form_id %>",
+			selected_timepoint_id: "<%= @selected_timepoint_id %>" 
+		})
+	})
+})
+
+
+// ADDING A NEW COLUMN TO THE COMPARISON TABLE
+$("#add_comparison_column_btn").unbind();
+$("#add_comparison_column_btn").bind("click",function(event){
+	event.preventDefault();
+	// The next negative number to be used for a temporary id
+	next_comparator_id = $("#next_comparator_id").val();
+	num_comparisons = $("#num_comparisons").val();
+	
+	// Get the html in the most current column header and modify it for the new one
+	html = $("#btw_arm_table_header_row > th:last").html();
+	col_num = parseInt($("#btw_arm_table_header_row > th:last").attr("column")) + 1;
+	new_comparator_num = 0;
+	current_num = html.match(/id=\"comparator_._./)[0].split("_")[1];
+	reg1 = new RegExp("comparator_" + current_num, "g");
+	reg2 = new RegExp("comparator\\[" + current_num, 'g');
+	html = html.replace(reg1, "comparator_" + (parseInt(current_num) + 1));
+	html = html.replace(reg2, "comparator[" + (parseInt(current_num) + 1));
+	
+	// Extend the title colspan
+	current_span = parseInt($("#btw_arm_comparison_title_row").attr("colspan"));
+	$("#btw_arm_comparison_title_row").attr("colspan",current_span+1);
+	
+	// Add the TH to the header row
+	inserting = "<th column='"+col_num+"'>"+html+"</th>";
+	$("#btw_arm_table_header_row > th:last").after(inserting);
+	// Make sure defaults are selected
+	$("#btw_arm_table_header_row > th:last select:first").val(0);
+	$("#btw_arm_table_header_row > th:last select:last").val(0);
+	
+	// For each row containing measures...
+	measure_rows = $(".comparison_measure_row")
+	current_id = parseInt($(measure_rows[0]).find("td:last").html().split("[")[2]);
+	for(i=0; i<measure_rows.length; i++){
+		// get the html for the last column's inputs and parse out the comparator_id
+		myrow = measure_rows[i];
+		input = $(myrow).find("td:last").html();
+		input_parts = input.split("[");
+		this_id = parseInt(input_parts[2]);
+		  		
+		// substitute the new id for the old
+		if(this_id != current_id){
+			next_comparator_id = next_comparator_id - 1;
+			current_id = this_id
+		}
+		input_parts[2] = next_comparator_id.toString();
+		input = "<td column='"+col_num+"'>"+input_parts.join("[")+"</td>";
+		input = input.replace(/value=\".*\"\s/,'');
+		$(myrow).find("td:last").after(input);
+		
+	}
+	// Add the new 'Remove Column' link td
+	rm_btn = "<a class='remove_comparison_column_btn' href='#' col_num='"+col_num+"'>Remove Column</a>"
+	rm_btn = "<td column='"+col_num+"'>"+rm_btn+"</td>";
+	$(".remove_column_link_row > td:last").after(rm_btn);
+	
+	// For each row containing links/buttons, simply increase the colspan by 1
+	button_rows = $(".comparison_btn_row");
+	for(i=0;i<button_rows.length;i++){
+		current_row = $(".comparison_btn_row")[i]
+		current_span = $(current_row).find("td:first").attr('colspan');
+		new_span = parseInt(current_span) + 1;
+		$(current_row).find("td:first").attr('colspan',new_span);
+	}
+	// Decrement the next_comparator_id
+	$("#next_comparator_id").val(next_comparator_id - 1);
+})
+
+// REMOVING A COLUMN FROM THE COMPARISON TABLE
+$(".remove_comparison_column_btn").unbind("click");
+$(".remove_comparison_column_btn").live("click",function(event){
+  event.preventDefault();
+  
+
+	
+  col_num = $(this).attr("col_num");
+  search_string = "[column="+col_num.toString()+"]";
+  
+  // remove this column using the column attribute that is tags all elements
+  $(search_string).remove();
+/*
+  // decrement the colspan on the title bar
+  current_span =parseInt($("#btw_arm_comparison_title_row").attr("colspan"));
+	$("#btw_arm_comparison_title_row").attr("colspan",current_span - 1);
+  
+  // For each row containing links/buttons, decrease the colspan by 1
+	button_rows = $(".comparison_btn_row");
+	for(i=0;i<button_rows.length;i++){
+		current_row = $(".comparison_btn_row")[i]
+		tmp = $(current_row).find("td")
+		// the current colspan
+		current_span = $(tmp).attr("colspan");
+		// decrement the colspan
+		new_span = parseInt(current_span) - 1;
+		//$(tmp).attr('colspan',new_span);
+	}
+*/
+//Done. 
+})
+-->
+</script>

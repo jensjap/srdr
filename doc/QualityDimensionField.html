@@ -1,0 +1,735 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: QualityDimensionField
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (Q)</a> &raquo; 
+    
+    
+    <span class="title">QualityDimensionField</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: QualityDimensionField
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">QualityDimensionField</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/quality_dimension_field.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+This model handles quality dimension fields. A quality dimension field is a
+row that is specified in the extraction form. Quality dimension fields are
+specified in the extraction form. 
+</p>
+<p>
+When a user enters data to a study, the quality dimensions table is set up
+using the get_dropdown_options function, which examines each quality
+dimension, compares it to the YML file, and if the quality_dimension.title
+matches the dimension in the YML file, sets up the dropdown menu of options
+based on the options in that question in the YML file. If the dimension
+does not match any of those listed, the default dropdown is created with
+options: Yes, No, No Data, Unsure, Not Applicable. These default options
+can be changed in the get_dropdown_options function below.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_all_dimensions_from_section-class_method" title="add_all_dimensions_from_section (class method)">+ (Object) <strong>add_all_dimensions_from_section</strong>(dimension_title, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of quality dimensions from the section specified.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_dimension_list-class_method" title="get_dimension_list (class method)">+ (array) <strong>get_dimension_list</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of quality dimensions to display in the drop down menu in the
+extraction form quality tab.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_dropdown_options-class_method" title="get_dropdown_options (class method)">+ (array) <strong>get_dropdown_options</strong>(quality_dimension_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Read the YML file for quality dimensions and return a dropdown-formatted
+array based on the quality dimension selected.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_study_data-class_method" title="has_study_data (class method)">+ (boolean) <strong>has_study_data</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+check whether a study has been created that uses this extraction_form_arm
+name used for alerting users when editing.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="add_all_dimensions_from_section-class_method">
+  
+    + (<tt>Object</tt>) <strong>add_all_dimensions_from_section</strong>(dimension_title, extraction_form_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of quality dimensions from the section specified.  the
+dimension name begins with &#8220;add all &#8220; and the text after that
+is the name of the section.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>dimension_title</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/quality_dimension_field.rb', line 111</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add_all_dimensions_from_section'>add_all_dimensions_from_section</span><span class='lparen'>(</span><span class='id identifier rubyid_dimension_title'>dimension_title</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@section_string</span> <span class='op'>=</span> <span class='id identifier rubyid_dimension_title'>dimension_title</span><span class='lbracket'>[</span><span class='int'>8</span><span class='comma'>,</span> <span class='id identifier rubyid_dimension_title'>dimension_title</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_fn'>fn</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/../../config/quality_dimensions.yml</span><span class='tstring_end'>'</span></span>
+	<span class='id identifier rubyid_dimensions_file'>dimensions_file</span> <span class='op'>=</span> <span class='const'>YAML</span><span class='op'>::</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_fn'>fn</span><span class='rparen'>)</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+		<span class='comment'># go through quality_dimensions.yml
+</span>		<span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_section'>section</span><span class='op'>|</span>
+			<span class='kw'>if</span> <span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>section-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='ivar'>@section_string</span>
+				<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+					<span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dimension'>dimension</span><span class='op'>|</span>
+						<span class='ivar'>@str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> [</span><span class='tstring_end'>&quot;</span></span>
+						<span class='ivar'>@options</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+						<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+							<span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_option'>option</span><span class='op'>|</span>
+								<span class='ivar'>@options</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_option'>option</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>option</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+							<span class='kw'>end</span>
+						<span class='kw'>end</span>
+						<span class='ivar'>@str</span> <span class='op'>=</span> <span class='ivar'>@str</span> <span class='op'>+</span> <span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>]</span><span class='tstring_end'>&quot;</span></span>							
+						<span class='ivar'>@new_dimension</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>		
+						<span class='ivar'>@new_dimension</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='op'>=</span> <span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='ivar'>@str</span>
+						<span class='ivar'>@new_dimension</span><span class='period'>.</span><span class='id identifier rubyid_field_notes'>field_notes</span> <span class='op'>=</span> <span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>description</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+						<span class='ivar'>@new_dimension</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+						<span class='ivar'>@new_dimension</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>							
+					<span class='kw'>end</span>
+				<span class='kw'>end</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_dimension_list-class_method">
+  
+    + (<tt>array</tt>) <strong>get_dimension_list</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of quality dimensions to display in the drop down menu in the
+extraction form quality tab
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+dim_fields the list of dimension fields, formatted for a rails select menu
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/quality_dimension_field.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_dimension_list'>get_dimension_list</span>
+	<span class='ivar'>@dim_fields</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>	
+	<span class='id identifier rubyid_fn'>fn</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/../../config/quality_dimensions.yml</span><span class='tstring_end'>'</span></span>
+	<span class='id identifier rubyid_dimensions_file'>dimensions_file</span> <span class='op'>=</span> <span class='const'>YAML</span><span class='op'>::</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_fn'>fn</span><span class='rparen'>)</span><span class='rparen'>)</span>
+
+	<span class='ivar'>@dim_fields</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Choose a quality dimension</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>choose</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>		
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+		<span class='comment'># go through quality_dimensions.yml
+</span>		<span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_section'>section</span><span class='op'>|</span>
+			<span class='ivar'>@dim_fields</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--------</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>section-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>--------</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+			<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+				<span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dimension'>dimension</span><span class='op'>|</span>
+					<span class='ivar'>@str</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>					
+					<span class='ivar'>@str</span> <span class='op'>=</span> <span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> [</span><span class='tstring_end'>&quot;</span></span>
+					<span class='ivar'>@options</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+					<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+						<span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_option'>option</span><span class='op'>|</span>
+							<span class='ivar'>@options</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_option'>option</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>option</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+						<span class='kw'>end</span>
+					<span class='kw'>end</span>
+					<span class='ivar'>@str</span> <span class='op'>=</span> <span class='ivar'>@str</span> <span class='op'>+</span> <span class='ivar'>@options</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>]</span><span class='tstring_end'>&quot;</span></span>
+					<span class='ivar'>@dim_fields</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='ivar'>@str</span><span class='comma'>,</span><span class='ivar'>@str</span><span class='rbracket'>]</span>						
+				<span class='kw'>end</span>
+				<span class='comment'># add &quot;add all section X dimensions&quot; link
+</span>				 <span class='ivar'>@dim_fields</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Add all </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>section-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> Dimensions</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add all </span><span class='tstring_end'>&quot;</span></span><span class='op'>+</span> <span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>section-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='ivar'>@dim_fields</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Add other dimension not in this list</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+	<span class='kw'>return</span> <span class='ivar'>@dim_fields</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_dropdown_options-class_method">
+  
+    + (<tt>array</tt>) <strong>get_dropdown_options</strong>(quality_dimension_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Read the YML file for quality dimensions and return a dropdown-formatted
+array based on the quality dimension selected. This function works by
+opening the quality_dimensions.yml file, reading it and comparing quality
+dimension entries to the current quality dimension text. When the current
+quality dimension is found in the list, the options are converted to an
+array suitable for use as a dropdown menu.  If the current quality
+dimension is not found in the list (i.e. a custom quality dimension), an
+array with the options &#8220;Yes&#8221; &#8220;No&#8221; &#8220;No
+Data&#8221; Not Applicable&#8221;  is created.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>quality_dimension_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the id of the quality dimension to generate an options array for
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+arr the array to use in the dropdown for options based on the quality
+dimension selected
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/quality_dimension_field.rb', line 54</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_dropdown_options'>get_dropdown_options</span><span class='lparen'>(</span><span class='id identifier rubyid_quality_dimension_id'>quality_dimension_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@quality_dimension</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_quality_dimension_id'>quality_dimension_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@qd_text</span> <span class='op'>=</span> <span class='ivar'>@quality_dimension</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+	
+	<span class='ivar'>@output_array</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>	
+	<span class='id identifier rubyid_fn'>fn</span> <span class='op'>=</span> <span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_dirname'>dirname</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_expand_path'>expand_path</span><span class='lparen'>(</span><span class='kw'>__FILE__</span><span class='rparen'>)</span><span class='rparen'>)</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>/../../config/quality_dimensions.yml</span><span class='tstring_end'>'</span></span>
+	<span class='id identifier rubyid_dimensions_file'>dimensions_file</span> <span class='op'>=</span> <span class='const'>YAML</span><span class='op'>::</span><span class='id identifier rubyid_load'>load</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id identifier rubyid_open'>open</span><span class='lparen'>(</span><span class='id identifier rubyid_fn'>fn</span><span class='rparen'>)</span><span class='rparen'>)</span>
+	<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+	
+	<span class='id identifier rubyid_finished'>finished</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='rparen'>)</span>
+		<span class='comment'># go through quality_dimensions.yml
+</span>		<span class='id identifier rubyid_dimensions_file'>dimensions_file</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_section'>section</span><span class='op'>|</span>
+			<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+				<span class='id identifier rubyid_section'>section</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>dimensions</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dimension'>dimension</span><span class='op'>|</span>
+					<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_finished'>finished</span>			
+						<span class='comment'># test if dimension['question'] equals first part of @qd_text
+</span>						<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='ivar'>@qd_text</span><span class='period'>.</span><span class='id identifier rubyid_starts_with?'>starts_with?</span><span class='lparen'>(</span><span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='rparen'>)</span>
+							<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+								<span class='id identifier rubyid_dimension'>dimension</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_option'>option</span><span class='op'>|</span>
+									<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='id identifier rubyid_option'>option</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>option</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_option'>option</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>option</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+								<span class='kw'>end</span>
+							<span class='kw'>end</span>
+							<span class='id identifier rubyid_finished'>finished</span> <span class='op'>=</span> <span class='kw'>true</span>
+						<span class='kw'>end</span> <span class='comment'># end compare question and yml question	
+</span>					<span class='kw'>end</span> <span class='comment'># end finished
+</span>				<span class='kw'>end</span> <span class='comment'>#end section.each
+</span>			<span class='kw'>end</span> <span class='comment'>#end 
+</span>		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='comment'># if not finished (no match found), create a default array
+</span>	<span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span><span class='id identifier rubyid_finished'>finished</span><span class='rparen'>)</span>
+		<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Yes</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Yes</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>								
+		<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>								
+		<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unsure</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unsure</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>								
+		<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No Data</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No Data</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>								
+		<span class='ivar'>@output_array</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Not Applicable</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Not Applicable</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='ivar'>@output_array</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_study_data-class_method">
+  
+    + (<tt>boolean</tt>) <strong>has_study_data</strong>(id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+check whether a study has been created that uses this extraction_form_arm
+name used for alerting users when editing
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+the quality dimension field id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+whether any quality dimension data points exist for that study
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/quality_dimension_field.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_has_study_data'>has_study_data</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_datapoints'>datapoints</span> <span class='op'>=</span> <span class='const'>QualityDimensionDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:quality_dimension_field_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_datapoints'>datapoints</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='id identifier rubyid_datapoints'>datapoints</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>==</span> <span class='int'>0</span><span class='rparen'>)</span>
+		<span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>false</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>true</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:51 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

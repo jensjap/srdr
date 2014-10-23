@@ -1,0 +1,26 @@
+<div class='tab-div'><br/>
+	<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Finalize Extraction Form"} %>
+
+	<div id="extraction_form_section_publications">
+
+		<div class='extraction_form_options'>
+			This extraction form will not be made available for use by project team members until it is said to be finalized. To finalize this extraction form and signal that it is ready for use, click on the link below. 
+			<br/><br/>
+			<strong>Note:</strong> You will still have the ability to edit this extraction form after it is finalized.
+		</div>
+		<br/><br/>
+		<div id='ef_status_div'>
+			<%= render :partial=>"extraction_forms/finalized_status" %>
+		</div>
+
+	</div>
+	<br/>
+	<div class='hr'></div>
+	<br/>
+	<div id='bank_submission_form_div'>
+	<%= render :partial=>"extraction_forms/bank_submission_form" %>
+	</div><br/><br style='clear: both;'/>
+	
+	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:last=>true} %>
+	<%= render 'shared/make_editable_and_confirm' %>
+</div><!-- end tab-div -->

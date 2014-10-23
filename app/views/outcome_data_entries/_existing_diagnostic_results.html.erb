@@ -1,0 +1,148 @@
+<% tabindex = 202 %>
+<% section_titles = {1=>"Descriptive Statistics",2=>"Assuming Reference Standard",3=>"Additional Analysis"} %>
+<% unless @existing_comparisons.nil? %>
+<% unless @existing_comparisons.empty? %><br/>
+<strong style='font-style:italic;color:black;'><br/>
+	<div class='actions' style='float:left;margin-bottom:10px;'>
+		<%= link_to render(:inline=>"<img src='/images/arrow_refresh_small.png' alt='Refresh'/>") + " Refresh", "/projects/#{params[:project_id]}/studies/#{params[:study_id]}/results/refresh_existing?extraction_form_id=#{@extraction_form_id}",{:remote=>true,:class=>'page_flip_btn_bk'} %>
+	</div>Use the button to the left to refresh the existing results table after saving changes.<br/><br/>
+</strong>
+<div style='overflow:scroll; width:95%;'>
+	<div style='width:100%;background-color:#96AFD0;color:black;font-weight:bold;margin-bottom:0px; text-align:center;padding: 5px 0px 5px 0px;'>
+		
+	  	Existing Results Entries
+	</div>
+	<span style='float:right;'>
+		<%= render :partial=>'save_indicators/deleted' %>
+	</span>
+	<%# The Hash of comparisons assigned to ocde objects in the project %>
+	<% ex_comparisons = @existing_comparisons %>
+	
+	<% ex_comparisons.keys.each do |key| %>
+		<% comparators = @existing_comparators[key] %>
+		<% ocid,sgid = key.split("_")%>
+		<% footnote_texts = Array.new()%>  <%# record the footnotes to be displayed for this outcome and subgroup%>
+		<% comparisons_array = ex_comparisons[key] %>
+		<% comparator_strings = @existing_comparators[key] %>
+		<% num_comparisons = comparisons_array.length %>
+		<% this_outcome = @outcomes.find{|oc| oc.id.to_i == ocid.to_i} %>
+		<% this_subgroup = @outcome_subgroups[ocid.to_i] %>
+		<% this_ef = this_outcome.extraction_form_id %>
+		<%# START CREATING THE EXISTING RESULTS TABLE %>
+		<table class='list_table' style='width:100%;' style='border: solid 5px #96AFD0;'>
+		<%#-----------------------------------------------------------%>
+		<%# BUILD THE TABLE HEADERS                                   %>
+		<%#-----------------------------------------------------------%>
+		
+		<tr id="existing_header_tr">
+			<th colspan="<%= 2 + comparators.length %>" class='title_row'>
+				<strong style='text-decoration:underline;'>Outcome:</strong> <%= this_outcome.title unless this_outcome.nil? %>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong style='text-decoration:underline;'>Population:</strong> <%= this_subgroup.first.title unless this_subgroup.nil? %>
+				<%# If there are no between-arm comparisons we'll put the edit 
+					# and remove links here. Otherwise they will go to the right 
+					# side of the between-arm comparisons %>
+				<% if num_comparisons > 0 %>
+					<strong>
+						<span style='float:right;'>
+							<a href='#' class="edit_existing_ocde_link" outcome_id="<%= ocid %>" subgroup_id="<%= sgid %>" ef_id="<%= this_outcome.extraction_form_id %>" tabindex="<%= tabindex %>">Edit</a> | 
+							<a href='#' class="remove_existing_ocde_link" outcome_id="<%= ocid %>" subgroup_id="<%= sgid %>" tabindex="<%= tabindex %>">Remove</a> 
+						</span>
+					</strong>
+				<% end %>
+			</th>	
+		</tr>
+
+		<%#------------------------------------------------------------%>
+		<%# BUILD THE FIRST ROW COLUMN TITLES AND COMPARISON DROPDOWNS %>
+		<%#------------------------------------------------------------%>
+		<tr >
+		  	<th class='head_col' style='min-width:100px;background-color:#2a57ff; color:white;'>Time Point</th>
+		  	<th class='head_col' style='background-color:#2a57ff; color:white;'>Measure</th>
+		  	<% comparators.each do |comparator| %>
+		  		<th class='head_col' style='background-color:#2a57ff;color:white;'><%= comparator %></th>
+		  	<% end %>
+	 	 </tr>
+
+	 	<%#------------------------------------------------------------%>
+		<%# BUILD THE ACTUAL COMPARISON ROWS
+		<%#------------------------------------------------------------%>
+		<% current_section = 0 %>
+		<% comparisons_array.each do |c| %>
+			
+			<% puts "COMPARISON: #{c.length} elements\n\n "%>
+			<% puts "COMPARISON at 0: #{c[0]} \n\n "%>
+			<% puts "COMPARISON at 1: #{c[1]} \n\n "%>
+			<% puts "COMPARISON at 2: #{c[2]} \n\n "%>
+			<% puts "COMPARISON at 3: #{c[3]} \n\n "%>
+			<% cmp_object = c[0] %>
+		    <% cmp_comparator_ids = c[1] %>
+		    <% cmp_measures = c[2] %>
+		    <% cmp_datapoints = c[3] %>
+
+		    
+			<% num_rows = cmp_measures.length %>
+			<% tp_title = OutcomeTimepoint.get_title(cmp_object.group_id)%>
+			
+
+			<%# PUT IN THE SECTION HEADER WHEN NECESSARY %>
+			<% if cmp_object.section != current_section %>
+				<tr>
+					<th colspan="<%= 2 + comparators.length %>" style='text-align:left; background-color:grey;'>
+						<%= section_titles[cmp_object.section] %>
+					</th>
+				</tr>
+				<% current_section = cmp_object.section %>
+			<% end %>
+			<tr>
+				<%# the timepoint value %>
+				<td rowspan="<%= num_rows %>">
+					<%= tp_title %>
+				</td>
+				<%# loop through and create a row for each measure %>
+				<% cmp_measures.each_with_index do |m,i| %>
+					<% unless i == 0 %>
+						<tr>
+					<% end %>
+					
+					<%# add the measure %>
+					<td><%= cmp_measures[i].title %></td>
+					<%# add the datapoints %>
+					<% puts "---------\n\nTHERE ARE #{cmp_comparator_ids.length} COMPARATOR IDS\n\n\n" %>
+					<% cmp_comparator_ids.each do |cid| %>
+  		  				<% dp = cmp_datapoints.keys.empty? ? nil : cmp_datapoints["#{cmp_measures[i].id}_#{cid}"] %>
+	  		  			<% unless dp.empty? %>
+	  		  			  <% if dp.length == 1 %>
+		  		  			  <% this_dp = dp.first %>
+		  		  			  <% style = this_dp.is_calculated==true ? "style='background-color:yellow;'" : '' %>
+		  		  				<td <%= style %>>
+		  		  					<%= this_dp.value %>
+		  		  					<% if this_dp.footnote_number > 0 %>
+										<% footnote_texts[this_dp.footnote_number - 1] = this_dp.footnote.to_s %>
+			  		    				<span class='footnote_tag'>[<%= this_dp.footnote_number %>]</span>
+		  		  					<% end %>
+		  		  				</td>
+		  		  			<% else %>
+		  		  				<td>
+		  		  					<%= render :partial => "outcome_data_entries/diagnostic_tests/existing_two_by_two_table", :locals=>{:comparison_id=>cmp_object.id, :comparator_id=>cid, :measure_id=>m.id, :values=>dp} %>
+		  		  				</td>
+		  		  			<% end %>
+	  		  			<% else %>
+	  		  			  <td></td>
+	  		  			<% end %>
+	  		  		<% end %> <%# end cmp_comparator_ids.each do %>
+  		  		<% end %> <%# end cmp_measures.each_with_index do %>
+  		  	</tr>
+		<% end %> <%# end comparisons_array.each do %>
+		<%# Show the footnotes associted with our data points for this comparison %>
+		  	<% unless footnote_texts.empty? %>
+		  <% colspan = 2 + comparators.length %>
+	      <tr><th colspan="<%= colspan %>" style='text-align:left;'>Footnotes</th></tr>
+		  <% footnote_texts.each_with_index do |fnote,index|%>
+		    <tr><td colspan="<%= colspan %>"><%= index + 1 %>. <%= fnote %></td></tr>
+		  <% end %>
+		<% end %>
+		</table>
+	<% end %> <%# end ex_comparisons.keys.each %>
+</div>
+<% end %> <%# unless session.empty? %>
+<% end %> <%# end unless @existing_comparisons.nil? %>

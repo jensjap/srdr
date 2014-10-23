@@ -1,0 +1,10 @@
+This extraction form was created to answer the following key questions: <br/><br/>
+<table class="result_table" id="key_questions_table_extraction_form_list" summary="key questions table extraction form list">
+	<% @ef_key_questions.each do |kq| %>
+		<tr class="<%= cycle("odd", "even") %>"><td class="label">
+	    <%# key_question = KeyQuestion.find(q_item.key_question_id) %> 
+		  <td><%= kq.question_number %></td>
+		  <td><%= render :inline => kq.question %>
+		</tr>
+	<% end %>
+</table>

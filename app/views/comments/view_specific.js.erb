@@ -1,0 +1,14 @@
+<% if @open_study %>
+
+<% if defined?(current_user) && !current_user.nil? %>
+<% @show_both = User.current_user_is_collaborator(project_id,current_user) %>
+<% end %>
+
+			window.scrollTo(0, 0);			
+			$("#preview_study_div").dialog('open').load("<%= '/projects/'+ @project_id.to_s+'/studies/'+@study_id.to_s %>");
+
+<% else %>
+
+
+
+<% end %>

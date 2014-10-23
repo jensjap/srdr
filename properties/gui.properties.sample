@@ -1,0 +1,66 @@
+# Site Properties --------------------------------------------------
+site-info:
+  name: Systematic Review Data Repository
+  description: SRDR Production Website
+  url: localhost
+  ip: 127.0.0.1
+  type: production
+training-site:
+  name: Systematic Review Data Repository Training
+  description: SRDR Training Website
+  url: http://localhost
+# Database Properties ---------------------------------------------
+database-info:
+  name: MYSQL
+  description: Production MySQL
+  url: localhost
+  ip: 127.0.0.1
+  type: production
+# Registar Properties ---------------------------------------------
+registar-notification: 
+  name: SRDR Administrator
+  organization: Tufts Medical Center
+  email: SRDR@ahrq.hhs.gov
+# Comments Properties ---------------------------------------------
+comments-notification: 
+  name: SRDR Administrator
+  organization: Tufts Medical Center
+  email: SRDR@ahrq.hhs.gov
+# -----------------------------------------------------------------
+search-mode:
+  public: Published projects/studies
+  private: Un-released projects/studies
+  advance: Advance search
+user-roles:
+  lead: Project Lead
+  collaborator: Project Collaborator
+  public: Access to published projects
+  commentator: Project reviewer
+# User Admin on SRDR-Dev ------------------------------------------
+user-admin-dev:
+  activation: 0
+# Report caching properties ------------------------------------------
+cache-project-path: cache/projects/
+# SRDRJ Properties ---------------------------------------------
+srdrj:
+  url: http://localhost:8080/srdrj/index.jsp
+  url-production: http://localhost:8080/srdrj/index.jsp
+  url-training: http://localhost:8080/srdrj/index.jsp
+# Report Builder Properties ---------------------------------------------
+report-builder:
+  url: http://localhost:8080/srdrj/index.jsp?page=REPORT
+  url-production: http://localhost:8080/srdrj/index.jsp?page=REPORT
+  url-training: http://localhost:8080/srdrj/index.jsp?page=REPORT
+  url-dev: http://localhost/srdrj/index.jsp?page=REPORT
+# Registry Properties ---------------------------------------------
+registry:
+  url: http://localhost:8080/srdrj/registry.jsp?default=CAM
+  url-production: http://localhost:8080/srdrj/registry.jsp?default=CAM
+  url-training: http://localhost:8080/srdrj/registry.jsp?default=CAM
+  url-dev: http://localhost/srdrj/registry.jsp?default=CAM
+# Data Comparison Properties ---------------------------------------------
+comparison:
+  url: http://localhost:8080/srdrj/index.jsp?page=COMPARATOR
+  url-production: http://localhost:8080/srdrj?page=COMPARATOR?page=COMPARATOR?page=COMPARATOR?page=COMPARATOR/index.jsp
+  url-training: http://localhost:8080/srdrj/index.jsp?page=COMPARATOR
+  url-dev: http://localhost/srdrj/index.jsp?page=COMPARATOR

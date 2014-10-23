@@ -1,0 +1,140 @@
+<% descriptions = nil %>
+<%= form_for test_obj, :remote=>true do |f|%>
+	<div style='width:550px; height:550px; overflow:scroll;'>
+	<% if editing %>
+		<h2>Editing <%= title %>: <%= test_obj.title %></h2><br/>
+	<% else %>
+		<h2>Create a new <%= title %></h2><br/>
+	<% end %>
+	<%= hidden_field_tag "diagnostic_test[extraction_form_id]", @ef_id %>
+	<%= hidden_field_tag "diagnostic_test[study_id]", @study.id %>
+	<%= hidden_field_tag "diagnostic_test[test_type]", @test_type %>
+	<%# THE TITLE FIELD %>
+	<%# THIS COULD BE EITHER A TEXT BOX OR A DROPDOWN SELECTOR DEPENDING ON HOW MANY
+	    DIAGNOSTIC TEST SUGGESTIONS WERE SPECIFIED IN THE EXTRACTION FORM %>
+	<div class='field'>
+		<% options = eval("@prev_"+title.split(" ")[0].downcase+"_tests") %>
+		<% descriptions = eval("@prev_"+title.split(" ")[0].downcase+"_descriptions") %>
+		<% if options.length < 2 %>
+	  		<label for="Diagnostic Test Title">Title:</label><br/>
+	  		<%= f.text_field :title, :class=>"bp_form_complete-1353-name editable_field", :tabindex => 1, :title => "Diagnostic Test Title" %><br/>
+	    <% else %>
+	    	<label for="Diagnostic Test Title">Title:</label><br/>
+		  	<% selected = test_obj.id.nil? ? "" : test_obj.title %>
+		  	<%= select "diagnostic_test", :title, options_for_select(options.collect{|x| [x,x]}, selected), {:class=>'editable_field'}, :tabindex => 1, :title => "Diagnostic Test Title" %>
+			
+		  	<br/>
+		  	<span class='smallText'>Diagnostic Test found in the dropdown have been added to either the study extraction_form or are found in other studies within this same project. Use "Other..." to specify a new title for this test.</span>
+		<% end %>
+	</div>
+	<%# THE DESCRIPTION FIELD %>
+	<div class='field'>
+		<label for="Diagnostic Test Description">Test Description</label><br/>
+		<%= f.text_area "description", :cols => 50, :rows => 4, :class => "editable_field", :tabindex => 2, :title => "Diagnostic Test Description" %>
+	</div>
+	<%# THE NOTES FIELD %>
+	<div class='field'>
+		<label for="Diagnostic Test Notes">Notes</label><br/>
+		<%= f.text_area "notes", :cols => 50, :rows => 2, :class => "editable_field", :tabindex => 2, :title => "Diagnostic Test Notes" %>
+	</div>
+	<%# DIAGNOSTIC TEST THRESHOLDS %>
+	<div class='field'>
+		<label for="Diagnostic Test Thresholds">Thresholds</label><br/>
+		<% if @thresholds.empty? %>
+			<div id="threshold_-1_div">
+				<input type="text" class="threshold_entry temporary_text" name="thresholds[-1]"  size=64 value="Enter a threshold value (e.g. 1 month)"/>
+			</div>
+		<% else %>
+			<% @thresholds.each do |th| %>
+				<div style='margin-top: 3px;' id="<%= "threshold_#{th.id.to_s}_div"%>">
+					<input size=64 type="text" class="threshold_entry" name="thresholds[<%=th.id.to_s%>]" value="<%= th.threshold %>" />
+					<% unless @thresholds.index(th) == 0 %>
+						<a href='#' class='remove_threshold_link'>Remove</a>
+					<% end %>
+				</div>
+			<% end %>
+		<% end %>
+		<a href='#' id='add_threshold_link'>Add a Threshold</a>
+	</div>
+
+	</div><%# end the container div for scrolling %>
+	<%# CANCEL AND SUBMIT BUTTONS %>
+	<center>
+	<div class='actions'>
+		<% if editing %>
+			<button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+				<%= image_tag "Add.png", :alt => "Add"  %>Save Edits
+			</button>
+		<% else %>
+			<button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+				<%= image_tag "Add.png", :alt => "Add"  %>Save
+			</button>
+		<% end %>
+			<button class="negative" id="close_window_button" tabindex="4">
+				<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+			</button>
+	</div>
+	</center>
+	<span id ="dxTestLoadedFlag"></span>
+<% end %>	
+
+<script type='text/javascript'>
+//<!--
+function dx_init(){
+  try{
+    checkDxLoaded(); 
+    prepareDxForm();
+  } catch( err ) {
+    setTimeout('document_init()', 200);
+  }
+}
+
+function checkDxLoaded() {
+  if ( $('#dxTestLoadedFlag').length == 0) $jquery.error( 'not ready' );
+} 
+
+function prepareDxForm(){
+
+  $("#save").on("click", function() {
+    forms = $(".unsaved_form");
+    for(i=0; i < forms.length; i++){
+      $(forms[i]).removeClass("unsaved_form");
+    }
+    fields = $(".edited_field");
+    for(i=0; i < fields.length; i++){
+      $(fields[i]).removeClass("edited_field");
+    }
+  });
+
+	$("#diagnostic_test_title").unbind();
+	$("#diagnostic_test_title").bind("change",function(){
+		var selected = $(this).val();
+		var descriptions = '<%= raw descriptions.to_json %>';
+		var obj = jQuery.parseJSON(descriptions);
+		$("#diagnostic_test_description").text(obj[selected]);
+	});
+	
+	$(".temporary_text").live("click",function(){
+		$(this).val("");
+		$(this).removeClass("temporary_text");
+	});
+	
+	var new_threshold_id = -2;
+	$("#add_threshold_link").unbind();
+	$("#add_threshold_link").bind("click",function(event){
+		event.preventDefault();
+		$("#add_threshold_link").before("<div style='margin-top: 3px;' id='threshold_"+new_threshold_id+"_div'> <input type='text' size=64 name='thresholds["+new_threshold_id+"]' value='Enter a threshold...' class='threshold_entry temporary_text'/><a href='#' class='remove_threshold_link'>Remove</a></div>");
+		new_threshold_id -= 1;
+	});
+
+	$(".remove_threshold_link").live("click",function(event){
+		event.preventDefault();
+		$(this).parent("div").remove();
+	});	
+} 
+
+dx_init();
+// -->
+</script>
+<%= render :inline=>attach_listener_for_other("diagnostic_test_title") %>
+

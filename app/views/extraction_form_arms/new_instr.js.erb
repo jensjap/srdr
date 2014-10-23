@@ -1,0 +1,4 @@
+$("#new_arms_instr_entry").html("<%= escape_javascript(render :partial=>'extraction_form_arms/instr_form')%>");
+$("#new_arms_instr_entry :button").removeAttr("disabled");
+$("#new_arms_instr_entry").dialog("option", "title", "Enter Arms Instructions");		
+$("#new_arms_instr_entry").dialog('open');

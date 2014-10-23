@@ -1,0 +1,33 @@
+<% if secondary_publications.length > 0 %>
+	<table class="list_table" id="study_pubs_table" summary="study publications table">
+	<thead><tr>
+	<th>UI</th>
+	<th>Title</th>
+	<th>Author</th>
+	<th>Country</th>
+	<th>Year</th>
+	<th></th>
+	</tr></thead>
+	<% for pub in secondary_publications %>
+		<tr class="<%= cycle("even", "odd") %>">
+		<td>
+		<% @pub_uis = SecondaryPublicationNumber.where(:secondary_publication_id => pub.id).all %>
+		<% for ui in @pub_uis %>
+			<%= ui.number %> (<%= ui.number_type %>)<br/>
+		<% end %>
+		</td>
+		<td><%= pub.title %></td>
+		<td><%= pub.author %></td>
+		<td><%= pub.country %></td>
+		<td><%= pub.year %></td>
+		<td class="comment_td">
+			<%= render :partial => "comments/field_comments", :locals => {:section_name => "secondarypublications", :section_id => pub.id, :field_name => "year", :study_id => @study.id, :project_id => @project.id} %>			
+		</td>	
+		</tr>
+	<% end %>
+<% else %>
+  There are currently no secondary publications defined for this study.
+<% end %>
+
+</table>
+<br/><br/>

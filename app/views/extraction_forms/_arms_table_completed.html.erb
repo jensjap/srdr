@@ -1,0 +1,23 @@
+<br/>
+  <% if !@extraction_form_arms.nil? && !@extraction_form_arms.empty? %>
+
+<table class="list_table" id="extraction_form_arms_table" summary="extraction form arms table completed">
+  <thead><tr>
+  	<th>Arm Title</th>
+  	<th>Arm Description</th>
+  	<th>User Note</th>
+	</tr></thead>
+
+    <% for onearm in @extraction_form_arms %>
+      <tr class="<%= cycle("even", "odd") %>" id="arm_row_<%=onearm.id.to_s %>">
+				<td><%= onearm.name %></td>
+				<td><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
+				<td><%= onearm.note %></td>
+
+			</tr>
+	  <% end %>
+</table>
+
+<% else %>
+No arms specified.
+<% end %>

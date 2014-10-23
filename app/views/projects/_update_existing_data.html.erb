@@ -1,0 +1,103 @@
+<h1> Project: <%= @project.title %> </h1>
+<br> <br> <br> <hr> <br>
+
+<h2>Import data</h2>
+<div>Import data using a Microsoft Excel spreadsheet.</div>
+
+<br>
+
+<div class="form-content">
+    <%= form_for :simport_upload, :url=>"/projects/#{params[:project_id]}/studies/simport", :html => {:multipart => true} do |f| %>
+        <%= hidden_field_tag :project_id, params[:project_id] %>
+        <%= hidden_field_tag :force_create, false %>
+
+        <div class="field">
+            <strong>Step 1: Please choose an extraction form from the dropdown below.</strong><br>
+            Note: <em>If you need to import data into an extraction form that does not yet exist in your project, choose “Create New Extraction Form”.</em>
+            <%#= f.label :extraction_form_id, "Please choose extraction form:" %><br>
+            <%= f.select :extraction_form_id, @ef_options_for_select, { prompt: "-- Please choose Extraction Form --" } %>
+        </div>
+
+        <br>
+        <br>
+
+        <div id="section" class="field hide">
+            <strong>Step 2: Please choose the section of the extraction form that you would like to import your data into.</strong><br>
+            Note: <em>Data may only be imported into a single extraction form section at a time.</em>
+            <%#= f.label :section, "Please choose section of extraction form:" %><br>
+            <%= f.select :section, @section_options_for_select, { prompt: "-- Please choose Section of Extraction Form --" } %>
+        </div>
+
+        <br>
+        <br>
+
+        <div id="file" class='field hide'>
+            <strong>Step 3: Please choose the Microsoft Excel file to upload. Only Microsoft Excel files (.xlsx) saved using Microsoft Excel 2007 or later may be uploaded.</strong><br>
+            Note: <em>Each row of data on the Microsoft Excel file needs to have data entered for at least the following column headers using the titles that are in quotations: “Pubmed ID” OR “Internal ID” OR “Author” AND “Title”.</em>
+            <%#= f.label :simport_file, "Please choose the file to upload:" %><br>
+            <%= f.file_field :simport_file %>
+        </div>
+
+        <br>
+        <br>
+
+        <div id="submit_button" class='actions hide'>
+            <strong>Confirmation that your data was imported successfully into SRDR and a listing of the data that was not imported due to error will be sent to you via email.</strong><br>
+            <button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" id="simport_button">
+                <%= image_tag "Note_go.png", :alt => "Update" %> Upload
+            </button>
+        </div>
+    <% end %>
+</div>
+
+<%= javascript_tag do %>
+    $("div.hide").hide();
+
+    var sections = new Array();
+    <% for ef in @ef_options_for_select %>
+        <% unless ef[1] == 0 %>  <!-- we skip over the "Create new extraction form" option -->
+            <% ar_ef = ExtractionForm.find(ef[1]) %>
+            <% for section in ar_ef.section_options_for_select_simple_import %>
+                sections.push(new Array( <%= ef[1] %>, '<%=h section[0] %>', '<%=h section[1] %>' ));
+            <% end %>
+        <% end %>
+    <% end %>
+
+    function efSelected() {
+        var aryLength = sections.length;
+
+        ef_id = $("#simport_upload_extraction_form_id").val();
+        options = document.getElementById('simport_upload_section').options;
+        options.length = 1;
+        sections.forEach(function(section) {
+            if (section[0] == ef_id) {
+                options[options.length] = new Option(section[1], section[2]);
+            }
+        });
+    }
+
+    function forwardEfCreation() {
+        if (confirm('Are you sure you want to create a new extraction form? You will taken to the extraction form creation page.')) {
+            window.location.href="<%= "/projects/" + @project.id.to_s + "/extraction_forms/new" %>";
+        }
+        return false;
+    };
+
+    $("#simport_upload_extraction_form_id").change(function() {
+        ef_id = $("#simport_upload_extraction_form_id").val();
+        if (ef_id == 0) {
+            forwardEfCreation();
+            return false;
+        };
+        efSelected();
+        $("div#section").show();
+    });
+
+    $("div#section").change(function() {
+        $("div#file").show();
+    });
+
+    $("div#file").change(function() {
+        $("div#submit_button").show();
+    });
+<% end %>

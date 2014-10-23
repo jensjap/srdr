@@ -1,0 +1,12 @@
+$("#modal_div").dialog({
+	autoOpen:false,
+	modal:true,
+	width:550,
+	height:600,
+	title: "Extraction Form Bank",
+	buttons: { "Close": function(){ $(this).dialog("close"); } }
+})
+
+$("#modal_div").html("<%= escape_javascript(render :partial=>'extraction_form_templates/template_list') %>");
+$("#modal_div").dialog("open");
+

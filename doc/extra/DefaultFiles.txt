@@ -1,0 +1,186 @@
+# @markup markdown
+# @title Default Question Setup
+
+# Default Question Setup
+
+## Config Files
+
+The following files contain information used to create default questions in SRDR:
+
+- config/default_questions.yml
+- config/quality_dimensions.yml
+
+These files have a specific structure that can be used to add new questions, set up in YAML format. For more information on YAML file structure, see the wikipedia entry on YAML at http://en.wikipedia.org/wiki/Yaml. 
+
+The files are read into the system in a function when the default questions or options need to be created. See below for the file setup and specific examples of reading in the files.
+
+
+## Default Questions Created with the Extraction Form
+
+###Design Details Syntax
+
+Below is the syntax for example questions in the design details section. Questions must be set up in the following format and must have "question-text", "notes", "field-type" attributes. If a question has no options (i.e. a text based question), you can leave off the "options" and "option" rows.
+
+    design-details:
+      - question: 
+        question-text: "Study type"
+        notes: "Created by default"
+        field-type: "checkbox"
+        options:
+          - option: "RCT"
+          - option: "Prospective Cohort"
+          - option: "Cross-Sectional"
+          - option: "Case Control"
+          - option: "Retrospective Cohort"
+          - option: "Other"
+        question-number: 1
+      - question: 
+        question-text: "Inclusion criteria"
+        notes: "Created by default"
+        field-type: "text"
+        question-number: 2
+
+###Adverse Event Columns Syntax
+
+Below is the syntax for example questions in the adverse event columns section. Questions must be set up in the following format and must include "column-title" and "description" attributes.
+		
+    adverse-event-columns:
+      - column:
+        column-title: "Timeframe"
+        description: "Created by default"
+      - column:
+        column-title: "Is event serious?"
+        description: "Created by default"
+      - column:
+        column-title: "Definition of serious"
+        description: "Created by default"
+      - column:
+        column-title: "Number affected"
+        description: "Created by default"
+      - column:
+        column-title: "Number at risk"
+        description: "Created by default"
+
+###Quality Rating Fields Syntax
+
+Below is the syntax for example questions in the quality rating fields section. Questions must be set up in the following format and must include "field-title" and "display-number" attributes.
+		
+    quality-rating-fields:
+    - field:
+      field-title: "Good"
+      display-number: 1
+    - field:
+      field-title: "Fair"
+      display-number: 2
+    - field:
+      field-title: "Poor"
+      display-number: 3
+	
+### Outcome Measures Syntax
+
+<u>This has not yet been implemented.</u> The default_questions.yml file does not contain any outcome measure information. Here is an example of possible outcome measure syntax:
+
+    outcome-measures:
+      - measure:
+        measure-title: "Example Measure Title"
+        description: "Example Measure Description"
+        unit: "Example Unit"
+        note: "Example Note"
+        measure-type: "Example Type"
+
+### Reading in the File
+
+The default_questions.yml file is read in the file app/models/extraction_form.rb, in the method create_default_questions(extraction_form_id). Below is the code for reading in the design details, adverse event columns, and quality rating fields.
+
+  require 'yaml'
+  
+  fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/default_questions.yml'
+  defaults = YAML::load(File.open(fn))
+
+  if (defined?(defaults) && !defaults.nil?)
+    if !defaults['design-details'].nil?
+      defaults['design-details'].each do |value|
+        @design_detail = DesignDetail.new
+        @design_detail.question = value['question-text']
+        @design_detail.field_type = value['field-type']
+        @design_detail.field_note = value['notes']
+        @design_detail.question_number = value['question-number']
+        @design_detail.extraction_form_id = extraction_form_id
+        @design_detail.save			
+        if defined?(value['options']) && !value['options'].nil?
+          value['options'].each do|v|
+            @design_detail_field = DesignDetailField.new
+            @design_detail_field.design_detail_id = @design_detail.id
+            @design_detail_field.option_text = v['option']
+            @design_detail_field.save
+          end
+        end
+      end
+    end	
+
+  if !defaults['adverse-event-columns'].nil?			
+    defaults['adverse-event-columns'].each do |adverse_event_column|
+      @new_col = AdverseEventColumn.new
+      @new_col.name = adverse_event_column['column-title']
+      @new_col.description = adverse_event_column['description']
+      @new_col.extraction_form_id = extraction_form_id
+      @new_col.save
+    end
+  end
+
+  if !defaults['quality-rating-fields'].nil?				
+    defaults['quality-rating-fields'].each do |quality_rating_field|
+      @new_field = QualityRatingField.new
+      @new_field.rating_item = quality_rating_field['field-title']
+      @new_field.display_number = quality_rating_field['display-number']
+      @new_field.extraction_form_id = extraction_form_id
+      @new_field.save
+    end
+  end
+  
+
+## Dropdown Menu Items for Quality Dimensions
+
+### Quality Dimensions Syntax
+
+Below is the syntax for quality dimensions listed in the drop-down menu in the quality dimensions section of the extraction form creation section. Quality Dimension items must be set up in the following format. They must include "section-title", "section-description", "question", "description" and "options" attributes. Section title and description is meant to be used for the type or source of a particular quality dimension, such as "Cochrane ROB".
+
+  - section: 
+    section-title: "Example Title"
+    section-description: "Example Description"
+    dimensions:
+      - dimension:
+        question: "Example Question"
+        description: "Example Question Description"
+        options:
+          - option: "Yes"
+          - option:  "No"
+          - option: "Unsure"
+
+### Reading in the File
+
+The quality_dimensions.yml file is read in the file app/models/quality_dimension_field.rb, in the function get_dimension_list(). This function is called from app/views/quality_dimension_fields/_form.html.erb in order to populate the drop down menu in the form dialog box. Below is the code for reading in the quality dimension fields.
+
+    require 'yaml'
+    @dim_fields = []	
+    fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
+    dimensions_file = YAML::load(File.open(fn)) 
+    @dim_fields << ["Choose a quality dimension", "choose"]
+    if (defined?(dimensions_file) && !dimensions_file.nil?)
+      dimensions_file.each do |section|
+        @dim_fields << ["--------" + section['section-title'] + "--------","-"]
+        if defined?(section['dimensions']) && !section['dimensions'].nil?
+          section['dimensions'].each do |dimension|
+            @str = ""
+            @str = dimension['question'] + " ["
+            @options = []
+            if !dimension['options'].nil?
+              dimension['options'].each do |option|
+                @options << option['option']
+              end
+            end
+            @str = @str + @options.join(", ") + "]"
+            @dim_fields << [@str,@str]							
+          end
+        end
+      end

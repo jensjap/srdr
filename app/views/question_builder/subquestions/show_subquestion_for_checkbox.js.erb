@@ -1,0 +1,17 @@
+<% if @has_sq %>
+	<%# if the checkbox is checked, show the subquestion partial %>
+	<% if @checked=="checked" %>
+		<%# render the subquestion partial for the correct one %>
+		//$("<%= @element_to_fill %> > :input").removeClass("disabled_text");
+		$("<%= @element_to_fill %> > :input").prop("disabled",false);
+	<%# if the checkbox is not checked, empty the subquestion span %>
+	<% else %>
+	  $("<%= @element_to_fill %> > :input").prop("disabled",true);
+	  $("<%= @element_to_fill %> > :input").removeClass("edited_field");
+	  //$("<%= @element_to_fill %> > :input").addClass("disabled_text");
+	  $("<%= @element_to_fill %> > :input").val("");
+	  
+	<% end %>
+<% end %>
+
+	

@@ -1,0 +1,33 @@
+// determine if there are other options in place that need to be removed
+var field_id = "#category_choices_<%= @model %>_choices";
+var n = $(field_id.toString()).length;
+
+if (n > 0){
+	$(field_id.toString()).remove();
+}
+
+// determine if the matrix form has been set up and if not, do so
+field_id = "#matrix_setup_<%= @model %>";
+n = $(field_id.toString()).length;
+
+existing_matrix_type = $(field_id).attr("matrix_type");
+<% partial = @matrix_type == "select" ? 'question_builder/matrix_questions/matrix_dropdowns_setup_form' : 'question_builder/matrix_questions/matrix_setup_form' %>
+matrix_type = "<%= @matrix_type %>"
+
+if(n < 1){
+	if(matrix_type == "select"){
+		$("#type_selector_<%= @model %>").after("<%= escape_javascript(render(:partial=>'question_builder/matrix_questions/matrix_dropdowns_setup_form')) %>");	
+	}else{
+		$("#type_selector_<%= @model %>").after("<%= escape_javascript(render(:partial=>'question_builder/matrix_questions/matrix_setup_form')) %>");	
+	}
+}else{
+	if(existing_matrix_type != matrix_type){
+		$(field_id.toString()).remove();
+		if(matrix_type == "select"){
+			$("#type_selector_<%= @model %>").after("<%= escape_javascript(render(:partial=>'question_builder/matrix_questions/matrix_dropdowns_setup_form')) %>");	
+		}else{
+			$("#type_selector_<%= @model %>").after("<%= escape_javascript(render(:partial=>'question_builder/matrix_questions/matrix_setup_form')) %>");	
+		}
+	}
+}
+

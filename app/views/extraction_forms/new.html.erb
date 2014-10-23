@@ -1,0 +1,162 @@
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial=>"sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+	<!-- some divs used for modal windows -->
+	<div id="modal_div">
+	</div>
+	
+	<div id="page_title">
+		<% assignedkqs = ExtractionForm.get_assigned_question_numbers(@extraction_form.id) %>
+		<%= render :partial => "projects/page_title", :locals => {:page_title => "Create a New Extraction Form", :in_ef => false} %>
+	</div>
+	<br/><br/>
+	<div id="notification_div">
+	<%= render :inline=>"#{flash[:error_html]}" if flash.keys.include?(:error_html) %>
+	</div>
+	<div id="extraction_form_container">
+		<div id="extraction_form_div">
+			<%# render :partial=>"extraction_forms/extraction_form_tabs" %>
+			<%= form_for(@extraction_form, :remote => true) do |f| %>
+  
+<table class="form_table" style="width: 90%" id="extraction_form_new_table" summary="extraction form new form table">
+<tr>
+	<td class='label'>
+		<label>Enter a title for this extraction form:</label>
+	</td>
+	<td class='input'>
+		<%= f.text_field :title, :class => "editable_field", :title => "title" %>
+		<%= f.hidden_field :creator_id, :value => current_user.nil? ? -1 : current_user.id %>
+		<%= f.hidden_field :project_id, :value => @project.id %>
+	</td>
+</tr>
+
+<tr>
+	<td class='label'><label>Does this extraction form deal with test performance?</label></td>
+	<td class='input'><%= f.select(:is_diagnostic, [["No",false],["Yes",true]]) %></td>
+</tr>
+
+
+<tr>
+	<td class='label'>Select which key questions this extraction form will address:</td>
+
+	  
+	<td>
+		<table class="form-subtable-checklist" id="extraction_form_new_form_subtable" summary="extraction form new form result table">
+		
+		<%# @key_questions = KeyQuestion.where(:project_id => @project.id).all %>
+		<%# available_question_info = ExtractionForm.get_available_questions(@project.id,nil) %>
+		<%# @available_questions = available_question_info[0] %>
+		<%# @assigned_questions = available_question_info[1]	%>
+		<%# @no_more_extraction_forms = @project.all_key_questions_accounted_for %>
+		
+		<% tabind = 2 %>
+		<% @key_questions.each do |kq| %>	
+			<% if !@available_questions.include?(kq.id) %>
+				<% if (@assigned_questions[kq.id] <=> @extraction_form.title) != 0 %>
+					<% disabled = "DISABLED" %>
+				<% else %>
+					<% disabled = "CHECKED" %>
+				<% end %>
+		  	<% end %>
+		  	<tr class='data'>
+		  		<td class='check'>
+		  			<input type='checkbox' name="<%= 'extraction_form_key_questions[key_question_' + kq.id.to_s + ']'%>" title="key question checkbox" id="<%= 'extraction_form_key_question_key_question_'+kq.id.to_s%>" value="<%= kq.id %>" class='cbox editable_field' <%= disabled %>>
+					<% tabind = tabind + 1 %> 
+				</td>
+				<td class='data' style='border: solid 1px #aaa'>
+					<label for="key question <%= kq.question_number %>">
+						<%= render :inline=>remove_paragraph_tags(kq.question) %>
+					</label>
+					<% if !@available_questions.include?(kq.id)%>
+						<% if (@assigned_questions[kq.id] <=> @extraction_form.title) != 0 %>
+							<span style="color:#8F2224;">
+								previously assigned to: <em><%= @assigned_questions[kq.id] %></em>
+							</span>
+						<% end %>
+		    		<% end %>
+				</td>
+			</tr>
+			<tr class='small_spacer'><td colspan=2></td></tr>
+		<% end %>
+		</table>
+	</td>
+</tr>
+
+</table>
+<div class="saving">	  	  	
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+            <%= image_tag "Note_go.png", :alt => "Save and Continue" %>SAVE
+		</button>  
+</div>
+
+<br/><br/>
+
+<% end %>
+
+<div class="post-ef-nav" style="text-align:right;">
+    <%= link_to "Continue to Create your Extraction Form",
+                "/projects/#{@project.id}/extraction_forms/#{@extraction_form.id}/edit",
+                { id: "post-ef-nav-1",
+                  class: "form_link actions",
+                  style: "display:none;",
+                  title: "Edit Extraction Form",
+                  remote: false } %>
+    <%= link_to "Continue to Retrospectively Import Data",
+                "/projects/#{@project.id}/update_existing_data",
+                { id: "post-ef-nav-2",
+                  class: "form_link actions",
+                  style: "display:none;",
+                  title: "Update Existing Data",
+                  remote: true } %>
+</div>
+
+
+<script>
+$(".saving").on('click', function() {
+    $(".editable_field").removeClass("edited_field");
+    $(".unsaved_form").removeClass("unsaved_form");
+})
+
+// attach a listener to update a flag when the form is edited without being saved.
+$(".editable_field").on('change', function() {
+    $(this).addClass('edited_field');
+});
+
+
+</script>
+
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+// <!--
+$(document).ready(function(){
+	
+	var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+	// Default values...
+	myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+	myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+	myMenu.oneSmOnly = false;             // One expanded submenu at a time
+	myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+
+	myMenu.init();
+
+	// // SEPARATE FROM THE MENU ITSELF...
+	// create_tabs();
+	// $("#modal_div").dialog({
+	// 	autoOpen: false
+	// })
+	
+	// $("#add_keyquestion_box").dialog({
+ //        autoOpen: false,
+	// 	minWidth: 600
+ //    });
+
+	$("a.nav_active").first().addClass("nav-active");
+	$("a.nav_active").first().addClass("nav-selected");
+
+});
+// -->
+</script>

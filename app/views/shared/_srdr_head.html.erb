@@ -1,0 +1,62 @@
+<%
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+%>
+<!--################################################################ -->
+<!-- SRDR BANNER MARKUP                                              -->
+<!--#################################################################-->
+<div id="header" tabindex=29>
+    <!--<a name='srdr-head' class='accessibility' tabindex=29>SRDR Header Links</a> -->
+
+    <ul class='skip'>
+        <li><a href="#left-navigation-div" tabindex=30>Skip to SRDR Navigation</a></li>
+    </ul>
+
+    <img alt="" src='/images/homepage/top_corner_left.png' style='position:absolute; left:-25px;'/>
+    <img alt="" src='/images/homepage/top_corner_right.png' style='position:absolute; right:-26px;'/>
+
+    <a href="/home/index" style='position:absolute; left:0px; top:0px;' tabindex=31>
+        <img src="/images/homepage/top_header_left_TM.jpg" alt="SRDR: The Systematic Review Data Repository" title="SRDR: The Systematic Review Data Repository"  />
+    </a>
+
+    <img src="/images/homepage/top_header_right.png" style='position:absolute; right:0px;' alt='search the SRDR'>
+
+    <div id="search_bar" style='position: absolute; bottom:0px; right: 0px; width:270px; height:40px; padding:5px; padding-right:10px;'>
+
+        <%= render "search/form" %>
+    </div>
+
+    <div id="account-links" style='position: absolute; top: 10px; right: 15px;'>
+        <% unless current_user.nil? %>
+            Logged in as <%= current_user.login %> | 
+            <%= link_to "MySRDR","/projects", {:tabindex=>32, :class=>'form_link'} %> |
+            <a href='#' class='feedback_link form_link' tabindex=33>Feedback</a>
+            <%# link_to 'Feedback', url_for(:controller=>'home', :action=>'feedback'), {:tabindex=>33} %> |
+            <%= link_to "Help & Training", "/help", {:tabindex=>34, :class=>'form_link'}  %> |
+            <%= link_to "Contact Us", "/help?selected=6", {:tabindex=>35, :class=>'form_link'} %> |
+            <%= link_to "Citing SRDR", "/home/citing_srdr", {:tabindex=>35, :class=>'form_link'} %> |
+            <%= link_to "Usage Policies", "/home/policies", {:tabindex=>35, :class=>'form_link'} %> |
+            <%= link_to "Log Out", "/logout", {:tabindex=>36, :class=>'form_link'}  %>
+        <% else %>
+
+            <% if siteproperties.isSiteTypeProduction() %>
+                <a href='<%= siteproperties.getTrainingSiteURL() %>' target='_blank' class='form_link'>Try the SRDR Training Site</a> |
+            <% end %>
+
+            <%= link_to "Login", "/login", {:tabindex=>32, :class=>'form_link'}  %> |
+            <%= link_to "Register", "/register", {:tabindex=>33, :class=>'form_link'}  %> |
+            <a href='#' class='feedback_link' tabindex=34>Feedback</a> |
+            <%= link_to "Help & Training", "/help", {:tabindex=>35, :class=>'form_link'}  %> |
+            <%= link_to "Contact Us", "/help?selected=6", {:tabindex=>35, :class=>'form_link'} %> |
+            <%= link_to "Citing SRDR", "/home/citing_srdr", {:tabindex=>35, :class=>'form_link'} %> |
+            <%= link_to "Usage Policies", "/home/policies", {:tabindex=>36, :class=>'form_link'} %>
+        <% end %>
+    </div>
+
+</div>
+

@@ -1,0 +1,43 @@
+var item_array = [
+<% i = 1 %>
+<% if defined?(item_list) && !item_list.nil? %>
+<% item_list.each do |item| %>
+"<%= item[1].to_s %>"
+	<% if i != item_list.length %>
+	,
+	<% end %>	
+	<% i = i + 1 %>
+<% end  %>
+<% end %>
+];
+
+var item = "<%= item_to_match.to_s %>";
+
+if ((item == "") || (item_array.indexOf(item) != -1))
+{
+	// item is in the list, or blank (default)
+	// do nothing
+}
+else
+{
+	// item is an 'other' value, not in the list
+	// select 'other' in the list
+	input_elem.val("Other");
+	
+	// show custom text box
+	// call "select_other" ajax
+	$.ajax({
+		url: "/application/show_other",
+		data: {
+			"field_id":input_elem.attr("id"),
+			"field_name": input_elem.attr("name"), 
+			"selected":"Other"
+		}
+	});
+	
+	alert(item);
+	// fill custom text box with value
+	var field_id = input_elem.attr("id");
+	$("#" + field_id + "_input").val(item);
+	
+}

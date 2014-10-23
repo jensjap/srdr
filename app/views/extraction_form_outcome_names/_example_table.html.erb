@@ -1,0 +1,22 @@
+<table class="list_table" id="extraction_form_outcome_names_table" summary="extraction_form_outcome_names_table">
+	<tr>
+		<th>Title</th>
+		<th>Note</th>
+	</tr>
+	<% unless @saved_names.empty? %>
+		
+		<% i = 1 %>
+	  <% for oc_name in @saved_names%>
+	    <tr class='<%= cycle("even","odd") %>' id='<%= "name_row_" + i.to_s %>'>
+	    	<td><%= oc_name.title %></td>
+	    	<td><%= oc_name.note %></td>
+	    </tr>
+	    <% i = i+1 %>
+	  <% end %>
+		
+	<% else %>
+	  <tr>
+	  	<td colspan='3'>You may specify a list of outcome names for this project by using the form below.</td>
+	  </tr>
+	<% end %>
+</table>

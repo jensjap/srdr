@@ -1,0 +1,7 @@
+<% if @display == 'none' %>
+	$("#header").slideDown(300);
+	$("#full_screen_toggle").html("Full Screen Mode");
+<% else %>
+	$("#header").slideUp(300);
+	$("#full_screen_toggle").html("Exit Full Screen");
+<% end %>

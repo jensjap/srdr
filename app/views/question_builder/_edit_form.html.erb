@@ -1,0 +1,237 @@
+<div id="validation_message_<%= @model_name %>">
+<%# render "layouts/modal_info_messages" %>
+</div>
+	<div style='float:right;'><strong>Need assistance building your form?</strong><br/><a href='http://www.youtube.com/watch?v=CvRPv4XG6Rc&feature=youtu.be' class='needs_exit_disclaimer' target='_blank'>Click Here for a training video  <img alt='WARNING: this link will direct you away form our site.' src="/images/exit_disclaimer.gif"/></a> or <br/><%= link_to "Visit the 'Using Question Builder' section of our FAQ", "/help?selected=4#question_builder_faq", {:target=>"blank"} %></div><br/>
+	<br/>
+	<% if @has_study_data==true %>
+		<%= render :partial=>'has_data_warning' %>
+	<% end %>
+
+	<%# this form will call the update function for one of the database models %>
+	<%# depending on what type @question is. It could be a design detail, a baseline characteristic...%>
+
+	<%= form_tag "question_builder/update", :remote=>true do %>
+		<% @question_number = @question.question_number.to_s %>
+		<%= hidden_field_tag "page_name", @model_name %>
+		<%= hidden_field_tag "qid", @question.id %>
+		<%= hidden_field_tag "#{@model_name}[question_number]", @question.question_number, :id=>"#{@model_name}_question_number"  %>
+		<%# start question text %>
+		<% if defined?(@is_duplicate) %>
+		    <div style='font-size:14px;'><span style='font-weight: bold;'>NOTE:</span> You are now working on a new, duplicated copy of your question. Please make any desired changes and press the 'Save' button.</div><br/>
+		<% end %>
+		<table class='form_table tab-list-table'>
+			<tr>
+				<td class='label'>
+					<strong>Question text:</strong> 
+				</td>
+				<td class='input'>
+					<textarea id="<%= "#{@model_name}_question"%>" name="<%= "#{@model_name}[question]"%>" style='width:100%;' class='editable_field' title='question_text' value="<%= @question.question %>"><%= @question.question %></textarea>
+					<%# f.text_area :question, :rows=>4, :style => "width: 100%", :class=> "editable_field", :title => "question text"  %>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class='label'>
+					<strong>Instructions for Extractor (optional):</strong>
+				</td>
+				<td class='input'>
+					<textarea name='<%="#{@model_name}[instruction]"%>' id="<%= "#{@model_name}_instruction" %>" rows=4 style='width:100%;' class='editable_field' title='Instructions for Extractor' value='<%= @question.instruction %>'><%= @question.instruction %></textarea>
+					<%# f.text_area :instruction, :rows=>4, :style => "width: 100%", :class=>"editable_field", :title => "instructions for extractor" %>
+				</td>
+			</tr>
+			<!--<tr class='small-spacer'></tr>-->
+			<tr>
+				<td class='label'>
+					<strong>Field Type:</strong>
+				</td>
+				<td class='input'>
+
+					<% options = [["Text (user will enter their own value)","text"],["Dropdown Menu (choose from a dropdown list, with an 'Other' option)","select"],["Multiple Choice (Only One Answer Allowed)","radio"],["Multiple Choice (Select More Than One Answer)","checkbox"],["Matrix of Choices (Only One Answer Allowed)","matrix_radio"],["Matrix of Choices (Select More Than One Answer)","matrix_checkbox"],
+							["Matrix of Dropdowns (Specify options in each cell)","matrix_select"]] %>
+	
+					<%# show the available question types that the user can choose from%>
+					<div id="<%= 'q_'+@question.id.to_s+'_field_type_div'%>">
+						<% @question.field_type = 'radio' if @question.field_type == 'yesno'%>
+				  
+
+						<select name="<%= @model.to_s + '[field_type]' %>" id="<%='q_'+@question.id.to_s+'_field_type'%>" title="field type" <%#"disabled" if @has_study_data %>>
+							<%# if @has_study_data %>
+                                <!--<input type='hidden' name="<%= @model.to_s + '[field_type]' %>" id="<%='q_'+@question.id.to_s+'_field_type'%>" title="field type" value="<%= @question.field_type %>" />-->
+                            <%# end %>
+							<% chosen = @question.field_type %>
+							<% options.each do |option| %>
+								<% selected = chosen == option[1].to_s ? 'selected' : '' %>
+								<option value="<%= option[1].to_s %>" <%= selected %>><%= option[0].to_s %></option>
+							<% end %>
+						</select>
+					
+					</div>
+					<%# show the question choices that have been defined %>
+					<% unless @fields.empty? %>
+						<%# IF IT'S A MATRIX QUESTION THAT WE'RE DEALING WITH... %>
+						<% if @question.field_type.match("matrix_") %>
+							<%
+							type = @question.field_type.split("_")[1]
+							rows = @fields.select{|r| [0,nil].include?(r.column_number)}
+							columns = @fields.select{|c| ![0,nil].include?(c.column_number)}
+							columns.sort! {|a,b| a.column_number <=> b.column_number}
+							rows.sort! {|a,b| a.row_number <=> b.row_number}
+							%>
+
+							<% if type == 'select' %>
+								<%= render :partial=>'question_builder/matrix_questions/matrix_dropdowns_setup_form' %>
+							<% else %>
+								<div id='matrix_setup_<%= @model %>' matrix_type='<%= @question.field_type %>'>
+								<br/>
+								<label for='<%=@model%>_matrix_rows'>Enter row options, one per line:</label><br/>
+								<%# rows.collect{|r| r.option_text}.join(",") %>
+								<textarea name="<%=@model%>_matrix[rows]" id="<%=@model%>_matrix_rows" title='Enter row values, one per line.' rows=4><% rows.each do |r| %><% unless r.row_number < 0 %><%="#{r.option_text}\r\n"%><% end %><% end %></textarea>
+								<br/><br/>
+								<%# columns.collect{|c| c.option_text}.join(",") %>
+
+								<label for='<%=@model%>_matrix_columns'>Enter column options, one per line:</label><br/>
+								<textarea name="<%=@model%>_matrix[columns]" id="<%=@model%>_matrix_columns" title='Enter column values, one per line.' rows=4><% columns.each do |c| %><%="#{c.option_text}\r\n"%><% end %></textarea>
+								<br><br/>
+
+
+								<% checked = rows.select{|r| r.row_number < 0}.length > 0 ? "checked" : "" %>
+								<input type='checkbox' name="<%=@model%>_matrix[allow_other_row]" id="<%= @model %>_matrix_allow_other_row" title="Include a row named 'Other' for additional input" <%= checked %>/><label for='<%= @model %>_matrix_allow_other_row'>Include a row for 'Other'</label><br/><br/>
+								<!--<input type='checkbox' name="<%=@model%>_matrix[allow_other_column]" id="<%= @model %>_matrix_allow_other_column" title="Include a column named 'Other' for additional input"/><label for='<%= @model %>_matrix_allow_other_column'>Include a column for 'Other'</label>-->
+
+							<% end %>
+
+
+							</div><%# END the matrix_setup div %>
+						<%# IF IT'S NOT A MATRIX QUESITON AND IT HAS CHOICES THEN IT MUST BE ONE OF RADIO, CHECKBOX OR SELECT %>
+						<% else %>
+							<%# show the subquestion selection checkbox and text, if applicable %>	
+							<% has_question = false %>
+							<% subquestion_text = ""%>
+							<% @fields.each do |field| %>
+								<% if field.has_subquestion == true %>
+									<% has_question = true %>
+									<% subquestion_text = field.subquestion%>
+									<% break %>
+								<% end %>
+							<% end %> <%# end fields.each do |field| %>	
+					
+							<% i = 1%>
+							<div id="<%= 'q_'+@question_number+'_choices' %>">
+								<% @fields.each do |field| %>
+									<span id="<%= 'q_' + @question_number + '_row_' + i.to_s + '_div' %>" class='question_choice'>
+										Option: <%= text_field @model + "_choices", 'choice_' + i.to_s + '_field_' + field.id.to_s, :value=>field.option_text, :class=>'choice_input_field', :title => "question option"%>  
+										<% if has_question %>
+											<%= check_box_tag "gets_sub["+i.to_s+"]",i.to_s, field.has_subquestion, :class=>'sq_assignment_edit_cbox', :style=>"display:inline;", :title => "question option" %>
+										<% else %>
+											<%= check_box_tag "gets_sub["+i.to_s+"]",i.to_s, true, :class=>'sq_assignment_edit_cbox', :style=>"display:none;", :title => "option" %>
+										<% end %>
+										<% unless i == 1 %>
+											<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>i.to_s, :editing=>"true", :field_id=>field.id, :page_name=>@model, :qnum=>@question_number), :remote=>true, :class=>"delete_column_link", :confirm=>"By removing this choice, you will DELETE ALL DATA associated with it. Are you sure?" %>
+										<% end %>
+										<br/>
+									</span> 
+									<% i += 1%>
+								<% end %> <%# end fields.each do |field| %>
+							
+								<% @button_id = 'q_'+@question_number+'_choice_button'%>
+								<div class="actions" id="new_choice_button"><br/>
+							 		<%= link_to "Add Another Option","#", :id=>@button_id %>
+								</div>
+								<br/><br/>			
+								<%= check_box_tag "has_subquestion_#{@model}","yes", has_question, :title => "has subquestion" %> I would like to include a subquestion.
+								
+					  		<div id="sq_edit_text_div" style="<%= has_question ? "display:inline;" : "display:none;" %>"><br/><br/>
+					  			<strong>Sub-question:</strong><%= text_field_tag :subquestion_text, subquestion_text, :size=>"40", :title => "sub-question"%><br/>
+									<span class='smallText'>Use the check boxes to the right of each choice to specify 
+										whether or not to associate the subquestion with that choice.
+									</span>
+								</div>
+							</div>	
+						<% end %>
+					<% end %> <%# end unless fields.empty? %>
+				</td>
+			</tr>
+		</table>
+		<%# start submit button%>
+		<br clear='all'/><br/><br/><br/><br/>
+		<div class='popup-footer actions' style='float:right;' >
+			<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+				<%= image_tag "Add.png", :alt => "Add" %> Save Edits
+			</button>
+			<%= link_to image_tag('Cancel.png', :alt => "Cancel" ) + ' Cancel', "#", :id=>"cancel_#{@model_name}_editing_button_"+@question.id.to_s, :class=>'negative edit_link' %>
+		</div>	
+	
+	<% end %><%# end the form %>	
+	
+	<span id="qb_edit_marker"></span>
+	<script type='text/javascript'>
+	    <!--
+	    function qb_edit_form_init(){
+		  try{
+		    checkQBEditMarkerLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+			attachQBEditListener();
+		  } catch( err ) {
+		    setTimeout('qb_edit_form_init()', 200);
+		  }
+		}
+
+		function checkQBEditMarkerLoaded(){
+			if ( $('#qb_edit_marker').length == 0) $jquery.error( 'not ready' );
+		}
+
+		function attachQBEditListener(){
+
+		  var model = "<%= @model %>";
+		  var subq_checkbox = "#has_subquestion_<%=@model%>";
+		    $(subq_checkbox.toString()).unbind();
+			$(subq_checkbox.toString()).bind("change", function(){
+				if ($(this).attr("checked")){
+					$(".sq_assignment_edit_cbox").css("display","inline");
+					$("#sq_edit_text_div").css("display","inline");
+				}else{
+					$(".sq_assignment_edit_cbox").css("display","none");
+					$("#sq_edit_text_div").css("display","none");
+				}
+			});	
+			
+			$("<%= '#q_' + @question.id.to_s + '_field_type' %>").change(function(){
+			  $.ajax({
+					type: "POST",
+					url: 'question_builder/show_input_options_during_edit',
+					cache: false,
+					data:{
+						choices_div: "<%= '#q_'+@question_number+'_choices' %>",
+						selected: $(this).val(),
+						q_num: "<%= @question_number %>",
+						q_id: "<%= @question.id %>",
+						page_name: "<%= @model %>"
+					}
+				});
+			});		
+		    var cancel_button = "<%= '#cancel_'+@model_name+'_editing_button_' + @question.id.to_s %>";
+		    $(cancel_button).unbind();
+			$(cancel_button).bind("click",function(event){
+				event.preventDefault();
+				var dialog_id = "<%= '#' + @model_name + '_fields_entry' %>";
+				$(dialog_id).dialog('close');
+			});
+			
+			$("<%= '#' + @button_id.to_s %>").bind("click",function(event) {
+				var has_sub = $(subq_checkbox.toString()).attr("checked");
+				event.preventDefault();
+		  	$.ajax({
+		  		url: 'question_builder/add_choice',
+		  		data: {
+		  				previous_row: $("<%= '#' + @button_id.to_s %>").parent().prev().attr('id'), 
+		  		 		page_name: "<%= @model %>",
+		  		 		editing: "true",
+		  		 		has_sub: has_sub
+			 		}
+		  	});
+		  });
+		}
+		qb_edit_form_init();
+		//-->
+	</script>
+
+

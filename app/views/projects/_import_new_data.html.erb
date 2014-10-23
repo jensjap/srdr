@@ -1,0 +1,75 @@
+<h1> Project: <%= @project.title %> </h1>
+<br> <br> <br> <hr> <br>
+
+<h2>Import new data</h2>
+<div>Create new study records with data using an Excel spreadsheet.</div>
+
+<br>
+
+<div class="form-content">
+    <%= form_for :simport_upload, :url=>"/projects/#{params[:project_id]}/studies/simport", :html => {:multipart => true} do |f| %>
+        <%= hidden_field_tag :project_id, params[:project_id] %>
+        <%= hidden_field_tag :force_create, true %>
+
+        <div class="field">
+            <%= f.label :extraction_form_id, "Please choose which extraction form to import data into:" %><br>
+            <%= f.select :extraction_form_id, @ef_options_for_select %>
+        </div>
+
+        <br>
+
+        <div id="section" class="field hide">
+            <%= f.label :section, "Please choose which section to update:" %><br>
+            <%= f.select :section, @section_options_for_select, { prompt: "-- Please choose a Section --" } %>
+        </div>
+
+        <br>
+
+        <div id="file" class='field hide'>
+            <%= f.label :simport_file, "Please choose the file to upload:" %><br>
+            <%= f.file_field :simport_file %>
+        </div>
+
+        <div id="submit_button" class='actions hide'>
+            <button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" id="simport_button">
+                <%= image_tag "Note_go.png", :alt => "Create" %> Create
+            </button>
+        </div>
+    <% end %>
+</div>
+
+<%= javascript_tag do %>
+    $("div.hide").hide();
+
+    var sections = new Array();
+    <% for ef in @ef_options_for_select %>
+        <% ar_ef = ExtractionForm.find(ef[1]) %>
+        <% for section in ar_ef.section_options_for_select_simple_import %>
+            sections.push(new Array( <%= ef[1] %>, '<%=h section[0] %>', '<%=h section[1] %>' ));
+        <% end %>
+    <% end %>
+
+    function efSelected() {
+        var aryLength = sections.length;
+
+        ef_id = $("#simport_upload_extraction_form_id").val();
+        options = document.getElementById('simport_upload_section').options;
+        options.length = 1;
+        sections.forEach(function(section) {
+            if (section[0] == ef_id) {
+                options[options.length] = new Option(section[1], section[2]);
+            }
+        });
+    }
+
+    $("#simport_upload_extraction_form_id").change(function() {
+        efSelected();
+        $("div#section").show();
+    });
+    $("div#section").change(function() {
+        $("div#file").show();
+    });
+    $("div#file").change(function() {
+        $("div#submit_button").show();
+    });
+<% end %>

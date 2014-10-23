@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Ef:</b>
+  <%= @ef_instruction.ef_id %>
+</p>
+
+<p>
+  <b>Section:</b>
+  <%= @ef_instruction.section %>
+</p>
+
+<p>
+  <b>Data element:</b>
+  <%= @ef_instruction.data_element %>
+</p>
+
+<p>
+  <b>Instructions:</b>
+  <%= @ef_instruction.instructions %>
+</p>
+
+
+<%= link_to 'Edit', edit_ef_instruction_path(@ef_instruction) %> |
+<%= link_to 'Back', ef_instructions_path %>

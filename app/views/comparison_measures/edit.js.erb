@@ -1,0 +1,2 @@
+$("#measure_form_div").html("<%= escape_javascript(render :partial=>"comparison_measures/form", :locals => {:comparison_measure => @comparison_measure}) %>");
+$("#measure_form_div").dialog('open');

@@ -1,0 +1,19 @@
+<% status = "---" %>
+<center>
+<br/><br/>
+<hr width="100%" color="#cccccc">
+<br/><br/>
+	<div style='width:70%; background-color: #e4e4e4; padding: 10px; text-align: center; border: solid 1px gray;'>
+<% unless session[:completed_sections].keys.empty? %>
+  <% status = session[:completed_sections][section] %>
+  <% status = status.nil? ? "Incomplete" : status[0] == true ? "Complete" : "Incomplete" %>
+  	<strong>Section Status:</strong> <span id="<%= section %>_status" style='font-weight: bold !important; color: <%= status == 'Complete' ? 'green' : 'red' %>;'><%= status %></span>
+  
+<% else %>
+  	<strong>Section Status:</strong> <span id="<%= section %>_status" style='font-weight: bold; color: red;'>Incomplete</span>
+<% end %>
+<br/><br/>
+<button type="submit" class="positive toggle_section_button" id="toggle_<%= section %>_button" section="<%= section %>" alt="Click to toggle the selected section">Mark Section <%= status == "Complete" ? "Incomplete" : "Complete" %></button><br/>
+</div>
+</center><br/><br/>
+

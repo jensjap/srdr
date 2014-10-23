@@ -1,0 +1,14 @@
+if (!endsWith(window.location.href, "<%= project_extraction_forms_path(@project) %>"))
+{	
+	testToRedirect(window.location.href, "<%= project_extraction_forms_path(@project) %>");
+	$.ajax({
+		type: "POST",
+		url: "<%= edit_project_extraction_form_path(@project, @extraction_form) %>"
+	});
+}
+else
+{
+		$("#extraction_form_div").html("<%= escape_javascript(render :partial => "extraction_forms/extraction_form_tabs") %>");
+		$("#page_title").html("<%= escape_javascript(render :partial => "projects/page_title", :locals => {:in_ef=>true, :page_title => "Editing Extraction Form: " + @extraction_form.title}) %>");
+		$("#extraction_form_button_div").html("<%= escape_javascript(render :partial => "extraction_forms/extraction_form_buttons") %>");
+}

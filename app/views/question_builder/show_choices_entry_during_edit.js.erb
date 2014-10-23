@@ -1,0 +1,19 @@
+// determine if there are any matrix options that need to be removed.
+var field_id = "#matrix_setup_<%= @model %>";
+var n = $(field_id.toString()).length;
+if(n > 0){
+	$(field_id.toString()).remove();
+}
+
+n = $("<%= @button_id %>").length;
+
+if (n < 1)
+{
+	$("<%= @field_type_div %>").after("<%= escape_javascript(render :partial=>'question_builder/add_option_button_during_edit') %>");
+}
+else
+{
+	$("<%= @choices_div %> :input").removeAttr('disabled');
+	$("<%= @button_id %> :input").removeAttr('disabled');
+	$("<%= @choices_div %>").removeClass('disabled');
+}

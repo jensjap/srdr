@@ -1,0 +1,68 @@
+<div class='tab-div'>
+  <% unless @user_instructions.blank? %>
+    <div class='user_instruction'>
+      <strong>Note:</strong> <%= @user_instructions %>
+    </div>
+    <br/><br/>
+  <%  end %>
+  <br/>
+<%# THE EXISTING DIAGNOSTIC TESTS %>
+<div id="diagnostic_tests_table">
+  <!-- THE TABLES TO HOLD ALREADY-CREATED OBJECTS -->
+    <div id="index_test_div" style='padding-bottom:0;margin-bottom:0;'>
+        <%= render :partial=>"diagnostic_tests/table", :locals=>{:tests=>@index_test_list, :title=>"Index Tests"} %>
+    </div>
+    <button type="submit" class="positive" id="add_index_button" alt="Click to open the New Diagnostic Test dialog and add a new Index Test to the study", test_type=1>
+    <%= image_tag "Add.png", :alt => "Add" %>Add Index Test
+  </button><br/><br/>
+    <div id="reference_test_div" style='padding-top:0;margin-top:0;'>
+        <%= render :partial=>"diagnostic_tests/table", :locals=>{:tests=>@reference_test_list, :title=>"Reference Tests"} %>
+    </div>
+    <button type="submit" class="positive" id="add_reference_button" alt="Click to open the New Diagnostic Test dialog and add a new Reference Test to the study" test_type=2>
+    <%= image_tag "Add.png", :alt => "Add" %>Add Reference Test
+  </button><br/>
+</div>
+<br/>
+<%# THE INPUT FORM FOR A NEW DIAGNOSTIC TEST %>
+<div id="new_obj_modal">
+</div>
+
+<div class="actions">
+  
+    
+  
+
+  <div class="saved" id="saved_item_indicator" style='display:none;'>  
+    Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
+  </div>
+</div>    
+
+<br/><br/>
+<%= render :partial=>'section_complete_status', :locals=>{"section"=>"diagnostics"} %>
+<br/><br/>
+<% this_page = request.request_uri %>
+<% current = this_page.split("/").last %>
+<%# create_back_and_continue_for_study(params[:extraction_form_id], current )%>
+
+<%= render 'shared/make_editable_and_confirm' %>
+<script type="text/javascript">
+
+$("#new_obj_modal").dialog({
+    autoOpen: false,
+  minWidth: 600,
+  modal:true
+});
+$("#add_index_button, #add_reference_button").bind("click", function(){
+  $.ajax({
+    url: '/projects/<%= @project.id %>/studies/<%= @study.id %>/extraction_forms/<%= params[:extraction_form_id] %>/diagnostic_tests/new',
+    type: "POST",
+    data:({
+      test_type: $(this).attr('test_type')
+    })
+  });
+});
+$("#close_window_button").live("click",function(event){event.preventDefault();$("#new_obj_modal").dialog("close");}); 
+
+</script>
+
+</div><!-- end tab div -->

@@ -1,0 +1,135 @@
+<div class='tab-div'>
+	<br/>
+	<h2>Finalize Study Sections</h2>
+	<br/><br/>
+	Use the form below to indicate which sections of the extraction form have been completely filled out for this study.
+	<br/><br/>
+	<table class='classic-a'>
+		<tr>
+			<th>Section Name</th>
+			<th>Status</th>
+			<th>Finalized By</th>
+		</tr>
+		<% sections = ["questions","publications","arms","arm_details","diagnostics","design","baselines","outcomes","outcome_details","results","adverse","quality"] %>
+		<% map = {"Key Questions"=>"questions","Publications"=>"publications","Design"=>"design","Arms"=>"arms","Arm Details"=>"arm_details","Diagnostic Tests"=>"diagnostics","Baselines"=>"baselines","Outcomes"=>"outcomes","Outcome Details"=>"outcome_details","Results"=>"results","Adverse Events"=>"adverse","Quality"=>"quality"} %>
+		<% users = Hash.new() %>
+		<% map.keys.each do |key| %>
+			<% if @included_sections.include?(map[key]) || ["Key Questions","Publications"].include?(key) %>
+				<tr>
+					<td><%= key %></td>
+					<% complete_array = session[:completed_sections].empty? ? [false,"---"] : session[:completed_sections][map[key]].nil? ? [false,"---"] : session[:completed_sections][map[key]] %>
+					
+					<td id="<%= map[key].to_s %>_status">
+						<%= render :partial=>'studies/toggle_status', :locals=>{:status=>complete_array[0]} %>
+					</td>
+					<% user = "---" %>
+					<% if complete_array[1] != "---" %>
+						<% if !users.keys.include?(complete_array[1]) %>
+							<% u = User.find(:first, :conditions=>["id=?",complete_array[1]],:select=>["id","login"]) %>
+							<% users[complete_array[1]] = u.login unless u.nil? %>
+						<% end %>
+						<% user = users[complete_array[1]] %>
+					<% end %>
+					<td id="<%= "#{map[key]}_user"%>"><%= user %></td>
+				</tr>
+			<% end %>
+		<% end %>
+	</table>
+	<br/>
+	<br/>
+	I would like to toggle the status of the
+	<select class="editable_field" id='toggle_section_selector'>
+		<option value=''>Select a section...</option>
+		<option value='all'>- ALL Sections -</option>
+		<option value='questions'>Key Questions</option>
+		<option value='publications'>Publications</option>
+		<% map.keys.each do |key| %>
+			<% if @included_sections.include?(map[key]) %>
+				<option value="<%= map[key] %>"><%= key %></option>
+			<% end %>
+		<% end %> 
+	</select> 
+	<button type="submit" class="positive" id="toggle_section_link" alt="Click to toggle the selected section">Update</button>
+<br/><br/><br/>
+<hr width="100%" color="#cccccc">
+<br/><br/>
+<strong>NOTE</strong>
+(This note will be visible on the study list)
+<span style='font-size: 11px;'><%= @study_note.nil? ? "" : " -- Last Updated: #{@study_note.updated_at.strftime("%b %d, %Y %I:%M %p")}" %></span><br/>
+	<textarea class="editable_field" style='width:80%; height:100px;' id='study_status_note' study_id="<%= session[:study_id]%>" extraction_form_id="<%=session[:extraction_form_id]%>"><%= @study_note.nil? ? "" : @study_note.note %></textarea>
+	<br/>
+	<button id='save_note_button' class='positive' alt="Click to save the associated note.">Save This Note</button><br/><br/>
+	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:last=>true} %>
+	<span id="last_finalize_element"></span>
+</div><!-- end tab div -->
+
+<script type='text/javascript'>
+//<!--
+
+// Remove .edited_field and .unsaved_form classes from forms and fields that have been saved
+$(".positive").on('click', function(e){
+    $("#toggle_section_link").siblings("select").removeClass("edited_field");
+})
+
+function finalize_init() {
+  try{
+    checkFinalizeLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	loadFinalizeJS();
+  } catch( err ) {
+    setTimeout('finalize_init()', 200);
+  }
+}
+function checkFinalizeLoaded() {
+	if ( $('#last_finalize_element').length == 0) $jquery.error( 'not ready' );
+}	
+function loadFinalizeJS(){
+	// The button used to toggle complete/incomplete in the table
+	$("#toggle_section_link").die();
+	$("#toggle_section_link").live("click",function(event){
+		event.preventDefault();
+		section_name = $("#toggle_section_selector").val();
+		study_id = "<%= session[:study_id] %>";
+		extraction_form_id = "<%= session[:extraction_form_id] %>";
+		$.ajax({
+			type: 'POST',
+			url: "study/toggle_section_completion",
+			data:({
+				study_id: study_id,
+				extraction_form_id: extraction_form_id,
+				ef_section: section_name,
+				finalize_tab: true
+			}),
+			success: function(){
+				$("#waitingGIF").remove();
+			}
+		});
+		$(this).after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+	});
+
+	// button for saving the user note for the study
+	$("#save_note_button").unbind();
+	$("#save_note_button").bind("click",function(event){
+		event.preventDefault();
+		user_id = "<%= current_user.id %>";
+		value = $('#study_status_note').val();
+
+        $("#save_note_button").siblings("textarea").removeClass("edited_field");
+		$.ajax({
+			type: 'POST',
+			url: 'study/save_study_status_note',
+			data:({
+				study_id: "<%= session[:study_id] %>",
+				extraction_form_id: "<%= session[:extraction_form_id] %>",
+				user_id: "<%= current_user.id %>",
+				note: value
+			}), 
+			success: function(){
+				$("#waitingGIF").remove();
+			}
+		});
+		$(this).after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+	})
+}
+finalize_init();
+//-->
+</script>

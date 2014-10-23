@@ -1,0 +1,38 @@
+<%# stylesheet_link_tag "lists" %>
+<!--<div id='modal_div'>
+</div>
+-->
+
+<div id="reporttabs" style='margin-top: 0px;'>
+    <ul style="background-image:url(/images/tabs_fill.png); background-repeat: repeat-x;">
+        <li><a href="#mw-tabs-1">Latest</a></li>
+        <li><a href="#mw-tabs-2">Most Viewed</a></li>
+    </ul>
+    <div id="mw-tabs-1">
+        <% if @recent_reports.size() > 0 %>	
+            <div id='recent_list_div'>
+                <%= render :partial=>'recent_list' %>
+            </div>
+        <% else %>
+            There are no recent reports available at this time.
+        <% end %>
+    </div>
+    <div id="mw-tabs-2">
+        <% if @mostviewed_reports.size() > 0 %>
+            <div id='recent_list_div'>
+                <%= render :partial=>'mostviewed_list' %>
+            </div>
+        <% else %>
+            There are no recent reports available at this time.
+        <% end %>
+    </div>
+</div>
+
+<script>
+$(function() {
+	$("#reporttabs").tabs();
+});
+$(document).ready(function(){
+	$("#reporttabs").tabs();
+})
+</script>

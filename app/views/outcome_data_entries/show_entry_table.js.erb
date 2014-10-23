@@ -1,0 +1,5 @@
+<% unless @OCDEs.empty? %>
+	$("#form_div").html("<%= escape_javascript(render :partial=>"/outcome_data_entries/entry_table")%>");
+<% else %>
+  $("#entry_div").html("");
+<% end %>

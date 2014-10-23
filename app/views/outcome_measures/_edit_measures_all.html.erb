@@ -1,0 +1,38 @@
+<% unless @outcome_measures.empty? %>
+<h2>Measures defined for this outcome</h2>
+<div class="smallText">You may edit or delete these measures using the icons to the right. Note that deleting a measure may result
+in the loss of associated data!</div><br/>
+
+<table class="list_table" id="outcome_measures_edit_form" summary="outcome measures edit form">
+<tr>
+<th>Measure Name</th>
+<th>Measure Unit</th>
+<th>Notes</th>
+<th></th>
+</tr>
+
+<% @outcome_measures.each do |measure| %>
+<tr class="<%= cycle("odd", "even") %>">
+<td><%= measure.measure_name %></td>
+<td><%= measure.unit %></td>
+<td><%= measure.note %></td>
+<td width="50">
+		<%= link_to image_tag("Pencil.png"), "#", :id => "edit_measure_" + measure.id.to_s, :class => "edit_measure_btn tooltip_edit" %>
+		<%= link_to image_tag("Bin_closed.png"), outcome_measure_path(measure.id), :method => :delete, :remote => true, :id => "delete_measure_" + measure.id.to_s, :class => "delete_measure_btn tooltip_delete", :confirm => "Are you sure you want to remove this measure?" %>
+</td>
+</tr>
+
+<script type="text/javascript">
+$("a#edit_measure_<%= measure.id.to_s %>").unbind("click");
+$("a#edit_measure_<%= measure.id.to_s %>").bind("click", function(e){
+e.preventDefault();
+$("#new_outcome_measure_dialog").html("<%= escape_javascript(render :partial => "outcome_measures/item_form", :locals => {:outcome_measure => measure}) %>");
+$("#new_outcome_measure_dialog").dialog('open');
+});
+</script>
+
+<% end %>
+</table>
+<% else %>
+	There are currently no outcome measures specified. Use the button below to add a new measure.
+<% end %>

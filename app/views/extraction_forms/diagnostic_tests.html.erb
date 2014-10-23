@@ -1,0 +1,97 @@
+<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Suggest Diagnostic Tests"} %>
+
+<div class="extraction_form_options">
+    <strong>Please Note:</strong>
+    You may choose to pre-specify <strong>diagnostic test names</strong> for data extractors to use. Data extractors will also have the option to specify their own test names during individual study extraction, and
+    will also add threshold information for each defined test.
+    <br/><br/>
+
+    The <strong>diagnostic tests</strong> section is <strong>always included</strong> in the extraction form.
+<br/><br/>
+    <!-- INSTRUCTIONS SECTION -->
+    <div id="diagnostic_tests_user_instructions">
+        <%= render :partial=>"extraction_forms/instructions" %>
+    </div>
+   <a href='#' class="positive add_arm_ef_instr_<%# @extraction_form_section.id.to_s %> add_diagnostics_instr_button" id="add_diagnostics_instr_button" alt="Click to add user instructions">
+        Add/Edit Instructions
+    </a>
+
+</div>
+  
+<div id="extraction_form_diagnostic_tests">
+    <br/>
+    <!-- THE TABLES TO HOLD ALREADY-CREATED OBJECTS -->
+    <div id="index_test_div" style='padding-bottom:0;margin-bottom:0;'>
+        <%= render :partial=>"extraction_form_diagnostic_tests/test_table", :locals=>{:tests=>@index_test_list, :title=>"Index Tests"} %>
+    </div>
+    <div class='actions'>
+        <button class="positive add_arm_ef_<%# @extraction_form_section.id.to_s %> add_test_button" id="add_arm_button" alt="Click to open Add New Arm Form Dialog" test_type=1>
+            <%= image_tag "Add.png", :alt => "Add" %>Add Index Test
+        </button>
+    </div><br/>
+    <div id="reference_test_div" style='padding-top:0;margin-top:0;'>
+        <%= render :partial=>"extraction_form_diagnostic_tests/test_table", :locals=>{:tests=>@reference_test_list, :title=>"Reference Tests"} %>
+    </div>
+    <div class='actions'>
+        <button class="positive add_arm_ef_<%# @extraction_form_section.id.to_s %> add_test_button" id="add_arm_button" alt="Click to open Add New Arm Form Dialog" test_type=2>
+                    <%= image_tag "Add.png", :alt => "Add" %>Add Reference Test
+        </button>
+    </div>
+    <br/>
+    
+    
+    <!-- THE BUTTONS -->
+    <div class="actions">
+        <div class="saved" id="saved_indicator_arms" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+        <div class="saved" id="removed_indicator_arms" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+    </div>
+</div>
+<!-- THE FORM FOR CREATING NEW OBJECTS -->
+<div id = "new_test_modal">
+</div>
+
+
+<div id="new_diagnostic_tests_instr_entry">
+</div>
+
+<br/>
+
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"/extraction_forms/" + @extraction_form.id.to_s + "/edit_form",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/design",:previous_title=>"Key Questions",:next_title=>"Design Details"} %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+<script type="text/javascript">
+
+    $("#new_test_modal, #new_diagnostic_tests_instr_entry").dialog({
+        autoOpen: false,
+        minWidth: 600,
+        modal:true
+    });
+    $(".add_test_button").unbind();
+    $(".add_test_button").bind("click", function()
+    {
+    	$.ajax({
+    	  url: '/projects/<%= @extraction_form.project_id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_diagnostic_tests/new',
+    	  type: "POST",
+          data:({
+            test_type: $(this).attr("test_type")
+          }) 
+    	});
+    });
+    $("#add_diagnostic_instr_button").unbind();
+    $("#add_diagnostics_instr_button").bind("click", function(event)
+    {
+        event.preventDefault();
+    	$.ajax({
+    	  url: '/projects/<%= @extraction_form.project_id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_diagnostic_tests/new_instr',
+    	  type: "POST",
+          data:({
+              section: "DIAGNOSTIC_TESTS",
+              data_element: "GENERAL"
+          })
+    	});
+    });
+
+</script>
+
+

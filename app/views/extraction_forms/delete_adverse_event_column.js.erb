@@ -1,0 +1,37 @@
+var str = "<%= @has_study_data %>" ;
+var has_study_data = (str === 'true');
+if(has_study_data)
+	{
+		var message = "One or more studies have been created that use this data item. Removing this data item will remove the data for these studies as well. Are you sure you want to continue?";
+		var answer = confirm(message);
+		if (answer)
+		{
+			$.ajax({
+				url: '/adverse_event_columns/<%= @column.id %>/delete',
+				data: {
+					extraction_form_id: <%= @extraction_form.id %>,
+					project_id: <%= params[:project_id] %>,
+					adverse_event_column_id: <%= @column.id %>
+				}
+			});
+		}
+		}
+	else{
+	
+			var message = "Are you sure you want to delete this column?";
+			var answer = confirm(message);
+			if (answer)
+			{
+
+				$.ajax({
+					url: '/adverse_event_columns/<%= @column.id %>/delete',
+					data: {
+						extraction_form_id: <%= @extraction_form.id %>,
+						project_id: <%= params[:project_id] %>,					
+						adverse_event_column_id: <%= @column.id %>
+					}
+				});
+			
+			
+			}		
+	}

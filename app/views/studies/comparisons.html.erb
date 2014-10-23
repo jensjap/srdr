@@ -1,0 +1,102 @@
+<div id='left_column'><%= render :partial => "sidebars/study_edit" %></div>
+<div id='right_column'>
+<%= render :partial => "page_title", :locals => {:page_title => "Outcome Comparisons"} %>
+
+<%= hidden_field_tag "study_id", params[:study_id]%>
+<%= hidden_field_tag "extraction_form_id", params[:extraction_form_id]%>
+
+
+
+<% unless @outcomes.empty? || @arms.empty? %>
+<div class='container_div'>
+	
+	<%# the choose your outcome... dropdown%>
+	<strong>Step 1:</strong> <label for="Select the outcome involved in this comparison">Select the Outcome involved in this comparison</label> <%= select_tag "selected_outcome", options_for_select([["Choose an outcome...","0"]] + @outcomes.collect{|oc| [oc.title,oc.id]}), :id=>'outcome_selector', :tabindex => 1 %><br/>
+	<% if @saved_comparisons.empty? || @saved_comparisons.nil? %>
+		<% display = "display:none;" %>
+	<% else %>
+		<% display = "display:inline;"%>
+	<% end %>
+	<div id="view_modify_button_div" style="<%= display %>">
+		<p align="center"/>OR<br/>
+	
+		<button type='submit' class='positive' id='see_saved_comparisons'>
+			<%= image_tag "Add.png", :alt => "Add" %> View/Modify Saved Comparisons
+		</button><br/>
+	</div>
+
+	<div id='existing_comparison_modal' style='display:none;'>
+		<div id='saved_comparisons'>
+			<%= render 'comparison_data_points/saved_comparisons' %>
+		</div>
+	</div>
+
+	<%# the within or between? dropdown %>
+	<div id='within_or_between_div'>
+	</div>
+	
+	<%# the group selection (either arm or outcome timepoint)%>
+	<div id='group_selection_div'>
+	</div>
+	
+	<%# comparator selection div %>
+	<div id='comparator_selection_div'>
+	</div>
+
+	<%# start the comparison form%>
+	<div id="form_div">
+	</div>
+
+	<div id="modal_div">
+	</div>
+	<%# end comparison form%>
+	
+</div>
+<% else %>
+  Please define study 
+  <%= link_to 'outcomes','/projects/'+params[:project_id].to_s+'/studies/'+params[:study_id].to_s+'/outcomes' %>  
+  and 
+  <%= link_to 'arms','/projects/'+params[:project_id].to_s+'/studies/'+params[:study_id].to_s+'/arms' %>
+   before entering comparison information.
+<% end %>
+
+<br/>
+<% this_page = request.request_uri %>
+<% current = this_page.split("/").last %>
+<%= create_back_and_continue_for_study(params[:extraction_form_id], current )%>
+
+<%= render 'shared/make_editable_and_confirm' %>
+</div>
+<script type='text/javascript'>
+  $('#outcome_selector').bind('change',function(){
+  	var selected = $(this).val();
+  	if(selected == 0){
+  		$("#within_or_between_div").html("");
+  		$("#group_selection_div").html("");
+  	  $("#form_div").html("");
+  	  $("#modal_div").html("");
+  	  $("#comparator_selection_div").html("")
+  	}else{
+  		$("#within_or_between_div").html("<%= escape_javascript(render :partial=> 'comparison_data_points/within_or_between_selector') %>");
+  		$("#comparator_selection_div").html("");
+  		$("#group_selection_div").html("");
+  		$("#form_div").html("");
+  		$("#modal_div").html("");
+  	}
+  });
+  
+  $("#see_saved_comparisons").bind("click", function(event){
+		event.preventDefault();
+		$( "#existing_comparison_modal").dialog({
+			title: "View and Edit Existing Comparisons",
+			modal: true,
+			minHeight: 700,
+			minWidth: 700,
+			position: ['center','center'],
+			resizable: "true"
+		});
+		$("#existing_comparison_modal").dialog('open');
+		
+	});
+	
+</script>

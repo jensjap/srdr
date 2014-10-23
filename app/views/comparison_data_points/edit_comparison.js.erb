@@ -1,0 +1,40 @@
+$("#add_measure_modal").remove();
+$("#add_measure_button").unbind("click");
+
+<%# select the proper outcome %>
+$("#outcome_selector").val("<%= params[:outcome_id]%>");
+
+<%# FILL IN THE WITHIN_OR_BETWEEN SELECTION %>
+$("#within_or_between_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/within_or_between_selector")%>");
+
+<% if @type == "between" %>
+	$("#w_or_b_between").attr("checked","checked");
+<% else %>
+  $("#w_or_b_within").attr("checked","checked");
+<% end %>
+
+<%# FILL IN THE GROuP SELECTION %>
+$("#group_selection_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/group_selector")%>");
+
+$("#group_selector").val(<%= @group_id %>);
+
+<%# FILL IN THE COMPARATOR SELECTION %>
+<% if @type == "between" %>
+	<% partial = "comparison_data_points/arms_matrix" %>
+<% else %>
+	<% partial = "comparison_data_points/timepoints_matrix" %>
+<% end %>
+$("#comparator_selection_div").html("<%= escape_javascript(render :partial=>partial)%>");
+
+<%# FILL IN THE FORM %>
+<% if @type == "between" %>
+	<% partial = "comparison_data_points/between_arm_comparisons" %>
+<% else %>
+	<% partial = "comparison_data_points/within_arm_comparisons" %>
+<% end %>
+
+$("#modal_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/add_measure_modal")%>");
+$("#form_div").html("<%= escape_javascript(render :partial=>partial)%>");
+
+<%# CLOSE THE MODAL WINDOW %>
+$("#existing_comparison_modal").dialog("destroy");

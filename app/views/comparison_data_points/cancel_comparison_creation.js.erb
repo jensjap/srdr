@@ -1,0 +1,9 @@
+$("#form_div").html("");
+$("#modal_div").html("");
+$("<%= @td_id %>").attr("style","background-color:#fff;");
+$("<%= @td_id %>").html("<%= render :inline=>"<span class='in_matrix_text'>" + @removed_comp_title + "</span>" %>");
+<% if @saved_comparisons.length > 0 %>
+	$("#saved_comparisons").html("<%= escape_javascript(render :partial=>"comparison_data_points/saved_comparisons")%>");
+<% else %>
+	$("#view_modify_button_div").css("display","none");
+<% end %>

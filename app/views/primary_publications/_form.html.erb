@@ -1,0 +1,251 @@
+<% form_tag url_for(:controller=>'primary_publications',:action=>'get_pubmed_data'),:remote=>true do %>
+	<div class="form_content container_div">
+		<span class='smallText'>Enter a PubMed ID and press 'Retrieve' to 
+			automatically populate the primary publication form.</span>
+			<br/>
+
+		<label class="inline-label" for="Pubmed ID"><strong>PubMed ID:</strong> </label><%= text_field_tag :pmid, @primary_publication.nil? ? "" : @primary_publication.pmid, :class => "inline-field editable_field" %>&nbsp;&nbsp;
+		<button type="submit" class="actions" data-disable-with="<%= ajax_wait_msg %>"><%= image_tag "Silk_arrow_right.png", :alt => "Retrieve"  %> 
+			Retrieve
+		</button>
+			
+		<div class='comments_div'>
+		<%= render :partial => "comments/field_comments", :locals => {:section_name => "primarypublications", :section_id => @primary_publication.id, :field_name => "title", :study_id => @primary_publication.study_id, :project_id => @project.id} %>	
+        </div>
+
+					
+	</div>
+
+<% end %>
+
+<div class="form_content container_div">
+<%= nested_form_for @primary_publication, :remote=>true do |f| %>
+	<br/>
+<!-- START FORM CONTENT DIV -->
+
+	<%= f.hidden_field "study_id", :value => params[:study_id] %>
+	<%= f.hidden_field :pmid, :value=>@primary_publication.pmid, :id=>'primary_pmid' %>
+		
+<table class="form_table tab-list-table ppiform_table" id="primary_pubs_form_table" summary="primary publications form table">
+
+<tr class="field">
+<td class="label">	    
+	    <label for="Trial Title">
+			Trial Title:
+		  </label>
+</td><td class='input'>
+			<%= f.text_area :trial_title, :rows=>2,:cols=>50,:id=>'primary_trial_title', :class => "editable_field", :trial_title => "trial_title"  %>
+</td>
+
+</tr>
+<tr class="field">
+<td class="label">	    
+	    <label for="Publication Title">
+			Publication Title:
+		  </label>
+</td><td class='input'>
+			<%= f.text_area :title, :rows=>2,:cols=>50,:id=>'primary_title', :class => "editable_field", :title => "title"  %>
+</td>
+
+</tr>
+<tr class="field">
+<td class="label">	   
+      <label for="Author">
+			Author(s):
+			</label>
+</td><td class='input'>
+	    <%= f.text_area :author, :rows=>1, :cols=>50, :id=>'primary_author', :class => "editable_field", :title => "author"  %>
+	  </div>
+ </td></tr>
+ <tr class="field">
+<td class="label">	   
+      <label for="Affiliation">
+			Affiliation:
+			</label>
+</td><td class='input'>
+    	<%= f.text_area :country, :rows=>1,:cols=>50, :id=>'primary_country', :class => "editable_field", :title => "country" %>
+ </td></tr>
+ <tr class="field">
+<td class="label">
+			<label for="Journal"> Journal:</label> 
+			</td><td class='input'>
+			<%= f.text_area :journal, :rows=>1, :cols=>50, :id=>'primary_journal',:class=>"editable_field" , :title => "journal" %>
+ </td></tr>
+ <tr class="field">
+<td class="label">
+			<label for="Year">Year:</label>
+			</td><td class='input'>
+			<%= f.text_field :year, :id=>'primary_year', :size=>"3", :class => "editable_field", :title => "year" %>
+ </td></tr>
+ <tr class="field">
+<td class="label">	   
+			<label for="Volume">Volume:</label></td><td class='input'>
+			<%= f.text_field :volume, :id=>"primary_volume", :class=>"editable_field",:style=>"width:70px;", :title => "volume" %>
+ </td></tr>
+ <tr class="field">
+<td class="label">	   
+			<label for="Issue">Issue:</label></td><td class='input'>
+			<%= f.text_field :issue, :id=>"primary_issue",:class=>"editable_field",:style=>"width:70px;", :title => "issue" %>
+ </td></tr>
+ <tr class='field'>
+ 	<td class='label'><label for="Abstract">Abstract:</label></td>
+ 	<td>
+ 		<%= f.text_area :abstract, :id=>"primary_abstract",:class=>"editable_field",:title=>"abstract", :style=>'width:80%;',:rows=>10 %>
+ 	</td>
+ </tr>
+ <tr><td colspan=2>
+	 	
+	<strong>Identifiers:</strong>
+	<br/><br/>
+    <%= render "primary_publications/alternate_identifiers" %>
+    <br/><br/>
+</div>
+
+</td></tr>
+</table><br/><br/>
+<button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Save
+</button>
+<div class="saved" id="saved_indicator_1" style='display:none;'>Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+<br/><br/>
+<div class='hr'></div><br/><br/>
+
+	
+<!-- END FORM CONTENT DIV -->
+<% end %>
+</div>
+
+<script type="text/javascript">
+// update the hidden pubmed id value whenever the user changes the input box.
+$("#pmid").bind("keyup",function(event){	
+	$("#primary_pmid").val($(this).val());
+});
+
+$(".add_ppi_button").bind("click", function(event)
+{
+	event.preventDefault();
+	$.ajax({
+	  url: 'primary_publication_numbers/new',
+	  type: "POST",
+	  data: { primary_publication: <%= @primary_publication.id.nil? ?  -1 : @primary_publication.id.to_s %>}
+	});
+});
+
+$(".remove_ppi_button").bind("click", function(event)
+{
+	event.preventDefault();
+	var id = $(this).attr('id');
+	var id_split = id.split("_");
+	var id_num = id_split[3];
+	$.ajax({
+	  url: 'primary_publication_numbers/destroy',
+	  type: "POST",
+	  data: { id: id_num,
+	  primary_publication: <%= @primary_publication.id.nil? ?  -1 : @primary_publication.id.to_s %>}
+	});
+});
+
+
+$("#pp_identifier_list_blocks .form_table .number_field").each(function(index)
+{
+	var the_id = $(this).attr('id');
+	var split_id = the_id.split("_");
+	var num = parseInt(split_id[1]);
+	$(this).attr('id', 'primary_publication_numbers_attributes_' + (num).toString() + "_number");
+	$(this).attr('name', 'primary_publication_numbers_attributes[' + (num).toString() + "][number]");
+});
+
+
+$(".number_type_field").each(function(index)
+{
+	var the_id = $(this).attr('id');
+	var split_id = the_id.split("_");
+	var num = parseInt(split_id[2]);
+	$(this).bind("change", function(event) {
+	$.ajax({	
+		url: "/application/show_other",
+		data: {
+			"field_id":$(this).attr('id'),
+			"field_name":$(this).attr('name'),
+			"selected":$(this).val()
+			}
+	});
+	});	
+	$(this).attr('id', 'primary_publication_numbers_attributes_' + (num).toString() + "_number_type");
+	$(this).attr('name', 'primary_publication_numbers_attributes[' + (num).toString() + "][number_type]");
+});
+
+
+$("#pp_identifier_list_blocks .form_table .id_field").each(function(index)
+{
+	var the_id = $(this).attr('id');
+	var split_id = the_id.split("_");
+	var num = parseInt(split_id[1]);
+
+	$(this).attr('id', 'primary_publication_numbers_attributes_' + (num).toString() + "_id");
+	$(this).attr('name', 'primary_publication_numbers_attributes[' + (num).toString() + "][id]");
+});
+
+
+
+  
+</script>
+
+<script type="text/javascript">
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });
+</script>

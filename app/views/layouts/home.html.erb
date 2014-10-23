@@ -1,0 +1,165 @@
+<html lang='en'>
+
+<head>
+<%= csrf_meta_tag %>
+    <meta charset="UTF-8">
+    <!DOCTYPE html>
+    <title>SRDR - Systematic Review Data Repository</title>
+    <%= stylesheet_link_tag "redesign", "jquery-ui-1.8.12.custom", :media => "screen, print" %>
+    <%= stylesheet_link_tag "pagination_styles", "jquery.qtip", "ahrqstyle_new", :media => "screen" %>
+    <%= javascript_include_tag 'jquery.min', 'jquery-ui-1.8.12.custom', 'rails', 'application' %>
+    <%= javascript_include_tag 'form_complete', 'nested_form', 'jquery.printelement.min', 'jquery.qtip.min', 'comments_dropdown' %>
+    <%= favicon_link_tag "favicon.ico" %>
+</head>
+
+<body>
+    <noscript>Your web browser does not support Javascript, or you have it turned off. Please turn on Javascript or use a Javascript-compatible web browser to take advantage of the full functionality of SRDR.</noscript> 
+    <div id="page-wrap">
+        <!--################################################################ -->
+        <!-- THE AHRQ BANNER MARKUP                                          -->
+        <!--#################################################################-->
+        <div id="ahrqbanner">
+            <div class="hhsportion">
+                <a class="skipnav" href="#main_content">Skip Navigation</a>
+                <a href="http://www.hhs.gov/" title="U.S. Department of Health and Human Services">
+                    <%= image_tag "ahrq/hhs_banner.gif", :alt=>"U.S. Department of Health and Human Services" %>
+                </a>
+                <a href="http://www.hhs.gov/" title="www.hhs.gov/" class="hhsright">
+                    <%= image_tag "ahrq/hhs_link.gif", :alt=>"www.hhs.gov/" %>
+                </a>
+            </div>
+
+            <div class="ahrqportion">
+                <a href="http://www.ahrq.gov/" title="Agency for Healthcare Research Quality">
+                    <%= image_tag "ahrq/ahrq_banner.gif", :alt=>"Agency for Healthcare Research Quality"%>
+                </a>
+                <form name="searchForm" method="get" action="http://search.ahrq.gov/search" id="banner_searchform">
+                    <label for="search" style="z-index:-1;position:relative;margin-right:-65px; font-size:0px;">Search</label>
+                    <input name="q" type="text" value=" Search AHRQ" size="11" onfocus="this.value='';" class="gotext" id="search" title="ahrq search" />
+                    <input type="hidden" name="entqr" value="0" />
+                    <input type="hidden" name="output" value="xml_no_dtd" />
+                    <input type="hidden" name="proxystylesheet" value="AHRQ_GOV" />
+                    <input type="hidden" name="client" value="AHRQ_GOV" />
+                    <input type="hidden" name="site" value="default_collection" />
+                    <input src="/images/ahrq/topbn_gobutton.gif" class="gobtn" name="Submit" onclick="javascript:document.searchForm.submit();" type="image" alt="Go" />                    
+                </form>
+                <a href="/" class="ahrqright">www.ahrq.gov</a>
+        </div>
+
+        <div class="ahrqlinks">
+            <a href="/">AHRQ Home</a> |
+            <a href="https://info.ahrq.gov/cgi-bin/ahrq.cfg/php/enduser/std_alp.php">Questions?</a> |
+            <a href="http://www.ahrq.gov/info/customer.htm">Contact Us</a> |
+            <a href="http://www.ahrq.gov/sitemap.htm">Site Map</a> |
+            <a href="http://www.ahrq.gov/whatsnew.htm">What's New</a> |
+            <a href="/browse/">Browse</a> |
+            <a href="http://www.ahrq.gov/consumer/espanoix.htm">Información en español</a> |
+            <%= image_tag "ahrq/envelope1.jpg", :alt=>"", :style => "padding-left: 4px; padding-right: 3px; padding-bottom: 4px; vertical-align:middle" %>
+            <a href="https://subscriptions.ahrq.gov/service/multi_subscribe.html?code=USAHRQ">
+                E-mail Updates
+            </a>
+        </div>
+
+        <div id="PrintBanner">
+            <%= image_tag "ahrq/PrintBanner.gif", :alt=>"www.ahrq.gov/", :width=>"100%" %>
+        </div>
+
+        <br/>
+
+        <div id="inside">
+            <!--################################################################ -->
+            <!-- SRDR BANNER MARKUP                                              -->
+            <!--#################################################################-->
+            <div id="header">
+                <img alt="" src='images/homepage/top_corner_left.png' style='position:absolute; left:-26px;'/>
+                <img alt="" src='images/homepage/top_corner_right.png' style='position:absolute; right:-26px;'/>
+
+                <a href="#" style='position:absolute; left:0px; top:0px;'>
+                    <img src="images/homepage/top_header_left.png" alt="SRDR Systematic Review Data Repository"  />
+                </a>
+                <img alt="" src="images/homepage/top_header_right2.png" style='position:absolute; right:0px;'s>
+                <div id="account-links" style='position: absolute; top: 10px; right: 15px;'>
+                    Logged in as admin |
+                    <a href="#">Log Out</a> |
+                    <a href="#">Register</a> |
+                    <a href="#">Feedback</a> |
+                    <a href="#">Help</a>
+                </div>
+
+            </div>
+            <!--################################################################ -->
+            <!-- THE MAIN LINKS BAR                                              -->
+            <!--#################################################################-->
+            <div id="horizontal-nav">
+                <ul>
+                    <li><a href="#" id='current'>Home</a></li>
+                    <li><a href="#">My Projects</a></li>
+                    <li><a href="#">Published Projects</a></li>
+                </ul>
+                <a href='/adv_search' style='position:absolute; right:15px; top: 5px;'>Advanced Search</a>
+            </div>
+            <!--################################################################ -->
+            <!-- THE BREADCRUMBS BAR                                             -->
+            <!--#################################################################-->
+            <!--
+            <div id="breadcrumbs">
+                <%= render :partial=>"shared/breadcrumbs" %>
+            </div>
+            -->
+            <!--################################################################ -->
+            <!-- THE HOMEPAGE COLLAGE AND LOGIN SECTION                          -->
+            <!--#################################################################-->
+
+            <div id="homepage-collage-div">
+                <img alt="Welcome to the SRDR" src="images/homepage/hero_txt_welcome.gif" width=359 height=69 style='position:absolute; top:20px; left:20px;z-index:100'/>
+                <img alt="Welcome to the SRDR" src="images/homepage/homepage_collage.jpg" style="position:absolute;right:0px;top:0px;height:100%;z-index:99"/>
+                <div id="welcome-text" >
+                    The Systematic Review Data Repository (SRDR) is a powerful and easy-to-use tool for the extraction and management of data for systematic review or meta-analysis. It is also an open and searchable archive of systematic reviews and their data.
+                </div>
+                <div id='login-window'>
+                    <div id='login-div'>
+                        For access to additional features, simply register for an account.<br/><br/><br/>
+                        <div id='login_form_div'>
+                            Registered users, log in below:<br/><br/>
+                            <input type='text' name='username' style='width:90%' value='Username'/><br/><br/>
+                            <input type='text' name='username' style='width:90%' value='Password'/>
+                            <br/><br/>
+                            <button type='submit'>Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <a href='#' style='position:absolute; bottom:10px; right:10px;'>Forgot Password?</a>
+            </div>
+
+            <!--################################################################ -->
+            <!-- THE HOMEPAGE CONTENT SECTION                                    -->
+            <!--#################################################################-->
+            <div id='home-content'>
+                <%= yield %>
+            </div><br/>
+            <div style="clear: both;"></div>
+
+            <div id="footer">
+                <!-- Footer graphic 1.3-->
+                <div id="ftrimgs">
+                    <span><%= image_tag "ahrq/bottom_ahrq_1.jpg", {:class=>"ftrimglft", :width=>125, :alt=>"AHRQ"} %><%= image_tag "ahrq/space.gif", {:class=>"ftrimgctr", :alt=>""} %><%= image_tag "ahrq/bottom_ahrq_2.gif", {:class=>"ftrimgrt", :alt=>"Advancing Excellence in Health Care", :width=>310, :height=>34} %></span>
+                </div>
+                <!-- Footer links section -->
+                <div id="banner_Footer3"><p> <a href="/">AHRQ  Home</a> | <a href="https://info.ahrq.gov/cgi-bin/ahrq.cfg/php/enduser/std_alp.php" class="footer_navlink">Questions?</a> | <a href="http://www.ahrq.gov/info/customer.htm" class="footer_navlink">Contact AHRQ</a> | <a href="http://www.ahrq.gov/sitemap.htm" class="footer_navlink">Site Map</a> | <a href="http://www.ahrq.gov/accessibility.htm" class="footer_navlink">Accessibility</a> | <a href="http://www.ahrq.gov/news/privacy.htm" class="footer_navlink">Privacy
+                 Policy</a> | <a href="http://www.ahrq.gov/news/foia.htm" class="footer_navlink">Freedom of Information Act</a> | <a href="http://www.ahrq.gov/news/disclaim.htm" class="footer_navlink">Disclaimers</a> | <a href="http://www.hhs.gov/open/recordsandreports/plainwritingact/index.html"  class="footer_navlink">Plain Writing Act</a> <br />
+
+                 <a href="http://www.hhs.gov/" class="footer_navlink">U.S. Department of Health &amp; Human Services</a> | <a href="http://www.whitehouse.gov/" class="footer_navlink">The White House</a> | <a href="http://www.usa.gov/" class="footer_navlink">USA.gov: The U.S. Government's Official Web Portal</a></p>
+                </div>
+                <div id="banner_Footeraddress"><p>Agency for Healthcare Research and Quality <%= image_tag "ahrq/bottom_dot.gif", {:alt=>""} %> 540 Gaither Road Rockville, MD 20850 <%= image_tag "ahrq/bottom_dot.gif", {:alt=>""} %> Telephone: (301) 427-1364</p></div>
+                        <br/>
+                  </div></div>
+                <!-- End of Footer links section -->
+            </div>
+
+        </div>
+
+        <div style="clear: both;"></div>
+
+    </div>
+</body>
+</html>

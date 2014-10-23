@@ -1,0 +1,266 @@
+<%= stylesheet_link_tag "lists" %>
+<% if defined?(current_user) && !current_user.nil? %>
+	<div class="actions centered">
+	<button class="toggle_comment_form_btn toggle_comment_form_btn1">
+		<%= image_tag("Comment.png", :style=>"border-style:none;vertical-align:top;", :alt => "Add Comment", :title => "add comment") %> Post a Comment
+	</button>
+	<button class="toggle_flag_form_btn toggle_flag_form_btn1">
+		<%= image_tag("Flag_red.png", :style=>"border-style:none;vertical-align:top;", :alt => "Flag Item", :title => "flag item") %> Flag This Data Item
+	</button>	
+    <% if current_user.user_type == "public" %>
+    <p/><br/>
+    <strong>Note:</strong> Public comments you submit are held for review prior to posting on this website.<br/><br/>
+    <% end %>
+	</div>
+<% else %>
+	<div class="actions centered">
+		<br/>
+		Please log in to post a new comment or reply.
+	</div>
+<% end %>
+<br/>
+
+<div class="comments_sorting">
+	<%= render "comments/sort_menu", :current_sorting_order => @current_sorting_order, :section_id => @section_id, :section_name => @section_name, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id %>
+</div>
+<br/><br/>
+
+
+<% if defined?(comments) && comments.length > 0 %>
+<% if User.current_user_is_collaborator(@project_id, current_user) || User.current_user_is_admin(@project_id, current_user) %>
+<table width="100%">
+    <tr>
+        <td align="LEFT" nowrap="nowrap">
+        <h1>Public Comments</h1>&nbsp;
+        </td>
+        <td bgcolor="#0d2f86" width="70%">
+        &nbsp;
+        </td>
+    </tr>
+</table>
+<% end %>
+<% if Comment.get_number_of_public_comments(@section_name, @section_id, @field_name, @study_id, @project_id) == 0 %>
+<div class="centered">There are no public comments for this section.</div>
+<% else %>
+<% comments.each do |comment| %>
+<%= render :partial => "comments/comment_entry", :locals => {:is_public => true, :comment => comment} %>
+<% end %>
+<% end %>
+
+<% if User.current_user_is_collaborator(@project_id, current_user) || User.current_user_is_admin(@project_id, current_user) %>
+
+<br/><br/>
+<table width="100%">
+    <tr>
+        <td align="LEFT" nowrap="nowrap">
+        <h1>Private Comments</h1>&nbsp;
+        </td>
+        <td bgcolor="#0d2f86" width="70%">
+        &nbsp;
+        </td>
+    </tr>
+</table>
+
+<% comments.each do |comment| %>
+<%= render :partial => "comments/comment_entry", :locals => {:is_public => false, :comment => comment} %>
+<% end %>
+
+<% if Comment.get_number_of_private_comments(@section_name, @section_id, @field_name, @study_id, @project_id) == 0 %>
+There are no public comments for this section.
+<% end %>
+
+<% end # end user is admin%>
+
+
+	
+	
+<% else %>
+  <div class="centered">There are no comments for this section.</div>
+<% end # end defined comments %>
+
+<br/><br/>
+<%= render 'shared/creative_commons_note' %>
+<br/><br/>
+
+<div class="actions centered">
+	<button class="negative close_comment_window_btn">
+		<%= image_tag "Cancel.png", :alt => "Cancel"  %> Close Window
+	</button>		
+</div>
+
+
+<script type="text/javascript">
+
+ $(".toggle_comment_form_btn").qtip({
+		id: "comment_form_tooltip",
+         overwrite: false, 
+         content: {
+			title: {
+                  text: 'Post a New Comment',
+                  button: true
+			},	
+			text: 'Loading...',
+			ajax: {
+				url: 'get_comment_form', 
+				type: 'POST',
+				data: {
+					section_name: "<%= @section_name.to_s %>",
+					section_id: "<%= @section_id.to_s %>",
+					field_name: "<%= @field_name.to_s %>",
+					study_id: "<%= @study_id.to_s %>",
+					project_id: "<%= @project_id.to_s %>"
+				}		
+			}					
+         },
+         show: {
+            event: "click"
+         },
+		 position: { 
+		 target: $(this),
+		 my: 'center center', at: 'center center',
+		 viewport: true
+		 },
+         hide: {
+            delay: 100,
+			event: false,
+            fixed: true,
+			target: $('.ui-tooltip .close_comment_form_btn')						
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light',
+            tip: false,
+			width: '500'
+         }
+});  
+
+$(".toggle_flag_form_btn").qtip({
+		id: "flag_form_tooltip",
+         overwrite: false, 
+         content: {
+			title: {
+                  text: 'Flag This Item',
+                  button: true
+			},	
+			text: 'Loading...',
+			ajax: {
+				url: 'get_flag_form', 
+				type: 'POST',
+				data: {
+					section_name: "<%= @section_name.to_s %>",
+					section_id: "<%= @section_id.to_s %>",
+					field_name: "<%= @field_name.to_s %>",
+					study_id: "<%= @study_id.to_s %>",
+					project_id: "<%= @project_id.to_s %>"
+				}
+			}					
+         },
+         show: {
+            event: "click"
+         },
+		 position: { 
+		 target: $(this),
+		 my: 'center center', at: 'center center',
+		 viewport: true 
+		 },
+         hide: {
+            delay: 100,
+			event: false,
+            fixed: true,
+			target: $('.ui-tooltip .close_comment_form_btn')			
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light',
+            tip: false,
+			width: '500'
+         }
+});  
+
+$('.close_comment_window_btn').bind("click", function(){
+$('.qtip').qtip('hide');
+});
+
+
+// show or hide multiple comment replies
+	$(".show_reply_icon").bind("click", function(e){
+		e.preventDefault();
+		this_id = $(this).attr('id').split("_");
+		note_id = this_id[3];
+		$("#comment_" + note_id + "_replies").toggle();
+		if ($("#comment_" + note_id + "_replies").is(":visible"))
+		{
+			$(this).html($(this).html().replace("Show", "Hide"));
+			$(this).html($(this).html().replace("add", "delete"));					
+		}
+		else
+		{
+			$(this).html($(this).html().replace("Hide", "Show"));
+			$(this).html($(this).html().replace("delete", "add"));		
+		}
+	});
+
+
+	// add click functionality to the comment deletion button
+	$(".del_icon").bind("click", function(event){
+		event.preventDefault();
+		if (confirm("Are you sure you want to permanently delete this comment and all of its replies?"))
+		{		
+		$.ajax({
+			url:"delete_comment",
+			type: "POST",
+			data:{
+				section_name: "<%= @section_name.to_s %>",
+				section_id: "<%= @section_id.to_s %>",
+				field_name: "<%= @field_name.to_s %>",
+				study_id: "<%= @study_id.to_s %>",
+				project_id: "<%= @project_id.to_s %>",
+				div_id: $(this).attr('id')
+			}
+		})		
+		}
+	});
+
+	// add click functionality to the email-to-comment button
+	$('.reply_icon').bind("click", function(event){
+		event.preventDefault();
+		$.ajax({
+			url:"show_reply_form",
+			type: "POST",
+			data:{
+				section_name: "<%= @section_name.to_s %>",
+				section_id: "<%= @section_id.to_s %>",
+				field_name: "<%= @field_name.to_s %>",
+				study_id: "<%= @study_id.to_s %>",
+				project_id: "<%= @project_id.to_s %>",
+				div_id: $(this).attr('id')
+			}
+		})
+	});
+
+	// add click functionality to the email-to-comment button
+	$('.email_icon').bind("click", function(event){
+		event.preventDefault();
+		$.ajax({
+			url:"comments/email_user",
+			type: "POST",
+			data:{
+				comment_id:$(this).attr("comment_id")
+			}
+		})
+	});	
+
+	// add click functionality to the reply-to-comment button
+	$('.del_reply_icon').bind("click", function(event){
+		event.preventDefault();
+		if (confirm("Are you sure you want to permanently delete this reply?"))
+		{
+			$.ajax({
+				url:"comments/remove_reply",
+				type: "POST",
+				data:{
+					reply_id:$(this).attr("reply_id")
+				}
+			})
+		}
+	});
+
+</script>

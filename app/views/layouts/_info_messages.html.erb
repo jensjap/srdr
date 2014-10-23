@@ -1,0 +1,25 @@
+<!-- Keys: error, success, notice
+     Images are in public/images. I've created symlinks to the filenames as not to break any old image tags -->
+
+<%# flash.each do |key, value| %>
+    <%# value = image_tag("#{key}.png", style: "border-style:none; vertical-align:top;", alt: "#{key}") + ' ' + key + value %>
+    <%#= content_tag(:div, value, class: "alert alert-#{key}") %>
+<%# end %>
+
+<div class="info-messages">
+    <ul>
+        <% flash.each do |key, messages| %>
+            <% if messages.is_a?(String) %>
+                <% value = image_tag("#{key}.png", style: "border-style:none; vertical-align:top;", alt: "#{key}") + ' ' + messages.to_s %>
+                <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+            <% elsif messages.is_a?(Array) %>
+                <% messages.each do |m| %>
+                    <li>
+                        <% value = image_tag("#{key}.png", style: "border-style:none; vertical-align:top;", alt: "#{key}") + ' ' + m.to_s %>
+                        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+                    </li>
+                <% end %>
+            <% end %>
+        <% end %>
+    </ul>
+</div>

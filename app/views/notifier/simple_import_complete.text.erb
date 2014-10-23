@@ -1,0 +1,29 @@
+
+Congratulations! We have concluded processing your file!
+=========================================================
+
+A total of <%= @skipped_rows %> row(s) were skipped.
+
+
+<% if @listOf_errors_processing_rows.length > 0 %>
+The following errors were recorded while processing each row:
+
+    <% @listOf_errors_processing_rows.each do |err| %>
+        * <%= raw err %>
+    <% end %>
+
+<% end %>
+
+<% if @listOf_errors_processing_questions.length > 0 %>
+The following errors were recorded while processing questions:
+
+    <% @listOf_errors_processing_questions.each do |err| %>
+        * <%= raw err %>
+    <% end %>
+
+<% end %>
+
+Have a great day!
+
+sincerely,
+your SRDR team

@@ -1,0 +1,3 @@
+<%= form_tag({:controller=>'search',:action=>'results'}, :method=>'get', :id => 'searchform') do %>
+    <%= text_field_tag 'user_input', '', :class => 'search_input', :title => "Search box", :size => 20, :tabindex=>37, :style=>"float:left; margin-top:5px;", :title=>"Enter a search term."%><%= image_submit_tag("homepage/btn_Search_off.png",{:style=>"float:right;",:tabindex=>38, :title=>"Start Searching SRDR"})%>
+<% end %>

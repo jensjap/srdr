@@ -1,0 +1,258 @@
+<%
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Edit Study","Edit Study","/projects/"+@project.id.to_s+"/studies/"+@study.id.to_s+"/edit#")
+    session[:urlhistory] = urlhistory
+%>
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial=>"/sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+	<%# render :partial=>"study_tabs" %>
+	<a name="studynav"></a>
+	<% page = request.fullpath.split("/") %>
+	<% page_name = page[page.length - 1]%>
+	<% unless @study.id.nil? %>
+		<%= render :partial=>"projects/page_title", :locals=>{:page_title=>"Editing Study:"} %>	
+		<br/><br/>
+		<%= render :inline=>"#{flash[:success_html]}" if flash.keys.include?(:success_html) %>
+    	<%= render :inline=>"#{flash[:error_html]}" if flash.keys.include?(:error_html) %>
+		<span id='study_citation'><%= render :inline=> @study.get_citation %></span>
+		
+		<% unless !defined?(@included_sections) %>
+			<% is_extforms = request.fullpath.split("/")[5] %>
+			<%# extraction_form_id = request.fullpath.split("/")[6].to_i %>
+			<%# extraction_form_id = @extraction_forms[0].id if extraction_form_id==0 %>
+			<% form_ids = @extraction_forms.collect{|x| x.id}%>
+			<% current_ef = @extraction_forms.find{|x| x.id == @current_form_id} %>
+			<div style='float:right;'>
+				<strong>Extracting Data to Form:</strong> 
+				<select tabindex='201' id="extraction_form_selector">
+					<option selected value="<%= current_ef.id %>">
+						<%= current_ef.title %> (KQs <%= @ef_kqs[current_ef.id].join(", ") %>)
+					</option>
+					<% @extraction_forms.each do |ef| %>
+						<% unless ef.id == current_ef.id %>
+							<option value="<%= ef.id %>"><%= ef.title %> 
+								(KQs <%= @ef_kqs[ef.id].join(", ") %>)
+							</option>
+						<% end %>
+					<% end %>
+				</select>
+			</div><br/><br/>
+		<% end %>
+		<!-- GENERATE STUDY TABS -->
+		<%# render :partial=>"shared/session_printout" %><br/>
+		<div id="tabs">
+			<% if defined?(@included_sections) %>
+				<%= render :partial=>"tab_links",:locals=>{:efID=>current_ef.id} %>
+			<% else %>
+				<%= render :partial=>"no_ef_tab_links" %>
+			<% end %>
+		</div>	
+		<div id="tabs-1">
+		</div>	
+	<% end %>
+	<!-- ARMS DIALOG -->
+	<div id="new_arm_entry" style='display:none; margin:0px; padding:0px; width:100%;'>
+	</div>
+
+	<!-- OUTCOME DIALOG -->
+	<div id="new_outcome_entry" style='display:none; margin:0; padding:0; width:100%;'>
+	</div>
+
+
+</div> <!-- end div id=content -->
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+	<% if defined?(@included_sections) %>
+		// listener for swapping to a different extraction form
+		$("#extraction_form_selector").unbind();
+		$("#extraction_form_selector").live("change",function(){
+			efid = $(this).val();
+			url = "/projects/<%= @project.id %>/studies/<%= @study.id %>/extraction_form/" + efid.toString() + "/edit"
+			window.location.replace(url);
+		})
+
+
+		// some listeners for the question builder to display subquestions for radio elements
+		
+		$(".question_radio_input").live("change",function(){
+			$.ajax({
+				type: "POST",
+				url: "question_builder/show_subquestion",
+				data:{
+					model: $(this).attr("section_name"),
+					option_id: $(this).attr("option_id"),
+					obj_id: $(this).attr("obj_id"),
+					input_type: $(this).prop("type"),
+					group_id: $(this).attr("group_id")
+				}
+			});
+		});
+			
+		// some listeners for the question builder to apply subquestions for checkbox elements
+		$(".question_checkbox_input").live("click",function(){
+			$.ajax({
+				type: "POST",
+				url: "question_builder/show_subquestion",
+				data:{
+					model: $(this).attr("section_name"),
+					option_id: $(this).attr("option_id"),
+					obj_id: $(this).attr("obj_id"),
+					input_type: $(this).prop("type"),
+					checked: $(this).attr("checked"),
+					group_id: $(this).attr("group_id")
+				}
+			});
+		});
+			
+		// listener for question builder to apply subquestion to select element
+		$(".question_select_input").live("change", function(){
+			$.ajax({
+				type:"POST",
+				url:"question_builder/show_subquestion",
+				data:{
+					model: $(this).attr("section_name"),
+					option_id: $(this).val(),
+					obj_id: $(this).attr("obj_id"),
+					input_type: $(this).prop("type"),
+					group_id: $(this).attr("group_id")
+				}
+			});
+		});
+
+		// listener for links which allow users to clear their radio button inputs
+		$(".clear_selection_link").unbind();
+		$(".clear_selection_link").live("click",function(event){
+			event.preventDefault();
+			names = $(this).attr("question_name").split(",");
+			for(var i=0; i<names.length; i++){
+				question = names[i]
+				query = '[name="' + question + '"]'
+				inputs = $(query)
+				for(var j=0; j<inputs.length; j++){
+					$($(inputs)[j]).removeAttr("checked");
+				}
+			}
+		});
+
+		// ---------- ARMS --------------
+		$("#new_arm_entry").dialog({
+	            autoOpen: false,
+				minWidth: 600,
+				modal:true
+	        });
+
+		$("#add_arm_button").die("click")
+		$("#add_arm_button").live("click", function()
+		{
+			$.ajax({
+			  url: 'arms/new',
+			  type: "POST",
+			  data:({
+			  	extraction_form_id: "<%= current_ef.id %>"
+			  })
+
+			});
+		});
+
+
+		// -------- OUTCOMES ------------
+		$("#new_outcome_entry").dialog({
+		  	autoOpen: false,
+			minWidth: 660,
+			modal: true
+		});
+		$("#add_outcome_button").die("click");
+		$("#add_outcome_button").live("click", function()
+		{
+			$.ajax({
+			  url: 'outcomes/new',
+			  type: "POST",
+			  data:({
+			  	extraction_form_id : "<%= current_ef.id %>"
+			  })
+			});
+		});
+		
+		// ---------- Finalize Toggle for each Section -----------
+		$(".toggle_section_button").die()
+		$(".toggle_section_button").live("click",function(event){
+			event.preventDefault();
+			section_name = $(this).attr('section');
+			study_id = "<%= session[:study_id] %>";
+			extraction_form_id = "<%= session[:extraction_form_id] %>";
+			$.ajax({
+				type: 'POST',
+				url: "study/toggle_section_completion",
+				data:({
+					study_id: study_id,
+					extraction_form_id: extraction_form_id,
+					ef_section: section_name,
+					finalize_tab: false
+				}),
+				success: function(){
+					$("#waitingGIF").remove();
+				}
+			});
+			$(this).after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+
+		})
+
+
+
+		// -------- END OUTCOMES ------------
+		//------------ RESULTS ----------------
+		/* When a user clicks the link to view/modify existing entries, slide down the div
+	   to show them their options. 
+	*/
+		function toggle_existing_results_display(){
+			display = $("#existing_results_div").css("display")
+		  if(display == "none"){
+				$("#existing_results_div").slideDown();
+				$("#view_modify_entry_link").html("Hide Existing Data Entries");
+			}else{
+				$("#existing_results_div").slideUp();
+				$("#view_modify_entry_link").html("View/Modify Existing Data Entries");
+			}
+		}
+		$(".toggle_existing_results_link").unbind("click");
+		$(".toggle_existing_results_link").live("click",function(event){
+			event.preventDefault();
+		 	toggle_existing_results_display();
+		})
+	<% end %>
+
+	// LOAD THE STUDY TABS
+	$( "#tabs" ).tabs({
+        select: function( event, ui ) {
+            var edited = $('.edited_field');
+
+            if (edited.length != 0) {
+                return confirm('Warning: Uncommitted data detected. Navigating away from this page will discard any unsaved work. Please confirm to continue.');
+            }
+        },
+		selected: <%= defined?(selected_tab) ? selected_tab.to_i : 0 %>,
+		ajaxOptions: {
+			error: function( xhr, status, index, anchor) {
+				$( anchor.hash ).html("Tab is loading. Please wait...");
+					// "Couldn't load this tab. We'll try to fix this as soon as possible. <br/> Status: " + status.toString() + ". Error: " + jQuery.parseJSON(xhr));
+			}
+		},
+		load: function(event, ui) {
+            $('.editable_field').removeClass('edited_field');
+			$('.disabled :input').attr("disabled","disabled");
+			$('.disabled a').bind("click", function(event){
+				event.preventDefault();
+				return false;
+			});			
+		}
+	});
+});
+-->
+</script>

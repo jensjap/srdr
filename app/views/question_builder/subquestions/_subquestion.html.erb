@@ -1,0 +1,7 @@
+<%= @subquestion + " " unless @subquestion.empty? || @subquestion.nil? %>
+<% if @input_type == "checkbox" %>
+ <% field_name = @model.to_s + "_sub[" + @obj_id.to_s + @group_id +"][" + @option_id.to_s + "]" %>
+<% else %>
+ <% field_name = @model.to_s + "_sub[" + @obj_id.to_s + @group_id.gsub("_","-") +"]" %>
+<% end %>
+<input class="editable_field" name=<%= field_name %> />

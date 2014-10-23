@@ -1,0 +1,98 @@
+<div class='tab-div'><br/>
+<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Suggest Arm Titles"} %>
+
+<div class="extraction_form_options">
+<strong>Please Note:</strong>You may choose to pre-specify <strong>outcome names</strong> for data extractors to use. Data extractors will also have the option to specify their own outcome names during individual study extraction.<br/><br/>
+        <strong>Warning:</strong><em>Selecting "No" below will eliminate the Arms section and all sections which depend on it from the final extraction form, including Arm Details and Results.</em>
+        <br/>
+        <br/>
+
+        <%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+            Would you like to include the <strong>arms</strong> section in your extraction form? 
+            <%= select("ef_included_" + @extraction_form_section.id.to_s, "arms", options_for_select([["Yes", true], ["No", false]], @extraction_form_section.included),{ :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+            <div class="inline" style='display:inline;' id="saved_display_section_outcomes"></div>
+        <% end %>
+        <br/>
+
+<!-- User-Defined Extraction Form Instructions -->
+<% @ef_user_instructions = @extraction_form_arm_instr.nil? ? nil : @extraction_form_arm_instr.instructions %>
+<div id = "new_arms_instr_entry">
+    <%= render 'extraction_form_arms/instr_form'%>
+</div>
+<div id="arms_user_instructions">
+    <%= render :partial=>"extraction_forms/instructions" %>
+</div> 
+<a href='#' class="add_arm_ef_instr_<%= @extraction_form_section.id.to_s %> add_arm_instr_button" id="add_arm_instr_button" alt="Click to add user instructions">Add/Edit Instructions</a>
+</div>
+  <% display = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %>
+<div id="extraction_form_section_arms" class='data' style='display:<%= display %>'>
+    <br/>
+
+    <div id="imported_arms">
+        <%= render :partial=>"extraction_forms/imported_arms_table" %>
+    </div>
+
+    <br/>
+
+<% if @donor_info.empty? %>
+    <div id="arms_table">
+    <%= render :partial=>"extraction_form_arms/table" %>
+    </div>
+    <br/>
+
+    <div class="actions">
+        <button class="positive add_arm_ef_<%= @extraction_form_section.id.to_s %> add_arm_button" id="add_arm_button" alt="Click to open Add New Arm Form Dialog">
+            <%= image_tag "Add.png", :alt => "Add" %>Add Arm
+        </button>
+        
+        <div class="saved" id="saved_indicator_arms" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+        <div class="saved" id="removed_indicator_arms" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+    </div>
+<% end %>
+</div>
+<div id = "new_arm_entry">
+    <%= render 'extraction_form_arms/form'%>
+</div>
+
+
+<br/>
+
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"/extraction_forms/" + @extraction_form.id.to_s + "/edit_form",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/design",:previous_title=>"Key Questions",:next_title=>"Design Details"} %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+<script type="text/javascript">
+// <!--
+    $("#new_arm_entry").dialog({
+        autoOpen: false,
+        minWidth: 600, 
+        modal: true
+    });
+
+    $("#add_arm_button").bind("click", function()
+    {
+    	$.ajax({
+    	  url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_arms/new',
+    	  type: "POST"
+    	});
+    });
+
+    $("#new_arms_instr_entry").dialog({
+        autoOpen: false,
+    	minWidth: 600,
+        modal: true
+    });
+
+    $("#add_arm_instr_button").bind("click", function(event)
+    {
+        event.preventDefault();
+    	$.ajax({
+    	  url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_arms/new_instr',
+    	  type: "POST"
+    	});
+    });
+// -->
+</script>
+
+
+</div>

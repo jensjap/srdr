@@ -1,0 +1,216 @@
+/* SRDR TEXT STYLES */
+body, div, a:link{
+	font-size:13px;
+}
+h1{
+	font-size:21px;
+	font-weight:bold;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #006daa;
+	padding:0;
+	margin:0;
+	display: inline;
+}
+h2{
+	font-size:17px;
+	font-weight: bold;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #2f66fe;
+	text-shadow: none;
+	padding:0;
+	margin:0;
+	display: inline;
+}
+h3{
+	font-size:16px;
+	font-weight: bold;
+	color: #000;
+	text-shadow: none;
+	padding:0;
+	margin:0;
+}
+h4{
+	font-size:15px;
+	font-weight: bold;
+	color: #1d1d1d;
+	text-shadow:none;
+	padding:0;
+	margin:0;
+}
+.bold{
+	font-weight: bold;
+}
+.status{
+	font-size: 12px;
+	color: #000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	display: inline;
+}
+.status span{
+	color: white;
+	padding: 1px 2px 1px 2px;
+}
+.status .complete{
+	background-color: #399632;
+}
+
+.status .incomplete{
+	background-color: red;
+}
+.page_heading, .summary_heading, .comparator_col_head{
+	font-size:16px;
+	color:#000;
+	font-weight: bold;font-weight
+	font-family: Helvetica, Arial, sans-serif;
+	display:inline;
+}
+.comparator_col_head{
+	color: #fff !important;
+}
+/* INFO BOX ABOVE EXTRACTION FORM AND STUDY PAGES */
+div.extraction_form_options{
+	padding: 5px 10px 5px 10px;
+	border: dotted 2px #1a6db2;
+	background: #d5e8f1;
+}
+/* INSTRUCTIONS ON THE STUDY PAGES */
+div.user_instruction{
+	padding: 5px 10px 5px 30px;
+	margin-bottom: 10px;
+	border: dotted 2px #1a6db2;
+	background: #d5e8f1 url('/images/information-silk.png') 7px center no-repeat;	
+}
+div.extraction_form_options a:link{
+	color: #052d8b;
+	text-decoration:underline;
+}
+div.extraction_form_options a:hover{
+	color: #000;
+	text-decoration:underline;
+}
+/* LINKS INSIDE FORMS AND BASIC LINKS*/
+form a:link, .list_table a:link, .tab-div a:link, a:link{
+	text-decoration: underline;
+	color: #09519c;
+    /*color: #3366ff;*/
+    font-size: 13px;
+}
+
+form a:visited, .list_table a:visited, .tab-div a:visited, a:visited{
+	text-decoration: underline;
+	color: #09519c;
+    /*color: #3366ff;*/
+    font-size: 13px;
+}
+
+form a:hover, .list_table a:hover, .tab-div a:hover, a:hover{
+	text-decoration: underline;
+    /*color: #193380;*/
+    color: #3366ff;
+    font-size: 13px;
+}
+/* REGISTER LINK ON THE HOMEPAGE */
+
+#login-window #login-div a:link, #login-window #login-div a:visited{
+	color: #dcffd4 !important;
+	text-decoration:underline;
+	font-size:13px;
+}
+#login-window #login-div a:hover, ul.link_list li a:hover{
+	color: #fff !important;
+}
+#login-window #login-div table tr td{ color:white; }
+/* FORM INPUTS */
+form input, form textarea{
+	font-family: Helvetica, Arial, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+	padding: 3px 3px 3px 3px;
+}
+
+select option, select{
+	font-size:14px;
+}
+
+/* LISTS */
+ul.link_list{
+	width:100%;
+	margin:0;
+	margin-left:10px;
+	padding:0;
+
+	}ul.link_list li{
+		width:90%;
+		height:20px;
+		font:13px;
+
+}
+ul.link_list li a:link, ul.link_list li a:visited{
+	color: #09519c;
+	text-decoration:underline;
+	font-size:13px;
+}
+ul.link_list li a:hover{
+	color: #3366ff !important;
+}
+
+ul.normal_list{
+	list-style:disc; 
+	margin-left:25px; 
+	line-height: 18px;'
+	}ul.normal_list li{
+		padding-bottom: 4px;
+		padding-top: 2px;
+	}ul.normal_list li ul{
+		list-style-type:circle;
+	}ul.normal_list li ul li ul{
+		list-style-type:square;
+}
+ul.exit_disclaimer li{
+	line-height: 15px !important;
+	font-size:14px !important;
+	margin-left: 25px !important;
+}
+ol.normal_ordered_list{
+	list-style-type: decimal;
+	margin-left:25px;
+	line-height:18px;
+	}ol.normal_ordered_list li{
+		padding-bottom:4px;
+}
+ol.normal_lettered_list{
+	list-style-type: lower-alpha;
+	margin-left:25px;
+	line-height:18px;
+	}ol.normal_lettered_list li{
+		padding-bottom:4px;
+}
+
+/* normal links in the left navigation menu */
+div.left-nav-menu plain-text a:link, div.left-nav-menu plain-text a:visited{
+	display:inline;
+	width:auto;
+	padding:0;
+	margin:0;
+	border:none;
+	font-size:12px;
+	background:none;
+	text-decoration:underline;
+	color: #3366ff;
+	font-weight:normal;
+}
+
+table.image_with_caption{
+	border: solid 2px #000;
+	width:400px;
+	max-width:400px;
+	margin:auto;
+	}table.image_with_caption tr td.image{
+		text-align:center;
+	}table.image_with_caption tr td{
+		font-size:13px;
+		font-style:italic;
+		text-align:left;
+		padding:4px 4px 6px 4px;
+}

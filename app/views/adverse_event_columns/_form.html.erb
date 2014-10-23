@@ -1,0 +1,48 @@
+<div id="validation_message_adverse">
+<%= render "layouts/modal_info_messages" %>
+</div>
+
+<%= form_for @adverse_event_column, :action => :create,  :remote => true, :id => "new_adverse_event_column" do |f| %>
+	
+	<div class="form_content">
+	<%= f.hidden_field :extraction_form_id, :value => @extraction_form.id %>
+	<table class='form_table'>
+		<tr>
+			<td class='label top'>
+				<label for="Column Title">Column Title: </label>
+			</td>
+			<td class='input top'>
+				<%= f.text_field :name, :class => "editable_field", :title => "column title" %> 
+			</td>
+		</tr>
+		
+		<tr>
+			<td class='label'>
+				<label for="Description">Description: </label>
+			</td>
+			<td class='input'>
+				<%= f.text_field :description, :class => "editable_field", :title => "adverse event description" %> 
+			</td>
+		</tr>
+	</table>
+	<br/><br/><br/><br/>
+	<div class="popup-footer actions inline-actions">
+		<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Add.png", :alt => "Add" %> Save
+		</button><%= render :partial=>'save_indicators/default' %>
+		<button class="negative" id="add_adverse_close">
+			<%= image_tag "Cancel.png", :alt => "Cancel" %> Cancel
+		</button>		
+	</div>
+
+<% end %>
+
+<script type="text/javascript">
+
+$("#add_adverse_close").bind("click", function(event)
+{
+event.preventDefault();
+$('#new_adverse_entry').dialog('close');
+});
+
+</script>

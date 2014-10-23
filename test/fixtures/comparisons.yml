@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: comparisons
+#
+#  id                 :integer          not null, primary key
+#  within_or_between  :string(255)
+#  study_id           :integer
+#  extraction_form_id :integer
+#  outcome_id         :integer
+#  group_id           :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  subgroup_id        :integer          default(0)
+#  section            :integer          default(0)
+#
+
+# this is being used to test the remove_extracted_data function in extraction form
+comp1:
+  id: 1
+  within_or_between: between
+  study_id: 100
+  extraction_form_id: 100
+  outcome_id: 1
+  group_id: 2

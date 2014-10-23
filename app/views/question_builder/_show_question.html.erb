@@ -1,0 +1,34 @@
+<% obj_type = get_camel_caps(@model) %>
+<% max_num = eval(obj_type).where(:extraction_form_id=>session[:extraction_form_id]).maximum("question_number") %>
+<% max_num = max_num.nil? ? 1 : max_num %>
+<% num_options = (1..max_num).to_a.collect{|x| [x,x]} %>
+<div style='float:right;' >
+	<%= link_to image_tag("Pencil.png", :style=>"border:none;vertical-align:middle;"), {:controller=>'question_builder', :action=>'edit_question', :page_name=>@model, :qid=>@question.id, :qnum=>@question.question_number}, :remote=>true, :class=>'tooltip_edit' %>
+	
+	<%= link_to image_tag("Bin_closed.png", :style=>"border:none;vertical-align:middle;"), {:controller=>'question_builder', :action=>'remove_question', :page_name=>@model, :qid=>@question.id}, :method=>:delete, :remote=>true, :class=>'tooltip_delete', :confirm=>"Are you sure?" %>
+				</div>
+				
+<%= select_tag "question_number_" + @question.question_number.to_s, options_for_select(num_options,@question.question_number), :class=>'question_number_switch', :title => "question number" %>. 
+
+<strong><%= @question.question %> </strong>
+<br/><br/>
+<div class="indent_block">
+<%= render :inline=>create_input(@question.id, @model) %><br/>
+</div>
+
+
+<script type='text/javascript'>
+	$("<%= '#question_number_' + @question.question_number.to_s %>").bind("change",function(){
+	$.ajax({
+		type: "POST",
+		url: 'question_builder/shift_numbers',
+		data: {
+			selector_id: $(this).attr("id"),
+			new_row_num: $(this).val(),
+			page_name: "<%= @model.to_s %>",
+			extraction_form_id: $("#extraction_form_id").val()
+		  }
+	  })
+  })
+  
+</script>

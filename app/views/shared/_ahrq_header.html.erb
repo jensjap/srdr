@@ -1,0 +1,32 @@
+﻿<div id="ahrqbanner"> 
+		<div class="hhsportion"> 
+		  <a class="skipnav" href="#main_content">Skip Navigation</a>
+			<a href="http://www.hhs.gov/" title="U.S. Department of Health and Human Services">
+				<%= image_tag "ahrq/hhs_banner.gif", :alt=>"U.S. Department of Health and Human Services" %>
+			</a>
+			<a href="http://www.hhs.gov/" title="www.hhs.gov/" class="hhsright">
+				<%= image_tag "ahrq/hhs_link.gif", :alt=>"www.hhs.gov/" %>
+			</a>
+		</div>
+			
+		<div class="ahrqportion">
+			<a href="http://www.ahrq.gov/" title="Agency for Healthcare Research Quality">
+				<%= image_tag "ahrq/ahrq_banner.gif", :alt=>"Agency for Healthcare Research Quality"%>
+			</a>
+				<form name="searchForm" method="get" action="http://search.ahrq.gov/search" id="banner_searchform"> 
+ <label for="search" style="z-index:-1;position:relative;margin-right:-65px; font-size:0px;">Search</label>
+ <input name="q" type="text" value=" Search AHRQ" size="11" onfocus="this.value='';" class="gotext" id="search" title="ahrq search" />
+	          <input type="hidden" name="entqr" value="0" />
+	          <input type="hidden" name="output" value="xml_no_dtd" />
+	          <input type="hidden" name="proxystylesheet" value="AHRQ_GOV" />
+	          <input type="hidden" name="client" value="AHRQ_GOV" />
+  	          <input type="hidden" name="site" value="default_collection" />
+				<input src="/images/ahrq/topbn_gobutton.gif" class="gobtn" name="Submit" onclick="javascript:document.searchForm.submit();" type="image" alt="Go" />            			</form>
+			<a href="/" class="ahrqright">www.ahrq.gov</a>
+		</div> 
+		
+		<div class="ahrqlinks"><a href="/">AHRQ Home</a> | <a href="https://info.ahrq.gov/cgi-bin/ahrq.cfg/php/enduser/std_alp.php">Questions?</a> | <a href="http://www.ahrq.gov/info/customer.htm">Contact Us</a> | <a href="http://www.ahrq.gov/sitemap.htm">Site Map</a> | <a href="http://www.ahrq.gov/whatsnew.htm">What's New</a> | <a href="/browse/">Browse</a> | <a href="http://www.ahrq.gov/consumer/espanoix.htm">Información en español</a> | <%= image_tag "ahrq/envelope1.jpg", :alt=>"", :style => "padding-left: 4px; padding-right: 3px; padding-bottom: 4px; vertical-align:middle" %> <a href="https://subscriptions.ahrq.gov/service/multi_subscribe.html?code=USAHRQ">E-mail Updates</a></div>
+	</div> 
+	<div id="PrintBanner">
+		<%= image_tag "ahrq/PrintBanner.gif", :alt=>"www.ahrq.gov/", :width=>"100%" %>
+	</div>

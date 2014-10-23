@@ -1,0 +1,19 @@
+<%
+    # Clear old session results
+    session[:search_results] = nil
+%>
+<%= render "shared/page_title", :locals => {:page_title => "Search SRDR"} %>
+
+<%= form_tag({:controller=>'search',:action=>'results'}, :method=>'get') %>
+<label for "search">
+    Enter Search Terms:
+</label>
+<%= text_field_tag 'user_input', :title => "search"> %>
+<button type="submit" class="inline">
+    <%= image_tag "Zoom.png", :alt => "Search"  %> Search 
+</button>
+<% if !current_user.nil? %>
+<%= image_tag "Zoom.png", :alt => "Advanced Search"  %> Advanced Search
+<% end %>
+
+

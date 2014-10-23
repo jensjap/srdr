@@ -1,0 +1,20 @@
+<%# find out how many questions there are total for this particular list %>
+<% obj_type = get_camel_caps(@model) %>
+<% max_num = eval(obj_type).where(:extraction_form_id=>params[:extraction_form_id]).maximum("question_number") %>
+<% max_num = max_num.nil? ? 1 : max_num %>
+<% num_options = (1..max_num).to_a.collect{|x| [x,x]} %>
+
+<%# CREATE THE LIST OF QUESTIONS AND ANSWERS JUST LIKE THEY WOULD APPEAR IN AN EXTRACTION FORM. %>
+<% unless @questions.empty? %>
+	<% @questions.each do |q| %>
+			<div class='field' id="<%= 'question_' + q.question_number.to_s + '_div' %>">
+<strong><%= q.question %> </strong><br/>
+				<%= render :inline=>create_input(q.id, @model) %>
+			</div>
+		<% end %>
+	
+<% else %>
+
+	No questions specified.
+
+<% end %>

@@ -1,0 +1,13 @@
+New SRDR Public Comment Posted
+
+From: <%= @user.login %>
+Project ID: <%= @comment.project_id %>
+Study ID: <%= @comment.study_id %>
+Section: [<%= @comment.section_id %>] <%= @comment.section_name %>
+Field Name: <%= @comment.field_name %>
+Type: <%= @comment.fact_or_opinion %>
+Posted: <%= @comment.created_at.to_s %>
+
+Comment:
+<%= @comment.comment_text %>
+

@@ -1,0 +1,8 @@
+<label for="<%= (timepoint.number.nil? || (timepoint.number == 0)) ? "" : timepoint.number.to_s %> <%= (timepoint.time_unit.nil? || (timepoint.time_unit == "")) ? "-" : timepoint.time_unit %>">
+	<%= (timepoint.number.nil? || (timepoint.number == 0)) ? "" : timepoint.number.to_s %> <%= (timepoint.time_unit.nil? || (timepoint.time_unit == "")) ? "-" : timepoint.time_unit %>
+</label>
+
+	<div class="tp_edit_buttons" style="display:none">
+		<%= image_tag "Pencil.png", :id => "edit_tp_" + timepoint.id.to_s, :class => "edit_tp_btn", :alt => "Edit"  %>
+		<%= image_tag "Bin_closed.png", :id => "delete_tp_" + timepoint.id.to_s, :class => "delete_tp_btn", :alt => "Delete"  %>
+	</div>

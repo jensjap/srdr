@@ -1,0 +1,2335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: User
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (U)</a> &raquo; 
+    
+    
+    <span class="title">User</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: User
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">User</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/user.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+the user class is linked to the authlogic authentication gem. This enables
+authentication/login and logout,  password encryption and password
+resetting. For more information see: <a
+href="https://github.com/binarylogic/authlogic">github.com/binarylogic/authlogic</a>
+For specifics about setting up authlogic on rails 3, see <a
+href="http://www.dixis.com/?p=352">www.dixis.com/?p=352</a>
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_user_has_extraction_form_edit_privilege-class_method" title="current_user_has_extraction_form_edit_privilege (class method)">+ (boolean) <strong>current_user_has_extraction_form_edit_privilege</strong>(extraction_form_id, user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the current user has the privileges to edit the extraction form.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_user_has_new_project_privilege-class_method" title="current_user_has_new_project_privilege (class method)">+ (boolean) <strong>current_user_has_new_project_privilege</strong>(user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the current user has the privileges to create a new project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_user_has_project_edit_privilege-class_method" title="current_user_has_project_edit_privilege (class method)">+ (boolean) <strong>current_user_has_project_edit_privilege</strong>(project_id, user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the current user has the privileges to edit the project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_user_has_study_edit_privilege-class_method" title="current_user_has_study_edit_privilege (class method)">+ (boolean) <strong>current_user_has_study_edit_privilege</strong>(project_id, user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the current user has the privileges to edit the study.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_user_is_admin-class_method" title="current_user_is_admin (class method)">+ (boolean) <strong>current_user_is_admin</strong>(project_id, user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the current user is an admin.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#current_user_is_collaborator-class_method" title="current_user_is_collaborator (class method)">+ (boolean) <strong>current_user_is_collaborator</strong>(project_id, user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the current user is a collaborator on the specified project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#email_exists-class_method" title="email_exists (class method)">+ (boolean) <strong>email_exists</strong>(str) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the email exists.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_available_extraction_form_ids-class_method" title="get_available_extraction_form_ids (class method)">+ (array) <strong>get_available_extraction_form_ids</strong>(uid) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get ids from extraction forms that are available for the specified user to
+edit.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_current_user-class_method" title="get_current_user (class method)">+ (Object) <strong>get_current_user</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+return the current user object, via authlogic.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_email-class_method" title="get_email (class method)">+ (string) <strong>get_email</strong>(user_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the user&#8217;s email address.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_name-class_method" title="get_name (class method)">+ (string) <strong>get_name</strong>(user_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the user&#8217;s first and last name in a string.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_user_editor_projects-class_method" title="get_user_editor_projects (class method)">+ (array) <strong>get_user_editor_projects</strong>(user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of projects that this user can edit (is an editor/collaborator
+for), in Project objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_user_editor_roles-class_method" title="get_user_editor_roles (class method)">+ (array) <strong>get_user_editor_roles</strong>(user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of roles that this user is editor for, in UserProjectRole
+objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_user_lead_projects-class_method" title="get_user_lead_projects (class method)">+ (array) <strong>get_user_lead_projects</strong>(user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of projects that this user leads, in Project objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_user_lead_roles-class_method" title="get_user_lead_roles (class method)">+ (array) <strong>get_user_lead_roles</strong>(user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of roles that this user is lead for, in UserProjectRole
+objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_users_for_project-class_method" title="get_users_for_project (class method)">+ (array) <strong>get_users_for_project</strong>(project_id, current_user) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the list of user roles on a particular project (other than the current
+user).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#user_has_roles-class_method" title="user_has_roles (class method)">+ (boolean) <strong>user_has_roles</strong>(user, project_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the user has roles in a specific project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#username_exists-class_method" title="username_exists (class method)">+ (boolean) <strong>username_exists</strong>(str) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+test if the username exists.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#deliver_password_reset_instructions%21-instance_method" title="#deliver_password_reset_instructions! (instance method)">- (Object) <strong>deliver_password_reset_instructions!</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+send an email with password reset instructions, via authlogic.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_string-instance_method" title="#to_string (instance method)">- (string) <strong>to_string</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+return the string of the users last and first name, and login.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="current_user_has_extraction_form_edit_privilege-class_method">
+  
+    + (<tt>boolean</tt>) <strong>current_user_has_extraction_form_edit_privilege</strong>(extraction_form_id, user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the current user has the privileges to edit the extraction form
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>extraction_form_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 172</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_user_has_extraction_form_edit_privilege'>current_user_has_extraction_form_edit_privilege</span><span class='lparen'>(</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>else</span>
+			<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_proj_id'>proj_id</span> <span class='op'>=</span> <span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+			<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_proj_id'>proj_id</span><span class='comma'>,</span> <span class='symbol'>:user_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_role'>role</span><span class='rbrace'>}</span> 
+			<span class='kw'>if</span> <span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_creator_id'>creator_id</span> <span class='op'>==</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>||</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>lead</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+				<span class='kw'>return</span> <span class='kw'>true</span>
+			<span class='kw'>else</span>
+				<span class='kw'>return</span> <span class='kw'>false</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="current_user_has_new_project_privilege-class_method">
+  
+    + (<tt>boolean</tt>) <strong>current_user_has_new_project_privilege</strong>(user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the current user has the privileges to create a new project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 195</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_user_has_new_project_privilege'>current_user_has_new_project_privilege</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>elsif</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>member</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="current_user_has_project_edit_privilege-class_method">
+  
+    + (<tt>boolean</tt>) <strong>current_user_has_project_edit_privilege</strong>(project_id, user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the current user has the privileges to edit the project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_user_has_project_edit_privilege'>current_user_has_project_edit_privilege</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:role</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+			<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> 
+				<span class='kw'>return</span> <span class='kw'>true</span>
+			<span class='kw'>else</span>
+				<span class='kw'>return</span> <span class='kw'>false</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="current_user_has_study_edit_privilege-class_method">
+  
+    + (<tt>boolean</tt>) <strong>current_user_has_study_edit_privilege</strong>(project_id, user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the current user has the privileges to edit the study
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 118</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_user_has_study_edit_privilege'>current_user_has_study_edit_privilege</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:role</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>editor</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+			<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+				<span class='kw'>return</span> <span class='kw'>true</span>
+			<span class='kw'>else</span>
+				<span class='kw'>return</span> <span class='kw'>false</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="current_user_is_admin-class_method">
+  
+    + (<tt>boolean</tt>) <strong>current_user_is_admin</strong>(project_id, user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the current user is an admin
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 156</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_admin'>current_user_is_admin</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="current_user_is_collaborator-class_method">
+  
+    + (<tt>boolean</tt>) <strong>current_user_is_collaborator</strong>(project_id, user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the current user is a collaborator on the specified project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 139</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+		<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>else</span>
+			<span class='kw'>return</span> <span class='kw'>false</span>
+		<span class='kw'>end</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="email_exists-class_method">
+  
+    + (<tt>boolean</tt>) <strong>email_exists</strong>(str) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the email exists
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+string to test
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+71
+72
+73
+74
+75
+76
+77
+78</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 71</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_email_exists'>email_exists</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_result_email'>result_email</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:email</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_result_email'>result_email</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_result_email'>result_email</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='kw'>return</span> <span class='kw'>true</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>false</span>	
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_available_extraction_form_ids-class_method">
+  
+    + (<tt>array</tt>) <strong>get_available_extraction_form_ids</strong>(uid) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get ids from extraction forms that are available for the specified user to
+edit
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>uid</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+user id
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+extraction form list
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_available_extraction_form_ids'>get_available_extraction_form_ids</span> <span class='id identifier rubyid_uid'>uid</span>
+	<span class='comment'># get the ones that the user created
+</span>	<span class='id identifier rubyid_my_extraction_forms'>my_extraction_forms</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:creator_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_uid'>uid</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_my_extraction_forms'>my_extraction_forms</span> <span class='op'>=</span> <span class='id identifier rubyid_my_extraction_forms'>my_extraction_forms</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_extraction_form'>extraction_form</span><span class='op'>|</span> <span class='id identifier rubyid_extraction_form'>extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	
+	<span class='comment'># get the ones that are associated with projects the user can edit or leads
+</span>	<span class='id identifier rubyid_associated'>associated</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_projects'>projects</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_uid'>uid</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>role DESC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_projects'>projects</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_proj'>proj</span><span class='op'>|</span>
+		<span class='ivar'>@tmpProj</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_proj'>proj</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+		<span class='ivar'>@tmpProj</span><span class='period'>.</span><span class='id identifier rubyid_studies'>studies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_study'>study</span><span class='op'>|</span>
+			<span class='id identifier rubyid_extraction_forms'>extraction_forms</span> <span class='op'>=</span> <span class='const'>StudyExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study'>study</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_extraction_forms'>extraction_forms</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_forms'>extraction_forms</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_extf'>extf</span><span class='op'>|</span> <span class='id identifier rubyid_extf'>extf</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rbrace'>}</span>
+			<span class='id identifier rubyid_associated'>associated</span> <span class='op'>+=</span> <span class='id identifier rubyid_extraction_forms'>extraction_forms</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_my_extraction_forms'>my_extraction_forms</span> <span class='op'>+=</span> <span class='id identifier rubyid_associated'>associated</span>
+	<span class='id identifier rubyid_my_extraction_forms'>my_extraction_forms</span><span class='period'>.</span><span class='id identifier rubyid_uniq!'>uniq!</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_my_extraction_forms'>my_extraction_forms</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_current_user-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_current_user</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+return the current user object, via authlogic
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_current_user'>get_current_user</span>
+<span class='kw'>return</span> <span class='ivar'>@current_user</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_email-class_method">
+  
+    + (<tt>string</tt>) <strong>get_email</strong>(user_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the user&#8217;s email address
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+288
+289
+290
+291</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 288</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_email'>get_email</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_email'>email</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_name-class_method">
+  
+    + (<tt>string</tt>) <strong>get_name</strong>(user_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the user&#8217;s first and last name in a string
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+280
+281
+282
+283</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 280</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_name'>get_name</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_user_id'>user_id</span><span class='comma'>,</span> <span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='symbol'>:fname</span><span class='comma'>,</span> <span class='symbol'>:lname</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_fname'>fname</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_lname'>lname</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_user_editor_projects-class_method">
+  
+    + (<tt>array</tt>) <strong>get_user_editor_projects</strong>(user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of projects that this user can edit (is an editor/collaborator
+for), in Project objects
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+249
+250
+251
+252
+253
+254
+255
+256
+257</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 249</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_user_editor_projects'>get_user_editor_projects</span> <span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:role</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>editor</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='ivar'>@project_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rbrace'>}</span>
+		<span class='kw'>return</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find_all_by_id'>find_all_by_id</span><span class='lparen'>(</span><span class='ivar'>@project_ids</span><span class='rparen'>)</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_user_editor_roles-class_method">
+  
+    + (<tt>array</tt>) <strong>get_user_editor_roles</strong>(user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of roles that this user is editor for, in UserProjectRole
+objects
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+237
+238
+239
+240
+241
+242
+243
+244</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 237</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_user_editor_roles'>get_user_editor_roles</span> <span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:role</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>editor</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='kw'>return</span> <span class='id identifier rubyid_roles'>roles</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_user_lead_projects-class_method">
+  
+    + (<tt>array</tt>) <strong>get_user_lead_projects</strong>(user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of projects that this user leads, in Project objects
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+224
+225
+226
+227
+228
+229
+230
+231
+232</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 224</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_user_lead_projects'>get_user_lead_projects</span> <span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:role</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='ivar'>@project_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span> <span class='id identifier rubyid_r'>r</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rbrace'>}</span>
+		<span class='kw'>return</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find_all_by_id'>find_all_by_id</span><span class='lparen'>(</span><span class='ivar'>@project_ids</span><span class='rparen'>)</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_user_lead_roles-class_method">
+  
+    + (<tt>array</tt>) <strong>get_user_lead_roles</strong>(user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of roles that this user is lead for, in UserProjectRole
+objects
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+212
+213
+214
+215
+216
+217
+218
+219</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 212</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_user_lead_roles'>get_user_lead_roles</span> <span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:role</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='kw'>return</span> <span class='id identifier rubyid_roles'>roles</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_users_for_project-class_method">
+  
+    + (<tt>array</tt>) <strong>get_users_for_project</strong>(project_id, current_user) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the list of user roles on a particular project (other than the current
+user).  for the user management page of a project.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>current_user</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="User (class)">User</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+array of user project roles
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 264</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_users_for_project'>get_users_for_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_users'>users</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='id identifier rubyid_new_list'>new_list</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_users'>users</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>for</span> <span class='id identifier rubyid_u'>u</span> <span class='kw'>in</span> <span class='id identifier rubyid_users'>users</span>
+			<span class='kw'>if</span> <span class='id identifier rubyid_u'>u</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span> <span class='op'>!=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+				<span class='id identifier rubyid_new_list'>new_list</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_u'>u</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_new_list'>new_list</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="user_has_roles-class_method">
+  
+    + (<tt>boolean</tt>) <strong>user_has_roles</strong>(user, project_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the user has roles in a specific project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+string to test
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+84
+85
+86
+87
+88
+89
+90
+91</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 84</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_user_has_roles'>user_has_roles</span><span class='lparen'>(</span><span class='id identifier rubyid_user'>user</span><span class='comma'>,</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:user_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_user'>user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='kw'>return</span> <span class='kw'>true</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="username_exists-class_method">
+  
+    + (<tt>boolean</tt>) <strong>username_exists</strong>(str) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+test if the username exists
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>str</span>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+string to test
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 59</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_username_exists'>username_exists</span><span class='lparen'>(</span><span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_result_uname'>result_uname</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:login</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_str'>str</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_result_uname'>result_uname</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_result_uname'>result_uname</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='kw'>return</span> <span class='kw'>true</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="deliver_password_reset_instructions!-instance_method">
+  
+    - (<tt>Object</tt>) <strong>deliver_password_reset_instructions!</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+send an email with password reset instructions, via authlogic
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_deliver_password_reset_instructions!'>deliver_password_reset_instructions!</span>  
+	<span class='id identifier rubyid_reset_perishable_token!'>reset_perishable_token!</span>  
+	<span class='const'>Notifier</span><span class='period'>.</span><span class='id identifier rubyid_password_reset_instructions'>password_reset_instructions</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_deliver'>deliver</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="to_string-instance_method">
+  
+    - (<tt>string</tt>) <strong>to_string</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+return the string of the users last and first name, and login
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a string in the format of &#8220;Firstname Lastname (Login)&#8220;
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+10
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user.rb', line 10</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_string'>to_string</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_fname'>fname</span><span class='rbrace'>}</span><span class='tstring_content'> </span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_lname'>lname</span><span class='rbrace'>}</span><span class='tstring_content'> (</span><span class='embexpr_beg'>#{</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_login'>login</span><span class='rbrace'>}</span><span class='tstring_content'>)</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:46 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

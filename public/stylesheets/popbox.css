@@ -1,0 +1,74 @@
+/* popup */
+.popBox-holder
+{
+     display:none;
+     position: fixed;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 999;
+     /*background-color:#000;
+     filter:alpha(opacity=40);
+     opacity:0.5;
+     */
+}
+
+.popBox-container
+{
+     display:none;
+     background-color: #fff;
+     border:1px solid #333;
+     padding:10px;
+     text-align:center;
+     z-index: 1000;
+}
+
+.popBox-container .done-button
+{
+    margin-top:10px;
+}
+
+.popBox-container .button {
+display: inline-block;
+zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
+*display: inline;
+vertical-align: baseline;
+margin: 0 2px;
+outline: none;
+cursor: pointer;
+text-align: center;
+text-decoration: none;
+font: 14px/100% Arial, Helvetica, sans-serif;
+padding: .5em 2em .55em;
+}
+.popBox-container .button:hover {
+text-decoration: none;
+}
+.popBox-container .button:active {
+position: relative;
+top: 1px;
+}
+
+.popBox-container .small {
+font-size: 11px;
+padding: .2em 1em .275em;
+}
+.popBox-container .blue {
+color: #d9eef7;
+border: solid 1px #0076a3;
+background: #0095cd;
+}
+.popBox-container .blue:hover {
+background: #007ead;
+}
+.popBox-container .blue:active {
+color: #80bed6;
+}
+/* end popup */
+
+/* form field */
+.popBox-field{
+	background-color: #F7E780;
+}

@@ -1,0 +1,52 @@
+<% unless @footnotes.empty? %>
+	<table style='width:100%;' class='list_table'>
+	<tr><th colspan='2' style='text-align:left;'>Footnotes</th></tr>
+	<% @footnotes.each_with_index do |fn,index| %>
+	  <tr>
+	  	<td valign='top' align='center' width='25px'>
+	  		<% unless @footnotes.length < 2 %>
+	  			<select class="footnote_sort_selector" title="Adjust the order of footnotes" orig_value="<%= index + 1 %>" style="height:20px;width:40px;font-size:11px;">  
+	  			  <% for i in 1..@footnotes.length %>
+	  			    <% sel = (i == index+1) ? "selected" : "" %>
+	  			    <option value="<%= i %>" <%= sel %>><%= i %></option>
+	  			  <% end %>
+	  			</select>	
+				<% else %>
+				  <strong><%= fn.footnote_number %>.</strong></td>
+				<% end %>
+			</td>	
+	    <td valign='top'><%= fn.footnote %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+<script type='text/javascript'>
+// <!--
+/* When users update the footnote order, update all footnote numbers
+   and update the entry table accordingly.
+*/
+if( $(".footnote_sort_selector").length > 0){
+	$(".footnote_sort_selector").unbind();
+	$(".footnote_sort_selector").bind("change",function(){
+		origVal = $(this).attr("orig_value");
+		newVal = $(this).val();
+		$.ajax({
+			type: 'POST',
+			url: 'results/update_footnote_order',
+			data:({
+				original_value: origVal,
+				new_value: newVal,
+				outcome_id: "<%= @outcome_id %>",
+				subgroup_id: "<%= @subgroup.nil? ? 0 : @subgroup.id %>",
+				selected_timepoints: "<%= @selected_timepoints %>"
+			}),
+			success: function(){
+				$("#loading_div").remove();
+			}
+		})
+		show_loading_icon();
+	})
+}
+
+// -->
+</script>

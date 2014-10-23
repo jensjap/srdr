@@ -1,0 +1,61 @@
+<!-- QUALITY DIMENSION DATA POINTS -->
+<div class="summary_heading">Quality Dimensions</div>
+<div id='qd_text'>
+<% dimensions = QualityDimensionField.where(:extraction_form_id => extraction_form.id) %>
+<% datapoints = QualityDimensionDataPoint.where(:study_id=>study.id, :extraction_form_id=>extraction_form.id) %>
+
+<% if !dimensions.empty? %>
+	<table class="list_table" id="study_quality_dimensions_table_<%= extraction_form.id.to_s %>" summary="study quality dimensions table extraction form #<%= extraction_form.id.to_s %>">
+		<thead>
+		<tr>
+		<th>Dimension</th>
+		<th>Value</th>
+		<th>Notes</th>
+		<th>Comments</th>
+		</tr></thead>
+
+    <%# Quality Dimension Data Here %>		
+		<% for qa in dimensions %>
+  		<tr class="<%= cycle("even", "odd") %>" id='<%= 'quality_aspect_' + qa.id.to_s %>'>
+
+  		<td><%= qa.title %></td>
+  		<% tmpl_id = qa.extraction_form_id %>
+      <% dp = datapoints.find{|x| x.quality_dimension_field_id == qa.id} %>
+      <% val = dp.nil? ? "" : dp.value %>
+      <% notes = dp.nil? ? "" : dp.notes %>
+  		<td><%= val %></td>
+  		<td><%= notes %></td>
+  		<td class="comment_td">	
+        <%= render :partial => "comments/field_comments", :locals => {:section_name => "qualitydimensions", :section_id => qa.id, :field_name => "qualitydimensions", :study_id => study.id, :project_id => project.id} %>  
+  		</td>
+  		</tr>
+		<% end %>
+		</table>
+<% else %>
+	No quality dimensions were specified.
+<% end %>
+</div>
+<br/>
+
+<!-- QUALITY RATING -->
+<% rating = QualityRatingDataPoint.where(:study_id=>study.id, :extraction_form_id=>extraction_form.id) %>
+<div class="summary_heading">Quality Rating</div>
+<div id='qr_text'>
+<% unless rating.empty? %>
+  <table class='list_table' summary='quality rating data'>
+    <thead>
+      <tr>
+        <th>Guideline Used</th>
+        <th>Overall Rating</th>
+      </tr>
+    </thead>
+    <tr>
+      <td align='center'><%= rating.first.guideline_used %></td>
+      <td align='center'><%= rating.first.current_overall_rating %></td>
+    </tr>
+  </table>
+<% else %>
+  No quality rating data was found.
+<% end %>
+</div>
+<br/>

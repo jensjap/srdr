@@ -1,0 +1,2 @@
+$("#content").html("<%= escape_javascript(render :partial=>'page_title',:locals => {:page_title => 'Add Studies To This Project'})%>");
+$("#page_title_div").after("<%= escape_javascript(render :partial=>'studies_table', :locals=>{:is_project_lead=>current_user.is_lead(@project.id)})%>");

@@ -1,0 +1,12 @@
+<% if !id_arr.nil? && id_arr.length > 0 %>
+
+	<% for design_detail_field_id in id_arr %>
+		<div class="dd_<%= design_detail_id.to_s %>_box_container">
+			
+			Option Name: <%= text_field "ddf_" + design_detail_field_id.to_s, :option_text, :class => "inline-field margined-bottom",  :onchange => remote_function(:update => "save_field",  :method => "put",  :with => "'option_text=' + escape(value)",  :url => { :controller => :design_detail_fields, :action => :save_field, :design_detail_field_id => design_detail_field_id, :design_detail_id => design_detail_id}, :title=>"option name") %>
+			<div class="inline" id="saved_field_<%= design_detail_field_id.to_s %>"></div>
+
+		</div>
+	<% end %>
+
+<% end %>

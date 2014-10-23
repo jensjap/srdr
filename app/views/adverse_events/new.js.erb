@@ -1,0 +1,11 @@
+$('#adverse_event_entry').html("<%= escape_javascript(render :partial => 'adverse_events/form') %>");
+
+
+
+  $(".editable_field").bind('change',function(){
+	$(this).addClass('edited_field');
+	var form = $(this).parents('form:first');
+	form.addClass("unsaved_form");
+	$(".unsaved_div").css("display","block");
+});
+				

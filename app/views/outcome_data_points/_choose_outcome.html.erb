@@ -1,0 +1,64 @@
+<strong>Step 1.</strong> <label for="Choose outcome to enter data for">Select which outcome to enter data for:</label>  
+	<% options = [["Choose an outcome...",0]] + @outcomes.map{|out| [out.title, out.id]}%>
+	<%= select "outcome_selection", "id", options, :tabindex => 0 %>
+		<div class="saved" id="successfully_cancelled_table" style='display:none;'>  Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+		<div id="view_modify_button_div" style="<%= display %>">
+		<p align="center"/>OR<br/><br/>
+	
+		<button type='submit' class='positive' id='see_saved_results'>
+			<%= image_tag "Note_go.png", :alt => "View Saved Results Tables" %> View Saved Results Tables
+		</button><br/>
+	</div>
+
+			<div id='saved_results' style="display:none">
+		</div>
+	
+<script type='text/javascript'>
+<!--
+$("#outcome_selection_id").bind("change", function(){
+
+	var id = $("#outcome_selection_id").val();
+	if(id != 0){
+		$("#choose_timepoint").html("");
+		$("#select_outcome_timepoints_display").html("");
+		$("#form_div").html("");
+		$("#modal_div").html("");
+		$.ajax({
+		  type: 'POST',
+		  url: "results/setup_arms",
+		  data: ({
+				outcome_id: id
+		  })
+		});
+	}else{
+		$("#choose_arm").html("")
+		$("#choose_timepoint").html("")
+		$("#select_outcome_timepoints_display").html("")
+		$("#form_div").html("");
+		$("#modal_div").html("");
+	}
+});
+-->
+</script>
+
+<script type='text/javascript'>
+  $("#see_saved_results").bind("click", function(event){
+		event.preventDefault();
+
+		$("#saved_results").dialog({
+			title: "View Saved Results",
+			autoOpen: false,
+			modal: true,
+			minWidth: 660,
+			resizable: true,
+			position: ['center','center'],
+			 open: function() {
+				$("#saved_results").load("results/saved_results");
+				window.scrollTo(0, 0);
+				},			
+		});
+		
+		$("#saved_results").dialog('open');
+		
+		});
+</script>

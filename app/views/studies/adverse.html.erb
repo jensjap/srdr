@@ -1,0 +1,24 @@
+<div class='tab-div'>
+	<br/>
+	<h2>Study Adverse Events</h2><br/><br/>
+	<% instruction = @extraction_form_adverse_instr.nil? ? "" : @extraction_form_adverse_instr.instructions %>
+	<% unless instruction.blank? %>
+		<div class='user_instruction'>
+			<strong>Note:</strong> <%= instruction %>
+		</div>
+		<br/>
+	<%  end %>
+
+<div id="adverse_events_table">
+<%= render 'adverse_events/table' %>
+</div>
+
+<br/><br/>
+<%= render :partial=>'section_complete_status', :locals=>{:section=>"adverse"} %>
+<br/><br/>
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+</div><!-- end tab div -->

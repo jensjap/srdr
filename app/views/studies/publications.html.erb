@@ -1,0 +1,63 @@
+<div class='tab-div'>
+	<br/>
+	<h2>Primary Publications</h2><br/><br/>
+
+	Although only a single publication may be marked as primary, users may denote multiple secondary publications as associated with each extracted study.<br/>
+	<br/>
+	<div id="primary_pub_validation_message"></div>
+	<%= render 'primary_publications/form' %>
+	<br/>
+
+
+	<h2>Associated Publications</h2> 
+	<br/>
+	<div id="secondary_publication_table">
+	<%= render 'secondary_publications/table' %>
+	</div>
+	<br/>
+	<div id="secondary_publication_entry">
+	<%= render 'secondary_publications/form' %>
+	</div>
+
+		<div class="actions">
+		<button type="submit" class="positive" id="add_sp_button">
+				<%= image_tag "Add.png", :alt => "Add" %>Add a New Secondary Publication
+		</button>
+			
+		<div class="saved" id="saved_item_indicator_2" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>
+		</div>		
+		
+		
+	<br/>
+	<br/>
+<%= render :partial=>'section_complete_status', :locals=>{:section=>"publications"} %>
+<br/>
+<br/>
+
+	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+	<%= render 'shared/make_editable_and_confirm' %>
+	<script type="text/javascript">
+
+	$("#secondary_publication_entry").dialog({
+	            autoOpen: false,
+				minWidth: 700
+	        });
+	$("#add_sp_button").bind("click", function()
+	{
+		$.ajax({
+		  url: 'secondary_publications/new',
+		  type: "POST"
+		});
+	});
+		
+
+    $(".editable_field").live('change',function(){
+        $(this).addClass('edited_field');
+        var form = $(this).parents('form:first');
+        form.addClass("unsaved_form");
+        $(".unsaved_div").css("display","block");
+    });
+	</script>
+
+</div><!-- end tab-div -->

@@ -1,0 +1,36 @@
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<!DOCTYPE html>
+  	<title>SRDR - Systematic Review Data Repository</title>
+  	<meta name="google-site-verification" content="oBj46LqxSfulhcdwgSgixZB3MhsAg4CykY5ij6vzJls" />
+	  
+	  <%= stylesheet_link_tag "pagination_styles", "jquery.qtip", "ahrqstyle_new", :media => "screen" %>
+	  <%= stylesheet_link_tag "scaffold", "jquery-ui-1.8.12.custom", "ahrqstyleprint_new", :media => "screen, print" %>
+	  <%= javascript_include_tag 'jquery.min', 'jquery-ui-1.8.12.custom', 'rails', 'application' %>
+	  <%= javascript_include_tag 'form_complete', 'nested_form', 'jquery.printelement.min', 'jquery.qtip.min', 'comments_dropdown' %>
+	  <%= csrf_meta_tag %>	  
+<%= favicon_link_tag "favicon.ico" %>
+  </head>
+  	<!--<body onload="init_footnote_values('outcome_results','<%= @cat_field_ids %>','<%= @cont_field_ids %>');">-->
+<body>
+
+<%= render "layouts/header" %>
+
+<div id="container">
+		<%= render "layouts/header" %>
+		<div id="content">
+			<a name="skipnav" id="skipnav"></a>
+			<div id="info_messages">
+			<%# render :partial => "layouts/info_messages" %>
+			</div>
+			<div style='clear:both;'></div>
+			<%= yield %>
+		</div>
+		<div style='clear:both;'></div>
+		<div class="footer">
+			<%= render "shared/ahrq_footer" %>
+		</div>
+  </div>
+</body>
+</html>

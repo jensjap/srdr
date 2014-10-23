@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ASCII-8BIT" />
+<title>
+  File: Question Builder
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: Question Builder</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Question Builder</h1>
+<h2>Overview</h2>
+<p>
+The traditional process for systematic review projects involves creating an
+extraction form to serve as a template for guiding the data extraction.
+Upon form completion, researchers manually scan journal articles one at a
+time and parse out any pertinent information requested in the extraction
+form. The ability to easily combine findings from multiple studies will be
+dependent on the quality of extraction form used, making it crucial and
+worthwhile to spend time developing a high quality form.
+</p>
+<p>
+Digitization of the extraction form creation process is one of the many
+goals of the SRDR system, but the amount of variation between projects and
+between studies has made the design stages for this feature especially
+challenging. The solution to this problem has come not as one main idea,
+but as a collection of ideas and methods tailored to the needs of specific
+extraction form sections. Among these solutions is the question builder
+functionality that is party of the Design Details and Baseline
+Characteristics sections of the site.
+</p>
+<p>
+Question Builder allows the project lead to define questions and answer
+choices for data fields associated with either the design details or
+baseline characteristics data elements. Answer choices can be represented
+as a radio buttons, check boxes, dropdown boxes or as a simple text entry,
+adding a great deal of flexibility to the extraction form. Researchers
+carrying out data extraction will then see each question for their
+associated studies and can input answers appropriately using the method
+specified in the extraction form.
+</p>
+<p>
+In order to assure reusability of code, the question builder feature was
+developed to be fairly generic and to work for multiple data models. A
+single QuestionBuilder controller handles the majority of functionality and
+logic, including adding or removing question choices, removing or editing
+existing questions and question choices and re-ordering questions after
+creation. View partials in the views/question_builder directory are used in
+AJAX calls between the server and controller functions. To make this work
+for various database models, an instance variable named @model passes
+information into the question_builder partials.
+</p>
+<p>
+At the time of writing the only prerequisite for using question builder is
+to set up the database tables accordingly. For a given model known as
+&#8220;test_model&#8221;, the system should have the following controllers,
+database tables and models defined:
+</p>
+<h3>Required controllers for test_model:</h3>
+<ul>
+<li><p>
+test_model_controller.rb
+</p>
+</li>
+<li><p>
+test_model_fields_controller.rb
+</p>
+</li>
+<li><p>
+test_model_data_points_controller.rb
+</p>
+</li>
+</ul>
+<h3>Database tables are also set up to correspond with these controllers:</h3>
+<ul>
+<li><p>
+test_models
+</p>
+</li>
+<li><p>
+test_model_fields
+</p>
+</li>
+<li><p>
+test_model_data_points
+</p>
+</li>
+</ul>
+<h3>To communicate with the tables above, models are also created:</h3>
+<ul>
+<li><p>
+test_model.rb
+</p>
+</li>
+<li><p>
+test_model_field.rb
+</p>
+</li>
+<li><p>
+test_model_data_points.rb  
+</p>
+</li>
+</ul>
+<p>
+To replicate the existing system for a new data model, test_model_field.rb
+should contain a function for saving question choices, while
+test_model_data_point.rb should contain a function for saving the extracted
+answers to the defined questions. In accordance with these controllers,
+models and database tables, the aforementioned @model variable would then
+need to contain the value ?test_model? whenever the question_builder
+interface is being used. This value would be passed into the question
+builder, and all fields/buttons would be set to automatically communicate
+with the corresponding database tables.
+</p>
+<p>
+To see an example of the question builder setup, refer to the baseline
+characteristics extraction form and study sections. Below is a basic
+outline of the files which will contain additional AJAX calls to the
+question builder controller code.
+</p>
+<h2>In Extraction Form Creation</h2>
+<p>
+/app/views/extraction_forms/baselines.html.erb
+</p>
+<ul>
+<li><p>
+renders a form for a BaselineCharacteristic object found in the partial,
+/app/views/baseline_characteristic_fields/_form.html.erb
+</p>
+</li>
+<li><p>
+upon form submission the create function in the
+app/controllers/baseline_characteristic_controller.rb is called
+</p>
+</li>
+<li><p>
+makes a call to save_question_choices in the BaselineCharacteristicField
+model
+</p>
+</li>
+<li><p>
+updates preview partial with
+/app/views/question_builder/_extraction_form_preview.html.erb
+</p>
+</li>
+<li><p>
+resets the question builder form with baseline_characteristic_fields/form
+</p>
+</li>
+</ul>
+<h2>In Study Extraction</h2>
+<p>
+/app/views/studies/baselines.html.erb
+</p>
+<ul>
+<li><p>
+renders a form for a BaselineCharacteristicDataPoint object in
+app/views/baseline_characteristic_data_points/table.html.erb.
+</p>
+</li>
+<li><p>
+upon form submission the create function in the
+app/controllers/baseline_characteristic_data_point_controller.rb is called
+</p>
+</li>
+<li><p>
+makes a call to save_data in the BaselineCharacteristicDataPoint model
+</p>
+</li>
+<li><p>
+AJAX call shows an indication of save success
+</p>
+</li>
+</ul>
+<p>
+It is quite possible that this code could be cleaned up in future versions
+of SRDR. Until then, questions regarding how to use this setup may be
+directed to cparkin@tuftsmedicalcenter.edu.
+</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:46 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

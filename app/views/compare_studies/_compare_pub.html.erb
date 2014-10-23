@@ -1,0 +1,329 @@
+    <input type="hidden" name="n_studies" value="<%= @compareset.size().to_s %>">
+<%
+    for studyidx in (0..@compareset.size() - 1)
+%>
+    <input type="hidden" name="study_id_<%= studyidx.to_s %>" value="<%= @compareset.getStudyID(studyidx).to_s %>">
+    <input type="hidden" name="study_title_<%= studyidx.to_s %>" value="<%= @compareset.getStudyTitle(studyidx).to_s %>">
+<%
+    end
+    if (!@compareset.sameEFIDs())
+%>
+    <b>Note: </b>The studies selected were not compiled using the same Extraction Form. Only the publication information is available for comparason.
+    <p/>
+<%
+    end
+%>
+    <table class="compare_studies_table">
+        <tr>
+            <th class="compare_studies_title">
+            Data
+            </th>
+<%
+    for studyidx in (0..@compareset.size() - 1)
+%>
+            <th class="compare_studies_title">
+            <!--[Study ID <%= @compareset.getStudyID(studyidx).to_s %>][EFID <%= @compareset.getExtractionFormID(studyidx).to_s %>]-->
+            <span class='comparator_col_head'>Study <%= @alphabet[studyidx] %></span>
+            <br/>
+            Created by <%= User.get_name(@compareset.getCreatorID(studyidx)) %><br/>
+            <div class='hidden-label'><label for="select_study_<%= studyidx.to_s %>">Use all Publication values for Study: <%= @compareset.getTitle(studyidx).truncate(25) %></label></div><input type="checkbox" id="select_study_<%= studyidx.to_s %>" name="select_study_<%= studyidx.to_s %>" value="1" title="Use all Publication values for Study: <%= @alphabet[studyidx] %>" onclick="selectAllPub(<%= studyidx.to_s %>,<%= @compareset.size() %>)"> Select This Study
+            </th>
+<%
+    end    
+%>
+            <th class="compare_studies_title">&nbsp;</th>
+            <th class="compare_studies_title">Consensus<br>Value</th>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td class="compare_studies_item">
+            <b>Title</b>
+            </td>
+<%
+    # Publication - Title
+    ndiff = @compareset.distinctTitle()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getTitle(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" name="merge_title" title="Select the value <%= dispvalue %> for Study Title: <%= @alphabet[studyidx] %>" value="<%= dispvalue %>" onclick="selectTitle(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_title_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata">
+            <img src="/images/action_forward.gif" alt="The merged consensus publication data will appear in the cell to the right upon selection"/>
+            </td>
+            <td class="compare_studies_data">
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getTitle(0)
+    end
+%>
+            <%= text_area_tag "merge_title_text", "Select value", :value=>consensus_value %>
+            </td>
+        </tr>
+        <tr bgcolor="#EAEAEA">
+            <td class="compare_studies_item">
+            <b>Year</b>
+            </td>
+<%
+    # Publication - Year
+    ndiff = @compareset.distinctYear()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getYear(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" name="merge_year" title="Select the value <%= dispvalue %> for Study Year: <%= @alphabet[studyidx] %>" value="<%= dispvalue %>" onclick="selectYear(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_year_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection" ></td>
+<%
+    consensus_value = ""
+    if  ndiff <= 1
+        consensus_value = @compareset.getYear(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_year_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td class="compare_studies_item">
+            <b>Author(s)</b>
+            </td>
+<%
+    # Publication - Authors
+    ndiff = @compareset.distinctAuthor()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getAuthor(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" title="Select the value <%= dispvalue %> for Study Authors: <%= @alphabet[studyidx] %>" name="merge_author" value="<%= dispvalue %>" onclick="selectAuthor(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_author_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getAuthor(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_author_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#EAEAEA">
+            <td class="compare_studies_item">
+            <b>Country</b>
+            </td>
+<%
+    # Publication - Country
+    ndiff = @compareset.distinctCountry()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getCountry(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" title="Select the value <%= dispvalue %> for Study Location: <%= @alphabet[studyidx] %>" name="merge_country" value="<%= dispvalue %>" onclick="selectCountry(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_country_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getCountry(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_country_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td class="compare_studies_item">
+            <b>PubMed ID</b>
+            </td>
+<%
+    # Publication - PubMed ID
+    ndiff = @compareset.distinctPMID()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getPMID(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" name="merge_pmid" title="Select the value <%= dispvalue %> for Study PubMed ID: <%= @alphabet[studyidx] %>" value="<%= dispvalue %>" onclick="selectPMID(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_pmid_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getPMID(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_pmid_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#EAEAEA">
+            <td class="compare_studies_item">
+            <b>Alternate ID(s)</b>
+            </td>
+<%
+    # Publication - Alternative ID
+    ndiff = @compareset.distinctAlternateNumbers()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getAlternateNumbers(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" name="merge_altid" title="Select the value <%= dispvalue %> for Study Alternate ID: <%= @alphabet[studyidx] %>" value="<%= dispvalue %>" onclick="selectAlternateID(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_altid_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getAlternateNumbers(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_altid_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td class="compare_studies_item">
+            <b>Journal</b>
+            </td>
+<%
+    # Publication - Journal
+    ndiff = @compareset.distinctJournal()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getJournal(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" title="Select the value <%= dispvalue %> for Publication Journal: <%= @alphabet[studyidx] %>" name="merge_journal" value="<%= dispvalue %>" onclick="selectJournal(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_journal_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+        end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getJournal(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_journal_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#EAEAEA">
+            <td class="compare_studies_item">
+            <b>Volume</b>
+            </td>
+<%
+    # Publication - Volume
+    ndiff = @compareset.distinctVolume()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getVolume(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" name="merge_volume" title="Select the value <%= dispvalue %> for Publication Volume: <%= @alphabet[studyidx] %>" value="<%= dispvalue %>" onclick="selectVolume(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_volume_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getVolume(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_volume_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td class="compare_studies_item">
+            <b>Issue</b>
+            </td>
+<%
+    # Publication - Issue
+    ndiff = @compareset.distinctIssue()
+    for studyidx in (0..@compareset.size() - 1)
+        dispvalue = @compareset.getIssue(studyidx)
+        # remove any line feeds, convert to simple space
+        dispvalue = dispvalue.gsub( /\r\n/m, " " )
+%>
+            <td class="compare_studies_data">
+            <% if ndiff > 1 %>
+            <input type="radio" name="merge_issue" value="<%= dispvalue %>" title="Select the value <%= dispvalue %> for Publication Issue: <%= @alphabet[studyidx] %>" onclick="selectIssue(<%= studyidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)">&nbsp;
+            <% else %>
+            <input type="hidden" name="merge_issue_default<%= studyidx.to_s %>" value="<%= dispvalue %>">
+            <% end %>
+            <%= dispvalue %>
+            </td>
+<%
+    end    
+%>
+            <td class="compare_studies_adata"><img src="/images/action_forward.gif" border="0" alt="The merged consensus publication data will appear in the cell to the right upon selection"></td>
+<%
+    consensus_value = ""
+    if ndiff <= 1
+        consensus_value = @compareset.getIssue(0)
+    end
+%>
+            <td class="compare_studies_data"><%= text_area_tag "merge_issue_text", "Select value", :value=>consensus_value %></td>
+        </tr>
+    </table>

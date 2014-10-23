@@ -1,0 +1,30 @@
+<% if !session[:study_id].nil? %>
+
+					<% @curr_tmpl = Study.where(:id => session[:study_id]).first	%>
+					<% @study = @curr_tmpl	%>
+					<% @baseline_characteristic_extraction_form_fields = []	%>
+					<% unless @curr_tmpl.nil?	%>
+						<% @baseline_characteristic_extraction_form_fields = BaselineCharacteristicField.where(:extraction_form_id => @curr_tmpl.extraction_form_id).all %>
+					<% end %>
+					<% @baseline_characteristic_custom_fields = BaselineCharacteristicField.where(:study_id => session[:study_id]).all	%>
+					<% @baseline_characteristic_data_point = BaselineCharacteristicDataPoint.new	%>
+					<% @study_arms = Arm.where(:study_id => session[:study_id]).all	%>
+
+$('#population_characteristics_table').html(<%= escape_javascript(render :partial => 'baseline_characteristic_data_points/table') %>);
+
+<% @baseline_characteristic_field = BaselineCharacteristicField.new %>
+
+$('#population_characteristic_entry').html(<%= escape_javascript(render :partial => 'baseline_characteristic_fields/custom_field_form') %>);
+
+$('#new_arm_entry').html(<%= escape_javascript(render :partial => 'arms/form') %>);
+
+<% else %>
+
+					<% @baseline_characteristic_fields = BaselineCharacteristicField.where(:extraction_form_id => tmpl_id).all %>
+$('#baseline_characteristic_fields_table').html(<%= escape_javascript(render :partial => 'baseline_characteristic_fields/table') %>);
+
+<% @baseline_characteristic_field = BaselineCharacteristicField.new %>
+
+$('#baseline_characteristic_fields_entry').html(<%= escape_javascript(render :partial => 'baseline_characteristic_fields/form') %>);
+
+<% end %>

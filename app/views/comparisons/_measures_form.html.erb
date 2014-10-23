@@ -1,0 +1,38 @@
+<!--
+ Cycle through all possible measures defined in the default measures table for this outcome
+ type. If the measure is also defined in the study, then check the box. Otherwise, leave it unchecked	
+-->
+<% selected_titles = @selected_measures.collect{|x| x.title}%>
+<% previously_checked = ""%>
+<% form_tag "results/update_comparison_measures", :remote=>true do %>
+	I would like to edit measures for:<br/>
+	<input type="radio" name="changes_apply_to" id="apply_changes_to" value="this" title="apply changes to this timepoint only" checked/>This timepoint only<br />
+	<input type="radio" name="changes_apply_to" id="apply_changes_to" title="apply changes to all timepoints that have comparisons" value="all"/> All timepoints with comparisons<br/><br/>
+	
+	<% @all_measures.each do |meas| %>
+	  <%# meas.title %><br/>
+		<% checked = selected_titles.include?(meas.title) ? "checked" : ""%>
+		<% selected_meas_id = 0 %>
+		<% if checked == "checked" %>
+		  <% selected_meas_id = @selected_measures[selected_titles.index(meas.title)].id %>
+		  <% previously_checked += previously_checked == "" ? "#{selected_meas_id}" : "_#{selected_meas_id}" %>
+	  <% end %>
+	  <% hashkey = "#{meas.id}_#{selected_meas_id}"%>
+		<input type="checkbox" name="<%= "measures[#{hashkey}]"%>" id="<%= "measure_#{hashkey}"%>"  title="measure option" <%= checked %>/> <%= meas.title %><br/>
+	<% end %> <%# end all_measures.each %>
+	<input type="hidden" name="previously_checked" value="<%= previously_checked %>"/>
+	<input type="hidden" name="timepoint_id" value="<%= @timepoint_id %>">
+  <input type="hidden" name="selected_timepoint_id" value="<%= @selected_timepoint_id %>"/>
+  <input type="hidden" name="comparison_id" value="<%= @comparison_id %>"/>
+	<br/>
+	<center>
+	<%# The submit button %>
+	<button type="submit" id="save_measures_btn" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+		<%= image_tag "Add.png", :alt => "Add" %> Save
+	</button>
+	<button class="negative" onClick="event.preventDefault();$('#modal_div').dialog('close');">
+		<%= image_tag "Cancel.png", :style=>"vertical-align:text-top;", :alt => "Cancel" %> Cancel
+	</button>
+	</center>
+<% end %> <%# end the form%>
+

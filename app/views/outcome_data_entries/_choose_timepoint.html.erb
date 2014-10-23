@@ -1,0 +1,32 @@
+<% unless @checkbox_timepoints.length == @selected_tp_array.length %>
+<br/><label for="Add inactive timepoints using this form">You are not using the following timepoints, but may add them again if you wish: </label>
+<br/>
+<%= form_tag "results/update_table_rows", :remote=>true do %>
+	<input type="hidden" name="outcome_id" value="<%= @outcome.id %>"/>
+	<input type="hidden" name="subgroup_id" value="<%= @subgroup.nil? ? 0 : @subgroup.id %>">
+	<input type="hidden" name="selected_timepoints" value="<%= @selected_timepoints %>"/>
+<table width="300px">
+	<tr>
+		<td width="50%">
+			<% @checkbox_timepoints.each do |tp| %>
+			  <% if !@selected_tp_array.include?(tp.id.to_s)%>  
+			  	<input id="<%= "checkbox_#{tp.id}" %>" type='checkbox' name='tps_to_add[]' value="<%= tp.id %>" />
+			  	<%= tp.number %> <%= tp.time_unit %><br/>
+			  <% end %>
+			<% end %>
+		</td>
+		<td width="50%"><button type='submit' id="button_to_submit_row_update">Update Table Rows</button></td>
+  </tr>
+</table>
+
+<% end %>
+<% end %>
+<script type='text/javascript'>
+<!--
+if($("#button_to_submit_row_update").length > 0){
+	$("#button_to_submit_row_update").bind("click",function(){
+		$(this).after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+	});
+}
+//-->
+</script>

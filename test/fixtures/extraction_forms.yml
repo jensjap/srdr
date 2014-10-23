@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: extraction_forms
+#
+#  id                          :integer          not null, primary key
+#  title                       :string(255)
+#  creator_id                  :integer
+#  notes                       :text
+#  adverse_event_display_arms  :boolean          default(TRUE)
+#  adverse_event_display_total :boolean          default(TRUE)
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  project_id                  :integer
+#  is_ready                    :boolean
+#  bank_id                     :integer
+#  is_diagnostic               :boolean          default(FALSE)
+#
+
+proj1_ef1:
+  id: 1
+  title: extraction form for key question 1
+  creator_id: 1
+  project_id: 1
+  is_diagnostic: true
+
+proj1_ef2:
+  id: 2
+  title: extraction form for key question 2
+  creator_id: 1
+  project_id: 1
+
+standalone_ef:
+  id: 3
+  title: stand-alone extraction form
+  creator_id: 1
+  project_id: 1
+
+proj2_ef2:
+  id: 4
+  title: ef for project 2
+  creator_id: 1
+  project_id: 2

@@ -1,0 +1,139 @@
+<script>
+  $(document).ready(function() {
+      var accOpts = {
+          icons: { 'header': 'ui-icon-circle-plus', 'headerSelected': 'ui-icon-circle-minus' },
+          active: false,
+          fillSpace: false,
+          collapsible: true,
+          change: function(e,ui) {
+               $(".notify").remove();
+               htext = ui.newHeader.find("a").text();
+               ui.newHeader.find("a").text(htext.replace("[OPEN]","[CLOSE]"));
+               htext = ui.oldHeader.find("a").text();
+               ui.oldHeader.find("a").text(htext.replace("[CLOSE]","[OPEN]"));
+          }
+      }
+      $("#prj_accordion").accordion(accOpts);
+  });
+</script>
+<hr width="100%">
+&nbsp;<br/>
+<h2>Systematic Review Matches</h2>
+&nbsp;<br/>
+<hr width="100%">
+<%
+    if !@resultslist["projects"].empty? %>
+<div id="prj_accordion">
+<%  
+    # For SRDR users (non-public) provide search results summary listing
+    if !current_user.nil? && @resultslist["projects"].length > 5 
+        # List just the titles here - quick list of findings
+%>    
+    <h3><a href="#" class="heading"><div id="search_project_title">[OPEN] Search results summary - <%= @resultslist["projects"].length %> project(s) matched search request</div> </h3> 
+        <div id="advsearch_project_0">
+<%          
+        count = 1
+        @resultslist["projects"].each do |projrec|
+            hitscore = projrec[0]
+            proj = projrec[1] 
+%>
+            <li><div id="search_project_title2">[<%= count %>] <%= proj.title.to_s %></div>
+<%          
+            count = count + 1                                                          
+        end
+%>
+        </div>
+<%  end %>
+<% 
+        count = 1
+        @resultslist["projects"].each do |projrec|
+            hitscore = projrec[0]
+            proj = projrec[1] 
+            qtext = projrec[2] 
+            study = projrec[3] 
+            publist = projrec[4] 
+            matchloc = projrec[5] 
+            userinfo = projrec[6] 
+            puts ">>>>>> projects_result.html.erb - proj "+proj.to_s
+            
+            header_text = count.to_s+". Project: "+proj.title
+            
+            
+            proj_info = ""
+            if proj.funding_source.nil? ||
+               proj.funding_source.length == 0
+                proj_info = proj_info + "<i><b>Funded by</b> na</i>"
+            else
+                proj_info = proj_info + "<i><b>Funded by</b> "+proj.funding_source+"</i>"
+            end
+            if proj.is_public?
+                proj_info = proj_info + ", <b>Published</b> "+proj.updated_at.strftime("%b/%Y")
+            else
+                proj_info = proj_info + ", <b>Created</b> "+proj.created_at.strftime("%b/%Y")
+            end
+%>
+    <h3><a href="#" class="heading" title="Project Result: <%= proj.title %> (CTRL + ENTER to open)"><div id="search_project_title">[OPEN] <%= raw header_text %></div>
+    <%= raw proj_info %><br/>
+    [Match found in <%= matchloc %> - "<%= raw qtext %>"]</a></h3> 
+        <div id="advsearch_project_<%= count %>">
+            <%= link_to image_tag('/images/Folder_table.png'), '/projects/'+proj.id.to_s %><B>Description:</B> <%= proj.description %><br/>
+<%          if !userinfo.nil? %>
+            <br/>
+            <b>Created By: </b><%= userinfo.lname %>, <b>Organization: </b><%= userinfo.organization %>, <b>Create Date: </b><%= proj.created_at %>, <b>Published: </b><%= proj.is_public.to_s.gsub("true","Yes").gsub("false","No") %>
+<%          end %>
+<%          if !publist.nil? && publist.length > 0 %>
+        <br/>&nbsp;
+        <br/>&nbsp;
+<%
+        if publist.length > 1
+%>
+        <b><%= publist.length %> Primary Publications</b><br/>
+<%
+        else
+%>
+        <b>Primary Publication</b><br/>
+<%
+        end
+%>
+        <table id='results_table' name='results_table' class="list_table" summary="systematic review search results table">
+            <th>PubMed ID</th>
+            <th>Title</th>
+            <th>Author(s)</th>
+            <th>Year</th>
+            <th>Journal</th>
+<%              for pub in publist %>
+            <tr class="<%= cycle("even", "odd") %>">	
+                <td><%= pub.pmid %></td>
+	        <td><%= pub.title %></td>
+	        <td><%= pub.author %></td>
+	        <td><%= pub.year %></td>
+	        <td><%= pub.journal %></td>
+            </tr>
+
+<%              end %>
+        </table>
+<%          end
+            count = count + 1
+%>
+        </div>
+<%      end %>
+</div>
+<%  elsif !@resultslist["publications"].empty? %>
+<em>Your search criteria did not match any SRDR projects, but did match one or more Study-Level records below.</em>
+<%  else %>
+<div class="indent_block">
+    <em>Your search criteria did not match any project, studies, or publications in the SRDR database.</em>
+    <br/>
+    Try and re-phrase your search criteria, and enter a new search.
+    <br/>
+    Common Problems
+    <li>Check your spelling.
+    <li>If you searched for an author name using initials, try again using only the author's last name.
+    <li>Try truncating words to find word variations: embryo retrieves embryo, embryos, embryonic.
+    <li>Pay particular attention to terms containing hyphens, periods, or other punctuation. Punctuation is ignored and letters or numbers separated by punctuation are treated as separate words: Search IL-4 with il-4 or il 4 (with a space), but not with il4 (without a space). Search mRNA with mrna, not with m-rna or m rna.
+    <li>Avoid Greek letters, superscripts, subscripts, and other special characters.
+    <li>Do not use wildcards such as "*" and "?", wild cards are not supported.
+    <li>For additional information, read <a href="#">Help with Searching.</a>
+    <p>
+</div>
+<%  end %>

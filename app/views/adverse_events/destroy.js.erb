@@ -1,0 +1,77 @@
+$("#adverse_events_table").html("<%= escape_javascript(render :partial=>"adverse_events/table", :locals => {:project => @project}) %>");
+
+	
+  // reset any forms and form elements marked as edited
+  forms = $(".unsaved_form");
+  for(i=0; i < forms.length; i++){
+  	$(forms[i]).removeClass("unsaved_form")
+  }
+  fields = $(".edited_field")
+  for(i=0; i < fields.length; i++){
+    $(fields[i]).removeClass("edited_field");
+  }
+  $(".unsaved_div").css("display","none"); // and finally, hide the unsaved message
+  
+  $(".editable_field").bind('change',function(){
+	$(this).addClass('edited_field');
+	var form = $(this).parents('form:first');
+	form.addClass("unsaved_form");
+	$(".unsaved_div").css("display","block");
+});
+
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });

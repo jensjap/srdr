@@ -1,0 +1,59 @@
+<br/><hr><br/>
+<% unless @groups.empty? %>
+	<% if @type == "between" %>
+	  <strong>Step 3:</strong> Choose a timepoint for this comparison<br/><br/>
+	  <span class='smallText'>You selected a comparison between arms, and should therefore select which timepoint
+	  	the comparison is being made at.</span>
+	<% else %>
+		<strong>Step 3:</strong> <label for="Choose an arm for this comparison">Choose an arm for this comparison</label><br/><br/>
+	  <span class='smallText'>You selected a within-arm comparison, and must select the arm for which the comparison
+	  	between timepoints is being made.</span>
+	<% end %>
+	<br/>	
+	
+	<select id="group_selector" tabindex="5">
+		<% if @type == "between" %>
+			<option value="choose">Choose a Timepoint</option>
+		<% else %>
+		  <option value="choose">Choose an Arm</option>
+		<% end %>
+		<% @groups.each do |group| %>
+		  <option value="<%= group[0].to_s %>"><%= group[1].to_s %></option>
+		<% end %>
+	</select>
+	
+<% else %>
+  <% if @type == "within" %>
+    <strong>You must add arms to the study before trying to define a within-arm comparison.</strong>
+  <% else %>
+    <strong>There are no timepoints defined for this outcome. Please add at least one outcome timepoint (e.g. Baseline)
+    	before entering a comparison.</strong>
+  <% end %>
+<% end %>
+
+<script type='text/javascript'>
+  $("#group_selector").bind("change",function(){
+  	var group_id = $(this).val();
+  	if(group_id != "choose"){
+  		var outcome_id = $("#outcome_selector").val();
+  		var study_id = $("#study_id").val();
+  		var extraction_form_id = $("#extraction_form_id").val();
+  		var within_or_between = "<%= @type %>"
+	  	$.ajax({
+				type: "POST",
+				url: 'comparison_data_points/show_comparison_selector',
+				data: {
+					outcome_id : outcome_id,
+					study_id : study_id,
+					extraction_form_id : extraction_form_id,
+					within_or_between : within_or_between,
+					group_id : group_id
+				}
+			});
+		}else{
+			$("#form_div").html("");
+			$("#modal_div").html("");
+			$("#comparator_selection_div").html("");
+		}
+  })
+</script>

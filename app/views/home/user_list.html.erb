@@ -1,0 +1,61 @@
+<div id='left-navigation-div' tabindex=100>
+<%= render :partial=>"sidebars/mySRDR_sidebar" %>
+</div>
+
+<div id='content' tabindex=200>
+<%
+    # Get control properties
+    guiproperties = Guiproperties.new
+    show_admin = guiproperties.getDevAdminActivation()
+    show_adminv = guiproperties.getDevAdminActivationValue()
+
+%>
+<table class='list_table'>
+	<tr>
+		<td scope='col'>ID</td>
+		<td scope='col'>Username</td>
+		<td scope='col'>FirstName</td>
+		<td scope='col'>LastName</td>
+		<td scope='col'>Email</td>
+		<td scope='col'>Organization</td>
+		<td scope='col'>User Type</td>
+		<td scope='col'>Login Count</td>
+<%
+    if show_admin
+%>
+		<td scope='col'>Admin</td>
+<%
+    end
+%>
+	</tr>
+	<% @users.each do |user| %>
+		<tr>
+			<td scope='row'><%= user.id %></td>
+			<td scope='row'><%=user.login%></td>
+			<td scope='row'><%= user.fname.force_encoding("UTF-8") %></td>
+			<td scope='row'><%= user.lname.force_encoding("UTF-8") %></td>
+			<td scope='row'><%= user.email.force_encoding("UTF-8") %></td>
+			<td scope='row'><%= user.organization.force_encoding("UTF-8") %></td>
+			<td scope='row'><%= user.user_type %></td>
+			<td scope='row'><%= user.login_count%></td>
+<%
+    if show_admin
+        if user.user_type == "PENDING"
+%>
+		<td scope='row'>
+        <a href="/accountsmanager/approve_request/<%= user.id %>">Approve</a> <a href="/accountsmanager/delete/<%= user.id %>">Delete</a>
+        </td>
+<%
+        else
+%>
+            <td scope='row'>
+            <a href="/accountsmanager/delete/<%= user.id %>">Delete</a>
+            </td>
+<%
+        end
+    end
+%>
+		</tr>
+	<% end %>
+</table>
+</div>

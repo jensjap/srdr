@@ -1,0 +1,192 @@
+<%
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Simple Export Tools","Simple Export Tools","/projects/exporttools/simpleexport.html?prjid="+@project.id.to_s)
+    session[:urlhistory] = urlhistory
+
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+    excel_cache_path = siteproperties.getProjectCachePath()
+
+    puts "Export tools index.html on project id = "+@project.id.to_s
+    puts "Extraction form size - "+@extraction_forms.size().to_s
+
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+<div id='content' tabindex=200>
+<h2>Project Export Tools:</h2>
+<hr width="100%">
+<p/>
+<h2><%= @project.title %></h2>
+&nbsp;<p/>
+<%= @project.description.force_encoding("UTF-8") %>
+&nbsp;<p/>
+&nbsp;<p/>
+<button class="regular" onClick="window.location='/projects/exporttools.html?prjid=<%= @project.id.to_s %>'">Return To Export Tools</button>
+&nbsp;<p/>
+&nbsp;<p/>
+<strong>Video Tutorial: </strong><a href='http://youtu.be/WP1GMwsXces' class='needs_exit_disclaimer' target='_blank'> Exporting your project’s entire dataset using the SRDR Simple Data Export Tool <img alt='WARNING: this link will direct you away form our site.' src="/images/exit_disclaimer.gif"/></a> (2 min, 28 sec)
+
+<br/><br/>
+<strong>Instructions: </strong> Your files for this project have been created and automatically saved. You may click the icons below to download 
+the files containing your data. The files are divided by extraction form and maybe downloaded to your computer in two different formats: 1) 
+Microsoft Excel files containing multiple spreadsheets; OR 2) single page CSV files. After clicking either the Excel or CSV icons, choose SAVE 
+and specify the location of your choice on your computer. Repeat this step for each extraction form dataset you want to download. Please note, 
+the option to export project data into Microsoft Excel files is only limited to those projects that meet the following criteria:
+<p/><br/> 
+<li> Total number of studies are less than 500
+<li> Total number of Arms, Outcomes, Subgroups, Timepoints are less than 200
+<p/><br/> 
+<table id="export_tools_excel_table">
+    <tr>
+        <td class="title">Extraction Form</td>
+        <td class="title">EXCEL Spreadsheets</td>
+        <td class="title">Compile Date/Time</td>
+        <td class="title">Project Last Updated</td>
+    </tr>
+<%
+    @extraction_forms.each do |ef|
+        if File.exist?("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".xlsx")
+%>
+    <tr>
+        <td class="ef_data">
+        <%= ef.title %>
+<%
+            if (File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".xlsx").to_f < @project.updated_at.to_f)
+%>
+	(old version)
+<%
+            end
+%>
+        </td>
+        <td class="data">
+        <A HREF="/<%= excel_cache_path %>project-<%= @project.id.to_s %>-<%= ef.id.to_s %>.xlsx"><IMG SRC="/images/Disk.png" border="0"> Excel</A>
+        </td>
+        <td class="data">
+        <%= File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".xlsx").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+        <td class="data">
+        <%= @project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+    </tr>
+<%
+        elsif File.exist?("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".xls") 
+%>
+    <tr>
+        <td class="ef_data">
+        <%= ef.title %>
+<%
+            if (File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".xls").to_f < @project.updated_at.to_f)
+%>
+	(old version)
+<%
+            end
+%>
+        </td>
+        <td class="data">
+        <A HREF="/<%= excel_cache_path %>project-<%= @project.id.to_s %>-<%= ef.id.to_s %>.xls"><IMG SRC="/images/Disk.png" border="0"> Excel</A>
+        </td>
+        <td class="data">
+        <%= File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".xls").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+        <td class="data">
+        <%= @project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+    </tr>
+<%
+        end
+    end
+%>
+    <tr>
+        <td class="title">Extraction Form</td>
+        <td class="title">EXCEL CSV Format</td>
+        <td class="title">Compile Date/Time</td>
+        <td class="title">Project Last Updated</td>
+    </tr>
+<%
+    # Setup section name list
+    sec_names = ['GeneralInfo','Team.','DesignDetail','Arms','ArmsDetail','Baselines','OutcomesInfo','Outcomes','OutcomeDetails','OutcomeMeasures','Quality','BAC','WAC','AdverseEvents'];
+    sec_descs = ['Project Summary','Project Team.','Design','Arms','Arm Details','Baselines','Outcome Summary','Outcomes','Outcome Details','Results','Quality','Between Arm Comparison','Within Arm Comparison','Adverse Events'];
+    @extraction_forms.each do |ef|
+        if File.exist?("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".csv") 
+%>
+    <tr>
+        <td class="ef_data">
+        <%= ef.title %>
+<%
+            if (File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".csv").to_f < @project.updated_at.to_f)
+%>
+	(old version)
+<%
+            end
+%>
+        </td>
+        <td class="data">
+        <A HREF="/<%= excel_cache_path %>project-<%= @project.id.to_s %>-<%= ef.id.to_s %>.csv"><IMG SRC="/images/Disk_csv.png" border="0"> CSV</A>
+        </td>
+        <td class="data">
+        <%= File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+".csv").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+        <td class="data">
+        <%= @project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+    </tr>
+<%
+        end
+        if File.exist?("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+"-GeneralInfo.csv")
+%>
+    <tr>
+        <td class="title">Extraction Form</td>
+        <td class="title">EXCEL CSV Format (by Section)</td>
+        <td class="title">Compile Date/Time</td>
+        <td class="title">Project Last Updated</td>
+    </tr>
+<%
+            # List links to each individual section CSV downloads 
+            sec_idx = 0
+            sec_names.each do |sec_name|
+            
+                if File.exist?("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+"-"+sec_name.to_s+".csv") 
+%>
+    <tr>
+        <td class="ef_data">
+        <%= sec_descs[sec_idx].to_s %>
+<%
+                    if (File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+"-"+sec_name.to_s+".csv").to_f < @project.updated_at.to_f)
+%>
+	(old version)
+<%
+                    end
+%>
+        </td>
+        <td class="data">
+        <A HREF="/<%= excel_cache_path %>project-<%= @project.id.to_s %>-<%= ef.id.to_s %>-<%= sec_name.to_s %>.csv"><IMG SRC="/images/Disk_csv.png" border="0"> CSV</A>
+        </td>
+        <td class="data">
+        <%= File.mtime("public/"+excel_cache_path+"project-"+@project.id.to_s+"-"+ef.id.to_s+"-"+sec_name.to_s+".csv").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+        <td class="data">
+        <%= @project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+    </tr>
+<%
+                end
+                sec_idx = sec_idx + 1
+            end
+        end
+    end
+%>
+</table>
+<p/>&nbsp;
+<p/>&nbsp;<br/>
+</div>

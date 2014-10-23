@@ -1,0 +1,3 @@
+<% entry_table = @is_diagnostic ? "outcome_data_entries/diagnostic_entry_table" : "outcome_data_entries/entry_table" %>
+$("#form_div").html("<%= escape_javascript(render :partial=>entry_table)%>");
+$("#modal_div").dialog("close");

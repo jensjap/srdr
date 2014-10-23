@@ -1,0 +1,4 @@
+$("#new_arm_entry").html("<%= escape_javascript(render :partial=>'extraction_form_arms/form')%>");
+$("#new_arm_entry :button").removeAttr("disabled");
+$("#new_arm_entry").dialog("option", "title", "Suggest New Arm Title");		
+$("#new_arm_entry").dialog('open');

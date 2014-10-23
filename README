@@ -1,0 +1,16 @@
+Systematic Review Data Repository (SRDR)
+
+An application to store systematic review data.
+
+To initialize the database, run the following:
+
+rake db:schema:load to create the empty database
+rake default_data:all to create the default administrator account and template fields
+rake default_result_measures:all to create default outcome and comparison measures
+
+
+_Secret Token_
+You might want to create a new secret token, especially if you start using
+SRDR in production. To generate the 30 character string use the command:
+    `rake secret`
+

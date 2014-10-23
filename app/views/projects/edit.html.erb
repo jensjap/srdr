@@ -1,0 +1,69 @@
+<%
+
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Edit Project","Edit Project","/projects/"+@project.id.to_s+"/edit#")
+    session[:urlhistory] = urlhistory
+
+%>
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+<div id='content' tabindex=200>
+
+	<%= render :partial => "page_title", :locals => {:page_title => "Project Information"} %>
+	<script type="text/javascript">
+		var is_edit_page = true;
+	</script>
+<br/><br/>
+	<%= render "projects/form" %>
+	
+	
+	<div id="add_keyquestion_box" style='display:none;'>
+	</div>
+	<!-- Used as a modal for alerting the user of unsaved data -->
+	<div id="unsaved_modal" style="display:none;" title="WARNING: Unsaved Data">
+		<p>By continuing, you will lose all unsaved changes. Are you sure?</p>
+	</div>
+</div>
+<span id='proj_marker'></div>
+
+<script type='text/javascript'>
+// Bind an event for the cancel button
+function proj_init(){
+  try{
+    checkProjMarkerLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	attachProjListeners();
+  } catch( err ) {
+    setTimeout('proj_init()', 200);
+  }
+}
+
+function checkProjMarkerLoaded(){
+	if ( $('#proj_marker').length == 0) $jquery.error( 'not ready' );
+}
+function attachProjListeners(){
+	//if ($.browser.msie) { dataType = 'text' } else { dataType = 'html' };
+	$("#add_kq_button").on("click", function(event){
+		event.preventDefault();
+		
+		$.ajax({
+		  url: 'key_questions/new',
+		  type: "POST",
+		  cache: false
+		});
+	});
+	$("#add_keyquestion_box").dialog({
+        modal: true,
+        autoOpen: false,
+		minWidth: 600, 
+		minHeight: 200,
+		title: "Add a New Key Question"	
+    });	
+}
+proj_init();
+// -->
+</script>

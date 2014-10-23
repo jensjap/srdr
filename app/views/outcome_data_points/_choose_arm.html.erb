@@ -1,0 +1,31 @@
+<br/><hr><br/>
+<strong>Step 2.</strong> <label for="Choose arm to enter data for">Choose which arm to enter results for:</label>
+<%= select "arm_selection", "id", [["Choose an arm...",0]] + ["All"], :tabindex => 1 %>
+
+<script type='text/javascript'>
+<!-- 
+$("#arm_selection_id").bind("change", function(){
+	var id = $("#arm_selection_id").val();
+	var outcome_id = $("#outcome_selection_id").val();
+	if(id != 0){
+		$("#form_div").html("");
+		$("#modal_div").html("");
+		$("#select_outcome_timepoints_display").html("");
+		$("#choose_timepoint").html("");
+		$.ajax({
+		  type: 'POST',
+		  url: "results/setup_timepoints",
+		  data: ({
+				arm_id: id,
+				outcome_id: outcome_id
+		  })
+		});
+	}else{
+		$("#form_div").html("");
+		$("#modal_div").html("");
+		$("#select_outcome_timepoints_display").html("");
+		$("#choose_timepoint").html("");
+	}
+});
+-->			
+</script>

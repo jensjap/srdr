@@ -1,0 +1,17 @@
+<% if @datapoint.nil? %>
+	$("#confirmation_modal").html("You must save a value for this field before any options can be set.")
+	$("#confirmation_modal").dialog({
+	 	resizable: false,
+		height: 160,
+		modal: true,
+		buttons: {
+			"Cancel": function(){
+				$(this).dialog("close");
+			}
+		}
+	})
+<% else %>
+  $("#data_point_option_div").html("<%= escape_javascript(render :partial=>"/outcome_data_entries/data_point_options_form")%>");
+	$("#data_point_option_div").dialog("option","resizable",true);
+	$("#data_point_option_div").dialog("open");
+<% end %>

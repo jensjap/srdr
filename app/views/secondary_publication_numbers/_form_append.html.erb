@@ -1,0 +1,59 @@
+<table class="form_table" id="sp_form_identifier_table_<%= num.to_s %>" summary="secondary publication form identifiers table">
+		<tbody>
+		<tr><td>
+			<label for="Identifier">Identifier:</label>
+		</td><td>
+		<%= hidden_field :id, num, :value => one_spi.id, :class => "id_field" %>
+			<%= text_field :number, num, :value => one_spi.number, :class=>"inline-field editable_field number_field", :tabindex => 7, :title=>"number" %>
+		</td>
+		<td rowspan="2" class="label" padding="6">
+			<div style="height:6px"></div>
+				<div class="admin_functions actions" style="margin-left: 5px">
+			<%= link_to "Remove This Identifier", {}, {:class => "remove_spi_button", :id => one_spi.id} %><br/>
+						</div>
+		</td>
+		</tr>
+		<tr><td valign="top">
+			<div class="identifier_field_other inline">
+				<label for="Number Type">Number Type: </label>
+			</div>
+		</td><td>
+		<% @id_types = [["Choose Identifier Type", "Choose Identifier Type"], ["Pubmed", "Pubmed"], ["Cochrane", "Cochrane"], ["NCT", "NCT"], ["ClinicalTrials\.gov", "ClinicalTrials\.gov"], ["Other", "Other"]]%>
+		<% @id_types_sm = ["Choose Identifier Type", "Pubmed", "Cochrane", "NCT", "ClinicalTrials\.gov"] %>		
+			<%= select :number_type, num, options_for_select(@id_types), {}, {:value => one_spi.number_type, :class => "has_other editable_field number_type_field", :tabindex => 8, :title=>"number"} %>
+		</td><td></td></tr>
+		<tr height="15"></tr>
+		</tbody>
+		</table>
+
+		
+		<% arr = @id_types_sm %>
+		<% if !arr.include?(one_spi.number_type) %>
+		<script type="text/javascript">
+			var field_id = "secondary_publication_identifiers_attributes_<%= num.to_s %>_number_type";
+			$.ajax({url: "/application/show_other_filled",
+						type: "POST",
+						data: {
+							"field_name": "secondary_publication_identifiers_attributes[<%=num.to_s %>][number_type]", 						
+							"field_id":field_id, 
+							"value": "<%= one_spi.number_type %>"
+						}
+					});
+		</script>
+		<% end %>
+		
+		<script>
+$(".remove_spi_button").bind("click", function(event)
+	event.preventDefault();
+	var id = $(this).attr('id');
+	$.ajax({
+	  url: 'secondary_publication_numbers/destroy',
+	  type: "POST",
+	  data: { id: id,
+	  study_id: <%= study.id.to_s %>}
+	});
+});
+
+
+  
+</script>

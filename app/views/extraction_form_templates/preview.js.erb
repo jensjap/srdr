@@ -1,0 +1,6 @@
+// extraction form template preview
+if(this["<%=@eft_id%>"]){
+	this["<%=@eft_id%>"].close();
+}
+this["<%=@eft_id%>"] = window.open ("","mywindow_<%=@eft_id%>", "location=no,titlebar=no,alwaysRaised=yes,toolbar=no,scrollbars=yes,menubar=no,width=700,height=700");
+this["<%=@eft_id%>"].document.write("<%= escape_javascript(render :partial=> 'extraction_form_templates/preview')%>")

@@ -1,0 +1,57 @@
+<% if !primary_publication.nil? %>
+
+
+		<div align="right"><%= render :partial => "comments/field_comments", :locals => {:section_name => "primarypublications", :section_id => primary_publication.id, :field_name => "title", :study_id => study.id, :project_id => project.id} %></div>
+
+	<table class="result_table" id="primary_publications_completed_table" summary="primary publications completed table">
+		<tr style="display:none"><th>Title</th><th>Data</th><th></th></tr>	
+		<tr>
+		<td class="label">
+		Title
+		</td>
+		<td>
+		<%= primary_publication.title %>
+		</td>
+		</tr>
+		<tr>
+		<td class="label">
+		Author
+		</td>
+		<td>
+		<%=primary_publication.author %>
+		</td>	
+		</tr>
+		<tr>
+		<td class="label">
+		Country
+		</td>
+		<td> 
+		<%=primary_publication.country %>
+		</td>	
+		</tr>
+		<tr>
+		<td class="label">
+		Year
+		</td>
+		<td>
+		<%=primary_publication.year %>
+		</td>		
+		</tr>
+		<tr>
+		<td class="label">
+		Numbers
+		</td>
+		<td>
+				<% @pub_uis = PrimaryPublicationNumber.where(:id => @primary_publication.id).all %>
+				<% if !primary_publication.pmid.nil? && primary_publication.pmid.to_s != "" %>
+				 Pubmed ID: <%= primary_publication.pmid.to_s %> <br/>
+				<% end %>
+				<% for ui in @pub_uis %>
+					<%= ui.number %> (<%= ui.number_type %>)<br/>
+				<% end %>
+		</td>	
+		</tr></table>
+		
+			<% else %>
+		  No primary publication information has been entered for this study.
+	<% end %>

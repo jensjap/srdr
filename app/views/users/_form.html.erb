@@ -1,0 +1,149 @@
+<%
+
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+
+%>
+<%= form_for(@user) do |f| %>
+
+<table class="form_table register_table" id="register_user_form_table" summary="register users form table">
+    <tr class="field">
+        <td class="label">
+            <label for="user_login">Username:</label>
+        </td>
+        <td>
+        		<%= @user.login %>
+        		<%= f.text_field :login %>
+        	    <%= f.hidden_field :user_type, :value => "PENDING" %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td class="label">
+            <label for="user_fname">First Name:</label>
+        </td>
+        <td>
+            <%= f.text_field :fname %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td class="label">
+            <label for="user_lname">Last Name:</label>
+        </td>
+        <td>
+            <%= f.text_field :lname %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td class="label">
+            <label for="user_organization">Organization:</label>
+		</td>
+        <td>
+    	    <%= f.text_field :organization %>
+        </td>
+    </tr>
+    <tr class="field">
+    	<td class="label">
+    	    <label for="user_email">Email:</label>
+    	</td>
+        <td>
+    	    <%= f.text_field :email %>
+    	</td>
+    </tr>
+	<tr class="field">
+    	<td class="label">
+    	    <label for="user_password">Password:</label>
+    	</td>
+    	<td>
+    	    <%= f.password_field :password %>
+    	</td>
+    </tr>
+    <tr class="field">
+    	<td class="label">
+    	    <label for="user_password_confirmation">Confirm Password:</label>
+    	</td>
+        <td>
+    	    <%= f.password_field :password_confirmation %>
+    	</td>
+    </tr>
+    <tr height="15"><td colspan='2'>&nbsp;</td></tr>
+    <tr class="field">
+        <td colspan="2" align="LEFT">
+            <strong><label for='account_type'>Account Type</label></strong><br/>
+            <%
+                if siteproperties.isSiteTypeProduction()
+            %>
+                    <input type="radio" id='account_type' name="account_type" value="PUPLIC" checked> Public Commentator<br/>
+                    <input type="radio" id='account_type' name="account_type" value="CONTRIBUTOR"> Project Contributor<br/>
+            <%
+                else
+            %>
+                    <input type="hidden" id='account_type' name="account_type" value="TRAINING">
+                    Training Account<br/>
+            <%
+                end
+            %>
+        </td>
+    </tr>
+    <tr class="field">
+        <td colspan="2" align="LEFT">
+            <h2>Agreement:</h2>
+            <br/>
+            <br/><a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/" target="_blank" class='needs_exit_disclaimer' tabindex=112 title="Creative Commons License"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/80x15.png" /><img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/> Creative Commons</a>
+            <br/>I understand that all contributions made to the SRDR are made freely available to the public in accordance with the 
+            <a href="/home/policies">SRDR's Open Access policy</a>, under the terms of a Creative Commons license.
+            <br/><br/>
+            <input type="checkbox" name="user_agreement" value="1" id="user_agreement"> I agree to the SRDR <a href="home/policies">Terms of Use Policy</a>
+        </td>
+    </tr>
+    <tr class="field">
+        <td colspan="2" align="LEFT">
+        <h2>What Happens Next:</h2><br/>
+        Users requesting a Public Commentator account will receive a validation E-mail notification within 24 hours to confirm the E-mail address entered.
+        Follow the instructions in the E-mail validation message to activate the account.
+        <br/><br/>
+        Users requesting a Project Contributor account will be reviewed and contacted by your organization's SRDR administrator.
+        </td>
+    </tr>
+	<tr>
+		<td colspan=2 align=center>
+		  <div class="actions buttons">
+				<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+					<%= image_tag "Add.png", :alt => "Submit" %>Submit
+				</button>
+				<button class="negative" id='cancel_register'>
+					<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+				</button>
+		  </div>
+		</td>
+	</tr>
+</table>
+<% end %>
+<span id='register_end'></span>
+<script type='text/javascript'>
+//<!--
+function register_init() {
+  try{
+    checkLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    set_register_js();
+  } catch( err ) {
+    setTimeout('register_init()', 200);
+  }
+}
+function checkLoaded() {
+    if ( $('#register_end').length == 0) $jquery.error( 'not ready' );
+}
+function set_register_js(){
+    $("#cancel_register").unbind();
+    $("#cancel_register").bind("click",function(event){
+        event.preventDefault();
+        window.location.replace("/");
+    });
+}
+register_init();
+    
+//-->
+</script>

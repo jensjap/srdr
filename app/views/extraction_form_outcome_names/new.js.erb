@@ -1,0 +1,4 @@
+$("#new_outcome_entry").html("<%= escape_javascript(render :partial=>'extraction_form_outcome_names/form')%>");
+$("#new_outcome_entry :button").removeAttr("disabled");
+$("#new_outcome_entry").dialog("option", "title", "Suggest New Outcome Title");			
+$('#new_outcome_entry').dialog('open');	

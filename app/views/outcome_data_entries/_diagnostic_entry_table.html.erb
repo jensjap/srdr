@@ -1,0 +1,555 @@
+<% @next_comparator_id = -1 %>
+<!--<div style='display:block; width:auto; border-top: solid 1px #C5CACE; margin-top:10px;padding-top:3px'>
+</div>-->
+<% outcome_tabindex = 1001 %>
+<% bac_tabindex = 2000 %>
+<% wac_tabindex = 3000 %>
+<div style='display:block; width:95%; overflow:scroll;' id='entry_div'>
+	<%# a hash to keep track of which comparators are in which columns when data is saved%>
+	<% comparator_ids = Hash.new%>
+  <%# Add the buttons for updating the rows in each section %>
+  <%#-------------------------------------------------------%>
+  <% form_started = false %>
+  <% section_titles = {1=>'Descriptive Statistics', 2=>'Assuming Reference Standard',3=>'Additional Analysis'} %>
+  <%= form_tag "results/update_table_rows", :remote=>true do %>
+    <input type="hidden" name="outcome_id" value="<%= @outcome.id %>"/>
+    <input type="hidden" name="subgroup_id" value="<%= @subgroup.nil? ? 0 : @subgroup.id %>">
+    <% [1,2,3].each do |section_number| %>
+      <% selected_timepoints = @selected_timepoints[section_number].split("_") %>
+      <% unless @checkbox_timepoints.length == selected_timepoints.length %>
+        <% unless form_started %>
+            <table class='list_table' width='300px' style='border:solid 1px red;'>
+              <tr id="section_0_header">
+              <th colspan=2 class='btwn_arm_comparisons title_row'>
+                <a class='table_head_link' hideClass="section_0" style='text-decoration:none;' href='#'>
+                  <div style='width:100%; background-color: #9C9C9D; text-align:left;color:#fff;font-weight:bold;font-size:15px;'>
+                    Click Here to add timepoints to the results table...
+                    <span style='float:right;font-weight:bold;color:white;'>-Show</span>
+                  </div>
+                </a>
+              </th>
+              </tr>
+            <% form_started = true %>
+        <% end %> <%# end unless form_started %>
+        <% @checkbox_timepoints.each do |tp| %>
+          <% if !selected_timepoints.include?(tp.id.to_s) %>
+            <tr class='section_0'>
+              <td width='50'>
+                <input id="<%= "checkbox_#{tp.id}" %>" type='checkbox' name="<%= "tps_to_add[#{section_number}][]" %>" value="<%= tp.id %>" />
+              </td>
+              <td>
+                <%= section_titles[section_number] %> : <%= tp.number %> <%= tp.time_unit %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+        
+      <% end %> <%# end unless checkbox_timepoints.length == selected_tp_array[sect.. %>
+    <% end %> <%# end 1,2,3.each do |section| %>
+    <%# if the form was actually used, throw in the table %>
+    <% if form_started %>
+        <tr class='section_0'>
+          <td colspan=2 >
+            <button type='submit' id="button_to_submit_row_update">Update Table Rows</button>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %> <%# end the form %>
+         
+  <br/>
+  <strong>Note:</strong> After successfully saving data to the table, you may double-click on the cell containing data to set footnotes and other options.    
+  <!-- CREATE THE FORM -->
+	<%= form_tag url_for(:controller=>:outcome_data_points, :action=>:create), :remote=>true do %>
+	<input type='hidden' name='subgroup_id' value="<%= @subgroup.nil? ? 0 : @subgroup.id %>">
+	<input type='hidden' name='outcome_id' value="<%= @outcome_id %>">
+	<input type="hidden" name="selected_timepoints" value="<%= @selected_timepoints %>">
+  <input type='hidden' name='diagnostic' value='true'/>
+  	<center><%= render :partial=>"save_indicators/default" %></center><br/>
+	
+	<table class='list_table' id="result_table" style='width:100%;'>
+	
+  	<%#-----------------------------------------------------------%>
+  	<%# BUILD THE TABLE HEADERS                                   %>
+  	<%#-----------------------------------------------------------%>
+  	<% numComparators = @all_comparators.length == 0 ? 1 : @all_comparators.length %>
+  	<tr id="header_tr">
+  		<th colspan="<%= 2 + numComparators %>" class='title_row'>
+  			<strong style='text-decoration:underline;'>Outcome:</strong> <%= @outcome.title %>
+        <%= "(#{@outcome.units})" unless @outcome.units.empty?%>
+  			&nbsp;&nbsp;
+  			<strong style='text-decoration:underline;'>Description:</strong> <%= @outcome.description.blank? ? "--" : "#{@outcome.description}" %>
+  			&nbsp;&nbsp;
+  			<strong style='text-decoration:underline;'>Population:</strong> <%=@subgroup.title%>
+  		</th>	
+  	</tr>
+    
+    <%# Add in the table titles for this section %>
+      <tr id="btw_arm_table_header_row">
+        <th class='btwn_arm_comparison'>Timepoint</th><th class='btwn_arm_comparison'>Measure</th>
+
+        <% unless @all_comparators.length == 0 %>
+          <% @all_comparators.each_with_index do |acomp,i| %>
+            <% elements = acomp.split("_") %>
+            <th class='btwn_arm_comparison' style='max-width:245;' column="<%= i + 1 %>">
+              <%= select_tag "comparator["+i.to_s+"[0]", options_for_select(@index_test_options,elements[0]), {:title=>"comparator", :style=>'max-width:230;'} %> vs.<br/>
+
+              <%= select_tag "comparator["+i.to_s+"[1]", options_for_select(@reference_test_options,elements[1]), {:title=>"comparator", :style=>'max-width:230;'} %> 
+              <% unless i == 0 %>
+                <br/>                
+                <a style='float:right;color:grey;' class="remove_comparison_column_btn" col_num="<%= i+1 %>" href='#'>Remove Column</a>
+              <% end %>
+            </th>
+          <% end %>
+        <% else %>
+          <th class='btwn_arm_comparison' style='max-width:245;' column="1">
+            <%= select_tag "comparator[0[0]]",options_for_select(@index_test_options), {:title=>"comparator", :style=>'max-width:230;'} %>  
+            vs.
+            <%= select_tag "comparator[0[1]]",options_for_select(@reference_test_options), {:title=>"comparator", :style=>'max-width:230;'} %>  
+          </th>
+        <% end %>
+      </tr>
+
+
+
+    <%# @curr_tp = @comparisons[1].nil? ? @comparisons[2].nil? ? @comparisons[3].keys.first : @comparisons[2].keys.first : @comparisons[1].keys.first %>
+
+  	<div id='section_1_div'>
+  		<%= render :partial=>"outcome_data_entries/diagnostic_tests/dx_section", :locals=>{:numComparators=>numComparators, :section_number=>1, :title=>"Descriptive Statistics"} %>
+  	</div>
+
+    <div id='section_2_div'>
+      <%= render :partial=>"outcome_data_entries/diagnostic_tests/dx_section", :locals=>{:numComparators=>numComparators, :section_number=>2, :title=>"Assuming Reference Standard"} %>
+    </div>
+
+    <div id='section_3_div'>
+      <%= render :partial=>"outcome_data_entries/diagnostic_tests/dx_section", :locals=>{:numComparators=>numComparators, :section_number=>3, :title=>"Additional Analysis"} %>
+    </div>
+
+    <tr class='comparison_btn_row comparison_save_data_row'>
+      <td colspan="<%= 2 + numComparators  %>" class='save_button_row'>
+        <center>
+          <button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+            <%= image_tag "Add.png", :alt => "Add" %>Save Table Data
+          </button>
+          |
+          <button type="submit" class="positive" id="add_comparison_column_btn">
+            <%= image_tag "Add.png", :alt => "Add" %>Add a Column
+          </button>
+
+          |
+          <button type="submit" class="positive" id='clear_btwn_arms_button'>
+            <%= image_tag "Add.png", :alt => "Add" %>Reset the Table
+          </button>
+        </center>
+      </td>
+    </tr>
+
+	</table> 
+	<% end %> <%# END FORM %>
+  <div id='footnotes_div' style='margin-top:8px;'>
+    <%= render :partial=>'outcome_data_entries/footnotes' %>
+  </div>
+</div> 	
+<div id='confirmation_modal' style='display:none;' title='Warning!'>
+  This action will remove this row along with <strong>all</strong> associated comparison data, and 
+  <strong>cannot be undone.</strong> Are you sure?
+</div>
+<input type="hidden" id="next_new_comparator_id" value="<%= @next_comparator_id %>"/>
+<%####################################################
+#          JAVASCRIPT FOR PAGE ACTIONS
+#####################################################%>
+
+<script type='text/javascript'>
+<!--
+// HIDE THE UNUSED TIMEPOINTS WHEN THE PAGE LOADS 
+$(document).ready(function(){
+  $(".section_0").css("display","none");
+});
+
+$(".table_head_link").bind("click",function(event){
+	event.preventDefault();
+	hideClass = "." + $(this).attr("hideClass");
+	currentDisplay = $(hideClass).first().css("display");
+	if(currentDisplay == "none"){
+		//$(hideClass).fadeIn();
+    $(hideClass).show();
+		$(this).children("div").children("span").html("- Hide");
+	}else{
+		//$(hideClass).fadeOut();
+    $(hideClass).hide();
+		$(this).children("div").children("span").html("+ Show");
+	}
+});
+//---------------------------------------------
+// CORE TABLE FUNCTIONALITY
+//--------------------------------------------0-
+function has_data(){
+  forms = $("form");
+  var has_data = false;
+  for(i=1; i<forms.length; i++){
+    if($(forms[i]).hasClass('unsaved_form')){
+      has_data = true;
+    }
+  }
+  return(has_data);
+}
+$(".editable_field").unbind();
+$(".editable_field").bind('change',function(){
+  $(this).addClass('edited_field');
+  var form = $(this).parents('form:first');
+  form.addClass("unsaved_form");
+  /*$(".unsaved_div").css("display","block");*/
+});
+$("#modal_div").dialog({
+    title: "Editing Diagnostic Test Comparison Measures",
+    modal: true,
+    height: 700,
+    width: 800,
+    position: ['center','center'],
+    resizable: true,
+    autoOpen: false
+  });
+//------------------------------------------------------
+// CODE BELOW THIS POINT IS FOR BETWEEN ARM COMPARISONS
+//------------------------------------------------------
+function bind_dbl_click_listener(){
+  $(".editable_field").unbind("dblclick");
+  $(".editable_field").bind("dblclick",function(){
+    var field_id = $(this).attr("id").toString();
+    var value = $(this).val();
+    if(value == ""){
+      $("#confirmation_modal").html("You must save a value for this field before any options can be set.")
+      $("#confirmation_modal").dialog({
+        resizable: false,
+        height: 160,
+        modal: true,
+        buttons: {
+          "Cancel": function(){
+            $(this).dialog("close");
+          }
+        }
+      })
+    }else{
+      $("#data_point_option_div").dialog({
+        title: "Set Up Field Options",
+        modal: true
+      })
+      $.ajax({
+        type: 'POST',
+        url: "results/show_data_point_options_form",
+        data:({
+          field_id: field_id,
+          outcome_id: "<%= @outcome.id %>",
+          outcome_type: "<%= @outcome.outcome_type %>",
+          subgroup_id: $("#subgroup_selector").val(),
+          selected_timepoints: "<%= @selected_timepoints %>" 
+        }),
+        success: function(){
+          $("#loading_div").remove();
+        }
+      })
+      show_loading_icon();
+    }
+  })
+}
+// Assign the double click listener the first pass through 
+bind_dbl_click_listener();
+// IF A USER HAS REMOVED TIMEPOINTS FROM A PARTICULAR ROW, ALLOW THEM TO ADD THEM BACK IN
+$(".button_to_submit_row_update").bind("click",function(){
+  $(this).after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+})
+
+// REMOVE A ROW FROM THE COMPARISON ENTRY TABLE, AND DELETE ALL
+// ASSOCIATED DATA POINTS/MEASURES/ETC.
+$(".remove_comparison_link").bind("click",function(event){
+  event.preventDefault();
+  comparison_id = $(this).attr("comparison_id")
+  // this is the delete confirm dialog
+  $("#confirmation_modal").html("This action will remove this row along with <strong>all</strong> associated comparison data, and <strong>cannot be undone.</strong> Are you sure?");
+  $("#confirmation_modal").dialog({
+    resizable: false,
+    height: 160,
+    modal: true,
+    buttons: {
+      "Cancel": function(){
+        $(this).dialog("close");
+      },
+      "Yes, I'm sure": function(){
+        $.ajax({
+          type: 'POST',
+          url: "results/remove_comparison_entry",
+          data:({
+            selected_timepoints: "<%= @selected_timepoints %>",
+            outcome_id: "<%= @outcome.id %>",
+            subgroup_id: $("#subgroup_selector").val(),
+            study_id: "<%= @study_id %>",
+            extraction_form_id: "<%= @extraction_form_id %>",
+            comparison_id: comparison_id
+          }),
+          success: function(){
+            $("#loading_div").remove();
+          }
+        })
+        $(this).dialog("close")
+        show_loading_icon();
+      }
+    }
+  })
+})
+
+// EDITING COMPARISON MEASURES
+$(".edit_comparison_measures_btn").unbind("click")
+$(".edit_comparison_measures_btn").bind("click",function(event){
+  event.preventDefault();
+  $("#modal_div").dialog({
+    title: "Editing Diagnostic Test Comparison Measures",
+    modal: true,
+    height: 700,
+    width: 800,
+    position: ['center','center'],
+    resizable: true,
+    autoOpen: false
+  });
+  could_lose_information = has_data();
+  if(could_lose_information){
+    $("#confirmation_modal").html("To avoid losing data, please save any current changes before editing measures.")
+    $("#confirmation_modal").dialog({
+      resizable: false,
+      height: 160,
+      modal: true,
+      buttons: {
+        "Cancel": function(){
+          $(this).dialog("close");
+        },
+        "Continue without saving": function(){
+          $(this).dialog("close");
+          $.ajax({
+            type: 'POST',
+            url: "results/show_comparison_measures",
+            data:({
+              timepoint_id: $(this).attr("tpid"),
+              comparison_id: $(this).attr("comparison_id"),
+              outcome_id: "<%= @outcome.id %>",
+              subgroup_id: $("#subgroup_selector").val(),
+              outcome_type: "<%= @outcome.outcome_type %>",
+              study_id: "<%= @study_id %>",
+              extraction_form_id: "<%= @extraction_form_id %>",
+              selected_timepoints: "<%= @selected_timepoints %>",
+              dx_section: $(this).attr("section") 
+            }),
+            success: function(){
+              $("#loading_div").remove();
+            }
+          })
+          show_loading_icon();
+        }
+      }
+    })
+  }else{
+    $.ajax({
+      type: 'POST',
+      url: "results/show_comparison_measures",
+      data:({
+        timepoint_id: $(this).attr("tpid"),
+        comparison_id: $(this).attr("comparison_id"),
+        outcome_id: "<%= @outcome.id %>",
+        subgroup_id: $("#subgroup_selector").val(),
+        outcome_type: "<%= @outcome.outcome_type %>",
+        study_id: "<%= @study_id %>",
+        extraction_form_id: "<%= @extraction_form_id %>",
+        selected_timepoints: "<%= @selected_timepoints %>",
+        dx_section: $(this).attr("section") 
+      }),
+      success: function(){
+        $("#loading_div").remove();
+      }
+    })
+    show_loading_icon();
+  }
+})
+var next_comparator_id = $("#next_new_comparator_id").val();
+// ADDING A NEW COLUMN TO THE COMPARISON TABLE
+$("#add_comparison_column_btn").unbind("click");
+$("#add_comparison_column_btn").bind("click",function(event){
+  event.preventDefault();
+  // The next negative number to be used for a temporary id
+  num_comparisons = $("#num_comparisons").val();
+  
+  // Get the html in the most current column header and modify it for the new one
+  comp_cell = $("#btw_arm_table_header_row > th:last")
+  html = $(comp_cell).html();
+  col_num = parseInt($("#btw_arm_table_header_row > th:last").attr("column")) + 1;
+  new_comparator_num = 0;
+  current_num = html.match(/id=\"comparator_._./)[0].split("_")[1];
+  reg1 = new RegExp("comparator_" + current_num, "g");
+  reg2 = new RegExp("comparator\\[" + current_num, 'g');
+  html = html.replace(reg1, "comparator_" + (parseInt(current_num) + 1));
+  html = html.replace(reg2, "comparator[" + (parseInt(current_num) + 1));
+  // Add the new 'Remove Column' link td
+  if(html.match(/<a class=\"remove_comparison_column_btn\".*<\/a>/)){
+   
+    html = html.replace(/<a class=\"remove_comparison_column_btn\".*<\/a>/,"");
+  }
+  html += "<a class='remove_comparison_column_btn' style='float:right;color:white;' href='#' col_num='"+col_num+"'>Remove Column</a>";
+
+  // Extend the title colspan
+  current_span = parseInt($(".title_row","#result_table").first().attr("colspan"));
+  //alert("starting to update colspans");
+  $(".title_row","#result_table").attr("colspan",current_span+1);
+  $(".edit_measure_row").attr("colspan",current_span+1);
+  $(".save_button_row").attr("colspan",current_span+1);
+  //alert("finished updating colspans");
+  // Add the TH to the header row
+  inserting = "<th class='btwn_arm_comparison' column='"+col_num+"'>"+html+"</th>";
+  $("#btw_arm_table_header_row > th:last").after(inserting);
+  // Make sure defaults are selected
+  $("#btw_arm_table_header_row > th:last select:first").val(0);
+  $("#btw_arm_table_header_row > th:last select:last").val(0);
+  
+  // For each row containing measures...
+  measure_rows = $(".comparison_measure_row")
+  current_id = 0
+  for(i=0; i<measure_rows.length; i++){
+    // get the html for the last column's inputs and parse out the comparator_id
+    myrow = measure_rows[i];
+    input = $(myrow).find("td.btwn_arm_comparison:last").html().trim();
+    input = input.replace(/\<span class=\"footnote_tag\"\>.*\<\/span\>/g,"");
+    //alert("input is: " + input);
+    if(input != ""){
+      //update the id attribute of the input box
+      comparison_id = input.match(/\"comparison_datapoints__\d*_.*_\d*\"/);
+      // if there was no match, check for a table2x2 datapoint
+      if(comparison_id == null){
+        comparison_id = input.match(/\"table2x2_datapoints__\d*_.*_\d*_\d*\"/g);
+        //alert("did not find a match. searched again and found " + comparison_id);
+      }
+      // IF THE COMPARISON ID HAS A LENGTH > 1, IT'S A TYPICAL FIELD
+      // OTHERWISE IT IS A TABLE OF SOME KIND
+      if(comparison_id.length == 1){
+        //alert("found a match: " + comparison_id + "...starting on the typical field copy...");
+        comparison_id = comparison_id[0].split("_");
+        this_id = parseInt(comparison_id[4]);
+        if(current_id == 0){ current_id = this_id;}
+        if(this_id != current_id){
+          next_comparator_id = next_comparator_id - 1;
+          current_id = this_id;
+        }
+        //assign the new comparator id      
+        comparison_id[4] = next_comparator_id;
+        comparison_id = comparison_id.join("_");
+        input = input.replace(/\"comparison_datapoints__\d*_.*_\d*\"/,comparison_id);
+        input = input.replace(/value=\".*\"\s*/,'');
+
+        //update the name attribute on the input box
+        comparison_name = input.match(/\"comparison_datapoints\[\d*\[.*\[\d*\]\]\]\"/);
+        comparison_name = comparison_name[0].split("[");
+        comparison_name[2] = next_comparator_id;
+        comparison_name = comparison_name.join("[");
+        input = input.replace(/\"comparison_datapoints\[\d*\[.*\[\d*\]\]\]\"/g,comparison_name);
+        // substitute the new id for the old
+        input = "<td class='btwn_arm_comparison' column='"+col_num+"'>"+input+"</td>";
+        
+      // COPY THE 2x2 TABLE TO ANOTHER COLUMN
+      }else{
+        //alert("starting on 2x2 table");
+        for(j=0;j<comparison_id.length;j++){
+
+          comp_id = comparison_id[j].split("_");
+          cell_id = parseInt(comp_id[6]);
+          //alert("comp id is " + comp_id);
+          this_id = parseInt(comp_id[4]);
+          if(current_id == 0){ current_id = this_id;}
+          if(this_id != current_id){
+            next_comparator_id = next_comparator_id - 1;
+            current_id = this_id;
+          }
+          //assign the new comparator id      
+          comp_id[4] = next_comparator_id;
+          comp_id = comp_id.join("_");
+          //alert("new comp id is " + comp_id);
+          input = input.replace(comparison_id[i],comp_id);
+          //alert("input is " + input);
+          //alert("input is " + input);
+          regx = new RegExp("table2x2_datapoints\\[\\d*\\[.*\\[\\d*\\[" + cell_id + "\\]\\]\\]\\]");
+          comparison_name = input.match(regx);
+          comparison_name = comparison_name[0].split("[");
+          comparison_name[2] = next_comparator_id;
+          comparison_name = comparison_name.join("[");
+          input = input.replace(regx,comparison_name);
+          // substitute the new id for the old
+        }
+        input = "<td class='btwn_arm_comparison' column='"+col_num+"'>"+input+"</td>";
+        input = input.replace(/value=\".*\"\s*/g,'');
+      }
+    }else{
+      input = "<td class='btwn_arm_comparison' column='"+col_num+"'></td>"; 
+    }
+    $(myrow).find("td.btwn_arm_comparison:last").after(input);
+  }
+  // Add the new 'Remove Column' link td
+  //rm_btn = "<a class='remove_comparison_column_btn' href='#' col_num='"+col_num+"'>Remove Column</a>"
+  //rm_btn = "<td class='btwn_arm_comparison' column='"+col_num+"'>"+rm_btn+"</td>";
+  //$(".remove_column_link_row > td:last").after(rm_btn);
+  
+  // For each row containing links/buttons, simply increase the colspan by 1
+  button_rows = $(".comparison_btn_row");
+  for(i=0;i<button_rows.length;i++){
+    current_row = $(".comparison_btn_row")[i]
+    current_span = $(current_row).attr('colspan');
+    new_span = parseInt(current_span) + 1;
+    $(current_row).attr('colspan',new_span);
+  }
+  // Add the double-click handler to the new cells
+  //bind_dbl_click_listener();
+})
+
+
+$(".remove_comparison_column_btn").unbind("click");
+$(".remove_comparison_column_btn").live("click",function(event){
+  event.preventDefault();
+  
+  col_num = $(this).attr("col_num");
+  search_string = "[column="+col_num.toString()+"]";
+  
+  // remove this column using the column attribute that is tags all elements
+  $(search_string).remove();
+//Done. 
+})
+
+$("#clear_btwn_arms_button").bind("click",function(event){
+  event.preventDefault();
+  $("#delete_confirm_modal").html("This action will permanently remove the comparison data above. Are you sure you want to do this?")
+  // this is the pretty confirm dialog
+  $("#delete_confirm_modal").dialog({
+    resizable: false,
+    height: 160,
+    modal: true,
+    buttons: {
+      "Cancel": function(){
+        $(this).dialog("close");
+      },
+      "Yes, I'm sure": function(){
+        $.ajax({
+          type: 'POST',
+          url: "results/clear_comparisons",
+          data:({
+            selected_timepoints: "<%= @selected_timepoints %>",
+            outcome_id: "<%= @outcome.id %>",
+            subgroup_id: $("#subgroup_selector").val(),
+            study_id: "<%= @study_id %>",
+            extraction_form_id: "<%= @extraction_form_id %>",
+            comparison_type: "between"
+          }),
+          success: function(){
+            $("#loading_div").remove();
+          }
+        })
+        $(this).dialog("close")
+        show_loading_icon();
+      }
+    }
+  })
+});
+-->
+</script>

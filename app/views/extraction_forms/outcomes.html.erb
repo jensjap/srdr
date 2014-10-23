@@ -1,0 +1,120 @@
+<div class='tab-div'><br/>
+    <%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Suggest Outcome Titles"} %>
+
+    <div class="extraction_form_options">
+        <strong>Please Note:</strong>You may choose to pre-specify <strong>outcome names</strong> for data extractors to use. Data extractors will also have the option to specify their own outcome names during individual study extraction.<br/><br/>
+        <strong>Warning:</strong><em>Selecting "No" below will eliminate the Outcomes section and all sections which depend on it from the final extraction form.</em>
+        <br/>
+        <br/>
+
+    	<%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+    		<% unless @donors.empty? %>
+    			<%= render :partial=>'extraction_form_section_copies/imported_message'%>
+    		<% else %>
+    			Would you like to include the <strong>outcomes</strong> section in your extraction form? 
+    			<%= select("ef_included_" + @extraction_form_section.id.to_s, "outcomes", options_for_select([["Yes", true], ["No", false]], @extraction_form_section.included),{ :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+    			<div class="inline" style='display:inline;' id="saved_display_section_outcomes"></div>
+    		<% end %>
+    	<% end %>
+        <br/>
+
+        <!-- user-defined extraction form instructions -->
+        <% @ef_user_instructions = @extraction_form_outcomes_instr.nil? ? nil : @extraction_form_outcomes_instr.instructions %> 
+        <div id="outcomes_user_instructions">
+            <%= render :partial=>"extraction_forms/instructions" %>
+        </div>
+        <a href="#" class="positive add_outcomes_ef_instr_<%= @extraction_form_section.id.to_s %> add_outcomes_instr_button" id="add_outcomes_instr_button" alt="Click to add user instructions">
+            Add/Edit Instructions
+        </a>
+    </div>
+     
+     <% display = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %>
+    <div id="extraction_form_section_outcomes" class='data' style='display: <%= display %>'>  
+    <%# if !@extraction_form_section.nil? && @extraction_form_section.included == true %>
+        <!-- <div id="extraction_form_section_outcomes"> -->
+    <%# else %>
+        <!-- <div id="extraction_form_section_outcomes" class="disabled"> -->
+    <%# end %>
+
+    <% if @donors.empty? %>
+        <div id="table_div">
+            <%= render "extraction_form_outcome_names/table"%>
+        </div>
+    	
+        <br/>
+    	
+        <div class="actions">
+            <button type="submit" class="positive" id="add_outcome_button" alt="Click to open Add New Outcome Suggestion Form Dialog">
+                <%= image_tag "Add.png", :alt => "Add" %>Add a New Outcome Name
+            </button>
+            
+    		
+            <div class="saved" id="saved_item_indicator_outcomes" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+            <div class="saved" id="removed_item_indicator_outcomes" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    	
+    <% else %>
+
+        <div id="imported_div">
+            <%= render "extraction_form_outcome_names/ef_imported_table"%>
+        </div>
+    <br/>
+    <br/>
+    <% end %>
+
+
+    <div id="outcome_table_examples">
+    During data extraction, analysis tables will be created automatically based on the outcomes that you and the data extractor specify.
+    </div>
+
+    <br/><br/>
+
+
+    <div id="new_outcome_entry">
+        <%= render "extraction_form_outcome_names/form" %>
+    </div>
+    <div id = "new_outcomes_instr_entry">
+        <%= render 'extraction_form_outcome/instr_form'%>
+    </div>
+
+    <%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"extraction_forms/" + @extraction_form.id.to_s + "/baselines",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/adverse",:previous_title=>"Baseline Characteristics",:next_title=>"Adverse Events"} %>
+
+    <%= render 'shared/make_editable_and_confirm' %>
+
+    <script type="text/javascript">
+
+        $("#new_outcome_entry").dialog({
+            autoOpen: false,
+    	   minWidth: 600,
+            modal:true
+        });
+        
+        $("#add_outcome_button").bind("click", function() {
+            $.ajax({
+                url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_outcome_names/new',
+                type: "POST"
+            });
+        });
+
+        $("#new_outcomes_instr_entry").dialog({
+            autoOpen: false,
+            modal: true,
+        	minWidth: 600,
+            modal: true
+        });
+
+        $("#add_outcomes_instr_button").bind("click", function(event)
+        {
+            event.preventDefault();
+        	$.ajax({
+        	  url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_outcome/add_instr',
+        	  type: "POST"
+        	});
+        });
+    	
+
+    </script>
+</div> <!-- end tab div -->

@@ -1,0 +1,189 @@
+# @markup rdoc
+# @title Basic Setup
+
+= Basic Setup
+
+== File Structure
+
+The SRDR file system is set up according to the default directory layout used by Ruby on Rails. Files specific to the SRDR system can be found in the following directories:
+
+- app
+- config
+- db
+- public
+- doc
+
+Details regarding items in these directories are found in the following sections.
+
+=== app
+
+The Systematic Review Data Repository system is built based on the Model-View-Controller (MVC) software architecture. This concept attempts to form a clear division between code defining the user interface elements and the underlying logic driving the system. This is accomplished by shuttling messages between the Models (database tables) and Views (user interface) through what is known as a controller class.
+
+All of the files relating to SRDR that are involved in this MVC architecture are found in the app directory. In keeping with the division of system tasks, the associated files are laid out in a similar fashion.
+
+The app directory is divided into the following sections:
+
+controllers::
+   - a collection of .rb formatted Ruby Classes
+   - the interface between the database and the web server / user interface
+   - functions defined in the ApplicationController are inherited by all other controllers
+helpers::
+   - a collection of .rb formatted Ruby modules
+   - these ruby functions are accessible from within SRDR views.
+   - ApplicationHelper is available from all views
+   - Carry out functions such as creating breadcrumb links on each page, calculating back/continue buttons, etc.
+models::
+   - a collection of .rb formatted Ruby Classes
+   - treat database records as objects, write functions to access/modify/remove those objects
+   - files are named in a singular form according to the database table name
+   - ex:  study.rb corresponds to the "studies" database table
+views::
+   - collection of .html.erb formatted HTML files with embedded Ruby
+   - each controller has a corresponding view folder
+   - defines what will appear in the user interface
+mailers::
+   - these are designed to set up email procedures, but are not used in the SRDR system.
+
+=== config
+This directory contains configuration files and instructions for the server as to how to interpret SRDR calls. In this directory we have the ability to set many Rails-associated options including URL-to-controller routing. Routes are required with the creation of any new SRDR controller, and will hault server execution if they are not found.
+
+=== db
+The db directory contains database files for the SRDR implementation. This includes a schema file, the database itself and any rails migrations that were used for database modification.
+
+=== public
+Any static html files used in SRDR should be placed within the public directory. This is also the location of many user interface elements, with folders named accordingly:
+
+- images
+- javascripts
+- stylesheets
+- movies
+- user_manuals
+
+Additional files and directories found in the SRDR code base contain information associated with the Ruby-on-Rails web framework and are generally not specific to the workings or layout of the SRDR interface. See the Ruby on Rails web site for further documentation.
+
+Images for the AHRQ logo are contained in images/ahrq. Icons used are from the Wikimedia Commons Silk Icon Library and are saved in the images folder. More icons can be found at wikimedia: http://commons.wikimedia.org/wiki/Silk_icons.
+
+=== doc
+
+This folder contains documentation generated using YARD. All documentation is generated from comments contained in models, helpers and controllers. Extra documentation files should be added to the doc/extra folder. They will appear automatically in this YARD documentation (due to a setting in the .yardopts config file).
+
+To re-generate documentation after updating comments or extra files, run the command "yardoc" from the main srdr folder.
+
+For more information on YARD, see http://rubydoc.info/docs/yard.
+
+== Programming Languages
+
+SRDR uses Ruby 1.9.2p0 (2010-08-18) [i386-mingw32] and Rails 3.0.0. Rails is a development framework that uses the Model-View-Controller (MVC) architecture pattern to organize application programming. SRDR uses .html.erb templates (instead of haml), and various Rails partials to display tables and maintain consistent layouts and sidebars.
+JavaScript and jQuery 1.5 are used for effects, DOM manipulation and ajax functionality. The jQuery javascript library is included in the header of every page. More information on jQuery can be found at http://www.jquery.com.
+
+== Plugins and Libraries
+
+Ruby Gems: the full list of gems used by the Ruby language can be found in “Gemfile” in the main folder of the SRDR application.
+
+- 'heroku' for using heroku
+- 'sqlite3' for using the sqlite database locally with rails
+- 'jquery-rails', '>= 0.2.6' for using jquery as the default in rails
+- 'authlogic' for authentication/user registration functionality. For information on how authlogic works in the project, see: https://github.com/binarylogic/authlogic. For information about how we are using authlogic to facilitate password retrieval, see: http://www.binarylogic.com/2008/11/16/tutorial-reset-passwords-with-authlogic/
+- 'rails3-generators' for legacy Rails functionality. For more info see: https://github.com/indirect/rails3-generators
+- "will_paginate", "~> 3.0.pre2" for pagination functionality. For more info see: https://github.com/mislav/will_paginate/wiki
+- "nokogiri" for HTML and XML parsing
+
+== Rails plugins
+
+- nested_form (found in vendor/plugins/nested_form)
+- used to add multiple items with the same form, i.e. Timepoints
+- More info at https://github.com/ryanb/nested_form
+
+== Required stylesheets and included javascripts
+
+=== Stylesheets
+
+scaffold.css::
+  contains most of the SRDR app styling
+print.css::
+  is a stylesheet to display when a user prints a page of SRDR
+feedback_button.css::
+  controls styles for the feedback button on SRDR pages
+pagination_styles.css::
+  handles pagination styles
+jquery-ui-1.8.12.custom.css::
+  contains jquery-ui styles (dialog boxes, tabs, and some form elements)
+jquery.qtip.css::
+  contains styles for the qtip library (see below)
+ahrqstyle_new.css::
+  contains styling information for the AHRQ header and footer
+ahrqstyleprint_new.css::
+  contains styling information for the AHRQ header and footer, optimized for printing
+  
+  
+=== Javascripts
+
+application.js::
+  contains all generally used project javascript, used on all pages
+rails.js::
+  enables jQuery functionality with Rails, used on all pages. This particular version is generated from the jquery-ujs plugin, which enables rails to use jquery as the default library (rather than prototype). For more information: https://github.com/rails/jquery-ujs
+jquery.min.js::
+  includes jQuery functionality.
+jquery.qtip.js::
+  enables advanced tooltip functionality for navigation. For more information see: http://craigsworks.com/projects/qtip2/
+nested_form.js::
+  enables the nested form plugin functionality (such as entering outcome timepoints). More info at https://github.com/ryanb/nested_form
+jquery-ui-1.8.12.custom.min.js::
+  enables jquery UI functionality, for creating advanced UI elements, such as dialog windows and accordion containers. more information at http://jqueryui.com/
+form_complete.js::
+  enables snomed form completion for outcomes. More information in the NCBI BioPortal section below.
+jquery.printelement.min.js::
+  used for direct printing of summary pages. more information at http://projects.erikzaadi.com/jQueryPlugins/jQuery.printElement/
+
+the /plugins folder contains extended javascripts for jquery-ui functionality. The scripts in this folder have equivalent functionality to jquery-ui-1.8.12.custom.min.js.
+
+in folder but not mentioned: easyloader.js, analysis_table_builder.js, jquery.livequery.js.
+  
+== External APIs
+
+=== Fetching NCBI Publication Information
+When creating an SRDR study, or set of studies, the user has the option of providing a PubMed identifier with which information is automatically pulled from the National Center for Biotechnology Information (NCBI) website, http://www.ncbi.nlm.nih.gov/. The NCBI offers an EFetch utility which is used to facilitate this data retrieval.
+
+A url is first formatted according to the specifications at the EFetch website. Below is a list of the required parameters for fetching literature information.
+
+- base url: http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?
+- db: the database of interest
+- id: the identifier for the article of interest
+- mode: the desired format for the file being fetched
+
+As an example, the following url will return XML-formatted information from the pubmed database for an article with the identifier equal to "2468246"
+http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=2468246&mode=xml
+
+Note that the specified parameters define pubmed as the database, 2468246 as the identifier and XML as the mode.  For more information regarding the EFetch utilities, please see their help page at:  http://www.ncbi.nlm.nih.gov/corehtml/query/static/efetchlit_help.html
+
+Information contained in this XML file is then parsed out using the Nokogiri Ruby plugin and displayed to the user, allowing them to save the journal information without manually typing it in or copying/pasting each field. This entire transaction takes place in a function known as get_summary_info_by_pmid, found in the SecondaryPublication model. At the time of writing this manuscript, the get_summary_info_by_pmid function will parse study author, title, year, affiliation, journal title, journal volume and journal issue information.  
+
+=== NCBI BioPortal
+
+The NCBO BioPortal is being used in an attempt to standardize user inputs and introduce a common medical terminology to extracted studies. NCBO Widgets offer the ability to run an AJAX-enabled search or ontology terms while the user enters data into a given text field. An example of this can be found in the Outcome Setup page, which asks the user to specify a name for their outcome. As the user types the name of their outcome, the widget will query the NCBO BioPortal and provide suggested outcome names.
+
+The following actions are required in order for this dynamic search to take place:
+
+1. the form_complete.js javascript file must be included on any page making use of the widget
+2. the class attribute for any input field using the widget must be set appropriately
+3. the class should be “bp_form_complete_XXXX_YYYY” where XXXX is the code corresponding to the ontology of interest and YYYY is a choice of which value to display to the user. For this field, we have the option of uri, shortid and name.
+
+SRDR makes use of SNOMED ontology terms in the outcome setup and definition pages. Given that the ontology ID for SNOMED is 1353, and the term name is the desired result, the full class name associated with the input field is: "bp_form_complete-1353-name"
+
+For more information regarding the use of NCBO BioPortal and to access ontology collections, visit http://bioportal.bioontology.org/. For NCBO Widget specifications,  visit http://www.bioontology.org/wiki/index.php/NCBO_Widgets
+
+=== Documentation with YARD
+
+Documentation is produced using YARD. For information on YARD, see http://rubydoc.info/docs/yard. 
+
+All documentation is generated from comments contained in models, helpers and controllers.  To generate documentation run this command from the srdr main folder:
+
+    yardoc
+	
+alternatively, use:
+
+    yard doc
+
+This command will update existing files based on comments that were changed, and add new files based on new models, controllers, or helpers that are created. 
+	
+Extra documentation files should be added to the doc/extra folder. They will appear automatically in this YARD documentation. To generate documentation from other external files, modify the .yardopts config file.

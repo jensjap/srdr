@@ -1,0 +1,48 @@
+<div id="validation_message_dd">
+<%= render "layouts/modal_info_messages" %>
+</div>
+<%
+    if @extraction_form_outcomes_instr.nil?
+        puts "............ nil extraction_form_outcomes_instr"
+    else
+        puts "............ has extraction_form_outcomes_instr"
+    end
+
+%>
+<%= form_for @extraction_form_outcomes_instr, :remote=>true do |f|%>
+    <%= hidden_field_tag "page_name","outcomes" %>
+    <%= hidden_field_tag "outcomes[extraction_form_id]", @extraction_form.id %>
+    <%= hidden_field_tag "extraction_form_id", @extraction_form.id %>
+    <%= hidden_field_tag "section", "OUTCOMES" %>
+    <%= hidden_field_tag "data_element", "GENERAL" %>
+
+    <div class='field'>
+        <label for="Outcomes Instructions">Outcomes Instructions</label><br/>
+        <%= f.text_area "instructions", :cols => 50, :rows => 4, :class => "editable_field", :tabindex => 2, :title => "instructions" %>
+    </div>
+		
+    <div class='actions'>
+        <% if @editing %>
+        <button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+	    <%= image_tag "Add.png", :alt => "Add"  %>Save Edits
+        </button>
+        <% else %>
+        <button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+            <%= image_tag "Add.png", :alt => "Add"  %>Save
+        </button>
+        <% end %>
+        <button class="negative" id="add_outcomes_instr_close" tabindex="4">
+            <%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+        </button>
+    </div>
+<% end %>	
+
+<script type="text/javascript">
+
+$("#add_outcomes_instr_close").bind("click", function(event)
+{
+    event.preventDefault();
+    $('#new_outcomes_instr_entry').dialog('close');
+});
+
+</script>

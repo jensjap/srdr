@@ -1,0 +1,500 @@
+/*------------- Tables - List table ------------*/
+
+table.data_entry_table {
+    color: #3D3D3D;
+    background-color: #FFF;
+    width: 600px;
+    border: solid 1px #C5CACE;
+    font-size: 12px;
+    border-collapse: separate;
+}
+table.data_entry_table tr{
+    border: solid 1px #C5CACE;
+}
+
+table.data_entry_table input{
+    
+}
+table.data_entry_table td{
+    width:100px;
+}
+table.data_entry_table td .fake_input{
+    height: 10px;
+    border: 1px dotted #bbb;
+    background-color: #f2f2f2;
+    padding: 6px;
+}
+
+table.data_entry_table td{
+    padding: 5px;
+    border: 1px solid #C5CACE;  
+}
+
+table.data_entry_table td.title_td{
+    font-weight: bold;
+}
+
+table.data_entry_table thead th, table.data_entry_table th, table.data_entry_table tr td.th{
+    text-align: center;
+    padding: 4px;
+    font-weight: bold;
+    background-color: #F6F6F6;
+    border: 1px solid #C5CACE;  
+    color: #000;
+}
+table.data_entry_table th.title_row{
+    font-weight:normal;
+    max-height:50px;
+}
+
+table.data_entry_table tbody tr.odd td {
+    background-color:#F4F4F4;
+}
+
+.border_cell{
+    border-left: solid 8px #155281 !important;
+}
+
+.footnote_tag{
+    font-size:11px;
+    color:#9B9B9B;
+    font-weight:bold;
+    float:right;
+}
+/*------------- Tables - Measures Table ------------*/
+
+table.measures_table {
+    color: #3D3D3D;
+    background-color: #FFF;
+    width: 100%;
+    border: solid 1px #C5CACE;
+    margin-top:4px;
+    margin-bottom:2px;
+}
+table.measures_table td{
+    padding: 5px;
+    border: 1px solid #C5CACE;  
+}
+table.measures_table th{
+    text-align: center;
+    padding: 4px;
+    font-size:13px; 
+    font-weight: bold;
+    background-color: #F6F6F6;
+    border: 1px solid #C5CACE;  
+    color: #000;
+}
+/* used to indicate when a measure is selected in the measure list */
+.selected_measure{
+    font-weight: bold;
+    background-color:#408040;
+    color:#fff;
+}
+/*------- END MEASURES TABLE STYLES -------*/
+
+
+tr.remove_column_link_row td{
+    text-align:center;
+    font-size:11px;
+}
+
+tr th.btwn_arm_comparison, tr td.btwn_arm_comparison{
+    /* background-color:#B9B9B9; */
+    background-color: #d5e8f1 !important;
+    color:000;
+}
+tr th.wa_comparison, tr td.wa_comparison, tr.wa_comparison td, tr.wa_comparison th{
+    background-color:#d7f1d5 !important;
+    color: #000;
+}
+
+/* use this to rotate text when necessary */
+.rotate{
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg); 
+    -moz-transform: rotate(90deg); 
+    -o-transform: rotate(90deg); 
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+    font-size:13px;
+}
+
+/*------------- Tables - Result table ------------*/
+
+table.result_table {
+    color: #3D3D3D;
+    background-color: #FFF;
+    width: 100%;
+}
+
+table.result_table input{
+    width: 100%;
+}
+
+table.result_table td{
+    padding: 5px;
+    border: 1px solid #fff; 
+}
+
+table.result_table td.label{
+    background-color: #777;
+    color: #fff;
+    padding: 5px;
+    border: 1px solid #fff;
+    vertical-align: top;
+    font-weight: bold;
+}
+
+table.result_table tr.odd {
+    background-color:#F4F4F4;
+}
+
+
+/*------------- Tables - Form Table ------------*/
+/*------------- Tables - Form Table ------------*/
+
+table.with_comment_rows tr td{
+    border-bottom: none !important;
+}
+table.with_comment_rows tr td.comment_td{
+    border-bottom: solid 1px #d3d3d3 !important;
+}
+table.form_table {
+	color: #000;
+	background:none;
+    margin-top: 5px;
+    width: auto;
+    width:100%;
+    border-collapse:separate;
+}
+table.form_table tr td{
+    border-bottom: solid 1px #d3d3d3;
+    padding: 8px;
+}
+table.form_table tr td, table.form-subtable tr td{
+    font-size:15px;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 17px !important;
+}
+table.form_table tr td.top{
+    border-top: solid 1px #d3d3d3;
+}
+table.form_table tr td.header-row{
+    font-size:15px;
+    color: #1e4d79;
+    font-weight: bold;
+}
+table.form_table tr.spacer{
+    height: 35px;
+    border: none;
+}
+table.form_table tr.small-spacer{
+    height: 15px;
+    border: none;
+
+}
+table.form_table td, table.form_table th{
+    padding:5px;
+    position: relative;
+    vertical-align: top;
+}
+table.form_table td table.no-border, table.form_table td table.no-border td{
+    border: none;
+}
+table.form_table td.label{
+    width:140px;
+    text-align:right;
+    background: #f0efef;
+}
+table.form_table td.input{
+    width: auto;
+}
+table.form_table td.input[type='checkbox'], table.form_table td.input[type='radio']{
+    display:inline !important;
+    padding:5px 8px 10px 8px !important;
+}
+table.form_table td.label div{
+    position: relative;
+    top: 3px;
+    right: 0px;
+    text-align: right;
+}
+table.form_table td.label, table.form_table td.label div label{
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+}
+table.form_table td.comment_td, table.list_table td.comment_td{
+    text-align: right;
+    font-size: 12px;
+    font-weight: normal;
+    color: #666666;
+    padding: 0 10 0 0;
+    border-bottom: solid 1px #d3d3d3;
+}
+.comments_div{
+    float:right;
+    font-size:12px;
+}
+
+/*------------ Comment Links ------------*/
+td.comment_td li{
+    display: inline;
+}
+.open_comments_link span, .open_comments_summary_link span{
+    text-decoration: underline;
+    color: #3366ff;
+    font-weight: normal;
+}
+
+.open_comments_link span:hover, .open_comments_summary_link span:hover{
+    color: #2255ee;
+    cursor: pointer;
+    font-weight: normal;
+}
+/*------------- Inputs ------------ */
+table.form_table td input{
+width: 100%;
+}
+
+table.form_table td input.cbox, input.question_checkbox_input, input.question_radio_input, .cbox{
+border: 0px;
+width: auto;
+background: none;
+}
+
+table.form_table tr td.actions{
+padding-top: 10px;
+text-align: center;
+margin-left: 5px;
+}
+
+table.form_table tr td.subtable{
+padding: 4px;
+}
+table.form_table tr th{
+	background-color: #f6f6f6;
+	border-left: solid 1px #9B9B9B;
+	border-bottom: solid 1px #9B9B9B;
+	font-weight: bold;
+	text-align:left;
+}
+/*------------- Tables - Form SubTable ------------*/
+
+table.form-subtable, table.form-subtable-checklist{
+    color: #3D3D3D;
+    border: none;
+    background-color: #FFF;
+    width: auto;
+    border-collapse: separate;
+}
+
+table.form-subtable td{
+    position: relative;
+    padding: 15px;
+    border: 1px solid black;
+}
+
+table.form-subtable thead th{
+    
+    background-color: #0d348a;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+    font-size: 13px;
+    padding: 5px;
+    text-shadow:none;
+}
+
+table.form-subtable tbody tr.odd td {
+    background-color:#F4F4F4;
+}
+table.form-subtable td.action-links{
+    background-color: #f0efef;
+    padding: 6px;
+    border-top: none;
+}
+/*------------- Tables - Form SubTable Type B ------------*/
+table.form-subtable-checklist td.check{
+    background-color: gray;
+    padding: 5px;
+    vertical-align: middle;
+}
+table.form-subtable-checklist td.data{
+     border: 1px solid #aaa;
+    background-color: #fff;
+    padding: 15px 10px 10px 15px;
+}
+.no_border{
+    border: none;
+}
+/* ------------------ Tables -  formatted table ---------------------- */
+
+table.formatted_results_table{
+    border: solid 1px #fff;
+    background-color:#f2f2f2;
+    width: 100%;
+    text-align: left;
+
+}
+table.formatted_results_table th{
+    font-weight: bold;
+    color: #fff;
+    border: solid 1px #fff;
+    background-color: #777;
+    text-align: left;
+    padding: 5px;
+}
+table.formatted_results_table td{
+    border: solid 1px #fff;
+    background-color:#f2f2f2;
+    text-align: left;
+    padding:5px;
+    vertical-align: top;    
+}
+table.form-subtable-checklist td.data .smallText, table.form-subtable-checklist td.data .error_text, .smallText, .errorText{
+    font-size:12px;
+    color:red !important;
+    text-decoration:italic !important;
+    display:inline !important;
+}
+/*
+label{
+	display: inline-block;
+	font-size: 13px;
+	margin-bottom: 5px;
+}
+*/
+/* ----------------- BUTTON STYLES -----------------
+ORIGINALLY FROM: http://www.bloggerswatch.com/internet/css-trick-submit-button-should-look-same-everywhere/ */
+button{ margin:0px;}
+.actions a, .actions button, .inline-actions a, .inline-actions button, .saved, button, .saving div.actions a, button.actions, a.actions, button.ui-button{
+    /* #cccaca, #f8f8f8*/
+    margin:0 15px 0 0;
+    /* give it rounded edges */
+    -moz-border-radius-topleft: 7px; 
+    -webkit-border-top-left-radius: 7px; 
+    border-top-left-radius: 7px; 
+    -moz-border-radius-topright: 7px; 
+    -webkit-border-top-right-radius: 7px; 
+    border-top-right-radius: 7px;
+    -moz-border-radius-bottomleft: 7px; 
+    -webkit-border-bottom-left-radius: 7px; 
+    border-bottom-left-radius: 7px; 
+    -moz-border-radius-bottomright: 7px; 
+    -webkit-border-bottom-right-radius: 7px; 
+    border-bottom-right-radius: 7px;
+
+    /* apply a gradient */
+    background:-webkit-gradient(linear, left bottom,left top, from(#cccaca), to(#f8f8f8)) !important;
+    background: -moz-linear-gradient(bottom,  #cccaca,  #f8f8f8) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#cccaca') !important;
+
+    background-color:#f5f5f5;
+    border: 1px solid #9e9d9d;
+    font-size:12px;
+    text-decoration:none !important;
+    font-weight:bold;
+    color:#565656 !important;
+    cursor:pointer;
+    padding:6px; 
+}
+.actions a:hover, .actions button:hover, button.actions:hover, button.ui-button:hover{
+    /* apply a gradient */
+    background:-webkit-gradient(linear, left bottom,left top, from(#8b8b8b), to(#f8f8f8)) !important;
+    background: -moz-linear-gradient(bottom,  #8b8b8b,  #f8f8f8) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#8b8b8b') !important;
+}
+
+div.saving{
+    float:left;
+}
+.saving button, button.saving, button.positive{
+    /* #cccaca, #f8f8f8*/
+    margin:10px 0 0 20px;
+    /* give it rounded edges */
+    -moz-border-radius-topleft: 7px; 
+    -webkit-border-top-left-radius: 7px; 
+    border-top-left-radius: 7px; 
+    -moz-border-radius-topright: 7px; 
+    -webkit-border-top-right-radius: 7px; 
+    border-top-right-radius: 7px;
+    -moz-border-radius-bottomleft: 7px; 
+    -webkit-border-bottom-left-radius: 7px; 
+    border-bottom-left-radius: 7px; 
+    -moz-border-radius-bottomright: 7px; 
+    -webkit-border-bottom-right-radius: 7px; 
+    border-bottom-right-radius: 7px;
+
+    /* apply a gradient */
+    background:-webkit-gradient(linear, left bottom,left top, from(#2e6606), to(#00bf13)) !important;
+    background: -moz-linear-gradient(bottom,  #2e6606,  #00bf13) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00bf13', endColorstr='#2e6606') !important;
+
+    background-color:#f5f5f5;
+    font-size:12px;
+    border: solid 1px #1e3d01;
+    text-decoration:none;
+    font-weight:bold;
+    color:#fff !important;
+    cursor:pointer;
+    padding:6px; 
+}
+.saving button:hover, button.saving:hover, button.positive:hover{
+    background:-webkit-gradient(linear, left bottom,left top, from(#2e6606), to(#183503)) !important;
+    background: -moz-linear-gradient(bottom,#183503, #2e6606) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#183503', endColorstr='#183503') !important;
+}
+
+.actions a, .inline-actions a{
+width: 100px;
+text-decoration: none;
+padding: 8px;
+}
+
+.actions button, .inline-actions button, button{
+    width:auto;
+    overflow:visible;
+    padding:6px; /* IE6 */
+}
+
+.actions button img, .actions a img, .inline-actions button img, .inline-actions a img, .saving button img{
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    border:none;
+    width:16px;
+    height:16px;
+}
+/* ---------------- Table Creator Form Style ---------------------- */
+#tc_templates {
+    font-size: 12px;
+}
+
+table.tc_options_table {
+    width: 100%;
+    padding: 15px 10px 10px 15px;
+    font-size: 0.75em;
+    font-family: Tahoma;
+    font-weight: normal;
+    border: solid 1px #2B447E;
+}
+
+/*------------------- Publication Image for Extraction Form -------------- */
+
+/* publication image */
+div#publication_image{
+    background: #fff url('/images/publication_example.png') no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 700px;
+    margin: 0px auto;
+    filter:alpha(opacity=80);
+    opacity:.80;        
+}
+div.watermark{
+    width: 100%;
+    height: 100%;
+    background: #fff url('/images/stripe_gray.png');    
+     filter:alpha(opacity=20);
+    opacity:.20;    
+}

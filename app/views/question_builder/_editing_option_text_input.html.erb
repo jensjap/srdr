@@ -1,0 +1,8 @@
+<span  id='<%= "q_" + @q_num + "_row_" + @row_id.to_s + "_div" %>'>
+	Option: <%= text_field @page_name, "choice_" + @row_id.to_s + "_field_0", :title => "option" %> 
+	<%= check_box_tag "gets_sub[#{@row_id.to_s}]", @row_id.to_s, true, :class=>'sq_assignment_edit_cbox', :style=> @has_sub=="true" ? "display:inline;" : "display:none;", :title => "option" %> 
+	<% unless @row_id < 2 %>
+		<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>@row_id, :editing=>"true", :page_name=>@page_name, :qnum=>@q_num), :remote=>true, :class=>"delete_column_link", :confirm=>"Are you sure? This cannot be undone." %>
+	<% end %>
+	<br/>
+</span>

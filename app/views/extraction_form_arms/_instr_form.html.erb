@@ -1,0 +1,41 @@
+<div id="validation_message_arms">
+<%= render "layouts/modal_info_messages" %>
+</div>
+
+<%= form_for @extraction_form_arm_instr, :remote=>true do |f|%>
+    <%= hidden_field_tag "extraction_form_arm[extraction_form_id]", @extraction_form.id %>
+    <%= hidden_field_tag "extraction_form_id", @extraction_form.id %>
+    <%= hidden_field_tag "project_id", @project.id %>
+    <%= hidden_field_tag "section", "ARMS" %>
+    <%= hidden_field_tag "data_element", "GENERAL" %>
+
+    <div class='field'>
+        <label for="Arms Instructions">Arms Instructions</label><br/>
+        <%= f.text_area "instructions", :cols => 50, :rows => 4, :class => "editable_field", :tabindex => 2, :title => "instructions" %>
+    </div>
+	<br/><br/>
+    <div class='actions'>
+        <% if @editing %>
+        <button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+	    <%= image_tag "Add.png", :alt => "Add"  %>Save Edits
+        </button>
+        <% else %>
+        <button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+            <%= image_tag "Add.png", :alt => "Add"  %>Save
+        </button>
+        <% end %>
+        <button class="negative" id="add_arm_instr_close" tabindex="4">
+            <%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+        </button>
+    </div>
+<% end %>	
+
+<script type="text/javascript">
+
+$("#add_arm_instr_close").bind("click", function(event)
+{
+    event.preventDefault();
+    $('#new_arms_instr_entry').dialog('close');
+});
+
+</script>

@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: ComparisonDataPoint
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (C)</a> &raquo; 
+    
+    
+    <span class="title">ComparisonDataPoint</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: ComparisonDataPoint
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">ComparisonDataPoint</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/comparison_data_point.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#save_comparison-class_method" title="save_comparison (class method)">+ (Object) <strong>save_comparison</strong>(values, metrics, objects, type, comp_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+save the results of a comparison input return the div id of the matrix
+blocked that was selected, or nil.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="save_comparison-class_method">
+  
+    + (<tt>Object</tt>) <strong>save_comparison</strong>(values, metrics, objects, type, comp_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+save the results of a comparison input return the div id of the matrix
+blocked that was selected, or nil
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/comparison_data_point.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_save_comparison'>save_comparison</span><span class='lparen'>(</span><span class='id identifier rubyid_values'>values</span><span class='comma'>,</span><span class='id identifier rubyid_metrics'>metrics</span><span class='comma'>,</span><span class='id identifier rubyid_objects'>objects</span><span class='comma'>,</span><span class='id identifier rubyid_type'>type</span><span class='comma'>,</span><span class='id identifier rubyid_comp_id'>comp_id</span><span class='rparen'>)</span>
+  
+  <span class='comment'># determine which objects are being compared (using the ids)
+</span>  <span class='id identifier rubyid_objectsArray'>objectsArray</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_objects'>objects</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_oKey'>oKey</span><span class='op'>|</span>
+  	<span class='id identifier rubyid_objectsArray'>objectsArray</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_objects'>objects</span><span class='lbracket'>[</span><span class='id identifier rubyid_oKey'>oKey</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+  <span class='comment'># Create a comparators string such as &quot;3_1_2&quot; which would mean 3 vs 1 vs 2 or &quot;3_1&quot; meaning 3 vs 1.
+</span>  <span class='comment'># In this example, &quot;3&quot; and &quot;1&quot; are IDs of either timepoints or arms.
+</span>  <span class='comment'># Next, add the comparators to the comparison object.
+</span>  <span class='id identifier rubyid_comparison'>comparison</span> <span class='op'>=</span> <span class='const'>Comparison</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_comp_id'>comp_id</span><span class='rparen'>)</span>		
+  <span class='id identifier rubyid_comparison'>comparison</span><span class='period'>.</span><span class='id identifier rubyid_comparators'>comparators</span> <span class='op'>=</span> <span class='id identifier rubyid_objectsArray'>objectsArray</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+  
+  <span class='comment'># save the new comparison
+</span>  <span class='kw'>if</span> <span class='id identifier rubyid_comparison'>comparison</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+  	
+  	
+  	<span class='comment'># set up the comparison data points based on comparison measures 
+</span>  	<span class='id identifier rubyid_i'>i</span> <span class='op'>=</span> <span class='int'>0</span>
+  	<span class='id identifier rubyid_metrics'>metrics</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_mKey'>mKey</span><span class='op'>|</span>
+  		<span class='id identifier rubyid_metric_id'>metric_id</span> <span class='op'>=</span> <span class='id identifier rubyid_mKey'>mKey</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>        <span class='comment'># get the metric id for the metric being reported
+</span>  		
+  		<span class='comment'># before saving, remove any existing data for this comparison
+</span>  		<span class='id identifier rubyid_search'>search</span> <span class='op'>=</span> <span class='const'>ComparisonDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:comparison_measure_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_metric_id'>metric_id</span><span class='rparen'>)</span>	
+  		<span class='kw'>unless</span> <span class='id identifier rubyid_search'>search</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  			<span class='id identifier rubyid_search'>search</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_entry'>entry</span><span class='op'>|</span>
+  				<span class='id identifier rubyid_entry'>entry</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>	
+  			<span class='kw'>end</span>
+  		<span class='kw'>end</span>
+  		   
+  		<span class='id identifier rubyid_tmpCDP'>tmpCDP</span> <span class='op'>=</span> <span class='const'>ComparisonDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>         <span class='comment'># create a new data point
+</span>  		<span class='id identifier rubyid_tmpCDP'>tmpCDP</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='id identifier rubyid_values'>values</span><span class='lbracket'>[</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='rbracket'>]</span>    <span class='comment'># get the value for the data point
+</span>  		<span class='kw'>unless</span> <span class='id identifier rubyid_tmpCDP'>tmpCDP</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+  			<span class='id identifier rubyid_tmpCDP'>tmpCDP</span><span class='period'>.</span><span class='id identifier rubyid_comparison_measure_id'>comparison_measure_id</span> <span class='op'>=</span> <span class='id identifier rubyid_metric_id'>metric_id</span> <span class='comment'># get the associated metric of the data point
+</span>  			<span class='id identifier rubyid_tmpCDP'>tmpCDP</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+  		<span class='kw'>end</span>
+  		<span class='id identifier rubyid_i'>i</span><span class='op'>+=</span><span class='int'>1</span>
+  	<span class='kw'>end</span>
+  		  	
+  <span class='kw'>else</span>
+  	
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:50 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

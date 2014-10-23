@@ -1,0 +1,14 @@
+// swap the table (it's either between or within)
+<% if defined?(@table_container) %>
+	$("#<%= @table_container.to_s %>").html("<%= escape_javascript(render :partial=>@table_partial) %>");
+<% end %>
+
+// remove the "import previous measures" form
+$("#measure_import_form").html("");
+
+// reset the regular "add measure" form
+$("#measure_form_div").html("<%= escape_javascript(render :partial=>"comparison_measures/form")%>");
+
+// reset the measures list
+$("#measure_display_div").html("<%= escape_javascript(render :partial=>"comparison_measures/measure_list")%>");
+	

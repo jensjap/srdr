@@ -1,0 +1,47 @@
+<%
+        # Get Properties for Report Builder URL
+        siteproperties = session[:guiproperties]
+        if siteproperties.nil?
+            siteproperties = Guiproperties.new
+            session[:guiproperties] = siteproperties
+        end
+%>
+<!--################################################################ -->
+<!-- THE MAIN LINKS BAR                                              -->
+<!--#################################################################-->
+
+<%
+current_path = request.fullpath # request_uri is deprecated. Use fullpath instead
+pieces = current_path.split("/")
+selected = ""
+#puts "The pieces array is #{pieces.join(",")}"
+if pieces.empty?
+    selected = "home"
+else
+    if pieces[2] == 'published'
+        selected = 'published'
+    else
+        selected = 'mywork'
+    end
+end
+#puts "SELECTED IS #{selected}"
+%>
+
+
+
+<div id='horizontal-nav'>
+    <% if current_user.nil? || current_user.user_type == "public" %>
+        <ul>
+            <li class="<%= selected=="home" ? "current" : "" %> horizontal-nav-link" href="/" tabindex=39 title="SRDR Home">Home</li>
+            <li class="<%= selected=="published" ? "current" : "" %> horizontal-nav-link" href="/projects/published" tabindex=40 title="Published Projects">Published Projects</li>
+            <li class="<%= selected=="published" ? "current" : "" %> horizontal-nav-link" href="<%= siteproperties.getRegistryURL()+"&action=SEARCH&login=public" %>" tabindex=41 title="Registries">Registries</li>
+        </ul>
+    <% else %>
+        <ul>
+            <li class='<%= selected=='home' ? "current" : "" %> horizontal-nav-link' href="/" tabindex=39 title='SRDR Home'>Home</li>
+            <li class='<%= selected=='mywork' ? "current" : "" %> horizontal-nav-link' href='/projects' tabindex=40 title='MySRDR'>MySRDR</li>
+            <li class='<%= selected=='published' ? "current" : "" %> horizontal-nav-link' href="/projects/published" tabindex=41 title='Published Projects'>Published Projects</li>
+        </ul>
+    <% end %>
+    <a href='/adv_search' style='position:absolute; right:15px; top: 5px;' tabindex=38>Advanced Search</a>
+</div>

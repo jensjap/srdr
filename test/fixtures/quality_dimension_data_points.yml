@@ -1,0 +1,36 @@
+# == Schema Information
+#
+# Table name: quality_dimension_data_points
+#
+#  id                         :integer          not null, primary key
+#  quality_dimension_field_id :integer
+#  value                      :string(255)
+#  notes                      :text
+#  study_id                   :integer
+#  field_type                 :string(255)
+#  extraction_form_id         :integer
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#
+
+# used in remove_extracted_data in extraction_form
+ef100_s100_qddp1:
+  id: 1
+  study_id: 100
+  extraction_form_id: 100
+  value: Y
+  quality_dimension_field_id: 1
+
+ef100_s100_qddp2:
+  id: 2
+  study_id: 100
+  extraction_form_id: 100
+  value: N
+  quality_dimension_field_id: 2
+
+ef100_s100_qddp3:
+  id: 3
+  study_id: 100
+  extraction_form_id: 100
+  value: Y
+  quality_dimension_field_id: 3

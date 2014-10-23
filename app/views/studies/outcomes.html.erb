@@ -1,0 +1,35 @@
+<div class='tab-div'>
+	<br/>
+	<h2>Study Outcomes</h2><br/><br/>
+	<% instruction = @extraction_form_outcomes_instr.nil? ? "" : @extraction_form_outcomes_instr.instructions %>
+	<% unless instruction.blank? %>
+		<div class='user_instruction'>
+			<strong>Note:</strong> <%= instruction %>
+		</div>
+		<br/>
+		<br/>
+	<%  end %>
+	
+	<div id="outcomes_table">
+	<%= render 'outcomes/table' %>
+	</div>
+
+		<br/>
+		<div class="actions">
+	<button type="submit" class="positive" id="add_outcome_button">
+				<%= image_tag "Add.png", :alt => "Add" %>Add a New Outcome
+			</button>
+			
+			<div class="saved" id="saved_item_indicator" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+	</div>
+
+	<br/><br/>
+	<%= render :partial=>'section_complete_status', :locals=>{:section=>"outcomes"} %>
+	<br/><br/>
+	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+	<%= render 'shared/make_editable_and_confirm' %>
+
+</div><!-- end tab div -->
+
+

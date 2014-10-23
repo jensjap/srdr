@@ -1,0 +1,4 @@
+$("#new_adverse_event_title_div").html("<%= escape_javascript(render :partial=>'extraction_form_adverse_events/form')%>");
+$("#new_adverse_event_title_div :button").removeAttr("disabled");
+$("#new_adverse_event_title_div").dialog("option","title","Suggest a new Adverse Event Title");
+$("#new_adverse_event_title_div").dialog('open');

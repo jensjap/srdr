@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: study_extraction_forms
+#
+#  id                 :integer          not null, primary key
+#  study_id           :integer
+#  extraction_form_id :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
+one:
+  id: 1
+  study_id: 1
+  extraction_form_id: 1
+
+two: 
+  id: 2
+  study_id: 1
+  extraction_form_id: 2
+
+three:
+  id: 3
+  study_id: 2
+  extraction_form_id: 1
+
+four:
+  id: 4
+  study_id: 2
+  extraction_form_id: 2

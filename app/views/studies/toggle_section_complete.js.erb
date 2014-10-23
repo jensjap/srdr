@@ -1,0 +1,22 @@
+<% if @finalize_tab == true %>
+	<% if @section == 'all' %>
+		$("td[id$='_user']").html("<%= current_user.login %>");
+		$("td[id$='_status']").html("<%=  escape_javascript(render :partial=>'toggle_status', :locals=>{:status => @new_status}) %>");
+	<% else %>
+		$("td[id='<%= @section %>_user']").html("<%= current_user.login %>");
+		$("td[id='<%= @section %>_status']").html("<%=  escape_javascript(render :partial=>'toggle_status', :locals=>{:status => @new_status}) %>");
+	<% end %>
+<% else %>
+	<% color = "green" %>
+	<% title = "Complete" %>
+	<% opposite = "Incomplete" %>
+	<% if @new_status == false %>
+		<% title = "Incomplete" %>
+		<% color = "red" %>
+		<% opposite = "Complete" %>
+	<% end %>
+	$("#<%= @section %>_status").html("<%= title %>");
+	$("#<%= @section %>_status").css("color","<%= color %>");
+	$("#toggle_<%= @section %>_button").html("Mark Section <%= opposite %>");
+	
+<% end %>

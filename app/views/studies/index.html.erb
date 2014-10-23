@@ -1,0 +1,78 @@
+<h1>Add Studies to This Project</h1>
+<br/>
+<!-- If this project is able to accept new studies... -->
+<% if @project_ready_for_studies[0] %>
+	<%# check user privilege %>	
+	<% has_privilege = User.current_user_has_study_edit_privilege(@project.id, current_user) %>
+	<% if has_privilege %>
+		
+			<%= link_to (image_tag("Add.png", :style=>"border-style:none;vertical-align:text-top;") + " Add a New Study"), new_project_study_path, :class=>"edit_link" %>
+
+		
+		<br/><br/>
+		<% unless @studies.empty? %>	
+			Below is a list of studies previously added to this project. You may edit or delete these entries using the 
+			icons in the right column of the table.
+			
+			<table class="list_table" id="studies_list_table" summary="studies list table">
+			<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Year</th>
+			<th>Key Questions Answered</th>
+			<th></th>
+			</tr>
+			
+			<% @studies.each do |study| %>
+			
+				<% study_pub_info = Study.get_primary_pub_info(study.id) %>
+				<% if !study_pub_info.nil? %> 
+				
+						<tr class="<%= cycle("even", "odd") %>">
+							<td><%= link_to study_pub_info.title, project_study_path(@project, study) %></td>
+							<td><%= study_pub_info.author %></td>
+							<td><%= study_pub_info.year %></td>
+							<td>
+								<% arr = Study.get_key_question_output(study.id) %>
+								<%= arr.to_sentence %>
+							</td>
+							<td>
+								<% has_privilege = User.current_user_has_study_edit_privilege(@project.id, current_user) %>
+								<% if has_privilege %>
+
+										<%= link_to (image_tag("Pencil.png", :style=>"border-style:none;vertical-align:middle;")), edit_project_study_path(@project, study),:class => 'tooltip_edit_study'%>
+										<%= link_to (image_tag("Bin_closed.png", :style=>"border-style:none;vertical-align:middle;")), project_study_path(@project,study), :method=>:delete, :confirm => "Are you sure?", :class=>'tooltip_delete_study' %>
+								<% end %>
+							</td>
+						</tr>
+				
+				<% end %>
+			
+			<% end %>
+				
+		</table>
+		
+		<% else %>
+This project does not yet have any associated studies. Please add a study using the "Add a New Study" button above.
+		<% end %>
+	<% else %>
+		You do not have access to this information. Please contact your project lead to correct this problem.
+	<% end %>
+	
+<!-- if the project is not ready to accept studies, tell them why -->
+<% else %>
+	<strong>Studies cannot yet be added to this project for the following reasons:</strong>
+  <div style="margin-left: 25px;">
+		<ul>
+	  	<% @project_ready_for_studies[1].each do |reason| %>
+	  		<li><%= reason %></li>
+	  	<% end %>
+	  </ul>
+	</div>
+  <br/>
+  Please correct these problems or contact your project lead before continuing.
+<% end %>
+
+	<br/><br/>
+  <%= render :partial=>'extraction_forms/back_and_continue_buttons', :locals=>{:previous_url=>"extractionforms",:next_url=>"/projects/#{session[:project_id]}",:previous_title=>"Create Extraction Forms",:next_title=>"Project Summary"} %>	
+	

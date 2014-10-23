@@ -1,0 +1,47 @@
+<div id="tc_templates">
+<%= form_tag({:controller=>'tablecreator',:action=>'templatemanager'}, :method=>'get', :name=>'tctemplateform', :id=>'tctemplateform') %>
+<input type="hidden" name="cmd" value="NA">
+<script type="text/javascript">
+    function loadTemplate() { 
+        document.getElementById("tctemplateform").cmd.value = "LOAD";
+        document.getElementById("tctemplateform").submit();
+    }
+    
+    function useDefault() {
+        document.getElementById("tctemplateform").cfgname.selectedIndex = 0;
+        document.getElementById("tctemplateform").cmd.value = "LOAD";
+        document.getElementById("tctemplateform").submit();
+    }
+</script>
+&nbsp;<br/>
+You can create a new table or modify a saved template from the drop down menu below
+<p/>
+<%
+    # Build options for template choice drop box
+    prj_id = @project.id.to_s
+    dir_files = nil
+    template_options = Array.new
+    template_options << ['Default','DEFAULT']
+    if File.exists?("reports/tables/"+prj_id+"/")
+        # dir_files = Dir.entries("reports/tables/"+prj_id+"/")
+        dir_files = Dir["reports/tables/"+prj_id+"/*.conf"]
+    end
+    if !dir_files.nil? && dir_files.size > 0
+        for fname in dir_files
+            table_formconfig = YAML.load_file(fname)
+            meta = table_formconfig["meta"]
+            name = meta["name"]
+            desc = meta["description"]
+            createdby = meta["creator"]
+            createdate = meta["created"]
+            opts_label = name+" ("+desc+")"
+            template_options << [opts_label,fname]
+        end
+    end
+%>
+<b>Choose from a Saved Table Template:</b> 
+<%= select_tag("cfgname", options_for_select(template_options), :onchange=>"loadTemplate()") %>
+<p/>
+or <a href="#" onclick='useDefault()'>Use Default Template</a>
+</form>
+</div>

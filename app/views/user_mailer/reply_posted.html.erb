@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+  
+  
+    <h1>A reply has been posted to your comment on SRDR!</h1>
+<br/>
+
+SRDR user <%= @poster.login %> has posted the following reply to your comment: <br/><br/>
+
+Your original comment: <br/>
+"<%= @parent_comment.comment_text %>"
+<br/><br/>
+
+<%= @poster.login %>'s: reply:<br/> 
+"<%= @comment.comment_text %>"
+<br/><br/>
+
+<br/><br/>
+This reply is located in: <br/>
+Project: <%= @project.title %><br/>
+<% if @comment.study_id != -1 %>
+Study: <%= Study.get_title(@comment.study_id) %><br/>
+<% end %>
+Section: <%= @comment.section_name %><br/>
+Field: <%= @comment.field_name %><br/><br/>
+
+To view and respond to the reply, go to the SRDR location specified.
+
+	
+	
+	
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<%# remove any existing forms %>
+$("#q_builder_form").remove();
+<%# IF WE'RE IN THE EXTRACTION FORM, THE STUDY INSTANCE IS NOT THERE %>
+<% if !defined?(@study) || @study.nil? %>
+
+	$('#baseline_characteristic_fields_entry').html("<%= escape_javascript(render :partial => 'baseline_characteristic_fields/form') %>");
+	$("#baseline_characteristic_fields_entry :button").removeAttr("disabled");	
+	$("#baseline_characteristic_fields_entry").dialog("option", "title", "New Baseline Characteristic");		
+	$("#baseline_characteristic_fields_entry").dialog('open');	
+<%# OTHERWISE, WE'RE IN THE STUDY SIDE...%>
+<% else %>
+	$('#population_characteristic_entry').html("<%= escape_javascript(render :partial => 'baseline_characteristic_fields/custom_field_form') %>");
+<% end %>

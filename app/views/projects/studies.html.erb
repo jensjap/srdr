@@ -1,0 +1,113 @@
+<%
+
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Studies","Studies","/projects/"+@project.id.to_s+"/studies")
+    session[:urlhistory] = urlhistory
+    session[:comp_project] = @project
+
+    is_project_lead = current_user.is_lead(@project.id)
+%>
+<div id='left-navigation-div' tabindex=100>
+<%= render :partial => "sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+<%
+    if @for_comparison
+        page_title = "Data Comparison Tool"
+        if @extraction_forms.size() > 1
+            page_title = page_title + "; Please select Extraction Form and Studies to compare"
+        end
+    else
+        page_title = "Add Studies to this Project"
+    end
+%>
+	<%= render :partial => "page_title", :locals => {:page_title => page_title} %>
+	<% if @project_ready_for_studies[0] %>
+		<%# check user privilege %>	
+        <% has_privilege = User.current_user_has_study_edit_privilege(@project.id, current_user) %>
+		<% if has_privilege %>
+			<!--<div class="actions centered">
+				<%# link_to (image_tag("Add.png", :style=>"border-style:none;vertical-align:text-top;") + " Add a New Study"), new_project_study_path(@project), :class => "positive" %>
+			</div>-->
+				<%= render :partial => "projects/studies_table", :locals=>{:is_project_lead => is_project_lead} %>
+		<% else %>
+			You do not have access to this information. Please contact your project lead to correct this problem.
+		<% end %>
+		
+		<br/><br/>
+	<!-- if the project is not ready to accept studies, tell them why -->
+	<% else %>
+		<strong>Studies cannot yet be added to this project for the following reasons:</strong>
+	  <div style="margin-left: 25px;">
+			<ul>
+		  	<% @project_ready_for_studies[1].each do |reason| %>
+		  		<li><%= reason %></li>
+		  	<% end %>
+		  </ul>
+		</div>
+	  <br/>
+	  Please correct these problems or contact your project lead before continuing.
+	<% end %>
+
+	<br/><br/>
+	<% if is_project_lead %>
+  		<%= render :partial=>'extraction_forms/back_and_continue_buttons', :locals=>{:previous_url=>"manage",:next_url=>"/projects/#{params[:id]}",:previous_title=>"Manage Users",:next_title=>"Project Summary"} %>	
+  		<br/><br/>
+  	<% end %>
+	
+<script type="text/javascript">
+var is_edit_page = false;
+$(document).ready(function(){
+	
+	var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+	// Default values...
+	myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+	myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+	myMenu.oneSmOnly = false;             // One expanded submenu at a time
+	myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+
+	myMenu.init();
+
+	// SEPARATE FROM THE MENU ITSELF...
+	create_tabs();
+	$("#modal_div").dialog({
+		autoOpen: false
+	})
+	
+	$("#add_keyquestion_box").dialog({
+        autoOpen: false,
+		minWidth: 600
+    });
+
+	$("a.nav_active").first().addClass("nav-active");
+	$("a.nav_active").first().addClass("nav-selected");
+
+	$("#items_per_page_selector, #sort_by_selector").bind("change",function(){
+		var per_page = $("#items_per_page_selector").val();
+		var sort_by = $("#sort_by_selector").val();
+		var comparison = <%= @for_comparison %>;
+		url="/projects/<%= params[:id] %>/studies?page=1&items_per_page=" + per_page.toString() + "&sort_by="+sort_by.toString() + "&comparison=" + comparison.toString();
+		window.location.replace(url);
+	});
+
+	$("#compef_selector").bind("change",function(){
+		var per_page = $("#items_per_page_selector").val();
+		var sort_by = $("#sort_by_selector").val();
+		var compef = $("#compef_selector").val();
+		var comparison = <%= @for_comparison %>;
+		url="/projects/<%= params[:id] %>/studies?page=1&items_per_page=" + per_page.toString() + "&sort_by="+sort_by.toString() + "&comparison=" + comparison.toString() + "&compef=" + compef.toString();
+		window.location.replace(url);
+	});
+
+	<% unless params[:page].nil? %>
+		$("body").animate({scrollTop:$("#projects_list_studies_table").offset().top})
+	<% end %>
+	
+})
+</script>
+
+</div>

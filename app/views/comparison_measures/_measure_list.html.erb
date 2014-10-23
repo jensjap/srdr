@@ -1,0 +1,57 @@
+<% unless @comparison_measures.empty? %>
+  <div id="measures_list_div">
+	  <h2>Measures defined for this comparison</h2>
+<div class="smallText">You may edit or delete these measures using the icons to the right. Note that deleting a measure may result
+in the loss of associated data!</div><br/>
+
+	<table class="list_table" id="comparison_measures_list_table" summary="comparison measures list table">
+		<tr>
+		<th id="measure_name_comparisons">Measure Name</th>
+		<th id="measure_unit_comparisons">Measure Unit</th>
+		<th id="description_comparisons">Description</th>
+		<th id="notes_comparisons">Notes</th>
+		<th id="actions_comparisons">Actions</th>
+		</tr>
+		
+		<% @comparison_measures.each do |measure| %>
+		
+			<tr class="<%= cycle("odd", "even") %>">
+			<td><%= measure.title %></td>
+			<td><%= measure.unit %></td>
+			<td><%= measure.description %></td>
+			<td><%= measure.note %></td>
+			<td width="50">
+			
+			<%= link_to image_tag("Pencil.png"), "", :id => "edit_measure_" + measure.id.to_s, :class => "edit_measure_link" %>
+			<%= link_to image_tag("Bin_closed.png"), comparison_measure_path(measure.id), :method => :delete, :remote => true, :id => "delete_measure_" + measure.id.to_s, :class => "delete_measure_btn" %>
+			
+			</td>
+			</tr>
+			
+		<% end %>
+		
+	</table>
+
+				
+	</div>
+	
+	<br/>
+	<script type='text/javascript'>
+		$("a.edit_measure_link").bind("click",function(event){
+			event.preventDefault();
+			var measure_arr = $(this).attr("id").split("_");
+			var measure_id = measure_arr[2];
+			$.ajax({
+				type: "POST",
+				url: 'comparison_measures/edit',
+				data: {
+					measure_id : measure_id,
+					comparison_id : "<%= @comparison.id %>"
+				}
+			});
+		});
+		
+	</script>
+<% else %>
+	There are currently no comparison measures specified. Use the button below to add a new measure.<br/><br/>
+<% end %>

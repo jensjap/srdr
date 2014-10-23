@@ -1,0 +1,49 @@
+.accessibility{
+	position: absolute;
+	left: -99999px;
+	height: 10px;
+	width: 10px
+}
+
+.skip{
+    position: absolute;
+	left: 0;
+	top: 100px;
+	width: 100%;
+    margin-left: 0;
+	text-align: center;
+	list-style: outside none;
+}
+
+.skip li{ list-style-type: none }
+
+.skip a{
+	position: absolute;
+	left: -99999px;
+	top: 30px;
+}
+
+.skip a:focus, #skip a:active{
+	position: relative;
+	left: 0;
+	z-index:9999;
+	width: 75%;
+	height: auto;
+	margin: 0 auto;
+	padding: 30px 45px;
+	text-align: center;
+	text-decoration: none;
+	letter-spacing: -4px !important;
+	font: bold 50px "Arial", "Helvetica", sans-serif !important;
+	/* color information, edit this to suit the colors of your layout */
+        color: navy;
+	/*background: transparent url(transparent.png) repeat scroll 0 0;*/
+	background: #fff;
+	border: 3px solid grey;
+}
+.hidden-label{
+	display:none;
+	width:0px;
+	height:0px;
+	overflow: hidden;
+}

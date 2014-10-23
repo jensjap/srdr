@@ -1,0 +1,17 @@
+// determine if there are any matrix options that need to be removed.
+var field_id = "#matrix_setup_<%= @model %>";
+var n = $(field_id.toString()).length;
+if(n > 0){
+	$(field_id.toString()).remove();
+}
+
+// determine if there's already a new row button, and if there isn't thn add one
+field_id = "<%= "#new_row_button_" + @page_name %>";
+n = $(field_id.toString()).length;
+
+if (n < 1){
+	$("#type_selector_<%= params[:page_name] %>").after("<%= escape_javascript(render(:partial=>'question_builder/add_option_button')) %>");
+}
+
+
+

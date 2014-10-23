@@ -1,0 +1,14 @@
+<div class='tab-div'>
+	
+	<script type='text/javascript'>
+	var is_edit_page=false;
+	</script>
+	<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Choose Title and Key Questions"} %>
+
+		Welcome to the Extraction Form editor.  In this section you will be able to create the data extraction form(s) to be used by you and your research team to extract data from the studies you choose to add to your review project.  The editor is flexible enough to accommodate most any information you’d care to extract, and gives you a variety of formatting options for your queries (radio buttons, check boxes, text fields, etc.).
+
+	<br/><br/>
+		<%= render 'form' %>
+	<br/>
+	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:first=>true} %>
+</div>

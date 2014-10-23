@@ -1,0 +1,40 @@
+
+<% if !@is_diagnostic %>
+	$("#choose_timepoint").html("<%= escape_javascript(render :partial=>'outcome_data_entries/choose_timepoint')%>");
+    
+	<% unless @OCDEs.empty? %>
+		//$("#form_div").html("Hrmm");
+		$("#form_div").html("<%= escape_javascript(render :partial=>'/outcome_data_entries/entry_table')%>");
+	<% else %>
+	  $("#entry_div").html("");
+	<% end %>
+
+	<% if @timepoints.length < 2 %>
+		$("#show_hide_wa_links").html("")
+	<% end %>
+
+	<% if defined?(@hide_wait_icon) %>
+		$("#waitingGIF").remove();
+	<% end %>
+
+	$("#existing_results_div").css("display","none");
+	$("#outcomes_reference").css("display","none");
+	$("#outcome_description_link").html("Show Outcome Reference");
+	$("#view_modify_entry_link").html("View/Modify Existing Data Entries");
+
+<% else %>
+	
+	$("#form_div").html("<%= escape_javascript(render :partial=>"/outcome_data_entries/diagnostic_entry_table")%>");
+
+	<%# There will never be within-arm comparisons for diagnostic test outcomes %>
+	$("#show_hide_wa_links").html("")
+
+	<% if defined?(@hide_wait_icon) %>
+		$("#waitingGIF").remove();
+	<% end %>
+
+	$("#existing_results_div").css("display","none");
+	$("#outcomes_reference").css("display","none");
+	$("#outcome_description_link").html("Show Outcome Reference");
+	$("#view_modify_entry_link").html("View/Modify Existing Data Entries");
+<% end %>

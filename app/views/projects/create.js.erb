@@ -1,0 +1,43 @@
+<% if @saved %>
+	$("#info_messages").html("");
+	$("#project_save_message").show().delay(500).fadeOut(300);	
+	$("#bottom_nav a#page_flip_btn").removeClass("unsaved_project");
+	$("#bottom_nav a#page_flip_btn").attr("href", "/projects/<%= @project.id.to_s %>/extraction_forms");	
+	
+	// reset the form so that it uses the new object
+	$("#left-navigation-div").html("<%= escape_javascript(render :partial=>"sidebars/project_sidebar") %>");
+	$("#project_form_div").html("");
+	$("#project_form_div").html("<%= escape_javascript(render :partial=>"projects/form") %>");
+	$("#continue_button_div").css("display","block");
+	
+<% else %>
+	$("#info_messages").html("<%= escape_javascript(render :partial=>"layouts/info_messages") %>");
+	window.scrollTo(0, 0);
+<% end %>
+
+	
+$("#project_id_field").val("<%=@project.id.to_s %>");	
+	
+// unset form and field 'unsaved' indicators
+forms = $(".unsaved_form");
+for(i=0; i < forms.length; i++){
+	$(forms[i]).removeClass("unsaved_form")
+}
+fields = $(".edited_field")
+for(i=0; i < fields.length; i++){
+  $(fields[i]).removeClass("edited_field");
+}
+
+$(".unsaved_project").removeClass("unsaved_project");
+ 
+$("#add_kq_button").off();
+$("#add_kq_button").on("click", function(e){
+e.preventDefault();
+$.ajax({
+  url: 'key_questions/new',
+  data:({project_id:<%=@project.id%>}),
+  type: "POST",
+  cache: false,
+  dataType: "script"
+});
+});

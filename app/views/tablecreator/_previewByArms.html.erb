@@ -1,0 +1,471 @@
+<div id="tc_preview_flat">
+<h2>Report by Arms</h2><br/><br/>
+<%
+# Load display configuration data
+reportconfig = @tc_project["reportconfig"]
+reportset = @tc_project["reportset"]
+prj = @tc_project["project"]
+%>
+<table class="tc_preview_table">
+<%
+for aidx in 0..reportconfig.getNumArmsItems()
+    armname = reportconfig.getArmsName(aidx)
+    armdesc = reportconfig.getArmsDesc(aidx)
+%>
+    <tr class="tc_preview_arm">
+        <td colspan="<%= reportconfig.getTotalCols().to_s %>">
+        <strong>Arm: <%= armdesc %></strong><br/><hr width="100%"/><br/>
+        </td>
+    </tr>
+<%
+    for ridx in 0..reportconfig.getNumExtractionFormsItems() - 1
+        efid = reportconfig.getExtractionFormID(ridx)
+        ncols = reportconfig.getTotalCols()
+%>
+    <tr class="tc_preview_ef">
+        <td colspan="<%= reportconfig.getTotalCols().to_s %>">
+        <strong>Extraction Form: <%= reportset.getEFTitle(ridx) %></strong><br/><hr width="100%"/><br/>
+        </td>
+    </tr>
+    <tr class="tc_preview_header">
+        <td class="tc_preview_title">
+        <strong>Publication</strong>
+        </td>
+<%
+        if reportconfig.getNumShowDesignDetails() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumShowDesignDetails() %>">
+        <strong>Design Details</strong>
+        </td>
+<%
+        end
+        if (reportconfig.getNumShowArmDetails() > 0) &&
+            (reportconfig.getNumShowArms() > 0)     # Only if Arm(s) were selected to be visible
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumShowArmDetails() %>">
+        <strong>Arm Details</strong>
+        </td>
+<%
+        end
+        if (reportconfig.getNumShowBaseline() > 0) &&
+            (reportconfig.getNumShowArms() > 0)     # Only if Arm(s) were selected to be visible
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumShowBaseline() %>">
+        <strong>Baseline Characteristics</strong>
+        </td>
+<%
+        end
+        if reportconfig.getNumOutcomeTimepointsCols() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumOutcomeTimepointsCols() %>">
+        <strong>Outcome Timepoints</strong>
+        </td>
+<%
+        end
+        if reportconfig.getNumOutcomeMeasuresCols() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumOutcomeMeasuresCols() %>">
+        <strong>Outcome Measures</strong>
+        </td>
+<%
+        end
+        if reportconfig.getNumOutcomesCols() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumOutcomesCols() %>">
+        <strong>Outcome Results</strong>
+        </td>
+<%
+        end
+        if reportconfig.getNumShowOutcomeDetails() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumShowOutcomeDetails() %>">
+        <strong>Outcome Details</strong>
+        </td>
+<%
+        end
+        if reportconfig.getNumAdverseEventsCols() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumAdverseEventsCols() %>">
+        <strong>Adverse Events</strong>
+        </td>
+<%
+        end
+        if reportconfig.getNumQualityDimCols() > 0
+%>
+        <td class="tc_preview_title" colspan="<%= reportconfig.getNumQualityDimCols() %>">
+        <strong>Quality Dimensions</strong>
+        </td>
+<%
+        end
+%>
+        <td class="tc_preview_title">
+        <strong>Overall Quality</strong>
+        </td>
+    </tr>
+    <tr class="tc_preview_subheader">
+        <td class="tc_preview_subtitle">
+        Summary
+        </td>
+<%
+        for ridx in 0..reportconfig.getNumDesignDetailsItems() - 1
+            if reportconfig.showDesignDetails(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getDesignDetailsDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+        if (reportconfig.getNumShowArmDetails() > 0) &&
+            (reportconfig.getNumShowArms() > 0)     # Only if Arm(s) were selected to be visible
+            for ridx in 0..reportconfig.getNumArmDetailsItems() - 1
+                if reportconfig.showArmDetails(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getArmDetailsDesc(ridx) %>
+        </td>
+<%
+                end
+            end
+        end
+        if (reportconfig.getNumShowBaseline() > 0) &&
+            (reportconfig.getNumShowArms() > 0)     # Only if Arm(s) were selected to be visible
+            for ridx in 0..reportconfig.getNumBaselineItems() - 1
+                if reportconfig.showBaseline(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getBaselineDesc(ridx) %>
+        </td>
+<%
+                end
+            end
+        end
+        for ridx in 0..reportconfig.getNumOutcomeTimepointsItems() - 1
+            if reportconfig.showOutcomeTimepoints(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getOutcomeTimepointsDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+        for ridx in 0..reportconfig.getNumOutcomeMeasuresItems() - 1
+            if reportconfig.showOutcomeMeasures(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getOutcomeMeasuresDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+        for ridx in 0..reportconfig.getNumOutcomesItems() - 1
+            if reportconfig.showOutcomes(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getOutcomesDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+        for ridx in 0..reportconfig.getNumOutcomeDetailsItems() - 1
+            if reportconfig.showOutcomeDetails(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getOutcomeDetailsDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+        for ridx in 0..reportconfig.getNumAdverseEventsItems() - 1
+            if reportconfig.showAdverseEvents(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getAdverseEventsDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+        for ridx in 0..reportconfig.getNumQualityDimItems() - 1
+            if reportconfig.showQualityDim(ridx)
+%>
+        <td class="tc_preview_subtitle">
+        <%= reportconfig.getQualityDimDesc(ridx) %>
+        </td>
+<%
+            end
+        end
+%>
+        <td class="tc_preview_subtitle">
+        &nbsp;
+        </td>
+    </tr>
+<%
+        bgidx = 0
+        rcolor = ["#FFFFFF","#EAEAEA"]
+        for sidx in 0..reportset.size() - 1
+            if reportset.containsArmName(sidx,armname)
+                arm_id =  reportset.getArmIDByName(sidx,armname);
+%>
+    <tr class="tc_preview_study" bgcolor="<%= rcolor[bgidx % 2] %>">
+        <td class="tc_preview_study">
+<%
+                pub_author = reportset.getAuthor(sidx)
+                for ridx in 0..reportconfig.getNumPublicationItems() - 1
+                    if (reportconfig.getPublicationConfigName(ridx) == "authorfirstonly") &&
+                        (reportconfig.getPublicationConfigFlag(ridx) == 1)
+                        pub_author = reportset.getFirstAuthor(sidx)
+                    end
+                end
+                if pub_author.nil?
+                    pub_author = "-"
+                end
+                celltxt = ""
+                for ridx in 0..reportconfig.getNumPublicationItems() - 1
+                    val = reportset.getPublicationData(sidx,ridx)
+                    if val.nil?
+                        val = "null"
+                    end
+                    puts "..... publication cell - "+reportconfig.getPublicationConfigName(ridx)+" show "+reportconfig.showPublication(ridx).to_s+" celltxt "+celltxt+" add "+val
+                    if reportconfig.getPublicationConfigName(ridx) == "authorfirstonly"
+                        # Skip
+                    else
+                        if reportconfig.showPublication(ridx)
+                            if celltxt.size() > 0
+                                if ridx > 4
+                                    celltxt = celltxt + ", "
+                                else
+                                    celltxt = celltxt + "<br/>"
+                                end
+                            end
+                            if reportconfig.getPublicationConfigName(ridx) == "author"
+                                celltxt = celltxt + pub_author
+                            else
+                                celltxt = celltxt + reportset.getPublicationData(sidx,ridx)
+                            end
+                        end
+                    end
+                end
+%>
+        <%= raw celltxt %>
+        </td>
+<%
+                # Design Details ---------------------------------------------------
+                if (reportconfig.getNumDesignDetailsItems() > 0)
+                    for ddidx in 0..reportconfig.getNumDesignDetailsItems() - 1
+                        if reportconfig.showDesignDetails(ddidx)
+%>
+        <td>
+<%
+                            dd_id = reportset.getDesignDetailID(sidx,ddidx)
+                            dd_name = reportset.getDesignDetailName(sidx,ddidx)
+                            if reportset.isDesignDetailComplex(sidx,dd_id)
+                                htmltxt = TablecreatorHelper.renderDesignDetailsHTMLTableCell(sidx,@tc_project,d_id,dd_name)
+                            else
+                                htmltxt = TextUtil.restoreCodedText(reportset.getDesignDetailValue(sidx,dd_id))
+                            end
+%>
+<%= raw htmltxt %>
+        </td>
+<%
+                        end
+                    end
+                end         
+                # Arm Details ---------------------------------------------------
+                if (reportconfig.getNumArmDetailsItems() > 0) &&
+                    (reportconfig.getNumArmsItems() > 0)
+                    for armdidx in 0..reportconfig.getNumArmDetailsItems() - 1
+                        if reportconfig.showArmDetails(armdidx)
+%>
+        <td>
+<%
+                            armd_id = reportset.getArmDetailID(sidx,armdidx)
+                            n_arms_rendered = 0
+                            if reportset.containsArmName(sidx,armname)
+                                armd_name = reportset.getArmDetailName(sidx,armdidx)
+                                if reportset.isArmDetailComplex(sidx,arm_id,armd_id)
+                                    htmltxt = TablecreatorHelper.renderArmDetailsHTMLTableCell(sidx,@tc_project,arm_id,armname,armd_id,armd_name)
+                                else
+                                    htmltxt = TextUtil.restoreCodedText(reportset.getArmDetailValue(sidx,arm_id,armd_id))
+                                end
+%>
+        <%= raw htmltxt %>
+<%
+                            end
+%>
+        </td>
+<%
+                        end
+                    end
+                end
+                # List Baseline Characteristics ---------------------------------------------------
+                if (reportconfig.getNumBaselineItems() > 0) &&
+                    (reportconfig.getNumArmsItems() > 0)
+                    for blidx in 0..reportconfig.getNumBaselineItems() - 1
+                        if reportconfig.showBaseline(blidx)
+%>
+        <td>
+<%
+                            bl_id = reportset.getBaselineID(sidx,blidx)
+                            n_arms_rendered = 0
+                            if reportset.containsArmName(sidx,armname)
+                                bl_name = reportset.getBaselineName(sidx,blidx)
+                                if reportset.isBaselineComplex(sidx,arm_id,bl_id)
+                                    htmltxt = TablecreatorHelper.renderBaselineHTMLTableCell(sidx,@tc_project,arm_id,armname,bl_id,bl_name)
+                                else
+                                    htmltxt = TextUtil.restoreCodedText(reportset.getBaselineValue(sidx,arm_id,bl_id))
+                                end
+%>
+        <%= raw htmltxt %>
+<%
+                            end
+%>
+        </td>
+<%
+                        end
+                    end
+                end
+                # List Outcome Timepoints ---------------------------------------------------
+                if reportconfig.getNumOutcomeTimepointsItems() > 0
+                    for ridx in 0..reportconfig.getNumOutcomeTimepointsItems() - 1
+                        if reportconfig.showOutcomeTimepoints(ridx)
+                            marker = "0"
+                            if reportset.containsTimePointsName(sidx,reportconfig.getOutcomeTimepointsName(ridx))
+                                marker = "1"
+                            end
+%>
+        <td>
+        <%= marker %>
+        </td>
+<%
+                        end
+                    end
+                end # end Time points
+                # List Outcome Measures ---------------------------------------------------
+                if reportconfig.getNumOutcomeMeasuresItems() > 0
+                    for ridx in 0..reportconfig.getNumOutcomeMeasuresItems() - 1
+                        if reportconfig.showOutcomeMeasures(ridx)
+                            marker = "0"
+                            if reportset.containsOutcomeMeasureName(sidx,reportconfig.getOutcomeMeasuresName(ridx))
+                                marker = "1"
+                            end
+%>
+        <td>
+        <%= marker %>
+        </td>
+<%
+                        end
+                    end
+                end # end mesures
+                # List Outcome Results ---------------------------------------------------
+                if reportconfig.getNumOutcomesItems() > 0
+                    for ridx in 0..reportconfig.getNumOutcomesItems() - 1
+                        if reportconfig.showOutcomes(ridx)
+                            celltxt = ""
+                            outcomename = reportconfig.getOutcomesName(ridx)
+                            # For measures - iterate through all the different subgroups, timepoints and arms attached to the outcome measure
+                            for sgidx in 0..reportconfig.getNumOutcomeSubgroupsItems() - 1
+                                if reportconfig.showOutcomeSubgroups(sgidx)
+                                    sgname = reportconfig.getOutcomeSubgroupsName(sgidx)
+                                    sgdesc = reportconfig.getOutcomeSubgroupsDesc(sgidx)
+                                    for tpidx in 0..reportconfig.getNumOutcomeTimepointsItems() - 1
+                                        if reportconfig.showOutcomeTimepoints(tpidx)
+                                            tpname = reportconfig.getOutcomeTimepointsName(tpidx)
+                                            tpdesc = reportconfig.getOutcomeTimepointsDesc(tpidx)
+                                            for midx in 0..reportconfig.getNumOutcomeMeasuresItems() - 1
+                                                if reportconfig.showOutcomeMeasures(midx)
+                                                    measname = reportconfig.getOutcomeMeasuresName(midx)
+                                                    measdesc = reportconfig.getOutcomeMeasuresDesc(midx)
+                                                    val = reportset.getOutcomesValue(sidx,outcomename,sgname,tpname,measname,armname)
+                                                    if !val.nil?
+                                                        if celltxt.size() > 0
+                                                            celltxt = celltxt + "<br/>"
+                                                        end
+                                                        celltxt = celltxt + "["+sgdesc+"]["+tpdesc+"]["+measdesc+"]="+val
+                                                    end
+                                                end # if showOutcomeMeasures
+                                            end # for outcome measures
+                                        end # if showOutcomeTimepoints
+                                    end # for outcome timepoints
+                                end # if showOutcomeSubgroups
+                            end # for outcome subgroups
+%>
+        <td>
+        <%= raw celltxt %>
+        </td>
+<%
+                        end
+                    end
+                end # end outcome results
+                # Outcome Details ---------------------------------------------------
+                if (reportconfig.getNumOutcomeDetailsItems() > 0)
+                    for outdidx in 0..reportconfig.getNumOutcomeDetailsItems() - 1
+                        if reportconfig.showOutcomeDetails(outdidx)
+%>
+        <td>
+<%
+                            outd_id = reportset.getOutcomeDetailID(sidx,outdidx)
+                            outd_name = reportset.getOutcomeDetailName(sidx,outdidx)
+                            if reportset.isOutcomeDetailComplex(sidx,outd_id)
+                                htmltxt = TablecreatorHelper.renderOutcomeDetailsHTMLTableCell(sidx,@tc_project,outd_id,outd_name)
+                            else
+                                htmltxt = TextUtil.restoreCodedText(reportset.getOutcomeDetailValue(sidx,outd_id))
+                            end
+%>
+<%= raw htmltxt %>
+        </td>
+<%
+                        end
+                    end
+                end          
+                # List Adverse Events ---------------------------------------------------
+                if reportconfig.getNumAdverseEventsItems() > 0
+                    for ridx in 0..reportconfig.getNumAdverseEventsItems() - 1
+                        if reportconfig.showAdverseEvents(ridx)
+                            val = reportset.getAdverseEventsValue(sidx,reportconfig.getAdverseEventsName(ridx),armname)
+                            if val.nil?
+                                val = "-"
+                            end
+%>
+        <td>
+        <%= val %>
+        </td>
+<%
+                        end
+                    end
+                end # end adverse evemts
+                # List Quality Dimensions ---------------------------------------------------
+                if reportconfig.getNumQualityDimItems() > 0
+                    for ridx in 0..reportconfig.getNumQualityDimItems() - 1
+                        if reportconfig.showQualityDim(ridx)
+                            qd_name = reportconfig.getQualityDimName(ridx);
+                            qd_id = reportset.getQualityDimIDByName(sidx,qd_name);
+                            val = reportset.getQualityDimValue(sidx,qd_id)
+                            if val.nil?
+                                val = "-"
+                            end
+%>
+        <td>
+        <%= val %>
+        </td>
+<%
+                        end
+                    end
+                end # end Quality Dimensions
+                # Overall Quality ---------------------------------------------------
+%>
+        <td>
+        <%= reportset.getTotalQualityValue(sidx) %>
+        </td>
+<%
+
+                bgidx = bgidx + 1
+%>
+    </tr>
+<%
+            end
+        end
+    end # end for efs
+end # end arms
+%>
+</table>
+</div>

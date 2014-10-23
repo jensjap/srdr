@@ -1,0 +1,13 @@
+<div id="left-navigation-div" tabindex=100>
+	<%= render :partial=>"sidebars/mySRDR_sidebar" %>
+</div>
+<div id="content" tabindex=200>
+	<!--
+	<h1>Send Feedback About SRDR</h1><br/>
+	<%= render 'feedback_items/form' %>
+	<br/><br/>
+	-->
+	<% if current_user.is_admin? %>
+		<%= render 'feedback_items/table' %>
+	<% end %>
+</div>

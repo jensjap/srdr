@@ -1,0 +1,22 @@
+<br/><div id="quality_rating_fields_validation_message"></div>
+<% if !@quality_rating_fields.nil? %>
+	<% unless @quality_rating_fields.length < 1 %>
+	  <table class="list_table" id="quality_rating_fields_list" summary="quality rating fields list">
+	  <thead>
+	  <tr>
+	  	<th>Rating Item</th>
+	 	</tr></thead>
+	  <% for rating in @quality_rating_fields %>
+	    <tr class="<%= cycle("even", "odd") %>" id="qdr_row_<%=rating.id.to_s %>">
+				<td><%= rating.rating_item %></td>
+			</tr>
+
+		<% end %>
+		</table>
+		
+	<% else %>
+	  <span style='font-style:italic;'>There are no quality rating items specified.</span>
+	<% end %>
+<% else %>
+	No quality rating items have been specified.
+<% end %>

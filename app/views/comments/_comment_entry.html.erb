@@ -1,0 +1,193 @@
+<%
+    if comment.is_public == is_public
+        replies = Comment.where(:reply_to => comment.id, :is_reply => true).all
+        marks = ""
+        if comment.fact_or_opinion != ""
+            if marks.size > 0
+                marks = marks + " | "
+            end
+            marks = marks + "<strong>"+comment.fact_or_opinion+"</strong>"
+        end
+        if comment.is_flag && 
+            (comment.flag_type != "") && 
+            !comment.flag_type.nil?
+            if marks.size > 0
+                marks = marks + " | "
+            end
+            marks = marks + "<strong>"+comment.flag_type+"</strong>"
+        end 
+        if comment.is_flag && 
+            comment.is_high_priority != "" 
+            if comment.is_high_priority 
+                if marks.size > 0
+                    marks = marks + " | "
+                end
+                marks = marks + "<strong>High Priority</strong>"
+            else
+                if marks.size > 0
+                    marks = marks + " | "
+                end
+                marks = marks + "<strong>Low Priority</strong>"
+            end
+        end 
+        if marks.size > 0
+            marks = "<b>Marked as:</b> "+marks
+        end
+%>	
+<div id="<%= 'comment_' + comment.id.to_s + '_div' %>" class="one_comment">
+    <p/>&nbsp;
+    <table id="comment_entry_table" width="100%" cellpadding="5px">
+        <tr style="border-top: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+            <td align="LEFT" valign="TOP">
+            <div class="comment_meta">
+<%
+        if !comment.is_public
+%>
+                <img src="/images/Lock.png" border="0" alt="Internal Comment">
+<% 
+        end
+        if comment.is_flag
+%>
+                <img src="/images/Flag_red.png" border="0" alt="Flag">
+<%      
+        else 
+%>
+                <img src="/images/Comment.png" border="0" alt="Comment">
+<%      
+        end 
+%>
+            </div>
+            </td>
+            <td align="LEFT" valign="BOTTOM">
+            <strong><%= User.get_name(comment.commenter_id) %></strong> posted a <%= comment.is_flag ? "flag" : "comment" %>
+            </td>
+            <td align="RIGHT" valign="BOTTOM">
+            <strong><%= comment.created_at.strftime("%D %I:%M%p") %></strong>
+            </td>
+        </tr>
+        <tr style="border-top: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+            <td align="LEFT" colspan="3">
+            <%= raw marks %>
+            </td>
+            <br/>&nbsp;
+        </tr>
+        <tr bgcolor="#f6f6f6" style="border: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+            <td align="LEFT" colspan="3">
+            <div class="comment_content">
+                <%= comment.comment_text %>
+            </div>
+            <p/>&nbsp;
+            </td>
+        </tr>
+<% 
+        if defined?(current_user) && 
+            !current_user.nil? 
+%>
+        <tr>
+            <td align="LEFT" colspan="3">
+            <div class="comment_menu_container">
+<% 
+            if !replies.empty?
+%>
+                <%= link_to image_tag("Comment_add.png", :style=>"border-style:none;vertical-align:top;") + " Hide " + pluralize(replies.length, "reply"),"#", :class=>"show_reply_icon", :id => "show_reply_icon_" + comment.id.to_s, :comment_id=>comment.id.to_s %>&nbsp;|&nbsp;						
+<%
+            end 
+%>					
+                <%= link_to image_tag("Comment_edit.png", :style=>"border-style:none;vertical-align:top;", :alt => "Post a reply") + " Post Reply","#", :class=>"reply_icon", :id => "reply_icon_" + comment.id.to_s %>&nbsp;|&nbsp;
+                <a href="mailto:<%= User.get_email(comment.commenter_id) %>"><%= image_tag("Email.png", :style=>"border-style:none;vertical-align:top;") + " Email User" %></a>&nbsp;|&nbsp;
+<% 
+            if (defined?(current_user) && !current_user.nil?) && 
+                ((current_user.login == "admin") || (comment.commenter_id == current_user.id)) 
+%>
+                <%= link_to image_tag("Bin_closed.png", :style=>"border-style:none;vertical-align:top;") + " Delete comment","#", :class=>"del_icon", :id => "comment_icon_" + comment.id.to_s%>
+<%
+            end 
+%>
+            </div>
+            </td>
+        </tr>
+<% 
+        end
+%>
+    </table>
+    <div id="reply_area_<%= comment.id.to_s %>" class="comment_reply_area"></div>
+<% 
+        unless replies.empty?
+%>
+    <div id="comment_<%= comment.id.to_s %>_replies" class="comment_replies">
+        <p/>&nbsp;
+        <table id="comment_reply_table" width="100%" cellpadding="5px">
+            <tr>
+                <td colspan="3">
+                <strong><%= replies.size().to_s %> Replies</strong>
+                </td>
+            </tr>
+<% 
+            replies.each do |reply|
+                rmarks = ""
+                if reply.fact_or_opinion != ""
+                    if rmarks.size > 0
+                        rmarks = marks + " | "
+                    end
+                    rmarks = rmarks + "<strong>"+reply.fact_or_opinion+"</strong>"
+                end
+                if rmarks.size > 0
+                    rmarks = "<b>Marked as:</b> "+rmarks
+                end
+%>
+            <tr style="border-top: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+                <td align="LEFT">
+                &nbsp;
+                </td>
+                <td align="LEFT">
+                <img  src="/images/Comment.png" border="0" alt="Reply">&nbsp;<strong><%= User.get_name(reply.commenter_id) %></strong> replied:
+                </td>
+                <td align="RIGHT">
+                <strong><%= reply.created_at.strftime("%D %I:%M%p") %></strong>
+                </td>
+            </tr>
+            <tr style="border-top: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+                <td align="LEFT">
+                &nbsp;
+                </td>
+                <td align="LEFT" colspan="2">
+                <%= raw rmarks %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" style="border: none;">
+                &nbsp;
+                </td>
+                <td align="LEFT" colspan="2" style="border: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+                <%= reply.comment_text %>
+                <p/>&nbsp;
+                </td>
+            </tr>
+<% 
+                if (defined?(current_user) && 
+                    !current_user.nil?) && 
+                    (current_user.login == "admin") 
+%>
+            <tr>
+                <td align="LEFT">
+                &nbsp;
+                </td>
+                <td align="LEFT" colspan="2" style="border-top: 1px solid #e0e0e0; padding-top: 10px; padding-bottom: 10px;">
+                <%= link_to image_tag("Bin_closed.png", :style=>"border-style:none;vertical-align:top;") + " Delete reply","#", :class=>"del_icon", :id => "reply_icon_" + reply.id.to_s %>
+                </td>
+            </tr>
+<% 
+                end
+%>
+<% 
+            end # end replies.each 
+%>
+        </table>
+    </div> <%# end div.comment_replies %>
+<% 
+        end # end unless replies.empty
+%>	
+</div> <%# end div.one_comment %>
+<% 
+    end # end comments if private/public 
+%> 

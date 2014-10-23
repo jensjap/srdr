@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: Commenting System
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: Commenting System</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Commenting System</h1>
+<h2>Public vs. Private Comments</h2>
+<p>
+Comments can be public or private. When comments are added before a project
+is published, the comment will be saved as a Private comment, which can
+only be viewed by users listed as project collaborators. When a project is
+published, all comments posted after publishing, whether by collaborators
+or commentators, will be marked as public.
+</p>
+<h2>Types of Comments</h2>
+<p>
+There are two types of comments: Regular Comments and Flags. Currently
+comment dialog windows show both comments and flags in the same list. 
+</p>
+<h2>Including Comments for a Section</h2>
+<p>
+To add a comment to a section or data field, include the partial
+&#8220;comments/field_comments.html.erb&#8221; and send it the following
+variables:
+</p>
+<ul>
+<li><p>
+section_name: (string) the name of the general section where the field is
+(example: projects, arms, studies, adverseevents, designdetails,
+baselinecharacteristics, keyquestions, primarypublications,
+secondarypublications, qualitydimensions, qualityratings)
+</p>
+</li>
+<li><p>
+section_id: (integer) the item_id of the section. (example: project id,
+keyquestion id, arm id)
+</p>
+</li>
+<li><p>
+field_name: (string) the name of the field where the comment will be
+(example: [project] title, [keyquestion] question)
+</p>
+</li>
+<li><p>
+study_id: (integer) the id of the study where the field is (-1 if the field
+is in a project)
+</p>
+</li>
+<li><p>
+project_id: (integer) the id of the project where the field is.
+</p>
+</li>
+</ul>
+<p>
+These variables should be passed in to any comment partial being rendered
+as they determine what comments are shown and how the comment is saved.
+</p>
+<h2>Example Usage</h2>
+<p>
+Example inclusion of comment partial:
+</p>
+<pre class="code">
+  &lt;%= render :partial =&gt; &quot;comments/field_comments&quot;, :locals =&gt; {:section_name =&gt; &quot;arms&quot;, :section_id =&gt; arm.id, 
+  :field_name =&gt; &quot;arms&quot;, :study_id =&gt; arm.study_id, :project_id =&gt; @project.id} %&gt;
+</pre>
+<h2>Partials</h2>
+<p>
+These are the .html.erb files contained in app/views/comments.
+</p>
+<table>
+<tr><td valign="top">_field_comments.html.erb</td><td><p>
+Used for including comments for a particular field. See &#8220;Including
+Comments for a Section&#8221; above. Included directly in a page to show
+the comment and flag numbers, and view links.
+</p>
+</td></tr>
+<tr><td valign="top">_field_flags.html.erb</td><td><p>
+Used in comments/create.js.erb, for updating the div that shows a number of
+flags in a comment section when a new comment is created.
+</p>
+</td></tr>
+<tr><td valign="top">_summary_comments.html.erb</td><td><p>
+Used for showing a comment summary, specifically on the published projects
+page. Included directly in a page to show the comment and flag numbers, and
+view summary links.
+</p>
+</td></tr>
+<tr><td valign="top">_myprojects_comments.html.erb</td><td><p>
+Used for showing a comment summary that is specifically formatted for the
+my projects/my work page. Included directly in a page to show the comment
+and flag numbers, and view myproject comment links.
+</p>
+</td></tr>
+<tr><td valign="top">_comment_form.html.erb</td><td><p>
+Contains the form for adding a new comment. This form is shown using the
+jquery-qTip plugin.
+</p>
+</td></tr>
+<tr><td valign="top">_flag_form.html.erb</td><td><p>
+Contains the form for adding a new flag-comment. This form is shown using
+the jquery-qTip plugin.
+</p>
+</td></tr>
+<tr><td valign="top">_reply_form.html.erb</td><td><p>
+Contains the form for adding a new flag-comment. This form is shown inline
+within the comment thread using jquery.
+</p>
+</td></tr>
+<tr><td valign="top">_thread.html.erb</td><td><p>
+Contains buttons to post comments and flags and the comment thread for a
+particular page. This is the partial that is displayed when the view
+comment window is opened.
+</p>
+</td></tr>
+<tr><td valign="top">_summary_thread.html.erb</td><td><p>
+Contains a comment thread for a particular page, altered to show summary
+partials only. This is the partial that is displayed when the view comment
+summary window is opened.
+</p>
+</td></tr>
+<tr><td valign="top">_sort_menu.html.erb</td><td><p>
+Shows the list of sorting links for a comment thread. Used in the thread
+partial.
+</p>
+</td></tr>
+<tr><td valign="top">_summary_sort_menu.html.erb</td><td><p>
+Shows the list of sorting links for a comment summary thread. Used in the
+summary_thread partial.
+</p>
+</td></tr>
+<tr><td valign="top">_single_comment.html.erb</td><td><p>
+Shows a single comment and its replies. Used in the thread partial.
+</p>
+</td></tr>
+<tr><td valign="top">_single_summary_comment.html.erb</td><td><p>
+Shows a single comment and its replies with summary information. Used in
+the summary_thread partial.
+</p>
+</td></tr>
+</table>
+<h2>Dialog setup</h2>
+<p>
+The comment dialog is shown using the qtip2 jquery tooltip library. The
+show, show_summary, new, and new_flag controller functions are all called
+from jquery-ajax calls that use this library to open a dialog window. Code
+for opening the dialogs is located in public/js/comments_dropdown.js. this
+file is included across all pages and opens the comment window based on the
+DOM ID of the comment link. The DOM ID is based on the variables passed to
+the partial (explained above). The jquery bind functions in this file must
+be called again when the partial containing the comments link (i.e. a table
+or form partial) is reloaded (for example, in key_questions/create.js.erb).
+</p>
+<p>
+This plugin is used because standard jquery-ui dialogs cannot open a dialog
+window on top of a dialog window  (needed to pop up the comments form over
+the comments list).
+</p>
+<p>
+More information on how to use the qtip2 library can be found at <a
+href="http://craigsworks.com/projects/qtip2">craigsworks.com/projects/qtip2</a>.
+</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:46 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<%= render :partial => "page_title", :locals => {:page_title => "Project Summary"} %>
+
+<div id="display_project_title" style="display:block">
+	<div class="summary_heading">Title and Description</div>
+		<br/>
+		<h1><%= @project.title %></h1>
+		<table class="result_table" id="projects_view_print_table" summary="projects view print table">
+		<% if !@project.description.nil? %> 
+			<tr><td class="label" style="width:120px">Description</td>
+				<td><% render :inline => @project.description.force_encoding("UTF-8")  %>
+				</td></tr>
+			<% end %>
+		<% if !@project.funding_source.nil? && @project.funding_source != "" %>
+			<tr><td class="label">
+			Funding Source</td>
+			<td>
+				<%= @project.funding_source %>
+			</td></tr>
+		<% end %>
+		
+	  <% if !@project.notes.nil? %>
+	  <tr><td class="label">Notes</td>
+	  <td><%= render :inline => @project.notes %>
+	  </td>
+	  </tr>
+	  <% end %>
+	  </table>
+	  </div>
+	<br/>
+
+
+<div id="display_project_keyqs" style="display:block">
+	<div class="summary_heading">Key Questions</div>
+	<br/>
+	<%= render 'key_questions/completed_table', :key_questions => @key_questions %>	
+		</br>
+</div>
+
+
+
+
+		<% has_privilege = User.current_user_has_project_edit_privilege(@project.id, current_user) %>
+	<% if has_privilege %>
+		<div id="display_project_collabs" style="display:block" summary="projects view collaborators table">
+			<div class="summary_heading">Collaborators</div>
+				<br/>
+<table class="result_table">
+<tr><td class="label" width="150">
+					Project Leads
+</td><td>					<%= Project.get_project_leads_string(@project.id) %></td></tr>
+<tr><td class="label">
+Project Collaborators
+</td><td>
+					<% collab_str = Project.get_project_collabs_string(@project.id) %>
+					<% if !collab_str.nil? && collab_str != "" %>
+						<%= Project.get_project_collabs_string(@project.id) %>
+					<% end %>
+				</td></tr></table>
+
+		</div>				<br/><br/>
+				<% end %>
+				
+				
+				
+<div id="display_project_efs" style="display:block">
+	<div class="summary_heading">Associated Extraction Forms</div>
+	<br/>
+	<%= render 'completed_tables/extraction_forms' %>
+ <br/>
+</div><br/>		
+		
+<div id="display_project_studies" style="display:block">
+	<div class="summary_heading">Associated Studies</div>
+	<br/>
+	<%= render 'completed_tables/study_list' %>	
+
+</div>

@@ -1,0 +1,27 @@
+<table class='list_table'>
+<tr>
+	<th></th>
+	<th>Disease (+)</th>
+	<th>Disease (-)</th>
+	<th>Total</th>
+</tr>
+<tr>
+	<th>Test (+)</th>
+	<% [0,1,2].each do |cell| %>
+		<td><%= values[cell].nil? ? '' : values[cell].value %></td>
+	<% end %>
+</tr>
+<tr>
+	<th>Test (-)</th>
+	<% [3,4,5].each do |cell| %>
+		<td><%= values[cell].nil? ? '' : values[cell].value %></td>
+	<% end %>
+</tr>	
+	
+<tr>
+	<th>Total</th>
+	<% [6,7,8].each do |cell| %>
+		<td><%= values[cell].nil? ? '' : values[cell].value %></td>
+	<% end %>
+</tr>
+</table>

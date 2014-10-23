@@ -1,0 +1,49 @@
+<% if @outcomes.length > 0 %>
+<table class="classic-a" id="outcome_list_table" summary="outcome list table">
+<thead><tr>
+<th scope='col'>Outcome Title</th>
+<th scope='col'>Type</th>
+<th scope='col'>Units</th>
+<th scope='col'>Follow-Up Time Points</th>
+<th scope='col'>Subgroups</th>
+<th scope='col'>Outcome Description</th>
+<th scope='col'>Notes</th>
+</tr></thead>
+<% for oneoutcome in @outcomes %>
+  <tr class="<%= cycle("even", "odd") %>" id="<%= "outcome_"+oneoutcome.id.to_s %>">
+  <td scope='row'><%= oneoutcome.title %></td>
+  <td scope='row'><%= oneoutcome.outcome_type %>
+  </td>
+  <td scope='row'><%= oneoutcome.units %></td>
+  
+  <td scope='row'>
+  <% outcome_timepoints = Outcome.get_timepoints(oneoutcome.id) %>
+  <%= outcome_timepoints %>
+  </td>
+  <td>
+    
+    <% sgs = @outcome_subgroups_hash.nil? ? nil : @outcome_subgroups_hash[oneoutcome.id] %>
+    <% unless sgs.nil?%>
+      <% if sgs.length < 2 %>
+        ---
+      <% else %> 
+        <% sgs=sgs.reject{|x| x.title == "All Participants"}%>
+        <%= sgs.collect{|x| x.title}.join(", ") %>
+      <% end %>
+    <% else %>
+      ---
+    <% end %>
+  </td>
+  <td scope='row'><%= oneoutcome.description %><%# render "shared/notes_tooltip", :section_name => "outcome_desc", :item_id => oneoutcome.id, :item_notes => oneoutcome.description %></td>
+  
+  <td scope='row'>
+  <%= oneoutcome.notes %>
+  <%# render "shared/notes_tooltip", :section_name => "outcome_notes", :item_id => oneoutcome.id, :item_notes => oneoutcome.notes %>
+  </td>
+  </tr>
+  <% end %>
+
+</table>
+<% else %>
+There are currently no outcomes associated with this study.
+<% end %>

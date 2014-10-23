@@ -1,0 +1,87 @@
+<%
+    alt_id_options =  [['PubMed','pubmed'],['ClinicalTrials.gov (NCT)','nct'],['Internal ID','internal'],['Cochrane RevMan','revman']]
+%>
+
+You may specify additional publication identifiers associated with this publication. To do so, click the 'Add Identifier' button below. 
+<br/><br/>
+<span id='id_start'></span>
+
+<input type='hidden' id='existing_id_count' value='<%= @publication_ids.length %>'/>
+<input type='hidden' id='new_id_count' value='0'/>
+<% @publication_ids.each_with_index do |pid, index| %>
+    <table id='alt_primary_id_table_<%=pid.id.to_s %>'>
+        <tr id='publication_id_row_<%= index+1 %>'>
+            <td></td>
+            <td>
+                <label for='publication_id_<%= pid.id.to_s %>'>ID: </label><input type='text' id='<%= "publication_id_#{pid.id}" %>' name='<%= "publication_ids[#{pid.id}]"%>' value='<%= pid.number %>'/>
+            </td>
+            <td>
+                Type: <select name='<%= "publication_types[#{pid.id}]" %>'>
+                    <% alt_id_options.each do |opt| %>
+                        <% selected = opt[1] == pid.number_type ? "selected='selected'" : "" %>
+                        <option value='<%= opt[1] %>' <%= selected %>><%= opt[0] %></option>
+                    <% end %>
+                </select>
+            </td>
+            <td><a class='remove_identifier_link' pubid='<%= pid.id.to_s %>' href='#' title='Click to remove ID: <%= pid.number %>'>Remove</a></td>
+        </tr>
+    </table>
+<% end %>
+
+<button class='actions' id='add_identifier_button' style='width:100px;'>Add Identifier</button>
+
+<!-- the javascript for adding an identifier row -->
+<script type='text/javascript'>
+//<!--
+
+
+
+function pub_init() {
+  try{
+    checkLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    set_pub_js();
+  } catch( err ) {
+    setTimeout('pub_init()', 200);
+  }
+}
+function checkLoaded() {
+    if ( $('#new_id_count').length == 0) $jquery.error( 'not ready' );
+}
+function set_pub_js(){
+    var new_id_count = 0;  // the number of new primary publication identifiers that have been specified
+    var existing_id_count = parseInt("<%= @publication_ids.length() %>");
+    var id_options = [['PubMed','pubmed'],['ClinicalTrials.gov (NCT)','nct'],['Internal ID','internal'],['Cochrane RevMan','revman']];
+
+    $("#add_identifier_button").unbind();
+    $("#add_identifier_button").bind("click",function(event){
+        //alert("Existing is " + existing_id_count + " and New is " + new_id_count);
+        event.preventDefault();
+        //alert("new_id_count is " + new_id_count);
+        new_entry = ""
+        // create the input fields for a new identifier (-1, -2, -3 for new ones)
+        if( existing_id_count == 0 && new_id_count == 0){
+            //new_entry += "<table><tr><td>ID Value</td><td>ID Type</td></tr>";
+        }
+        // decrement the temporary id for this field
+        new_id_count = new_id_count - 1;
+        new_entry += "<table id='alt_primary_id_table_"+new_id_count.toString()+"'><tr id='publication_id_row_" + (existing_id_count + (new_id_count * -1)).toString() + "'><td></td><td><label for='publication_id_"+new_id_count.toString()+"'>ID: </label><input type='text' id='publication_id_" + new_id_count.toString() + "' name='publication_ids["+new_id_count.toString()+"]' value=''/></td><td><label for='publication_type_"+new_id_count.toString()+"'>Type: </label><select name='publication_types["+new_id_count.toString()+"]'>"
+        for(i=0;i<id_options.length;i++){
+            new_entry += "<option value='"+id_options[i][1]+"'>"+id_options[i][0]+"</option>"
+        }
+        new_entry += "</select></td><td><a class='remove_identifier_link' pubid='"+new_id_count.toString()+"' href='#' title='Click to remove this alternate ID number'>Remove</a></td></tr></table>";
+        $(this).before(new_entry);
+        bind_remove_link();
+    });
+    
+    $(".remove_identifier_link").unbind();
+    $(".remove_identifier_link").live("click",function(event){
+        event.preventDefault();
+        pid = $(this).attr("pubid");
+        ref = '#alt_primary_id_table_' + pid.toString();
+        $(ref).remove();
+    })
+}
+pub_init();
+    
+//-->
+</script>

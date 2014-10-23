@@ -1,0 +1,21 @@
+<% if defined?(@div_name) %>
+$("#<%= @div_name %>").html("<%= escape_javascript(render :partial=> @partial_name) %>");
+<% end %>
+
+<% if defined?(@div2_name) %>
+$("#<%= @div2_name %>").html("<%= escape_javascript(render :partial=> @partial2_name) %>");
+<% end %>
+
+	// save message
+	<% if defined?(@message_div) %>
+		$("#<%= @message_div %>").show().delay(1000).fadeOut(300);
+		<% if defined?(@error_div) %>
+			$("#<%= @error_div.to_s %>").html("");	
+		<% end %>
+	<% end %>
+<% if defined?(@msg_type) %>
+	$.getScript("/javascripts/user_feedback.js", function(){
+		show_message("<%= @msg_type %>","<%= @msg_title %>","<%= @msg_description %>");	
+	});
+<% end %>
+

@@ -1,0 +1,121 @@
+	// swap the table if necessary
+	<% if defined?(@table_container) %>
+		$("#<%= @table_container.to_s %>").html("<%= escape_javascript(render :partial=>@table_partial) %>");
+	<% end %>
+	
+	// swap the entry partial if necessary
+	<% if defined?(@entry_container) %>
+		$("#<%= @entry_container.to_s %>").html("<%= escape_javascript(render :partial=>@entry_partial) %>");
+		$("#<%= @entry_container.to_s %> :input").removeAttr("disabled");
+	<% end %>
+	
+	// added a second table swap element for the event where a second swap is required
+	<% if defined?(@table_container2) %>
+	  $("#<%= @table_container2.to_s %>").html("<%= escape_javascript(render :partial=>@table_partial2) %>");
+	<% end %>
+	
+	// clear a div when requested
+	<% if defined?(@div_to_clear) %>
+    $("#<%= @div_to_clear %>").html("");
+	<% end %>
+
+	// swap the form if necessary
+	<% if defined?(@form) %>
+		$("#<%= @form.to_s %> :input").not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+	<% end %>
+	
+	// save message
+	<% if defined?(@message_div) %>
+		$("#<%= @message_div %>").show().delay(1000).fadeOut(300);
+		<% if defined?(@error_div) %>
+			$("#<%= @error_div.to_s %>").html("");	
+		<% end %>
+	<% end %>
+	
+	<% if defined?(@close_window) %>	
+			$('#<%= @close_window %>').dialog('close');
+	<% end %>
+
+	<% if defined?(@destroy_window)%>
+		$('#<%= @destroy_window %>').dialog('destroy');
+	<% end %>
+	
+	// only to be used when updating basic project information
+	// used to refresh the title in breadcrumbs and title.
+	<% if defined?(@update_project_title) && @update_project_title %>
+		<% if defined?(@breadcrumb_div) %>
+			$("#<%= @breadcrumb_div.to_s %>").html("<%= escape_javascript(render :inline=> get_bread_crumbs(request.url,">")) %>");
+		<% end %>
+		<% if defined?(@title_div) %>
+			$("#<%= @title_div.to_s %>").html("<%= escape_javascript(render :partial=>@title_partial) %>");				
+		<% end %>	
+	<% end %>
+	
+	// show error messages if necessary
+	<% if defined?(@error_div) %>
+		<% if @saved %>
+			$("#<%= @error_div.to_s %>").html("");		
+		<% else %>
+			$("#<%= @error_div.to_s %>").html("<%= escape_javascript(render :partial=>@error_partial) %>");		
+		<% end %>
+	<% end %>
+	
+	// used for publishing project only
+	<% if defined?(@publishing) %>
+			$.ajax({
+				url: '/projects/<%= @project.id.to_s %>/publish',
+				data: {
+					project_id: <%= @project.id.to_s %>
+				}
+			});
+	<% end %>
+
+	// used if an item needs to be destroyed
+	<% if defined?(@to_destroy) %>
+		$("<%= @to_destroy %>").remove();
+	<% end %>	
+
+	// SOME OUTCOME-RESULT-SPECIFIC ACTIONS
+	// Update the comparator ID for between-arm datapoints 
+  <% if defined?(@updated_bac_comparator_ids) %>
+  	//alert("updating the bac comparator ids");
+  	updated_ids = "<%= @updated_bac_comparator_ids %>"
+		updated_ids = updated_ids.replace(/&quot;/g,'"');
+    updated_ids = jQuery.parseJSON(updated_ids);
+
+  	to_update = $(".bac_data");
+  	for(i=0; i<to_update.length; i++){
+  		old_name = $(to_update[i]).attr("name");
+  		old_id = $(to_update[i]).attr("id");
+  		prev_id = old_name.match(/-\d*/);
+  		//alert("previous id is " + prev_id);
+  		if(parseInt(prev_id) < 0){
+  			prev_id = prev_id[0];
+  			//alert("set previd");
+  			curr_id = updated_ids[prev_id];
+  			//alert("set curr_id");
+  			new_name = old_name.replace(prev_id,curr_id);
+  			//alert("set new name");
+  			new_id = old_id.replace(prev_id,curr_id)
+  			//alert("set new_id");
+  			$(to_update[i]).attr("name",new_name);
+  			//alert("set name attr");
+  			$(to_update[i]).attr("id",new_id);
+  			//alert("set id attr");
+  			//alert("switching old name: " + old_name + " with new name: " + new_name);
+  		}
+  	}
+  <% end %>
+
+  // RESET THE FORM 
+  // reset any forms and form elements marked as edited
+  forms = $(".unsaved_form");
+  for(i=0; i < forms.length; i++){
+  	$(forms[i]).removeClass("unsaved_form")
+  }
+  fields = $(".edited_field")
+  for(i=0; i < fields.length; i++){
+    $(fields[i]).removeClass("edited_field");
+  }
+  $(".unsaved_div").css("display","none"); // and finally, hide the unsaved message
+  

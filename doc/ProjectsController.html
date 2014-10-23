@@ -1,0 +1,1830 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: ProjectsController
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (P)</a> &raquo; 
+    
+    
+    <span class="title">ProjectsController</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: ProjectsController
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActionController::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></li>
+          
+            <li class="next">ProjectsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/controllers/projects_controller.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#cancel_new-instance_method" title="#cancel_new (instance method)">- (Object) <strong>cancel_new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+cancel_new cancel creation of a new project destroy any key questions that
+have already been saved.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#clearSessionProjectInfo-instance_method" title="#clearSessionProjectInfo (instance method)">- (Object) <strong>clearSessionProjectInfo</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+clearSessionProjectInfo clear systematic review project info from the
+session.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#close_editor-instance_method" title="#close_editor (instance method)">- (Object) <strong>close_editor</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+close_editor close the extraction form editor.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+create create a new systematic review project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">- (Object) <strong>destroy</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+destroy delete a systematic review project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit-instance_method" title="#edit (instance method)">- (Object) <strong>edit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+edit edit an existing systematic review project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#export_human_readable-instance_method" title="#export_human_readable (instance method)">- (Object) <strong>export_human_readable</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+provide an excel-formatted file of the study summaries and data.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#export_machine_readable-instance_method" title="#export_machine_readable (instance method)">- (Object) <strong>export_machine_readable</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+provide an excel file that could be usable for statistics programs etc.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#extractionforms-instance_method" title="#extractionforms (instance method)">- (Object) <strong>extractionforms</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+extraction_form_list show a list of extraction forms that are associated
+with this project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index-instance_method" title="#index (instance method)">- (Object) <strong>index</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+index aka &#8220;my work&#8221; show list of publications user is involved
+in.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#index_pdf-instance_method" title="#index_pdf (instance method)">- (Object) <strong>index_pdf</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+index_pdf show print layout for printing a project summary or saving as
+PDF.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#makeProjectActive-instance_method" title="#makeProjectActive (instance method)">- (Object) <strong>makeProjectActive</strong>(currentProject) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+makeProjectActive add a project&#8217;s info to the session.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#manage-instance_method" title="#manage (instance method)">- (Object) <strong>manage</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+manage manage users for a project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Object) <strong>new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+new create a new systematic review project.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#publish-instance_method" title="#publish (instance method)">- (Object) <strong>publish</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+publish &#8220;publish&#8221; the project to the system, making it publicly
+viewable and turning on the ability to track the history of changes.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#published-instance_method" title="#published (instance method)">- (Object) <strong>published</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+published show list of published projects, sorted by created date (todo:
+implement sorting on these).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_to_published-instance_method" title="#set_to_published (instance method)">- (Object) <strong>set_to_published</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+set_to_published based on the input to the project publishing form, update
+project and redirect to &#8220;publish&#8221;.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show-instance_method" title="#show (instance method)">- (Object) <strong>show</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+show show a project summary page.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#studies-instance_method" title="#studies (instance method)">- (Object) <strong>studies</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+studies   show the list of studies for the project with id =
+params[:project_id].
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+update update an existing systematic review project.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#escape_quotes-instance_method" title="ApplicationController#escape_quotes (method)">#escape_quotes</a></span>, <span class='object_link'><a href="ApplicationController.html#set_as_current-instance_method" title="ApplicationController#set_as_current (method)">#set_as_current</a></span>, <span class='object_link'><a href="ApplicationController.html#show_other-instance_method" title="ApplicationController#show_other (method)">#show_other</a></span>, <span class='object_link'><a href="ApplicationController.html#show_other_filled-instance_method" title="ApplicationController#show_other_filled (method)">#show_other_filled</a></span>, <span class='object_link'><a href="ApplicationController.html#toggle_ahrq_header-instance_method" title="ApplicationController#toggle_ahrq_header (method)">#toggle_ahrq_header</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="cancel_new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>cancel_new</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+cancel_new cancel creation of a new project destroy any key questions that
+have already been saved
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 36</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_cancel_new'>cancel_new</span>
+<span class='ivar'>@unsaved_id</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>*</span> <span class='op'>-</span><span class='int'>1</span>
+<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@unsaved_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='kw'>for</span> <span class='id identifier rubyid_kq'>kq</span> <span class='kw'>in</span> <span class='ivar'>@key_questions</span>
+	<span class='id identifier rubyid_kq'>kq</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:success_message</span><span class='rbracket'>]</span> <span class='op'>=</span>  <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Project creation was cancelled.</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/</span><span class='tstring_end'>&quot;</span></span>	
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="clearSessionProjectInfo-instance_method">
+  
+    - (<tt>Object</tt>) <strong>clearSessionProjectInfo</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+clearSessionProjectInfo clear systematic review project info from the
+session
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+246
+247
+248
+249
+250</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 246</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_clearSessionProjectInfo'>clearSessionProjectInfo</span>
+	<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+	<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_title</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+	<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_status</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="close_editor-instance_method">
+  
+    - (<tt>Object</tt>) <strong>close_editor</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+close_editor close the extraction form editor
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+272
+273
+274
+275</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 272</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_close_editor'>close_editor</span>
+<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='ivar'>@extraction_forms</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+create create a new systematic review project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 131</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:key_questions</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:key_questions</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+   <span class='kw'>if</span> <span class='ivar'>@saved</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+		<span class='comment'>#params[:key_questions].each do |keyq|
+</span>		<span class='comment'>#	kq = KeyQuestion.find(keyq[0].to_s)
+</span>		<span class='comment'>#	kq.project_id = @project.id
+</span>		<span class='comment'>#	kq.save
+</span>		<span class='comment'>#end
+</span>		<span class='ivar'>@project_kqs</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>*</span> <span class='op'>-</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+		
+		<span class='ivar'>@project_kqs</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_keyq'>keyq</span><span class='op'>|</span>
+			<span class='id identifier rubyid_keyq'>keyq</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+			<span class='id identifier rubyid_keyq'>keyq</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+		<span class='kw'>end</span>
+		
+		<span class='comment'>#save user as creator and create user role
+</span>		<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+			<span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_creator_id'>creator_id</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+			<span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+			<span class='ivar'>@user_role</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+			<span class='ivar'>@user_role</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+			<span class='ivar'>@user_role</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+			<span class='ivar'>@user_role</span><span class='period'>.</span><span class='id identifier rubyid_role'>role</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead</span><span class='tstring_end'>&quot;</span></span>
+			<span class='ivar'>@user_role</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+		<span class='kw'>end</span>
+
+		<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+	<span class='kw'>else</span>		
+		<span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:key_questions</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_keyq'>keyq</span><span class='op'>|</span>
+			<span class='id identifier rubyid_kq'>kq</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_keyq'>keyq</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_kq'>kq</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+		<span class='kw'>end</span>
+		<span class='id identifier rubyid_problem_html'>problem_html</span> <span class='op'>=</span> <span class='id identifier rubyid_create_error_message_html'>create_error_message_html</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:error_message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_problem_html'>problem_html</span>
+  	<span class='kw'>end</span>
+	<span class='kw'>else</span>
+  	<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:error_message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A project is required to have at least one associated key question.</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="destroy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>destroy</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+destroy delete a systematic review project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 225</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
+  <span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_remove_roles_for_project'>remove_roles_for_project</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='ivar'>@studies</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+  <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+<span class='ivar'>@studies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_st'>st</span><span class='op'>|</span>
+	<span class='id identifier rubyid_st'>st</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_clearSessionProjectInfo'>clearSessionProjectInfo</span><span class='lparen'>(</span><span class='rparen'>)</span>
+ <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_user_type'>user_type</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+		<span class='ivar'>@all_projects</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='rparen'>)</span>
+	<span class='kw'>end</span>	  
+	<span class='ivar'>@lead_projects</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_get_user_lead_projects'>get_user_lead_projects</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@collab_projects</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_get_user_editor_projects'>get_user_editor_projects</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+ <span class='kw'>end</span>	
+	<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:success_message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Project deleted successfully.</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="edit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>edit</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+edit edit an existing systematic review project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+123
+124
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 123</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_edit'>edit</span>
+  <span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+	<span class='ivar'>@key_question</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>	
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="export_human_readable-instance_method">
+  
+    - (<tt>Object</tt>) <strong>export_human_readable</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+provide an excel-formatted file of the study summaries and data
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 278</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_export_human_readable'>export_human_readable</span>
+	<span class='comment'># construct the Excel file and get a list of files created
+</span>	<span class='id identifier rubyid_filenames'>filenames</span> <span class='op'>=</span> <span class='const'>ExcelExport</span><span class='period'>.</span><span class='id identifier rubyid_project_to_xls'>project_to_xls</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_login'>login</span>
+  <span class='comment'>#zipfile_name = &quot;#{user}_project_export.zip&quot;
+</span>  <span class='comment'>#zipfile_loc = &quot;exports/#{user}_project_export_#{Time.now.to_i}.zip&quot;
+</span>	<span class='comment'>## create a zipped file to contain all exported docs
+</span>  <span class='comment'>#Zippy.create zipfile_loc do |zip|
+</span>  <span class='comment'>#	filenames.each do |file|
+</span>	<span class='comment'>#		zip[file] = File.open(&quot;exports/#{file}&quot;)
+</span><span class='comment'>#	end    	
+</span>  <span class='comment'>#end
+</span>  <span class='comment'>## provide the created zip file for download
+</span>	<span class='comment'>#send_file zipfile_loc, :type =&gt; &quot;application/zip&quot;, :filename =&gt; zipfile_name
+</span>	<span class='id identifier rubyid_fname'>fname</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='rbrace'>}</span><span class='tstring_content'>_project_export.xls</span><span class='tstring_end'>&quot;</span></span>
+	<span class='id identifier rubyid_send_data'>send_data</span><span class='lparen'>(</span><span class='id identifier rubyid_filenames'>filenames</span><span class='comma'>,</span> <span class='symbol'>:type</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/xls</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:filename</span><span class='op'>=&gt;</span><span class='id identifier rubyid_fname'>fname</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="export_machine_readable-instance_method">
+  
+    - (<tt>Object</tt>) <strong>export_machine_readable</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+provide an excel file that could be usable for statistics programs etc
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 298</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_export_machine_readable'>export_machine_readable</span>
+	<span class='comment'># construct the Excel file and get a list of files created
+</span>	<span class='id identifier rubyid_filenames'>filenames</span> <span class='op'>=</span> <span class='const'>TsvExport</span><span class='period'>.</span><span class='id identifier rubyid_project_to_tsv'>project_to_tsv</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	
+  <span class='id identifier rubyid_user'>user</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_login'>login</span>
+  <span class='comment'>#zipfile_name = &quot;#{user}_project_export.zip&quot;
+</span>  <span class='comment'>#zipfile_loc = &quot;exports/#{user}_project_export_#{Time.now.to_i}.zip&quot;
+</span>	<span class='comment'>## create a zipped file to contain all exported docs
+</span>  <span class='comment'>#Zippy.create zipfile_loc do |zip|
+</span>  <span class='comment'>#	filenames.each do |file|
+</span>	<span class='comment'>#		zip[file] = File.open(&quot;exports/#{file}&quot;)
+</span><span class='comment'>#	end    	
+</span>  <span class='comment'>#end
+</span>  <span class='comment'>## provide the created zip file for download
+</span>	<span class='comment'>#send_file zipfile_loc, :type =&gt; &quot;application/zip&quot;, :filename =&gt; zipfile_name
+</span>	<span class='id identifier rubyid_fname'>fname</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_user'>user</span><span class='rbrace'>}</span><span class='tstring_content'>_project_export.xls</span><span class='tstring_end'>&quot;</span></span>
+	<span class='id identifier rubyid_send_data'>send_data</span><span class='lparen'>(</span><span class='id identifier rubyid_filenames'>filenames</span><span class='comma'>,</span> <span class='symbol'>:type</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>application/xls</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='symbol'>:filename</span><span class='op'>=&gt;</span><span class='id identifier rubyid_fname'>fname</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="extractionforms-instance_method">
+  
+    - (<tt>Object</tt>) <strong>extractionforms</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+extraction_form_list show a list of extraction forms that are associated
+with this project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 48</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_extractionforms'>extractionforms</span>
+<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>	
+<span class='ivar'>@extraction_forms</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='ivar'>@no_more_extraction_forms</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_all_key_questions_accounted_for'>all_key_questions_accounted_for</span>	
+<span class='ivar'>@key_questions_assigned</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='comment'># get the key questions associated with each form
+</span><span class='kw'>unless</span> <span class='ivar'>@extraction_forms</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+	<span class='id identifier rubyid_efids'>efids</span> <span class='op'>=</span> <span class='ivar'>@extraction_forms</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_record'>record</span><span class='op'>|</span> <span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	<span class='id identifier rubyid_efids'>efids</span><span class='period'>.</span><span class='id identifier rubyid_uniq!'>uniq!</span>
+	<span class='id identifier rubyid_efids'>efids</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_eid'>eid</span><span class='op'>|</span>
+		<span class='id identifier rubyid_kqs'>kqs</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_get_assigned_question_numbers'>get_assigned_question_numbers</span><span class='lparen'>(</span><span class='id identifier rubyid_eid'>eid</span><span class='rparen'>)</span>
+		<span class='comment'># KEEP GOING WITH THIS TO PUT qTip POPUPS ON EACH KQ NUMBER
+</span>		<span class='comment'>#for i in 0..kqs.length-1
+</span>		<span class='comment'>#	tmp = '&lt;a href=&quot;#&quot; class=&quot;kq_link&quot; kq_num=&quot;' + kqs[i].to_s + '&quot;&gt;' + kqs[i].to_s + '&lt;/a&gt;'
+</span>		<span class='comment'>#	kqs[i] = tmp
+</span>		<span class='comment'>#end
+</span>		<span class='ivar'>@key_questions_assigned</span><span class='lbracket'>[</span><span class='id identifier rubyid_eid'>eid</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_kqs'>kqs</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>, </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>	
+	<span class='kw'>end</span>
+<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="index-instance_method">
+  
+    - (<tt>Object</tt>) <strong>index</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+index aka &#8220;my work&#8221; show list of publications user is involved
+in
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_index'>index</span>
+	<span class='ivar'>@lead_projects</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_get_user_lead_projects'>get_user_lead_projects</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@collab_projects</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_get_user_editor_projects'>get_user_editor_projects</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_login'>login</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@all_projects</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='rparen'>)</span>
+<span class='kw'>end</span>	
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="index_pdf-instance_method">
+  
+    - (<tt>Object</tt>) <strong>index_pdf</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+index_pdf show print layout for printing a project summary or saving as PDF
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+7
+8
+9
+10
+11
+12
+13
+14</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 7</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_index_pdf'>index_pdf</span>
+<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+<span class='ivar'>@extraction_forms</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='ivar'>@studies</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+<span class='ivar'>@kq_formatted_strings</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_get_addressed_question_numbers_for_studies'>get_addressed_question_numbers_for_studies</span><span class='lparen'>(</span><span class='ivar'>@studies</span><span class='rparen'>)</span>			
+<span class='id identifier rubyid_render'>render</span> <span class='symbol'>:pdf</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='comma'>,</span> <span class='symbol'>:template</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>projects/show_print.html.erb</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:layout</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>print</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:disable_javascript</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:header</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:center</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>SRDR Systematic Review</span><span class='tstring_end'>&quot;</span></span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="makeProjectActive-instance_method">
+  
+    - (<tt>Object</tt>) <strong>makeProjectActive</strong>(currentProject) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+makeProjectActive add a project&#8217;s info to the session
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 254</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_makeProjectActive'>makeProjectActive</span> <span class='id identifier rubyid_currentProject'>currentProject</span>
+  <span class='id identifier rubyid_clearSessionProjectInfo'>clearSessionProjectInfo</span><span class='lparen'>(</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_currentProject'>currentProject</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+	<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_title</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_currentProject'>currentProject</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+	
+	<span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_currentProject'>currentProject</span><span class='period'>.</span><span class='id identifier rubyid_is_public'>is_public</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_status'>status</span>
+		<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_status</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Published (public)</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>else</span> 
+		<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:project_status</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Incomplete (private)</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+	
+	<span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:extraction_form_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+  <span class='id identifier rubyid_session'>session</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="manage-instance_method">
+  
+    - (<tt>Object</tt>) <strong>manage</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+manage manage users for a project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74
+75
+76</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_manage'>manage</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@project_users</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_get_users_for_project'>get_users_for_project</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@user_project_roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>		
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+new create a new systematic review project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='ivar'>@key_question</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='id identifier rubyid_num'>num</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>*</span> <span class='op'>-</span><span class='int'>1</span>
+<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_num'>num</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+<span class='ivar'>@key_questions</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_kq'>kq</span><span class='op'>|</span>
+	<span class='id identifier rubyid_kq'>kq</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+<span class='kw'>end</span>
+<span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_num'>num</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="publish-instance_method">
+  
+    - (<tt>Object</tt>) <strong>publish</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+publish &#8220;publish&#8221; the project to the system, making it publicly
+viewable and turning on the ability to track the history of changes. this
+method shows the &#8220;publish&#8221; page
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+205
+206
+207</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 205</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_publish'>publish</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="published-instance_method">
+  
+    - (<tt>Object</tt>) <strong>published</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+published show list of published projects, sorted by created date (todo:
+implement sorting on these)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 18</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_published'>published</span>
+	<span class='ivar'>@projects</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:is_public</span><span class='op'>=&gt;</span><span class='kw'>true</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>created_at DESC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_paginate'>paginate</span><span class='lparen'>(</span><span class='symbol'>:page</span><span class='op'>=&gt;</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:page</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:per_page</span><span class='op'>=&gt;</span><span class='int'>15</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="set_to_published-instance_method">
+  
+    - (<tt>Object</tt>) <strong>set_to_published</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+set_to_published based on the input to the project publishing form, update
+project and redirect to &#8220;publish&#8220;
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 211</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_set_to_published'>set_to_published</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>  
+	<span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_is_public'>is_public</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:is_public</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:is_public</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>false</span><span class='tstring_end'>&quot;</span></span>
+<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:notice</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>No changes made. Choose the 'Publish' option if you would like to make your project public.</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>else</span>
+<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:success</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Project published successfully.</span><span class='tstring_end'>&quot;</span></span>	
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/projects/</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/publish</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+show show a project summary page
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
+  <span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_makeProjectActive'>makeProjectActive</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='rparen'>)</span>
+  <span class='comment'># get the key questions and format them for display in the table
+</span>  <span class='comment'># see format_for_display in KeyQuestion model
+</span>  <span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+  <span class='ivar'>@extraction_forms</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='ivar'>@studies</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='ivar'>@kq_formatted_strings</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_get_addressed_question_numbers_for_studies'>get_addressed_question_numbers_for_studies</span><span class='lparen'>(</span><span class='ivar'>@studies</span><span class='rparen'>)</span>	
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="studies-instance_method">
+  
+    - (<tt>Object</tt>) <strong>studies</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+studies   show the list of studies for the project with id =
+params[:project_id]
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 80</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_studies'>studies</span>
+<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+<span class='ivar'>@project_ready_for_studies</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_is_ready_for_studies'>is_ready_for_studies</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+<span class='ivar'>@project_extraction_forms</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_extraction_forms'>extraction_forms</span>
+<span class='ivar'>@studies</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='ivar'>@key_question</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+
+<span class='kw'>if</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+	<span class='ivar'>@user_extraction_forms</span> <span class='op'>=</span> <span class='kw'>nil</span>
+<span class='kw'>else</span>
+	<span class='ivar'>@extraction_form_list_array</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_get_extraction_form_list_array'>get_extraction_form_list_array</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>	
+	<span class='ivar'>@user_extraction_forms</span> <span class='op'>=</span> <span class='ivar'>@extraction_form_list_array</span>
+<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+update update an existing systematic review project
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/projects_controller.rb', line 174</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+  <span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='op'>!</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_creator_id'>creator_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_creator_id'>creator_id</span> <span class='op'>=</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+<span class='kw'>end</span>
+  <span class='ivar'>@key_questions</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span><span class='period'>.</span><span class='id identifier rubyid_sort_by'>sort_by</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='op'>|</span><span class='id identifier rubyid_obj'>obj</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span><span class='rbrace'>}</span>
+<span class='ivar'>@key_question</span> <span class='op'>=</span> <span class='const'>KeyQuestion</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+<span class='kw'>unless</span> <span class='ivar'>@key_questions</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+	<span class='ivar'>@saved</span> <span class='op'>=</span> <span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_update_attributes'>update_attributes</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='ivar'>@saved</span>
+		<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:publishing</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+			<span class='ivar'>@publishing</span> <span class='op'>=</span> <span class='kw'>true</span>
+		<span class='kw'>end</span>
+		<span class='ivar'>@message_div</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>project_save_message</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>else</span>
+		<span class='id identifier rubyid_problem_html'>problem_html</span> <span class='op'>=</span> <span class='id identifier rubyid_create_error_message_html'>create_error_message_html</span><span class='lparen'>(</span><span class='ivar'>@project</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:error_message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_problem_html'>problem_html</span>
+		<span class='ivar'>@error_partial</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>layouts/info_messages</span><span class='tstring_end'>&quot;</span></span>	
+		<span class='ivar'>@error_div</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>validation_message</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>else</span>
+	<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:error_message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A project is required to have at least one associated key question.</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@error_partial</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>layouts/info_messages</span><span class='tstring_end'>&quot;</span></span>	
+	<span class='ivar'>@error_div</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>validation_message</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:52 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

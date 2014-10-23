@@ -1,0 +1,124 @@
+<div id="validation_message">
+<%= render "layouts/modal_info_messages" %>
+</div>
+
+<%= form_tag url_for(:controller=>'secondary_publications', :action=>'get_pubmed_data'),:remote=>true do %>
+<div class="form_content container_div">
+<span class='smallText'>Enter a PubMed ID and press 'Retrieve' to 
+				automatically populate the associated publications form.</span><br/>
+			<label class="inline-label" for="Pubmed ID">PubMed ID: </label><%= text_field_tag :pmid, @secondary_publication.nil? ? "" : @secondary_publication.pmid, :class => "inline-field editable_field", :title => "pubmed ID"  %>
+			<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">Retrieve</button>
+</div>
+<% end %>
+
+<br/>
+  <!-- START FORM CONTENT DIV -->
+	<div class="form_content container_div">
+<%= nested_form_for @secondary_publication, :remote => true, :html=>{:id=>'secondary_pub_form'} do |m| %>
+
+<div id="publication_error_message" class="error_message_noborder"></div>
+	<%= hidden_field_tag "extraction_form_id", params[:extraction_form_id].nil? ? @extraction_form_id : params[:extraction_form_id] %>
+	<%= hidden_field_tag "study_id", params[:study_id].nil? ? @study_id : params[:study_id] %>
+	<%= m.hidden_field :pmid, :value=>@secondary_publication.pmid, :id=>'secondary_pmid' %>
+	
+<table class="form_table" id="primary_pubs_form_table" summary="primary publications form table">
+
+<tr class="field">
+<td class="label">
+		    <label for="Trial Title">
+					Trial Title:
+				</label>
+</td><td>
+    		<%= m.text_area :trial_title, :rows=>2, :size=>50, :id=>'secondary_trial_title', :class => "editable_field", :trial_title=>"trial_title" %>
+</td></tr>
+<tr class="field">
+<td class="label">
+		    <label for="Publication Title">
+					Publication Title:
+				</label>
+</td><td>
+    		<%= m.text_area :title, :rows=>2, :size=>50, :id=>'secondary_title', :class => "editable_field", :title=>"title" %>
+</td></tr>
+<tr class="field">
+<td class="label">
+    		<label for="Author">Author(s):</label>
+</td><td>
+    		<%= m.text_area :author, :rows=>1, :size=>50, :id=>'secondary_author', :class => "editable_field", :title=>"author" %>
+</td></tr>
+<tr class="field">
+<td class="label">
+       <label for="Affiliation">Affiliation:</label>
+</td><td>
+    		<%= m.text_area :country, :rows=>1, :size=>50, :id=>'secondary_country', :class => "editable_field", :title=>"country" %>
+</td></tr>
+<tr><td>
+<tr class="field">
+<td class="label">
+			<label for="Journal">Journal:</label>
+			</td><td>
+			<%= m.text_area :journal, :rows=>1, :cols=>50, :id=>'secondary_journal',:class=>"editable_field", :title=>"journal" %>
+</td></tr>
+<tr class="field">
+<td class="label">			
+			<label for="Year">Year:</label>
+			</td><td>
+			<%= m.text_field :year, :id=>'secondary_year', :size=>"3", :class => "editable_field", :title=>"year" %>
+</td></tr>
+<tr class="field">
+<td class="label">			
+			<label for="Volume">Volume:</label>
+			</td><td>
+			<%= m.text_field :volume, :id=>"secondary_volume", :class=>"editable_field",:style=>"width:70px;", :title=>"volume" %>
+</td></tr>
+<tr class="field">
+<td class="label">			
+			<label for="Issue">Issue:</label>
+</td><td>
+<%= m.text_field :issue, :id=>"secondary_issue",:class=>"editable_field",:style=>"width:70px;", :title=>"issue" %>
+</td></tr>
+<tr class="field">
+<td class="label">
+  			<label for="Association Type">Association Type:</label>
+</td><td>
+  			<% association_options = [['Contributed to Analysis', 'Contributed to Analysis'], ['Used for Reference', 'Used for Reference'], ['Methods Description', 'Methods Description'], ['Other', 'Other']] %>
+			<% @association_options_sm = ["Contributed to Analysis", "Used for Reference", "Methods Description"] %>
+			<% the_value = @secondary_publication %>
+			<%= select "secondary_publication", :association, association_options, {}, {:onchange=> "has_other_field(this.id);", :class => "editable_field", :title=>"association type"} %>
+		<% if (!the_value.nil?) && (!the_value.association.nil?) && (!@association_options_sm.include? the_value.association) %>
+				<script type="text/javascript">setup_other_field("<%= the_value.association %>", "publication_association");</script>
+		<% end %>
+</td></tr>
+<!--
+<tr><td colspan="100%">
+Identifiers:
+<br/><br/>
+
+	<div id="sp_identifier_list_blocks">
+ <%= render "secondary_publications/identifier_form", :secondary_publication_numbers => @secondary_publication_numbers%>
+ </div>
+ <div class="actions">
+  <%= link_to image_tag("Add-blue.png") + " Add an Identifier", "", {:class => "add_spi_button"}  %>
+  </div>
+</div>
+
+</td></tr>
+-->
+<tr><td colspan="2" class='actions'>
+		<% unless @editing %>
+			<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+				<%= image_tag "Add.png", :alt => "Save" %>Save
+			</button>
+		<% else %>
+			<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+				<%= image_tag "Add.png", :alt => "Save" %>Save Edits
+			</button>
+		<% end %>
+			<button class="negative simplemodal-close" onClick="event.preventDefault();$('#secondary_publication_entry').dialog('close');">
+				<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+			</button>
+</td></tr></table>
+
+
+<!-- END FORM CONTENT DIV -->
+  		</div>  
+<% end %>

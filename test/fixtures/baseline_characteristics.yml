@@ -1,0 +1,37 @@
+# == Schema Information
+#
+# Table name: baseline_characteristics
+#
+#  id                      :integer          not null, primary key
+#  question                :text
+#  field_type              :string(255)
+#  extraction_form_id      :integer
+#  field_notes             :string(255)
+#  question_number         :integer
+#  study_id                :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  instruction             :text
+#  is_matrix               :boolean          default(FALSE)
+#  include_other_as_option :boolean
+#
+
+study1_bc1:
+  id: 1
+  question: What type of study is this?
+  extraction_form_id: 1
+  field_type: radio
+  field_notes:
+  question_number: 1
+  study_id: 1
+  instruction: just do it
+
+study1_bc2:
+  id: 2
+  question: Would you?
+  extraction_form_id: 1
+  field_type: select
+  field_notes:
+  question_number: 2
+  study_id: 1
+  instruction: don't do it!

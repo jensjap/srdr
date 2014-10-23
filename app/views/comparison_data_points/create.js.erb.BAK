@@ -1,0 +1,6 @@
+$("<%= @td_id %>").html("Saved.");
+$("<%= @td_id %>").attr("style","background-color:#00A876;text-align:center;");
+$("#saved_comparisons").html("<%= escape_javascript(render :partial=>"comparison_data_points/saved_comparisons")%>");
+$("#view_modify_button_div").css("display","inline");
+
+$("#<%= @message_div %>").show().delay(500).fadeOut(300);

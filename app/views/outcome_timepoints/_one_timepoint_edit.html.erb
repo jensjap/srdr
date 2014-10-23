@@ -1,0 +1,8 @@
+	<%# form_for timepoint, :remote => true, :url => {:controller => "outcome_timepoints", :action => "save"}, :html => {:method => "post"} do |f| %>
+	<%= text_field "number", {}, :id => "outcome_tp_num_" + timepoint.id.to_s, :class => "edit_outcome_tp_num_box editable_field", :title => "number" %> 
+	<%= text_field "time_unit", {}, :id => "outcome_tp_unit_" + timepoint.id.to_s, :class => "edit_outcome_tp_unit_box editable_field", :title => "time unit" %>
+	<div class="tp_edit_buttons" style="display: none">
+		<%= image_tag "Accept.png", :id => "save_tp_btn_" + timepoint.id.to_s, :class => "save_tp_btn", :alt => "Edit"  %>
+		<%= image_tag "Cancel.png", :id => "cancel_tp_btn_" + timepoint.id.to_s, :class => "cancel_tp_btn", :alt => "Delete"  %>
+	</div>
+	<%# end %>

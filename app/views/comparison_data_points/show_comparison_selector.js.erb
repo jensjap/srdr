@@ -1,0 +1,14 @@
+<% if @type == "within"%>
+	$("#comparator_selection_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/timepoints_matrix") %>");
+	$("#add_measure_button").unbind("click");
+	$("#form_div").html("");
+  $("#modal_div").html("");
+<% elsif @type == "between" %>
+	$("#comparator_selection_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/arms_matrix") %>");
+	$("#add_measure_button").unbind("click");
+	$("#form_div").html("");
+	$("#modal_div").html("");
+<% else %>
+	alert("Error.");  
+<%# must have been an error somewhere...%>
+<% end %>

@@ -1,0 +1,225 @@
+<!-- SUMMARY HEADING DIV SECTION -->
+
+<div id="display_study_title" style="display:block">
+	<div class="summary_heading">
+		Study Title and Description
+	</div>
+	<br/>
+	<div id="summary_text" style="display:inline;">
+		<% if @study_title.nil? || @study_title == "" %>
+			<h3>Untitled</h3>
+		<% else %>
+			<h3><%= @study_title %></h3>
+		<% end %>
+		<% if !@study.study_type.nil? && @study.study_type != "" %>
+			<table id="view_basic_study_info_print_table" summary="view basic study info print table">
+			<tr><td>
+				<h4>Study Type:</h4>
+			</td><td>
+				<%= @study.study_type %>
+			</td></tr>
+			</table>
+		<% end %>
+		<br/>
+	</div>
+	<br/>
+</div>
+	
+
+
+<!-- KEY QUESTIONS DIV SECTION -->
+
+<div id="display_study_keyqs" style="display:block">
+	<div class="summary_heading">
+		Key Questions Addressed
+	</div>
+	<br/>
+	<div id="key_questions_text" style="display:inline;">
+	<% unless @study_questions.empty? %>
+		<%= render "key_questions/completed_table", :key_questions => @study_questions %>
+	<% else %>
+		There are no key questions associated with this study.<br/>
+	<% end %>
+	<br/>
+	</div>
+
+</div>
+
+	
+
+<!-- PUBLICATION INFORMATION DIV SECTION -->
+<div id="display_study_pubinfo" style="display:block">
+<div class="summary_heading">
+	Publication Information
+</div>
+<br/>
+<div id="publications_text">
+	<h4>Primary Publication</h4><br/>
+	<% if !@primary_publication.nil? %>
+		<%= render 'primary_publications/completed_table', :locals => {:primary_publication => @primary_publication} %>	
+	<% else %>
+		  No primary publication information has been entered for this study.
+	<% end %>
+	<br/><br/>
+	
+	<h4>Secondary Publications</h4><br/>
+		<%= render 'secondary_publications/completed_table' %>	
+	</div>
+	<br/>
+	</div>
+	
+	
+	
+	<%#  -----------------  BEGIN EXTRACTION FORM DATA SECTIONS  --------------------- %>
+  
+<% for extform in @extraction_forms %>
+<% sections_list = ExtractionFormSection.get_included_sections_by_extraction_form_id(extform.extraction_form_id)%>
+<% @one_extform = ExtractionForm.find(extform.extraction_form_id) %>
+
+
+
+	
+	<% if sections_list.include?("arms") %>
+	
+		<% @arms = Arm.where(:study_id => @study.id, :extraction_form_id => @one_extform.id).all %>
+		
+	<!-- STUDY ARMS DIV SECTION -->
+	  <div id="display_study_arms_<%= @one_extform.id.to_s %>" style="display:block">
+	<div class="summary_heading">
+Arms
+	</div>
+	<div id="study_arms_text">		<br/>
+
+		<%= render 'arms/completed_table', :locals => {:arms => @arms} %>
+
+	</div>
+	<br/>
+	</div>
+<% end %>
+
+<% if sections_list.include?("design") %>	
+	<!-- STUDY DESIGN DIV SECTION -->
+	<% @design_detail_extraction_form_fields = DesignDetail.where(:study_id => nil, :extraction_form_id => @one_extform.id).all %>
+	<% @design_detail_custom_fields = DesignDetail.where(:study_id => @study.id, :extraction_form_id => @one_extform.id).all %>
+	 
+	 <div id="display_study_design_<%= @one_extform.id.to_s %>" style="display:block">
+			<div class="summary_heading">Design Details</div>
+			<div id="study_design_text">
+			<br/>
+
+			<%= render 'design_detail_data_points/completed_table', :extraction_form => @one_extform %>
+	
+			</div>
+			<br/>
+			</div>
+<% end %>
+
+	
+<% if sections_list.include?("baselines") %>	
+	<!-- BASELINE CHARACTERISTICS DIV SECTION -->
+	<% @baseline_characteristic_extraction_form_fields = BaselineCharacteristic.where(:study_id => nil, :extraction_form_id => @one_extform.id).all %>
+	<% @baseline_characteristic_custom_fields = BaselineCharacteristic.where(:study_id => @study.id, :extraction_form_id => @one_extform.id).all %>	
+	  <div id="display_study_baselines_<%= @one_extform.id.to_s %>" style="display:block">
+	<div class="summary_heading">
+Baseline Characteristics
+	</div>
+	<div id="pop_char_text"><br/>
+	<%= render 'baseline_characteristic_data_points/completed_table', :extraction_form => @one_extform %>
+	</div>
+	<br/>
+	</div>
+	<% end %>
+	
+<% if sections_list.include?("results") %>
+	  <div id="display_study_results_<%= @one_extform.id.to_s %>" style="display:block">
+	<div class="summary_heading">
+Outcome Results Tables
+	</div><br/>
+	<div id="outcome_results_text">
+		<% @categorical_outcomes = Outcome.where(:study_id => @study.id, :outcome_type => "Categorical", :extraction_form_id => @one_extform.id).all %>
+		<% @continuous_outcomes = Outcome.where(:study_id => @study.id, :outcome_type => "Continuous", :extraction_form_id => @one_extform.id).all %>	
+		<% if @categorical_outcomes.length > 0 || @continuous_outcomes.length > 0 %>		
+			<%= render 'outcome_data_points/all_tables', :extraction_form => @one_extform %>	
+		<% else %>
+			There are currently no outcome results to be displayed.<br/>		
+		<% end %>
+	</div>
+	<br/>
+	</div>
+	<% end %>
+	
+	
+<% if sections_list.include?("comparisons") %>
+	<!-- OUTCOME ANALYSIS DIV SECTION -->
+	
+		<% @categorical_outcomes = Outcome.where(:study_id => @study.id, :outcome_type => "Categorical", :extraction_form_id => @one_extform.id).all %>
+		<% @continuous_outcomes = Outcome.where(:study_id => @study.id, :outcome_type => "Continuous", :extraction_form_id => @one_extform.id).all %>
+	
+	  <div id="display_study_comparisons_<%= @one_extform.id.to_s %>" style="display:block">
+	<div class="summary_heading">
+Outcome Comparison Tables
+	</div><br/>
+	<div id="outcome_analysis_text">
+	<% if @categorical_outcomes.length > 0 || @continuous_outcomes.length > 0 %>	
+		<%= render 'comparison_data_points/all_tables' %>	
+	<% else %>
+		There are currently no outcome comparisons to be displayed.<br/>
+	<% end %>
+	<br/>
+	</div>
+	<br/>
+	</div>
+	<% end %>
+	
+	
+<% if sections_list.include?("adverse") %>	
+  <!-- ADVERSE EVENTS SECTION -->
+  
+  	<% @extraction_form_adverse_event_columns = AdverseEventColumn.where(:extraction_form_id => @one_extform.id).all %>
+  
+    <div id="display_study_advev_<%= @one_extform.id.to_s %>" style="display:block">
+	<div class="summary_heading">
+Adverse Events
+	</div><br/>
+	<div id="adverse_events_text">
+	<% if !@adverse_events.nil? && @adverse_events.length > 0 %>
+		<%= render 'adverse_events/completed_table', :extraction_form => @one_extform %>	
+	<% else %>
+	No adverse events were created for this study.
+	<% end %>
+	</div>
+	<br/>
+	</div>
+<% end %>
+	
+<% if sections_list.include?("quality") %>	
+	<!-- QUALITY ASSESSMENT SECTION -->
+	<% @quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => @one_extform.id, :study_id => nil).all %>
+	<% @quality_dimension_custom_fields = QualityDimensionField.where(:extraction_form_id => @one_extform.id, :study_id => @study.id).all %>
+	<% @quality_rating = QualityRatingDataPoint.where(:study_id => @study.id).first %>
+	  <div id="display_study_quality_<%= @one_extform.id.to_s %>" style="display:block">
+	<div class="summary_heading">
+		Quality Assessment
+	</div>
+	<div id="qa_text">
+	<br/>
+	<h4>Quality Dimensions</h4>
+		<% if !@quality_dimension_extraction_form_fields.nil? || @quality_dimension_extraction_form_fields.length > 0 %>
+		<%= render 'quality_dimension_data_points/completed_table', :extraction_form => @one_extform %>
+		<% else %>
+		No quality dimensions were specified in this extraction form.
+		<% end %>
+		<br/>
+		<h4>Quality Ratings</h4><br/>
+		<% if !@quality_rating.nil? %>
+			<%= render 'quality_rating_data_points/table' %>
+		<% else %>
+			No quality ratings were assigned.
+		<% end %>
+		<br/>
+	</div>
+	<br/>
+	</div>
+<% end %>
+	
+	<% end %>

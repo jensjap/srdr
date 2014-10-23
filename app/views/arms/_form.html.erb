@@ -1,0 +1,109 @@
+<%= form_for(@arm, :remote => true, :html=>{:id=>"new_arm_form"}) do |f| %>
+
+	<div class="form_content">
+	<%= render :inline=>attach_listener_for_other("arm_title")%>
+	
+	<div id="validation_message">
+	<%= render "layouts/modal_info_messages" %>
+	</div>
+	
+	<%= hidden_field_tag :study_id, params[:study_id] %>
+	<%= hidden_field_tag :extraction_form_id, session[:extraction_form_id]  %>
+	<%= hidden_field_tag :project_id, params[:project_id] %>
+	
+	<div  id="arm_error_message" class="error_message_noborder"></div>
+	<table class='form_table'>
+		<tr>
+			<td class='label'>
+				<label for="arm_title">Arm Title:</label>
+			</td>
+			<td class='input'>
+			  <%# arm_options length is always at least 1 since the other field is added. %>
+			  <% if @arm_options.keys.length < 2 %>
+			  	<%= f.text_field :title, :class=>"bp_form_complete-1353-name editable_field", :title => "arm title" %><br/>
+			  	<!-- <span class='smallText'>Note that this field will auto-suggest terms based on the 
+			  	SNOMED ontology.</span> -->
+			  <% else %>
+			  	
+			  	<select style='width:90%;' title='Select an Outcome Title' class='editable_field' name='arm[title]' id='arm_title'>
+	    			<option value='Choose a suggested Arm...'>Choose a suggested Arm...</option>
+					<% @arm_options.keys.each do |armtitle| %>
+						<% selected = armtitle == @arm.title ? "selected" : "" %>
+	    				<option value='<%= armtitle %>' <%= selected %>><%= armtitle %></option>
+	    			<% end %>
+	    			<option value='Other'>Other...</option>
+	    		</select>
+	    		<br/><span class='smallText'>Arm titles in the menu above have either been added to the extraction form or are found in other studies within this project. Use "Other..." to specify a new arm title.</span>
+	    		<%# select "outcome", :title, @outcome_options, {}, {:style => "width: 90%", :title => "Enter the Outcome title"} %>
+			  <% end %>
+			  <%= render :inline=>attach_listener_for_other("arm_title") %>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class='label'>
+				<label for="arm_description">Arm Description:</label>
+			</td>
+			<td class='input'>
+   				 <%= f.text_area :description, :cols => 50, :rows => 4, :class => "editable_field" %>
+			</td>
+		</tr>
+		
+		<!--<tr>
+			<td class='label'>
+				<label class="inline-label" for="arm_is_intention_to_treat">
+					Is this an 'intention to treat' arm?
+  				</label>
+			</td>
+			<td class='input'>
+  				<%= f.select :is_intention_to_treat, [["Yes", true], ["No", false]], {:class => "editable_field"}, :title => "is this an intention to treat arm" %>
+
+			</td>
+		</tr>-->
+		<input type='hidden' id='arm_is_intention_to_treat' name="arm[is_intention_to_treat]" value='true'/>
+
+	</table>
+  	<br/><br/><br/><br/><br/>
+	<div class="popup-footer actions buttons">
+	<% if @editing == true %>
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>' class="editable_field">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Save Edits
+		</button>
+	<% else %>
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>' >
+			<%= image_tag "Add.png", :alt => "Add" %>Save
+		</button>
+	<% end %>
+		<button class="negative" onClick="event.preventDefault();$('#new_arm_entry').dialog('close');" >
+			<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+		</button>
+	</div>
+</div>
+<% end %>
+
+
+<script type='text/javascript'>
+    // Remove .edited_field and .unsaved_form classes from forms and fields that have been saved
+    $(".positive").on('click', function(e){
+        $(".unsaved_form").removeClass("unsaved_form");
+        $(".editable_field").removeClass("edited_field");
+    })
+
+	$("#arm_title").bind("change",function(){
+		//var selected = this.value;
+		// var descriptions = '<%= raw @descriptions.to_json %>';
+		//alert("The JSON string is " + descriptions);
+		// var obj = jQuery.parseJSON(descriptions);
+		// $("#arm_description").text(obj[selected]);
+
+		var selected = this.value
+		var jsonObj = jQuery.parseJSON('<%= raw @arm_options.to_json.gsub("\'","") %>');	
+		var desc = "";
+		
+		if (jsonObj[selected]){
+			desc = jsonObj[selected][0];
+		}
+		$("#arm_description").val(desc);
+
+	});
+</script>

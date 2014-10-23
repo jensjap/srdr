@@ -1,0 +1,228 @@
+<%
+	user_is_lead = current_user.is_lead(@project.id)
+	nav_studies = []
+	if user_is_lead
+		nav_studies = @project.studies.order("created_at DESC")
+	elsif current_user.is_editor(@project.id)
+		nav_studies = Study.where(:project_id => @project.id, :creator_id=>current_user.id).order("created_at DESC")
+	end
+	nav_extraction_forms = @project.extraction_forms.order("created_at ASC")
+        
+        # Get Properties for Report Builder URL
+        siteproperties = session[:guiproperties]
+        if siteproperties.nil?
+            siteproperties = Guiproperties.new
+            session[:guiproperties] = siteproperties
+        end
+%>
+<% running_index = 105 %>
+<!-- Used as a modal for alerting the user of unsaved data -->
+<div id="unsaved_modal" style="display:none;" title="WARNING: Unsaved Data">
+	<p>By continuing, you will lose all unsaved changes. Are you sure?</p>
+</div>
+
+<ul class='skip'>
+	<li><a href="#content" tabindex=101>Skip to Main Content</a></li>
+</ul>
+<!--################################################################ -->
+<!-- THE PROJECT LEFT NAVIGATION                                	 -->
+<!--#################################################################-->
+<div class='left-nav-menu' id="nav-menu">
+	<br/>
+	<% unless @project.id.nil? || !["member","admin","super-admin"].include?(current_user.user_type) %>
+		<% if user_is_lead %>
+			<p>PROJECT SETUP</p>
+			<%= link_to "Project Information", edit_project_path(@project), {:tabindex=>102, :class=>'form_link'} %>
+			<!--
+			<div>
+			<span>Extraction Forms</span>
+			<a href='#'>My First Form</a>
+			<a href='#'>My Second Form</a>
+			</div>
+			-->
+			<div>
+		
+			<span tabindex=103>Extraction Forms</span>
+			<%= link_to "View Full List", project_extraction_forms_path(@project),{:tabindex=>104,:class=>"form_link", :id=>"ef_list_link"} %>
+
+			<% nav_extraction_forms.each_with_index do |form, i| %>
+				<% if i < 9 %>
+					<% assignedkqs = ExtractionForm.get_assigned_question_numbers(form.id) %>
+					<%# link_to "#{assignedkqs.length > 1 ? "Questions" : "Question"} #{assignedkqs.join(", ")}", "extraction_forms/#{form.id}/edit", :remote=>true %>
+					<%= link_to "#{assignedkqs.length > 1 ? "Questions" : "Question"} #{assignedkqs.join(", ")}", edit_project_extraction_form_path(@project, form), {:remote => false, :alt => "Click to edit this extraction form", :tabindex=>running_index, :class=>'form_link', :title=>"Go To Form: #{form.title}"}%>
+					<% running_index += 1 %>
+				<% else %>
+					<% break %>
+				<% end %>
+			<% end %>
+			</div>
+			<%= link_to "Manage Users", project_path(@project) + "/manage", {:tabindex=>running_index + 1, :class=>'form_link', :title=>"Manage Project Users"} %>
+		<% end %> <%# END IF CURRENT_USER IS PROJECT LEAD %>	
+		<p>PROJECT STUDY DATA</p>
+		<% unless nav_studies.empty? %>
+			<%# the list of studies, either all for the lead 
+				or just those assigned for an editor %>
+			<div>
+				<span tabindex='<%= running_index.to_i + 2 %>'>Study List</span>
+                <%= link_to "Complete List (#{nav_studies.length.to_s} Total)", project_studies_path(@project, :user => "listall"), {:tabindex=>running_index+3, :class=>'form_link', :remote=>true} %>
+				<% running_index = running_index + 4 %>
+				<% nav_studies.each_with_index do |study,i| %>
+					<% if i < 9 %>
+						<% pmid = study.get_pubmed_id %>
+						<% first_author = study.get_first_author %>
+						<% pmid = pmid.empty? ? "(No PMID)" : "(#{pmid})" %>
+						<% first_author = first_author.empty? ? "Author Undefined" : first_author %>
+						<a tabindex='<%= running_index %>' class='form_link' title="<%= "Go To Study: #{Study.get_title(study.id)}"%>" href="<%= "/projects/#{@project.id}/studies/#{study.id}/edit" %>"><%= "#{first_author} #{pmid}" %></a>
+						<% running_index += 1 %>
+					<% else %>
+						<% break %>
+					<% end %>
+				<% end %>
+				
+			</div>
+			<% if user_is_lead %>
+				<% lead_studies = nav_studies.select{|x| x.creator_id == current_user.id} %>
+				<% unless lead_studies.empty? %>
+				<div>
+					<span tabindex='<%= running_index.to_i + 2 %>'>
+						My Studies
+					</span>
+					<%= link_to "My List (#{lead_studies.length.to_s} Total)", project_studies_path(@project, :user=>current_user.id), {:tabindex=>running_index+3, :class=>'form_link', :remote=>true} %>
+					<% running_index = running_index + 4 %>
+					<% lead_studies.each_with_index do |study,i| %>
+						<% if i < 9 %>
+							<% pmid = study.get_pubmed_id %>
+							<% first_author = study.get_first_author %>
+							<% pmid = pmid.empty? ? "(No PMID)" : "(#{pmid})" %>
+							<% first_author = first_author.empty? ? "Author Undefined" : first_author %>
+							<a tabindex='<%= running_index %>' class='form_link' title="<%= "Go To Study: #{Study.get_title(study.id)}"%>" href="<%= "/projects/#{@project.id}/studies/#{study.id}/edit" %>"><%= "#{first_author} #{pmid}" %></a>
+							<% running_index += 1 %>
+						<% else %>
+							<% break %>
+						<% end %>
+					<% end %>
+				</div>
+				<% end %>
+			<% end %>
+		<% end %>
+		
+		<a tabindex='<%= running_index %>' class='form_link' title="<%= "Add a new study to the project, #{@project.title}" %>" href="<%= "/projects/#{@project.id}/studies/new" %>">Add New Study</a>
+		<% running_index += 1 %>
+<!--
+	<div>
+	<span>Edit Study</span>
+	<a href='#'>My First Study</a>
+	<a href='#'>My Second Study</a>
+	</div>
+-->
+		<% if user_is_lead %>
+			<p>PROJECT TOOLS</p>
+			<a tabindex='<%= running_index %>' class='form_link' title="View Project Summary" href="<%= "/projects/#{@project.id}" %>">View Summary</a>
+			<%= link_to "Progress Reports", "/projects/#{@project.id}/progress", {:tabindex=>running_index, :class=>'form_link', :remote=>true} %>
+			<a tabindex='<%= running_index + 1 %>' class='form_link' title="Finalize and Publish This Project" href="<%= "/projects/#{@project.id}/publish" %>">Publish Externally</a>
+                        <a href="javascript:void(null);" onclick="showDialog();">Data Comparison Tool **</a>
+                        <div id="dialog-modal" title="Data Comparator Tool Note:" style="display: none;">
+                        Please note: THIS TOOL IS STILL UNDER DEVELOPMENT.
+                        <br/><br/><p/>
+                        At this time using this tool you may:
+                        <br/><br/><p/>
+                        1) Compare data values extracted from two or more studies into the same extraction form template.
+                        2) Reconcile data values extracted from two or more copies of a study into the same extraction form template.
+                        <br/><br/><p/>
+                        If you are using this project tool to reconcile data values between studies, please note that, ONLY data values entered into questions in these extraction form sections CAN be reconciled: 
+                        <br/><br/><p/>
+                        <LI>Study Design
+                        <LI>Baseline Characteristics
+                        <LI>Study Quality
+                        <br/><br/><p/>
+                        However, data values entered into questions on the following extraction form sections CANNOT be reconciled at this time:
+                        <br/><br/><p/>
+                        <LI>Arms
+                        <LI>Arm Details
+                        <LI>Outcome
+                        <LI>Outcome Details
+                        <LI>Results
+                        <LI>Adverse Events 
+                        <br/><br/><p/>
+                        We anticipate that the tool will be fully operational (support all sections) by May 15, 2014.
+                        <br/><br/><p/>
+                        Click link below to continue to the Data Comparison Tool.
+                        <br/><br/><p/>
+<%			
+        if siteproperties.isReportBuilderURLLocal()
+%>
+                        <%= link_to "Data Comparison Tool **", project_studies_path(@project.id, :comparison=>true), {:tabindex=>running_index+2, :class=>'form_link', :title=>"Compare studies in this project"} %>
+<%
+        else
+%>
+                        <%= link_to "Data Comparison Tool **", siteproperties.getDataComparisonURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>running_index+2,:class=>'form_link', :title=>"Data Comparison Tool"} %>
+<%			
+        end
+%>
+                        <br/><br/><p/>
+                        </div>
+<script type="text/javascript">
+function showDialog()
+{
+    $("#dialog-modal").dialog(
+    {
+        width: 600,
+        height: 500,
+        open: function(event, ui)
+        {
+            var textarea = $('<textarea style="height: 400px;">');
+            $(textarea).redactor({
+                focus: true,
+                autoresize: false,
+                initCallback: function()
+                {
+                    this.set('<p>Lorem...</p>');
+                }
+            });
+        }
+     });
+}
+</script>
+                        <%= link_to "Data Export Tool", "/projects/exporttools.html?prjid="+@project.id.to_s,{:tabindex=>running_index+6,:class=>'form_link', :title=>"Export to PDF, Excel"} %>
+			<%= link_to "File Repository *", "/home/coming_soon", {:remote=>true,:tabindex=>running_index+4,:class=>'form_link', :title=>"File Repository"} %>
+			<%= link_to "Graphical Data View & Stats *", "/home/coming_soon", {:remote=>true,:tabindex=>running_index+5,:class=>'form_link', :title=>"Graphical Data View & Stats"} %>
+		<% end %>
+		
+	<% end %>
+        <%= link_to "Registries", siteproperties.getRegistryURL()+"&action=SEARCH&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>running_index+7,:class=>'form_link', :title=>"Registries"} %>
+
+        <%= link_to "Data Import Tool", "/projects/#{@project.id}/update_existing_data", { class: "form_link", title: "Data Import Tool", remote: true } %>
+
+	<p>HELP INFORMATION</p>
+	<a tabindex='<%= running_index + 7 %>'href='/help' class='form_link' title='The SRDR User Manual and Frequently Asked Questions'>User Manual and FAQ</a>
+	<!--<a tabindex='<%= running_index + 8 %>'href='/help'>Video Tutorials</a>-->
+	<a href='#' class='feedback_link' tabindex='<%= running_index + 8 %>' class='form_link' title='Leave SRDR Feedback'>Feedback</a>
+	
+	<br/><br/>
+        <table>
+            <tr>
+                <td>
+	        <plain-text>Note:</plain-text>
+                </td>
+                <td>
+	        &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <plain-text>*</plain-text>
+                </td>
+                <td>
+	        <plain-text>Coming Soon</plain-text>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <plain-text>**</plain-text>
+                </td>
+                <td>
+	        <plain-text>Experimental Feature Under Development</plain-text>
+                </td>
+            </tr>
+        </table>
+</div> 

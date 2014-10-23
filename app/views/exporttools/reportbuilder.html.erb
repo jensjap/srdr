@@ -1,0 +1,58 @@
+<%
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Export Tools","Export Tools","/projects/exporttools.html?prjid="+@project.id.to_s)
+    session[:urlhistory] = urlhistory
+
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+    excel_cache_path = siteproperties.getProjectCachePath()
+
+    puts "Report Builder on project id = "+@project.id.to_s
+
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+<div id='content' tabindex=200>
+<h2>Export Data Tools: Report Builder</h2>
+<hr width="100%">
+<p/><br/>
+<h2>Project: <%= @project.title %></h2>
+&nbsp;<p/>
+&nbsp;<p/>
+<button class="regular" onClick="window.location='/projects/exporttools?prjid=<%= @project.id.to_s %>'">Return To Export Tools</button>
+&nbsp;<p/>
+&nbsp;<p/>
+<table id="export_data_tools_table">
+    <tr>
+        <td class="simple">
+        <%= link_to "Click Here To:", siteproperties.getReportBuilderURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>1,:class=>'form_link', :title=>"Click Here To:"} %><br/>
+        <p/><br/>
+        <span id="export_tools_title">Create Summary Tables for all Studies in the Project</span> 
+        </td>
+        <td class="advance">
+        <%= link_to "Click Here To:", "advexport?prjid="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Click Here To:"} %><br/>
+        <p/><br/>
+        <span id="export_tools_title">Sort by Study Attributes and Then Create Summary Tables for all Studies Selected</span>
+        </td>
+        <td class="manage">
+        <%= link_to "Click Here To:", siteproperties.getSRDRJURL()+"?page=REPORTMGR&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>3,:class=>'form_link', :title=>"Click Here To:"} %><br/>
+        <p/><br/>
+        <span id="export_tools_title">Manage reports</span>
+        </td>
+    </tr>
+</table>
+<p/>&nbsp;<br/>
+Please note: For large projects you may see a blank page while the project is being loaded from the database. Large projects <I>(ex containing more than 20
+studies or contains complex and large number of data points)</I> could take 5 minutes or more to load into the report builder application.
+<p/>&nbsp;<br/>
+</div>

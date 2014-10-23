@@ -1,0 +1,1774 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Outcome
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (O)</a> &raquo; 
+    
+    
+    <span class="title">Outcome</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Outcome
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Outcome</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/outcome.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#at_least_one_has_data-class_method" title="at_least_one_has_data (class method)">+ (Object) <strong>at_least_one_has_data</strong>(outcome_list) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_array_of_titles-class_method" title="get_array_of_titles (class method)">+ (Object) <strong>get_array_of_titles</strong>(outcome_ids) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_extraction_form_information-class_method" title="get_extraction_form_information (class method)">+ (Object) <strong>get_extraction_form_information</strong>(ef_list, study_obj, project_obj) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_extraction_form_information gather the following outcome-related
+information based on a list of extraction forms associated with the study.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_subgroups_by_outcome-class_method" title="get_subgroups_by_outcome (class method)">+ (Object) <strong>get_subgroups_by_outcome</strong>(outcomes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_subgroups_by_outcome given an array of outcome ids, return a hash
+referenced by id that contains arrays of outcome subgroups.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timepoint_unit_options-class_method" title="get_timepoint_unit_options (class method)">+ (Object) <strong>get_timepoint_unit_options</strong>(study_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_timepoint_unit_options
+</p>
+<ul>
+<li><p>
+returns a list of pre-defined timepoint unit options as well as.
+</p>
+</li>
+</ul>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timepoints-class_method" title="get_timepoints (class method)">+ (Object) <strong>get_timepoints</strong>(outcome_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timepoints_array-class_method" title="get_timepoints_array (class method)">+ (Object) <strong>get_timepoints_array</strong>(outcome_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the timepoints associated with an outcome.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timepoints_for_outcomes-class_method" title="get_timepoints_for_outcomes (class method)">+ (Object) <strong>get_timepoints_for_outcomes</strong>(outcome_list) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_timepoints_for_outcomes.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timepoints_for_outcomes_array-class_method" title="get_timepoints_for_outcomes_array (class method)">+ (Object) <strong>get_timepoints_for_outcomes_array</strong>(outcomes) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get an array of timepoint arrays for a collection of outcome objects.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_timepoints_hash-class_method" title="get_timepoints_hash (class method)">+ (Object) <strong>get_timepoints_hash</strong>(outcome_array) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+GET THE COLLECTION OF TIMEPOINTS ASSOCIATED WITH AN ARRAY OF OUTCOMES
+</p>
+<ul>
+<li><p>
+EACH TIMEPOINTS ARRAY IS INDEXED BY THE OUTCOME ID.
+</p>
+</li>
+</ul>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_title-class_method" title="get_title (class method)">+ (Object) <strong>get_title</strong>(id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#outcome_has_measures-class_method" title="outcome_has_measures (class method)">+ (Object) <strong>outcome_has_measures</strong>(outcome) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_existing_results-instance_method" title="#get_existing_results (instance method)">- (Object) <strong>get_existing_results</strong>(subgroup_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_existing_results gather existing outcome result data for this outcome.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_foot_notes-instance_method" title="#get_foot_notes (instance method)">- (Object) <strong>get_foot_notes</strong>(subgroup_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get_foot_notes for a given outcome, return a collection of footnotes sorted
+by their footnote display number.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#has_data-instance_method" title="#has_data (instance method)">- (Object) <strong>has_data</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+has_data determine whether or not any data has already been saved for a 
+particular outcome.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update_subgroups-instance_method" title="#update_subgroups (instance method)">- (Object) <strong>update_subgroups</strong>(sg_names, sg_descriptions) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+update_subgroups when an outcome is updated, the user could have added or
+removed  subgroup definitions.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="at_least_one_has_data-class_method">
+  
+    + (<tt>Object</tt>) <strong>at_least_one_has_data</strong>(outcome_list) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45
+46
+47
+48
+49
+50</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 43</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_at_least_one_has_data'>at_least_one_has_data</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_list'>outcome_list</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_outcome_list'>outcome_list</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_one_outcome'>one_outcome</span><span class='op'>|</span>
+		<span class='kw'>if</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_outcome_has_measures'>outcome_has_measures</span><span class='lparen'>(</span><span class='id identifier rubyid_one_outcome'>one_outcome</span><span class='rparen'>)</span>
+			<span class='kw'>return</span> <span class='kw'>true</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_array_of_titles-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_array_of_titles</strong>(outcome_ids) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+140
+141
+142
+143
+144
+145
+146
+147</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 140</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_array_of_titles'>get_array_of_titles</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_ids'>outcome_ids</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_outcome_ids'>outcome_ids</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_id'>id</span><span class='op'>|</span>
+		<span class='id identifier rubyid_tmp'>tmp</span> <span class='op'>=</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>title</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_tmp'>tmp</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_extraction_form_information-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_extraction_form_information</strong>(ef_list, study_obj, project_obj) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_extraction_form_information gather the following outcome-related
+information based on a list of extraction forms associated with the study.
+Also gathers information re: the project RETURN:
+</p>
+<pre class="code">
+ * extraction_forms  (an array of extraction form objects)
+ * outcome_descriptions (hash containing description, data type)
+ * outcomes (an array of outcomes from the extraction forms and project)
+ * included_sections (hash stating which sections are included for each form)
+ * borrowed_section_names (hash stating the names of sections being borrowed in each form)
+ * section_donor_ids  (hash providing the donor id for any section borrowing data from another)
+</pre>
+<p>
+PARAMS: 
+</p>
+<pre class="code">
+ * ef_list    : the result of querying StudyExtractionForm for the study id
+ * study_obj  : rails object representing the study
+ * proj_obj   : rails object representing the project</pre>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 163</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_extraction_form_information'>get_extraction_form_information</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_list'>ef_list</span><span class='comma'>,</span> <span class='id identifier rubyid_study_obj'>study_obj</span><span class='comma'>,</span> <span class='id identifier rubyid_project_obj'>project_obj</span><span class='rparen'>)</span>
+	<span class='comment'># set up all of the values that we will eventualy return to the controller
+</span>	<span class='id identifier rubyid_extraction_forms'>extraction_forms</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='id identifier rubyid_included_sections'>included_sections</span><span class='comma'>,</span> <span class='id identifier rubyid_borrowed_section_names'>borrowed_section_names</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='comma'>,</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_section_donor_ids'>section_donor_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_kqs_per_section'>kqs_per_section</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='comma'>,</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	
+	<span class='comment'># for each extraction form associated with the study
+</span>	<span class='id identifier rubyid_ef_list'>ef_list</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_record'>record</span><span class='op'>|</span>
+		<span class='id identifier rubyid_ef_id'>ef_id</span> <span class='op'>=</span> <span class='id identifier rubyid_record'>record</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+		
+		<span class='comment'># add the extraction form to the extraction_forms list
+</span>		<span class='id identifier rubyid_tmpForm'>tmpForm</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_extraction_forms'>extraction_forms</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_tmpForm'>tmpForm</span> 
+		
+		<span class='comment'># determine which sections are included, and which ones are included but borrowed
+</span>		<span class='comment'># and add this information to the appropriate hashes
+</span>		<span class='id identifier rubyid_included'>included</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_get_included_sections'>get_included_sections</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_borrowed'>borrowed</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_get_borrowed_sections'>get_borrowed_sections</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_included_sections'>included_sections</span><span class='lbracket'>[</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_included'>included</span>
+		<span class='kw'>unless</span> <span class='id identifier rubyid_borrowed'>borrowed</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+			<span class='id identifier rubyid_borrowed_section_names'>borrowed_section_names</span><span class='lbracket'>[</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_borrowed'>borrowed</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+			<span class='id identifier rubyid_section_donor_ids'>section_donor_ids</span><span class='lbracket'>[</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_borrowed'>borrowed</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+		<span class='kw'>else</span>
+			<span class='id identifier rubyid_borrowed_section_names'>borrowed_section_names</span><span class='lbracket'>[</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+			<span class='id identifier rubyid_section_donor_ids'>section_donor_ids</span><span class='lbracket'>[</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+		<span class='kw'>end</span> 	
+		
+		<span class='comment'># determine which key questions are addressed in each extraction form section. The values
+</span>		<span class='comment'># will display in the side study navigation panel as ex:  Outcome Setup [1,2,3] 
+</span>		<span class='id identifier rubyid_kqs_per_section'>kqs_per_section</span><span class='lbracket'>[</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>ExtractionFormSection</span><span class='period'>.</span><span class='id identifier rubyid_get_questions_per_section'>get_questions_per_section</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='comma'>,</span><span class='id identifier rubyid_study_obj'>study_obj</span><span class='rparen'>)</span>
+		
+		<span class='comment'># get suggested outcomes from the form and add them to the list
+</span>		<span class='id identifier rubyid_records'>records</span> <span class='op'>=</span> <span class='const'>ExtractionFormOutcomeName</span><span class='period'>.</span><span class='id identifier rubyid_get_outcomes_array'>get_outcomes_array</span><span class='lparen'>(</span><span class='id identifier rubyid_ef_id'>ef_id</span><span class='rparen'>)</span>
+		<span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>=</span> <span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>+</span> <span class='id identifier rubyid_records'>records</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='kw'>unless</span> <span class='id identifier rubyid_records'>records</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+			
+	  <span class='id identifier rubyid_tmp_desc'>tmp_desc</span> <span class='op'>=</span> <span class='id identifier rubyid_records'>records</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+	  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_tmp_desc'>tmp_desc</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+	  <span class='kw'>for</span> <span class='id identifier rubyid_key'>key</span> <span class='kw'>in</span> <span class='id identifier rubyid_tmp_desc'>tmp_desc</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+	  	<span class='kw'>if</span> <span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+	  		<span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_tmp_desc'>tmp_desc</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+	  	<span class='kw'>end</span>
+	  <span class='kw'>end</span>
+	  <span class='kw'>end</span>
+	<span class='kw'>end</span>	<span class='comment'># end ef_list.each
+</span>	<span class='comment'># add the default value to the descriptions list
+</span>	<span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Choose a suggested outcome...</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+	
+	<span class='comment'># pull in previous outcomes for the project and add those to outcomes choices 
+</span>	<span class='comment'># and descriptions
+</span>	<span class='id identifier rubyid_previous_outcomes'>previous_outcomes</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_get_outcomes_array'>get_outcomes_array</span><span class='lparen'>(</span><span class='id identifier rubyid_project_obj'>project_obj</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span> 
+	<span class='id identifier rubyid_previous_names'>previous_names</span> <span class='op'>=</span> <span class='id identifier rubyid_previous_outcomes'>previous_outcomes</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_prev_desc'>prev_desc</span> <span class='op'>=</span> <span class='id identifier rubyid_previous_outcomes'>previous_outcomes</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
+	<span class='kw'>for</span> <span class='id identifier rubyid_key'>key</span> <span class='kw'>in</span> <span class='id identifier rubyid_prev_desc'>prev_desc</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
+		<span class='kw'>if</span> <span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+			<span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_prev_desc'>prev_desc</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>=</span> <span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>+</span> <span class='id identifier rubyid_previous_names'>previous_names</span>
+	<span class='id identifier rubyid_outcomes'>outcomes</span><span class='period'>.</span><span class='id identifier rubyid_uniq!'>uniq!</span>
+	<span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Choose a suggested outcome...</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Choose a suggested outcome...</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rbracket'>]</span> <span class='op'>+</span> <span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>+</span> <span class='lbracket'>[</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Other</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Other</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rbracket'>]</span>
+	<span class='kw'>return</span> <span class='lbracket'>[</span><span class='id identifier rubyid_extraction_forms'>extraction_forms</span><span class='comma'>,</span> <span class='id identifier rubyid_outcomes'>outcomes</span><span class='comma'>,</span> <span class='id identifier rubyid_outcome_descriptions'>outcome_descriptions</span><span class='comma'>,</span> 
+	        <span class='id identifier rubyid_included_sections'>included_sections</span><span class='comma'>,</span> <span class='id identifier rubyid_borrowed_section_names'>borrowed_section_names</span><span class='comma'>,</span> <span class='id identifier rubyid_section_donor_ids'>section_donor_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_kqs_per_section'>kqs_per_section</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_subgroups_by_outcome-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_subgroups_by_outcome</strong>(outcomes) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_subgroups_by_outcome given an array of outcome ids, return a hash
+referenced by id that contains arrays of outcome subgroups.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+293
+294
+295
+296
+297
+298
+299
+300</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 293</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_subgroups_by_outcome'>get_subgroups_by_outcome</span> <span class='id identifier rubyid_outcomes'>outcomes</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='id identifier rubyid_outcomes'>outcomes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_oc'>oc</span><span class='op'>|</span>
+		<span class='id identifier rubyid_sgs'>sgs</span> <span class='op'>=</span> <span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_outcome_subgroups'>outcome_subgroups</span>
+		<span class='id identifier rubyid_retVal'>retVal</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_sgs'>sgs</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_timepoint_unit_options-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_timepoint_unit_options</strong>(study_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_timepoint_unit_options
+</p>
+<ul>
+<li><p>
+returns a list of pre-defined timepoint unit options as well as a list of
+units for timepoints already added for this study An &#8216;Other&#8217;
+field is also included.
+</p>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoint_unit_options'>get_timepoint_unit_options</span><span class='lparen'>(</span><span class='id identifier rubyid_study_id'>study_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_outcomes'>outcomes</span> <span class='op'>=</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_study_id'>study_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_timepoints'>timepoints</span> <span class='op'>=</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoints_for_outcomes_array'>get_timepoints_for_outcomes_array</span><span class='lparen'>(</span><span class='id identifier rubyid_outcomes'>outcomes</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_units'>units</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>seconds</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>minutes</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>hours</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>days</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>weeks</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>months</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>years</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>baseline</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span> 
+	<span class='id identifier rubyid_saved_units'>saved_units</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_timepoints'>timepoints</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span> 
+		<span class='id identifier rubyid_timepoints'>timepoints</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_timepoint'>timepoint</span><span class='op'>|</span>
+			<span class='id identifier rubyid_points'>points</span> <span class='op'>=</span> <span class='id identifier rubyid_timepoint'>timepoint</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_tp'>tp</span><span class='op'>|</span> <span class='id identifier rubyid_tp'>tp</span><span class='period'>.</span><span class='id identifier rubyid_time_unit'>time_unit</span><span class='rbrace'>}</span>		
+			<span class='id identifier rubyid_saved_units'>saved_units</span> <span class='op'>+=</span> <span class='id identifier rubyid_points'>points</span>	
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+		
+	<span class='comment'>#saved_units.uniq!
+</span>	<span class='comment'>#saved_units.sort!
+</span>	<span class='comment'>#units += saved_units
+</span>	<span class='id identifier rubyid_units'>units</span><span class='period'>.</span><span class='id identifier rubyid_uniq!'>uniq!</span>
+	<span class='id identifier rubyid_units'>units</span> <span class='op'>&lt;&lt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Other</span><span class='tstring_end'>'</span></span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_units'>units</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_timepoints-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_timepoints</strong>(outcome_id) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 99</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoints'>get_timepoints</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_id'>outcome_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@outcome_tps</span> <span class='op'>=</span> <span class='const'>OutcomeTimepoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_outcome_id'>outcome_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='id identifier rubyid_tp_array'>tp_array</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='ivar'>@outcome_tps</span>
+		<span class='id identifier rubyid_tp_array'>tp_array</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_number'>number</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'> </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_time_unit'>time_unit</span>
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_tp_list'>tp_list</span> <span class='op'>=</span> <span class='id identifier rubyid_tp_array'>tp_array</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>, </span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_tp_list'>tp_list</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_timepoints_array-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_timepoints_array</strong>(outcome_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the timepoints associated with an outcome
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 110</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoints_array'>get_timepoints_array</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_id'>outcome_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_outcome_tps'>outcome_tps</span> <span class='op'>=</span> <span class='const'>OutcomeTimepoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_outcome_id'>outcome_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	
+	<span class='kw'>unless</span> <span class='id identifier rubyid_outcome_tps'>outcome_tps</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='comment'># put the baseline timepoint first
+</span>		<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_outcome_tps'>outcome_tps</span><span class='lbracket'>[</span><span class='id identifier rubyid_outcome_tps'>outcome_tps</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span>
+		<span class='lparen'>(</span><span class='int'>0</span><span class='op'>..</span><span class='id identifier rubyid_outcome_tps'>outcome_tps</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span><span class='op'>-</span><span class='int'>2</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+			<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_outcome_tps'>outcome_tps</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span> 
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_timepoints_for_outcomes-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_timepoints_for_outcomes</strong>(outcome_list) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_timepoints_for_outcomes. get timepoints associated with a list of
+outcomes. return a hash to indicate which timepoints are associated with
+which outcome
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>outcome_list</span>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+a list of outcome ids
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+timepoints      a has containing arrays of timepoints referenced by outcome
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 129</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoints_for_outcomes'>get_timepoints_for_outcomes</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_list'>outcome_list</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_timepoints'>timepoints</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_outcome_list'>outcome_list</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_outcome_list'>outcome_list</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_oc'>oc</span><span class='op'>|</span>
+			<span class='id identifier rubyid_tp'>tp</span> <span class='op'>=</span> <span class='id identifier rubyid_get_timepoints_array'>get_timepoints_array</span><span class='lparen'>(</span><span class='id identifier rubyid_oc'>oc</span><span class='rparen'>)</span>
+			<span class='id identifier rubyid_timepoints'>timepoints</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_tp'>tp</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>	
+	<span class='kw'>return</span> <span class='id identifier rubyid_timepoints'>timepoints</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_timepoints_for_outcomes_array-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_timepoints_for_outcomes_array</strong>(outcomes) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get an array of timepoint arrays for a collection of outcome objects
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 53</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoints_for_outcomes_array'>get_timepoints_for_outcomes_array</span><span class='lparen'>(</span><span class='id identifier rubyid_outcomes'>outcomes</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='semicolon'>;</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_outcomes'>outcomes</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_i'>i</span> <span class='op'>=</span> <span class='int'>0</span><span class='semicolon'>;</span>
+		<span class='kw'>for</span> <span class='id identifier rubyid_oc'>oc</span> <span class='kw'>in</span> <span class='id identifier rubyid_outcomes'>outcomes</span>
+			  <span class='id identifier rubyid_timepoints'>timepoints</span> <span class='op'>=</span> <span class='id identifier rubyid_get_timepoints_array'>get_timepoints_array</span><span class='lparen'>(</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+		  	<span class='id identifier rubyid_retVal'>retVal</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_timepoints'>timepoints</span>
+		  	<span class='id identifier rubyid_i'>i</span> <span class='op'>+=</span> <span class='int'>1</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_timepoints_hash-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_timepoints_hash</strong>(outcome_array) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+GET THE COLLECTION OF TIMEPOINTS ASSOCIATED WITH AN ARRAY OF OUTCOMES
+</p>
+<ul>
+<li><p>
+EACH TIMEPOINTS ARRAY IS INDEXED BY THE OUTCOME ID
+</p>
+</li>
+</ul>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 23</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_timepoints_hash'>get_timepoints_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome_array'>outcome_array</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_outcome_array'>outcome_array</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_outcome_array'>outcome_array</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_oc'>oc</span><span class='op'>|</span>
+			<span class='id identifier rubyid_timepoints'>timepoints</span> <span class='op'>=</span> <span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_outcome_timepoints'>outcome_timepoints</span>
+			<span class='kw'>unless</span> <span class='id identifier rubyid_timepoints'>timepoints</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+				<span class='id identifier rubyid_tmp_array'>tmp_array</span> <span class='op'>=</span> <span class='id identifier rubyid_timepoints'>timepoints</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='lbracket'>[</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_outcome_id'>outcome_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_number'>number</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='comma'>,</span><span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_time_unit'>time_unit</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='rbrace'>}</span>
+				<span class='comment'>#timepoints.each do |tp|
+</span>				<span class='comment'>#	tmp_tp = tp.collect{|x| [x.id.to_s,x.outcome_id.to_s,x.number.to_s,x.time_unit.to_s]}
+</span>				<span class='comment'>#	tmp_array &lt;&lt; tmp_tp
+</span>				<span class='comment'>#end
+</span>				<span class='id identifier rubyid_retVal'>retVal</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_tmp_array'>tmp_array</span>
+			<span class='kw'>else</span>
+				<span class='id identifier rubyid_retVal'>retVal</span><span class='lbracket'>[</span><span class='id identifier rubyid_oc'>oc</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+			<span class='kw'>end</span>
+		<span class='kw'>end</span>	
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_title-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_title</strong>(id) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+90
+91
+92
+93
+94
+95
+96
+97</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 90</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_title'>get_title</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='ivar'>@outcome</span> <span class='op'>=</span> <span class='const'>Outcome</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+		<span class='kw'>return</span> <span class='ivar'>@outcome</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="outcome_has_measures-class_method">
+  
+    + (<tt>Object</tt>) <strong>outcome_has_measures</strong>(outcome) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+12
+13
+14
+15
+16
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 12</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_outcome_has_measures'>outcome_has_measures</span><span class='lparen'>(</span><span class='id identifier rubyid_outcome'>outcome</span><span class='rparen'>)</span>
+	<span class='ivar'>@measures</span> <span class='op'>=</span> <span class='const'>OutcomeMeasure</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_outcome'>outcome</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>if</span> <span class='ivar'>@measures</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
+		<span class='kw'>return</span> <span class='kw'>true</span>
+	<span class='kw'>else</span>
+		<span class='kw'>return</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="get_existing_results-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_existing_results</strong>(subgroup_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_existing_results gather existing outcome result data for this outcome.
+Put it into an array format such as:
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+retVal  - the array described above
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+objs     - an array of outcome data entry objects that will be used to find
+corresponding comparison data. THIS IS INCLUDED AT THE END OF THE retVal
+ARRAY
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 351</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_existing_results'>get_existing_results</span> <span class='id identifier rubyid_subgroup_id'>subgroup_id</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span>
+	<span class='comment'># gather the outcome data entries for this outcome/subgroup pair
+</span>	<span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='const'>OutcomeDataEntry</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:subgroup_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_subgroup_id'>subgroup_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_order'>order</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>display_number ASC</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+	  <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_res'>res</span><span class='op'>|</span>
+	  	<span class='id identifier rubyid_result_entry'>result_entry</span> <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span>
+	  	<span class='id identifier rubyid_result_entry'>result_entry</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_res'>res</span>  <span class='comment'># store the result entry itself
+</span>
+	  	<span class='comment'># obtain the measures associated with the data entry
+</span>	  	<span class='id identifier rubyid_measures'>measures</span> <span class='op'>=</span> <span class='id identifier rubyid_res'>res</span><span class='period'>.</span><span class='id identifier rubyid_outcome_measures'>outcome_measures</span>
+	  	<span class='kw'>unless</span> <span class='id identifier rubyid_measures'>measures</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+	  		<span class='id identifier rubyid_result_entry'>result_entry</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_measures'>measures</span>
+	  		<span class='comment'># obtain the data points associated with the measure
+</span>	  		<span class='id identifier rubyid_dp_hash'>dp_hash</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>    <span class='comment'># a hash to store data points per measure
+</span>	  		<span class='id identifier rubyid_measures'>measures</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_m'>m</span><span class='op'>|</span>
+	  			<span class='id identifier rubyid_dp_hash'>dp_hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	  			<span class='id identifier rubyid_datapoints'>datapoints</span> <span class='op'>=</span> <span class='const'>OutcomeDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_measure_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	  			<span class='kw'>unless</span> <span class='id identifier rubyid_datapoints'>datapoints</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+	  				<span class='id identifier rubyid_datapoints'>datapoints</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dp'>dp</span><span class='op'>|</span>
+	  					<span class='id identifier rubyid_dp_hash'>dp_hash</span><span class='lbracket'>[</span><span class='id identifier rubyid_m'>m</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='id identifier rubyid_dp'>dp</span><span class='period'>.</span><span class='id identifier rubyid_arm_id'>arm_id</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_dp'>dp</span>
+	  				<span class='kw'>end</span>
+	  			<span class='kw'>end</span>
+	  		<span class='kw'>end</span>
+	  		<span class='id identifier rubyid_result_entry'>result_entry</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_dp_hash'>dp_hash</span>
+	  	<span class='kw'>else</span>
+	  		<span class='id identifier rubyid_result_entry'>result_entry</span> <span class='op'>&lt;&lt;</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>   <span class='comment'># empty measures
+</span>	  		<span class='id identifier rubyid_result_entry'>result_entry</span> <span class='op'>&lt;&lt;</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>   <span class='comment'># empty data points
+</span>	  	<span class='kw'>end</span>
+	  	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_result_entry'>result_entry</span>
+	  <span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_foot_notes-instance_method">
+  
+    - (<tt>Object</tt>) <strong>get_foot_notes</strong>(subgroup_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get_foot_notes for a given outcome, return a collection of footnotes sorted
+by their footnote display number
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'></span>
+      
+      
+      
+        
+        <div class='inline'><p>
+footnotes - a sorted collection of footnotes from outcome_data_entries and
+comparisons
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 305</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_foot_notes'>get_foot_notes</span> <span class='id identifier rubyid_subgroup_id'>subgroup_id</span>
+	<span class='comment'>##puts &quot;ENTERING THE GET_FOOT_NOTES FUNCTION\n&quot;
+</span>	<span class='id identifier rubyid_footnotes'>footnotes</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+	<span class='comment'># get all outcome data entries
+</span>	<span class='id identifier rubyid_outcome_data_entries'>outcome_data_entries</span> <span class='op'>=</span> <span class='const'>OutcomeDataEntry</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:subgroup_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_subgroup_id'>subgroup_id</span><span class='comma'>,</span> <span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> 																						                <span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='comment'># for each data entry that we find...
+</span>	<span class='id identifier rubyid_outcome_data_entries'>outcome_data_entries</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ocde'>ocde</span><span class='op'>|</span>
+		<span class='comment'>##puts &quot;----------------------\nWorking on ocde with id of #{ocde.id}...\n\n&quot;
+</span>		<span class='comment'># get all the measures associated with the data entry
+</span>		<span class='id identifier rubyid_oc_measures'>oc_measures</span> <span class='op'>=</span> <span class='id identifier rubyid_ocde'>ocde</span><span class='period'>.</span><span class='id identifier rubyid_outcome_measures'>outcome_measures</span>
+		<span class='id identifier rubyid_oc_measures'>oc_measures</span> <span class='op'>=</span> <span class='id identifier rubyid_oc_measures'>oc_measures</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+		
+		<span class='comment'># get the datapoints associated with the measure
+</span>		<span class='id identifier rubyid_oc_dps'>oc_dps</span> <span class='op'>=</span> <span class='const'>OutcomeDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span><span class='symbol'>:conditions</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>outcome_measure_id IN (?) AND footnote_number &gt; ? AND footnote &lt;&gt; ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='id identifier rubyid_oc_measures'>oc_measures</span><span class='comma'>,</span><span class='int'>0</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>footnote</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>footnote_number</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>	
+		
+		<span class='comment'>##puts &quot;Found #{oc_dps.length} datapoints for this measure.\n&quot;
+</span>		<span class='id identifier rubyid_oc_dps'>oc_dps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_dp'>dp</span><span class='op'>|</span>
+			<span class='comment'>##puts &quot;Starting on datapoint #{dp.id} and entering a footnote of #{dp.footnote}\n\n&quot;
+</span>		  <span class='id identifier rubyid_footnotes'>footnotes</span><span class='lbracket'>[</span><span class='id identifier rubyid_dp'>dp</span><span class='period'>.</span><span class='id identifier rubyid_footnote_number'>footnote_number</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_dp'>dp</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>	
+ 
+	<span class='comment'># get all comparisons for the outcome
+</span>	<span class='id identifier rubyid_comparisons'>comparisons</span> <span class='op'>=</span> <span class='const'>Comparison</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:subgroup_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_subgroup_id'>subgroup_id</span><span class='comma'>,</span> <span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span>
+													       <span class='symbol'>:extraction_form_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='comment'># go through each comparison and pull out comparison measures 
+</span>	<span class='id identifier rubyid_comparisons'>comparisons</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_comp'>comp</span><span class='op'>|</span>
+		<span class='id identifier rubyid_comp_measures'>comp_measures</span> <span class='op'>=</span> <span class='id identifier rubyid_comp'>comp</span><span class='period'>.</span><span class='id identifier rubyid_comparison_measures'>comparison_measures</span>
+		<span class='id identifier rubyid_comp_measures'>comp_measures</span> <span class='op'>=</span> <span class='id identifier rubyid_comp_measures'>comp_measures</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+		<span class='comment'># for each comparison measure in the comparison, find datapoints with footnotes
+</span>		<span class='id identifier rubyid_comp_dps'>comp_dps</span> <span class='op'>=</span> <span class='const'>ComparisonDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='comma'>,</span><span class='symbol'>:conditions</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>comparison_measure_id IN (?) AND footnote_number &gt; ? 
+														AND footnote &lt;&gt; ?</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='id identifier rubyid_comp_measures'>comp_measures</span><span class='comma'>,</span><span class='int'>0</span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='comma'>,</span><span class='symbol'>:select</span><span class='op'>=&gt;</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>id</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>footnote</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>footnote_number</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+		<span class='comment'># for each datapoint found that has footnotes, add them to the array based on the footnote number
+</span>  	<span class='id identifier rubyid_comp_dps'>comp_dps</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_cmp_dp'>cmp_dp</span><span class='op'>|</span>
+  		<span class='id identifier rubyid_footnotes'>footnotes</span><span class='lbracket'>[</span><span class='id identifier rubyid_cmp_dp'>cmp_dp</span><span class='period'>.</span><span class='id identifier rubyid_footnote_number'>footnote_number</span><span class='op'>-</span><span class='int'>1</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_cmp_dp'>cmp_dp</span>
+  	<span class='kw'>end</span>
+	<span class='kw'>end</span>
+ <span class='kw'>return</span> <span class='id identifier rubyid_footnotes'>footnotes</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="has_data-instance_method">
+  
+    - (<tt>Object</tt>) <strong>has_data</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+has_data determine whether or not any data has already been saved for a 
+particular outcome. If Yes, return TRUE, if no, return FALSE also return a
+message stating where data has been saved (results or comparisons) return a
+boolean
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 235</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_has_data'>has_data</span>
+	<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='comment'># if there are outcome data entries defined for the outcome, then return true
+</span>	<span class='id identifier rubyid_data_entries'>data_entries</span> <span class='op'>=</span> <span class='const'>OutcomeDataEntry</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_data_entries'>data_entries</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_retVal'>retVal</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='kw'>end</span>
+	
+	<span class='kw'>return</span> <span class='id identifier rubyid_retVal'>retVal</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update_subgroups-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update_subgroups</strong>(sg_names, sg_descriptions) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+update_subgroups when an outcome is updated, the user could have added or
+removed  subgroup definitions. Any submissions with a negative identifier
+are new and need to be saved. Any with positive IDs should be updated and
+saved
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/outcome.rb', line 250</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update_subgroups'>update_subgroups</span><span class='lparen'>(</span><span class='id identifier rubyid_sg_names'>sg_names</span><span class='comma'>,</span> <span class='id identifier rubyid_sg_descriptions'>sg_descriptions</span><span class='rparen'>)</span>
+	<span class='comment'># get those previously saved so that we know what was deleted
+</span>	<span class='id identifier rubyid_previous'>previous</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_outcome_subgroups'>outcome_subgroups</span>
+	<span class='id identifier rubyid_previous_ids'>previous_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_previous'>previous</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_x'>x</span><span class='op'>|</span> <span class='id identifier rubyid_x'>x</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	
+	<span class='comment'># the keys in either the names or descriptions hold the object ID
+</span>	<span class='id identifier rubyid_sg_names'>sg_names</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+		<span class='comment'># if the key is positive
+</span>     <span class='kw'>if</span> <span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>&gt;</span> <span class='int'>0</span>			
+		  <span class='comment'># remove it from the previous array
+</span>		  <span class='kw'>if</span> <span class='id identifier rubyid_previous_ids'>previous_ids</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+		  	<span class='id identifier rubyid_previous'>previous</span><span class='period'>.</span><span class='id identifier rubyid_delete_at'>delete_at</span><span class='lparen'>(</span><span class='id identifier rubyid_previous_ids'>previous_ids</span><span class='period'>.</span><span class='id identifier rubyid_index'>index</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span><span class='rparen'>)</span>
+		  	<span class='id identifier rubyid_previous_ids'>previous_ids</span><span class='period'>.</span><span class='id identifier rubyid_delete'>delete</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+		  <span class='kw'>end</span>
+		  <span class='comment'># update the name and description and save changes
+</span>		  <span class='kw'>begin</span>
+		  	<span class='id identifier rubyid_sg'>sg</span> <span class='op'>=</span> <span class='const'>OutcomeSubgroup</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='rparen'>)</span>
+		  <span class='kw'>rescue</span>
+		  	<span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>\n\nERROR: could not find the outcome subgroup with id = </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='rbrace'>}</span><span class='tstring_content'>\n\n</span><span class='tstring_end'>&quot;</span></span>
+		  	<span class='id identifier rubyid_sg'>sg</span> <span class='op'>=</span> <span class='kw'>nil</span>
+		  <span class='kw'>end</span>
+		  <span class='kw'>unless</span> <span class='id identifier rubyid_sg'>sg</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		  	<span class='id identifier rubyid_sg'>sg</span><span class='period'>.</span><span class='id identifier rubyid_update_attributes'>update_attributes</span><span class='lparen'>(</span><span class='symbol'>:title</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_sg_names'>sg_names</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='symbol'>:description</span><span class='op'>=&gt;</span><span class='id identifier rubyid_sg_descriptions'>sg_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+		  <span class='kw'>else</span>
+		  	<span class='const'>OutcomeSubgroup</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span><span class='symbol'>:title</span><span class='op'>=&gt;</span><span class='id identifier rubyid_sg_names'>sg_names</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='comma'>,</span>
+		  												 <span class='symbol'>:description</span><span class='op'>=&gt;</span><span class='id identifier rubyid_sg_descriptions'>sg_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+		  <span class='kw'>end</span>
+		<span class='comment'># else if the key is negative
+</span>		<span class='kw'>else</span>
+		  <span class='comment'># create a new outcome subgroup using the name and description provided
+</span>		  <span class='const'>OutcomeSubgroup</span><span class='period'>.</span><span class='id identifier rubyid_create'>create</span><span class='lparen'>(</span><span class='symbol'>:outcome_id</span><span class='op'>=&gt;</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:title</span><span class='op'>=&gt;</span><span class='id identifier rubyid_sg_names'>sg_names</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='comma'>,</span> 
+		  											 <span class='symbol'>:description</span><span class='op'>=&gt;</span><span class='id identifier rubyid_sg_descriptions'>sg_descriptions</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='comment'># remove those still left in the previous array
+</span>	<span class='id identifier rubyid_previous'>previous</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span>
+		<span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span><span class='lparen'>(</span><span class='rparen'>)</span><span class='semicolon'>;</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:47 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

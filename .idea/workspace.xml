@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="86051ee0-490e-4d61-87bd-7e28a255af79" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\jquery-ui-1.8.10.custom.min.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\jquery.wysiwyg.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\rails.js.original" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\jquery.tinymce.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\autolink\editor_plugin.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\autolink\editor_plugin_src.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\example_dependency\editor_plugin.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\example_dependency\editor_plugin_src.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\lists\editor_plugin.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\lists\editor_plugin_src.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\plugins\media\moxieplayer.swf" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\flash.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\iframe.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\pagebreak.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\quicktime.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\realmedia.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\shockwave.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\video.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\img\windowsmedia.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\shortcuts.htm" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\skins\highcontrast\content.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\skins\highcontrast\dialog.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\images\tiny_mce\themes\advanced\skins\highcontrast\ui.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\stylesheets\jquery.wysiwyg.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\stylesheets\jquery.wysiwyg.old-school.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\stylesheets\tiny_mce_default\content.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\skeefe\My Documents\srdr-dev\public\stylesheets\tiny_mce_default\ui.css" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-foot-in-mouth.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-laughing.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-laughing.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-sealed.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-sealed.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-smile.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-smile.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-surprised.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-surprised.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-wink.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/img/smiley-wink.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/alert.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/button.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/confirm.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/corners.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/img/vertical.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/img/colorpicker.jpg" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/img/colorpicker.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/icons.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/img/buttons.png" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/img/buttons.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/img/items.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/img/items.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/img/tabs.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/img/tabs.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/img/button_bg.png" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/img/button_bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_black.png" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_black.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_silver.png" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/img/button_bg_silver.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/img/icons.gif" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/img/icons.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/key_questions_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/key_questions_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/projects_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/key_questions/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/key_questions/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/key_questions/edit.js.erb" afterPath="$PROJECT_DIR$/app/views/key_questions/edit.js.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/key_questions/new.js.erb" afterPath="$PROJECT_DIR$/app/views/key_questions/new.js.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/projects/_form.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/projects/edit.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/new.html.erb" afterPath="$PROJECT_DIR$/app/views/projects/new.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/application.js" afterPath="$PROJECT_DIR$/public/images/application.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/langs/en.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/langs/en.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/license.txt" afterPath="$PROJECT_DIR$/public/images/tiny_mce/license.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/css/advhr.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/css/advhr.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/js/rule.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/js/rule.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/rule.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advhr/rule.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/css/advimage.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/css/advimage.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/image.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/image.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/js/image.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/js/image.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advimage/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/css/advlink.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/css/advlink.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/js/advlink.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/js/advlink.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/link.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlink/link.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlist/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlist/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlist/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/advlist/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autoresize/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autoresize/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autoresize/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autoresize/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autosave/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autosave/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autosave/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autosave/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autosave/langs/en.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/autosave/langs/en.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/bbcode/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/bbcode/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/bbcode/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/bbcode/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/contextmenu/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/contextmenu/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/contextmenu/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/contextmenu/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/directionality/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/directionality/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/emotions.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/emotions.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/js/emotions.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/js/emotions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/emotions/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/dialog.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/dialog.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/js/dialog.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/js/dialog.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/langs/en.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/langs/en.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/example/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/css/fullpage.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/css/fullpage.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/fullpage.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/fullpage.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/js/fullpage.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/js/fullpage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullpage/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullscreen/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullscreen/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullscreen/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullscreen/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullscreen/fullscreen.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/fullscreen/fullscreen.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/iespell/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/iespell/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/skins/clearlooks2/window.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/template.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/inlinepopups/template.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/insertdatetime/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/insertdatetime/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/layer/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/layer/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/layer/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/layer/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/legacyoutput/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/legacyoutput/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/legacyoutput/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/legacyoutput/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/css/media.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/css/media.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/js/embed.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/js/embed.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/js/media.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/js/media.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/media.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/media/media.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/nonbreaking/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/nonbreaking/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/nonbreaking/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/nonbreaking/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/noneditable/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/noneditable/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/noneditable/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/noneditable/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/pagebreak/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/pagebreak/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/pagebreak/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/pagebreak/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/js/pastetext.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/js/pastetext.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/js/pasteword.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/js/pasteword.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/pastetext.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/pastetext.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/pasteword.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/paste/pasteword.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/preview/example.html" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/preview/example.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/preview/jscripts/embed.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/preview/jscripts/embed.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/preview/preview.html" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/preview/preview.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/print/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/print/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/save/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/save/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/css/searchreplace.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/css/searchreplace.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/js/searchreplace.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/js/searchreplace.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/searchreplace.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/searchreplace/searchreplace.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/spellchecker/css/content.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/spellchecker/css/content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/spellchecker/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/spellchecker/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/spellchecker/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/spellchecker/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/css/props.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/css/props.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/js/props.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/js/props.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/props.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/style/props.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/tabfocus/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/tabfocus/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/tabfocus/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/tabfocus/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/cell.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/cell.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/css/cell.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/css/cell.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/css/row.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/css/row.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/css/table.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/css/table.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/cell.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/cell.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/merge_cells.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/merge_cells.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/row.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/row.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/table.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/js/table.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/merge_cells.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/merge_cells.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/row.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/row.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/table.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/table/table.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/blank.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/blank.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/css/template.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/css/template.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/js/template.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/js/template.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/template.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/template/template.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/visualchars/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/visualchars/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/visualchars/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/visualchars/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/wordcount/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/wordcount/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/wordcount/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/wordcount/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/abbr.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/abbr.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/acronym.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/acronym.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/attributes.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/attributes.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/cite.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/cite.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/css/attributes.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/css/attributes.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/css/popup.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/css/popup.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/del.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/del.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/editor_plugin.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/editor_plugin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/editor_plugin_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/editor_plugin_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/ins.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/ins.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/abbr.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/abbr.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/acronym.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/acronym.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/attributes.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/attributes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/cite.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/cite.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/del.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/del.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/element_common.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/element_common.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/ins.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/js/ins.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/plugins/xhtmlxtras/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/about.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/about.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/anchor.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/anchor.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/charmap.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/charmap.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/color_picker.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/color_picker.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/editor_template.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/editor_template.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/editor_template_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/editor_template_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/image.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/image.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/about.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/about.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/anchor.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/anchor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/charmap.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/charmap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/color_picker.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/color_picker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/image.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/image.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/link.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/link.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/source_editor.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/js/source_editor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/langs/en.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/langs/en.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/langs/en_dlg.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/langs/en_dlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/link.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/link.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/content.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/dialog.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/dialog.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/ui.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/default/ui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/content.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/dialog.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/dialog.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/ui.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/ui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/ui_black.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/ui_black.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/ui_silver.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/skins/o2k7/ui_silver.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/source_editor.htm" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/advanced/source_editor.htm" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/editor_template.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/editor_template.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/editor_template_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/editor_template_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/langs/en.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/langs/en.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/default/content.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/default/content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/default/ui.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/default/ui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/o2k7/content.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/o2k7/content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/o2k7/ui.css" afterPath="$PROJECT_DIR$/public/images/tiny_mce/themes/simple/skins/o2k7/ui.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/tiny_mce.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/tiny_mce.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/tiny_mce_popup.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/tiny_mce_popup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/tiny_mce_src.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/tiny_mce_src.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/utils/editable_selects.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/utils/editable_selects.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/utils/form_utils.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/utils/form_utils.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/utils/mctabs.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/utils/mctabs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/images/tiny_mce/utils/validate.js" afterPath="$PROJECT_DIR$/public/images/tiny_mce/utils/validate.js" />
+    </list>
+    <ignored path="srdr-dev.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+    <option name="REVERSE_PATCH" value="false" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="srdr-dev" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="srdr-dev" pinned="false" current="true" current-in-tab="true">
+        <entry file="model://srdr-dev">
+          <provider selected="true" editor-type-id="AssociationsFileEditorProvider">
+            <state>
+              <settings isFieldsVisible="true" isMigrationFieldsVisible="true" isTypicalFieldsVisible="false" isOwnFieldsVisible="false" isHandToolMode="false" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="study.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/study.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="50" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="CHECKOUT_INCLUDE_TAGS" value="false" />
+    <option name="UPDATE_CHANGES_POLICY" value="STASH" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Favorites" />
+      <pane id="Scope" />
+      <pane id="RailsProjectView" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="srdr-dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+  </component>
+  <component name="RunManager" selected="Rails.Development: srdr-dev">
+    <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="RailsRunConfigurationType" factoryName="Rails">
+      <predefined_log_file id="RUBY_RAILS_SERVER" enabled="true" />
+      <module name="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="srdr-dev" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="test" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE=":test_unit " />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="spec" type="RakeRunConfigurationType" factoryName="Rake">
+      <module name="srdr-dev" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="spec" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE=":rspec " />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TRACE" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
+      <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Production: srdr-dev" type="RailsRunConfigurationType" factoryName="Rails">
+      <predefined_log_file id="RUBY_RAILS_SERVER" enabled="true" />
+      <module name="srdr-dev" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="C:\Documents and Settings\skeefe\My Documents\srdr-dev" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="production" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Development: srdr-dev" type="RailsRunConfigurationType" factoryName="Rails">
+      <predefined_log_file id="RUBY_RAILS_SERVER" enabled="true" />
+      <module name="srdr-dev" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="C:\Documents and Settings\skeefe\My Documents\srdr-dev" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="SCRIPT_ARGS" VALUE="" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="PORT" VALUE="3000" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="IP" VALUE="127.0.0.1" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="RAILS_SERVER_TYPE" VALUE="Default" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="ENVIRONMENT_TYPE" VALUE="development" />
+      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME="LAUNCH_JS" VALUE="false" />
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Rake.test" />
+      <item index="1" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="2" class="java.lang.String" itemvalue="Rails.Production: srdr-dev" />
+      <item index="3" class="java.lang.String" itemvalue="Rails.Development: srdr-dev" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <configuration useDefault="true">C:\Documents and Settings\skeefe\Application Data\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="86051ee0-490e-4d61-87bd-7e28a255af79" name="Default" comment="" />
+      <created>1311973374972</created>
+      <updated>1311973374972</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="44" y="37" width="1152" height="987" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16399287" sideWeight="0.7881944" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21180555" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="ENABLE_BACKGROUND_PROCESSES" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/models/study.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="50" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="model://srdr-dev">
+      <provider selected="true" editor-type-id="AssociationsFileEditorProvider">
+        <state>
+          <settings isFieldsVisible="true" isMigrationFieldsVisible="true" isTypicalFieldsVisible="false" isOwnFieldsVisible="false" isHandToolMode="false" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

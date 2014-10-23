@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: Updating the SRDR Database
+  
+    &mdash; Documentation by YARD 0.7.5
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: Updating the SRDR Database</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Updating the SRDR Database</h1>
+<h2>Online Reference</h2>
+<p>
+The document below is essentially a summary of infromation in the  Rails
+Guide for Active Record Migrations found online at  <a
+href="http://api.rubyonrails.org/classes/ActiveRecord/Migration.html">api.rubyonrails.org/classes/ActiveRecord/Migration.html</a>
+</p>
+<h2>Creating Migrations</h2>
+<p>
+To create a rails migration, run the command:
+</p>
+<pre class="code ruby"><code>
+  <span class='id identifier rubyid_rails'>rails</span> <span class='id identifier rubyid_g'>g</span> <span class='id identifier rubyid_migration'>migration</span> <span class='lbracket'>[</span><span class='const'>MigrationName</span><span class='rbracket'>]</span>
+</code></pre>
+<p>
+<b>example:</b> rails g migration CreateProjectTable
+</p>
+<p>
+<b>result:</b> rails will create a file in the db/migrations folder named
+according to your input and formatted as:
+</p>
+<pre class="code ruby"><code>
+  201201312114677_create_project_table.rb
+</code></pre>
+<p>
+Where the leading sequence of numbers represents a date and time stamp.
+</p>
+<h2>Migration Files</h2>
+<p>
+Migration files inherit from ActiveRecord::Migration and are formatted as
+follows:
+</p>
+<pre class="code ruby"><code>
+  <span class='kw'>class</span> <span class='const'>CreateProjectTable</span> <span class='op'>&lt;</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Migration</span>
+  	<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_up'>up</span>
+
+  	<span class='kw'>end</span>
+  	<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_down'>down</span>
+
+  	<span class='kw'>end</span>
+  <span class='kw'>end</span>
+</code></pre>
+<p>
+To make changes to the database, code must be entered in the
+&#8216;self.up&#8217; function. To reverse a change, code should be added
+to the self.down function prior to running rake.
+</p>
+<h2>Running Migrations</h2>
+<p>
+To run all recent migrations that have yet to be made to the database, run
+the command:
+</p>
+<pre class="code ruby"><code>
+  <span class='id identifier rubyid_rake'>rake</span> <span class='label'>db:</span><span class='id identifier rubyid_migrate'>migrate</span>
+</code></pre>
+<p>
+To run a migration in a specific direction:
+</p>
+<pre class="code ruby"><code>
+  rake db:migrate:up  
+</code></pre>
+<p>
+or 
+</p>
+<pre class="code ruby"><code>
+  rake db:migrate:down
+</code></pre>
+<p>
+To undo a migration if, for instance, it fails part-way through:
+</p>
+<pre class="code ruby"><code>
+  <span class='id identifier rubyid_rake'>rake</span> <span class='label'>db:</span><span class='id identifier rubyid_rollback'>rollback</span>
+</code></pre>
+<p>
+To run a specific migration:
+</p>
+<pre class="code ruby"><code>
+  run db:migrate VERSION=201201312114677
+</code></pre>
+<h2>Creating a Table Example</h2>
+<pre class="code ruby"><code>
+  <span class='kw'>class</span> <span class='const'>CreateProjectTable</span> <span class='op'>&lt;</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Migration</span>
+    <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_up'>up</span>
+      <span class='id identifier rubyid_create_table'>create_table</span> <span class='symbol'>:projects</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+        <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='symbol'>:title</span><span class='comma'>,</span> <span class='symbol'>:null</span><span class='op'>=&gt;</span><span class='kw'>false</span>
+        <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='symbol'>:description</span><span class='comma'>,</span> <span class='symbol'>:default</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Test Project</span><span class='tstring_end'>'</span></span>
+        <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_integer'>integer</span> <span class='symbol'>:creator_id</span>
+        <span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_timestamps'>timestamps</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+</code></pre>
+<h2>Changing a Table Example</h2>
+<p>
+This works in essentially the same way as creating a table:
+</p>
+<pre class="code ruby"><code>
+  <span class='kw'>class</span> <span class='const'>ChangeProjectTable</span> <span class='op'>&lt;</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Migration</span>
+  	<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_up'>up</span>
+  		<span class='id identifier rubyid_change_table'>change_table</span> <span class='symbol'>:projects</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_t'>t</span><span class='op'>|</span>
+  			<span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='symbol'>:title</span><span class='comma'>,</span> <span class='symbol'>:null</span><span class='op'>=&gt;</span><span class='kw'>false</span>
+  			<span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_string'>string</span> <span class='symbol'>:description</span><span class='comma'>,</span> <span class='symbol'>:default</span><span class='op'>=&gt;</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Test Project</span><span class='tstring_end'>'</span></span>
+  			<span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_integer'>integer</span> <span class='symbol'>:creator_id</span>
+  			<span class='id identifier rubyid_t'>t</span><span class='period'>.</span><span class='id identifier rubyid_timestamps'>timestamps</span>
+  		<span class='kw'>end</span>
+  	<span class='kw'>end</span>
+  <span class='kw'>end</span>
+</code></pre>
+<h2>Changing a Column Example</h2>
+<p>
+Change the previously created description field from a string to text 
+</p>
+<pre class="code ruby"><code>
+  <span class='kw'>class</span> <span class='const'>ChangeProjectDescriptionColumn</span> <span class='op'>&lt;</span> <span class='const'>ActiveRecord</span><span class='op'>::</span><span class='const'>Migration</span>
+    <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_up'>up</span>
+      <span class='id identifier rubyid_change_column'>change_column</span> <span class='symbol'>:projects</span><span class='comma'>,</span> <span class='symbol'>:description</span><span class='comma'>,</span> <span class='symbol'>:text</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+</code></pre>
+<h2>Other Available Transformations</h2>
+<p>
+(This list is straight from the ActiveRecord documentation)
+</p>
+<ul>
+<li><p>
+create_table(name, options): 
+</p>
+</li>
+</ul>
+<p>
+Creates a table called name and makes the table object available to a block
+that can then add columns to it, following the same format as add_column.
+See example above. The options hash is for fragments like &#8220;DEFAULT
+CHARSET=UTF-8&#8221; that are appended to the create table definition.
+</p>
+<ul>
+<li><p>
+drop_table(name): 
+</p>
+</li>
+</ul>
+<p>
+Drops the table called name.
+</p>
+<ul>
+<li><p>
+rename_table(old_name,new_name): 
+</p>
+</li>
+</ul>
+<p>
+Renames the table called old_name to new_name.
+</p>
+<ul>
+<li><p>
+add_column(table_name,column_name,type,options): 
+</p>
+</li>
+</ul>
+<p>
+Adds a new column to the table called table_name named column_name
+specified to be one of the following types: 
+</p>
+<pre class="code ruby"><code>
+  :string, :text, :integer, :float, :decimal, :datetime, :timestamp, :time, :date, :binary, :boolean. 
+</code></pre>
+<p>
+A default value can be specified by passing an options hash like { :default
+=> 11 }. Other options include :limit and :null (e.g. { :limit => 50, :null
+=> false }) &#8212; see
+ActiveRecord::ConnectionAdapters::TableDefinition#column for details.
+</p>
+<ul>
+<li><p>
+rename_column(table_name,column_name,new_column_name): 
+</p>
+</li>
+</ul>
+<p>
+Renames a column but keeps the type and content.
+</p>
+<ul>
+<li><p>
+change_column(table_name,column_name,type,options): 
+</p>
+</li>
+</ul>
+<p>
+Changes the column to a different type using the same parameters as
+add_column.
+</p>
+<ul>
+<li><p>
+remove_column(table_name,column_names): 
+</p>
+</li>
+</ul>
+<p>
+Removes the column listed in column_names from the table called table_name.
+</p>
+<ul>
+<li><p>
+add_index(table_name,column_names,options): 
+</p>
+</li>
+</ul>
+<p>
+Adds a new index with the name of the column. Other options include :name,
+:unique (e.g. { :name => &#8220;users_name_index&#8221;, :unique => true })
+and :order (e.g. { :order => => :desc }</tt>).
+</p>
+<ul>
+<li><p>
+remove_index(table_name,:column=>column_name): 
+</p>
+</li>
+</ul>
+<p>
+Removes the index specified by column_name.
+</p>
+<ul>
+<li><p>
+remove_index(table_name,:name=>index_name): 
+</p>
+</li>
+</ul>
+<p>
+Removes the index specified by index_name.
+</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 15:58:51 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.5 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

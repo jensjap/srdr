@@ -1,0 +1,9 @@
+<% if @has_sq %>
+	<%# if the element has a subquestion, show it %>
+	$("<%= @element_to_fill %>").html("<%= escape_javascript(render :partial=>"question_builder/subquestions/subquestion") %>");
+<% else %>
+	
+  	$("<%= @element_to_fill %>").html("");
+<% end %>
+
+	

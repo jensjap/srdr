@@ -1,0 +1,106 @@
+<a name="studynav"></a>
+<% page = request.fullpath.split("/") %>
+<% page_name = page[page.length - 1]%>
+<% unless @study.id.nil? %>
+	
+	<% is_extforms = request.fullpath.split("/")[5] %>
+	<% extraction_form_id = request.fullpath.split("/")[6].to_i %>
+	<% extraction_form_id = @extraction_forms[0].id if extraction_form_id==0 %>
+	<% form_ids = @extraction_forms.collect{|x| x.id}%>
+	
+	<% project_id = params[:project_id].nil? ? @study.project_id.to_s : params[:project_id].to_s %>
+	<% study_id = params[:study_id].nil? ? params[:id].to_s : params[:study_id].to_s %>
+	
+	<!-- Put in the links section by section, saying which key questions should be 
+		   answered at each step of the way -->	
+	<% sections = ["arms","diagnostics","design","baselines","outcomes","results","comparisons","adverse","quality"]%>
+	<% base_link_general = "/projects/#{project_id}/studies/#{study_id}/" %>
+	<div id="sidebar">
+
+		<%# STUDY BASICS SECTION OF SIDE BAR %>
+		<div class="sidebar_title">Study Basics</div>
+		<div class="process_link">
+			<%= link_to "Key Questions",base_link_general+"questions",:class=>"form_link",:id=>"questions_link_"+ @extraction_forms[0].id.to_s %>
+		</div>
+		<div class="process_link">
+			<%= link_to "Publications",base_link_general+"publications",:class=>"form_link",:id=>"publications_link_"+ @extraction_forms[0].id.to_s %>
+		</div>	
+				
+		<%# EXTRACTION FORM SECTION OF SIDE BAR %>
+		<div class="sidebar_title">Extraction Form</div>
+		<% for section in sections %>
+		  <% unless section == 'comparisons'%> <%# REMOVE THIS WHEN RESULTS ARE FINISHED %>
+			<% for extform in @extraction_forms %>
+				<% base_link = "/projects/#{project_id}/studies/#{study_id}/extraction_forms/#{extform.id}/" %>
+				<% if @included_sections[extform.id].include?(section) %> 
+					<% show_in_nav = true %>
+					<% if @borrowed_section_names[extform.id].include?(section) %>
+			
+					<% donor_id = @section_donor_ids[extform.id][@borrowed_section_names[extform.id].index(section)]%>
+					<% if form_ids.include?(donor_id) %>
+					  <% show_in_nav = false %>
+					<% end %>
+				<% end %>
+				  
+				<% if show_in_nav %>
+					<div class="process_link">
+				  <% case section %>	
+						<% when "arms" %>
+							<%= link_to "Study Arms", base_link + "arms", :class=>"form_link", :id=>"arms_link_"+ extform.id.to_s %>
+								<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "diagnostics" %>
+							<%= link_to "Diagnostic Tests", base_link + "diagnostics", :class=>"form_link", :id=>"diagnostics_link_"+ extform.id.to_s %>
+								<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "design" %> 
+							<%= link_to "Study Design", base_link + "design", :class=>"form_link", :id=>"design_link_"+ extform.id.to_s %>				
+								<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "baselines" %>
+							<%= link_to "Baseline Characteristics", base_link + "baselines", :class=>"form_link", :id=>"baselines_link_"+ extform.id.to_s %>
+									<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "outcomes" %>
+								<%= link_to "Outcome Setup", base_link + "outcomes", :class=>"form_link", :id=>"outcomes_link_"+ extform.id.to_s%>
+									<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "results" %>
+								<%= link_to "Results", base_link + "results", :class=>"form_link", :id=>"results_link_"+ extform.id.to_s%>
+									<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "comparisons" %>
+								<%# link_to "Comparisons", base_link + "comparisons", :class=>"form_link", :id=>"comparisons_link_"+ extform.id.to_s%>
+						<% when "adverse" %>
+								<%= link_to "Adverse Events", base_link + "adverse", :class=>"form_link", :id=>"adverse_link_"+ extform.id.to_s%>
+								<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+						<% when "quality" %>
+								<%= link_to "Study Quality", base_link + "quality", :class=>"form_link", :id=>"quality_link_"+ extform.id.to_s%>
+								<span class='smallText'>[<%= @kqs_per_section[extform.id][section].join(", ")%>]</span>
+					<% end %>
+				  </div>
+				<% end %>
+			<% end %>
+			<% end %> <%# unless section == comparisons   (REMOVE THIS EVENTUALLY)%>
+		<% end %>
+		<% end %>
+	  
+		<div style='margin-left:15px;font-size:12px;'>Example: <span class='smallText' style='font-weight:bold;'>[1, 2]</span> would indicate that key questions 1 and 2 are addressed by the extraction form section.</div>
+		<% unless defined?(@project) %>
+		  <% @project = Project.find(params[:project_id]) %>
+		<% end %>
+		<% if User.current_user_has_project_edit_privilege(@project.id, current_user) %>
+			<div class="sidebar_title">Project</div>
+			<div class="process_link"><%= link_to "Project Information", edit_project_path(@project), :class=>"form_link" %></div>
+			<div class="process_link"><%= link_to "Extraction Forms", project_extraction_forms_path(@project), :class=>"form_link" %></div>
+			<div class="process_link"><%= link_to "Manage Users", project_path(@project) + "/manage", :class=>"form_link" %></div>
+			<div class="process_link"><%= link_to "Study List", project_studies_path(@project),:class=>"form_link" %></div>
+			<div class="process_link"><%= link_to "Save and Review", project_path(@project),:class=>"form_link" %></div>
+			<div class="process_link"><%= link_to "Publish Externally", project_path(@project) + "/publish",:class=>"form_link" %></div>
+		<% else %>
+			<div class="process_link"><%= link_to "Study List", project_studies_path(@project),:class=>"form_link" %></div>
+			<div class="process_link"><%= link_to "View Project", project_path(@project),:class=>"form_link" %></div>		
+		<% end %>
+	</div>					
+	<script type="text/javascript">
+	  var page = "<%= page_name %>"
+	  var efid = "<%= extraction_form_id.to_s %>"
+	  var link = "#" + page + "_link_" + efid
+	  $(link).parent().attr("class","process_link current");
+	</script>
+<% end %>
+

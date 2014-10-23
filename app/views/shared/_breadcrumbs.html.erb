@@ -1,0 +1,32 @@
+<!--################################################################ -->
+<!-- THE BREADCRUMBS BAR                                 		     -->
+<!--#################################################################-->
+<div id="breadcrumbs-div">
+    <ul class='breadcrumb'>
+<%                                                            
+    # Get bread crumbs from session object. If nil, create a new one
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+        urlhistory.setCurrentPage("Projects","My Projects","/projects")
+        session[:urlhistory] = urlhistory
+    end
+    #puts ">>>>>>>>>>>>>> url stack size is "+urlhistory.size.to_s
+    
+    # Show bread crumbs
+
+    descs = urlhistory.getDescriptionList
+    urls = urlhistory.getURLList
+    #puts "************ descs "+descs.to_s
+    #puts "************ urls "+urls.to_s
+%>
+    <ul>
+<%
+    for i in (0..descs.size - 1)
+%>
+    <li><a href="<%= urls[i] %>" tabindex="<%= 50 + i %>"><%= descs[i] %></a></li>
+<%
+    end
+%>
+    </ul>
+</div>

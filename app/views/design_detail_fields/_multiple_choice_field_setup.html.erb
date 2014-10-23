@@ -1,0 +1,34 @@
+<div id="dd_<%= design_detail_id.to_s %>_num_fields_container">
+	<br/>
+	<% number_of_fields = DesignDetailField.where(:design_detail_id => design_detail_id).all.length %>
+	Number of Options: <%= text_field "dd_" + design_detail_id.to_s, :num_fields, :value => number_of_fields == 0 ? "" : number_of_fields.to_s, :class => "inline-field margined-bottom-large", :title=>"number of fields" %>
+	<div class="inline" id="saved_num_fields_<%=design_detail_id.to_s %>"></div><br/><br/>
+
+	<%= render :partial => 'design_detail_fields/multiple_choice_field_box_single', :locals => {:design_detail_id => design_detail_id} %>
+	
+	
+	<div id="dd_<%= design_detail_id.to_s %>_fields_list_container"></div>
+	
+</div>
+
+<script type="text/javascript">
+	
+	$("#dd_<%= design_detail_id.to_s %>_num_fields").live("change", function(){
+		var num_fields = $(this).val();
+		
+		// validate if num_fields is a number here
+		
+		// remove all existing boxes
+		$('.dd_<%= design_detail_id.to_s %>_box_container').remove();
+
+		
+		$.ajax({
+			url: "design_detail_fields/create_remote",
+			type: "POST",
+			data: "num_fields=" + num_fields + "&design_detail_id=" + <%=design_detail_id.to_s%>,
+			success: function(e){}
+		});
+		
+
+	});
+</script>

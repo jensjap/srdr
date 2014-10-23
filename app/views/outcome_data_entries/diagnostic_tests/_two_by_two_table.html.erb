@@ -1,0 +1,45 @@
+<table class='list_table'>
+<tr>
+	<th></th>
+	<th>Disease (+)</th>
+	<th>Disease (-)</th>
+	<th>Total</th>
+</tr>
+<tr>
+	<th>Test (+)</th>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[1]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_1" %>" value="<%= values[1].nil? ? '' : values[1].value %>" >
+	</td>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[2]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_2" %>" value="<%= values[2].nil? ? '' : values[2].value %>" >
+	</td>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[3]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_3" %>" value="<%= values[3].nil? ? '' : values[3].value %>" >
+	</td>
+	
+</tr>
+<tr>
+	<th>Test (-)</th>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[4]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_4" %>" value="<%= values[4].nil? ? '' : values[4].value %>">
+	</td>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[5]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_5" %>" value="<%= values[5].nil? ? '' : values[5].value %>" >
+	</td>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[6]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_6" %>" value="<%= values[6].nil? ? '' : values[6].value %>">
+	</td>
+</tr>
+<tr>
+	<th>Total</th>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[7]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_7" %>" value="<%= values[7].nil? ? '' : values[7].value %>">
+	</td>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[8]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_8" %>" value="<%= values[8].nil? ? '' : values[8].value %>">
+	</td>
+	<td>
+		<input type='text' class='editable_field bac_data' name="<%= "table2x2_datapoints[#{comparison_id}[#{comparator_id}[#{measure_id}[9]]]]" %>" id="<%= "table2x2_datapoints__#{comparison_id}_#{comparator_id}_#{measure_id}_9" %>" value="<%= values[9].nil? ? '' : values[9].value %>" >
+	</td>
+</tr>
+</table>

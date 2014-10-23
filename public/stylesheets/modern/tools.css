@@ -1,0 +1,80 @@
+/*---------------- Export tools table style -----------------*/
+#export_tools_excel_table {
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    border: solid 1px #e0e0e0;
+}
+#export_tools_excel_table td.title {   
+    background: #a0a0a0 none;
+    font-size: 1.1em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+#export_tools_excel_table td.ef_data {   
+    background: #e0e0e0 none;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+}         
+#export_tools_excel_table td.data {   
+    background: #fff none;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    text-align: center;
+    padding: 5px;
+}         
+/*---------------- Report Builder style -----------------*/
+#tc_preview_flat {
+    background: #e0e0e0 none;
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    width: 100%;
+    padding: 5px;
+}
+/*---------------- Export Data Tools table style -----------------*/
+#edt_title {
+    font-size: 2.0em;
+    font-family: Tahoma;
+    font-weight: bold;
+}
+#export_data_tools_table {
+    font-size: 1.0em;
+    font-family: Tahoma;
+    font-weight: normal;
+    padding: 15px;
+    border-spacing: 10px;
+    border-collapse: seperate;
+}
+#export_data_tools_table td.simple {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    text-align: center;
+    width: 33%;
+    border: solid 1px #e0e0e0;
+}         
+#export_data_tools_table td.advance {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    text-align: center;
+    width: 33%;
+    border: solid 1px #e0e0e0;
+}         
+#export_data_tools_table td.manage {   
+    font-size: 1.0em;
+    font-family: Tahoma;
+    text-align: center;
+    width: 33%;
+    padding: 15px;
+    border: solid 1px #e0e0e0;
+}         

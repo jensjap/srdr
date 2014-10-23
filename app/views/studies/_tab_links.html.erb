@@ -1,0 +1,79 @@
+<% project_id = params[:project_id].nil? ? @study.project_id.to_s : params[:project_id].to_s %>
+<% study_id = params[:study_id].nil? ? params[:id].to_s : params[:study_id].to_s %>
+
+<!-- Put in the links section by section, saying which key questions should be
+       answered at each step of the way -->
+<% sections = ["design","arms","arm_details","diagnostics","diagnostic_test_details","baselines","outcomes","outcome_details","results","comparisons","adverse","quality"]%>
+<% base_link_general = "/projects/#{project_id}/studies/#{study_id}/" %>
+<br/>
+<ul>
+    <li>
+        <%= link_to "Key Questions",base_link_general+"questions",:class=>"form_link",:id=>"questions_link_"+ @extraction_forms[0].id.to_s, :tabindex=>'202' %>
+    </li>
+    <li>
+        <%= link_to "Publications",base_link_general+"publications",:class=>"form_link",:id=>"publications_link_"+ @extraction_forms[0].id.to_s, :tabindex=>'203' %>
+    </li>
+
+    <%# EXTRACTION FORM SECTION OF SIDE BAR %>
+    <% for section in sections %>
+        <%# puts "SECTION IS #{section}\n\n" %>
+      <% unless section == 'comparisons'%> <%# REMOVE THIS WHEN RESULTS ARE FINISHED %>
+            <% base_link = "/projects/#{project_id}/studies/#{study_id}/extraction_forms/#{efID}/" %>
+            <% show_in_nav = false %>
+            <% if @included_sections.include?(section) %>
+                <% show_in_nav = true %>
+                <%# if @borrowed_section_names[efID].include?(section) %>
+
+                <%# donor_id = @section_donor_ids[efID][@borrowed_section_names[efID].index(section)]%>
+                <%# if form_ids.include?(donor_id) %>
+                  <%# show_in_nav = false %>
+                <%# end %>
+            <% end %>
+            <%# puts "SHOW IN NAV IS #{show_in_nav}\n" %>
+            <% if show_in_nav %>
+                <% if sections.index(section) == 0 %>
+                    <li href="#tabs-1" class='form_link'>
+                <% else %>
+                    <li class='form_link'>
+                <% end %>
+              <% case section %>
+                    <% when "arms" %>
+                        <%= link_to "Arms", base_link + "arms", :remote=>true, :class=>"form_link", :id=>"arms_link_"+ efID.to_s, :tabindex=>'205'%>
+                    <% when "arm_details" %>
+                        <%= link_to "Arm Details", base_link + "arm_details", :remote=>true, :class=>"form_link", :id=>"arm_details_link_"+ efID.to_s, :tabindex=>'205'%>
+                    <% when "diagnostics" %>
+                        <%= link_to "Diagnostic Tests", base_link + "diagnostics", :class=>"form_link", :id=>"diagnostics_link_"+ efID.to_s, :tabindex=>'205' %>
+                    <% when "diagnostic_test_details" %>
+                        <%= link_to "Diagnostic Test Details", base_link + "diagnostic_test_details", :class=>"form_link", :id=>"diagnostic_test_details_link_"+ efID.to_s, :tabindex=>'205'
+                        %>
+                    <% when "design" %>
+                        <%= link_to "Design", base_link + "design", :class=>"form_link", :id=>"design_link_"+ efID.to_s, :tabindex=>'204' %>
+                    <% when "baselines" %>
+                        <%= link_to "Baselines", base_link + "baselines", :class=>"form_link", :id=>"baselines_link_"+ efID.to_s, :tabindex=>'206' %>
+                    <% when "outcomes" %>
+                            <%= link_to "Outcomes", base_link + "outcomes", :class=>"form_link", :id=>"outcomes_link_"+ efID.to_s, :tabindex=>'207'%>
+                    <% when 'outcome_details' %>
+                            <%= link_to "Outcome Details", base_link + "outcome_details", :class=>"form_link", :id=>"outcome_details_link_"+ efID.to_s, :tabindex=>'207'%>
+                    <% when "results" %>
+                            <%= link_to "Results", base_link + "results", :class=>"form_link", :id=>"results_link_"+ efID.to_s, :tabindex=>'208'%>
+                    <% when "comparisons" %>
+                            <%# link_to "Comparisons", base_link + "comparisons", :class=>"form_link", :id=>"comparisons_link_"+ efID.to_s%>
+                    <% when "adverse" %>
+                            <%= link_to "Adverse Events", base_link + "adverse", :class=>"form_link", :id=>"adverse_link_"+ efID.to_s, :tabindex=>'209'%>
+                    <% when "quality" %>
+                            <%= link_to "Quality", base_link + "quality", :class=>"form_link", :id=>"quality_link_"+ efID.to_s, :tabindex=>'210'%>
+
+                <% end %>
+              </li>
+            <% end %>
+        <% end %> <%# unless section == comparisons   (REMOVE THIS EVENTUALLY)%>
+    <% end %> <%# end for section in sections %>
+    <% if current_user.is_admin? %>
+    <li>
+        <%= link_to "Q2", base_link + "quality_details", :class=>"form_link", :id=>"new_quality_link_#{efID.to_s}", :tabindex=>'211' %>
+    </li>
+    <% end %>
+    <li>
+        <%= link_to "Finalize",base_link+"finalize",:class=>"form_link",:id=>"finalize_link_"+ @extraction_forms[0].id.to_s, :tabindex=>'210' %>
+    </li>
+</ul>

@@ -1,0 +1,8 @@
+<h1>Project Copy Request Submitted</h1><br/><br/>
+Your request to copy the project titled "<%= @original_title %>" was submitted and is currently being processed. The duplicate version of this project will appear in your list shortly with the title, "<%= @new_title %>". <br/><br/>
+Any errors during this process will be reported via email to <%= current_user.email %>.
+
+<br/><br/>
+<strong>NOTE:</strong> Depending on the complexity and size of the project being copied, up to an hour may be required before the new project is fully accessible. 
+<br/><br/>
+<%= link_to "Back", "/projects" %>

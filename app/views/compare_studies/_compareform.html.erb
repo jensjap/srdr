@@ -1,0 +1,437 @@
+<script>      
+   $(document).ready(function() {
+       var accOpts = {
+           icons: { 'header': 'ui-icon-circle-plus', 'headerSelected': 'ui-icon-circle-minus' },
+           active: 0,
+           fillSpace: true,
+           change: function(e,ui) {
+               $(".notify").remove();
+               htext = ui.newHeader.find("a").text();
+               ui.newHeader.find("a").text(htext.replace("[OPEN]","[CLOSE]"));
+               htext = ui.oldHeader.find("a").text();
+               ui.oldHeader.find("a").text(htext.replace("[CLOSE]","[OPEN]"));
+           }
+       }
+       $("#compare_studies_accordion").accordion(accOpts);
+   });
+</script>
+<script type="text/javascript">
+    function checkSubmission() {
+        return true;
+    }
+  
+    function checkSubmit2EXCEL(fval) {
+        document.compare_studies.export2excel.value = ""+fval
+    }
+  
+    // ------------ Publication Compare Controls -------------
+    function selectAllPub(sidx,n) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_"+i+".checked = false");
+            };
+        };
+        try {
+            document.compare_studies.merge_title[sidx].checked = true;
+            document.compare_studies.merge_title_text.value = document.compare_studies.merge_title[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_title_text.value = document.compare_studies.merge_title_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_year[sidx].checked = true;
+            document.compare_studies.merge_year_text.value = document.compare_studies.merge_year[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_year_text.value = document.compare_studies.merge_year_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_author[sidx].checked = true;
+            document.compare_studies.merge_author_text.value = document.compare_studies.merge_author[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_author_text.value = document.compare_studies.merge_author_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_country[sidx].checked = true;
+            document.compare_studies.merge_country_text.value = document.compare_studies.merge_country[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_country_text.value = document.compare_studies.merge_country_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_pmid[sidx].checked = true;
+            document.compare_studies.merge_pmid_text.value = document.compare_studies.merge_pmid[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_pmid_text.value = document.compare_studies.merge_pmid_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_journal[sidx].checked = true;
+            document.compare_studies.merge_journal_text.value = document.compare_studies.merge_journal[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_journal_text.value = document.compare_studies.merge_journal_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_volume[sidx].checked = true;
+            document.compare_studies.merge_volume_text.value = document.compare_studies.merge_volume[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_volume_text.value = document.compare_studies.merge_volume_default0.value;
+        };  // end for
+        try {
+            document.compare_studies.merge_issue[sidx].checked = true;
+            document.compare_studies.merge_issue_text.value = document.compare_studies.merge_issue[sidx].value;
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            document.compare_studies.merge_issue_text.value = document.compare_studies.merge_issue_default0.value;
+        };  // end for
+    } 
+  
+    function selectTitle(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_title_text.value = selectedval;
+    } 
+  
+    function selectYear(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_year_text.value = selectedval;
+    } 
+  
+    function selectAuthor(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_author_text.value = selectedval;
+    } 
+  
+    function selectCountry(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_country_text.value = selectedval;
+    } 
+  
+    function selectPMID(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_pmid_text.value = selectedval;
+    } 
+  
+    function selectAlternateID(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_altid_text.value = selectedval;
+    } 
+  
+    function selectJournal(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_journal_text.value = selectedval;
+    } 
+  
+    function selectVolume(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_volume_text.value = selectedval;
+    } 
+  
+    function selectIssue(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_"+i+".checked = false");
+        };
+        document.compare_studies.merge_issue_text.value = selectedval;
+    } 
+  
+    // ------------ Design Details Compare Controls -------------
+    function selectAllDD(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_dd_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_dds_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_dds_"+i+"_text.value = document.compare_studies.merge_dds_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_dds_"+i+"_text.value = document.compare_studies.merge_dds_"+i+"_default0.value");
+            };  // end for
+        };
+    } 
+  
+    function selectDesignDetail(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_dd_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_dds_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+  
+    // ------------ Baseline Characteristics Compare Controls -------------
+    function selectAllBaseline(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_bl_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_bls_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_bls_"+i+"_text.value = document.compare_studies.merge_bls_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_bls_"+i+"_text.value = document.compare_studies.merge_bls_"+i+"_default0.value");
+            };  // end for
+        };
+    } 
+  
+    function selectBaseline(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_bl_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_bls_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+
+    function setBaselineConcensusValue(selected_id,selected_val) {
+        eval("document.compare_studies.merge_bls_"+selected_id+".value = '"+selected_val+"'");
+    }
+
+    function setBaselineConcensusColumn(selected_id,sidx,cfidx,n_rows) {
+        alert("setBaselineConcensusColumn - id "+selected_id+" sidx "+sidx+" cfidx "+cfidx+" nrows "+n_rows);
+        for (rfidx = 0; rfidx < n_rows; rfidx++) {
+            eval("document.compare_studies.blm_"+selected_id+"_"+rfidx+"_"+cfidx+"["+sidx+"].checked = true");
+            eval("document.compare_studies.merge_bls_"+selected_id+"_"+rfidx+"_"+cfidx+".value = document.compare_studies.blv_"+sidx+"_"+selected_id+"_"+rfidx+"_"+cfidx+".value");
+        };  // end for
+    }
+
+    function setBaselineConcensusRow(selected_id,sidx,rfidx,n_cols) {
+        for (cfidx = 0; cfidx < n_cols; cfidx++) {
+            eval("document.compare_studies.blm_"+selected_id+"_"+rfidx+"_"+cfidx+"["+sidx+"].checked = true");
+            eval("document.compare_studies.merge_bls_"+selected_id+"_"+rfidx+"_"+cfidx+".value = document.compare_studies.blv_"+sidx+"_"+selected_id+"_"+rfidx+"_"+cfidx+".value");
+        };  // end for
+    }
+  
+    // ------------ Arms Events Compare Controls -------------
+    function selectAllArms(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_arm_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_arm_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_arm_"+i+"_text.value = document.compare_studies.merge_arm_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_arm_"+i+"_text.value = document.compare_studies.merge_arm_"+i+"_default0.value");
+            };  // end for
+        };
+    } 
+    
+    function selectArms(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_arm_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_arm_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+  
+    // ------------ Outcomes Events Compare Controls -------------
+    function selectAllOutcomes(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_outc_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_outc_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_outc_"+i+"_text.value = document.compare_studies.merge_outc_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_outc_"+i+"_text.value = document.compare_studies.merge_outc_"+i+"_default0.value");
+            };  // end for
+        };
+    } 
+    
+    function selectOutcomes(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_outc_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_outc_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+  
+    // ------------ Outcome Results Events Compare Controls -------------
+    function selectAllOutcomeResults(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_outcr_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_outcr_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_outcr_"+i+"_text.value = document.compare_studies.merge_outcr_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_outcr_"+i+"_text.value = document.compare_studies.merge_outcr_"+i+"_default0.value");
+            };  // end for
+        };
+    } 
+    
+    function selectOutcomeResults(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_outcr_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_outcr_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+  
+    // ------------ Adverse Events Compare Controls -------------
+    function selectAllAdverse(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_adv_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_adve_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_adve_"+i+"_text.value = document.compare_studies.merge_adve_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_adve_"+i+"_text.value = document.compare_studies.merge_adve_"+i+"_default0.value");
+            };  // end for
+        };
+    } 
+    
+    function selectAdverse(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_adv_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_adve_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+  
+    // ------------ Quality Dimension Compare Controls -------------
+    function selectAllQualityDim(sidx,n,ndd) {
+        for (i = 0; i < n; i++) {
+            if (i != sidx) {
+                eval("document.compare_studies.select_study_qualdim_"+i+".checked = false");
+            };
+        };
+        for (i = 0; i < ndd; i++) {
+            try {
+                eval("document.compare_studies.merge_qualdim_"+i+"["+sidx+"].checked = true");
+                eval("document.compare_studies.merge_qualdim_"+i+"_text.value = document.compare_studies.merge_qualdim_"+i+"["+sidx+"].value");
+            } catch (err) {
+                // No difference across studies
+                // load the text box with the default value
+                eval("document.compare_studies.merge_qualdim_"+i+"_text.value = document.compare_studies.merge_qualdim_"+i+"_default0.value");
+            };  // end for
+        };
+        // Handle overall quality rating
+        try {
+            eval("document.compare_studies.merge_qualdim_overallquality["+sidx+"].checked = true");
+            eval("document.compare_studies.merge_qualdim_overallquality_text.value = document.compare_studies.merge_qualdim_overallquality["+sidx+"].value");
+        } catch (err) {
+            // No difference across studies
+            // load the text box with the default value
+            eval("document.compare_studies.merge_qualdim_overallquality_text.value = document.compare_studies.merge_qualdim_overallquality[0].value");
+        };  // end for
+    } 
+    
+    function selectQualityDim(sidx,ddidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_qualdim_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_qualdim_"+ddidx+"_text.value = '"+selectedval+"'");
+    } 
+    
+    // Overall Quality field
+    function selectQuality(sidx,selectedval,n) {
+        for (i = 0; i < n; i++) {
+            eval("document.compare_studies.select_study_qualdim_"+i+".checked = false");
+        };
+        eval("document.compare_studies.merge_qualdim_overallquality_text.value = '"+selectedval+"'");
+    } 
+</script> 
+<form action="create_consensus" method="POST" name="compare_studies" onsubmit='return checkSubmission()'>
+<input type="hidden" name="prj_id" value="<%= params["prj_id"] %>">
+<input type="hidden" name="prj_title" value="<%= @project.title %>">
+<div id="compare_studies_accordion">
+    <h3><a href="#" class="heading" title="Merge Publications (CTRL + Enter to open)"><div id="compare_studies_pub">[CLOSE] Publication Information</div></a></h3>
+    <div id="compare_pub">
+<%= render 'compare_pub' %>
+    </div>
+    <h3><a href="#"  title="Merge Arm Details (CTRL + Enter to open)"class="heading"><div id="compare_studies_armds">[OPEN] Arm Details</div></a></h3>
+    <div id="compare_armd">
+<%= render 'compare_armd' %>
+    </div>
+    <h3><a href="#"  title="Merge Design Details (CTRL + Enter to open)"class="heading"><div id="compare_studies_dds">[OPEN] Design Details</div></a></h3>
+    <div id="compare_dd">
+<%= render 'compare_dd' %>
+    </div>
+    <h3><a href="#"  title="Merge Baseline Characteristics (CTRL + Enter to open)"class="heading"><div id="compare_studies_blc">[OPEN] Baseline Characteristics</div></a></h3>
+    <div id="compare_bl">
+<%= render 'compare_bl' %>
+    </div>
+    <h3><a href="#"  title="Merge Study Arms (CTRL + Enter to open)"class="heading"><div id="compare_studies_arm">[OPEN] Study Arms</div></a></h3>
+    <div id="compare_arm">
+<%= render 'compare_arm' %>
+    </div>
+    <h3><a href="#" class="heading" title="Merge Outcomes (CTRL + Enter to open)"><div id="compare_studies_outc">[OPEN] Outcomes</div></a></h3>
+    <div id="compare_outc">
+<%= render 'compare_outcome' %>
+    </div>
+    <h3><a href="#" class="heading" title="Merge Outcome Results (CTRL + Enter to open)"><div id="compare_studies_outcr">[OPEN] Outcome Results</div></a></h3>
+    <div id="compare_outcr">
+<%= render 'compare_outcome_results' %>
+    </div>
+    <h3><a href="#"  title="Merge Outcome Details (CTRL + Enter to open)"class="heading"><div id="compare_studies_outds">[OPEN] Outcome Details</div></a></h3>
+    <div id="compare_outd">
+<%= render 'compare_outd' %>
+    </div>
+    <h3><a href="#" class="heading" title="Merge Adverse Events (CTRL + Enter to open)"><div id="compare_studies_adve">[OPEN] Adverse Events</div></a></h3>
+    <div id="compare_adv">
+<%= render 'compare_adv' %>
+    </div>
+    <h3><a href="#" class="heading" title="Merge Quality Dimensions (CTRL + Enter to open)"><div id="compare_studies_qual">[OPEN] Quality Dimensions</div></a></h3>
+    <div id="compare_qualdim">
+<%= render 'compare_qualdim' %>
+    </div>
+</div>
+<p/>
+<label for="consensus_comments">Additional Comments/Notes:</label><br/>
+<textarea autocomplete="off" class="concensuscomments" cols="60" id="consensus_comments" maxlength="240" name="consensus_comments" rows="4" width="600"></textarea>
+<p/>
+<input type="hidden" name="export2excel" value="0">
+<button type="submit" class="inline" onClick="checkSubmit2EXCEL(0)">
+    <%= image_tag "Table_go.png", :alt => "Save table creator selections"  %> Merge/Create Consensus Study 
+</button>
+<button type="submit" class="inline" onClick="checkSubmit2EXCEL(1)">
+    <%= image_tag "Table_go.png", :alt => "Export comparason to EXCEL"  %> Export to EXCEL 
+</button>
+</form>

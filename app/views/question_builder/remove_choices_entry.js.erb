@@ -1,0 +1,14 @@
+// REMOVE RADIO, CHECKBOX, DROPDOWN QUESTION SETUPS
+var field_id = "<%= "#category_choices_" + @page_name %>";
+var n = $(field_id.toString()).length;
+if (n >= 1){
+  $('div').remove(field_id.toString());
+  $("#subquestion_div_<%= params[:page_name] %>").html("");
+}
+
+// REMOVE MATRIX FORM SETUPS
+field_id = "#matrix_setup_<%=@model%>"
+n = $(field_id.toString()).length;
+if(n >= 1){
+	$(field_id.toString()).remove();
+}

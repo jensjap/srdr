@@ -1,0 +1,7 @@
+	<% str = DesignDetailField.find(design_detail_field_id).option_text %>
+		<div class="dd_<%= design_detail_id.to_s %>_box_container">
+			<br/>
+			Option Name: <%= text_field "ddf_" + design_detail_field_id.to_s, :option_text, :value => str,:class => "inline-field margined-bottom",  :onchange => remote_function(:update => "save_field",  :method => "put",  :with => "'option_text=' + value",  :url => { :controller => :design_detail_fields, :action => :save_field, :design_detail_field_id => design_detail_field_id, :design_detail_id => design_detail_id}, :title=> "option name") %>
+			<div class="inline" id="saved_field_<%= design_detail_field_id.to_s %>"></div>
+
+		</div>

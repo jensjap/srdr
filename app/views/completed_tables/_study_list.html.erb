@@ -1,0 +1,57 @@
+<% if @studies.length > 0 %>
+<table class="list_table" id="project_studies_table" summary="project studies table">
+<thead>
+  <tr>
+
+    <th scope='col'>Title</th>
+    <th scope='col'>Author</th>
+    <th scope='col'>Year</th>
+	
+
+  </tr>
+</thead>
+<tbody>
+<% i=0 %>
+<% @studies.each do |study| %>
+<% if !study.nil? %>
+<% study_pub_info = Study.get_primary_pub_info(study.id) %>
+ <% if !study_pub_info.nil? %> 
+ <tr>
+	
+    <td scope='row'>
+      <% title = study_pub_info.title.nil? ? "Untitled" : study_pub_info.title %>
+      <a target="_blank" href="/projects/<%= params[:id].to_s %>/studies/<%= study.id.to_s %>" title="Preview Study: <%= title %>"><%= title %></a>
+
+      <%# link_to study_pub_info.title.nil? ? "Untitled" : study_pub_info.title, '/projects/'+params[:id].to_s+'/studies/'+study.id.to_s, :id => "preview_study_link_" + study.id.to_s, :title=>"Preview Study: #{Study.get_title(study.id)}" %></td>
+    <td scope='row'><%= study_pub_info.author %></td>
+    <td scope='row'><%= study_pub_info.year %></td>
+
+  </tr>
+
+<!--
+<script>
+  		$("#preview_study_link_<%= study.id.to_s %>").bind("click", function(e){
+			e.preventDefault();
+			window.scrollTo(0, 0);			
+			$("#preview_study_div").dialog('open').load("<%= '/projects/'+params[:id].to_s+'/studies/'+study.id.to_s %>");
+
+		});
+</script>
+-->
+  
+  <% end %>
+  <% end %>
+  <% i += 1%>
+<% end %>
+</tbody>
+</table>
+
+
+<% else %>
+<div class="indented_block">
+There are no studies associated with this systematic review.
+</div>
+<% end %>
+
+		<div id="preview_study_div">
+		</div>	

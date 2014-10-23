@@ -1,0 +1,48 @@
+<div id="<%= @model %>_by_category_form_div">
+	How would you like these questions displayed?<div class="inline" style="display:inline;" id="saved_by_category_section_<%= @model %>"></div><br/>
+	<% option_name = @model == 'quality_detail' ? 'Outcome' : @model_title.split(" ").first.singularize %>
+	<% display_options = ["Display the questions for each #{option_name} defined in the study", "Display the questions only once"] %>
+	<% display_options.each_with_index do |opt,i| %>
+	    <% font_style = "font-size: 12px; font-weight: normal;" %>
+		<% selected = "" %>
+		<% if (i == 0 && @by_category) || (i==1 && !@by_category) %>
+			<% font_style = "font-size: 13px; font-weight: bold;" %>
+			<% selected = "checked" %>
+		<% end %>
+		<input type='radio' value="<%= 1 - i %>" name="display_by_category" model="<%= @model %>" class="display_by_category_toggle_<%=@model%>" <%= selected %> style='margin-top:5px;'/> <span style="<%= font_style %>"><%= opt %></span><br/>
+	<% end %>
+	<span id="<%=@model%>_category_end"></span>
+</div>
+<script type='text/javascript'>
+// <!-- 
+
+function category_toggle_init(){
+	try{
+		check_toggle_loaded();
+		set_toggle_functionality();
+	}catch(err){
+		setTimeout('category_toggle_init()',200);
+	}
+}
+function check_toggle_loaded() {
+	//alert("Checking... length is " + $("#existing_results_div").length.toString());
+	if ( $('#<%=@model%>_category_end').length == 0) 
+		$jquery.error( 'not ready, the length is ' + $("#<%=@model%>_category_end").length.toString() );
+}
+function set_toggle_functionality(){
+	$(".display_by_category_toggle_<%=@model%>").unbind();
+	$(".display_by_category_toggle_<%=@model%>").bind("click",function(){
+		notifier_div = "#saved_by_category_section_<%= @model %>";
+		$.ajax({
+			url: "extraction_forms/toggle_by_category",
+			data:{
+				model: $(this).attr("model"),
+				extraction_form_id: <%= @extraction_form_id %>
+			}
+		});
+		$(notifier_div).html(" <img src='/images/waiting.gif' alt='Please wait...'/>");
+	});
+}
+category_toggle_init();
+//-->
+</script>

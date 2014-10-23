@@ -1,0 +1,6 @@
+<% if @outcome.outcome_type == 'Continuous' %>
+	$("#form_div").html("<%= escape_javascript(render :partial=>"/comparisons/between_arm_continuous")%>")
+<% elsif @outcome.outcome_type == 'categorical' %>
+  
+<% end %>
+$("#modal_div").dialog("close");

@@ -1,0 +1,9 @@
+//alert("entered the new js");
+$('#new_outcome_entry').html("<%= escape_javascript(render :partial => 'outcomes/form') %>");
+//alert("loaded the form to the div");
+//var html = $("#new_outcome_entry").html();
+//alert("html for the div is " + html);
+$("#new_outcome_entry").dialog("option", "title", "Add New Outcome");
+$("#new_outcome_entry").dialog("open");
+//alert("opened the dialog");
+

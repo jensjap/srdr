@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: comparison_measures
+#
+#  id            :integer          not null, primary key
+#  title         :string(255)
+#  description   :text
+#  unit          :string(255)
+#  note          :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  comparison_id :integer
+#  measure_type  :integer          default(0)
+#
+
+# this is being used to test the remove_extracted_data in extraction_form
+comp_measure1:
+  id: 1
+  title: Std. Dev
+  Description:
+  unit: NA
+  comparison_id: 1
+
+comp_measure2:
+  id: 2
+  title: Mean
+  Description:
+  unit: lbs.
+  comparison_id: 1

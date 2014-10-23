@@ -1,0 +1,36 @@
+Sorting: 
+<% if @current_sorting_order == "type" %>
+	flags first
+<% else %>
+<%= link_to "newest flags first", {:controller => "comments", :action => "sort", :sort_by => "type", :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+| 
+<% if @current_sorting_order == "priority" %>
+	flag priority
+<% else %>
+<%= link_to "flag priority", {:controller => "comments", :action => "sort", :sort_by => "priority", :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+| 
+<% if @current_sorting_order == "flagtype" %>
+	flag type
+<% else %>
+<%= link_to "flag type", {:controller => "comments", :action => "sort", :sort_by => "flagtype", :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "recent" %>
+	most recent
+<% else %>
+<%= link_to "most recent", {:controller => "comments", :action => "sort", :sort_by => "recent", :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "oldest" %>
+	oldest
+<% else %>
+<%= link_to "oldest", {:controller => "comments", :action => "sort", :sort_by => "oldest", :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "facts" %>
+	fact/opinion
+<% else %>
+<%= link_to "fact/opinion", {:controller => "comments", :action => "sort", :sort_by => "facts", :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>

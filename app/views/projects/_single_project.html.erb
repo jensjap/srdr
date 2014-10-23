@@ -1,0 +1,32 @@
+<div class="summary_heading">
+
+		<div class="single_project_title">
+		<%= image_tag "Folder-silk.png", :alt => "project"  %>
+	 	<%= link_to project.title, project_path(project) %> 
+	 	<% if @show_status %>
+			<% if project.is_public? %>
+				(<span style="color: green;">Published</span>)
+			<% else %>
+				(<span style="color: red;">Private</span>)			
+			<% end %>
+	 	<% end %>
+		</div>
+		<div class="comment_summary_section">
+		<div class="comment_summary_link">
+			<%= render :partial => "comments/summary_comments", :locals => {:project_id => project.id} %>	
+		</div>
+		</div>
+
+</div>
+	
+<div class="summary_sub">
+		Project Lead: <%= Project.get_project_leads_string(project.id) %><br/>
+		<% num_studies = Project.get_num_studies(project) %>
+		<% num_key_qs = Project.get_num_key_qs(project) %>
+		<% num_ext_forms = Project.get_num_ext_forms(project) %>
+		<%= pluralize(num_studies, 'Study') %>, <%= pluralize(num_key_qs, 'Key Question') %>, <%= pluralize(num_ext_forms, 'Extraction Form') %><br/><br/>
+		<% if !project.description.nil? %>
+		<%= render :inline => project.description.force_encoding("UTF-8") %>
+		<% end %>
+		
+</div>

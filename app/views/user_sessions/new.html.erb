@@ -1,0 +1,45 @@
+<% content_for :title, content='Login' %>
+
+<div id='left_column'>
+
+</div>
+<div id='content' tabindex=200>
+<%= render "layouts/info_messages" %>
+
+<h1>Log in to SRDR</h1>
+<br/><br/>
+<div class="indented-text">
+To log in, enter your username and password below.
+
+
+<br/><br/>
+
+<%= render "user_sessions/login_form" %>
+
+</div>
+</div>
+<span id='page_end'></span>
+<script type='text/javascript'>
+//<!--
+function login_init() {
+  try{
+    checkLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    set_login_js();
+  } catch( err ) {
+    setTimeout('login_init()', 200);
+  }
+}
+function checkLoaded() {
+    if ( $('#page_end').length == 0) $jquery.error( 'not ready' );
+}
+function set_login_js(){
+    $("#forgot_password").unbind();
+    $("#forgot_password").bind("click",function(event){
+        event.preventDefault();
+        window.location.replace("/forgot_password");
+    });
+}
+login_init();
+
+//-->
+</script>

@@ -1,0 +1,6 @@
+<% unless @ef_instruction.blank? %>
+	<div class='user_instruction'>
+		<strong>Note:</strong> <%= @ef_instruction %>
+	</div>
+	Enter your <%= "#{@data[:model].gsub('_',' ').titleize}"%> information using the entry fields below. Remember to <strong>press the "Save" button before exiting</strong> the page<br/><br/>
+<%  end %>

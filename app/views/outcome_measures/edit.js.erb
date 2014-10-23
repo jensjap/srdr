@@ -1,0 +1,2 @@
+$("#add_measure_modal #edit_measures_list").html("<%= escape_javascript(render :partial => "outcome_measures/edit_measures_all", :locals => {:measure => @measure, :outcome_measures => @outcome_measures}) %>");
+$("#measure_<%= @measure.id.to_s %>_div").html("<%= escape_javascript(render :partial => "outcome_measures/one_measure_edit", :locals => {:measure => @measure}) %>");

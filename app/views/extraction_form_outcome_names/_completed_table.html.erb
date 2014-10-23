@@ -1,0 +1,25 @@
+	<% unless @saved_names.empty? %>
+
+<table class="list_table" id="outcome_names_table" summary="outcome names table">
+<thead>
+	<tr>
+		<th>Outcome Title</th>
+		<th>Note</th>
+	</tr></thead>
+
+		
+		<% i = 1 %>
+	  <% for oc_name in @saved_names%>
+	    <tr class='<%= cycle("even","odd") %>' id='<%= "name_row_" + i.to_s %>'>
+	    	<td><%= oc_name.title %></td>
+	    	<td><%= oc_name.note %></td>
+	    	
+	    </tr>
+	    <% i = i+1 %>
+
+	  <% end %>
+</table><br/>
+<% else %>
+
+No outcomes specified.
+<% end %>

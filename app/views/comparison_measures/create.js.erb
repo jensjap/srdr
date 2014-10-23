@@ -1,0 +1,75 @@
+$("#new_measure_entry").html("<%= escape_javascript( render :partial=>"comparison_data_points/add_measures_form")%>");
+$("#measure_form_div").dialog("close");
+$("#measure_form_div").html("<%= escape_javascript(render :partial=>"comparison_measures/form", :locals => {:comparison_measure => ComparisonMeasure.new}) %>");
+$("#measure_display_div").html("<%= escape_javascript( render :partial=>"comparison_measures/measure_list")%>");
+
+
+	// swap the table if necessary
+	<% if defined?(@table_container) %>
+		$("#<%= @table_container.to_s %>").html("<%= escape_javascript(render :partial=>@table_partial) %>");
+	<% end %>
+	
+	// swap the entry partial if necessary
+	<% if defined?(@entry_container) %>
+		$("#<%= @entry_container.to_s %>").html("<%= escape_javascript(render :partial=>@entry_partial) %>");
+		$("#<%= @entry_container.to_s %> :input").removeAttr("disabled");
+	<% end %>
+	
+	// added a second table swap element for the event where a second swap is required
+	<% if defined?(@table_container2) %>
+	  $("#<%= @table_container2.to_s %>").html("<%= escape_javascript(render :partial=>@table_partial2) %>");
+	<% end %>
+	
+	// swap the form if necessary
+	<% if defined?(@form) %>
+		$("#<%= @form.to_s %> :input").not(':button, :submit, :reset, :hidden').val('').removeAttr('checked').removeAttr('selected');
+	<% end %>
+	
+	// save message
+	<% if defined?(@message_div) %>
+		$("#<%= @message_div %>").show().delay(500).fadeOut(300);
+		<% if defined?(@error_div) %>
+			$("#<%= @error_div.to_s %>").html("");	
+		<% end %>
+	<% end %>
+	
+	<% if defined?(@close_window) %>	
+			$('#<%= @close_window %>').dialog('close');
+	<% end %>
+
+	<% if defined?(@destroy_window)%>
+		$('#<%= @destroy_window %>').dialog('destroy');
+	<% end %>
+	
+	// only to be used when updating basic project information
+	// used to refresh the title in breadcrumbs and title.
+	<% if defined?(@update_project_title) && @update_project_title %>
+		<% if defined?(@breadcrumb_div) %>
+			$("#<%= @breadcrumb_div.to_s %>").html("<%= escape_javascript(render :inline=> get_bread_crumbs(request.url,">")) %>");
+		<% end %>
+		<% if defined?(@title_div) %>
+			$("#<%= @title_div.to_s %>").html("<%= escape_javascript(render :partial=>@title_partial) %>");				
+		<% end %>	
+	<% end %>
+	
+	// show error messages if necessary
+	<% if defined?(@error_div) %>
+		<% if @saved %>
+			$("#<%= @error_div.to_s %>").html("");		
+		<% else %>
+			$("#<%= @error_div.to_s %>").html("<%= escape_javascript(render :partial=>@error_partial) %>");		
+		<% end %>
+	<% end %>
+	
+	// used for publishing project only
+	<% if defined?(@publishing) %>
+			$.ajax({
+				url: '/projects/<%= @project.id.to_s %>/publish',
+				data: {
+					project_id: <%= @project.id.to_s %>
+				}
+			});
+	<% end %>
+
+
+

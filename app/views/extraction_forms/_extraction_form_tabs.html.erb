@@ -1,0 +1,67 @@
+<br/>
+<div id="tabs">
+	<ul class='ef-tabs'>
+		<li class='ef-tab-color'><a href="#tabs-1">Title and KQs</a></li>
+		<% if !@extraction_form.id.nil? %>
+			<!--<li><a href="extraction_forms/<%= @extraction_form.id.to_s %>/import">Options</a></li>		-->
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/publications">Publications</a></li>
+			<!-- <li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/design">Study Design</a></li>-->
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder?model=design_detail">Design</a></li>
+			<% unless @extraction_form.is_diagnostic %>
+				<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/arms">Arms</a></li>
+				<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder?model=arm_detail">Arm Details</a></li>
+			<% else %>
+				<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/diagnostics">Diagnostic Tests</a></li>
+                <li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder?model=diagnostic_test_detail">Diagnostic Test Details</a></li>
+			<% end %>
+			<!--<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/baselines">Baseline Data</a></li> -->
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder?model=baseline_characteristic">Baseline Data</a></li>
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/outcomes">Outcomes</a></li>
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder?model=outcome_detail">Outcome Details</a></li>
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/adverse">Adverse Events</a></li>
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/quality">Quality</a></li>
+      <% if current_user.is_admin? %>
+      <li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder?model=quality_detail">Q2</a>
+      </li>
+      <% end %>
+			<li class='ef-tab-color'><a href="/projects/<%= @project.id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/finalize">Finalize</a></li>	
+			
+		<% end %>
+	</ul>
+	<div id="tabs-1"><br/>
+		<%= render "extraction_forms/new" %>
+	</div>
+
+</div>
+
+
+<script>
+<!--
+$(function() {
+    $( "#tabs" ).tabs({
+        select: function( event, ui ) {
+            var edited = $('.edited_field');
+
+            if (edited.length != 0) {
+                return confirm('Warning: Uncommitted data detected. Navigating away from this page will discard any unsaved work. Please confirm to continue.');
+            }
+        },
+        selected: <%= defined?(selected_tab) ? selected_tab.to_i : 0 %>,
+        ajaxOptions: {
+            error: function( xhr, status, index, anchor) {
+                $( anchor.hash ).html("Tab is loading. Please wait...");
+                    // "Couldn't load this tab. We'll try to fix this as soon as possible. <br/> Status: " + status.toString() + ". Error: " + jQuery.parseJSON(xhr));
+            }
+        },
+        load: function(event, ui) {
+            $('.editable_field').removeClass('edited_field');
+            $('.disabled :input').attr("disabled","disabled");
+            $('.disabled a').bind("click", function(event){
+                event.preventDefault();
+                return false;
+            });
+        }
+    });
+});
+//-->
+</script>

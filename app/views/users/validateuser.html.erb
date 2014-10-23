@@ -1,0 +1,31 @@
+<div id='left-navigation-div' tabindex=100>
+
+</div>
+<div id='content' tabindex=200>
+
+<%= render "layouts/info_messages" %>
+
+<h1> New SRDR User Account - Validation</h1>
+<br/>
+<div class="indented-text">
+<%
+    today = Time.now
+    if @days_since_registration > 2
+        # More than two days old
+%>
+Your account request has expired, please register again and validate your request within 2 days.
+<%
+    elsif @days_since_registration >= 0
+%>
+Your account is now activated. Please click on the "Home" link above and login.
+<%
+    else
+%>
+Your account validation code is invalid - please register a user account and follow the validation instructions in the confirmation E-mail you will receive after
+submitting the new account request.
+<%
+    end
+%>
+</div>
+
+</div>

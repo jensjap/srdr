@@ -1,0 +1,3 @@
+ $("#new_test_modal").dialog({title:"<%= @editing==true ? 'Editing' : 'New' %> <%= @test_type %>"});
+ $("#new_test_modal").html("<%= escape_javascript(render :partial=>'extraction_form_diagnostic_tests/form', :locals=>{:test_obj => @test_obj, :title=>@test_type, :editing=>@editing}) %>")
+ $("#new_test_modal").dialog("open");

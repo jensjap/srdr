@@ -1,0 +1,75 @@
+<div class="comments_sorting">
+	<%= render "comments/summary_sort_menu", :current_sorting_order => @current_sorting_order, :project_id => @project_id %>
+</div>
+<br/><br/>
+
+
+<% if defined?(comments) && comments.length > 0 %>
+<% if User.current_user_is_collaborator(@project_id, current_user) || User.current_user_is_admin(@project_id, current_user) %>
+<h1>Public Comments</h1>
+<% end %>
+<% if Comment.get_number_of_public_project_comments(@project_id) == 0 %>
+<div class="centered">There are no comments for this section.</div>
+<% else %>
+<% comments.each do |comment| %>
+<%= render :partial => "comments/single_summary_comment", :locals => {:is_public => true, :comment => comment} %>
+<% end %>
+<% end %>
+
+<% if User.current_user_is_collaborator(@project_id, current_user) || User.current_user_is_admin(@project_id, current_user) %>
+
+<br/><br/>
+<h1>Private Comments</h1>
+
+<% comments.each do |comment| %>
+<%= render :partial => "comments/single_summary_comment", :locals => {:is_public => false, :comment => comment} %>
+<% end %>
+
+<% if Comment.get_number_of_private_project_comments(@project_id) == 0 %>
+<div class="centered">There are no comments for this section.</div>
+<% end %>
+
+
+<% end # end user is admin%>
+
+
+	
+	
+<% else %>
+  <div class="centered">There are no comments for this section.</div>
+<% end # end defined comments %>
+
+<br/><br/>
+
+<div class="actions centered">
+	<button class="negative close_comment_window_btn">
+		<%= image_tag "Cancel.png", :alt => "Cancel"  %> Close Window
+	</button>		
+</div>
+
+
+<script type="text/javascript">
+
+$('.close_comment_window_btn').bind("click", function(){
+$('.qtip').qtip('hide');
+});
+
+// show or hide multiple comment replies
+	$(".show_reply_icon").bind("click", function(e){
+		e.preventDefault();
+		this_id = $(this).attr('id').split("_");
+		note_id = this_id[3];
+		$("#comment_" + note_id + "_replies").toggle();
+		if ($("#comment_" + note_id + "_replies").is(":visible"))
+		{
+			$(this).html($(this).html().replace("Show", "Hide"));
+			$(this).html($(this).html().replace("add", "delete"));					
+		}
+		else
+		{
+			$(this).html($(this).html().replace("Hide", "Show"));
+			$(this).html($(this).html().replace("delete", "add"));		
+		}
+	});	
+	
+</script>

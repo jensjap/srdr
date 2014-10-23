@@ -1,0 +1,8 @@
+<%  unless @studies.empty? %>   
+<div style='float:right;'>
+    <%= form_tag("/projects/#{@project.id}/search", :method=>"get") do |f| %>
+        <%= text_field_tag(:search_term) %>
+        <%= submit_tag("Search") %>
+    <% end %>
+</div>
+<% end %>

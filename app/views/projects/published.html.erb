@@ -1,0 +1,22 @@
+<%
+    # Top-level - Reset and set bread crumb to current page
+    urlhistory = Breadcrumb.new
+    urlhistory.setCurrentPage("Home","Home","/")
+    urlhistory.setCurrentPage("Published Projects","Published Projects","/projects/published")
+    session[:urlhistory] = urlhistory
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/mySRDR_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+<h1>Completed Systematic Reviews</h1>
+
+<% unless @projects.empty? %>
+	
+        <%= render :partial=>'projects/published_list' %>
+	
+<% else %>
+	There are currently no publicly available projects in the system. 
+<% end %>
+
+</div>

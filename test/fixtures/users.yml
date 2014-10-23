@@ -1,0 +1,95 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                 :integer          not null, primary key
+#  login              :string(255)      not null
+#  email              :string(255)      not null
+#  fname              :string(255)      not null
+#  lname              :string(255)      not null
+#  organization       :string(255)      not null
+#  user_type          :string(255)      not null
+#  crypted_password   :string(255)      not null
+#  password_salt      :string(255)      not null
+#  persistence_token  :string(255)      not null
+#  login_count        :integer          default(0), not null
+#  failed_login_count :integer          default(0), not null
+#  last_request_at    :datetime
+#  current_login_at   :datetime
+#  last_login_at      :datetime
+#  current_login_ip   :string(255)
+#  last_login_ip      :string(255)
+#  perishable_token   :string(255)      default(""), not null
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
+project_lead: 
+  id: 1
+  login: proj_lead
+  email: chris.d.parkin@gmail.com
+  fname: Chris
+  lname: Parkin
+  organization: Tufts EPC
+  user_type: member
+  crypted_password: testing
+  password_salt: testing_salt
+  login_count: 1
+  failed_login_count: 0
+  persistence_token: 12345
+
+project_collab_1:
+  id: 2
+  login: proj_collab1
+  email: collab@gmail.com
+  fname: Colla
+  lname: Borator
+  organization: Tufts EPC
+  user_type: member
+  crypted_password: testing
+  password_salt: testing_salt
+  login_count: 1
+  failed_login_count: 0
+  persistence_token: 23456
+
+project_collab_2:
+  id: 3
+  login: proj_collab2
+  email: collab2@gmail.com
+  fname: Colla
+  lname: BoratorTwo
+  organization: Tufts EPC
+  user_type: member
+  crypted_password: testing
+  password_salt: testing_salt
+  login_count: 1
+  failed_login_count: 0
+  persistence_token: 34567
+
+another_user:
+  id: 4
+  login: another_user
+  email: abc@def.com
+  fname: Anotha
+  lname: Usa
+  organization: Tufts EPC
+  user_type: admin
+  crypted_password: testing
+  password_salt: testing_salt
+  login_count: 2
+  failed_login_count: 0
+  persistence_token: 45678
+
+non_member:
+  id: 5
+  login: non_member
+  email: bcd@efg.com
+  fname: Non
+  lname: Member
+  organization: Tufts EPC
+  user_type: user
+  crypted_password: testing
+  password_salt: testing_salt
+  login_count: 2
+  failed_login_count: 0
+  persistence_token: 56789

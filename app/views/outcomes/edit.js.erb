@@ -1,0 +1,3 @@
+$("#new_outcome_entry").html("<%= escape_javascript(render :partial=>'outcomes/form') %>");
+$("#new_outcome_entry").dialog("option", "title", "Edit Outcome");			
+$("#new_outcome_entry").dialog('open');		

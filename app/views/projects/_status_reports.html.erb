@@ -1,0 +1,79 @@
+<%#
+@project_efs
+@progress_by_ef
+@project_users
+%>
+<!--
+Report 1
+
+Display a list of progress by extractor. Report # of studies completed vs # of studies assigned for each section in the form.
+-->
+<% map = {"questions"=>"Key Questions","publications"=>"Publications","design"=>"Design","arms"=>"Arms","arm_details"=>"Arm Details", "outcomes"=>"Outcomes","outcome_details"=>"Outcome Details","baselines"=>"Baselines","diagnostics"=>"Diagnostic Tests","results"=>"Results","quality"=>"Quality","adverse"=>"Adverse Events"} %>
+<%# loop through the extraction forms to produce a table for each form. %>
+
+<%= render :partial => "page_title", :locals => {:page_title => "Progress Reports"} %>
+<br/><br/>Below is a set of progress reports generated for this Project. Descriptions of these reports are as follows:<br/><br/>
+1. Details Coming Soon...<br/><br/>
+2. Details Coming Soon...<br/>
+<% @project_efs.each do |pef| %>
+	<br/><br/>
+	<% ef_data = @progress_by_ef[pef.id] %>
+	<strong>Extraction Form: <%= pef.title  %></strong><br/><br/>
+	<% if ef_data.empty? %>
+		Could not find any completed sections for this extraction form. 
+	<% else %>
+		<table class='classic-a' style='border: solid 1px #f7f7f7; border-collapse:separate;'>
+			<% section_names = ef_data.collect{|x| x.section_name}.uniq %>
+			<!-- Table Header Row -->
+			<thead>
+				<tr>
+					<th style='font-size: 13px; font-weight: normal;'>User</th>
+					<% section_names.each do |sn| %>
+						<th style='font-size: 12px; font-weight: normal;'><%= map[sn] %></th>
+					<% end %>
+				</tr>
+			</thead>
+			<tbody>
+				<%# For each individual user %>
+				<% @project_users.each do |pu| %>
+					<%# determine which studies in the project were assigned to them %>
+					<% user_study_ids = @project_studies.select{|ps| ps.creator_id == pu.id}.collect{|snum| snum.id}.uniq %> 
+					<tr>
+						<%# provide the user login and # of studies assigned %>
+						<td style='background-color: #f7f7f7;text-align:left;'>
+							<strong>Name:</strong> <%= pu.fname %> <%= pu.lname %>
+							<br/><strong>Login:</strong> <%= pu.login %>
+							<br/><strong># Studies:</strong> <%= user_study_ids.length %>
+							<br/></td>
+						<% all_user_sections = ef_data.select{|efd| user_study_ids.include?(efd.study_id) && efd.extraction_form_id == pef.id} %>
+						<%# for each section, list the percentage of studies with that section marked complete %>
+						<% section_names.each do |sn| %>
+							<% unless user_study_ids.length == 0 %>
+								<% complete = all_user_sections.select{|aus| aus.section_name == sn && aus.is_complete == true} %>
+								<% incomplete = all_user_sections.select{|aus| aus.section_name == sn && aus.is_complete == false} %>
+								<% percentage = complete.length.to_f / (incomplete.length + complete.length) * 100 %>
+								<% bar_color = "#33c05a"
+		                            if percentage < 25
+		                                bar_color = "#b71d09"
+		                            elsif percentage < 50
+		                                bar_color = "#b77e39"
+		                            elsif percentage < 75
+		                                bar_color = "#e6d425"
+		                            elsif percentage < 100
+		                                bar_color = "#afd127"
+		                            end 
+	                            %>
+								<td style='background-color: <%= bar_color %>;'>
+									<span style='font-weight: bold; font-size:14px;'><%= sprintf("%.0f", percentage)%>%</span><br/><br/>(<%= complete.length %> / <%= incomplete.length + complete.length %>)
+								</td>
+							<% else %>
+								<td>---</td>
+							<% end %>
+						<% end %>	
+					</tr>
+				<% end %>
+			</tbody>
+		</table><br/><br/>
+	<% end %>
+<% end %>
+

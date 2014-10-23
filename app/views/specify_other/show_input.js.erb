@@ -1,0 +1,7 @@
+<% if @field_size == "small" %>
+	$("#<%= @field_id %>").after("<%= escape_javascript(render :partial=>"specify_other/other_field", :name => @field_name) %>");
+<% elsif @field_size == "medium" %>
+	$("#<%= @field_id %>").after("<%= escape_javascript(render :partial=>"specify_other/other_textArea", :name => @field_name) %>");
+<% else %>
+	
+<% end %>

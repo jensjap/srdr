@@ -1,0 +1,20 @@
+<%
+
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Edit Project","Edit Project","/projects/"+@project.id.to_s+"/edit#")
+    session[:urlhistory] = urlhistory
+
+%>
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+
+<div id='content' tabindex=200>
+
+	<%= render :partial => "update_existing_data" %>
+
+</div>

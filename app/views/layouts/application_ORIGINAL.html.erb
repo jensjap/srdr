@@ -1,0 +1,37 @@
+<html lang='en'>
+	<head>
+<%= csrf_meta_tag %>
+<meta charset="UTF-8">  	
+<!DOCTYPE html>
+		<title>SRDR - Systematic Review Data Repository</title>
+	  <%= stylesheet_link_tag "scaffold", "jquery-ui-1.8.12.custom", :media => "screen, print" %>
+	  <%= stylesheet_link_tag "pagination_styles", "jquery.qtip", "ahrqstyle_new", :media => "screen" %>
+	  <%= javascript_include_tag 'jquery.min', 'jquery-ui-1.8.12.custom', 'rails', 'application' %>
+	  <%= javascript_include_tag 'form_complete', 'nested_form', 'jquery.printelement.min', 'jquery.qtip.min', 'comments_dropdown' %>
+<%= favicon_link_tag "favicon.ico" %>
+  </head>
+<body>
+	 <noscript>Your web browser does not support Javascript, or you have it turned off. Please turn on Javascript or use a Javascript-compatible web browser to take advantage of the full functionality of SRDR.</noscript> 
+	<div id="container">
+	
+		<div id="feedback">
+			<a>feedback</a>
+		</div>
+		<div id="feedback_form" style="display:none">
+			<%= render :partial => "feedback_items/feedback_form" %>
+		</div>	
+	
+	
+		<%= render "layouts/header" %>
+		<div id="content">
+	
+			<div style='clear:both;'></div>
+			<%= yield %>
+		</div>
+		<div style='clear:both;'></div>
+		<div class="footer">
+			<%= render "shared/ahrq_footer" %>
+		</div>
+  </div>
+</body>
+</html>

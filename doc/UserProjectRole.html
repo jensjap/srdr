@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: UserProjectRole
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (U)</a> &raquo; 
+    
+    
+    <span class="title">UserProjectRole</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: UserProjectRole
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">UserProjectRole</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/user_project_role.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+This class links users to projects. A User can be either an admin (username
+&#8216;admin&#8217; only), a project lead, or a project editor.
+</p>
+<p>
+A user becomes a project lead currently (as of 1/2012) by simply creating a
+new project in the system. A project lead has the ability to create
+extraction forms and studies. A project lead can also assign users to their
+projects.
+</p>
+<p>
+A user becomes a project editor or collaborator when the project lead adds
+them via the project user management page. A  project editor/collaborator
+has the ability to create new studies within a project using existing
+extraction forms, and edit study data.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_roles_for_project-class_method" title="remove_roles_for_project (class method)">+ (Object) <strong>remove_roles_for_project</strong>(project_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Remove any entries in the user_project_roles table for the project being
+deleted.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#set_up_role_hash-class_method" title="set_up_role_hash (class method)">+ (hash) <strong>set_up_role_hash</strong>(user_project_role_list) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+set up a hash consisting of role names and user ids based on an existing
+list of user-project roles.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_full_role-instance_method" title="#get_full_role (instance method)">- (string) <strong>get_full_role</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+get the user&#8217;s full role name.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="remove_roles_for_project-class_method">
+  
+    + (<tt>Object</tt>) <strong>remove_roles_for_project</strong>(project_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Remove any entries in the user_project_roles table for the project being
+deleted.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>project_id</span>
+      
+      
+        <span class='type'>(<tt>integer</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+39
+40
+41
+42
+43
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user_project_role.rb', line 39</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_remove_roles_for_project'>remove_roles_for_project</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_roles'>roles</span> <span class='op'>=</span> <span class='const'>UserProjectRole</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_roles'>roles</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_role_entry'>role_entry</span><span class='op'>|</span>
+			<span class='id identifier rubyid_role_entry'>role_entry</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="set_up_role_hash-class_method">
+  
+    + (<tt>hash</tt>) <strong>set_up_role_hash</strong>(user_project_role_list) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+set up a hash consisting of role names and user ids based on an existing
+list of user-project roles
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>user_project_role_list</span>
+      
+      
+        <span class='type'>(<tt>array</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>hash</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user_project_role.rb', line 25</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_up_role_hash'>set_up_role_hash</span><span class='lparen'>(</span><span class='id identifier rubyid_user_project_role_list'>user_project_role_list</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_the_hash'>the_hash</span> <span class='op'>=</span> <span class='const'>Hash</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_user_project_role_list'>user_project_role_list</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='kw'>for</span> <span class='id identifier rubyid_i'>i</span> <span class='kw'>in</span> <span class='id identifier rubyid_user_project_role_list'>user_project_role_list</span>
+			<span class='id identifier rubyid_the_hash'>the_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>editor_</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_role'>role</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+			<span class='id identifier rubyid_the_hash'>the_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead_</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_role'>role</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+			<span class='id identifier rubyid_the_hash'>the_hash</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>delete_</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_role'>role</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_i'>i</span><span class='period'>.</span><span class='id identifier rubyid_user_id'>user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_the_hash'>the_hash</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="get_full_role-instance_method">
+  
+    - (<tt>string</tt>) <strong>get_full_role</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+get the user&#8217;s full role name
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>string</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/user_project_role.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_get_full_role'>get_full_role</span>
+	<span class='kw'>if</span> <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>lead</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Project Lead</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>elsif</span> <span class='id identifier rubyid_role'>role</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>editor</span><span class='tstring_end'>&quot;</span></span>
+		<span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>editor</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:48 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

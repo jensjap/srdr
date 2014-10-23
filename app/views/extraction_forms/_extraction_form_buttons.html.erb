@@ -1,0 +1,23 @@
+		<div class="actions" id="extraction_form_buttons">
+			<%# link_to image_tag("Cancel.png", :style=>"border-style:none;vertical-align:middle%;") + " Close Extraction Form Editor", "", :id => "close_extform_editor", :class => "negative" %>
+			<% if !@extraction_form.id.nil? %>
+			<%= link_to image_tag("Note_go.png", :style=>"border-style:none;vertical-align:middle;") + " View Extraction Form Preview", {}, :id => "view_preview_btn", :class => "positive" %>
+			<% end %>
+		</div>
+		
+		<div id="preview_div">
+		</div>
+		<% if !@extraction_form.id.nil? %>
+		<script type="text/javascript">
+		$("#preview_div").dialog({
+			autoOpen: false,
+			minWidth: 600,
+			position: 'top',
+			 open: function() {
+				$("#preview_div").load("<%= extraction_form_path(@extraction_form) %>");
+				window.scrollTo(0, 0);
+				},
+				title: "Preview Extraction Form"
+		});
+		</script>
+		<% end %>

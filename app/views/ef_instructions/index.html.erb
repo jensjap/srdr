@@ -1,0 +1,29 @@
+<h1>Listing ef_instructions</h1>
+
+<table>
+  <tr>
+    <th>Ef</th>
+    <th>Section</th>
+    <th>Data element</th>
+    <th>Instructions</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ef_instructions.each do |ef_instruction| %>
+  <tr>
+    <td><%= ef_instruction.ef_id %></td>
+    <td><%= ef_instruction.section %></td>
+    <td><%= ef_instruction.data_element %></td>
+    <td><%= ef_instruction.instructions %></td>
+    <td><%= link_to 'Show', ef_instruction %></td>
+    <td><%= link_to 'Edit', edit_ef_instruction_path(ef_instruction) %></td>
+    <td><%= link_to 'Destroy', ef_instruction, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ef instruction', new_ef_instruction_path %>

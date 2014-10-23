@@ -1,0 +1,345 @@
+<br/>
+<%= form_for @adverse_event_result, :remote => true, :id => "adverse_event_data_form" do %>
+
+<%= hidden_field_tag "study_id", params[:study_id] %>
+<%= hidden_field_tag "extraction_form_id", params[:extraction_form_id] %>
+
+<%# --------------- Header ----------------%>
+<div style='overflow:auto;'>
+<table class="classic-a" style='border-collapse:separate;'id="adv_ev_table" summary="Table Displaying Adverse Event Information">
+<thead>
+<tr>
+<th scope='col' >
+Arm or Total
+</th>
+<th scope='col' width="150px" style='min-width:150px !important;' >
+Title
+</th>
+<th scope='col' width="150px" style='min-width:150px !important;'>
+Description
+</th>
+<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
+	<% for col in @extraction_form_adverse_event_columns %>
+		<th scope='col' class="qtip_col_<%= col.id %>" style='width:100px;'>
+			<%= col.name %> 
+		</th>
+	<% end %>
+<% end %>
+<th scope='col' style='width:100px;'>Actions</th>
+</tr>
+</thead>
+
+<%# --------------- Table Meat ----------------%>
+<tbody>
+<% for ae in @adverse_events %>
+	<% first = true %>
+	<% classname = cycle("even","odd") %>
+	<% if @extraction_form.adverse_event_display_arms == true %>
+
+		<% for one_arm in @arms %>
+			
+			<tr class='<%= classname %>'>
+				<td scope='row' class="title_td"><%= one_arm.title %></td>
+				
+				<% if first %>
+					<% is_other = false %>
+					<td scope='row' rowspan="<%= @num_rows %>">
+							<!-- There are <%# @suggested_ae_titles.length %> titles. -->
+							<% unless @suggested_ae_titles.empty? %>
+								<select name='title[<%= ae.id %>]' id='title_<%= ae.id %>' style='width:150px;'>
+									<option value="">Select an Adverse Event...</option>
+									<% found = false %>
+
+									<% @suggested_ae_titles.each do |t| %>
+										<% selected = "" %>
+										<% if t.title == ae.title %>
+											<% selected = "selected='selected'" %>
+											<% found = true %>
+											<% is_other = false %>
+										<% end %>
+										<option value="<%= t.title %>" <%= selected %>><%= t.title %></option>
+										
+									<% end %>
+									<% if found == true %>
+										<option value='other'>Other...</option>
+									<% else %>
+										<% unless [nil, ""].include?(ae.title) %>
+											<% is_other = true %>
+											<option value='other' selected='selected'>Other...</option>
+										<% else %>
+											<option value='other'>Other...</option>
+										<% end %>
+									<% end %>
+								</select>
+								<% if is_other %>
+									<%= render :inline=>show_other_filled("title_#{ae.id}", ae.title, "title[#{ae.id}]") %>
+								<% end %>
+								
+							<% else %>
+								<%= text_area "title", ae.id, :value=>ae.title, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
+							<% end %>
+					</td>				
+					<td scope='row' rowspan="<%= @num_rows %>">
+							<%= text_area "description", ae.id, :value=>ae.description, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
+					</td>
+				<% end %>
+				
+				<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
+					<% for col in @extraction_form_adverse_event_columns %>
+						<td scope='row' >
+							<% val = AdverseEventResult.get_data_point(ae.id, col.id, one_arm.id) %>
+							<%= text_field "result_" + one_arm.id.to_s + "_" + ae.id.to_s, col.id, :value=>val, :size=>10, :class => "editable_field", :title => "Enter data for adverse event: #{ae.title} and arm: #{one_arm.title}" %>
+						</td>
+					<% end %>
+				<% end %>
+				
+				<% if first %>
+					<td scope='row' rowspan="<%= @num_rows %>" align='center'>
+						<%= link_to  image_tag("Bin_closed.png", :style=>"border:0px") + "Delete Adverse Event", adverse_event_path(ae, :study_id => params[:study_id], :extraction_form_id => params[:extraction_form_id]), :remote=> true, :method=>:delete, :class=>"tooltip_delete", :confirm=>"Are you sure? This will delete this adverse event and all data in it, and all unsaved data will be lost." %><br/>
+						<%= render :partial => "comments/field_comments", :locals => {:section_name => "adverseevents", :section_id => ae.id, :field_name => "event", :study_id => ae.study_id, :project_id => @project.id} %>						
+					</td>
+					<% first = false %>
+				<% end %>
+			</tr>
+			
+		<% end %>
+	<% end %>
+
+	<% if @extraction_form.adverse_event_display_total == true %>
+	<tr class='<%= classname %>'>
+		<td scope='row' class="title_td">Total</td>
+			
+		<% if first %>
+			<td scope='row' rowspan="<%= @num_rows %>">
+				<% unless @suggested_ae_titles.empty? %>
+					<select name='title[<%= ae.id %>]' id='title_<%= ae.id %>' style='width:150px;'>
+						<option value="">Select an Adverse Event...</option>
+						<% found = false %>
+
+						<% @suggested_ae_titles.each do |t| %>
+							<% selected = "" %>
+							<% if t.title == ae.title %>
+								<% selected = "selected='selected'" %>
+								<% found = true %>
+								<% is_other = false %>
+							<% end %>
+							<option value="<%= t.title %>" <%= selected %>><%= t.title %></option>
+							
+						<% end %>
+						<% if found == true %>
+							<option value='other'>Other...</option>
+						<% else %>
+							<% unless [nil, ""].include?(ae.title) %>
+								<% is_other = true %>
+								<option value='other' selected='selected'>Other...</option>
+							<% else %>
+								<option value='other'>Other...</option>
+							<% end %>
+						<% end %>
+					</select>
+					<% if is_other %>
+						<%= render :inline=>show_other_filled("title_#{ae.id}", ae.title, "title[#{ae.id}]") %>
+					<% end %>
+					
+				<% else %>
+					<%= text_area "title", ae.id, :value=>ae.title, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
+				<% end %>
+			</td>	
+
+			<td scope='row' rowspan="<%= @num_rows %>">
+					<%= text_area "description", ae.id, :value=>ae.description, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
+			</td>
+
+			<!--
+			<td rowspan="<%= @num_rows %>">
+					<%= text_area "title", ae.id, :value=>ae.title, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell"  %>	
+			</td>
+			<td scope='row' rowspan="<%= @num_rows %>">
+					<%= text_area "description", ae.id, :value=>ae.description, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell"  %>	
+			</td>
+		-->
+		<% end %>
+			
+		<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
+			<% for col in @extraction_form_adverse_event_columns %>
+				<td scope='row' >
+						<% val = AdverseEventResult.get_data_point(ae.id, col.id, "total") %>
+					<%= text_field "result_total_" + ae.id.to_s, col.id, :value=>val, :class => "editable_field", :size=>10, :title => "Enter data for adverse event: #{ae.title} and arm: Total" %>
+				</td>
+			<% end %>
+		<% end %>
+			
+		<% if first %>
+			<td scope='row' rowspan="<%= @num_rows %>" align='center'>
+					<%= link_to  image_tag("Bin_closed.png", :style=>"border:0px") + " Delete Adverse Event", adverse_event_path(ae, :study_id => params[:study_id], :extraction_form_id => params[:extraction_form_id]), :remote=> true, :method=>:delete, :class=>"tooltip_delete", :confirm=>"Are you sure? This will delete this adverse event and all data in it, and all unsaved data will be lost." %><br/>
+					<%= render :partial => "comments/field_comments", :locals => {:section_name => "adverseevents", :section_id => ae.id, :field_name => "event", :study_id => ae.study_id, :project_id => @project.id} %>	
+			</td>
+			<% first = false %>
+		<% end %>
+	</tr>
+	<% end %>
+<%= render :inline=>attach_listener_for_other("title_#{ae.id}")%>
+<% end %>
+
+</tbody>	
+</table>
+</div>
+<br/><button class="saving" data-disable-with="<%= ajax_wait_msg %>" id="adverse_event_data_form_button" alt="Click to save Adverse Event table data">
+		<%= image_tag "Accept.png", :alt => "Save Table Data" %> Save Table Data
+	</button>	
+
+	<button type="submit" class="actions" alt="Click to add new row to adverse event table" id="adverse_event_new_row_btn">
+		<%= image_tag "Add-blue.png", :alt => "Add New Row" %> Add New Row
+	</button>
+<br/><%= render :partial=>'save_indicators/default' %>
+<% end %>
+
+<!--
+	<% @adverse_event_new = AdverseEvent.new %>
+	<%= form_tag @adverse_event_new, :remote => true, :id=>"new_row_form" do %>
+	<%= hidden_field_tag "study_id", params[:study_id] %>
+	<%= hidden_field_tag "extraction_form_id", params[:extraction_form_id] %>
+	<div class='actions'>
+	
+	
+		
+</div>
+-->
+	
+	<% end %>
+
+
+				<br/>
+<script type="text/javascript">
+<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
+	<% for col in @extraction_form_adverse_event_columns %>
+			
+			$('.list_table thead .qtip_col_<%= col.id %>').qtip({
+			   content: '<%= col.description %>',
+			   show: 'mouseover',
+			   hide: 'mouseout',
+				  position: {
+				  corner: {
+					 target: 'bottomMiddle',
+					 tooltip: 'topRight'
+				  }
+			   }
+			});
+					
+		<% end %>
+	<% end %>
+
+		/*$("#adverse_event_data_form_button").click(function(e){
+			//e.preventDefault();
+			$("#new_adverse_event_result").submit();
+		});*/
+		
+		$("#adverse_event_new_row_btn").click(function(e){
+			e.preventDefault();
+			if($('.edited_field').length > 0){
+				$("#unsaved_modal").dialog({
+					resizable: false,
+					height: 160,
+					modal: true,
+					buttons: {
+						"Cancel": function(){
+							$(this).dialog("close");
+						},
+						"Continue Without Saving": function(){
+							$.ajax({
+								type: 'POST',
+								url: "adverse_events/create_row",
+								data:({
+									study_id: "<%= params[:study_id] %>",
+									extraction_form_id: "<%= params[:extraction_form_id] %>"
+								}),
+								success: function(){
+									$("#loading_div").remove();
+								}
+							})
+							show_loading_icon();
+							/*$("#new_row_form").submit();
+							$(this).dialog("close");*/
+						}
+					}
+				});
+			}
+		  	else{
+				$.ajax({
+					type: 'POST',
+					url: "adverse_events/create_row",
+					data:({
+						study_id: "<%= params[:study_id] %>",
+						extraction_form_id: "<%= params[:extraction_form_id] %>"
+					}),
+					success: function(){
+						$("#loading_div").remove();
+					}
+				})
+				show_loading_icon();
+				//$("#new_row_form").submit();
+		  }
+		  });
+		
+			
+	</script>
+
+
+<script type="text/javascript">
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });
+</script>

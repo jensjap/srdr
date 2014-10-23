@@ -1,0 +1,92 @@
+<div class='tab-div'><br/>
+	<h2>Key Questions</h2><br/><br/>
+<% unless @questions.empty? %>
+	<div class='container_div'>
+		<strong>Please choose the Key Questions that are addressed in this study.</strong><br/><br/>
+	  <span class='smallText'>You may update this assignment at any time by returning to this page.</span>
+ 	<br/><br/>
+  <%= form_for @study do |f| %>
+  	<%= hidden_field_tag "extraction_form_id", @extform %>
+  	<%= hidden_field_tag "updating_kq",true%>
+	<div class="form_content">
+		<div style='position:relative;'>
+			<div class="field">
+				<!-- <table class="list_table"> -->
+				  <table class='form_table' id="studies_key_questions_table" summary="studies key questions table">
+				  <tr style="display:none">
+				  <th>Label</th>
+				  <th>Input</th>
+				  </tr>
+				  <tr>		  	
+				    <td class='label'>Please choose the key questions that are addressed in this study:</td>
+				    <td class='data'>
+				    	<table class='form-subtable-checklist'>
+						<% @questions.each do |q| %>
+							<% tabind = 0 %>
+						  	<% disabled = "" %>
+							<% unless @available[q.id] %>
+							  <% disabled = "DISABLED" %>
+							<% end %>
+			  					<tr>
+					    			<td class='check'>
+					    				<input type="checkbox" class="cbox editable_field" name=<%= "question_" + q.id.to_s %>
+										<% if @checked_ids.include?(q.id) %> checked <% end %> <%= disabled %> tabindex="<%= tabind %>">
+					    			</td>
+					    			<td class='data'>
+					    				<%= render :inline => remove_paragraph_tags(q.question) %>
+										<% unless @available[q.id] %>
+											<span class='error_text'>(no extraction form assigned to this question)</span>
+										<% end %>
+					    			</td>
+					    		</tr>
+					    		<tr class='small-spacer'><td></td></tr>
+						<% end %>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<br/><br/>
+		<button type="submit" class="saving" id='submit_button'>
+			<%= image_tag "Accept.png", :alt => "Accept" %>Save Questions
+		</button><%= render :partial=>'save_indicators/default' %>
+	</div>	
+</div>
+	<div id="key_question_validation_message">
+	</div>
+	<% end %>
+	</div>
+<% else %>
+  There are no key questions associated with this project.
+<% end %>
+<br/>
+<%= render :partial=>'section_complete_status', :locals=>{:section=>"questions"} %>
+<br/>
+<br/>
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:first=>true} %>
+
+<script type='text/javascript'>
+// <!-- 
+$(document).ready(function(){
+/*  form_id = "#edit_study_" + <%= params[:study_id].to_s %>
+  $(form_id).bind('submit', function(){
+      return confirm("Warning: If you un-assign key questions from the study then you might lose data. Would you like to continue?");
+  });
+*/
+  $(".editable_field").live('change',function(){
+      $(this).addClass('edited_field');
+      var form = $(this).parents('form:first');
+      form.addClass("unsaved_form");
+      $(".unsaved_div").css("display","block");
+  });
+
+  $(".saving").on('click', function() {
+      $(".edited_field").removeClass("edited_field");
+      $(".unsaved_form").removeClass("unsaved_form");
+  });
+});
+</script>
+<%= render 'shared/make_editable_and_confirm' %>
+	
+</div><!-- end tab div -->

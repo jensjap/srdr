@@ -1,0 +1,57 @@
+<strong style='color:red;'><%= @message %></strong>
+<br/><br/>
+
+<% active = @incoming_requests.select{|x| x.status == "pending"} %>
+<% unless active.empty? %>
+  <%= form_tag "/home/data_requests/update" do %>
+  <h3>Unresolved Requests:</h3>
+  <table class='form_table'>
+  	<tr><th>ACCEPT</th><th>DENY</th><th>Project</th><th>User</th><th>Message</th><th>Submission Date</th><th>Status</th><th>Response Date</th></tr>
+  	<% active.each do |act| %>
+      <% usr = @users.find{|u| u.id == act.user_id} %>
+  		<tr>
+        <td><input type='radio' name='request_entries[<%=act.id%>]', value='accept' /></td>
+        <td><input type='radio' name='request_entries[<%=act.id%>]', value='deny' /></td>
+        <td><%= @projects.find{|x| x.id == act.project_id}.title %></td>
+        <td><%= usr.login %></td>
+        <td><%= act.message %></td>
+        <td><%= act.requested_at.nil? ? "--" : act.requested_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+        <td><%= act.status %></td>
+        <td><%= act.responded_at.nil? ? "--" : act.responded_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+      </tr>
+  	<% end %>
+    <tr>
+      <td colspan=8>
+        <button type="submit" id="update_requests_button" class="positive" >Update Requests</button>
+      </td>
+    </tr>
+  </table>
+
+  <% end %>
+<% else %>
+There are currently 0 incoming requests that you need to address.
+<% end %>
+<br/><br/>
+
+<% closed = @incoming_requests - active %>
+<% unless closed.empty? %>
+<h3>Resolved Requests</h3>
+<table class='form_table'>
+  <tr><th>Project</th><th>User</th><th>Message</th><th>Submission Date</th><th>Status</th><th>Response Date</th><th>Last Downloaded</th><th>Downloads</th></tr>
+  <% closed.each do |clo| %>
+    <% usr = @users.find{|u| u.id == clo.user_id} %>
+    <tr>
+      <td><%= @projects.find{|x| x.id == clo.project_id}.title %></td>
+      <td><%= usr.login %></td>
+      <td><%= clo.message %></td>
+      <td><%= clo.requested_at.nil? ? "--" : clo.requested_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+      <td><%= clo.status %></td>
+      <td><%= clo.responded_at.nil? ? "--" : clo.responded_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+      <td><%= clo.last_download_at.nil? ? "--" : clo.last_download_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+      <td><%= clo.download_count %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% else %>
+<% end %>

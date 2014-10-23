@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: QualityDimensionFieldsController
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (Q)</a> &raquo; 
+    
+    
+    <span class="title">QualityDimensionFieldsController</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: QualityDimensionFieldsController
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActionController::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></li>
+          
+            <li class="next">QualityDimensionFieldsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/controllers/quality_dimension_fields_controller.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+This controller handles quality dimension fields. A quality dimension field
+is a row that is specified in the extraction form.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+save updates to a quality dimension field (custom field).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">- (Object) <strong>destroy</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+delete a quality dimension field (custom field).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#edit-instance_method" title="#edit (instance method)">- (Object) <strong>edit</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+edit an existing quality dimension field (custom field).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Object) <strong>new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+create a new quality dimension field (custom field).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#update-instance_method" title="#update (instance method)">- (Object) <strong>update</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+save changes/update an existing quality dimension field (custom field).
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#escape_quotes-instance_method" title="ApplicationController#escape_quotes (method)">#escape_quotes</a></span>, <span class='object_link'><a href="ApplicationController.html#set_as_current-instance_method" title="ApplicationController#set_as_current (method)">#set_as_current</a></span>, <span class='object_link'><a href="ApplicationController.html#show_other-instance_method" title="ApplicationController#show_other (method)">#show_other</a></span>, <span class='object_link'><a href="ApplicationController.html#show_other_filled-instance_method" title="ApplicationController#show_other_filled (method)">#show_other_filled</a></span>, <span class='object_link'><a href="ApplicationController.html#toggle_ahrq_header-instance_method" title="ApplicationController#toggle_ahrq_header (method)">#toggle_ahrq_header</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+save updates to a quality dimension field (custom field)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/quality_dimension_fields_controller.rb', line 24</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
+	<span class='ivar'>@quality_dimension_field</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>	
+	<span class='ivar'>@already_saved</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='comma'>,</span><span class='int'>8</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add all </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_add_all_dimensions_from_section'>add_all_dimensions_from_section</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+<span class='ivar'>@quality_dimension_fields</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='ivar'>@already_saved</span> <span class='op'>=</span> <span class='kw'>true</span>
+	<span class='kw'>end</span>
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='op'>!</span><span class='ivar'>@already_saved</span><span class='rparen'>)</span>
+<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@saved</span> <span class='op'>=</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='ivar'>@study</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+		<span class='ivar'>@quality_dimension_extraction_form_fields</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+		<span class='ivar'>@quality_dimension_data_point</span> <span class='op'>=</span> <span class='const'>QualityDimensionDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+		<span class='ivar'>@study_arms</span> <span class='op'>=</span> <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>else</span>
+		<span class='kw'>if</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+			<span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field_title_other</span><span class='rbracket'>]</span>
+		<span class='kw'>elsif</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:title</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+			<span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+			<span class='id identifier rubyid_problem_html'>problem_html</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>That is not a valid selection. Please choose a valid dimension from the list or choose 'Other'.</span><span class='tstring_end'>&quot;</span></span>	
+		<span class='kw'>else</span>
+			<span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+			<span class='ivar'>@quality_dimension_fields</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>else</span>
+	<span class='id identifier rubyid_problem_html'>problem_html</span> <span class='op'>=</span> <span class='id identifier rubyid_create_error_message_html'>create_error_message_html</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:modal_error</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_problem_html'>problem_html</span>
+<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="destroy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>destroy</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+delete a quality dimension field (custom field)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+96
+97
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/quality_dimension_fields_controller.rb', line 96</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
+  <span class='ivar'>@quality_dimension_field</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="edit-instance_method">
+  
+    - (<tt>Object</tt>) <strong>edit</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+edit an existing quality dimension field (custom field).  renders
+edit.js.erb
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+16
+17
+18
+19
+20
+21</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/quality_dimension_fields_controller.rb', line 16</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_edit'>edit</span>
+  <span class='ivar'>@quality_dimension_field</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:extraction_form_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@has_study_data</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_has_study_data'>has_study_data</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+create a new quality dimension field (custom field)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+6
+7
+8
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/quality_dimension_fields_controller.rb', line 6</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@quality_dimension_field</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:extraction_form_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>
+  <span class='ivar'>@editing</span> <span class='op'>=</span> <span class='kw'>false</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="update-instance_method">
+  
+    - (<tt>Object</tt>) <strong>update</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+save changes/update an existing quality dimension field (custom field)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/quality_dimension_fields_controller.rb', line 60</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
+  <span class='ivar'>@quality_dimension_field</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_update_attributes'>update_attributes</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@extraction_form</span> <span class='op'>=</span> <span class='const'>ExtractionForm</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@extraction_form</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span><span class='rparen'>)</span>	
+  <span class='kw'>if</span> <span class='ivar'>@saved</span> <span class='op'>=</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+	<span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+	<span class='ivar'>@study</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+		<span class='ivar'>@quality_dimension_extraction_form_fields</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>else</span>
+		<span class='ivar'>@quality_dimension_extraction_form_fields</span> <span class='op'>=</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+	<span class='ivar'>@quality_dimension_data_point</span> <span class='op'>=</span> <span class='const'>QualityDimensionDataPoint</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@study_arms</span> <span class='op'>=</span> <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>		
+<span class='kw'>else</span>
+	<span class='kw'>if</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>other</span><span class='tstring_end'>&quot;</span></span>
+		<span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:quality_dimension_field_title_other</span><span class='rbracket'>]</span>
+	<span class='kw'>elsif</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span><span class='period'>.</span><span class='id identifier rubyid_starts_with?'>starts_with?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>all </span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+		<span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_add_all_dimensions_of_title_type'>add_all_dimensions_of_title_type</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='rparen'>)</span>
+	<span class='kw'>end</span>
+	<span class='kw'>if</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_title'>title</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id identifier rubyid_problem_html'>problem_html</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>That is not a valid selection. Please choose a valid dimension from the list or choose 'Other'.</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>else</span>	
+		<span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+		<span class='ivar'>@quality_dimension_fields</span> <span class='op'>=</span> <span class='const'>QualityDimensionField</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+	<span class='kw'>end</span>	
+<span class='kw'>end</span>
+<span class='kw'>else</span>
+	<span class='id identifier rubyid_problem_html'>problem_html</span> <span class='op'>=</span> <span class='id identifier rubyid_create_error_message_html'>create_error_message_html</span><span class='lparen'>(</span><span class='ivar'>@quality_dimension_field</span><span class='period'>.</span><span class='id identifier rubyid_errors'>errors</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:modal_error</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_problem_html'>problem_html</span>
+<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:55 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

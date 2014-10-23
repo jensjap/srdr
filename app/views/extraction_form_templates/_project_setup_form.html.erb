@@ -1,0 +1,30 @@
+<% form_tag "extraction_form_templates/assign_to_project", :remote=>true do %>
+  <input type='hidden' name='project_id' value="<%= @project.id %>"/>
+  <input type='hidden' name='template_id' value="<%= @template_id %>"/>
+	<label for="new_form_title">New Form Title:</label> 
+	<input type='text' id="new_form_title" name="new_form_title" size=30><br/><br/>
+	<strong>Key Question Assignment</strong><br/>
+	<!-- include key question assignment section -->
+	<table>
+	<% @key_questions.each do |kq| %>
+		<% disabled = "" %>
+		<% if !@available_questions.include?(kq.id) %>
+			<% disabled = "DISABLED" %>
+		<% end %>
+	  <input type='checkbox' name="<%= "kqs[#{kq.id.to_s}]" %>" title="<%= "Checkbox for key question number #{kq.question_number}" %>" value="<%= kq.id %>" <%= disabled %>>
+	  <%= render :inline=>remove_paragraph_tags(kq.question) %>
+		<% if @assigned_questions.keys.include?(kq.id) %>
+			<br/>
+			<span style="color:#8F2224;">
+				(previously assigned to: <em><%= @assigned_questions[kq.id] %></em>)
+			</span>
+		<% end %>
+		<br/><br/>
+	<% end %>
+	<div class="actions">	  	  	
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+			<%= image_tag "Note_go.png", :alt => "Assign This Form" %>Assign and Save
+		</button>  
+	</div>
+<% end %>
+

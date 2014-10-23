@@ -1,0 +1,303 @@
+<!--
+Existing Comparisons Session:<br/>
+<%= @existing_comparisons %>
+<br/><br/>
+Existing Results Session:<br/>
+<%= @existing_results %>
+<br/><br/>
+-->
+<% tabindex = 231 %>
+<% unless @existing_results.nil? %>
+<% unless @existing_results.empty? %><br/>
+
+<% unless defined? no_links %>
+<strong style='font-style:italic;color:black;'><br/>
+	<div class='actions' style='float:left;margin-bottom:10px;'>
+		
+		<%= link_to render(:inline=>"<img src='/images/arrow_refresh_small.png' alt='Refresh'/>") + " Refresh", "/projects/#{params[:project_id]}/studies/#{params[:study_id]}/results/refresh_existing?extraction_form_id=#{@extraction_form_id}",{:remote=>true,:class=>'page_flip_btn_bk', :id=>'refresh_btn'} %>
+	</div>	Use the button to the left to refresh the existing results table after saving changes.<br/><br/>
+</strong>
+<% end %>
+<div style='width:100%;background-color:#96AFD0;color:black;font-weight:bold;margin-bottom:0px; text-align:center;padding: 5px 0px 5px 0px;'>
+		<% if defined? no_links %>
+			Results Data
+		<% else %>
+			Existing Results Entries
+		<% end %>
+	</div>
+	<%# The Hash of comparisons assigned to ocde objects in the project %>
+	<% ex_comparisons = @existing_comparisons %>
+	<%# get the between-arm comparisons %>
+	<% all_btwn_comparisons = ex_comparisons[:between] %>
+	<% all_wthn_comparisons = ex_comparisons[:within] %>
+
+	<% @existing_results.keys.each do |key| %>
+	  <% cmp_key = key.split("_") %>
+	  <% cmp_key = "#{cmp_key[1]}_#{cmp_key[3]}" %>
+	  <%# get the between-arm comparisons and comparators %>
+	  <% btwn_comparisons = all_btwn_comparisons.keys.empty? ? [] : all_btwn_comparisons[cmp_key].nil? ? [] : all_btwn_comparisons[cmp_key] %>
+	  <% btwn_comparators = btwn_comparisons.empty? ? [] : btwn_comparisons.last %>
+		
+		<%# get the within-arm comparisons %>
+	  <% wthn_comparisons = all_wthn_comparisons.keys.empty? ? [] : all_wthn_comparisons[cmp_key].nil? ? [] : all_wthn_comparisons[cmp_key] %>
+
+		<% footnote_texts = Array.new()%>  <%# record the footnotes to be displayed for this outcome and subgroup%>
+		<% oc_title,ocid,sg_title,sgid = key.split("_")%>
+		<% ocde_array = @existing_results[key] %>
+		<span style='float:right;'>
+			<%= render :partial=>'save_indicators/deleted' %>
+		</span>
+		<%# START CREATING THE EXISTING RESULTS TABLE %>
+		<table class='list_table' style='width:100%;' style='border: solid 5px #96AFD0;'>
+		<%#-----------------------------------------------------------%>
+		<%# BUILD THE TABLE HEADERS                                   %>
+		<%#-----------------------------------------------------------%>
+		
+		<tr id="existing_header_tr">
+			<th scope='col' colspan="<%= 2 + @study_arms.length %>" class='title_row'>
+				<strong>Outcome:</strong> <%= oc_title %>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong>Population:</strong> <%= sg_title %>
+				<%# If there are no between-arm comparisons we'll put the edit 
+					# and remove links here. Otherwise they will go to the right 
+					# side of the between-arm comparisons %>
+				<% if btwn_comparisons.empty? && (! defined? no_links)%>
+					<strong><span style='float:right;'>
+						<a href='#' class="edit_existing_ocde_link" outcome_id="<%= ocid %>" subgroup_id="<%= sgid %>" ef_id="<%= @extraction_form_id %>" title="Edit Outcome Data Entry" tabindex="<%= tabindex %>">Edit</a> | 
+						<a href='#' class="remove_existing_ocde_link" outcome_id="<%= ocid %>" subgroup_id="<%= sgid %>" tabindex="<%= tabindex %>">Remove</a> 
+					</span>
+					</strong>
+				<% end %>
+			</th>	
+
+			<% unless btwn_comparisons.empty? %>
+			  <th scope='col' class='title_row' colspan="<%= btwn_comparators.empty? ? 1 : btwn_comparators.length + 1 %>">
+	  			<strong>Between-Arm Comparisons
+	  			<% unless defined? no_links %>
+	  			<span style='float:right;'>
+						<a href='#' class="edit_existing_ocde_link" outcome_id="<%= ocid %>" subgroup_id="<%= sgid %>" ef_id="<%= @extraction_form_id %>" tabindex="<%= tabindex %>">Edit</a> | 
+						<a href='#' class="remove_existing_ocde_link" outcome_id="<%= ocid %>" tabindex="<%= tabindex %>" subgroup_id="<%= sgid %>">Remove</a> 
+					</span>
+				<% end %>
+					</strong>
+	  		</th>
+			<% end %>
+		</tr>
+
+		<%#------------------------------------------------------------%>
+		<%# BUILD THE FIRST ROW COLUMN TITLES AND COMPARISON DROPDOWNS %>
+		<%#------------------------------------------------------------%>
+		<tr >
+	  	<th scope='col' class='head_col' style='min-width:100px;'>Time Point</th>
+	  	<th scope='col' class='head_col'>Measure</th>
+	  	<% @study_arms.each do |arm| %>
+	  		<th scope='col' class='head_col'><%= arm.title %></th>
+	  	<% end %>
+			<% unless btwn_comparisons.empty? %>
+				<%# get the comparators %>
+				<th scope='col' class='head_col'>Comparison Measure</th>
+				<% unless btwn_comparators.empty? %>
+					<% btwn_comparators.each do |c| %>
+					  <th scope='col' class='head_col'><%= c.to_s %></th>
+					<% end %>
+				<% end %>
+			<% end %> <%# end unless btwn_comparisons.empty? %>
+	  </tr>
+
+		<%# FOR EACH DATA ENTRY ELEMENT, CREATE A ROW %>
+		<% ocde_array.each_with_index do |ocde,iter| %>
+			<% puts "THE OCDE ARRAY IS #{ocde}\n\n" %>
+		  <% ocde_obj = ocde[0] %>
+		  <%# 
+		  	get the array of comparison information for the ocde
+		  	REMEMBER THAT THE LAST BTWN_COMPARISON ARRAY SHOULD NOT 
+		  	BE USED BECAUSE IT CONTAINS THE COMPARATORS!
+		  %>
+		  <% ocde_comparison = (btwn_comparisons.empty? || iter >= btwn_comparisons.length - 1) ? [] : btwn_comparisons[iter] %>
+		  <%# if there is a comparison, assign variables for use later %>
+		  <% cmp_object = nil %>
+		  <% cmp_measures = [] %>
+		  <% cmp_comparator_ids = [] %>
+		  <% cmp_datapoints = {} %>
+		  <% unless ocde_comparison.empty? %>
+		    <% cmp_object = ocde_comparison[0] %>
+		    <% cmp_comparator_ids = ocde_comparison[1] %>
+		    <% cmp_measures = ocde_comparison[2] %>
+		    <% cmp_datapoints = ocde_comparison[3] %>
+		  <% end %>
+
+			<% measure_objs = ocde[1] %>
+			<% num_measures = measure_objs.nil? ? 0 : measure_objs.length %>
+			<% num_cmp_measures = cmp_measures.nil? ? 0 : cmp_measures.length %>
+			<% num_rows = [num_measures, num_cmp_measures].max %>
+			<% tp_title = OutcomeTimepoint.get_title(ocde_obj.timepoint_id)%>
+			<% datapoints_hash = ocde[2] %>
+	  	<tr>
+  		<!-- THE TIME POINT -->
+  		<td scope='row' rowspan="<%= num_rows %>" align='center'>
+  			<br/><br/>
+  			<strong><%= tp_title %></strong><br/><br/>
+  		</td>
+  		<%# ADD MEASURE ROWS AND ANY EXTRAS REQUIRED %>
+  		<% for i in 0..num_rows-1 %>
+  		  <% unless i == 0 %>
+  		    <tr>
+  		  <% end %>
+  		  <td scope='row' ><%= measure_objs[i].nil? ? "" : measure_objs[i].title %></td>
+  		  
+  		  <!-- ADDING COLUMNS FOR EACH ARM -->
+  		  <% for j in 0..@study_arms.length-1 %>
+  		    <% unless measure_objs[i].nil? %>
+  		      <% measure = measure_objs[i] %>
+	  		    <% dp = datapoints_hash[measure.id].nil? ? nil : datapoints_hash[measure.id][@study_arms[j].id].nil? ? nil : datapoints_hash[measure.id][@study_arms[j].id] %>
+	  		    <% dp_val = dp.nil? ? '' : dp.value %>
+	  		    <% td_style = dp.nil? ? "" : (dp.is_calculated == true ? "style='background-color:yellow;'" : "style='background-color:#fff;'") %>
+	  		    <% footnote_num = dp.nil? ? 0 : dp.footnote_number %>
+	  		    <td scope='row'  <%= td_style %> >
+	  		    	<%= dp_val %>
+	  		    	<% unless footnote_num == 0 %>
+	  		    	  <% footnote_texts[footnote_num.to_i - 1] = dp.footnote.to_s %>
+	  		    		<span class='footnote_tag'>[<%= footnote_num %>]</span>
+	  		    	<% end %>
+  		    	</td>
+	  		  <% else %>
+	  		    <td scope='row' ></td>
+	  		  <% end %>
+  		  <% end %> <%# end for j in 0..study_arms.length %>
+
+  		  <!-- ADDING COLUMNS FOR EACH COMPARISON -->
+  		  <% unless cmp_object.nil? %>
+  		    <%# if a measure exists for this row number...%>
+  		  	<% if !cmp_measures.nil? %>
+                        <%# MK 2013-11-21 - workaround for project 69 study 8915. cmp_measures[] contains NilClass and String objects %>
+                        <%# TODO - figure out why cmp_measures[] contains the other unexpected objects.                               %>
+  		  	<% unless cmp_measures[i].nil? || !(cmp_measures[i].class.name.eql? "ComparisonMeasure") %>
+  		  	  <%# add in the measure title %>
+  		  		<td scope='row' ><%= cmp_measures[i].title %></td>
+  		  		<%# 
+  		  			for each comparator associated with this comparison, 
+  		  			find a datapoint and if it exists, insert the value to the table.
+  		  			If it does not exist, enter a blank table cell. 
+  		  		%>
+  		  		<% cmp_comparator_ids.each do |cid| %>
+  		  			<% dp = cmp_datapoints.keys.empty? ? nil : cmp_datapoints["#{cmp_measures[i].id}_#{cid}"] %>
+  		  			<% if dp.class == ComparisonDataPoint %>
+  		  			  <% style = dp.is_calculated==true ? "style='background-color:yellow;'" : '' %>
+  		  				<td scope='row' <%= style %>>
+  		  					<%= dp.value %>
+  		  					<% if dp.footnote_number > 0 %>
+										<% footnote_texts[dp.footnote_number - 1] = dp.footnote.to_s %>
+	  		    				<span class='footnote_tag'>[<%= dp.footnote_number %>]</span>
+  		  					<% end %>
+  		  				</td>
+  		  			<% else %>
+  		  			  <td scope='row' ></td>
+  		  			<% end %>
+  		  		<% end %>
+  		  	<% else %>
+  		  		<td scope='row' ></td>
+  		  		<% for i in 0..(btwn_comparators.length - 1) %>
+  		  			<td scope='row' ></td>
+  		  		<% end %>
+  		  	<% end %>
+  		  	<% end %> <%# end if !cmp_measures.nil? %>
+  		  <% end %>
+
+	  		</tr> <%# complete the row %>
+			<% end %> <%# END for i in num_rows %>
+		<% end %> <%# end OCDEs.each do %>
+		<%#---------------------------------------------------------------
+		# Include any within-arm comparisons for this outcome data entry
+		-----------------------------------------------------------------%>
+		<% unless wthn_comparisons.empty? %>
+			<%#------------------------------------
+			# The within-arm comparison header row 
+			-------------------------------------%>
+			<%# the within-arm comparison header %>
+			<tr>
+				<th scope='col' class='head_col' colspan="<%= 2 + @study_arms.length %>">
+					Within-Arm Comparisons
+				</th>
+				<% unless btwn_comparators.empty? %>
+					<th colspan="<%= 1 + btwn_comparators.length %>"> </th>
+				<% end %>
+			</tr>
+			<%# the comparison, measures and arms column headers %>
+			<tr>
+				<th scope='col' class='head_col'>Comparison</th>
+				<th scope='col' class='head_col'>Measure</th>
+				<% @study_arms.each do |sa| %>
+					<th scope='col' ><%= sa.title %></th>
+				<% end %>
+				<% unless btwn_comparators.empty? %>
+					<th scope='col' colspan="<%= 1 + btwn_comparators.length %>"> </th>
+				<% end %>
+			</tr>
+			<% wthn_comparisons.each do |wac| %>
+				<%# Get the relevant info for this comparison %>
+				<%# obj = the comparison object
+						comparatorID = the id of the comparator object
+						comparatorTitle = the title of the comparator object
+						measures = the array of comparison measures
+						datapoints = the hash of datapoints referenced by comparatorID, 
+												 measureID, armID %>
+				<% obj,comparatorID,comparatorTitle,wac_measures,wac_datapoints = wac %>
+					
+				<%#------------------------------------
+				# The meat of the within-arm comparison table
+				---------------------------------------%>
+				<%# the comparator %>
+				<tr>
+					<td scope='row' rowspan="<%= wac_measures.length %>"><%= comparatorTitle %></td>
+					<%# for each comparison measure %>
+					<% wac_measures.each_with_index do |wm,index| %>
+					  <%# print the new row unless it's the first entry %>
+					  <%  unless index == 0 %>
+					  	<tr>
+					  <% end %>
+						<%# print the measure title cell %>
+						<td scope='row' ><%= wm.title %></td>
+						<%# for each study arm %>
+						<% @study_arms.each do |sa| %>
+							<%# print the datapoint cell for the arm %>
+							<% key = "#{wm.id}_#{comparatorID}_#{sa.id}" %>
+							<% dp = wac_datapoints[key] %>
+							<% if dp.class == ComparisonDataPoint %>
+								<% value = dp.value %>
+								<% style = dp.is_calculated==true ? "style='background-color:yellow;'" : '' %>
+								<% fnum = dp.footnote_number %>
+								<td scope='row' <%= style %>>
+  		  					<%= value %>
+  		  					<% if fnum > 0 %>
+										<% footnote_texts[dp.footnote_number - 1] = dp.footnote.to_s %>
+	  		    				<span class='footnote_tag'>[<%= fnum %>]</span>
+  		  					<% end %>
+  		  				</td>
+ 							<% else %>
+ 							  <td scope='row' ></td> 		  				
+ 							<% end %>
+						<% end %> <%# end study_arms.each do %>
+						<% unless btwn_comparators.empty? %>
+							<th scope='col' colspan="<%= 1 + btwn_comparators.length %>"> </th>
+						<% end %> 
+						</tr>
+				<% end %> <%# end wac_measures.each do %>
+				</tr><%# end within-arm comparison row %>
+			<% end %>
+		<% end %>
+		<%# Show the footnotes associted with our data points for this OCDE%>
+		<% unless footnote_texts.empty? %>
+		  <% colspan = 2 + @study_arms.length %>
+	    <tr><th scope='col' colspan="<%= colspan %>" style='text-align:left;'>Footnotes</th></tr>
+		  <% footnote_texts.each_with_index do |fnote,index|%>
+		    <tr><td scope='row' colspan="<%= colspan %>"><%= index + 1 %>. <%= fnote %></td></tr>
+		  <% end %>
+		<% end %>
+		</table> <%# complete the table %>
+		<span style='float:right;'>
+			<%= render :partial=>'save_indicators/deleted' %>
+		</span>
+	<% end %> <%# end keys.each do key %>
+<% end %> <%# end unless @existing_results.empty? %>
+<% end %> <%# end unless @existing_results.nil? %>
+<span id='results_loaded'></span>

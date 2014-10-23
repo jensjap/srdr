@@ -1,0 +1,40 @@
+# == Schema Information
+#
+# Table name: primary_publications
+#
+#  id          :integer          not null, primary key
+#  study_id    :integer
+#  title       :text
+#  author      :string(255)
+#  country     :string(255)
+#  year        :string(255)
+#  pmid        :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  journal     :string(255)
+#  volume      :string(255)
+#  issue       :string(255)
+#  trial_title :string(255)
+#
+
+study1_pub:
+  study_id: 1
+  title: Study 1 title 
+  author: Study 1 author list
+  country: United States
+  year: 2011
+  pmid: 1234432
+  journal: Nature
+  volume: 55
+  issue: 115
+
+study2_pub:
+  study_id: 2
+  title: Study 2 title 
+  author: Study 2 author list
+  country: United States
+  year: 2011
+  pmid: 1234434
+  journal: Science
+  volume: 23
+  issue: 4

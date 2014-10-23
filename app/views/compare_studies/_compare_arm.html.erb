@@ -1,0 +1,92 @@
+<%
+    # Get the total number of design detail items - assume this is the same across all the studies being compared
+    n_items = @compareset.getNumDistinctArms()
+    if (!@compareset.sameEFIDs())
+%>
+    <b>Note: </b>The studies selected were compiled from different Extraction Forms, the arms data points below are presented for review but will not
+    be updated in the consensus study record.
+    <p/>
+<%
+    end
+%>
+    <input type="hidden" name="merge_arm_n_items" value="<%= n_items %>">
+    <table class="compare_studies_table">
+        <tr>
+            <th class="compare_studies_title">Data</th>
+<%
+    for studyidx in (0..@compareset.size() - 1)
+%>
+            <th class="compare_studies_title">
+            <!--[Study ID <%= @compareset.getStudyID(studyidx).to_s %>]-->
+            <span class='comparator_col_head'>Study <%= @alphabet[studyidx] %></span>
+            <br/>
+            Created by <%= User.get_name(@compareset.getCreatorID(studyidx)) %><br/>
+            <input type="checkbox" name="select_study_arm_<%= studyidx.to_s %>" value="1" onclick="selectAllArms(<%= studyidx.to_s %>,<%= @compareset.size() %>,<%= n_items.to_s %>)" title="Choose all Arms from Study <%= @alphabet[studyidx]%>"> Select This Study
+            </th>
+<%
+    end    
+%>
+            <th class="compare_studies_title">&nbsp;</th>
+            <th class="compare_studies_title">Consensus<br>Value</th>
+        </tr>
+<%
+    rcolor = ["#FFFFFF","#EAEAEA"]
+    ridx = 0
+    for otcidx in 0..n_items - 1
+        dispname = @compareset.getArmName(otcidx)
+%>
+        <tr bgcolor="<%= rcolor[ridx % 2] %>">
+            <td class="compare_studies_item">
+            [<%= otcidx %>] <%= dispname %>  
+            </td>
+<%
+        # Now display values across stucies horizontally
+        for studyidx in (0..@compareset.size() - 1)
+            if @compareset.containsArmName(studyidx,dispname) &&
+                (studyidx == 0)
+                dispvalue = ""
+                dispvalue_txt = "Exclude from consensus"
+%>
+            <td class="compare_studies_data">
+            <input type="radio" name="merge_arm_<%= otcidx.to_s %>" value="<%= dispvalue %>" onclick="selectArms(<%= studyidx.to_s %>,<%= otcidx.to_s %>,'<%= dispvalue %>',<%= @compareset.size() %>)" title="Include Arm <%= dispname %> from Study <%= @alphabet[studyidx]%>">&nbsp;
+            <%= dispvalue_txt %>
+            </td>
+<%
+            elsif @compareset.containsArmName(studyidx,dispname)
+                dispvalue = dispname
+                dispvalue_txt = ""
+%>
+            <td class="compare_studies_data" align="CENTER">
+            X
+            </td>
+<%
+            else
+                dispvalue = dispname
+                dispvalue_txt = ""
+%>
+            <td class="compare_studies_data" align="CENTER">
+            &nbsp;
+            </td>
+<%
+            end
+        end
+        if @compareset.containsSameArm(dispname)
+            consensus_value = dispname
+        else
+            consensus_value = "Select value"
+        end
+%>
+            <td class="compare_studies_adata">
+            <img src="/images/action_forward.gif" border="0" alt="The merged consensus arm data will appear in the cell to the right upon selection">
+            </td>
+            <td class="compare_studies_data">
+            <input type="hidden" name="merge_arm_<%= otcidx.to_s %>_id" value="<%= otcidx.to_s %>">
+            <input type="hidden" name="merge_arm_<%= otcidx.to_s %>_name" value="<%= dispname %>">
+            <%= text_area_tag "merge_arm_"+otcidx.to_s+"_text", consensus_value, :value=>consensus_value %>
+            </td>
+        </tr>
+<%
+        ridx = ridx + 1
+    end
+%>
+    </table>

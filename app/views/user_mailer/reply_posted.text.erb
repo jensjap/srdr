@@ -1,0 +1,20 @@
+A reply has been posted to your comment on SRDR!
+
+SRDR user <%= @poster.login %> has posted the following reply to your comment: <br/><br/>
+
+Your original comment:
+"<%= @parent_comment.comment_text %>"
+
+
+<%= @poster.login %>'s: reply:
+"<%= @comment.comment_text %>"
+
+
+
+This reply is located in: 
+Project: <%= @project.title %>
+<% if @comment.study_id != -1 %>Study: <%= Study.get_title(@comment.study_id) %><% end %>
+Section: <%= @comment.section_name %>
+Field: <%= @comment.field_name %>
+
+To view and respond to the reply, go to the SRDR location specified.

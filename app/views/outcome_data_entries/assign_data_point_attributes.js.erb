@@ -1,0 +1,52 @@
+<% unless @datapoint.nil? %>
+  
+	<%# get the field id to work with %>
+	var this_field = "#" + $(<%= @field_id %>).attr("id")
+	
+	<%# update the background color of the cell depending on whether or not
+	    the field is marked as being calculated%>
+	<% if @datapoint.is_calculated == true %>
+	  $(this_field).parent().css("background-color","yellow");
+	<% else %>
+	  $(this_field).parent().css("background-color","#fff");
+	<% end %>
+	
+	var span_search = this_field + "+ span";
+	var result = $(span_search)
+	  
+	<%# if a footnote is defined then it will have an associted footnote number. In this case,
+	    the number should be placed in the cell next to the input field. otherwise, make sure 
+	    that no number is visible.%>
+	<% unless @datapoint.footnote_number == 0 %>
+	  if(result.length == 0){
+	  	$(this_field).after("<span class='footnote_tag'><%=@datapoint.footnote_number%></span>");
+	  }else{
+	    result.html(<%=@datapoint.footnote_number%>)
+	  }
+	  
+	<% else %>
+	  if(result.length > 0){
+	  	result.remove()
+	  }
+	<% end %>
+	
+	<%# refresh the footnotes partial to keep the list updated%>
+	$("#footnotes_div").html("<%= escape_javascript(render :partial=>"outcome_data_entries/footnotes")%>");
+	
+	<%# if a footnote was removed, the other footnotes above it had their footnote numbers decremented.
+	    in this case, we need to also decrement them on the screen (anything larger than the value of
+	    @footnote_removed %>
+	<% unless @footnote_removed.nil? %>
+	  var tags = $(".footnote_tag");
+	  footnote_removed = parseInt("<%= @footnote_removed%>")
+	  for(i=0; i < tags.length; i++){
+	  	var currentVal = parseInt($(tags[i]).html());
+	  	if(currentVal > footnote_removed){
+	  		currentVal -= 1;
+	  		$(tags[i]).html(currentVal)
+	  	}
+	  }
+  <% end %>
+	
+<% end %>
+$("#data_point_option_div").dialog("close");

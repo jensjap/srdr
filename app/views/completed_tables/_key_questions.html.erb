@@ -1,0 +1,20 @@
+<% if @key_questions.length > 0 %>
+<table class="result_table" id="view_project_key_questions_table" summary="project key questions table">
+
+	<% for keyq in @key_questions %>
+		<tr>
+		<td class="label" width="50">
+			<%= keyq.question_number %>
+		</td>
+		<td>
+			<%= keyq.question %>
+		</td>
+		<td class="comment_td">
+			<%= render :partial => "comments/field_comments", :locals => {:section_name => "keyquestions", :section_id => keyq.id, :field_name => "question", :study_id => -1, :project_id => @project.id} %>	
+		</td>
+		</tr>
+	<% end %>
+	
+</table>
+
+<% end %>

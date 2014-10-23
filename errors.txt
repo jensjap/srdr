@@ -1,0 +1,8 @@
+Loaded suite test/unit/extraction_form_test
+Started
+............
+Finished in 1.948038 seconds.
+
+12 tests, 43 assertions, 0 failures, 0 errors, 0 skips
+
+Test run options: --seed 35556

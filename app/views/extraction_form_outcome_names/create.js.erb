@@ -1,0 +1,6 @@
+$("#new_outcome_entry").html("<%= escape_javascript(render :partial=>"extraction_form_outcome_names/form") %>");
+$("#outcome_names_table").html("<%= escape_javascript(render :partial=>"extraction_form_outcome_names/table") %>");
+$("#new_outcome_entry").dialog('close');
+
+$("#saved_item_indicator_outcomes").show().delay(500).fadeOut(300);
+$("#validation_message_outcomes").html("");

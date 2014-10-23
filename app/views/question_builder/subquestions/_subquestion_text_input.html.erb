@@ -1,0 +1,6 @@
+<strong>Followup Question:</strong>	<%= text_field_tag :subquestion_text, "", :size=>"40"%><br/>
+<br/>
+<strong>Which question options should have this associated subquestion?</strong><br/>
+<% for i in 1..@num_options%>
+	<%= check_box_tag "gets_sub["+i.to_s+"]", i.to_s, :checked=>true %>Choice <%= i.to_s %><br/>
+<% end %>

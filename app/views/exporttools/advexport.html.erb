@@ -1,0 +1,48 @@
+<%
+
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+    excel_cache_path = siteproperties.getProjectCachePath()
+
+    puts "Report Builder on project id = "+@project.id.to_s
+
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+<div id='content' tabindex=200>
+<h2>Export Data Tools: Report Builder</h2>
+<hr width="100%">
+<p/><br/>
+<h2>Project: <%= @project.title %></h2>
+&nbsp;<p/>
+<%= @project.description.force_encoding("UTF-8") %>
+&nbsp;<p/>
+&nbsp;<p/>
+<button class="regular" onClick="window.location='/projects/exporttools?prjid=<%= @project.id.to_s %>'">Return To Export Tools</button>
+<button class="regular" onClick="window.location='/projects/exporttools/reportbuilder?prjid=<%= @project.id.to_s %>'">Report Builder Home</button>
+&nbsp;<p/>
+&nbsp;<p/>
+<table id="export_data_tools_table">
+    <tr>
+        <td class="simple">
+        <%= link_to "Click Here To:", siteproperties.getReportBuilderURL()+"&action=FILTER&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>1,:class=>'form_link', :title=>"Click Here To:"} %><br/>
+        <strong>Sort by One Study Attribute and Create Summary Tables for all Eligible Studies Selected</strong>
+        </td>
+        <td class="advance">
+        <%= link_to "Click Here To:", siteproperties.getReportBuilderURL()+"&action=MATRIXFILTER&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Click Here To:"} %><br/>
+        <strong>Sort by Multiple Study Attributes and Create Summary Tables for all Eligible Studies Selected</strong>
+        </td>
+        <td class="manage">
+        <%= link_to "Click Here To:", siteproperties.getSRDRJURL()+"?page=REPORTMGR&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Click Here To:"} %><br/>
+        <strong>Manage reports</strong>
+        </td>
+    </tr>
+</table>
+<p/>&nbsp;<br/>
+</div>

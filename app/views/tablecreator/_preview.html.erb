@@ -1,0 +1,57 @@
+<div id="tc_preview">
+<%
+    # Load display configuration data
+    tc_project = session[:tc_project]
+    tc_options = session[:tc_options]
+    table_config = tc_options["config"]
+    table_formconfig = session[:tc_formconfig]
+    if table_formconfig.nil? || (table_formconfig.size == 0)
+%>
+Select project data to build report
+<%
+    else    
+        prj = tc_project["project"]
+        prj_id = prj.id
+        prj_title = prj.title
+        project_config = table_config["tablecreator-projects"]
+%>
+<h2>Preview: Project <%= prj_title %> [<%= prj_id %>]</h2><br/>
+<%
+        if !project_config.nil?
+            prj_keys = project_config.keys
+            project_formconfig = table_formconfig["tablecreator-projects"];
+            if project_formconfig.nil?
+                project_formconfig = Hash.new
+            end
+            prj = tc_project["project"]
+            for pk in prj_keys
+                datalist = project_config[pk]
+                dbtablename = datalist[0]
+                dbfieldname = datalist[1]
+                tmpa = datalist[2].split("=>")
+                title = tmpa[1]
+                datavalue = prj[dbfieldname]
+                if (!project_formconfig.nil? && !project_formconfig[dbtablename+"_"+pk].nil? && project_formconfig[dbtablename+"_"+pk] == "1")
+%>
+<b><%= title %></b> <%= datavalue %><br/>
+<%
+                end
+            end
+%>
+<p/>
+<hr width="80%" align="center"><br/>
+<%
+            # There are two ways to render the publication data - as a Flat format, across all Arms or organized by Arms in projects with more than one Arm
+            if !table_formconfig["tablecreator-arms"].nil? &&
+               !table_formconfig["tablecreator-arms"]["format_by_arms"].nil? &&
+               table_formconfig["tablecreator-arms"]["format_by_arms"] == "1"
+                # puts ".............. render preview0"
+                render 'preview0'
+            else
+                # puts ".............. render preview1"
+                render 'preview1'
+            end
+        end
+    end
+%>
+</div>

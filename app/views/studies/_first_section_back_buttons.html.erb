@@ -1,0 +1,13 @@
+<table id="bottom_nav" summary="page bottom nav">
+	<tr>
+		<td align="left">
+			<%= link_to image_tag("Silk_bullet_back.png", :style=>"border:0px; vertical-align:text-top") + " Back", edit_project_study_path(params[:project_id],params[:study_id].nil? ? params[:id] : params[:study_id]) %>	
+		</td>
+		<td align="right">
+			<a href="<%= next_url %>">
+					Next <%= next_title %>
+					<img src="/images/Silk_bullet_go.png" style="border:0px; vertical-align:text-top" alt="Go to Next Page"/>
+			</a>
+		</td>
+	</tr>
+</table>

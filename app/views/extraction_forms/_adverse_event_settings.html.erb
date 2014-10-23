@@ -1,0 +1,38 @@
+<br/>
+<div id="validation_message_advsettings"></div>
+
+<%= form_for @extraction_form, :url => {:action => :update_adverse_event_settings},  :remote => true do |f| %>
+	<%= hidden_field_tag "extraction_form_id", @extraction_form.id %>
+	<%= hidden_field_tag "project_id", @project.id %>
+
+<label for="Choose how you would like adverse event data entered">Choose how you would like adverse event data entered:</label>
+		<table cellspacing=0 cellpadding=0 class='list_table' id="adverse_event_settings_table" summary="adverse event settings table">
+			<tr>
+				<td>
+					<input class="arm_or_total_selector cbox" type='radio' name='arm_or_total_selector' value='arm_and_total' checked tabindex="2" title="by arm and total" />
+					</td><td><label for="By Arm and Total" style="display:inline-block">By Arm And Total</label>
+				</td><td>
+					<input class="arm_or_total_selector cbox" type='radio' name='arm_or_total_selector' value='arm' tabindex="2" style="display:inline-block" title="by arm only" />
+					</td><td><label for="By Arm Only" >By Arm Only</label>
+				</td><td>
+					<input class="arm_or_total_selector cbox" type='radio' name='arm_or_total_selector' value='total' tabindex="2" style="display:inline-block" title="by total only" />
+					</td><td><label for="By Total Only" >By Total Only</label>
+				</td>
+			</tr>
+		</table>
+<br/>
+			<div class="actions">
+		<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" onClick="return confirm_settings_update()" tabindex="3">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Update Settings
+		</button>
+		<div class="saved" id="saved_item_indicator_advsettings" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+		</div>
+		
+<% end %>
+
+<script>
+	function confirm_settings_update()
+	{
+		return confirm("Updating this setting will REMOVE all data in any existing adverse event tables and studies. Are you sure you want to continue?");
+	}
+</script>

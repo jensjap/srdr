@@ -1,0 +1,35 @@
+<div class='tab-div'><br/>
+<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Publication Information"} %>
+<br/><br/>
+<div class="extraction_form_options">
+<strong>Please Note:</strong>
+Although not enabled here, <strong>primary publications, secondary publications, and additional publication identifiers</strong> can be added during individual study extraction.
+<br/><br/>
+The <strong>publications</strong> section is <strong>always included</strong> in the extraction form.<br/>
+</div>
+  
+  
+<% if true || (!@extraction_form_section.nil? && @extraction_form_section.included == true) %>
+	<div id="extraction_form_section_publications">
+<% else %>
+	<div id="extraction_form_section_publications" class="disabled">
+<% end %>
+	
+
+	<br/><br/>
+	<h3>Preview of Publications Form</h3>
+	<div id="publication_image" alt="Publications page preview image" title="Publications page preview image">
+	<div class="watermark"></div>
+	</div>
+	<br/><br/>
+	
+	</div>
+
+
+<br/>
+
+<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+
+<%= render 'shared/make_editable_and_confirm' %>
+</div>

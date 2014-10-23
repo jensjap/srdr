@@ -1,0 +1,19 @@
+<div id='category_choices_<%= @page_name %>'>
+	<%= render :partial=>"question_builder/option_text_input" %>
+	
+	<div class="actions" id="new_row_button">
+	  <%= link_to "Add Another Option","#", :id=>'add_question_button' %>
+	</div>
+
+<script>
+	$("#add_question_button").bind("click",function(event) {
+		event.preventDefault();
+  	$.ajax({
+  		url: 'question_builder/add_choice',
+  		data: {"previous_row":$('#add_question_button').parent().prev().attr('id'), "page_name":$('#page_name').val()}
+  	});		
+  });
+</script>
+
+</div>
+

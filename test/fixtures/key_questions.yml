@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: key_questions
+#
+#  id              :integer          not null, primary key
+#  project_id      :integer
+#  question_number :integer
+#  question        :text
+#  created_at      :datetime
+#  updated_at      :datetime
+#
+
+proj1_kq1:
+  id: 1
+  project_id: 1
+  question_number: 1
+  question: Why is the sky blue?
+
+proj1_kq2:
+  id: 2
+  project_id: 1
+  question_number: 2
+  question: Where do babies come from?
+
+proj2_kq1:
+  id: 3
+  project_id: 2
+  question_number: 1
+  question: What is your name?
+
+#proj2_kq2:
+#  id: 4
+#  project_id: 2
+#  question_number: 2
+#  question: Why?
+
+#proj2_kq3:
+#  id: 5
+#  project_id: 2
+#  question_number: 3
+#  question: Who?

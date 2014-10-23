@@ -1,0 +1,92 @@
+<%
+    # Get site properties
+    # siteproperties = session[:guiproperties]
+    # siteproperties = nil
+    # if siteproperties.nil?
+    #     siteproperties = Guiproperties.new
+    #     session[:guiproperties] = siteproperties
+    # end
+    # excel_cache_path = siteproperties.getProjectCachePath()
+    excel_cache_path = "/public/cache/projects/"
+%>
+<div id='left-navigation-div' tabindex=100>
+<%= render :partial => "sidebars/mySRDR_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+<%= render :partial => "page_title", :locals=>{:page_title=>"Downloading Data"} %>
+<br/><br/>
+<% if @project.public_downloadable || (@request != nil && @request.status == "accepted" && (Time.now() - @request.responded_at) < 1.week) %>
+  <br/>
+<%= render 'shared/creative_commons_note' %>
+  <br/><br/>
+	<input type='checkbox' name='creativeCommons_agree' id='cc_agree_cbox'>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above.<br/><br/>
+    <table id="export_tools_excel_table">
+    <tr>
+      <td class="title">Extraction Form</td>
+      <td class="title">Option 1</td>
+      <td class="title">Option 2</td>
+      <td class="title">Compile Date/Time</td>
+    </tr>
+    <% @extraction_forms.each do |ef| %>
+    <tr>
+    <td class="ef_data">
+        <%= ef.title %>
+    </td>
+      <% timestamp = "---" %>
+        <td class="data">
+          <% if File.exist?("#{Rails.root}/#{excel_cache_path}project-#{@project.id}-#{ef.id}.xlsx") %>
+            <% timestamp = File.mtime("#{Rails.root}#{excel_cache_path}project-#{@project.id}-#{ef.id}.xlsx") %>
+            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=xlsx" %>
+            <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk.png" border="0"> Excel</a>
+          <% else %>
+            - Not Found -
+          <% end %>
+        </td>
+        <td class="data">
+          <% if File.exist?("#{Rails.root}/#{excel_cache_path}project-#{@project.id}-#{ef.id}.csv") %>
+            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=csv" %>
+            <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk_csv.png" border="0"> CSV</a>
+          <% else %>
+            - Not Found -
+          <% end %>
+        </td>
+        <td class="data">
+          <% if timestamp != "---" %>
+            <%= timestamp.strftime("%b %d, %Y %I:%M%p") %>
+          <% else %>
+            <%= timestamp %>
+          <% end %>
+          <%# timestamp < @project.updated_at ? "(old version)" : "" %>
+        </td>
+    </td>
+    </tr>
+    <% end %>
+    </table>
+
+  
+
+<% else %>
+	This project requires permission of the project lead before we can provide you with access to the tabular data. Please complete the form below.<br/><br/>
+	
+  <%= render :partial=>"data_requests/form" %>
+
+<% end %>
+<br/><br/><br/>
+<%= link_to "Back", :back%>
+
+</div>
+
+<script type='text/javascript'>
+<!--
+$(document).ready(function(){
+
+$(".download_link").bind("click",function(event){
+  if($("#cc_agree_cbox").attr("checked") != "checked"){
+    event.preventDefault();
+    alert("This action requires acceptance of the Creative Commons Attribution-NonCommercial license agreement.");
+  }
+});
+
+});
+-->
+</script>

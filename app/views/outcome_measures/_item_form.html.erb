@@ -1,0 +1,60 @@
+<div class="form_content">
+<% if defined?(outcome_measure) && !outcome_measure.nil? %>
+<% @outcome_measure = outcome_measure %>
+<% end %>
+			<%= form_for @outcome_measure, :remote => true, :html => {:id => "new_outcome_measure"} do |f| %>
+			  <%= f.hidden_field :outcome_id, :value => @outcome.id %>
+			  <% j = ActiveSupport::JSON %>
+			  <% str = "" %>
+			  <% @outcome_timepoints.each{|a| str = str + a.id.to_s + "_"}  %>
+			  <%= hidden_field_tag :outcome_timepoints_list, str %>
+			
+			<table class="form_table" id="outcome_measures_item_form" summary="outcome measures item form">
+			<tr>
+				<td class="label" style="width: 150px">
+				<label for="Measure">Measure:</label>
+				</td>
+				<td>
+				<%= f.select :measure_name, options_for_select({"Value" => "value", "Standard Deviation" => "standard deviation", "Standard Error" => "standard error", "Mean" => "mean", "Median" => "median", "N event"=>"n event", "Other" => "other"}, @outcome_measure.measure_name), {}, :class => "editable_field", :tabindex => 100, :style => "width:100%" %>
+				
+				</td>
+			</tr>
+			<tr><td class="label">
+				<label for="Unit">Unit: </label>
+				</td>
+				<td>
+				<%= f.select :unit, options_for_select({"Not Applicable" => "N/A", "inches (in)" => "in", "feet (ft)" => "ft", "centimeters (cm)" => "cm", "Other" => "other"}, @outcome_measure.unit), {}, :tabindex => 101, :class => "editable_field", :style => "width:100%" %>
+									
+
+				
+			</td></tr>
+			
+			  <tr><td class="label">
+				<label for="Notes">Notes:</label>
+				</td>
+				<td>
+				<%= f.text_area :note, :rows => 4, :class => "editable_field", :style => "width:100%", :tabindex => 102 %>
+			  </td></tr>
+	<tr height="15"></tr>
+			<tr><td></td>
+			<td class="actions">
+				<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" tabindex="103">
+					<%= image_tag "Add.png", :alt => "Add" %>Save
+				</button>
+				<button class="negative" onClick="event.preventDefault();$('#new_outcome_measure_dialog').dialog('close');" tabindex="104">
+					<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+				</button>
+			</td></tr></table>
+	
+
+	
+	
+		<% end %>
+		</div>
+	
+			<%= render :inline=>attach_listener_for_other("outcome_measure_measure_name")%>
+			<%= render :inline=>attach_listener_for_other("outcome_measure_unit")%>
+		
+						
+				<%= render :partial => "specify_other/other_selection_js", :locals => {:field_id => "outcome_measure_measure_name", :item_list => [["Value", "value"], ["Standard Deviation", "standard deviation"], ["Standard Error", "standard error"], ["Mean", "mean"], ["Median", "median"], ["N event", "n event"], ["Other", "other"]], :item_to_match => @outcome_measure.measure_name} %>
+				<%= render :partial => "specify_other/other_selection_js", :locals => {:field_id => "outcome_measure_unit", :item_list => [["inches (in)", "in"], ["feet (ft)", "ft"], ["centimeters (cm)", "cm"], ["Not Applicable", "N/A"], ["Other", "other"]], :item_to_match => @outcome_measure.unit} %>		

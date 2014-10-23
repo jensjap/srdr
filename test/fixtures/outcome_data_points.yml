@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: outcome_data_points
+#
+#  id                 :integer          not null, primary key
+#  outcome_measure_id :integer
+#  value              :string(255)
+#  footnote           :string(255)
+#  is_calculated      :boolean          default(FALSE)
+#  arm_id             :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  footnote_number    :integer          default(0)
+#
+
+# used for testing remove_extracted_data in extraction_form
+ef100_outcome5_dp:
+  id: 1
+  outcome_measure_id: 4
+  arm_id: 5
+
+ef100_outcome6_dp:
+  id: 2
+  outcome_measure_id: 4
+  arm_id: 6

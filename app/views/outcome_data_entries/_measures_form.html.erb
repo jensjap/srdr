@@ -1,0 +1,208 @@
+<% selected_titles = @selected_measures.collect{|x| x.title}%>
+<% all_titles = @all_measures.collect{|x| x.title} %>
+<% userdef_titles = @all_user_defined_measures.collect{|x| x.title} %>
+<% stragglers = selected_titles - all_titles - userdef_titles %>
+<% previously_checked = ""%>
+<% previously_defined_checked = "" %>
+<% submit_path = @show_measures_for=="Outcome" ? "results/update_measures" : "results/update_comparison_measures" %>
+<% form_tag submit_path, :remote=>true do %>
+<!--
+ Cycle through all possible measures defined in the default measures table for this outcome
+ type. If the measure is also defined in the study, then check the box. Otherwise, leave it unchecked	
+-->
+<!--<div style='width:100%; height:97%; overflow:auto;' id='measure_container'> -->
+<div id='measure_form_container'>	
+  <table class='measures_table'>
+		<tr>
+			<th colspan='2'>
+  			I would like to edit measures for:
+  		</th>
+  	</tr>
+    <tr>
+	  	<td colspan='2'>
+	  		<% individual = "This timepoint only"%>
+	  		<% group = "All timepoints in this outcome" %>
+	  		<% if @show_measures_for == 'Within-Arm Comparison' %>
+	  		  <% individual = "This comparison only"%>
+	  		  <% group = "All comparisons in the within-arm comparison table" %>
+	  		<% elsif @show_measures_for == 'Between-Arm Comparison' %>
+	  		  <% individual = "This timepoint only" %>
+	  		  <% group = "All timepoints in the between-arm comparison table" %>
+	  		<% end %>
+				<input type="radio" name="changes_apply_to" id="apply_changes_to" value="this" checked/> <%= individual %><br />
+				<input type="radio" name="changes_apply_to" id="apply_changes_to" value="all"/> <%= group %>
+			</td>
+		</tr>
+  	
+    <% previous_group = 0%>
+  	<%# The measure type descriptions for each section %>
+  	<% titles = {1=>"Descriptive Statistics",2=>"Descriptive Statistics",3=>"Statistical Tests",4=>"Methods of Estimation",5=>"Adjusted Statistical Tests",6=>"Adjusted Methods of Estimation"}%>
+  	<% @all_measures.each do |meas| %>
+	  <% if meas.measure_type != previous_group %>
+	    <% if previous_group.even? %>
+	    		<tr>
+	        	<th colspan=2><%= titles[previous_group + 1]%></th>
+	        </tr>
+	      <% if previous_group == 0 %>
+	        <tr><td valign='top' >
+	      <% else %>
+      		</td></tr><tr><td valign='top'>
+      	<% end %>
+	    <% else %>
+    		</td><td valign='top'>
+    	<% end %>
+    	<% previous_group += 1 %>
+	  <% end %>
+	  <br/>
+		<% checked = selected_titles.include?(meas.title) ? "checked" : ""%>
+		<% selected_meas_id = 0 %>
+		<% if checked == "checked" %>
+		  <% selected_meas_id = @selected_measures[selected_titles.index(meas.title)].id %>
+		  <% previously_checked += previously_checked == "" ? "#{selected_meas_id}" : "_#{selected_meas_id}" %>
+	  <% end %>
+	  <% hashkey = "#{meas.id}_#{selected_meas_id}"%>
+		<input type="checkbox" name="<%= "measures[#{hashkey}]"%>" id="<%= "measure_#{hashkey}"%>" <%= checked %>/> <%= checked=="checked" ? render(:inline=>"<span class='selected_measure m_title'> #{meas.title} </span>") : render(:inline=>"<span class='m_title'>#{meas.title}</span>") %>
+	<% end %> <%# end all_measures.each %>
+  </td>
+	</tr>
+  <% unless @all_user_defined_measures.empty? && stragglers.empty? %>
+		<tr>
+	  	<th colspan='2'>
+	  	  User-Defined Measures
+	  	</th>
+	  </tr>
+	  <tr>
+	  	<th width="35%">
+	  		Title
+	  	</th>
+	  	<th>
+	  		Description
+	  	</th>
+	  </tr>
+	  <%# selected_titles = @selected_measures.collect{|x| x.title} %>
+	  <% previous_defined_checked = "" %>
+	  <% @all_user_defined_measures.each do |measure| %>
+	    <tr class='defined_measure_row'>
+	    <td>
+	    <% checked = selected_titles.include?(measure.title) ? "checked" : "" %>
+	    <% selected_meas_id = 0 %>
+	    <% if checked == "checked" %>
+	      <% selected_meas_id = @selected_measures[selected_titles.index(measure.title)].id %>
+		  <% previously_defined_checked += previously_defined_checked == "" ? "#{selected_meas_id}" : "_#{selected_meas_id}" %>
+	    <% end %>
+	    <% hashkey = "#{measure.id}_#{selected_meas_id}"%>
+			<input type="checkbox" name="<%= "user_defined_measures[#{hashkey}]"%>" id="<%= "user_defined_measure_#{hashkey}"%>" <%= checked %>/> <%= checked=="checked" ? render(:inline=>"<span class='selected_measure m_title'> #{measure.title} </span>") : render(:inline=>"<span class='m_title'>#{measure.title}</span>") %>
+			</td>
+			<td><%= measure.description %></td>
+			</tr>
+	  <% end %>
+    <%# stragglers %>
+    <% stragglers.each do |straggler| %>
+      <% selected_measure = @selected_measures[selected_titles.index(straggler)] %>
+      <% previously_defined_checked += previously_defined_checked == "" ? "#{selected_measure.id}" : "_#{selected_measure.id}" %>
+      <tr class='defined_measure_row'>
+      <td>
+      <% checked = "checked" %>
+      <% selected_meas_id = 0 %>
+    
+      <% hashkey = "#{selected_measure.id}_#{selected_measure.id}"%>
+      <input type="checkbox" name="<%= "user_defined_measures[#{hashkey}]"%>" id="<%= "user_defined_measure_#{hashkey}"%>" <%= checked %>/> <%= checked=="checked" ? render(:inline=>"<span class='selected_measure m_title'> #{selected_measure.title} </span>") : render(:inline=>"<span class='m_title'>#{selected_measure.title}</span>") %>
+      </td>
+      <td><%= selected_measure.description %></td>
+      </tr>
+    <% end %>
+
+    </tr>
+	<% end %>
+  <tr id="new_measure_title_row" class='new_measure_row'>
+  	<th colspan='2'>
+  		<a href='#' id='define_measure_link'><img alt="Add a User-Defined measure" src='/images/add_user_defined_measure.png' title='Add a User-Defined Measure'/></a>
+  	</th>
+  </tr>
+  
+</table> <%# complete the end of the table %>
+	
+  <input type="hidden" name="previously_checked" value="<%= previously_checked %>"/>
+  <input type="hidden" name="previously_defined_checked" value="<%= previously_defined_checked %>"/>
+	<input type="hidden" name="timepoint_id" value="<%= @timepoint_id %>">
+  <input type="hidden" name="selected_timepoints" value="<%= @selected_timepoints %>"/>
+  <%# used only by the outcome measures%>
+  <input type="hidden" name="ocde_id" value="<%= @ocde_id %>">  
+  <%# used only by the comparison measures%>
+  <input type="hidden" name="comparison_id" value="<%= @comparison_id %>"/>
+  <input type="hidden" name="subgroup_id" value="<%= @subgroup_id %>"/>
+  <span id='bottom_anchor'></span>
+</div> <%# end the overflow div %>
+	<center>
+		<button type="submit" id="save_measures_btn" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+			<%= image_tag "Add.png", :alt => "Add" %> Save
+		</button>
+		<button class="negative" id="cancel_measures_form_btn">
+			<%= image_tag "Cancel.png", :style=>"vertical-align:text-top;", :alt => "Cancel" %> Cancel
+		</button>
+  </center>
+<% end %> <%# end the form%>
+
+<% next_new_measure_id = -1 %>
+<script type='text/javascript'>
+<!--
+function measures_init(){
+  try{
+    checkMeasuresFormLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    prepareMeasuresForm();
+  } catch( err ) {
+    setTimeout('measures_init()', 200);
+  }
+}
+function checkMeasuresFormLoaded(){
+  if ( $('#cancel_measures_form_btn').length == 0){
+    $jquery.error( 'not ready' );
+  }
+}
+
+function prepareMeasuresForm(){
+
+  $("#cancel_measures_form_btn").unbind("click");
+  $("#cancel_measures_form_btn").bind("click",function(event){
+    event.preventDefault();
+    $('#modal_div').dialog('close');
+  });
+
+  /* WHEN THE CHECKBOXES ARE PRESSED, TOGGLE THE TITLE HIGHLIGHTING
+     DEPENDING ON WHETHER OR NOT IT'S SELECTED */
+  $(':checkbox').unbind("click");
+  $(':checkbox').bind("click",function(){
+    id_to_search = "#" + $(this).attr("id") + " + .m_title";
+    span_element = $(id_to_search.toString());
+    if($(span_element).hasClass("selected_measure")){
+      $(span_element).removeClass("selected_measure");
+    }else{
+      $(span_element).addClass("selected_measure");
+    }
+  });
+  var next_new_measure_id = -1;
+  $("#define_measure_link").bind("click",function(event){
+    event.preventDefault();
+    
+    /*$("#new_measure_title_row").show();*/
+    $($(".new_measure_row").last()).after("<tr class='new_measure_row' id='new_measure_row_"+next_new_measure_id+"'><td><input type='checkbox' checked disabled><input type='text' size=30 class='tmp_input' name='user_defined_titles["+next_new_measure_id+"]' value='Enter a Title Here'></td><td><div style='float:right;'><a href='#' class='remove_measure_button' row_id='"+next_new_measure_id+"'>Remove</a></div><input type='text' size=50 class='tmp_input' name='user_defined_descriptions["+next_new_measure_id+"]' value='Enter a Description Here'></td></tr>")
+    $("#measure_container").scrollTop(9999);
+    next_new_measure_id = next_new_measure_id - 1;
+  });
+
+  $(".remove_measure_button").live("click",function(event){
+    event.preventDefault();
+    row = $(this).attr("row_id");
+    rowid = "#new_measure_row_"+row.toString();
+    $(rowid).remove();
+  });
+
+  $(".tmp_input").live("click",function(){
+    $(this).val("");
+    $(this).removeClass("tmp_input");
+  });
+}
+
+measures_init(); // attach everything for the measures form
+//-->
+</script>

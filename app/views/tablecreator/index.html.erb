@@ -1,0 +1,736 @@
+<%
+    prj_id = @tc_project["prjid"]
+    @project = @tc_project["project"]
+
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Report Builder","Report Builder "+prj_id.to_s,"/projects/tablecreator.html?prjid="+prj_id.to_s)
+    session[:urlhistory] = urlhistory
+
+    reportconfig = @tc_project["reportconfig"]
+
+    # Note - sidebar needs this instance variable - @project
+    prj_title = @project.title
+
+    table_formconfig = session[:tc_formconfig]
+    
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "info"} %>
+</div>
+<div id='content' tabindex=200>
+<h2>Table Creator in Project: <%= prj_title %></h2>
+<hr width="100%">
+<p/>
+<%= render 'templates' %>
+&nbsp;<p/>
+<%= form_tag({:controller=>'tablecreator',:action=>'buildtable'}, :method=>'get', :name=>'tablecreator') %>
+<input type="hidden" name="exportto" value="">
+<input type="hidden" name="confname" value="">
+<input type="hidden" name="description" value="">
+<table width="100%">
+    <tr>
+        <td align="left">
+        &nbsp;
+        </td>
+        <td align="right">
+        <%= check_box_tag "format_by_arms", 1, reportconfig.isFormatByArm() %>
+        <label for="format_by_arms">Format data by Arms</label>
+        </td>
+    </tr>
+<%
+    template_name = nil
+    name = reportconfig.getMetaName()
+    desc = reportconfig.getMetaDescription()
+    if name == "Default"
+    else
+        cfgname = reportconfig.reportconfig()
+%>
+    <tr>
+        <td align="left">
+        <h3>Template: <%= name %> (<i><%= desc %></i>)</h3>
+        </td>
+        <td align="right">
+        <img src="/images/Cancel.png" border="0">&nbsp;<a href="tablecreator/templatemanager?cmd=REMOVE&cfgname=<%= cfgname %>" alt="Remove report configuration">Delete this template</a>
+        </td>
+    </tr>
+<%
+    end
+%>
+</table>
+<script type="text/javascript">
+    // ----------------- Studies -----------------
+    function clearStudyFilters() { 
+        document.tablecreator.sf_pmid.value = "";
+        document.tablecreator.sf_title.value = "";
+        document.tablecreator.sf_authors.value = "";
+    }
+
+    function filterStudies() { 
+        document.tablecreator.filter_studies.value = "1";
+        document.tablecreator.submit();
+    }
+
+    function StudySelectAll() { 
+        var itemval = 0;
+        if (document.tablecreator.study_all.checked) {
+           itemval = 1;
+        };      // end if   
+<%
+        for ridx in 0..reportconfig.getNumStudyItems() - 1
+%>
+        document.tablecreator.<%= "s_"+ridx.to_s %>.checked = itemval;
+<%
+        end
+%>
+    }
+
+    function StudyItemChecked() { 
+        document.tablecreator.study_all.checked = false;
+    }
+
+    // ----------------- Publications -----------------
+    function PublicationSelectAll() { 
+        var itemval = 0;
+        if (document.tablecreator.pub_all.checked) {
+           itemval = 1;
+        };      // end if   
+<%
+        for ridx in 0..reportconfig.getNumPublicationItems() - 1
+%>
+        document.tablecreator.<%= "pub_"+ridx.to_s %>.checked = itemval;
+<%
+        end
+%>
+    }
+    
+    function PublicationItemChecked() { 
+        document.tablecreator.pub_all.checked = false;
+    }
+    
+    // ----------------- Arms -----------------
+<%
+    arms_config = reportconfig.getArms()
+%>
+    <%= raw arms_config.renderJavaScript() %>
+    
+    
+    // ----------------- Arm Details -----------------
+<%
+    armd_config = reportconfig.getArmDetails()
+%>
+    <%= raw armd_config.renderJavaScript() %>
+    
+    // ----------------- Design -----------------
+<%
+    dd_config = reportconfig.getDesignDetails()
+%>
+    <%= raw dd_config.renderJavaScript() %>
+    
+    // ----------------- Baseline functions --------------------
+<%
+    bl_config = reportconfig.getBaseline()
+%>
+    <%= raw bl_config.renderJavaScript() %>
+    
+    // ----------------- Outcome Measures -----------------
+    // ----------------- Outcome Subgroup -----------------
+<%
+    outcomesgs_config = reportconfig.getOutcomeSubgroups()
+%>
+    <%= raw outcomesgs_config.renderJavaScript() %>
+
+    // ----------------- Outcome Time Point -----------------
+<%
+    outcometpts_config = reportconfig.getOutcomeTimepoints()
+%>
+    <%= raw outcometpts_config.renderJavaScript() %>
+
+    // ----------------- Outcome Measure Record Details -----------------
+<%
+    outcomemeas_config = reportconfig.getOutcomeMeasures()
+%>
+    <%= raw outcomemeas_config.renderJavaScript() %>
+    
+    // ----------------- Outcomes -----------------
+<%
+    outcomes_config = reportconfig.getOutcomes()
+%>
+    <%= raw outcomes_config.renderJavaScript() %>
+    
+    // ----------------- Outcome Details -----------------
+<%
+    outd_config = reportconfig.getOutcomeDetails()
+%>
+    <%= raw outd_config.renderJavaScript() %>
+
+    // ============ Generic matrix functions ==========================
+    function setDetails(mid,idx,r,c,nrows,ncols,status) {
+        eval("document.tablecreator."+mid+"_"+idx+"_"+r+"_x.checked = "+getDetailsAnyColsChecked(mid,idx,r,ncols));
+        eval("document.tablecreator."+mid+"_"+idx+"_x_"+c+".checked = "+getDetailsAnyRowsChecked(mid,idx,c,nrows));
+    }
+    
+    function setDetailsAll(mid,idx,nrows,ncols,status) {
+        for (r = 0; r < nrows; r++) {
+            setDetailsAllCols(mid,idx,r,nrows,ncols,status);
+        };  // end for
+    }
+    
+    function setDetailsAllRows(mid,idx,colidx,nrows,ncols,status) {
+        for (r1 = 0; r1 < nrows; r1++) {
+            eval("document.tablecreator."+mid+"_"+idx+"_"+r1+"_"+colidx+".checked = "+status);
+            eval("document.tablecreator."+mid+"_"+idx+"_"+r1+"_x.checked = "+getDetailsAnyColsChecked(mid,idx,r1,ncols));
+        };  // end for
+        eval("document.tablecreator."+mid+"_"+idx+"_x_"+colidx+".checked = "+status);
+    }
+    
+    function setDetailsAllCols(mid,idx,rowidx,nrows,ncols,status) {
+        for (c1 = 0; c1 < ncols; c1++) {
+            eval("document.tablecreator."+mid+"_"+idx+"_"+rowidx+"_"+c1+".checked = "+status);
+            eval("document.tablecreator."+mid+"_"+idx+"_x_"+c1+".checked = "+getDetailsAnyRowsChecked(mid,idx,c1,nrows));
+        };  // end for
+        eval("document.tablecreator."+mid+"_"+idx+"_"+rowidx+"_x.checked = "+status);
+    }
+    
+    function getDetailsAnyRowsChecked(mid,idx,colidx,nrows) {
+        nchecked = getDetailsNRowsChecked(mid,idx,colidx,nrows);
+        if (nchecked > 0) {
+            return "true";
+        } else {
+            return "false";
+        };  // end if
+    }
+    
+    function getDetailsAnyColsChecked(mid,idx,rowidx,ncols) {
+        nchecked = getDetailsNColsChecked(mid,idx,rowidx,ncols);
+        if (nchecked > 0) {
+            return "true";
+        } else {
+            return "false";
+        };  // end if
+    }
+    
+    function getDetailsAllRowsChecked(mid,idx,colidx,nrows) {
+        nchecked = getDetailsNRowsChecked(mid,idx,colidx,nrows);
+        if (nchecked == nrows) {
+            return "true";
+        } else {
+            return "false";
+        };  // end if
+    }
+    
+    function getDetailsAllColsChecked(mid,idx,rowidx,ncols) {
+        nchecked = getDetailsNColsChecked(mid,idx,rowidx,ncols);
+        if (nchecked == nrows) {
+            return "true";
+        } else {
+            return "false";
+        };  // end if
+    }
+    
+    function getDetailsNRowsChecked(mid,idx,colidx,nrows) {
+        var nchecked = 0;
+        var cf;
+        for (rx = 0; rx < nrows; rx++) {
+            eval("cf = document.tablecreator."+mid+"_"+idx+"_"+rx+"_"+colidx+".checked;");
+            if (cf) {
+                nchecked = nchecked + 1;
+            };  // end if
+        };  // end for
+        return nchecked;
+    }
+    
+    function getDetailsNColsChecked(mid,idx,rowidx,ncols) {
+        var nchecked = 0;
+        var cf;
+        for (cx = 0; cx < ncols; cx++) {
+            eval("cf = document.tablecreator."+mid+"_"+idx+"_"+rowidx+"_"+cx+".checked;");
+            if (cf) {
+                nchecked++;
+            };  // end if
+        };  // end for
+        return nchecked;
+    }
+    
+    // ----------------- AdverseEvents -----------------
+<%
+    advevents_config = reportconfig.getAdvEvents()
+%>
+    <%= raw advevents_config.renderJavaScript() %>
+    
+    // ----------------- QualDimFields -----------------
+<%
+    qualdims_config = reportconfig.getQuality()
+%>
+    <%= raw qualdims_config.renderJavaScript() %>
+    
+    // ----------------- Within Arms Comparisons -----------------
+    function WACSelectAll() { 
+        var itemval = 0;
+        if (document.tablecreator.wac_all.checked) {
+           itemval = 1;
+        };      // end if   
+<%
+        for ridx in 0..reportconfig.getNumWACItems() - 1
+%>
+        document.tablecreator.<%= "wac_"+ridx.to_s %>.checked = itemval;
+<%
+        end
+%>
+    }
+    
+    function WACItemChecked() { 
+        document.tablecreator.wac_all.checked = false;
+    }
+    
+    function WACMeasuresSelectAll() { 
+        var itemval = 0;
+        if (document.tablecreator.wacmeas_all.checked) {
+           itemval = 1;
+        };      // end if   
+<%
+        for ridx in 0..reportconfig.getNumWACMeasureItems() - 1
+%>
+        document.tablecreator.<%= "wacmeas_"+ridx.to_s %>.checked = itemval;
+<%
+        end
+%>
+    }
+    
+    function WACMeasureItemChecked() { 
+        document.tablecreator.wacmeas_all.checked = false;
+    }
+    
+    function saveTCConfig() {
+        document.tablecreator.confname.value = prompt('Enter Table Creator Configuration Name:','');
+        document.tablecreator.description.value = prompt('Enter Description:','');
+    }
+    
+    // ----------------- Between Arms Comparisons -----------------
+    function BACSelectAll() { 
+        var itemval = 0;
+        if (document.tablecreator.bac_all.checked) {
+           itemval = 1;
+        };      // end if   
+<%
+        for ridx in 0..reportconfig.getNumBACItems() - 1
+%>
+        document.tablecreator.<%= "bac_"+ridx.to_s %>.checked = itemval;
+<%
+        end
+%>
+    }
+    
+    function BACItemChecked() { 
+        document.tablecreator.bac_all.checked = false;
+    }
+    
+    function BACMeasuresSelectAll() { 
+        var itemval = 0;
+        if (document.tablecreator.bacmeas_all.checked) {
+           itemval = 1;
+        };      // end if   
+<%
+        for ridx in 0..reportconfig.getNumBACMeasureItems() - 1
+%>
+        document.tablecreator.<%= "bacmeas_"+ridx.to_s %>.checked = itemval;
+<%
+        end
+%>
+    }
+    
+    function BACMeasureItemChecked() { 
+        document.tablecreator.bacmeas_all.checked = false;
+    }
+    
+    // ------------------------------------------------------------------------------------
+    function saveTCConfig() {
+        document.tablecreator.confname.value = prompt('Enter Table Creator Configuration Name:','');
+        document.tablecreator.description.value = prompt('Enter Description:','');
+    }
+    
+    function saveAsExcel() {
+        document.tablecreator.exportto.value = "EXCEL";
+    }
+    
+    function saveAsWord() {
+        document.tablecreator.exportto.value = "MSWORD";
+    }
+    
+</script>
+<div id="my_work_tabs">
+    <ul>
+    <li><a href="#mw-tabs-1">Studies</a></li>
+    <li><a href="#mw-tabs-2">Publications</a></li>
+    <li><a href="#mw-tabs-3">Design</a></li>
+    <li><a href="#mw-tabs-4">Arms</a></li>
+    <li><a href="#mw-tabs-5">Arm Details</a></li>
+    <li><a href="#mw-tabs-6">Baselines</a></li>
+    <li><a href="#mw-tabs-7">Outcome Details</a></li>
+    <li><a href="#mw-tabs-8">Outcomes</a></li>
+    <li><a href="#mw-tabs-9">Outcome Subgroups</a></li>
+    <li><a href="#mw-tabs-10">Outcome Timepoints</a></li>
+    <li><a href="#mw-tabs-11">Outcome Measures</a></li>
+    <li><a href="#mw-tabs-12">Adverse Events</a></li>
+    <li><a href="#mw-tabs-13">Quality</a></li>
+    <li><a href="#mw-tabs-14">Within Arms Comparison</a></li>
+    <li><a href="#mw-tabs-15">Between Arms Comparison</a></li>
+    </ul>
+<%
+        # Originally the project info was in its own tab, but Nira thought it be better to default settings across all reports. Move these into a hidden
+        # input to the form instead.
+        for ridx in 0..reportconfig.getNumProjectItems() - 1
+            datalist = reportconfig.getProjectConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+%>        
+        <input type="HIDDEN" name="<%= "prj_"+ridx.to_s %>" value="<%= itemshow.to_s %>">
+<%
+        end
+        rcolor = ["#FFFFFF","#EAEAEA"]
+%>
+    <div id="mw-tabs-1">
+        <table class="tc_options_table">
+            <tr bgcolor="#e0e0e0">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "study_all", 1, false, :onclick => "StudySelectAll()" %>
+                </td>
+                <td class="tc_options_title">
+                <label for="study_all">Select All Available Studies/Publications:</label>
+                <br/>
+                <label for="study_filter">Filter Studies/Publications:</label> 
+                &nbsp;PubMed ID(s) <input type="text" name="sf_pmid" size="4" value="<%= reportconfig.getStudyFilterPMIDs() %>" style="font: 0.9em;">
+                &nbsp;Title <input type="text" name="sf_title" size="20" value="<%= reportconfig.getStudyFilterTitles() %>" style="font: 0.9em;">
+                &nbsp;Author(s) <input type="text" name="sf_authors" size="20" value="<%= reportconfig.getStudyFilterAuthors() %>" style="font: 0.9em;">
+                &nbsp;<input type="button" value="Clear" style="font: 0.7em;" onclick="clearStudyFilters()">
+                &nbsp;<input type="button" value="Filter" style="font: 0.7em;" onclick="filterStudies()">
+                <input type="hidden" name="filter_studies" value="0">
+                </td>
+            </tr>
+
+<%
+        for ridx in 0..reportconfig.getNumStudyItems() - 1
+            datalist = reportconfig.getStudyConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+            trbg_color = rcolor[ridx % 2]
+            if checked_flag
+                trbg_color = "#f7bdde"
+%>
+            <tr bgcolor="<%= trbg_color %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "s_"+ridx.to_s, 1, checked_flag, :onclick => "StudyItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %>:</label>
+                </td>
+            </tr>
+<%
+            end
+        end
+        for ridx in 0..reportconfig.getNumStudyItems() - 1
+            datalist = reportconfig.getStudyConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+            trbg_color = rcolor[ridx % 2]
+            if !checked_flag
+%>
+            <tr bgcolor="<%= trbg_color %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "s_"+ridx.to_s, 1, checked_flag, :onclick => "StudyItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %>:</label>
+                </td>
+            </tr>
+<%
+            end
+        end
+%>
+        </table>
+    </div>
+    <div id="mw-tabs-2">
+        <table class="tc_options_table">
+            <tr bgcolor="#e0e0e0">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "pub_all", 1, false, :onclick => "PublicationSelectAll()" %>
+                </td>
+                <td class="tc_options_title">
+                <label for="pub_all">Select All Available Publication Detail Data:</label>
+                </td>
+            </tr>
+
+<%
+        for ridx in 0..reportconfig.getNumPublicationItems() - 1
+            datalist = reportconfig.getPublicationConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+            if itemname == "authorfirstonly"
+%>
+            <tr bgcolor="<%= rcolor[ridx % 2] %>">
+                <td class="tc_options_checkbox">
+                &nbsp;
+                </td>
+                <td class="tc_options_data">
+                <%= radio_button_tag "pub_"+ridx.to_s, 1, checked_flag, :onclick => "PublicationItemChecked()" %>
+                <label for="<%= itemname %>">Show <%= itemdesc %>:</label>
+                &nbsp;&nbsp;<%= radio_button_tag "pub_"+ridx.to_s, 0, !checked_flag, :onclick => "PublicationItemChecked()" %>
+                <label for="<%= itemname %>">Show all authors:</label>
+                </td>
+            </tr>
+<%
+            else
+%>
+            <tr bgcolor="<%= rcolor[ridx % 2] %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "pub_"+ridx.to_s, 1, checked_flag, :onclick => "PublicationItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %>:</label>
+                </td>
+            </tr>
+<%
+            end
+        end
+%>
+        </table>
+    </div>
+    <div id="mw-tabs-3">
+    <%= raw dd_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-4">
+    <%= raw arms_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-5">
+    <%= raw armd_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-6">
+    <%= raw bl_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-7">
+    <%= raw outd_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-8">
+    <%= raw outcomes_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-9">
+    <%= raw outcomesgs_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-10">
+    <%= raw outcometpts_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-11">
+    <%= raw outcomemeas_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-12">
+    <%= raw advevents_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-13">
+    <%= raw qualdims_config.renderTabControls() %>
+    </div>
+    <div id="mw-tabs-14">
+<%    
+    if reportconfig.getNumWAC() == 0
+%>
+        <br/>
+        <label for="header">No Within Arms Comparison (WAC) data defined for this project</label>
+        <p/>
+<%    
+    else
+%>
+        <table class="tc_options_table">
+            <tr bgcolor="#e0e0e0">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "wac_all", 1, false, :onclick => "WACSelectAll()" %>
+                </td>
+                <td class="tc_options_title">
+                <label for="wac_all">Select All Available WAC Comparators:</label>
+                </td>
+            </tr>
+<%
+        for ridx in 0..reportconfig.getNumWACItems() - 1
+            datalist = reportconfig.getWACConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+%>
+            <tr bgcolor="<%= rcolor[ridx % 2] %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "wac_"+ridx.to_s, 1, checked_flag, :onclick => "WACItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %></label>
+                </td>
+            </tr>
+<%
+        end
+%>
+            <tr bgcolor="#ffffff">
+                <td colspan="2">
+                &nbsp;
+                </td>
+            </tr>
+            <tr bgcolor="#e0e0e0">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "wacmeas_all", 1, false, :onclick => "WACMeasuresSelectAll()" %>
+                </td>
+                <td class="tc_options_title">
+                <label for="wacmeas_all">Select All WAC Comparison Measures:</label>
+                </td>
+            </tr>
+<%
+        for ridx in 0..reportconfig.getNumWACMeasureItems() - 1
+            datalist = reportconfig.getWACMeasureConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+%>
+            <tr bgcolor="<%= rcolor[ridx % 2] %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "wacmeas_"+ridx.to_s, 1, checked_flag, :onclick => "WACMeasureItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %></label>
+                </td>
+            </tr>
+<%
+        end
+%>
+        </table>
+<%
+    end
+%>
+    </div>
+    <div id="mw-tabs-15">
+<%    
+    if reportconfig.getNumBAC() == 0
+%>
+        <br/>
+        <label for="header">No Between Arms Comparison (BAC) data defined for this project</label>
+        <p/>
+<%    
+    else
+%>
+        <table class="tc_options_table">
+            <tr bgcolor="#e0e0e0">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "bac_all", 1, false, :onclick => "BACSelectAll()" %>
+                </td>
+                <td class="tc_options_title">
+                <label for="bac_all">Select All Available BAC Comparators:</label>
+                </td>
+            </tr>
+<%
+        for ridx in 0..reportconfig.getNumBACItems() - 1
+            datalist = reportconfig.getBACConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+%>
+            <tr bgcolor="<%= rcolor[ridx % 2] %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "bac_"+ridx.to_s, 1, checked_flag, :onclick => "BACItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %></label>
+                </td>
+            </tr>
+<%
+        end
+%>
+            <tr bgcolor="#ffffff">
+                <td colspan="2">
+                &nbsp;
+                </td>
+            </tr>
+            <tr bgcolor="#e0e0e0">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "bacmeas_all", 1, false, :onclick => "BACMeasuresSelectAll()" %>
+                </td>
+                <td class="tc_options_title">
+                <label for="bacmeas_all">Select All BAC Comparison Measures:</label>
+                </td>
+            </tr>
+<%
+        puts "index.html.erb - reportconfig.getNumBACMeasureItems() = "+reportconfig.getNumBACMeasureItems().to_s
+        for ridx in 0..reportconfig.getNumBACMeasureItems() - 1
+            datalist = reportconfig.getBACMeasureConfig(ridx)
+            itemname = datalist[0]
+            itemdesc = datalist[1]
+            itemshow = datalist[2]
+            checked_flag = (itemshow.to_s == "1")
+%>
+            <tr bgcolor="<%= rcolor[ridx % 2] %>">
+                <td class="tc_options_checkbox">
+                <%= check_box_tag "bacmeas_"+ridx.to_s, 1, checked_flag, :onclick => "BACMeasureItemChecked()" %>
+                </td>
+                <td class="tc_options_data">
+                <label for="<%= itemname %>"><%= itemdesc %></label>
+                </td>
+            </tr>
+<%
+        end
+%>
+        </table>
+<%
+    end
+%>
+    </div>
+    &nbsp;<p/>
+    <button type="submit" class="saving" onClick="saveTCConfig()">
+        <%= image_tag "Table_go.png", :alt => "Save table creator selections"  %> Save Selections 
+    </button>
+    <button type="submit" class="action">
+        <%= image_tag "Table_go.png", :alt => "Create Table"  %> Preview Report 
+    </button>
+    <%= link_to image_tag("Disk.png") + " Save report to Excel", "/tcexporter/saveas_excel/#{prj_id.to_s}" %>&nbsp;&nbsp;
+    <%# link_to image_tag("Disk.png") + " Save report as MS Word", "/tcexporter/saveas_excel/#{prj_id.to_s}" %>&nbsp;&nbsp;
+    <%# link_to image_tag("pdf.png") + " Save report as PDF", "/tcexporter/saveas_excel/#{prj_id.to_s}" %>
+    &nbsp;<p/>
+    <br/>
+</div>
+<%= render 'previewProject' %>
+<p/>
+<hr width="80%" align="center"><br/>
+<%
+    if session[:tc_preview].nil?
+%>
+Click on "Preview Report" button above to generate Title and Table
+<%
+    else
+        if !reportconfig.nil?
+            if reportconfig.isFormatByArm()
+%>
+<%= render 'previewByArms' %>
+<%
+            else
+%>
+<%= render 'previewFlat' %>
+<%
+            end
+        end
+    end
+%>
+<script>
+    $(function() {
+        var tabOpts = {
+            selected: 0
+        };
+        $( "#my_work_tabs" ).tabs(tabOpts);
+    });
+</script>
+</form>
+</div>

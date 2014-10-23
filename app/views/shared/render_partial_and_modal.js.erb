@@ -1,0 +1,6 @@
+<% if defined?(@partial_div) %>
+$("#<%= @partial_div %>").html("<%= escape_javascript(render :partial => @partial_name) %>");
+<% end %>
+<% if defined?(@modal_div) %>
+openModal("<%= @modal_div %>", "<%= @modal_partial %>");
+<% end %>

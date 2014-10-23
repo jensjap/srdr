@@ -1,0 +1,22 @@
+$("#measure_form_div").remove();
+$("#modal_div").html("");
+$("#add_measure_modal").remove();
+$("#add_measure_button").unbind("click");
+$('[aria-labelledby="ui-dialog-title-add_measure_form_div"]').remove()
+
+$("#modal_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/add_measure_modal")%>");
+
+<% if @type == "within" %>
+	$("#form_div").html("");
+	$("#form_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/within_arm_comparisons")%>");
+<% else %>
+	$("#form_div").html("");
+	$("#form_div").html("<%= escape_javascript(render :partial=>"comparison_data_points/between_arm_comparisons")%>");
+<% end %>
+
+<% if @is_new_comparison %>
+	$("<%= @td_id %>").attr("style","background-color:#ffd540;text-align:center;");
+	$("<%= @td_id %>").html("Initialized.");
+<% else %>
+  
+<% end %>

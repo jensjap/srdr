@@ -1,0 +1,28 @@
+<% if defined?(current_user) && !current_user.nil? %>
+<% show_both = User.current_user_is_collaborator(project_id,current_user) %>
+<% else %>
+<% show_both = false %>
+<% end %>
+
+<ul id="comments_summary_project_<%= project_id.to_s %>" class="comment_open_menu">
+
+	<% if (Comment.get_number_of_project_flags(project_id, show_both) >0) && (Comment.get_number_of_project_comments(project_id, show_both) >0) %>
+	
+	<li style="font-weight:normal">
+		<% if Comment.get_number_of_project_flags(project_id, show_both) > 0 %>
+		<%= image_tag "Flag_red.png", :alt => "This section has flags" %> Flags (<div style="display:inline" id="flags_number_<%= project_id.to_s %>"><%= Comment.get_number_of_project_flags(project_id, show_both) %></div>) |
+		<% end %>
+	</li>
+	<li style="font-weight:normal">
+			<%= image_tag "Comment.png", :alt => "Comments" %> Comments (<div style="display:inline" id="comments_number_<%= project_id.to_s %>"><%= Comment.get_number_of_project_comments(project_id, show_both) %></div>) |
+	</li>
+	<li id="comments_li_<%= project_id.to_s %>" class="open_comments_summary_link">
+		 <span>
+			View
+		</span>
+	</li>
+	
+	<% end %>
+
+</ul>
+

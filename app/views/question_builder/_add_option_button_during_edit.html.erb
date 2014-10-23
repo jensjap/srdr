@@ -1,0 +1,79 @@
+<div id="<%= 'q_'+@q_num.to_s+'_choices' %>">
+	<!-- The first option text field -->
+	<span  id='<%= "q_"+@q_num.to_s+"_row_1_div" %>' class='question_choice'>
+	Option: <%= text_field @page_name, "choice_1_field_0", :class=>'choice_input_field', :title => "question option" %> 
+	<%= check_box_tag "gets_sub[1]","1", true, :class=>'sq_assignment_edit_cbox', :style=>"display:none;", :title => "question option" %>
+	<br/>
+	</span>
+	
+	<!-- The second option text field -->
+	<span  id='<%= "q_"+@q_num.to_s+"_row_2_div" %>' class='question_choice'>
+	Option: <%= text_field @page_name, "choice_2_field_0", :class=>'choice_input_field', :title => "question option" %> 
+	<%= check_box_tag "gets_sub[2]","2", true, :class=>'sq_assignment_edit_cbox', :style=>"display:none;", :title => "question option" %>
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice,:row_num=>"2", :editing=>true, :page_name=>@model, :field_id=>"0", :qnum=>@q_num), :remote=>true, :class=>"delete_column_link", :confirm=>"Are you sure? This cannot be undone." %>
+	<br/>
+	</span>
+	
+	<!-- The third option text field -->
+	<span  id='<%= "q_"+@q_num.to_s+"_row_3_div" %>' class='question_choice'>
+	Option: <%= text_field @page_name, "choice_3_field_0", :class=>'choice_input_field', :title => "question option" %>
+	<%= check_box_tag "gets_sub[3]","3", true, :class=>'sq_assignment_edit_cbox', :style=>"display:none;", :title => "question option" %> 
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>"3", :editing=>true, :page_name=>@model, :field_id=>"0", :qnum=>@q_num), :remote=>true, :class=>"delete_column_link", :confirm=>"Are you sure? This cannot be undone." %>
+	<br/>
+	</span>
+	
+	<!-- The fourth option text field -->
+	<span  id='<%= "q_"+@q_num.to_s+"_row_4_div" %>' class='question_choice'>
+	Option: <%= text_field @page_name, "choice_4_field_0", :class=>'choice_input_field', :title => "question option" %> 
+	<%= check_box_tag "gets_sub[4]","4", true, :class=>'sq_assignment_edit_cbox', :style=>"display:none;", :title => "question option" %>
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>"4", :editing=>true, :page_name=>@model, :field_id=>"0", :qnum=>@q_num), :remote=>true, :class=>"delete_column_link", :confirm=>"Are you sure? This cannot be undone." %>
+	<br/>
+	</span>
+	<br/>
+	<div class="actions" id="new_choice_button">
+		
+		<% @button_id = "q_"+@q_num.to_s+"_choice_button"%>
+	  <%= link_to "Add a Choice","#", :id=>@button_id %>
+	</div>
+	<br/><br/>			
+	<%= check_box_tag "has_subquestion_" + @model,"yes", false, :title => "has subquestion" %> I would like to include a subquestion.
+	
+	<div id="sq_edit_text_div" style="display:none;" ><br/><br/>
+		<strong>Sub-question:</strong><%= text_field_tag :subquestion_text, "", :size=>"40", :title => "subquestion" %><br/>
+		<span class='smallText'>Use the check boxes to the right of each choice to specify 
+			whether or not to associate the subquestion with that choice.
+		</span>
+	</div>
+
+<script type='text/javascript'>
+		var subq_checkbox = "<%= "#has_subquestion_"+@model%>"
+		$(subq_checkbox.toString()).bind("change", function(){
+			if ($(this).attr("checked")){
+				$(".sq_assignment_edit_cbox").css("display","inline");
+				$("#sq_edit_text_div").css("display","inline");
+			}else{
+				$(".sq_assignment_edit_cbox").css("display","none");
+				$("#sq_edit_text_div").css("display","none");
+			}
+		});	
+		
+		// unbind just in case the same question number was edited on 
+		// the previous tab
+		$("<%= '#' + @button_id %>").unbind("click");
+		$("<%= '#' + @button_id %>").bind("click",function(event) {
+			var has_sub = $(subq_checkbox.toString()).attr("checked");
+			event.preventDefault();
+	  	$.ajax({
+	  		url: 'question_builder/add_choice',
+	  		data: {
+	  				previous_row: $("<%= '#' + @button_id %>").parent().prev().prev().attr('id'),
+	  		 		page_name: "<%= @model %>",
+	  		 		editing: "true", 
+	  		 		has_sub: has_sub
+	  		 }
+			});
+  	});
+	</script>
+
+</div>
+

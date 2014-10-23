@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: Default Question Setup
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: Default Question Setup</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>Default Question Setup</h1>
+
+<h2>Config Files</h2>
+
+<p>The following files contain information used to create default questions in SRDR:</p>
+
+<ul>
+<li>config/default_questions.yml</li>
+<li>config/quality_dimensions.yml</li>
+</ul>
+
+
+<p>These files have a specific structure that can be used to add new questions, set up in YAML format. For more information on YAML file structure, see the wikipedia entry on YAML at <a href="http://en.wikipedia.org/wiki/Yaml.">http://en.wikipedia.org/wiki/Yaml.</a></p>
+
+<p>The files are read into the system in a function when the default questions or options need to be created. See below for the file setup and specific examples of reading in the files.</p>
+
+<h2>Default Questions Created with the Extraction Form</h2>
+
+<h3>Design Details Syntax</h3>
+
+<p>Below is the syntax for example questions in the design details section. Questions must be set up in the following format and must have "question-text", "notes", "field-type" attributes. If a question has no options (i.e. a text based question), you can leave off the "options" and "option" rows.</p>
+
+<pre class="code">design-details:
+  - question: 
+    question-text: &quot;Study type&quot;
+    notes: &quot;Created by default&quot;
+    field-type: &quot;checkbox&quot;
+    options:
+      - option: &quot;RCT&quot;
+      - option: &quot;Prospective Cohort&quot;
+      - option: &quot;Cross-Sectional&quot;
+      - option: &quot;Case Control&quot;
+      - option: &quot;Retrospective Cohort&quot;
+      - option: &quot;Other&quot;
+    question-number: 1
+  - question: 
+    question-text: &quot;Inclusion criteria&quot;
+    notes: &quot;Created by default&quot;
+    field-type: &quot;text&quot;
+    question-number: 2
+</pre>
+
+<h3>Adverse Event Columns Syntax</h3>
+
+<p>Below is the syntax for example questions in the adverse event columns section. Questions must be set up in the following format and must include "column-title" and "description" attributes.</p>
+
+<pre class="code">adverse-event-columns:
+  - column:
+    column-title: &quot;Timeframe&quot;
+    description: &quot;Created by default&quot;
+  - column:
+    column-title: &quot;Is event serious?&quot;
+    description: &quot;Created by default&quot;
+  - column:
+    column-title: &quot;Definition of serious&quot;
+    description: &quot;Created by default&quot;
+  - column:
+    column-title: &quot;Number affected&quot;
+    description: &quot;Created by default&quot;
+  - column:
+    column-title: &quot;Number at risk&quot;
+    description: &quot;Created by default&quot;
+</pre>
+
+<h3>Quality Rating Fields Syntax</h3>
+
+<p>Below is the syntax for example questions in the quality rating fields section. Questions must be set up in the following format and must include "field-title" and "display-number" attributes.</p>
+
+<pre class="code">quality-rating-fields:
+- field:
+  field-title: &quot;Good&quot;
+  display-number: 1
+- field:
+  field-title: &quot;Fair&quot;
+  display-number: 2
+- field:
+  field-title: &quot;Poor&quot;
+  display-number: 3
+</pre>
+
+<h3>Outcome Measures Syntax</h3>
+
+<p><u>This has not yet been implemented.</u> The default_questions.yml file does not contain any outcome measure information. Here is an example of possible outcome measure syntax:</p>
+
+<pre class="code">outcome-measures:
+  - measure:
+    measure-title: &quot;Example Measure Title&quot;
+    description: &quot;Example Measure Description&quot;
+    unit: &quot;Example Unit&quot;
+    note: &quot;Example Note&quot;
+    measure-type: &quot;Example Type&quot;
+</pre>
+
+<h3>Reading in the File</h3>
+
+<p>The default_questions.yml file is read in the file app/models/extraction_form.rb, in the method create_default_questions(extraction_form_id). Below is the code for reading in the design details, adverse event columns, and quality rating fields.</p>
+
+<p>  require 'yaml'</p>
+
+<p>  fn = File.dirname(File.expand_path(<strong>FILE</strong>)) + '/../../config/default_questions.yml'
+  defaults = YAML::load(File.open(fn))</p>
+
+<p>  if (defined?(defaults) &amp;&amp; !defaults.nil?)</p>
+
+<pre class="code"><span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>design-details</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+  <span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>design-details</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span>
+    <span class='ivar'>@design_detail</span> <span class='op'>=</span> <span class='const'>DesignDetail</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+    <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_question'>question</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question-text</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_field_type'>field_type</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>field-type</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_field_note'>field_note</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>notes</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_question_number'>question_number</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>question-number</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+    <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+    <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>         
+    <span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+      <span class='id identifier rubyid_value'>value</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>options</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span><span class='op'>|</span><span class='id identifier rubyid_v'>v</span><span class='op'>|</span>
+        <span class='ivar'>@design_detail_field</span> <span class='op'>=</span> <span class='const'>DesignDetailField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+        <span class='ivar'>@design_detail_field</span><span class='period'>.</span><span class='id identifier rubyid_design_detail_id'>design_detail_id</span> <span class='op'>=</span> <span class='ivar'>@design_detail</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span>
+        <span class='ivar'>@design_detail_field</span><span class='period'>.</span><span class='id identifier rubyid_option_text'>option_text</span> <span class='op'>=</span> <span class='id identifier rubyid_v'>v</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>option</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+        <span class='ivar'>@design_detail_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+      <span class='kw'>end</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span> 
+</pre>
+
+<p>  if !defaults['adverse-event-columns'].nil?</p>
+
+<pre class="code"><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>adverse-event-columns</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_adverse_event_column'>adverse_event_column</span><span class='op'>|</span>
+  <span class='ivar'>@new_col</span> <span class='op'>=</span> <span class='const'>AdverseEventColumn</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_name'>name</span> <span class='op'>=</span> <span class='id identifier rubyid_adverse_event_column'>adverse_event_column</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>column-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_description'>description</span> <span class='op'>=</span> <span class='id identifier rubyid_adverse_event_column'>adverse_event_column</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>description</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+  <span class='ivar'>@new_col</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+<span class='kw'>end</span>
+</pre>
+
+<p>  end</p>
+
+<p>  if !defaults['quality-rating-fields'].nil?</p>
+
+<pre class="code"><span class='id identifier rubyid_defaults'>defaults</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>quality-rating-fields</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_quality_rating_field'>quality_rating_field</span><span class='op'>|</span>
+  <span class='ivar'>@new_field</span> <span class='op'>=</span> <span class='const'>QualityRatingField</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+  <span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_rating_item'>rating_item</span> <span class='op'>=</span> <span class='id identifier rubyid_quality_rating_field'>quality_rating_field</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>field-title</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_display_number'>display_number</span> <span class='op'>=</span> <span class='id identifier rubyid_quality_rating_field'>quality_rating_field</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>display-number</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span>
+  <span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span>
+  <span class='ivar'>@new_field</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>
+<span class='kw'>end</span>
+</pre>
+
+<p>  end</p>
+
+<h2>Dropdown Menu Items for Quality Dimensions</h2>
+
+<h3>Quality Dimensions Syntax</h3>
+
+<p>Below is the syntax for quality dimensions listed in the drop-down menu in the quality dimensions section of the extraction form creation section. Quality Dimension items must be set up in the following format. They must include "section-title", "section-description", "question", "description" and "options" attributes. Section title and description is meant to be used for the type or source of a particular quality dimension, such as "Cochrane ROB".</p>
+
+<ul>
+<li>section:
+section-title: "Example Title"
+section-description: "Example Description"
+dimensions:
+
+<ul>
+<li>dimension:
+question: "Example Question"
+description: "Example Question Description"
+options:
+
+<ul>
+<li>option: "Yes"</li>
+<li>option:  "No"</li>
+<li>option: "Unsure"</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Reading in the File</h3>
+
+<p>The quality_dimensions.yml file is read in the file app/models/quality_dimension_field.rb, in the function get_dimension_list(). This function is called from app/views/quality_dimension_fields/_form.html.erb in order to populate the drop down menu in the form dialog box. Below is the code for reading in the quality dimension fields.</p>
+
+<pre class="code">require 'yaml'
+@dim_fields = []    
+fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
+dimensions_file = YAML::load(File.open(fn)) 
+@dim_fields &lt;&lt; [&quot;Choose a quality dimension&quot;, &quot;choose&quot;]
+if (defined?(dimensions_file) &amp;&amp; !dimensions_file.nil?)
+  dimensions_file.each do |section|
+    @dim_fields &lt;&lt; [&quot;--------&quot; + section['section-title'] + &quot;--------&quot;,&quot;-&quot;]
+    if defined?(section['dimensions']) &amp;&amp; !section['dimensions'].nil?
+      section['dimensions'].each do |dimension|
+        @str = &quot;&quot;
+        @str = dimension['question'] + &quot; [&quot;
+        @options = []
+        if !dimension['options'].nil?
+          dimension['options'].each do |option|
+            @options &lt;&lt; option['option']
+          end
+        end
+        @str = @str + @options.join(&quot;, &quot;) + &quot;]&quot;
+        @dim_fields &lt;&lt; [@str,@str]                          
+      end
+    end
+  end
+</pre>
+</div></div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:46 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

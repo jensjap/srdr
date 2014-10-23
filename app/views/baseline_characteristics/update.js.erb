@@ -1,0 +1,6 @@
+$("#baseline_characteristic_fields_entry").html("<%= escape_javascript(render :partial=>"baseline_characteristic_fields/form", :locals => {:baseline_characteristic => @baseline_characteristic}) %>");
+$("#extraction_form_preview_table_bc").html("<%= escape_javascript(render :partial=>"question_builder/extraction_form_preview") %>");
+$("#baseline_characteristic_fields_entry").dialog('close');
+
+$("#saved_item_indicator_bc").show().delay(500).fadeOut(300);
+$("#validation_message_bc").html("");

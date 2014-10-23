@@ -1,0 +1,11 @@
+<% if @saved %>
+    $("#info_messages").html("<%= escape_javascript(render "layouts/info_messages") %>");
+    $("#extraction_form_table").html("<%= escape_javascript(render "projects/extractionforms_table", :extraction_forms => @extraction_forms) %>");
+    $("#tabs-1").html("<%= escape_javascript(render "extraction_forms/new", :locals => {:extraction_form => @extraction_form}) %>");
+    $("#extraction_form_button_div").html("<%= escape_javascript(render :partial => "extraction_forms/extraction_form_buttons") %>");
+    $("div.post-ef-nav a.#post-ef-nav-1.actions").attr('href', '<%= "/projects/#{@project.id}/extraction_forms/#{@extraction_form.id}/edit" %>');
+    $("div.post-ef-nav a.actions").toggle();
+<% else %>
+    $("#info_messages").html("<%= escape_javascript(render "layouts/info_messages") %>");
+    window.scrollTo(0,0);
+<% end %>

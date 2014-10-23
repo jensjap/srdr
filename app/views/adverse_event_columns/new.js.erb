@@ -1,0 +1,4 @@
+$("#new_adverse_entry").html("<%= escape_javascript(render :partial=>'adverse_event_columns/form')%>");
+$("#new_adverse_entry :button").removeAttr("disabled");
+$("#new_adverse_entry").dialog("option", "title", "New Adverse Event Column Title");			
+$('#new_adverse_entry').dialog('open');	

@@ -1,0 +1,163 @@
+<div class="extraction_form_title"><h2>Preview for Extraction Form: "<%= @extraction_form.title %>"</h2></div><br/>
+
+  <br/>
+  
+  <% if ExtractionForm.no_sections_are_included(@extraction_form.id) %>
+	The creator of this extraction form did not include any of the available sections.
+  <% else %>
+
+  <% end %>
+  
+ 	<% if sections_list.include?("questions") %>
+  	<!-- KEY QUESTIONS DIV SECTION -->
+<div id="extraction_form_view_questions" style="display:block">
+	<div class="summary_heading">Key Questions</div>
+	<div id="keyqs_text"><br/>
+
+<%= render "key_questions/extraction_form_list" %>
+	</div>	
+
+	<br/>
+	
+	</div>
+<% end %>
+
+	
+	<% if sections_list.include?("arms") %>
+  	<!-- ARMS DIV SECTION -->
+	<div id="extraction_form_view_arms" style="display:block">
+	<div class="summary_heading">Arms</div>
+	<div id="arms_text">
+	<%= render 'arms_table_completed' %>
+	</div>
+  <br/>
+	</div>
+  <% end %>
+
+	<% if sections_list.include?("design") %>
+  	<!-- DESIGN DETAILS DIV SECTION -->
+	<% @questions = DesignDetail.where(:extraction_form_id => @extraction_form.id, :study_id => nil).order("question_number ASC") %>
+	<div id="extraction_form_view_design" style="display:block">
+	<div class="summary_heading">Design Details and Enrollment</div>
+	<div id="design_detail_text"><br/>
+	<% @model = "design_detail" %>
+	<%= render 'question_builder/extraction_form_preview_noedit' %>
+	</div>
+  <br/>
+	</div>
+  <% end %>
+
+  	<% if sections_list.include?("baselines") %>
+	<!-- BASELINE CHARACTERISTICS DIV SECTION -->
+	<% @questions = BaselineCharacteristic.where(:extraction_form_id => @extraction_form.id, :study_id => nil).order("question_number ASC")%>	
+	<div id="extraction_form_view_baselines" style="display:block">
+	<div class="summary_heading">Baseline Characteristics Fields</div>
+	<div id="pop_char_text"><br/>
+	<% @model = "baseline_characteristic" %>
+	<%= render 'question_builder/extraction_form_preview_noedit' %>
+	</div>
+<br/>	
+	</div>
+	<% end %>
+
+		<% if sections_list.include?("outcomes") %>
+  	<!-- OUTCOME SETUP DIV SECTION -->
+	<div id="extraction_form_view_outcomes" style="display:block">
+	<div class="summary_heading">Pre-Defined Outcomes</div>
+	<div id="outcome_setup_text"><br/>
+	<%= render 'extraction_form_outcome_names/completed_table' %>
+	</div>
+<br/>
+	</div>
+<% end %>
+
+	
+		<% if sections_list.include?("results") %>
+	<!-- OUTCOME DATA SECTION -->
+	<div id="extraction_form_view_results" style="display:block">
+	<div class="summary_heading">Outcome Data Fields</div>
+	<div id="datafields_text">
+	<br/>
+		<%= render 'outcome_columns/example_table' %>	
+	</div>
+	<br/>
+	</div>
+	<% end %>
+
+	<% if sections_list.include?("comparisons") %>
+  	<!-- OUTCOME COMPARISONS DIV SECTION -->
+	<div id="extraction_form_view_comparisons" style="display:block">
+	<div class="summary_heading">Outcome Comparisons</div>
+	<div id="outcome_comparison_results_text"><br/>
+		<%= render 'outcome_comparison_results/example_table' %>	
+	</div>
+	<br/>
+	</div>
+	<% end %>
+
+		<% if sections_list.include?("adverse") %>
+	  	<!-- ADVERSE EVENTS DIV SECTION -->
+	<div id="extraction_form_view_adverse" style="display:block">
+	<div class="summary_heading">Adverse Events</div>
+	<div id="adverse_events_text"><br/>
+	<%= render 'adverse_event_columns/example_table' %>
+	</div>
+	<br/>
+	</div>
+	<% end %>
+
+	<% if sections_list.include?("quality") %>
+	<!-- QUALITY ASSESSMENT SECTION -->
+	<div id="extraction_form_view_quality" style="display:block">
+	<div class="summary_heading">Quality Dimension Fields</div>
+	<div id="qa_text"><br/>
+		<%= render 'quality_dimension_data_points/example_table' %>
+		<%= render 'quality_rating_fields/example_table' %>	
+	</div>
+	</div>
+	<% end %>
+	
+	<br/><br/>
+
+<table id="bottom_nav" id="extraction_form_bottom_nav_table" summary="extraction form bottom nav table">
+	<tr>
+		<td align="left">
+			<a href="extraction_forms/<%= @extraction_form.id.to_s %>/quality" id ="page_flip_btn_bk_mod_qu" class="edit_link">
+  			<img alt="Go Back" src="/images/Silk_bullet_back.png" style="border:0px; vertical-align:text-top"/>
+				Back to Study Quality
+  		</a>
+		</td>
+		<td align="right">
+			<a href="#" id="close_window_btn" class="negative edit_link">
+  			<img alt="Close This Window" src="/images/Cancel.png" style="border:0px; vertical-align:text-top"/>
+			Close Window
+  			
+  		</a>
+  	</td>
+</tr>
+</table>
+
+
+
+<script type="text/javascript">
+	$("#page_flip_btn_bk_mod_qu").bind("click", function(e){
+		e.preventDefault();
+		$.ajaxSetup({
+			'beforeSend': function(xhr) {
+				xhr.setRequestHeader("Accept", "text/javascript")
+			}
+		})					
+		$.ajax({
+			type: 'POST',
+			url: 'extraction_forms/<%= @extraction_form.id.to_s %>/quality',
+			data: ({
+			})
+		});
+	});
+
+	$("#close_window_btn").bind("click", function(e){
+		e.preventDefault();
+		$.modal.close();		
+	});	
+	
+	</script>

@@ -1,0 +1,48 @@
+Sorting: 
+<% if @current_sorting_order == "type" %>
+	flags first
+<% else %>
+<%= link_to "newest flags first", {:controller => "comments", :action => "summary_sort", :sort_by => "type", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+| 
+<% if @current_sorting_order == "priority" %>
+	flag priority
+<% else %>
+<%= link_to "flag priority", {:controller => "comments", :action => "summary_sort", :sort_by => "priority", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+| 
+<% if @current_sorting_order == "flagtype" %>
+	flag type
+<% else %>
+<%= link_to "flag type", {:controller => "comments", :action => "summary_sort", :sort_by => "flagtype", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "recent" %>
+	most recent
+<% else %>
+<%= link_to "most recent", {:controller => "comments", :action => "summary_sort", :sort_by => "recent", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "oldest" %>
+	oldest
+<% else %>
+<%= link_to "oldest", {:controller => "comments", :action => "summary_sort", :sort_by => "oldest", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "study" %>
+	by study
+<% else %>
+<%= link_to "by study", {:controller => "comments", :action => "summary_sort", :sort_by => "study", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "section" %>
+	by section
+<% else %>
+<%= link_to "by section", {:controller => "comments", :action => "summary_sort", :sort_by => "section", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>
+|
+<% if @current_sorting_order == "facts" %>
+	fact/opinion
+<% else %>
+<%= link_to "fact/opinion", {:controller => "comments", :action => "summary_sort", :sort_by => "facts", :project_id => @project_id}, {:remote => true, :method => "post"} %>
+<% end %>

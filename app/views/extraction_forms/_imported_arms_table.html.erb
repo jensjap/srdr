@@ -1,0 +1,20 @@
+<% unless @donor_info.empty? %>
+	<h3>Arms Imported From Other Forms</h3>
+	<table class="list_table" id="imported_arms_table" summary="imported arms table">	  
+  	<thead><tr>
+  	<th>Arm Title</th>
+  	<th>Arm Description</th>
+  	<!--<th>User Note</th>-->
+  	<th></th>
+		</tr></thead>
+		<% @donor_info.each do |donor| %>
+  
+		<tr class="<%= cycle("even","odd") %>" >
+  		<td><%= donor.name %></td>
+  		<td><%= donor.description %></td>
+  		<!--<td><%# donor.note %></td>-->
+  		<td>(imported)</td>
+  	</tr>
+  <% end %>
+	</table>
+<% end %>

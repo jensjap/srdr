@@ -1,0 +1,77 @@
+<%= form_tag("/projects/#{@study.project_id}/studies/#{@study.id}/reassign", :method=>'post') do %>
+<% current_user_login = @all_users.find{|x| x.id == @study.creator_id} %>
+<% if current_user_login.nil? %>
+	<% current_user_login = User.find(@study.creator_id) %>
+	<% unless current_user_login.nil? %>
+		<% current_user_login = current_user_login.login + " WARNING: This user is not an assigned collaborator on this project!" %>
+	<% else %>
+		<% current_user_login = "Error: This user was not found. Please contact the SRDR team for assistance." %>
+	<% end %>
+<% else %>
+	<% current_user_login = current_user_login.login %>
+<% end %>
+
+<input type='hidden' name='old_user_login' value="<%= current_user_login %>" />
+<input type='hidden' name='old_user_id' value="<%= @study.creator_id %>" />
+<br/>
+<span style='font-weight:bold; font-size:15px;'>Video Tutorial:</span> <a href='http://youtu.be/0wxEWaUmuEA' class='needs_exit_disclaimer' target='_blank'>Reassigning studies in a project to a different project team member<img alt='WARNING: this link will direct you away form our site.' src="/images/exit_disclaimer.gif"/></a> (1 min, 21 sec)
+<br/>
+<br/>
+<span style='font-weight: bold; font-size: 15px;'>Current Assignment:</span> <%= current_user_login %><br/><br/>
+<span style='font-weight: bold; font-size: 15px;'>New Assignment:</span> <select name="new_user" id="new_assignment_selector">
+					<% @all_users.each do |au| %>
+						<% unless au.id == @study.creator_id %>
+							<option value="<%= au.id %>|<%= au.login%>"><%= au.login %></option>
+						<% end %>
+					<% end %>
+				</select>
+<br/><br/>
+The table below contains the complete list of <%= @user_studies.length + 1 %> studies assigned to <%= current_user_login %>. Any or all of these studies may be selected for reassignment.<br/><br/>
+<strong>Note:</strong> The studies listed below are ordered by title.<br/><br/>
+<div style='width:100%; height: 300px; overflow: scroll; border: solid 1px black;'>
+	<table class='classic-a'>
+	<tr><th></th>
+		<th><input type='checkbox' id='toggle_all_studies_assignment_box' title='Select / Deselect All'/></th>
+		<th>Pubmed ID</th>
+		<th>Internal ID</th>
+		<th>Study Title</th>
+		<th>Authors</th>
+	</tr>
+	<% ([@study] + @user_studies).each_with_index do |s,indx| %>
+		<% pmid = s.primary_publication.nil? ? "---" : (s.primary_publication.pmid.blank? ? "---" : s.primary_publication.pmid)%>
+		<% internal_id = s.primary_publication_numbers.select{|x| x.number_type == 'internal'}.first.nil? ? "---" : (s.primary_publication_numbers.select{|x| x.number_type == 'internal'}.first.number.blank? ? "---" : s.primary_publication_numbers.select{|x| x.number_type == 'internal'}.first.number) %>
+		<% if indx == 0 %>
+			<tr>
+				<td style='text-align:left;'>1.</td>
+				<td><input type='checkbox' value="<%= s.id %>" name='studies_to_update[]' class='study_assignment_selector' checked="checked"/></td>
+				<td style='font-weight:bold;'><%= pmid %></td>
+				<td style='font-weight:bold;'><%= internal_id %></td>
+				<td style='font-weight:bold; text-align:left;'><%= s.primary_publication.nil? ? "-- No Title Entered --" : (s.primary_publication.title.blank? ? "-- No Title Entered --" : s.primary_publication.title) %></td>
+				<td style='font-weight:bold; text-align:left;'><%= s.primary_publication.nil? ? "-- No Author(s) Entered --" : (s.primary_publication.title.blank? ? "-- No Author(s) Entered --" : s.primary_publication.author) %></td>
+			</tr>
+		<% else %>
+			<tr>
+				<td style='text-align:left;'><%= indx + 1 %>.</td>
+				<td><input type='checkbox' value="<%= s.id %>" name='studies_to_update[]' class='study_assignment_selector'></td>
+				<td><%= pmid %></td>
+				<td><%= internal_id %></td>
+				<td style='text-align:left;'><%= s.primary_publication.nil? ? "-- No Title Entered --" : (s.primary_publication.title.blank? ? "-- No Title Entered --" : s.primary_publication.title) %></td>
+				<td style='text-align:left;'><%= s.primary_publication.nil? ? "-- No Author(s) Entered --" : (s.primary_publication.title.blank? ? "-- No Author(s) Entered --" : s.primary_publication.author) %></td>
+			</tr>
+		<% end %>
+	<% end %>
+	</table>
+</div>
+<br/><br/>
+<center>
+	 <div class="popup-footer actions">
+		<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Re-Assign Studies
+		</button>
+	
+		<button class="negative" onClick="event.preventDefault();$('#reassignment_modal').dialog('close');">
+			<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+		</button>
+	</div>
+</center>
+<% end %>

@@ -1,0 +1,3 @@
+$("img.delete_tp_btn").attr("src", "/images/waiting.gif");
+
+$("#edit_tp_list").html("<%= escape_javascript(render :partial => "outcome_timepoints/edit_timepoints_all", :locals => {:outcome_timepoints => @outcome_timepoints}) %>");

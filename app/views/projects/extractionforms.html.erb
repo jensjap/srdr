@@ -1,0 +1,100 @@
+<!-- RIGHT COLUMN DIV -->
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial => "sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+	<!-- some divs used for modal windows -->
+	<div id="modal_div">
+	</div>
+	<div id="notification_div">
+	</div>
+	
+	<script>
+	var is_edit_page=false;
+	</script>
+
+	<div id="page_title">
+		<%= render :partial => "page_title", :locals => {:page_title => "Extraction Forms", :in_ef => true} %>
+		
+	</div>
+
+	<div id="extraction_form_container">
+		
+	<div id="extraction_form_div">
+	<br/><br/>
+	In order to extract study data to this systematic review, you must first create <strong>Extraction Forms</strong>. <br/><br/>
+	Each Extraction Form should answer one or more of your <strong><%= Project.get_num_key_qs(@project) %> Key Questions</strong>. <br/><br/>
+	<div id='ef_form_list_div'>
+	  <%= render :partial=>'projects/ef_form_list_explanation' %>
+	</div>
+	
+	<br/>
+		<% if !@project.nil? %>
+			<% if @extraction_forms.empty? %>
+			There are currently no extraction forms in this project. Click the Add Extraction Form button to add an extraction form to this project.<br/><br/>
+			<% end %>
+		
+		<% end %>
+		<br/>
+	
+	  <%= render :partial=>'extraction_forms/back_and_continue_buttons', :locals=>{:previous_url=>"edit",:next_url=>"/projects/" + @project.id.to_s + "/studies", :previous_title=>"Project Information",:next_title=>"Study Listing"} %>
+	  </div>
+	</div>
+</div> <!-- END RIGHT COLUMN DIV -->
+
+
+  <script type="text/javascript">
+	$("#add_new_extraction_form").live("click", function(e){
+		e.preventDefault();
+		$.ajaxSetup({
+			'beforeSend': function(xhr) {
+				xhr.setRequestHeader("Accept", "text/javascript")
+			}
+		})				
+				$.ajax({
+				  type: 'POST',
+				  url: "/projects/<%= @project.id.to_s %>/extraction_forms/new",
+				  data: ({
+						project_id: <%= @project.id.to_s %>
+				  })
+				});
+	});
+
+	$("#browse_extraction_forms").live("click", function(e){
+		e.preventDefault();
+		$.ajax({
+		  type: 'POST',
+		  url: "/extraction_forms/add_from_bank",
+		  data: ({
+				project_id: <%= @project.id.to_s %>
+		  })
+		});
+	});
+
+	$(document).ready(function(){
+	
+		var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+		// Default values...
+		myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+		myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+		myMenu.oneSmOnly = false;             // One expanded submenu at a time
+		myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+
+		myMenu.init();
+
+		// SEPARATE FROM THE MENU ITSELF...
+		create_tabs();
+		$("#modal_div").dialog({
+			autoOpen: false
+		})
+		
+		$("#add_keyquestion_box").dialog({
+	        autoOpen: false,
+			minWidth: 600
+	    });
+
+		$("a.nav_active").first().addClass("nav-active");
+		$("a.nav_active").first().addClass("nav-selected");
+	
+	})
+  </script>

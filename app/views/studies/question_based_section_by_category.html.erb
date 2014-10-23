@@ -1,0 +1,190 @@
+<div class='tab-div'>
+	<br/>
+	<h2><%= @data[:page_title] %></h2><br/><br/>
+	<%# objects_needed = ['baseline_characteristic','arm_detail'].include?(@data[:model]) ? "Arms" : "Outcomes" %>
+    <% 
+        objects_needed = ""
+        if ['baseline_characteristic','arm_detail','diagnostic_test_detail'].include?(@data[:model])
+            if @data[:by_dx_test] == true
+                objects_needed = "Diagnostic Tests"
+            else
+                objects_needed = "Arms"
+            end
+        else
+            objects_needed = "Outcomes"
+        end 
+    %>
+	<%# if no categories have been created then the user will first need to create some before continuing %>
+	<% if @data[:categories].empty? %>
+		You should <strong>enter all <%= objects_needed %> to the study</strong> before completing this section.         
+    <% end  %>
+
+    <% if @data[:include_total] == true %>
+        <% unless !@data[:categories].empty? %>
+            <strong>Until then, the questions below may be answered to represent the Total set of <%= objects_needed %></strong> in the study. <br/><br/>
+        <% end %>
+        <%# we'll create an object to represent the 'Total' category as well... %>
+        <% 
+        tmpObj = nil
+        if @data[:by_arm] == true 
+            tmpObj = Arm.new(:title=>"All Arms (Total)")
+        elsif @data[:by_outcome] == true
+            tmpObj = Outcome.new(:title=>"All Outcomes (Total)")
+        elsif @data[:by_dx_test] == true
+            tmpObj = DiagnosticTest.new(:title=>"All Diagnostic Tests (Total)")
+        end
+        tmpObj.id = 0 unless tmpObj.nil?
+        @data[:categories] << tmpObj unless tmpObj.nil?
+        %>
+    <% end %>
+	<%# if there are already categories (arms or outcomes), then the user is free to continue %>
+    <% unless @data[:categories].empty? %>
+
+    	<%= form_for(@data_point, :remote => true) do |f| %>
+    		<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
+    		<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
+    		<%= f.hidden_field :project_id, :value=>session[:project_id] %>
+            <%= f.hidden_field :is_diagnostic, :value=>@data[:by_dx_test] %>
+    		
+
+    		<% section_name_for_comments = "#{@data[:model].gsub('_','')}s" %>
+    		<% field_name_for_comments = "#{@data[:model].split("_").first.singularize}" %>
+    		<% questions = @data[:questions] %>
+    		<% category_class = @data[:categories].first.class.to_s.titleize.pluralize %>
+    		<%= render :partial=>'ef_instruction' %>
+    		<table class='list_table tab-list-table' style='margin-left:0px;'> 
+    			
+    			<% questions.each do |question| %> 
+    				<tr>
+    				<td class='data' style='min-width:450px; max-width:950px;'>
+    					<%= raw(create_title(question[:q_num], question[:q_quest])) %><br/>
+    					<div style='min-width:450px; max-width:950px !important; overflow:auto;'>
+    						<% @data[:categories].each do |cat| %>
+    							<div style='text-decoration:underline;min-width:300px;margin-top:0px;'><%=cat.title%></div>
+
+    							<% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
+    								<%= raw(build_multi_choice(question, @data[:model], cat)) %>
+    								
+    							<% elsif question[:q_type] == 'select' %>
+    								<%= raw(build_dropdown(question, @data[:model], cat)) %>
+    							
+    							<% elsif question[:q_type] == 'text' %>
+    								<%= raw(build_text(question, @data[:model], 66, cat)) %>
+    							
+    							<% else %>
+    								<%= raw(build_matrix(question, @data[:model], cat)) %>
+
+    							<% end %>
+    							<br/>
+    						<% end %>
+    						<br/>
+    						<%= raw(include_instruction(question)) %>
+
+    						<br style='clear:both;'/>
+    						<br/>
+    						<div style='font-size:12px;'>
+    							<%= render :partial => "comments/comments_link", :locals => {:section_name => section_name_for_comments, :section_id => question[:q_id], :field_name => "#{field_name_for_comments}", :study_id => session[:study_id], :project_id => session[:project_id], :num_comments=>question[:q_num_comments], :num_flags=>question[:q_num_flags]} %>	
+    						</div>
+    					</div><!-- end overflow div -->
+    				</td>
+    				</tr>
+    			<% end %> <%# end questions.each do %>
+    							
+    		</table>
+    			<button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
+    				<%= image_tag "Accept.png", :alt => "Accept" %>Save Data
+    			</button>
+    			<div class="saved" id="saved_indicator_1" style='display:none;'>  
+    				Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
+    			</div>
+    		<!--<div id="design_detail_fields_table">-->
+    		<%# render 'design_detail_data_points/table' %>
+    		<!--</div>-->
+    		<br/><br/>
+    		<% 
+    			# DUMB HARD-CODING OF SECTION NAME FOR THE COMPLETION STATUS 
+    			sctn = case @data[:model]
+    				when "design_detail" then "design"
+    				when "baseline_characteristic" then "baselines"
+    				when "outcome_detail" then "outcome_details"
+    				when "arm_detail" then "arm_details"
+                    when "diagnostic_test_detail" then "diagnostic_test_details"
+    			end
+    		%>
+    		<%= render :partial=>'section_complete_status', :locals=>{:section=>sctn} %>
+    		<br/>
+    		<br/>
+    		<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+    		<%= render 'shared/make_editable_and_confirm' %>
+    	<% end %> <%# end form for %>
+	<% else %> <%# end else %>
+        <br/>
+    <% end %>
+</div><!-- end tab div -->
+<script type="text/javascript">
+
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+
+    $(".editable_field").live('change',function(){
+        $(this).addClass('edited_field');
+        var form = $(this).parents('form:first');
+        form.addClass("unsaved_form");
+        $(".unsaved_div").css("display","block");
+    });
+});
+</script>

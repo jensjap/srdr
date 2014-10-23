@@ -1,0 +1,16 @@
+<% if @saved %>
+  $("#info_messages").html("<%= escape_javascript(render "layouts/info_messages") %>");
+	$("#extraction_form_table").html("<%= escape_javascript(render "projects/extractionforms_table", :extraction_forms => @extraction_forms) %>");
+	$("#tabs-1").html("<%= escape_javascript(render "extraction_forms/new", :locals => {:extraction_form => @extraction_form}) %>");	
+	$("#page_title").html("<%= escape_javascript(render :partial => "projects/page_title", :locals => {:page_title => "Editing Extraction Form: " + @extraction_form.title}) %>");
+	<%# @extraction_forms = ExtractionForm.where(:project_id => params[:project_id]).all %>
+	<% if @extraction_forms.length > 1 %>
+		$("#extraction_form_div").html("<%= escape_javascript(render :partial => "extraction_forms/extraction_form_tabs", :locals => {:selected_tab => "1"}) %>");		
+	<% else %>
+		$("#extraction_form_div").html("<%= escape_javascript(render :partial => "extraction_forms/extraction_form_tabs", :locals => {:selected_tab => "2"}) %>");	
+	<% end %>
+	$("#extraction_form_button_div").html("<%= escape_javascript(render :partial => "extraction_forms/extraction_form_buttons") %>");		
+<% else %>
+	$("#info_messages").html("<%= escape_javascript(render "layouts/info_messages") %>");
+	window.scrollTo(0,0);	
+<% end %>

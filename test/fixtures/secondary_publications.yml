@@ -1,0 +1,73 @@
+# == Schema Information
+#
+# Table name: secondary_publications
+#
+#  id                 :integer          not null, primary key
+#  study_id           :integer
+#  title              :text
+#  author             :string(255)
+#  country            :string(255)
+#  year               :string(255)
+#  association        :string(255)
+#  display_number     :integer
+#  extraction_form_id :integer
+#  pmid               :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  journal            :string(255)
+#  volume             :string(255)
+#  issue              :string(255)
+#  trial_title        :string(255)
+#
+
+study1_spub1:
+  id: 1
+  study_id: 1
+  title: Associated Publication 1
+  author: Parkin, C.
+  country: United States
+  year: 2010
+  pmid: 664889
+  journal: Nature
+  volume: 55
+  issue: 115
+  display_number: 1
+
+study1_spub2:
+  id: 2
+  study_id: 1
+  title: Associated publication 2
+  author: Keefe, S.
+  country: United States
+  year: 2009
+  pmid: 554687
+  journal: Science
+  volume: 20
+  issue: 4
+  display_number: 2
+
+study1_spub3:
+  id: 3
+  study_id: 1
+  title: Originally the third secondary pub
+  author: Keefe, S.
+  country: United States
+  year: 2009
+  pmid: 554687
+  journal: Science
+  volume: 20
+  issue: 4
+  display_number: 3
+
+study1_spub4:
+  id: 4
+  study_id: 1
+  title: Originally the fourth secondary pub
+  author: Keefe, S.
+  country: United States
+  year: 2009
+  pmid: 554687
+  journal: Science
+  volume: 20
+  issue: 4
+  display_number: 4

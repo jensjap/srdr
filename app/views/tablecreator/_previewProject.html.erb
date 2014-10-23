@@ -1,0 +1,31 @@
+<div id="tc_preview_project">
+<%
+    if session[:tc_preview].nil?
+%>
+Select project data to build report
+<%
+    else
+        # Load display configuration data
+        reportconfig = @tc_project["reportconfig"]
+        reportset = @tc_project["reportset"]
+        prj = @tc_project["project"]
+        prj_id = prj.id
+        prj_title = prj.title
+%>
+<h2>Preview: <%= prj_title %></h2><br/><br/>
+<%
+        for ridx in 0..reportconfig.getNumProjectItems() - 1
+            # cfg format [<item name>, <item desc>, <0 | 1>]
+            cfg = reportconfig.getProjectConfig(ridx)
+            name = cfg[0]
+            desc = cfg[1]
+            showflag = cfg[2]
+            if showflag == 1
+%>
+<strong><%= desc %></strong>: <%= reportset.getProjectValue(ridx) %><br/>
+<%
+            end
+        end
+    end
+%>
+</div>

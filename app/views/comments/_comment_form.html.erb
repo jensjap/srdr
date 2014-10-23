@@ -1,0 +1,75 @@
+<div id="comments_messages_<%= @section_name.to_s %>_id_<%= @section_id.to_s %>_field_<%= @field_name %>_study_<%= @study_id.to_s %>_project_<%= @project_id.to_s %>">
+</div>
+
+<%= form_for(comment, :remote => true) do |f| %>
+    
+	<%= f.hidden_field "study_id", :value => @study_id %>
+	<%= f.hidden_field "project_id", :value => @project_id %>
+	<%= f.hidden_field "is_flag", :value => false %>
+	<%= f.hidden_field "is_reply", :value => false %>
+	<%= f.hidden_field "section_name", :value => @section_name %>
+	<%= f.hidden_field "section_id", :value => @section_id %>
+	<%= f.hidden_field "field_name", :value => @field_name %>
+	<%= f.hidden_field "is_public", :value => @project.is_public ? true : false %>		
+	<%= f.hidden_field "value_at_comment_time", :value => @value_at_comment_time %>
+	<%= f.hidden_field :commenter_id, :value => !current_user.nil? ? current_user.id : nil %>
+	
+	<table id="comment_form_table" summary="comments form table">
+<tbody>
+<tr class="field">
+<td>
+	<label for="Posting As">Posting As:</label>
+</td>
+<td>
+	<%= current_user.login %>
+</td></tr>
+<tr class="field">
+<td>
+	<label for="Comment Visibility">Comment Visibility:</label>
+</td>
+<td>
+	<%= @project.is_public ? "Public" : image_tag("Lock.png", :alt => "Lock", :title => "Lock") + " Internal Only" %>
+</td></tr>
+<tr class="field">
+<td>
+    <label for="Comment">Comment:</label>
+</td></td>
+<td>
+    <%= f.text_area :comment_text, :style => "width: 100%; height: 80px;", :title => "comment text" %>
+</td></tr>
+<tr class="field">
+<td>
+	<label for="Fact or Opinion">Fact or Opinion?</label>
+</td>
+<td>
+	<%= f.select :fact_or_opinion, options_for_select(["SELECT","Fact", "Opinion", "Both"], ""), :title => "fact or opinion" %>
+</td></tr>
+<tr class="field" style="display:none">
+<td>
+	<label for="How to send comment">How to send comment?</label>
+</td>
+<td>
+	<%= select_tag :how_to_comment, options_for_select(["Post Only", "Post and Email Project Leads"], ""), :title => "how to comment" %>
+</td></tr>
+  <tr height="15"></tr>
+<tr>
+<td colspan="2" align="center">
+
+  	<div class="actions">
+			<button type="submit" class="positive">
+				<%= image_tag "Add.png", :alt => "Add"  %> Post Comment
+			</button>
+			<button class="negative close_comment_form_btn ui-tooltip-close" type="reset">
+				<%= image_tag "Cancel.png", :alt => "Cancel"  %> Cancel
+			</button>			
+  	</div>
+
+	</td></tr></table>
+<% end %>
+
+
+<script>
+$('.close_comment_form_btn').bind("click", function(){
+	$('#ui-tooltip-comment_form_tooltip').qtip('hide');
+});
+</script>

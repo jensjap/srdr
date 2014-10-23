@@ -1,0 +1,2 @@
+$("#<%=@table_container%>").html("<%= escape_javascript(render :partial=>'extraction_form_diagnostic_tests/test_table',:locals=>{:tests=>@tests, :title=>@title})%>");
+$("#new_test_modal").dialog('close');

@@ -1,0 +1,80 @@
+<% if comment.is_public == is_public %>
+	<% replies = Comment.where(:reply_to => comment.id, :is_reply => true).all %>	
+	<div id="<%= 'comment_' + comment.id.to_s + '_div' %>" class="one_comment">
+
+			<div class="comment_meta">
+			<% if !comment.is_public %>
+			<%= image_tag("Lock.png", :style=>"border-style:none;vertical-align:top;", :alt => "Internal Comment") %>				
+			<% end %>
+			<% if comment.is_flag %>
+				<%= image_tag("Flag_red.png", :style=>"border-style:none;vertical-align:top;", :alt => "Flag") %>
+			<% else %>
+				<%= image_tag("Comment.png", :style=>"border-style:none;vertical-align:top;", :alt => "Comment") %>			
+			<% end %>
+		  	<strong><%= User.get_name(comment.commenter_id) %></strong> posted a <strong><%= comment.is_flag ? "flag" : "comment" %></strong> on <strong><%= comment.created_at.strftime("%D %I:%M%p") %></strong>
+			</div>
+			<div class="comment_meta_summary">
+				<%= render :inline => Comment.get_location_string(comment.id) %>
+			</div>
+		
+			<div class="comment_content">
+				<%= comment.comment_text %>
+				<br/><br/>
+				<% if comment.fact_or_opinion != "" %>
+				Marked as <strong><%= comment.fact_or_opinion %></strong><br/>
+				<% end %>
+				<% if comment.is_flag && (comment.flag_type != "") && !comment.flag_type.nil?%>
+					Marked as <strong><%= comment.flag_type %></strong><br/>
+				<% end %>
+				<% if comment.is_flag && comment.is_high_priority != "" %>
+					<% if comment.is_high_priority %>
+							Marked as <strong>High Priority</strong><br/>								
+					<% else %>
+							Marked as <strong>Low Priority</strong><br/>							
+					<% end %>
+				<% end %>					
+				<br/>
+
+				<div class="comment_menu_container">
+					<ul class="comment_menu">
+						<% if !replies.empty? %>
+							<%= link_to image_tag("Comment_add.png", :style=>"border-style:none;vertical-align:top;") + " Hide " + pluralize(replies.length, "reply"),"#", :class=>"show_reply_icon", :id => "show_reply_icon_" + comment.id.to_s, :comment_id=>comment.id.to_s %>						
+						<% end %>
+				<% if defined?(current_user) && !current_user.nil? %>
+				<% if User.current_user_is_collaborator(@project_id, current_user) || User.current_user_is_admin(@project_id, current_user) %>
+						<li><%= link_to image_tag("Pencil.png", :style=>"border-style:none;vertical-align:top;", :alt => "Edit Section") + " Edit Section", Comment.get_edit_url(comment), :class=>"edit_section_icon", :id => "edit_section_icon_" + comment.id.to_s %></li>
+				<% end %>
+				<% end %>
+						<li><%= link_to image_tag("Note_go.png", :style=>"border-style:none;vertical-align:top;", :alt => "Go To Section") + " Go To Section",  Comment.get_view_url(comment) + "?open_study=" + Comment.get_view_open_study(comment).to_s, :class=>"view_section_icon", :id => "view_section_icon_" + comment.id.to_s %></li>				
+					</ul>
+				</div>
+
+
+							</div><%# end div.comment_content %>		
+			<div id="reply_area_<%= comment.id.to_s %>" class="comment_reply_area"></div>
+			
+		  	<% unless replies.empty? %>
+
+				<div id="comment_<%= comment.id.to_s %>_replies" class="comment_replies">
+			  		<% replies.each do |reply| %>
+			  			<div class="comment_reply">
+						
+							<div class="comment_meta">
+								<%= image_tag("Comment.png", :style=>"border-style:none;vertical-align:top;", :alt => "Comment") %>			
+								<strong><%= User.get_name(reply.commenter_id) %></strong> posted a <strong>reply</strong> on <strong><%= reply.created_at.strftime("%D %I:%M%p") %></strong>
+							</div>
+				
+							<div class="comment_content">
+								<%= reply.comment_text %>
+								<br/><br/>
+								<% if reply.fact_or_opinion != "" %>
+								Marked as <strong><%= reply.fact_or_opinion %></strong>
+								<% end %>													
+							</div>
+							
+						</div>
+			  		<% end # end replies.each %>
+				</div> <%# end div.comment_replies %>
+		<% end # end unless replies.empty %>	
+	</div> <%# end div.one_comment %>
+<% end # end comments if private/public %> 

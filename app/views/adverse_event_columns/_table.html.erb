@@ -1,0 +1,41 @@
+
+<table class="classic-a" summary="Table For Editing Adverse Event Columns" id="editing_adverse_event_cols_table">
+	<thead>
+		<tr>
+			<th>
+			<label for="Arm or Total">Arm or Total</label>
+			</th>
+			<th>
+			<label for="Arm or Total">Adverse Event Title</label>
+			</th>
+			<th>
+			<label for="Arm or Total">Description</label>
+			</th>
+			<% for col in @extraction_form_adverse_event_columns %>
+				<th class="qtip_col_<%= col.id %>">
+					<label for="<%= col.name %>"><%= col.name %></label> 
+				<%= link_to image_tag("Silk_cross.png"), adverse_event_column_path(col.id), :method => "delete", :remote => true, :class => "delete_column_link", :style=>"float:right", :alt => "delete this column" %>
+				</th>
+			<% end %>
+		</tr>
+	</thead>
+</table>
+<br/><br/>
+
+<script type="text/javascript">
+			<% for col in @extraction_form_adverse_event_columns %>
+		
+			$('.qtip_col_<%= col.id %>').qtip({
+			   content: '<%= col.description %>',
+			   show: 'mouseover',
+			   hide: 'mouseout',
+				  position: {
+				  corner: {
+					 target: 'bottomMiddle',
+					 tooltip: 'topRight'
+				  }
+			   }
+			});
+	<% end %>
+					
+</script>

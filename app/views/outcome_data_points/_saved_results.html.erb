@@ -1,0 +1,183 @@
+
+<% if (@continuous_outcomes.length > 0 && Outcome.at_least_one_has_data(@continuous_outcomes)) || (@categorical_outcomes.length > 0 && Outcome.at_least_one_has_data(@categorical_outcomes)) %>
+
+
+<% if @categorical_outcomes.length > 0 && Outcome.at_least_one_has_data(@categorical_outcomes) %>
+<h2>Results for Categorical Outcomes</h2><br/>
+<% @categorical_outcomes.each do |cat_o| %>
+		 <% if Outcome.outcome_has_measures(cat_o) %>
+		 <% @first = true %>
+			<% @outcome_timepoints = OutcomeTimepoint.where(:outcome_id => cat_o.id).all %>
+			<% @outcome_measures = OutcomeMeasure.where(:outcome_id => cat_o.id).all %>
+			<% @arms = Arm.where(:study_id => @study.id).all %>
+			
+			<% if @outcome_timepoints.length > 0 && @outcome_measures.length > 0 && @arms.length > 0 %>
+			
+			<table class="outcome_data_points_table formatted_results_table" id="outcome_data_points_saved_results_table_<%= cat_o.id.to_s %>" summary="outcome data points saved results table">
+				<tr>
+					<th rowspan="2" scope="col" class="table_header" id="continuous_results_outcome_column_<%= cat_o.id.to_s %>">Outcome</th>
+					<th rowspan="2" scope="col" class="table_header" id="continuous_results_arm_column_<%= cat_o.id.to_s %>">Arm</th>
+					<th rowspan="2" scope="col" class="table_header" id="continuous_results_measure_column_<%= cat_o.id.to_s %>">Measure</th>
+					<% if @outcome_timepoints.length > 0 %>
+						<% @outcome_timepoints.each do |timepoint| %>
+							<th class="table_header" scope="col" style="text-align:center" id="continuous_results_timepoint_column_<%= cat_o.id.to_s %>_<%= timepoint.id.to_s %>"><%= timepoint.number.to_s %> <%= timepoint.time_unit %></th>
+						<% end %>
+						<th rowspan="2" scope="col" width="20" id="continuous_results_actions_column_<%= cat_o.id.to_s %>">Actions</th>					
+						</tr>
+						<% @outcome_timepoints.each do |timepoint| %>
+							<th scope="col" class="table_header" style="text-align:center" id="continuous_results_value_column_<%= cat_o.id.to_s %>_<%= timepoint.id.to_s %>">Value</th>
+						<% end %>
+									
+						</tr>
+					<% else %>
+						</tr><td style="display:none"></td></tr>
+					<% end %>
+
+				</tr>
+
+				<tr>
+					<% @measures_length = @outcome_measures.length > 0 ? @outcome_measures.length : 1 %>
+					<td rowspan="<%= @arms.length * @measures_length %>" class="table_header"><%= cat_o.title %></td>
+
+					<% @arms.each do |arm| %>
+						<td rowspan="<%= @measures_length %>" class="table_header"><%= arm.title %></td>
+
+						<% if @outcome_measures.length > 0 %>
+							<% @outcome_measures.each do |measure| %>
+								<td><%= measure.measure_name %> <%= (measure.unit.nil? || measure.unit == "" || measure.unit == "N/A") ? "" : "(" + measure.unit + ")" %></td>
+								<% if @outcome_timepoints.length > 0 %>
+									<% @outcome_timepoints.each do |timepoint| %>
+											<td><%= OutcomeDataPoint.get_data_point_value(cat_o.id, arm.id, timepoint.id, measure.id) %>
+											<hr class="thin" />
+											N: <%= OutcomeDataPoint.get_data_point_n_enrolled(cat_o.id, arm.id, timepoint.id, measure.id) %>
+											</td>
+									<% end %>
+									</td>
+									<% if @first %>
+									<td rowspan="100%"><%= link_to image_tag("Pencil.png"), "", {:class => "edit_outcome_button", :id => "outcomebtn_" + cat_o.id.to_s, :alt => "Edit"} %></td>
+									<% @first = false %>
+									<% end %>
+								<% else %>
+									</td>
+								<% end %>		
+								</tr>
+						<% end %>
+
+				<% else %>
+					<td colspan="<%= @outcome_timepoints.length + 1 %>"></td>
+				<% end %>
+
+			</tr>
+			
+		<% end %>
+<% end %>
+			
+			</table>
+<br/>
+
+<% end %>
+
+<% end %>
+<% end %>
+
+<% if @continuous_outcomes.length > 0 && Outcome.at_least_one_has_data(@continuous_outcomes) %>
+<h2>Results for Continuous Outcomes</h2>
+<% @continuous_outcomes.each do |con_o| %>
+
+		<% if Outcome.outcome_has_measures(con_o) %>
+		 <% @first = true %>
+			<% @outcome_timepoints = OutcomeTimepoint.where(:outcome_id => con_o.id).all %>
+			<% @outcome_measures = OutcomeMeasure.where(:outcome_id => con_o.id).all %>
+			<% @arms = Arm.where(:study_id => @study.id).all %>
+			
+			<% if @outcome_timepoints.length > 0 && @outcome_measures.length > 0 && @arms.length > 0 %>
+			
+		<table class="outcome_data_points_table formatted_results_table" id="outcome_data_points_saved_results_table_formatted_<%= con_o.id.to_s %>" summary="outcome data points saved results table">
+		<tr>
+			<th scope="col" rowspan="2" class="table_header" id="continuous_results_outcome_column_<%= con_o.id.to_s %>">Outcome</th>
+			<th scope="col" rowspan="2" class="table_header" id="continuous_results_arm_column_<%= con_o.id.to_s %>">Arm</th>
+			<th scope="col" rowspan="2" class="table_header" id="continuous_results_measure_column_<%= con_o.id.to_s %>">Measure</th>
+			<% if @outcome_timepoints.length > 0 %>	
+			<% @outcome_timepoints.each do |timepoint| %>
+				<th scope="col" class="table_header" style="text-align:center" id="continuous_results_timepoint_column_<%= con_o.id.to_s %>_<%= timepoint.id.to_s %>"><%= timepoint.number.to_s %> <%= timepoint.time_unit %></th>
+			<% end %>
+			<th scope="col" rowspan="2" width="20" id="continuous_results_actions_column_<%= con_o.id.to_s %>">Actions</th>
+			</tr>
+			<% @outcome_timepoints.each do |timepoint| %>
+				<th scope="col" class="table_header" style="text-align:center" id="continuous_results_value_column_<%= con_o.id.to_s %>_<%= timepoint.id.to_s %>">Value</th>
+			<% end %>
+			</tr>
+			<% else %>
+		</tr><th scope="col" style="display:none" id="continuous_results_actions_column_<%= con_o.id.to_s %>">Actions</th></tr>	
+			<% end %>
+		</tr>
+
+
+		<tr>
+		<% @measures_length = @outcome_measures.length > 0 ? @outcome_measures.length : 1 %>
+		<td rowspan="<%= @arms.length * @measures_length %>" class="table_header">
+			<%= con_o.title %>
+		</td>
+
+		<% @arms.each do |arm| %>
+		<td rowspan="<%= @measures_length %>" class="table_header">
+			<%= arm.title %>
+		</td>
+
+			<% if @outcome_measures.length > 0 %>
+				<% @outcome_measures.each do |measure| %>
+					<td>
+						<%= measure.measure_name %> <%= (measure.unit.nil? || measure.unit == "" || measure.unit == "N/A") ? "" : "(" + measure.unit + ")" %></td>
+				<% if @outcome_timepoints.length > 0 %>			
+				<% @outcome_timepoints.each do |timepoint| %>
+					<td><%= OutcomeDataPoint.get_data_point_value(con_o.id, arm.id, timepoint.id, measure.id) %></td>
+				<% end %>
+									<% if @first %>
+									<td rowspan="100%"><%= link_to image_tag("Pencil.png"), "", {:class => "edit_outcome_button", :id => "outcomebtn_" + con_o.id.to_s} %></td>
+									<% @first = false %>
+									<% end %>
+				<% else %>
+					</td>
+				<% end %>	
+				
+
+				</tr>
+				<% end %>
+
+			<% else %>
+				<td colspan="<%= @outcome_timepoints.length + 1 %>"></td>
+			<% end %>
+
+		</tr>
+		
+		<% end %>
+<% end %>
+</table>
+
+<br/>
+
+<% end %>
+
+<% end %>
+
+<% end %>
+
+
+<% else %>
+	No outcome results tables have been created.
+<% end %>
+
+<script type="text/javascript">
+$(".edit_outcome_button").bind("click", function(e){
+	e.preventDefault();
+	var item_id = $(this).attr("id").split("_");
+	var outcome_id = item_id[1];
+	$.ajax({
+		type: "POST",
+		url: "outcome_data_points/edit_results_table",
+		data:{
+			"outcome_id": outcome_id
+		}
+	});
+});
+</script>

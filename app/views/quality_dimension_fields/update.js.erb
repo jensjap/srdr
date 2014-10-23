@@ -1,0 +1,7 @@
+$("#new_qd_entry").html("<%= escape_javascript(render :partial=>"quality_dimension_fields/form") %>");
+$("#quality_dimension_fields_table").html("<%= escape_javascript(render :partial=>"quality_dimension_fields/table") %>");
+$("#new_qd_entry").dialog('close');
+
+$("#saved_item_indicator_dim").show().delay(500).fadeOut(300);
+$("#validation_message_dim").html("");
+

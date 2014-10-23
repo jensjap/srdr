@@ -1,0 +1,11 @@
+closeModal();
+<%= print @outcome_timepoints %>
+<% if @outcome.outcome_type == "Continuous" %>
+
+$("#outcome_data_points_table").html("<%= escape_javascript(render :partial => "outcome_data_points/continuous_table", :locals => {:outcome_measure => @outcome_measure, :outcome_measures => @outcome_measures, :study => @study, :extraction_form => @extraction_form}) %>");
+
+<% else %>
+
+$("#outcome_data_points_table").html("<%= escape_javascript(render :partial => "outcome_data_points/categorical_table", :locals => {:outcome_measure => @outcome_measure, :outcome_measures => @outcome_measures, :study => @study, :extraction_form => @extraction_form}) %>");
+
+<% end %>

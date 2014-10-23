@@ -1,0 +1,4 @@
+$("#new_<%= @section %>_instr_entry").html("<%= escape_javascript(render :partial=>'question_builder/instr_form')%>");
+$("#new_<%= @section %>_instr_entry :button").removeAttr("disabled");
+$("#new_<%= @section %>_instr_entry").dialog("option", "title", "Enter <%= @model_title %> Instructions");		
+$("#new_<%= @section %>_instr_entry").dialog('open');

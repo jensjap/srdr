@@ -1,0 +1,14 @@
+<%# empty out any existing subquestions %>
+subqs = $("<%= @group_class %> > :input");
+for(i=0; i < subqs.length; i++){
+	sq = subqs[i];
+	$(sq).attr("disabled","disabled");
+	$(sq).removeClass("edited_field");
+	//$(sq).addClass("disabled_text");
+	$(sq).val("");
+}
+<% if @has_sq %>
+<%# render the subquestion partial for the correct one %>
+//$("<%= @element_to_fill %> > :input").removeClass("disabled_text");
+$("<%= @element_to_fill %> > :input").removeAttr("disabled");
+<% end %>

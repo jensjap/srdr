@@ -1,0 +1,41 @@
+<h2>Filter Results</h2>
+<div id="my_work_tabs">
+    <ul>
+    <li><a href="#mw-tabs-1">By Pub Med ID</a></li>
+    <li><a href="#mw-tabs-2">By Year</a></li>
+    <li><a href="#mw-tabs-3">By Journal</a></li>
+    <li><a href="#mw-tabs-4">By Author</a></li>
+    </ul>
+    <div id="mw-tabs-1">
+        <br/>
+        <%= form_tag({:controller=>'search',:action=>'filter'}, :method=>'get') %>
+        <label for "search">
+            Enter Pub Med IDs:
+        </label>
+        <%= text_field_tag 'filter_input', nil, :title => "Filter" %>
+        <button type="submit" class="inline">
+            <%= image_tag "Table_go.png", :alt => "Filter"  %> Filter 
+        </button>
+        <br/>
+        You can enter multiple Pub Med IDs using a space to separate each number. 
+        <br/>
+        <br/>
+    </div>
+    <div id="mw-tabs-2">
+    By Year
+    </div>
+    <div id="mw-tabs-3">
+    By Journal
+    </div>
+    <div id="mw-tabs-4">
+    By Author
+    </div>
+</div>
+<script>
+    $(function() {
+        var tabOpts = {
+            selected: 0
+        };
+        $( "#my_work_tabs" ).tabs(tabOpts);
+    });
+</script>

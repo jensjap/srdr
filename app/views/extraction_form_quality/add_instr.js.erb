@@ -1,0 +1,4 @@
+$("#new_quality_instr_entry").html("<%= escape_javascript(render :partial=>'extraction_form_quality/instr_form')%>");
+$("#new_quality_instr_entry :button").removeAttr("disabled");
+$("#new_quality_instr_entry").dialog("option", "title", "Enter Quality Instructions");		
+$("#new_quality_instr_entry").dialog('open');

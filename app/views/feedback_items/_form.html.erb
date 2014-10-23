@@ -1,0 +1,23 @@
+<%= form_tag({:action=>'send_feedback', :controller=>'home'}, :remote => true) do %>
+<table class="form_table" summary="feedback form table">
+<tr class="field"><td class="label">
+		<%= hidden_field_tag "url",request.url %>
+			<% options = ["User Home Screen","Extraction Forms","Project Creation","Study Creation","Preview Pages","Other"] %>
+			<label for="feedback-form-select">Select a Topic:</label>
+</td><td>			
+	<%= select_tag "feedback-form-select", options_for_select(options.collect{|opt| [opt,opt]}, ""), {:title => "Feedback Type"} %>
+</td></tr>
+<tr class='field'><td class="label">
+<label for="Your Feedback">Your Feedback:</label>
+</td><td>
+			<%= text_area_tag "description",nil, :size=>"40x4", :title => "Feedback Text" %>
+</td></tr>
+<tr><td colspan="2" class="actions">
+		  <button type="submit" class="positive">
+		 <%= image_tag "Accept.png", :alt => "Submit" %> Submit
+		  </button>
+		  <button type="reset" class="negative">
+		 <%= image_tag "Cancel.png", :alt => "Reset Form" %> Reset
+		  </button>
+</td></tr></table>
+<% end %>

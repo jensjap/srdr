@@ -1,0 +1,24 @@
+$("#feedback_form").dialog('close');
+<% if @saved %>
+$("#feedback_form").html("<%= escape_javascript(render :partial=>"feedback_items/success_message") %>");
+$("#feedback_form").dialog({
+		modal:true,
+		position: 'center',
+		minWidth: 300,
+		title: "Thank You"
+		});
+<% else %>
+$("#feedback_form").html("<%= escape_javascript(render :partial=>"feedback_items/failure_message") %>");
+$("#feedback_form").dialog({
+		modal:true,
+		position: 'center',
+		minWidth: 300,
+		title: "Problem Submitting Feedback"
+		});
+<% end %>
+
+$("#feedback_form #feedback_result_close_btn").bind("click", function()
+{
+$('#feedback_form').dialog('close');
+$('#feedback_form').html('<%= escape_javascript(render :partial=>'feedback_items/feedback_form') %>');
+});

@@ -1,0 +1,15 @@
+<% project_id = params[:project_id].nil? ? @study.project_id.to_s : params[:project_id].to_s %>
+<% study_id = params[:study_id].nil? ? params[:id].to_s : params[:study_id].to_s %>
+
+<!-- Put in the links section by section, saying which key questions should be 
+	   answered at each step of the way -->	
+<% base_link_general = "/projects/#{project_id}/studies/#{study_id}/" %>
+<br/>
+<ul>
+	<li>
+		<%= link_to "Key Questions",base_link_general+"questions",:class=>"form_link", :tabindex=>'202' %>
+	</li>
+	<li>
+		<%= link_to "Publications",base_link_general+"publications",:class=>"form_link", :tabindex=>'203' %>
+	</li>	
+</ul>

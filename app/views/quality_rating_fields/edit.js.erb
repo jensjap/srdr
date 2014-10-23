@@ -1,0 +1,19 @@
+var str = "<%= @has_study_data %>" ;
+var has_study_data = (str === 'true');
+if(has_study_data)
+	{
+		var message = "One or more studies have been created that use this data item. Changing this data item will change it for these studies as well. Are you sure you want to continue?";
+		if (confirm(message))
+		{
+			$("#new_qr_entry").html("<%= escape_javascript(render :partial=>"quality_rating_fields/form") %>");
+			$("#new_qr_entry :button").removeAttr("disabled");			
+			$("#new_qr_entry").dialog("option", "title", "Edit Quality Rating Item");					
+			$('#new_qr_entry').dialog('open');	
+		}
+	}
+	else{
+		$("#new_qr_entry").html("<%= escape_javascript(render :partial=>"form") %>");
+		$("#new_qr_entry :button").removeAttr("disabled");		
+		$("#new_qr_entry").dialog("option", "title", "Edit Quality Rating Item");				
+		$('#new_qr_entry').dialog('open');	
+	}

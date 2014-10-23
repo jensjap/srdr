@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<h1>New SRDR Public Comment Posted</h1>
+<p/><br/>
+<li>From: <%= @user.login %>
+<li>Project ID: <%= @comment.project_id %>
+<li>Study ID: <%= @comment.study_id %>
+<li>Section: [<%= @comment.section_id %>] <%= @comment.section_name %>
+<li>Field Name: <%= @comment.field_name %>
+<li>Type: <%= @comment.fact_or_opinion %>
+<li>Posted: <%= @comment.created_at.to_s %>
+<p/><br/>
+<hr width="100%">
+<strong>Comment:</strong>
+<hr width="100%">
+<%= @comment.comment_text %>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<div class='tab-div'>
+    <%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Create Design Details Form"} %>
+
+    <div class="extraction_form_options">
+        In this section you can create questions for data extractors to answer about <strong>design details</strong>.<br/><br/>
+        <%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+          <% unless @donors.empty? || @donor_info.empty? %>
+        		<%= render :partial=>'extraction_form_section_copies/imported_message'%>
+        	<% else %> 
+        		Would you like to include the <strong>design details</strong> section in your extraction form? 
+        		<%= select("ef_included_" + @extraction_form_section.id.to_s, "design", options_for_select([["Yes", true], ["No", false]], 	@extraction_form_section.included),
+          { :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+          <div class="inline" id="saved_display_section_design"></div>
+        	<% end %>
+        <% end %>
+        <br/>
+
+       <!-- user-defined EF instruction -->
+        <%  @ef_user_instructions = @extraction_form_design_instr.nil? ? nil : @extraction_form_design_instr.instructions %>
+        <div id="design_user_instructions">
+            <%= render :partial=>"extraction_forms/instructions" %>
+        </div>
+        <a href="#" class="add_design_ef_instr_<%= @extraction_form_section.id.to_s %> add_design_instr_button" id="add_design_instr_button" class="add_design_instr_button" alt="Click to add user instructions to Design Detail">Add/Edit Instructions</a>
+    </div>
+
+  
+    <% if !@extraction_form_section.nil? && @extraction_form_section.included == true %>
+        <div id="extraction_form_section_design">
+    <% else %>
+        <div id="extraction_form_section_design" class="disabled">
+    <% end %>
+
+    <br/>
+    <div id='extraction_form_preview_table_dd'>
+        <%= render 'question_builder/extraction_form_preview' %>
+    </div>
+
+    </div>
+
+
+
+<!-- ###################################### -->
+<!-- design details modals -->
+<div id='dd_fields_entry' style='display:none;'></div>
+<div id='new_design_instr_entry' style='display:none;'></div>
+
+<div class="actions">
+    <button class="positive" id="add_dd_button" class="add_dd_button" alt="Click to open Add New Design Detail Form Dialog">
+        <%= image_tag "Add.png", :alt => "Add" %>Add a New Design Detail
+    </button>
+
+    <div class="saved" id="saved_item_indicator_dd" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+    <div class="saved" id="removed_item_indicator_dd" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+    </div>
+    <br/>
+    <%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"extraction_forms/" + @extraction_form.id.to_s + "/arms",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/baselines",:previous_title=>"Study Arms",:next_title=>"Baseline Characteristics"} %>
+
+    <%= render 'shared/make_editable_and_confirm' %>
+
+</div> <!-- end tab-div -->
+<script type='text/javascript'>
+// <!--
+function design_init(){
+  try{
+    checkDesignLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    prepareDesign();
+  } catch( err ) {
+    setTimeout('design_init()', 200);
+  }
+}
+
+function checkDesignLoaded(){
+    if ($('#add_design_instr_button').length == 0) $jquery.error( 'not ready' );
+}
+
+function prepareDesign(){
+    
+    // DESIGN DETAILS PAGE
+    //----------------------------------
+    $("#dd_fields_entry").dialog({
+        autoOpen: false,
+        modal: true,
+        minWidth: 700
+    });
+    $("#add_dd_button").bind("click", function(){
+        $.ajax({
+            url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/design_details/new',
+            type: "POST"
+        });
+    });
+    
+    $("#new_design_instr_entry").dialog({
+        autoOpen: false,
+        modal: true,
+        minWidth: 600
+    });
+
+    $("#add_design_instr_button").bind("click", function(event){   
+        event.preventDefault();
+        $.ajax({
+            url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_design/add_instr',
+            type: "POST"
+        });
+    });
+}
+design_init();
+// -->
+</script>

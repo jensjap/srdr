@@ -1,0 +1,56 @@
+<%= fields_for "primary_publications[primary_publication_numbers]" do |t| %>		
+
+<% num = 1 %>
+<% if !primary_publication_numbers.nil? && primary_publication_numbers.length > 0 %>
+<% primary_publication_numbers.each do |one_ppi| %>
+		<table class="form_table" id="pp_form_identifier_table_<%= num.to_s %>" summary="primary publications form identifiers table">
+		<tbody>
+		<tr><td>
+			<label for="Identifier">Identifier:</label>
+		</td><td>
+		<%= hidden_field :id, num, :value => one_ppi.id, :class => "id_field" %>
+			<%= text_field :number, num, :value => one_ppi.number, :class=>"inline-field editable_field number_field", :tabindex => 7, :title => "number" %>
+		</td>
+		<td rowspan="2" class="label" padding="6">
+			<div style="height:6px"></div>
+				<div class="admin_functions actions" style="margin-left: 5px">
+			<%= link_to "Remove This Identifier", {}, {:class => "remove_ppi_button", :id => "remove_ppi_button_" + num.to_s} %><br/>
+						</div>
+		</td>
+		</tr>
+		<tr><td valign="top">
+			<div class="identifier_field_other inline">
+				<label for="Identifier Type">Identifier Type: </label>
+			</div>
+		</td><td>
+    <% @id_types = ["Choose Identifier Type", "Pubmed", "Cochrane", "NCT", "ClinicalTrials\.gov", "Other"]%>
+
+	<% @id_types_sm = ["Choose Identifier Type", "Pubmed", "Cochrane", "NCT", "ClinicalTrials\.gov"] %>		
+		
+			<%= select :number_type, num, options_for_select(@id_types, one_ppi.number_type), {}, {:class => "has_other editable_field number_type_field", :tabindex => 8, :title => "identifier type"} %>
+		</td><td></td></tr>
+		<tr height="15"></tr>
+		</tbody>
+		</table>
+
+		
+		<% arr = @id_types_sm %>
+		<% if !arr.include?(one_ppi.number_type) %>
+		<script type="text/javascript">
+			var field_id = "primary_publication_numbers_attributes_<%= num.to_s %>_number_type";
+			$.ajax({url: "/application/show_other_filled",
+						type: "POST",
+						data: {
+							"field_name": "primary_publication_numbers_attributes[<%=num.to_s %>][number_type]", 						
+							"field_id":field_id, 
+							"value": "<%= one_ppi.number_type %>"
+						}
+					});
+		</script>
+		<% end %>
+		
+		
+<% num = num + 1 %>
+	<% end %>
+	<% end %>
+	<% end %>

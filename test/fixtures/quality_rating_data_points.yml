@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: quality_rating_data_points
+#
+#  id                     :integer          not null, primary key
+#  study_id               :integer
+#  guideline_used         :string(255)
+#  current_overall_rating :string(255)
+#  notes                  :text
+#  extraction_form_id     :integer
+#  created_at             :datetime
+#  updated_at             :datetime
+#
+
+# used in remove_extracted_data in extraction_form
+ef100_s100_qrdp1:
+  id: 1
+  study_id: 100
+  extraction_form_id: 100
+  guideline_used: Tufts
+  current_overall_rating: blah
+
+ef100_s100_qrdp2:
+  id: 2
+  study_id: 100
+  extraction_form_id: 100
+  guideline_used: Cochrane
+  current_overall_rating: A
+
+ef100_s100_qrdp3:
+  id: 3
+  study_id: 100
+  extraction_form_id: 100
+  guideline_used: Tufts
+  current_overall_rating: B

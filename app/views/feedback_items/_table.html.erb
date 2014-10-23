@@ -1,0 +1,21 @@
+<h1>Admin: View Feedback Items</h1><br/><br/>
+<% @feedback_items = FeedbackItem.all %>
+<% unless @feedback_items.empty? || @feedback_items.nil? %>
+	<div id='feedback_entries'>
+		<% @feedback_items.each do |fb| %>
+			<div style='float: right;'>
+				<%= link_to 'Remove', fb, :method=>:delete, :confirm=>'Are you sure?', :title=>"Remove the feedback item: #{fb.description}" %>
+			</div>
+			<strong>Topic:</strong> <%= fb.page %><br/>
+			<strong>Description:</strong> <%= fb.description %><br/>
+			<strong>URL:</strong> <%= fb.url %><br/>
+			<% user = User.find(fb.user_id)%>
+			<strong>User:</strong> <%= user.fname %> <%= user.lname %> (<%= user.email %>)<br/>
+			<strong>Date:</strong> <%= fb.created_at.strftime("%B %d, %Y") %><br/>
+			<br/>
+			<hr/><br/>
+		<% end %>
+	</div>
+<% else %>
+  <em>There are no new feedback items.</em>
+<% end %>

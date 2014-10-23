@@ -1,0 +1,58 @@
+<%= fields_for "outcome[outcome_timepoints_attributes]" do |t| %>		
+<div id="outcome_timepoints_form_list_tables">
+<% num = 1 %>
+<% if !@outcome_timepoints.nil? && @outcome_timepoints.length > 0 %>
+<% @outcome_timepoints.each do |one_tp| %>
+		<table class="form_table" id="outcomes_form_timepoints_table_<%= num.to_s %>" summary="outcomes form timepoints table">
+		<tbody>
+		<tr><td>
+			<label for="Timepoint number (optional)">Number [Optional]:</label>
+		</td><td>
+		<%= hidden_field :id, num, :value => one_tp.id, :class => "id_field" %>
+			<%= text_field :number, num, :value => one_tp.number, :class=>"inline-field editable_field number_field", :tabindex => 7, :title => "number" %>
+		</td>
+		<td rowspan="2" style='vertical-align:top;' padding="6">
+			<div style="height:6px"></div>
+				<div class="admin_functions" style="margin-left: 5px">
+			<%= link_to "Remove This Timepoint", {}, {:class => "remove_tp_button", :id => "remove_tp_button_" + num.to_s} %><br/>
+						</div>
+		</td>
+		</tr>
+		<tr><td valign="top">
+			<div class="timepoint_field_other inline">
+				<label for="Time Unit">Time Unit: </label>
+			</div>
+		</td><td>
+			<%= select :time_unit, num, options_for_select(["years", "months", "days", "weeks", "hours", "minutes", "seconds", "Other"], one_tp.time_unit), {}, {:class => "has_other editable_field time_unit_field", :tabindex => 8, :title => "time_unit"} %>
+		</td><td></td></tr>
+		<tr height="15"></tr>
+		</tbody>
+		</table>
+
+		
+		<% arr = ["years", "months", "days", "weeks", "hours", "minutes", "seconds"] %>
+		<% if !arr.include?(one_tp.time_unit) %>
+		<script type="text/javascript">
+			var field_id = "outcome_timepoints_attributes_<%= num.to_s %>_time_unit";
+			$.ajax({url: "/application/show_other_filled",
+						type: "POST",
+						data: {
+							"field_name": "outcome_timepoints_attributes[<%=num.to_s %>][time_unit]", 						
+							"field_id":field_id, 
+							"value": "<%= one_tp.time_unit %>"
+						}
+					});
+		</script>
+		<% end %>
+		
+		
+<% num = num + 1 %>
+	<% end %>
+	<% end %>
+</div>
+	<% end %>
+	
+	
+	
+
+

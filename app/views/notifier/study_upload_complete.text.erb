@@ -1,0 +1,35 @@
+This is an automated message from the Systematic Review Data Repository
+
+<% if @problem_lines.empty? %>
+You'll be happy to know that all <%= @num_successful %> studies uploaded were successfully created, and can now be accessed from your study list.
+
+	<% unless @warning_lines.empty? %>
+		However, we wanted to make you aware of the following warnings that came up:
+		<% @warning_lines.each do |w| %>
+			<%= "Line #{w[0]}: #{w[1]}\r\n" %>
+		<% end %>
+	<% end %>
+<% else %>
+We experienced problems while attempting to create some of the studies in your list.
+
+# Submitted: <%= @num_successful + @problem_lines.length %>
+# Created: <%= @num_successful %>
+
+Studies found on the following lines of the uploaded file could not be created:
+	<%= @problem_lines.each do |p| %>
+	<%= "Line #{p[0]}: #{p[1]}\r\n" %>
+	<% end %>
+
+	<% unless @warning_lines.empty? %>
+	In addition, the following warnings were generated:
+	<% @warning_lines.each do |w| %>
+		<%= "Line #{w[0]}: #{w[1]}\r\n" %>
+	<% end %>
+	<% end %>
+<% end %>
+
+If you have any questions, please write to us at SRDR@ahrq.hhs.gov or call 401.863.5791.
+
+Thank you,
+
+The SRDR Team

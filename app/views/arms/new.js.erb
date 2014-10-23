@@ -1,0 +1,3 @@
+$('#new_arm_entry').html("<%= escape_javascript(render :partial => 'arms/form') %>");
+$("#new_arm_entry").dialog("option", "title", "Add New Arm");		
+$("#new_arm_entry").dialog('open');

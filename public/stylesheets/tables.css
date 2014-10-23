@@ -1,0 +1,24 @@
+table.matrix_question{
+	border: none;
+	width:500px;
+	max-width: 800px;
+	min-width:300px;
+	overflow:auto;
+	margin-left:20px;
+
+	}table.matrix_question tr td{
+		width:200px;
+	}table.matrix_question tr td.title{
+		font-size:13px;	
+	}table.matrix_question tr td.heading{
+		background-color: #e4e4e4 !important;
+	}table.matrix_question tr.odd{
+		background-color: #bbbbbb;
+	}table.matrix_question tr.even{
+		background-color: #fff;
+	}table.matrix_question tr td input[type='checkbox'],table.matrix_question tr td input[type='radio']{
+		width:auto;
+}
+table.login_table tr td input[type='text'],table.login_table tr td input[type='password']{
+	width: 150px !important;
+}

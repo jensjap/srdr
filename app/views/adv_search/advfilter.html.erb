@@ -1,0 +1,25 @@
+<div id='left_column'>
+</div>
+<div id='content' tabindex=200>
+<%= render 'advfilters' %>
+<p/>
+<%
+    resultset = session[:search_results]
+    if !resultset.nil? &&
+        ((!resultset["projects"].nil? && (resultset["projects"].size > 0)) ||
+         (!resultset["publications"].nil? && (resultset["publications"].size > 0)))
+        filtgroup = params[:filtergroup]
+
+        if filtgroup == "projects.categories"
+%>
+<%= render 'advfilter_projects' %>
+<%      
+        elsif filtgroup == "publications.categories"
+%>
+<%= render 'advfilter_pub' %>
+<%      
+        end
+    else
+    end
+%>
+</div>

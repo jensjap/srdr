@@ -1,0 +1,23 @@
+//var str = "<%= @has_study_data %>" ;
+//var has_study_data = (str === 'true');
+var has_study_data = false;  // UPDATE THIS IF WE WANT TO RE-INCORPORATE HAS_STUDY_DATA
+if(has_study_data)
+	{
+		var message = "One or more studies have been created that use this data item. Changing this data item will change it for these studies as well. Are you sure you want to continue?";
+		if (confirm(message))
+		{
+			$("#new_adverse_event_title_div").html("<%= escape_javascript(render :partial=>'extraction_form_adverse_events/form')%>");
+			$("#new_adverse_event_title_div :button").removeAttr("disabled");
+			$("#new_adverse_event_title_div").dialog("option","title","Editing Adverse Event Title");
+			$("#new_adverse_event_title_div").dialog('open');
+
+			
+		}
+	}
+	else{
+		$("#new_adverse_event_title_div").html("<%= escape_javascript(render :partial=>'extraction_form_adverse_events/form')%>");
+		$("#new_adverse_event_title_div :button").removeAttr("disabled");
+		$("#new_adverse_event_title_div").dialog("option","title","Editing Adverse Event Title");
+		$("#new_adverse_event_title_div").dialog('open');
+		
+	}

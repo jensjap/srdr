@@ -1,0 +1,28 @@
+<%# removing a number of things that can cause problems... %>
+$('[aria-labelledby="ui-dialog-title-new_outcome_measure_dialog"]').remove();
+$('[aria-labelledby="ui-dialog-title-add_measure_modal"]').remove();
+$("#add_measure_modal").remove();
+$("#new_outcome_measure_dialog").dialog("destroy");
+$("#new_outcome_measure_dialog").remove();
+$("#add_measure_btn").unbind("click");
+<%# end removal block %>
+
+$("#saved_results").dialog('close');
+$("#outcome_selection_id").val("<%= @outcome.id.to_s %>");
+$("#choose_arm").html("<%= escape_javascript(render :partial => "outcome_data_points/choose_arm", :locals => {:outcome => @outcome}) %>");
+$("#arm_selection_id").val("All");
+$("#choose_timepoint").html("<%= escape_javascript(render :partial => "outcome_data_points/choose_timepoint", :locals => {:outcome => @outcome, :outcome_timepoints => @outcome_timepoints}) %>");
+<% @outcome_timepoints.each do |tp| %>
+$("#tp_<%= tp.id.to_s %>_div :checkbox").attr("checked", "checked");
+<% end %>
+<% if @outcome.outcome_type == "Continuous" %>
+
+$("#form_div").html("<%= escape_javascript(render :partial => "outcome_data_points/continuous_table", :locals => {:outcome_measure => @outcome_measure, :outcome_measures => @outcome_measures, :study => @study, :extraction_form => @extraction_form}) %>");
+
+<% else %>
+
+$("#form_div").html("<%= escape_javascript(render :partial => "outcome_data_points/categorical_table", :locals => {:outcome_measure => @outcome_measure, :outcome_measures => @outcome_measures, :study => @study, :extraction_form => @extraction_form}) %>");
+
+<% end %>
+
+$("#modal_div").html("<%= escape_javascript(render :partial=>"outcome_measures/form")%>");

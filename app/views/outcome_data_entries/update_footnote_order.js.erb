@@ -1,0 +1,18 @@
+$("#footnotes_div").html("<%= escape_javascript(render :partial=>"outcome_data_entries/footnotes")%>");
+
+var tags = $(".footnote_tag");
+original_value = parseInt("<%= @original_value%>");
+new_value = parseInt("<%= @new_value%>");
+
+for(i=0; i < tags.length; i++){
+	var current_val = parseInt($(tags[i]).html());
+	if(current_val == original_value){
+		$(tags[i]).html(new_value)
+	}else if((current_val <= new_value) && (current_val > original_value)){
+		current_val = current_val - 1;
+		$(tags[i]).html(current_val);
+	}else if((current_val >= new_value) && (current_val < original_value)){
+		current_val = current_val + 1;
+		$(tags[i]).html(current_val)
+	}
+}

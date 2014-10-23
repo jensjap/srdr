@@ -1,0 +1,378 @@
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+    <h3>Study Consensus Results</h3>
+    <table class="study_consensus_table" cellpadding="10px" style="padding: 10px; font-size: 0.85em; font-family: Tahoma; font-weight: normal; border: solid 1px #2B447E;">
+        <tr bgcolor="#101010">
+            <td colspan="3" style="color: #fff;">
+            <b>Project: </b> [<%= @prj_id.to_s %>] <%= @project.title.to_s %>
+            </td>
+        </tr>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Publication [<%= @study.id %>][<%= @publication.id %>]</b>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Title:</b>
+            </td>
+            <td>
+            <%= @pubset[:title].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Year:</b>
+            </td>
+            <td>
+            <%= @pubset[:year].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Author:</b>
+            </td>
+            <td>
+            <%= @pubset[:author].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Country:</b>
+            </td>
+            <td>
+            <%= @pubset[:country].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>PubMed ID:</b>
+            </td>
+            <td>
+            <%= @pubset[:pmid].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Journal:</b>
+            </td>
+            <td>
+            <%= @pubset[:journal].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Volume:</b>
+            </td>
+            <td>
+            <%= @pubset[:volume].to_s %>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b>Issue:</b>
+            </td>
+            <td>
+            <%= @pubset[:issue].to_s %>
+            </td>
+        </tr>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Arm Details </b>
+            </td>
+        </tr>
+<%
+    if (!@armdset.nil? && @armdset.size() > 0) 
+        for i in (0..@armdset.size() - 1)
+            armdrec = @armdset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= armdrec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= armdrec[1].to_s %>
+            </td>
+        </tr>
+<%
+        end
+    else
+%>
+        <tr>
+            <td width="10" colspan="3">
+            No Arm Detail changes
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Design Details </b>
+            </td>
+        </tr>
+<%
+    if (!@ddset.nil? && @ddset.size() > 0) 
+        for i in (0..@ddset.size() - 1)
+            ddrec = @ddset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= ddrec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= ddrec[1].to_s %>
+            </td>
+        </tr>
+<%
+        end
+    else
+%>
+        <tr>
+            <td width="10" colspan="3">
+            No Design Detail changes
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Baseline Characteristics </b>
+            </td>
+        </tr>
+<%
+    for i in (0..@blset.size() - 1)
+        blrec = @blset[i]
+        consensus_blid = blrec[2]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= blrec[0].to_s %>:</b><br/>
+            added ids - <%= consensus_blid.to_s %>
+            </td>
+            <td>
+            <%= blrec[1].to_s %>
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Study Arms </b>
+            </td>
+        </tr>
+<%
+    for i in (0..@armset.size() - 1)
+        armrec = @armset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= armrec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= armrec[1].to_s %>
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Outcomes </b>
+            </td>
+        </tr>
+<%
+    for i in (0..@outcset.size() - 1)
+        outcrec = @outcset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= outcrec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= outcrec[1].to_s %>
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Outcome Results </b>
+            </td>
+        </tr>
+<%
+    for i in (0..@outcrset.size() - 1)
+        outcrec = @outcrset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= outcrec[0].to_s %>:</b><br/>
+            Outcome: <%= outcrec[1].to_s %><br/>
+            Arm: <%= outcrec[2].to_s %><br/>
+            Timepoint: <%= outcrec[3].to_s %><br/>
+            Measure: <%= outcrec[4].to_s %>
+            </td>
+            <td>
+            <%= outcrec[5].to_s %>
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Outcome Details </b>
+            </td>
+        </tr>
+<%
+    if (!@outdset.nil? && @outdset.size() > 0) 
+        for i in (0..@outdset.size() - 1)
+            outdrec = @outdset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= outdrec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= outdrec[1].to_s %>
+            </td>
+        </tr>
+<%
+        end
+    else
+%>
+        <tr>
+            <td width="10" colspan="3">
+            No Outcome Detail changes
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Adverse Events </b>
+            </td>
+        </tr>
+<%
+    for i in (0..@adveset.size() - 1)
+        adverec = @adveset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= adverec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= adverec[1].to_s %>
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Quality Dimensions </b>
+            </td>
+        </tr>
+<%
+    for i in (0..@qualdimset.size() - 1)
+        qualdimrec = @qualdimset[i]
+%>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= qualdimrec[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= qualdimrec[1].to_s %>
+            </td>
+        </tr>
+<%
+    end
+%>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Overall Quality </b>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td>
+            <b><%= @overallqualset[0].to_s %>:</b>
+            </td>
+            <td>
+            <%= @overallqualset[1].to_s %>
+            </td>
+        </tr>
+        <tr bgcolor="#e0e0e0">
+            <td colspan="3">
+            <b>Concensus Comments </b>
+            </td>
+        </tr>
+        <tr>
+            <td width="10">
+            &nbsp;
+            </td>
+            <td colspan="2">
+            <%= @consensus_comments.to_s %>
+            </td>
+        </tr>
+    </table>
+</div>

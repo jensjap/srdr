@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: comparison_data_points
+#
+#  id                    :integer          not null, primary key
+#  value                 :string(255)
+#  footnote              :string(255)
+#  is_calculated         :boolean
+#  comparison_measure_id :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  comparator_id         :integer
+#  arm_id                :integer          default(0)
+#  footnote_number       :integer          default(0)
+#  table_cell            :integer
+#
+
+# this is being used to test remove_extracted_data in extraction_form
+comp_data_point1:
+  id: 1
+  value: 12
+  comparison_measure_id: 1
+
+comp_data_point2:
+  id: 2
+  value: 182
+  comparison_measure_id: 2

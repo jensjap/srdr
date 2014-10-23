@@ -1,0 +1,87 @@
+<% form_tag("projects/copy", {:remote=>false,:onSubmit=>"pleaseBePatient()"}) do %>
+<input type='hidden' name='project_id' value="<%= @project.id %>">
+<div style='width:auto; padding:10px;'>
+	This form will allow you to make a copy of the project titled "<%= @project.title %>". Please enter a title for the duplicate project and choose the elements that you would like to copy:<br/><br/>
+
+	<label title="Title">Title</label>
+	<input type='text' name='new_title' size=55><br/><br/>
+	<% if @has_efs %>
+		<input type='checkbox' name="copy_efs" checked class='copy_selector' level='ef' id='copy_efs'>
+		<label for="copy_efs">Copy Associated Extraction Forms</label>
+		<br/><br/>
+		<% if @has_studies %>
+			<input type='checkbox' name="copy_studies" class='copy_selector' level='study' id='copy_studies'>
+			<label for="copy_studies">Copy Associated Studies</label>
+			<br/><br/>
+			<input type='checkbox' name="copy_study_data" class='copy_selector' level='data' id='copy_study_data' disabled>
+			<label for="copy_study_data">Copy Extracted Study Data</label>
+			<br/><br/>
+		<% end %>
+	<% end %>
+	<center>
+		<button type="submit" id="request_copy_button" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+			<%= image_tag "Add.png", :alt => "Add" %> Submit
+		</button>
+		<button class="negative" id="copy_form_cancel_button">
+			<%= image_tag "Cancel.png", :style=>"vertical-align:text-top;", :alt => "Cancel" %> Cancel
+		</button>
+	</center>
+</div>
+<center><span id="be_patient" style='display:none;'>Please be patient. Depending on the size of your project, this could take a minute.</span></center>
+<% end %> <%# end the form%>
+<span id='copyFormMarker'></span>
+
+<script type='text/javascript'>
+<!--
+function copy_form_init(){
+  
+  try{
+    checkCopyFormMarkerLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	attachCopyListeners();
+  } catch( err ) {
+    setTimeout('copy_form_init()', 200);
+  }
+}
+
+function checkCopyFormMarkerLoaded(){
+	if ( $('#copyFormMarker').length == 0) $jquery.error( 'not ready' );
+}
+function attachCopyListeners(){
+	//alert("attaching...");
+	
+	//alert("copy efs binding");
+	$("#copy_efs").bind("click",function(){
+		checked = $(this).attr("checked");
+		if(checked == false){
+			$("#copy_studies").attr("checked",false)
+			$("#copy_study_data").attr("checked",false)
+			$("#copy_studies").attr("disabled",true)
+			$("#copy_study_data").attr("disabled",true)
+		}else{
+			$("#copy_studies").attr("disabled",false)
+		}
+	})
+	//alert("copy studies binding");
+	$("#copy_studies").bind("click",function(){
+		checked = $(this).attr("checked");
+		if(checked == false){
+			$("#copy_study_data").attr("checked",false)
+			$("#copy_study_data").attr("disabled",true)
+		}else{
+			$("#copy_study_data").attr("disabled",false)
+		}
+	})
+
+	$("#copy_form_cancel_button").unbind();
+	$("#copy_form_cancel_button").bind("click",function(event){
+		event.preventDefault();
+		$('#modal_div').dialog('close');
+	})
+}
+function pleaseBePatient(){
+	$("#request_copy_button").attr("disabled","disabled");
+	$("#be_patient").show();
+}
+copy_form_init();
+//-->
+</script>

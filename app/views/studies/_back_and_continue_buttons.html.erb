@@ -1,0 +1,29 @@
+<table id="bottom_nav" summary="bottom page navigation table">
+	<tr>
+		<td align="left">
+			<a href="<%= previous_url %>" id ="page_flip_btn_bk">
+  			<img src="/images/Silk_bullet_back.png" style="border:0px; vertical-align:text-top" alt="Go Back"/>
+				Back
+  		</a>
+		</td>
+		<td align='center'>
+			<!-- Tells the user when unsaved data exists -->
+			<div class="unsaved_div" style="display:none; color:red; font: 12px verdana;">
+				<center>
+				Please remember to save your changes 
+				before leaving this page.
+				</center>
+			</div>
+			<!-- Used as a modal for alerting the user of unsaved data -->
+			<div id="unsaved_modal" style="display:none;" title="WARNING: Unsaved Data">
+				<p>By continuing, you will lose all unsaved changes. Are you sure?</p>
+			</div>
+		</td>
+		<td align="right">
+			<a href="<%= next_url %>" id="page_flip_btn">
+  			Next 
+  			<img src="/images/Silk_bullet_go.png" style="border:0px; vertical-align:text-top" alt="Continue"/>
+  		</a>
+  	</td>
+</tr>
+</table>

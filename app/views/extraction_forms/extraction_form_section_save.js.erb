@@ -1,0 +1,20 @@
+
+<% if @saved %>
+	<% if @included %>
+		$('#icon_<%= @extraction_form_section.section_name %>').css('opacity', '');
+		$('#<%= @extraction_form_section.section_name %>_menu_item').addClass('menu_highlight');			
+	<% else %>
+		$('#icon_<%= @extraction_form_section.section_name %>').css('opacity', '0.2');
+		$("#<%= @extraction_form_section.section_name %>_menu_item").removeAttr('class');			
+	<% end %>
+	$('#saved_display_section_<%= @extraction_form_section.section_name %>').html("<img alt='Saved Successfully' src='/images/Accept.png'/>").delay(1500);
+	$('#saved_display_section_<%= @extraction_form_section.section_name %>').fadeOut("slow");
+	$('#saved_display_section_<%= @extraction_form_section.section_name %>').removeAttr("style");
+  
+
+<% else %>
+	<% if defined?(@error_div) %>
+		$("#<%= @error_div.to_s %>").html("<%= escape_javascript(render :partial=>@error_partial) %>");		
+	<% end %>		
+<% end %>
+

@@ -1,0 +1,37 @@
+<%= form_for(@quality_rating, :remote => true) do |f| %>
+<table class='form_table tab-list-table editable_field'>
+  <%= f.hidden_field :study_id, :value=> params[:study_id] %>
+  <%= f.hidden_field :extraction_form_id, :value=> params[:extraction_form_id] %>
+  <% @select_options = QualityRatingField.where(:extraction_form_id => params[:extraction_form_id]) %>
+
+
+	<% if !@select_options.nil? %>
+  <tr>
+    <td class='label'>
+      <label for="Quality Guideline Used">Quality Guideline Used:</label>
+    </td>
+    <td class='input'>
+      <%= f.text_field :guideline_used, :value => @quality_rating.guideline_used, :title => "guideline used" %>
+    </td>
+  </tr>
+  <tr class='small-spacer'><td></td></tr>
+  <tr><td class='label'><label class="inline-label" for="Select Current Overall Rating">Select Current Overall Rating:</label></td>
+      <td class='input'><%= f.select :current_overall_rating, options_for_select(@select_options.collect{|a| a.rating_item},[@quality_rating.current_overall_rating]), {}, :value => @quality_rating.current_overall_rating, :class => "inline-field", :title => "overall rating" %></td>
+  </tr>
+  <tr class='small-spacer'><td></td></tr>
+  <tr><td class='label'><label for="Notes on this Rating">Notes on this Rating:</label></td>
+      <td class='input'><%= f.text_area :notes, :value => @quality_rating.notes, :size=>"40x4", :title => "notes" %></td>
+  </tr>
+  <tr class='small-spacer'><td></td></tr>
+</table>
+  
+  <div class="actions">
+		<button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Save Quality Rating
+		</button><div class="saved" id="saved_indicator_2" style='display:none;'>  Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+  </div>
+  <% else %>
+	 Quality Rating options have not been set in this extraction form.
+  <% end %>
+  
+<% end %> <!-- end form -->

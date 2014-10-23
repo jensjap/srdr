@@ -1,0 +1,32 @@
+<%                                    
+    user_input = params["user_input"]
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Search Results","Search Results","/search/adv_results")
+    session[:urlhistory] = urlhistory
+%>
+<div id='left_column'>
+</div>
+<div id='content' tabindex=200>
+<%
+    if !@resultslist.nil? &&
+        ((!@resultslist["projects"].nil? && (@resultslist["projects"].size > 0)) ||
+         (!@resultslist["publications"].nil? && (@resultslist["publications"].size > 0)))
+%>
+<%= render 'advfilters' %>
+<%  end %>
+<%  if !@resultslist["projects"].nil? %>
+<%= render 'projects_result' %>
+<p/>
+<%  end %>
+<%  if !@resultslist["publications"].nil? %>
+<br/>
+<hr width="80%" align="center">
+<br/>
+<%= render 'publications_result' %>
+<p/>
+<%  end %>
+</div>

@@ -1,0 +1,13 @@
+<% if @outcome.outcome_type == "Continuous" %>
+
+$("#outcome_data_points_table").html("<%= escape_javascript(render :partial => 'outcome_data_points/continuous_table', :locals => {:outcome_measure => @measure, :outcome_measures => @outcome_measures, :study => @study, :extraction_form => @extraction_form, :outcome => @outcome, :outcome_data_point => @outcome_data_point, :outcome_timepoints => @outcome_timepoints, :arms => @arms}) %>");
+
+<% else %>
+
+$("#outcome_data_points_table").html("<%= escape_javascript(render :partial => 'outcome_data_points/categorical_table', :locals => {:outcome_measure => @measure, :outcome_measures => @outcome_measures, :study => @study, :extraction_form => @extraction_form, :outcome => @outcome, :outcome_data_point => @outcome_data_point, :outcome_timepoints => @outcome_timepoints, :arms => @arms}) %>");
+
+
+<% end %>
+
+$("#add_measure_modal #edit_measures_list").html("<%= escape_javascript(render :partial => 'outcome_measures/edit_measures_all', :locals => {:measure => @measure, :outcome_measures => @outcome_measures}) %>");
+$("#add_measure_modal #new_outcome_measure_dialog").dialog('close');

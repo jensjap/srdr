@@ -1,0 +1,8 @@
+<%# remove any existing forms %>
+$("#q_builder_form").remove();
+<% if !defined?(@study) || @study.nil? %>
+	$('#dd_fields_entry').html("<%= escape_javascript(render :partial => 'design_detail_fields/form') %>");
+	$("#dd_fields_entry :button").removeAttr("disabled");		
+	$("#dd_fields_entry").dialog("option", "title", "New Design Detail");		
+	$("#dd_fields_entry").dialog('open');	
+<% end %>

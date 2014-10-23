@@ -1,0 +1,6 @@
+$("#form_div").html("<%= escape_javascript(render :partial=>@partial)%>");
+$("#add_measure_modal #edit_measures_list").html("<%= escape_javascript(render :partial => 'outcome_measures/edit_measures_all') %>");
+$("#new_outcome_measure_dialog").dialog("close");
+
+
+

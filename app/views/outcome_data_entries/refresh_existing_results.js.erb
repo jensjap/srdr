@@ -1,0 +1,18 @@
+// UPDATE THE CORRESPONDING EXISTING RESULTS TABLE
+<% unless @is_diagnostic %>
+	<% unless @existing_results.empty? %>
+		$("#existing_results_div").html("<%= escape_javascript(render :partial=>"/outcome_data_entries/existing_results")%>");
+	<% else %>
+		$("#view_modify_link_div").hide();
+		$("#view_modify_link_div").html("");
+		$("#existing_results_div").html("");
+	<% end %>
+<% else %>
+	<% unless @existing_comparisons.empty? and @existing_comparators.empty? %>
+		$("#existing_results_div").html("<%= escape_javascript(render :partial=>"/outcome_data_entries/existing_diagnostic_results")%>");
+	<% else %>
+		$("#view_modify_link_div").hide();
+		$("#view_modify_link_div").html("");
+		$("#existing_results_div").html("");
+	<% end %>
+<% end %>

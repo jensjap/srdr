@@ -1,0 +1,8 @@
+<% tabind = 2 %>
+<% outcome_timepoints.each do |timepoint| %>
+<div id="tp_<%= timepoint.id.to_s %>_div" class="one_tp_div">
+<%= check_box_tag "timepoint[selected_ids][]", timepoint.id.to_s, :tabindex => tabind, :title => "timepoint option" %>
+<% tabind = tabind + 1 %>
+	<%= render :partial => "outcome_timepoints/one_timepoint", :locals => {:timepoint => timepoint} %>
+</div>
+<% end %>

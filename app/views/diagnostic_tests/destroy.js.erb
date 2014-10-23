@@ -1,0 +1,1 @@
+$("#<%=@table_container%>").html("<%= escape_javascript(render :partial=>'diagnostic_tests/table',:locals=>{:tests=>@tests, :title=>@title})%>");

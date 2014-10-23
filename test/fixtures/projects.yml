@@ -1,0 +1,43 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id                  :integer          not null, primary key
+#  title               :string(255)
+#  description         :text
+#  notes               :text
+#  funding_source      :string(255)
+#  creator_id          :integer
+#  is_public           :boolean          default(FALSE)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  contributors        :text
+#  methodology         :text
+#  management_file_url :string(255)
+#
+
+# A yaml comment
+full_project:
+  id: 1
+  title: Test Project with all elements
+  description: A test description of full_project
+  notes: Here are some notes
+  funding_source: AHRQ
+  creator_id: 1
+  is_public: true
+
+missing_title:
+  id: 2
+  description: This project does not have a title associated with it
+  notes: Here are some notes
+  funding_source: AHRQ
+  creator_id: 1
+  is_public: false
+
+empty_project:
+  id: 3
+  title: This project will not have any key questions or studies or extraction forms
+  notes: Here are some notes
+  funding_source: AHRQ
+  creator_id: 1
+  is_public: false

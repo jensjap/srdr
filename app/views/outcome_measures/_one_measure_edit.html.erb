@@ -1,0 +1,10 @@
+	<% form_for measure, :remote => true, :url => {:controller => "outcome_measures", :action => "save"}, :html => {:method => "post"} do |f| %>
+	<%= f.text_field "measure_name", :id => "outcome_measure_name_" + measure.id.to_s, :class => "edit_outcome_measure_name_box editable_field" %> 
+	<%= f.text_field "unit", :id => "outcome_measure_unit_" + measure.id.to_s, :class => "edit_outcome_measure_unit_box editable_field" %>
+	<div class="measure_edit_buttons">
+		<button class="save_measure_btn" data-disable-with='<%= ajax_wait_msg_small %>'>
+		<%= image_tag "Accept.png", :alt => "Accept"  %>
+		</button>
+		<%= image_tag "Cancel.png", :id => "cancel_editmeasure_" + measure.id.to_s, :class => "cancel_measure_btn", :alt => "Cancel"  %>
+	</div>
+	<% end %>

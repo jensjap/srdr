@@ -1,0 +1,445 @@
+
+<%# Get a unique set of possible time units by combining current timepoints with
+    previous timepoints and taking the unique set. %>
+<% possible_time_units = ['years','months','weeks','days','hours','minutes','seconds','N/A'] %>
+<% if defined?(@previous_outcome_timepoints) %>
+	<% possible_time_units = possible_time_units + @previous_outcome_timepoints.collect{|x| x.time_unit} %>
+<% end %>
+
+<% unless(@outcome_timepoints.empty?) %>
+	<% possible_time_units = possible_time_units + @outcome_timepoints.collect{|x| x.time_unit} %>
+<% end %>
+<% possible_time_units.uniq! %>
+
+<div id="validation_message">
+<%= render "layouts/modal_info_messages" %>
+</div>
+<% if @has_data %>
+	<div style='color: red;'>Please note that you have saved data for this outcome. In order to remove
+	    outcome characteristics such as timepoints or subgroups, you will first need to delete any data entries associated with them.
+	</div>
+<% end %>
+
+<%= form_for(@outcome, :remote => true, :html=>{:id=>"new_outcome_form"}) do |f| %>
+<div style='width:100%;height:550px;overflow:auto;'>
+  <%= f.hidden_field :study_id, :value => @study.id %>
+  <%= f.hidden_field :extraction_form_id, :value => @extraction_form.id %>
+<table class="form_table tab-list-table" id="outcomes_form_table" summary="outcomes form table">
+<%# -------- BASIC SETUP AREA ---------%>
+<tr><td colspan='2' class='header-row'>Basic Setup</td></tr>
+<tr class="field">
+	<td class="label">
+	    <label for="outcome_title">Outcome Title:</label>
+	</td>
+	<td class='input top'>
+	    <% if @outcome_options.keys.length < 2 %>
+	    	<%= f.text_field :title, :class=>"bp_form_complete-1353-name editable_field", :style => "width: 90%", :title => "title" %>
+	    <% else %>
+    		<select style='width:90%;' title='Select an Outcome Title' name='outcome[title]' id='outcome_title'>
+    			<option value='Choose a suggested Outcome...'>Choose a suggested Outcome...</option>
+    			<% @outcome_options.keys.each do |octitle| %>
+    					<% selected = octitle == @outcome.title ? "selected" : "" %>
+	    				<option value='<%= octitle %>' <%= selected %>><%= octitle %></option>
+	    			<% end %>
+	    			<option value='Other'>Other...</option>
+    		</select>
+    		<br/><span class='smallText'>Outcome titles in the menu above have either been added to the extraction form or are found in other studies within this project. Use "Other..." to specify a new outcome title.</span>
+    		<%# select "outcome", :title, @outcome_options, {}, {:style => "width: 90%", :title => "Enter the Outcome title"} %>
+		<% end %>
+			<%= render :inline=>attach_listener_for_other("outcome_title") %>
+			
+		</td>
+	</tr>
+
+	<tr class="field">
+		<td class="label">
+		  <label for="outcome_description"></strong>Outcome Description:</strong></label>
+		</td>
+		<td class='input'>
+		  <%= f.text_area :description, :rows => 2, :class => "editable_field", :style => "width: 90%", :title => "Enter the Outcome description" %>
+		</td>
+	</tr>
+	<%unless @extraction_form.is_diagnostic %>
+		<!--
+		<tr class="field"><td class="label">	
+		  	<label class="inline-label" for="outcome_is_primary">Is this a primary outcome?</label>
+			</td><td class='input'>
+		    <%# f.select :is_primary, [["Yes", true], ["No", false]], {}, {:class => "editable_field", :title => "Is this a primary outcome?"} %>
+			</td>
+		</tr>
+
+		-->
+		<input type='hidden' name='outcome[is_primary]' id='outcome_is_primary' value='true' />
+
+		<tr class="field"><td class="label">
+		    <label for="outcome_outcome_type">What type of outcome is this?</label>
+			</td><td class='input'>
+			    <%= f.radio_button "outcome_type","Categorical", {:checked=>true, :class=>"inline cbox editable_field", :title => "categorical"} %> <label for="Categorical">Categorical</label><br/>
+			    <%= f.radio_button "outcome_type","Continuous", {:class=>"inline cbox editable_field", :title => "continuous"} %><label for="Continuous">Continuous</label><br/>
+			    <%= f.radio_button "outcome_type","Time to Event", {:class=>"inline cbox editable_field", :title => "time to event"} %><label for="Time to Event">Time to Event</label>
+			</td>
+		</tr>
+	<% else %>
+		<input type='hidden' name='outcome[is_primary]' value='true'/>
+		<input type='hidden' name='outcome[outcome_type]' value='Continuous'/>
+	<% end %>
+
+	<tr class="field"><td class="label">
+	    <label for='outcome_units'>Units:</label>
+		</td><td class='input'>
+		    <%= f.text_field :units, :class => "editable_field", :style=>"width:90%", :title => "units" %>
+		 </td>
+	</tr>
+	<%# -------- NOTES ---------%>
+	<tr>
+		<td class='label'><label for='outcome_notes'>Notes:</label></td>
+		<td class='input'>
+	    	<%= f.text_area :notes, :rows => 2, :class => "editable_field", :style => "width: 90%", :title => "Notes for this outcome" %>
+		</td>
+	</tr>
+
+	<%# -------- TIMEPOINTS ---------%>
+	<tr>
+		<td colspan='2' class='header-row'>Define Outcome Timepoints</td>
+	</tr>
+	<tr>
+		<td colspan='2'>
+			<table style="width:100%;" class='no-border'>
+				<tr class='timepoint_title_row '>
+					<td scope='col' style='text-decoration:underline;font-weight:bold;width:55%;'>Numeric Value or Name</td>
+					<td scope='col' colspan='2'style='text-decoration:underline; font-weight:bold;width:75%;'>Time Unit</td>
+					
+				</tr>
+				<% unless @outcome_timepoints.empty? %>
+				  <% @outcome_timepoints.each_with_index do |tp,index|%>
+				    <% tp_has_data = OutcomeTimepoint.has_data(tp.id) %>
+				    <%# Set the default option (created first) to be readonly and not editable %>
+				    <tr class='timepoint_row'>
+				    	<td scope='row'>
+				    		<input type='text' name="<%= "timepoint_numbers[#{tp.id}]"%>" value="<%= tp.number %>" size=15 >
+				    	</td>
+				    	<td scope='row'>
+				    		<select class='timepoint_unit_field' id="<%= "timepoint_#{index}"%>" name="<%= "timepoint_units[#{tp.id}]"%>">
+								  <% possible_time_units.each do |val| %>
+								    <% selected = val == tp.time_unit ? "selected" : "" %>
+								  	<option value='<%=val%>' <%= selected %>><%=val%></option>
+								  <% end %>
+								  <option value='other'>Other...</option>
+								</select>
+
+
+				    		<!--
+				    		<input type='text' name="<%= "timepoint_units[#{tp.id}]"%>" value="<%= tp.time_unit %>" size=8 >
+				    		-->
+				    	</td>
+				    	<td scope='row' style='width:20px;'>
+				    		<% unless index == 0 %>
+				    			<% if tp_has_data %>
+				    				(has_associated_results)
+				    			<% else %>
+				    				<a href='#' title="<%= "Remove Timepoint: #{tp.number} #{tp.time_unit}"%>" class='remove_timepoint_row_link'>Remove</a>
+				    			<% end %>
+				    		<% else %>
+				    			<% if tp_has_data %>
+				    				(has associated results)	
+				    			<% else %>
+				    			  &nbsp;
+				    			<% end %>
+				    		<% end %>
+				    	</td>
+				    </tr>
+				  <% end %>
+				<% else %>
+				
+					<% if defined?(@previous_outcome_timepoints) && @editing == false %>
+						<% @previous_outcome_timepoints.each_with_index do |tp,index| %>
+							<tr class='timepoint_row'>
+								<td>
+									<input type='text' name="<%= "timepoint_numbers[#{index}]" %>" value="<%= tp.number %>" size=15 >
+								</td>
+								<td>
+									<select class='timepoint_unit_field' id="<%= "timepoint_#{index}"%>" name="<%= "timepoint_units[#{index}]"%>">
+									  <% possible_time_units.each do |val| %>
+									  	<% selected = val == tp.time_unit ? "selected" : "" %>
+									  	<option value="<%=val%>" <%= selected %>><%=val%></option>
+									  <% end %>
+									  <option value='other'>Other...</option>
+									</select>
+								</td>
+								<td style='width:10px;'>
+									<% unless index == 0 %>
+						    			<a href='#' title="<%= "Remove Timepoint: #{tp.number} #{tp.time_unit}"%>" class='remove_timepoint_row_link'>Remove</a>
+						    		<% else %>
+						    			&nbsp;
+						    		<% end %>
+								</td>
+							</tr>
+						<% end %>
+					<% else %>
+					    <tr class='timepoint_row'>
+							<td>
+								<input class='new_row_title' type='text' name='timepoint_numbers[0]' value='Enter a numeric value or title (required)' >
+							</td>
+							<td>
+								<select class='timepoint_unit_field'  id="timepoint_0" name='timepoint_units[0]'>
+								  <% possible_time_units.each do |val| %>
+								  	<option value="<%=val%>"><%= val %></option>
+								  <% end %>
+								  <option value='other'>Other...</option>
+								</select>
+							</td>
+							<td style='width:10px;'>
+								&nbsp;
+							</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table>
+			<center><a href='#' id='add_timepoint_link' title='Add another timepoint'>Add A Timepoint</a></center>
+		</td>
+	</tr>
+
+	<%# -------- SUBGROUPS ---------%>
+	<tr>
+		<td colspan='2' class='header-row'>Define Patient Populations (Subgroups)</td>
+	</tr>
+	<tr>
+		<td colspan='2'>
+			<table style="width:100%;" class='no-border'>
+				<tr class='subgroup_title_row '>
+					<td scope='col' style='text-decoration:underline;font-weight:bold;width:25%;'>Name</td>
+					<td scope='col' colspan='2'style='text-decoration:underline; font-weight:bold;width:75%;'>Description</td>
+					
+				</tr>
+				<% unless @outcome_subgroups.empty? %>
+				  <% @outcome_subgroups.each_with_index do |sg,index|%>
+				  	<% sg_has_data = OutcomeSubgroup.has_data(sg.id) %>
+				    <%# Set the default option (created first) to be readonly and not editable %>
+				    <% type = sg.title=="All Participants" ? "hidden" : "text" %>
+				    <tr class='subgroup_row'>
+				    	<td scope='row'>
+				    		<%= "All Participants" unless type == "text" %>
+				    		<input type="<%= type %>" name="<%= "subgroup_names[#{sg.id}]"%>" value="<%= sg.title %>" size=8 >
+				    	</td>
+				    	<td scope='row'>
+				    		<%= "All patients enrolled in this study. (Default)" unless type == "text" %>
+				    		<input type="<%= type %>" name="<%= "subgroup_descriptions[#{sg.id}]"%>" value="<%= sg.description %>" size=8 >
+				    	</td>
+
+				    	<td  scope='row'style='width:20px;'>
+				    		<% unless index == 0 %>
+				    			<% if sg_has_data %>
+										(has associated results)			    				
+				    			<% else %>
+				    				<a href='#' class='remove_subgroup_row_link'>Remove</a>
+				    			<% end %>
+				    		<% else %>
+				    			<% if sg_has_data %>
+				    				(has associated results)	
+				    			<% else %>
+				    			  &nbsp;
+				    			<% end %>
+				    		<% end %>
+				    	</td>
+				    </tr>
+				  <% end %>
+				<% else %>
+					<% if defined?(@previous_outcome_subgroups) %>
+						<% @previous_outcome_subgroups.each_with_index do |sg,index| %>
+							<%# Set the default option (created first) to be readonly and not editable %>
+					    <% type = sg.title=="All Participants" ? "hidden" : "text" %>
+					    <tr class='subgroup_row'>
+					    	<td scope='row'>
+					    		<%= "All Participants" unless type == "text" %>
+					    		<input type="<%= type %>" name="<%= "subgroup_names[#{index}]"%>" value="<%= sg.title %>" size=8>
+					    	</td>
+					    	<td scope='row'>
+					    		<%= "All patients enrolled in this study. (Default)" unless type == "text" %>
+					    		<input type="<%= type %>" name="<%= "subgroup_descriptions[#{index}]"%>" value="<%= sg.description %>" size=8>
+					    	</td>
+					    	<td scope='row' style='width:20px;'>
+					    		<% unless index == 0 %>
+					    			<a href='#' class='remove_subgroup_row_link'>Remove</a>
+					    		<% else %>
+					    			&nbsp;
+					    		<% end %>
+					    	</td>
+					    </tr>
+						<% end %> <%# end previous outcome subrgoups.each do %>
+					<% else %>  <%# if defined? previous outcome subgroups...%>
+						<tr class='subgroup_row'>
+							<td scope='row'>
+								All Participants
+								<input type='hidden' name='subgroup_names[0]' value='All Participants'>
+							</td>
+							<td scope='row'>
+								All patients enrolled in this study. (Default)
+								<input type='hidden' name='subgroup_descriptions[0]' value='All patients enrolled in this study. (Default)'>
+							</td>
+							<td style='width:10px;'>
+							</td>
+						</tr>
+					<% end %>
+				<% end %>
+			</table><br/>
+			<span><a href='#' id='add_subgroup_link' title='Add another subgroup'><img alt="Add a Subgroup" src='/images/Add.png'/> Add A Subgroup</a></span>
+		</td>
+	</tr>
+
+	</table>
+	</div><br/><br/><br/><br/><br/>
+	<center>
+		 <div class="popup-footer actions">
+		<% if @editing == true %>
+			<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+				<%= image_tag "Accept.png", :alt => "Accept" %>Save Edits
+			</button>
+		<% else %>
+			<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+				<%= image_tag "Add.png", :alt => "Save" %>Save
+			</button>
+		<% end %>
+			<button class="negative" onClick="event.preventDefault();$('#new_outcome_entry').dialog('close');">
+				<%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+			</button>
+		</div>
+	</center>
+	<% end %> <!-- end form -->
+<script type='text/javascript'>
+	// <!--
+    // Remove .edited_field and .unsaved_form classes from forms and fields that have been saved
+    $(".positive").on('click', function(e){
+        $(".unsaved_form").removeClass("unsaved_form");
+        $(".editable_field").removeClass("edited_field");
+    })
+
+	function document_init() {
+	  try{
+	    checkDivLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+		prepareForm();
+	  } catch( err ) {
+	    setTimeout('document_init()', 200);
+	  }
+	}
+
+	function checkDivLoaded() {
+		if ( $('#add_subgroup_link').length == 0) $jquery.error( 'not ready' );
+	}
+
+	// When users select 'Other' from the timepoint unit selector, 
+	// give them the option of specifying another unit.
+	// This function is called any time a new timepoint is added to be sure
+	// that the time unit selector works properly.  
+	function assign_other_to_tp_units(){
+		$(".timepoint_unit_field").unbind("change");
+		$(".timepoint_unit_field").bind("change",function(){
+			my_id = $(this).attr("id");
+			my_name = $(this).attr("name");
+			selected_val = $(this).val();
+			$.ajax({
+				url:"/application/show_other",
+				data:{
+					"field_id":my_id,
+					"field_name":my_name,
+					"selected":selected_val
+				}
+			})
+		})	
+	}
+	function prepareForm(){
+		/* set up a variable used to iterate the next temporary timepoint id */
+		var next_timepoint_id = -1;
+		/* ADDING A NEW TIMEPOINT ROW */
+		$("#add_timepoint_link").unbind("click");
+		$("#add_timepoint_link").bind("click",function(event){
+			//alert("next time point id is " + next_timepoint_id.toString());
+			event.preventDefault();
+			time_units = "<%= possible_time_units.to_json %>";
+			time_units = time_units.replace(/&quot;/g,'"');
+		    time_units = jQuery.parseJSON(time_units);
+			
+			tp_number_name = "timepoint_numbers[" + next_timepoint_id.toString() + "]";
+			tp_unit_name = "timepoint_units[" + next_timepoint_id.toString() + "]";
+			html_string = "<tr class='timepoint_row' style='border-top: solid 1px #9b9b9b;'>"+
+			               "<td><input class='new_row_title' type='text' name='" + tp_number_name + "' value='' size=8 /></td>"+
+			               "<td><select id='timepoint_"+next_timepoint_id+"' name='" + tp_unit_name + "' class='timepoint_unit_field'>";
+			for(i=0;i < time_units.length;i++){
+				html_string += "<option value='" + time_units[i] + "'>" + time_units[i] + "</option>";
+			}
+			html_string += "<option value='other'>Other...</option>";
+			html_string += "</select></td><td><a href='#' class='remove_timepoint_row_link'>Remove</a></td></tr>";
+			
+			$($(".timepoint_row").last()).after(html_string);
+			// WHERE DID THIS ASSIGN OTHER FUNCTION GO?
+			assign_other_to_tp_units();		
+			next_timepoint_id = next_timepoint_id - 1;
+		});
+
+		/* REMOVING A SUBGROUP ROW */
+		$(".remove_timepoint_row_link").live("click",function(event){
+			event.preventDefault();
+			parent_td = $(this).parent();
+			parent_tr = $(parent_td).parent();
+			$(parent_tr).remove();
+		})
+
+		/* set up a variable used to iterate the next temporary subgroup id */
+		var next_subgroup_id = -1
+
+		/* ADDING A NEW SUBGROUP ROW */
+		$("#add_subgroup_link").unbind("click");
+		$("#add_subgroup_link").bind("click",function(event){
+			event.preventDefault();
+			sg_field_name = "subgroup_names[" + next_subgroup_id.toString() + "]";
+			sg_desc_name = "subgroup_descriptions[" + next_subgroup_id.toString() + "]";
+			$($(".subgroup_row").last()).after("<tr class='subgroup_row' style='border-top: solid 1px #9b9b9b;'>"+
+			"<td><input type='text' name='" + sg_field_name + "' value='' size=8 /></td>"+
+			"<td><input class='new_row_title' type='text' name='" + sg_desc_name + "' value=''></td>"+
+			"<td style='width:10px;'><a href='#' class='remove_subgroup_row_link'>Remove</a></td>"+
+			"</tr>");
+			next_subgroup_id -= 1;
+		})
+		/* REMOVING A SUBGROUP ROW */
+		$(".remove_subgroup_row_link").live("click",function(event){
+			event.preventDefault();
+			parent_td = $(this).parent();
+			parent_tr = $(parent_td).parent();
+			$(parent_tr).remove();
+		})
+
+		$("#outcome_title").bind("change",function(){
+			var selected = this.value
+			//var jsonObj = jQuery.parseJSON('<%= raw @descriptions.to_json %>')
+			var jsonObj = jQuery.parseJSON('<%= raw @outcome_options.to_json.gsub("\'","") %>');
+			
+			var desc = "";
+			var units = "";
+			var type = "";
+			if (jsonObj[selected]){
+				desc = jsonObj[selected][0];
+				units = jsonObj[selected][1];
+				type = jsonObj[selected][2];
+			}
+			$("#outcome_description").val(desc);
+			$("#outcome_units").val(units);
+			if(type == "Categorical"){
+				$("#outcome_outcome_type_categorical").attr("checked",true);
+			}else if(type == "Continuous"){
+				$("#outcome_outcome_type_continuous").attr("checked",true);
+			}else if(type == "Survival" || type == "Time to Event"){
+				$("#outcome_outcome_type_time_to_event").attr("checked",true);
+			}	
+		});
+
+		assign_other_to_tp_units();
+
+		// Erase the contents of the first timepoint row title after the user clicks.
+		$(".new_row_title").bind("click",function(){
+			$(this).val("");
+			$(".new_row_title").unbind("click");
+		})
+	}
+	document_init();
+// -->
+</script>
+

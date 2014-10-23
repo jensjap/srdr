@@ -1,0 +1,34 @@
+<% if !@quality_dimension_extraction_form_fields.nil? && @quality_dimension_extraction_form_fields.length > 0 %>
+
+
+<table class="list_table" id="study_quality_dimensions_table_<%= @extraction_form.id.to_s %>" summary="study quality dimensions table extraction form #<%= @extraction_form.id.to_s %>">
+<thead>
+<tr>
+<th>Quality Dimension</th>
+<th>Value</th>
+<th>Notes</th>
+</tr></thead>
+
+<%# ------------------- LISTING TEMPLATE FIELDS --------------------- %>
+
+<% if !@quality_dimension_extraction_form_fields.nil? && @quality_dimension_extraction_form_fields.length > 0 %>
+<% for qa in @quality_dimension_extraction_form_fields %>
+<tr class="<%= cycle("even", "odd") %>" id='<%= 'quality_aspect_' + qa.id.to_s %>'>
+
+<td><%= qa.title %></td>
+
+
+<td></td>
+
+<td></td>
+
+
+</tr>
+<% end %>
+<% end %>
+
+
+</table>
+<% else %>
+No quality dimensions were specified.
+<% end %>

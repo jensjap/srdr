@@ -1,0 +1,125 @@
+# @markup rdoc
+# @title 508 Compliance
+
+=508 Compliance
+
+
+
+
+== Technical questions for AHRQ
+
+Last updated 1-5-2012
+
+- What does "Instructional Text Needs to be marked up" mean?
+Example:  on the study form page (../studies/new), "Instructional text needs to be marked up" was listed for the following code: 
+  <form accept-charset="UTF-8" action="/search/results" id="searchform" method="get">
+  <div style="margin: 0pt; padding: 0pt; display: inline;"&gt;<input nam.....
+
+- AHRQ spacer being interpreted as placeholder text
+Example: On all pages with the AHRQ footer (all pages), "Suspicious text equivalent for Image - could be placeholder text or ascii art" was listed for the following code:  
+  <img alt="Spacer" class="ftrimgctr" src="/images/ahrq/space.gif?1324669924">
+
+- AHRQ footer links don’t include a "skip navigation" link
+Example:  Example: On all pages with the AHRQ footer, "Mechanism to bypass navigation links is absent" was listed for the following code:
+  <a href="/">AHRQ Home</a> | <a href="https://info.ahrq.gov/cgi-bin/
+  ahrq.cfg/php/enduser/std_alp.php">Questions?</a> | <a href="http://www.ahrq.gov/inf...
+
+- Ask if storing a session for a certain time is acceptable (user login session times out after a certain amount of time)
+- Ask if we are required to provide shortcut keys for certain sections (i.e. Search)
+
+== Policy questions for AHRQ
+
+- List what personally identifiable information we are storing (name, email address, organization, password) and ask if storing that info complies with OMB/AHRQ policy
+- Ask whether we need a Privacy Impact Assessment based on the final registration model
+- Ask if there are any OMB/AHRQ policy issues with our recordkeeping policy (records will be stored indefinitely)
+- Ask whether password protection must happen while hosted on Heroku, or if it can be after the site is ported to AHRQ
+- Ask about the possibility and process of obtaining an "srdr.ahrq.gov" domain name
+- Send Biff of our definition of "Wiki" (commenting system) and ask whether this complies with OMB/AHRQ policy
+- Ask what we need to do for the final approval process (what the submission process is, what documentation we need)
+
+== Task List
+
+<table style="border: 1px" border="1" cellspacing="0">
+<tbody>
+<tr>
+<td>Task Title</td>
+<td>Task Description</td>
+<td>Estimated Time to Complete</td>
+<td>Who will do this</td>
+<td>When this can be done</td>
+</tr>
+<tr>
+<td>Write up final decisions about user policy (to send to Biff)</td>
+<td>
+<ol>
+<li>Write out details of registration process for SRDR for different user types:</li>
+</ol>
+(a) one admin account creates accounts for contributor users and Directors/Publishers
+(b) commenter users create accounts on-the-fly with an email address and password
+- Review and confirm final registration process with the team</td>
+<td>< 1 day</td>
+<td>Sarah</td>
+<td>[revisions in progress]</td>
+</tr>
+<tr>
+<td>Discuss policy issues with Biff</td>
+<td>List of policy questions located in separate document (508 compliance policy questions.docx)</td>
+<td>(emails or phone call)</td>
+<td>Sarah or Nira</td>
+<td>When write up is complete</td>
+</tr>
+<tr>
+<td>Discuss technical issues with Gerri/Biff</td>
+<td>List of specific technical questions located above</td>
+<td>(emails or phone call)</td>
+<td>Sarah</td>
+<td>Any time</td>
+</tr><tr>
+<td>Password Protect the Site</td>
+<td>Dependent on Biff's response. Password protect the site to comply with AHRQ and HHS policy. Contact existing users and inform them of the change. </td>
+<td>< 1 day</td>
+<td>Sarah</td>
+<td>After policy discussion with Biff</td>
+</tr><tr>
+<td>Create a shortcut key for Search field</td>
+<td>Dependent on Biff's response. Only if required by 508 standards</td>
+<td>< 1 day </td>
+<td>Sarah</td>
+<td>After technical discussion with Biff</td>
+</tr><tr>
+<td>Update the navigation</td>
+<td>>- Create a link called SRDR Home and link it to the home page (My Work). Remove the Full Screen Mode link. Make sure all links are standard color</td>
+<td>< 1 day</td>
+<td>Whoever updates the sidebar (Sarah or Chris)</td>
+<td>When we update the sidebar navigation to be like RedCap</td>
+</tr><tr>
+<td>Check and fix all tables for accessibility</td>
+<td>Make sure each table in SRDR is accessible to screen readers. Need to update existing tables</td>
+<td>2 days to 1 week to fix existing tables</td>
+<td>Sarah</td>
+<td>any time (plus ongoing development)</td>
+</tr><tr class="c2">
+<td>Check and fix all tab-index attributes</td>
+<td>Add ordered numbers to every link, form element, and button in the site so screen readers and users pressing the &ldquo;Tab&rdquo; key will navigate items in order. Need to update existing links, form elements, and buttons</td>
+<td>2 days to 1 week to update &nbsp;existing links</td>
+<td>Sarah</td>
+<td>any time (plus ongoing development)</td>
+</tr><tr class="c2">
+<td>Make export process and exported documents accessible</td>
+<td>Once no further changes will be made to sections, finalize Excel and PDF export. Make sure each export link/export process calculates and displays the file size with download link. Make sure each export link contains a link to a viewer of the data (AHRQ PDF Help page, Word Viewer)</td>
+<td>Concurrent with exporting updates</td>
+<td>Sarah (PDF) and Chris (Excel and TSV)</td>
+<td>After quality, user roles, and outcomes are finalized</td>
+</tr><tr class="c2">
+<td>Create a web-based accessible user manual</td>
+<td>Update existing manual or start from scratch, including screenshots. Adapt it to an accessible HTML format (for the SRDR site). Adapt it to an accessible PDF format.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr><tr class="c2">
+<td>Create accessible tutorial videos</span></p></td>
+<td>Decide what features are essential to show in a video / plan the videos</span></p><p class="c0"><span>- Write a script for each video</span></p><p class="c0"><span>- Record each video</span></p><p class="c0"><span>- Add titles and captions</span></p></td>
+<td></td>
+<td></td>
+<td>May 2012</span></p></td>
+</tr></tbody></table>

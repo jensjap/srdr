@@ -1,0 +1,184 @@
+<table class="list_table" style='border:none;'>
+<% 
+    # View controls selections are stored in the session object - get them or load defaults
+    sortby_v = session[:sortby]
+    if sortby_v.nil?
+        sortby_v = "MOSTVIEWED" 
+        session[:sortby] = sortby_v
+    end
+    itemsperpage_v = session[:itemsperpage]
+    if itemsperpage_v.nil?
+        itemsperpage_v = 10 
+        session[:itemsperpage] = itemsperpage_v
+    end
+    viewset_v = session[:viewset]
+    if viewset_v.nil?
+        viewset_v = 1 
+        session[:viewset] = viewset_v
+    end
+    n_projects = @lead_projects.size
+    
+    @lead_projects.each do |project|
+        if defined?(current_user) && 
+            !current_user.nil?
+            show_both = User.current_user_is_collaborator(project.id.to_s,current_user)
+        else
+            show_both = false
+        end
+        
+        if project.is_public
+            access_state = "Public Report"
+            access_label = "Complete"
+        else
+            access_state = "Private Report"
+            access_label = "Incomplete"
+        end
+        num_studies = Project.get_num_studies(project)
+        num_key_qs = Project.get_num_key_qs(project)
+        num_ext_forms = Project.get_num_ext_forms(project)
+%>
+    <tr>
+        <td class='data' style='position:relative;'>
+            <span style='float:left;width:75%'>
+               <h2><%= project.title %></h2><br/>
+            </span>
+            <span style='float:right;position:relative; right:30px; top:0px;' class='status'>
+                <%= access_state %> 
+                <span class="<%= access_label.downcase %>"><%= access_label %></span>
+            </span>
+            <br clear='all'>
+            <span class='bold'>Statistics:</span> <%= pluralize(num_studies, 'Study') %>,
+            <%= pluralize(num_key_qs, 'Key Question') %>,
+            <%= pluralize(num_ext_forms, 'Extraction Form') %>,    
+            <%# Project.get_status_string(project.id) %><br/>
+
+            <!--<span class='bold'>Date Created: </span><%= project.created_at.strftime("%b %d, %Y %I:%M%p") %>-->
+            <span class='bold'>Date Created: </span><%= project.created_at.strftime("%b %d, %Y") %><br/>
+            <span class='bold'>Last Update: </span><%= project.updated_at.strftime("%b %d, %Y %I:%M%p") %> GMT<br/>
+
+            <div class='comment more'>
+                <span class='bold'>Description: </span>
+                <%= project.description.blank? ? "None Provided" : project.description.force_encoding("UTF-8") %>
+            </div>
+
+            <div class='comment more'>
+                <span class='bold'>Contributor(s): </span>
+                <%= project.contributors.blank? ? "None Provided" : project.contributors.force_encoding("UTF-8") %><br>
+            </div>
+
+            <div class='comment more'>
+                <span class='bold'>Funding Source: </span>
+                <%= project.funding_source.blank? ? "None Provided" : project.funding_source.force_encoding("UTF-8") %><br>
+            </div>
+
+            <div class="comment more">
+                <span class='bold'>Methodology Description: </span>
+                <%= project.methodology.blank? ? "None Provided" : project.methodology.force_encoding("UTF-8") %>
+            </div>
+
+            <br/><br/>
+            &nbsp;&nbsp;
+            <%= link_to image_tag("Pencil.png") + " Edit", "/projects/#{project.id}/edit" %>
+            &nbsp;&nbsp;|
+            &nbsp;&nbsp;
+            <%= link_to image_tag("Add.png") + " Add a Study", new_project_study_path(project) %>
+            &nbsp;&nbsp;|
+            &nbsp;&nbsp;
+            <!--
+            <%= link_to image_tag("Disk.png") + " Export to TSV", "/exporter/full_proj_machine/#{project.id.to_s}" %>
+            &nbsp;&nbsp;|
+            &nbsp;&nbsp;
+            <%= link_to image_tag("pdf.png") + " Export to PDF", "/exporter/full_proj_machine/#{project.id.to_s}" %>
+            &nbsp;&nbsp;|
+            &nbsp;&nbsp;
+            -->
+            <a href='#' class='copy_project_link' title="Copy Project <%= project.id%>" project_id="<%= project.id %>"><img alt="Copy the project titled <%= project.title %>" src='/images/copy.png'/> Copy</a>
+            &nbsp;&nbsp;|
+<%
+        if (Comment.get_number_of_project_flags(project.id.to_s, show_both) >0) && 
+            (Comment.get_number_of_project_comments(project.id.to_s, show_both) >0)
+            # Place holder to fix comment link
+%>
+            <%# link_to image_tag("Comment.png") + " View Comments", "/exporter/full_proj_machine/#{project.id.to_s}" %>
+<% 
+        end
+        if (current_user.user_type == "admin") || 
+            User.current_user_is_collaborator(project.id, current_user)
+%>                      
+            <%= link_to image_tag("Bin_closed.png") + " Delete", project_path(project), :method=> "delete", :confirm => "Are you sure?", :remote => true, :class => "tooltip_delete" %>
+<% 
+        end
+%>
+        </td>
+    </tr>
+    
+<%
+    end
+%>		
+    <tr>
+        <td class="controls">
+        <form>
+        Sort by:
+        <select name="sortby">
+            <option value="MOSTVIEWED">Most Viewed
+            <option value="PUBLIC">Public
+            <option value="PRIVATE">Private
+            <option value="COMPLETE">Complete
+            <option value="INCOMPLETE">Incomplete
+        </select>
+<%
+    if itemsperpage_v < n_projects
+%>
+        &nbsp;&nbsp;Items Per Page:
+        <select name="itemsperpage">
+<%
+        # Construct the options based on the number of projects to be listed
+        n_sets = n_projects / itemsperpage_v;
+        if (n_projects % itemsperpage_v) > 0
+            n_sets = n_sets + 1
+        end
+        count = 10
+        while count <= n_projects
+            if count == itemsperpage_v
+%>
+            <option value="<%= count %>" SELECTED><%= count %>
+<%
+            else
+%>
+            <option value="<%= count %>"><%= count %>
+<%
+            end
+            count = count + 10
+        end
+%>
+            <option value="ALL">All
+        </select>
+        &nbsp;&nbsp;
+<%
+        count = 1
+        while count <= n_sets
+            if count > 1
+%>
+        &nbsp;|&nbsp;
+<%
+            end
+            if count == viewset_v
+%>
+        <%= count %>
+<%
+            else
+%>
+        <a href="#"><%= count %></a>
+<%
+            end
+            count = count + 1
+        end
+%>
+        &nbsp;&gt;
+<%
+    end
+%>
+        </form>
+        </td>
+    </tr>
+</table>

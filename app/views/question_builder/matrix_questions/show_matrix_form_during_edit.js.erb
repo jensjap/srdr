@@ -1,0 +1,31 @@
+// determine if there are other options in place that need to be removed
+var field_id = "#q_<%= @q_num %>_choices";
+var n = $(field_id.toString()).length;
+
+if (n > 0){
+	$(field_id.toString()).remove();
+}
+
+// determine the matrix form has been set up and if not, do so
+field_id = "#matrix_setup_<%= @model %>";
+existing_matrix_type = $(field_id).attr("matrix_type");
+<% partial = @input_type.match("select") ? 'question_builder/matrix_questions/matrix_dropdowns_setup_form' : 'question_builder/matrix_questions/matrix_setup_form' %>
+new_matrix_type = "<%= @input_type %>"
+n = $(field_id.toString()).length;
+if(n < 1){
+	// the matrix was not set up yet, so just pop it in there.
+	$("#q_<%= @q_id %>_field_type_div").after("<%= escape_javascript(render(:partial=>partial)) %>");
+}else{
+	// if the new and old matrix types are not equal
+	if(new_matrix_type != existing_matrix_type){
+		// if we're trying to display a dropdown matrix, then check to make sure the previous one was
+		// also a dropdown. otherwise, switch the form.
+		if(new_matrix_type == "matrix_select" || existing_matrix_type == "matrix_select"){	
+			$("#matrix_setup_<%= @model %>").remove();
+			$("#q_<%= @q_id %>_field_type_div").after("<%= escape_javascript(render(:partial=>partial)) %>");
+		}
+	}
+}
+
+
+

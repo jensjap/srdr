@@ -1,0 +1,48 @@
+<div id='category_choices_<%= @page_name %>'>
+	<!-- The yes option text field -->
+	<span  id='row_1_div'>
+	Option: <%= text_field @page_name, "choice_1", :value=>'Yes', :class=>'question_option', :title => "question option"%> 
+	<%= check_box_tag "gets_sub[1]","1", true, :class=>'sq_assignment_cbox', :style=>"display:none;", :title => "question option" %>
+	<br/>
+	</span>
+	
+	<!-- The no option text field -->
+	<span  id='row_2_div'>
+	Option: <%= text_field @page_name, "choice_2", :value=>'No',:class=>'question_option', :title => "question option" %> 
+	<%= check_box_tag "gets_sub[2]","2", false, :class=>'sq_assignment_cbox', :style=>"display:none;", :title => "question option" %>
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>"2"), :remote=>true, :class=>"delete_column_link" %>
+	<br/>
+	</span><br/><br/>
+
+	<div class="actions" id="new_row_button_<%= @page_name %>">
+	  <%= link_to "Add Another Option","#", :id=>'add_question_button_' +@page_name %>
+	</div>
+  <br/>
+	<%= check_box_tag "has_subquestion", "yes", false, :title => "has subquestion" %> I would like to include a subquestion.
+	<div id="sq_text_div" style="display:none;"><br/><br/><strong>Sub-question:</strong><%= text_field_tag :subquestion_text, "", :size=>"40", :title => "subquestion"%><br/>
+		<span class='smallText'>Use the check boxes to the right of each choice to specify whether or not to
+			associate the subquestion with that choice.</span>
+	</div>
+
+<script>
+	$("#add_question_button_<%= @page_name %>").bind("click",function(event) {
+		event.preventDefault();
+  	$.ajax({
+  		url: 'question_builder/add_choice',
+  		data: {"previous_row":$('#add_question_button_<%= @page_name %>').parent().prev().attr('id'), "page_name":$('#page_name').val()}
+  	});		
+  });
+  
+	$("#has_subquestion").bind("change", function(){
+		if ($(this).attr("checked")){
+			$(".sq_assignment_cbox").css("display","inline");
+			$("#sq_text_div").css("display","inline");
+		}else{
+			$(".sq_assignment_cbox").css("display","none");
+			$("#sq_text_div").css("display","none");
+		}
+	});
+</script>
+
+</div>
+

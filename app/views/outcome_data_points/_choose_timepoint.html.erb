@@ -1,0 +1,25 @@
+<br/><hr><br/>
+<table id="include_timepoints_table" summary="choose timepoints to include in outcome data charts"><tr>
+
+<th></th>
+</tr>
+<tr><td>
+<strong>Step 3. </strong><label for="Choose timepoints to include">Choose Timepoints to include in the table:</label><br/>
+
+<%= form_tag "results/show_table", :remote => true, :method => "post", :id=>"outcome_timepoint_setup_form" do %>
+<div class="form_content">
+<%= hidden_field "timepoint", "outcome_id", :value => outcome.id %>
+<%= hidden_field_tag "outcome_id", outcome.id %>
+
+<div class="field" id="edit_tp_list">
+<%= render :partial => "outcome_timepoints/edit_timepoints_all", :locals => {:outcome_timepoints => outcome_timepoints} %>
+
+</div>
+
+<div class="actions buttons">
+		<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+			<%= image_tag "Note_go.png", :alt => "Submit" %>Submit
+		</button>
+</div>
+<% end %>
+</td></tr></table>

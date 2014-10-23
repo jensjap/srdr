@@ -1,0 +1,62 @@
+<div class='container_div' style='background-color:#fff;border:none;'>
+<p align="center"/>
+	<table class='formatted_table' id="saved_outcome_comparisons_table" summary="saved outcome comparisons table">
+		<tr>
+			<th>Outcome</th><th>Type</th><th>Comparators</th>
+			<th>Group</th><th>Values</th><th>Actions</th>
+		</tr>
+		<% @saved_comparisons.each do |comparison| %>
+			<tr class="<%= cycle("even","odd")%>">
+				<td><%= @comparison_titles[comparison.id][0] %></td>
+				<td><%= comparison.within_or_between %></td>
+				<td><%= @comparison_titles[comparison.id][1] %></td>
+				<td><%= @comparison_titles[comparison.id][2] %></td>
+				<td>
+					<% measures = @saved_measures[comparison.id] %>
+					<% unless measures.empty? %>
+					 <table border=0 id="saved_outcome_comparisons_subtable" summary="saved outcome comparisons subtable">
+					 	<% measures.each do |m|%>
+					 	  <% unless @saved_data_points.empty? %>
+						 	<tr>
+						 		<td style='border:none;'><%= m.title %>:</td>
+						 	
+						 		<td style='border:none;'>
+						 				<% unless @saved_data_points[m.id].first.nil?%>
+						 					<%= @saved_data_points[m.id].first.value %> <%= m.unit %>
+						 				<% end %>
+					 			</td>
+						 	</tr>
+						 	<% end %>
+					 	<% end %>
+					 	</table>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to image_tag("Pencil.png", :style=>"border:none;"), "#", :class=>"edit_comparison_link", :comparison_id=>comparison.id, :type=>comparison.within_or_between, :group_title=>@comparison_titles[comparison.id][2],:group_id=>comparison.group_id, :outcome_id=>comparison.outcome_id %>
+				</td>
+			</tr>
+		<% end %>
+	</table>
+	<br/><br/>
+<p align="center"/>
+		<button class="positive" onClick="event.preventDefault();$('#existing_comparison_modal').dialog('destroy');">
+			<%= image_tag "Accept.png", :style=>"vertical-align:text-top;", :alt => "Done" %>Done
+	  </button>
+
+</div>
+<script type='text/javascript'>
+$(".edit_comparison_link").bind("click",function(event){
+		event.preventDefault();
+		$.ajax({
+			type: "POST",
+			url: 'comparison_data_points/edit_comparison',
+			data: {
+				comparison_id : $(this).attr("comparison_id"),
+				outcome_id : $(this).attr("outcome_id"),
+				type : $(this).attr("type"),
+				group_id : $(this).attr("group_id"),
+				group_title : $(this).attr("group_title")	
+			}
+		});
+	})
+</script>

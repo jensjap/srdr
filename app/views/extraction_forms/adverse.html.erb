@@ -1,0 +1,141 @@
+<div class='tab-div'><br/>
+    <%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Adverse Events"} %>
+
+   <div class="extraction_form_options">
+       <%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+      <% unless @donors.empty? %> 
+    		<%= render :partial=>'extraction_form_section_copies/imported_message'%>
+      <% else %>
+      Would you like to include the <strong>adverse events</strong> section in your extraction form? 
+    	<%= select("ef_included_" + @extraction_form_section.id.to_s, "adverse", options_for_select([["Yes", true], ["No", false]], @extraction_form_section.included),
+      { :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+      <div class="inline" id="saved_display_section_adverse"></div>
+       <% end %>
+      <% end %>
+      <br/>
+      <!-- user-defined extraction form instructions -->
+      <% @ef_user_instructions = @extraction_form_adverse_instr.nil? ? nil : @extraction_form_adverse_instr.instructions %>  
+        <div id="adverse_user_instructions">
+            <%= render :partial=>"extraction_forms/instructions" %>
+        </div>
+        <a href='#' class="positive add_adverse_ef_instr_<%= @extraction_form_section.id.to_s %> add_adverse_instr_button" id="add_adverse_instr_button" alt="Click to add user instructions">
+                Add/Edit Instructions
+            </a>
+
+    </div>
+    <br/>
+    <% display = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %>
+    <div id="extraction_form_section_adverse" class='data' style='display: <%= display %>'>
+    <%# if !@extraction_form_section.nil? && @extraction_form_section.included == true %>
+    <!-- <div id="extraction_form_section_adverse"> -->
+    <%# else %>
+    <!-- <div id="extraction_form_section_adverse" class="disabled"> -->
+    <%# end %>
+        
+        <br/>
+        <br/>
+        <%= render 'adverse_events/extraction_form_settings' %>
+        <br/>
+        <br/>
+        <div class='hr'></div>
+        <br/>
+        <div class='page_heading'>Adverse Event Table Headings</div><br/>
+        You may add adverse event table columns to your extraction form using the form below. Data extractors will be able to add rows to this table and fill it out.
+        <br/><br/>
+        <div id="adverse_event_fields_table"><%= render 'adverse_event_columns/table' %></div>
+
+        <div class="actions">
+            <button type="submit" class="positive" id="new_adverse_button" alt="Click to open Add New Adverse Event Column Form Dialog">
+                <%= image_tag "Add.png", :alt => "Add" %>Add a New Adverse Event Column
+            </button>
+            
+        		
+            <div class="saved" id="saved_item_indicator_adverse" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+            <div class="saved" id="removed_item_indicator_adverse" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+        </div>
+    <br/><br/>
+        <div class='hr'></div>
+        <%#---------------------------------%>
+        <%#  SUGGESTED ADVERSE EVENT TITLES %>
+        <%#---------------------------------%>
+        <br/><br/>
+        <div class='page_heading'>Suggest Adverse Event Titles</div><br/>
+        <div id='adverse_events_table'>
+            <%= render 'extraction_form_adverse_events/table' %>
+        </div>
+        <br/>
+        <div class='actions'>
+            <button type="submit" class="positive" id="new_title_button" alt="Click to open Add New Adverse Event Title Form Dialog">
+                <%= image_tag "Add.png", :alt => "Suggest Another Adverse Event Title" %>Suggest An Adverse Event Title
+            </button>
+              <div class="saved" id="saved_indicator_ae" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+              <div class="saved" id="removed_indicator_ae" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+        </div>	
+
+    </div>
+    <div id='new_adverse_event_title_div' style='display:none;'>
+        <%= render 'extraction_form_adverse_events/form' %>
+    </div>
+    <div id="new_adverse_entry" style='display:none;'>
+        <%= render 'adverse_event_columns/form' %>
+    </div>
+    <div id = "new_adverse_instr_entry" style='display:none;'>
+        <%= render 'extraction_form_adverse/instr_form'%>
+    </div>
+
+
+    <br/><br/>
+
+    <%= render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"extraction_forms/" + @extraction_form.id.to_s + "/outcomes",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/quality",:previous_title=>"Outcome Setup",:next_title=>"Study Quality"} %>
+
+
+    <%= render 'shared/make_editable_and_confirm' %>
+
+    <script type="text/javascript">
+
+        // CREATE A NEW TABLE HEADER
+        $("#new_adverse_entry").dialog({
+            autoOpen: false,
+            minWidth: 600,
+            modal: true
+        });
+
+        $("#new_adverse_button").bind("click", function() {
+            $.ajax({
+    	    url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/adverse_event_columns/new',
+                type: "POST"
+            });
+        });
+
+        // CREATE A NEW SUGGESTED TITLE AND DESCRIPTION
+        $("#new_adverse_event_title_div").dialog({
+            autoOpen:false,
+            minWidth: 600,
+            modal: true
+        })
+
+        $("#new_title_button").bind("click",function(){
+            $.ajax({
+                url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_adverse_events/new',
+                type: "POST"
+            });
+        })
+
+        // ADD USER INSTRUCTIONS
+        $("#new_adverse_instr_entry").dialog({
+            autoOpen: false,
+            modal: true,
+        	minWidth: 600,
+            modal: true
+        });
+
+        $("#add_adverse_instr_button").bind("click", function(event)
+        {
+            event.preventDefault();
+        	$.ajax({
+        	  url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/extraction_form_adverse/add_instr',
+        	  type: "POST"
+        	});
+        });
+    </script>
+</div>

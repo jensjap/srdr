@@ -1,0 +1,22 @@
+<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
+	<table class="list_table" summary="Table For Editing Adverse Event Columns" id="editing_adverse_event_cols_table">
+		<thead>
+			<tr>
+				<th>
+					<label for="Arm or Total">Arm or Total</label>
+				</th>
+				<th>
+					<label for="Arm or Total">Adverse Event Title</label>
+				</th>
+				<th>
+					<label for="Arm or Total">Description</label>
+				</th>
+					<% for col in @extraction_form_adverse_event_columns %>
+						<th class="qtip_col_<%= col.id %>">
+							<label for="<%= col.name %>"><%= col.name %></label> 
+						</th>
+					<% end %>
+			</tr>
+		</thead>
+	</table>
+<% else %>

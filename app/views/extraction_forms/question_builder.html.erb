@@ -1,0 +1,123 @@
+<div class='tab-div'><br/>
+	<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Create #{@model_title}s Form"} %>
+
+	<div class="extraction_form_options">
+		<strong>Please Note:</strong>
+		This page allows you to generate extraction form questions for <strong><%= @model_title%>s</strong>, each with an optional set of suggested responses.
+		<br/><br/>
+		Responses can be designated as drop down lists, radio buttons or check boxes, or text fields.
+		<br><br/>
+<%
+    if !@extraction_form_section.nil?
+%>		<strong>Display Options</strong><br/>
+		<%= form_for @extraction_form_section, :action => :create,  :remote => true do |f| %>
+			
+	        Would you like to include the <strong><%= @model_title %>s</strong> section in your extraction form? 
+            <%= select("ef_included_" + @extraction_form_section.id.to_s, @section, options_for_select([["Yes", true], ["No", false]], @extraction_form_section.included),{ :selected => :included, :include_blank => false }, :class => "include_section_dropdown") %>
+		  	<div class="inline" style='display:inline;' id="saved_display_section_<%= @section %>"></div>
+		   
+		<% end %>
+		<br/>
+		<% if @possibly_by_category %>
+			<%= render :partial=>"byCategory_toggle" %>
+		<% end %><br/>
+		<!-- user-defined EF instruction -->
+        <div id="<%= @section %>_user_instructions">
+        	<%= render :partial=>"extraction_forms/instructions" %>
+        </div>
+        <a href="#" class="add_ef_instr_<%= @extraction_form_section.id.to_s %> add_instr_button" id="add_<%= @section %>_instr_button" title="Click to add user instructions to <%= @model_title %>">Add/Edit Instructions</a>
+<%
+    end     # end !extraction_form_section.nil?
+%>
+	</div>
+	<div id='new_<%= @section %>_instr_entry' style='display:none;'></div>
+
+<div id="extraction_form_section_baselines">
+<%# if !@extraction_form_section.nil? && @extraction_form_section.included == true %>
+	
+<%# else %>
+	<!--<div id="extraction_form_section_baselines" class="disabled">-->
+<%# end %>
+
+	<br/>
+	<div id="<%= @model_name %>_extraction_form_preview_table">
+		
+		<%= render 'question_builder/extraction_form_preview' %>	
+	</div>
+
+</div>
+<!-- modal window for the new question form -->
+<div id='<%= @model_name %>_fields_entry' style='display:none;'></div>
+
+<br/>
+<div class="actions">
+<% display_button = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %>
+<button type="submit" class="positive add_element_button" style='display: <%= display_button %>;' id="<%= @model_name %>_add_question_button" title="Click to add a new question">
+			<%= image_tag "Add.png", :alt => "Add" %>Add a New <%= @model_title %>
+		</button>
+		
+		<div class="saved" id="saved_item_indicator" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>
+		<div class="saved" id="removed_item_indicator" style='display:none;'>  Removed Successfully <%= image_tag 'Accept.png', :alt => "Accept" %></div>
+</div>
+<br/>
+
+<%# render :partial=>'extraction_forms/back_and_continue_buttons_modal', :locals=>{:previous_url=>"extraction_forms/" + @extraction_form.id.to_s + "/design",:next_url=>"extraction_forms/" + @extraction_form.id.to_s + "/outcomes",:previous_title=>"Design Details",:next_title=>"Outcome Setup"} %>
+
+<%= render 'shared/make_editable_and_confirm' %>
+
+</div> <!-- end tab-div -->
+
+<script type='text/javascript'>
+<!--
+
+function document_init(){
+  try{
+    checkDivLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	prepareForm();
+  } catch( err ) {
+    setTimeout('document_init()', 200);
+  }
+}
+
+function checkDivLoaded(){
+	if ( $('#<%= @model_name %>_add_question_button').length == 0) $jquery.error( 'not ready' );
+}
+
+function prepareForm(){
+	// SET UP SECTION-SPECIFIC BUTTONS AND FIELDS
+	$("#<%= @model_name %>_fields_entry").dialog({
+		autoOpen: false,
+		modal: true,
+		width: 950
+	});
+	$("#<%= @model_name %>_add_question_button").unbind("click");
+	$("#<%= @model_name %>_add_question_button").bind("click", function(){
+		$.ajax({
+		  url: '/projects/<%= @extraction_form.project_id.to_s %>/extraction_forms/<%= @extraction_form.id.to_s %>/question_builder/new',
+		  type: "POST",
+		  data: {"model_name":"<%= @model_name %>", "model_title":"<%= @model_title %>", "obj_id":"<%= @model_obj.id %>"}
+		});
+	});
+	
+	// FOR ADDING USER INSTRUCTIONS TO THE FORM...
+	$("#new_<%= @section %>_instr_entry").dialog({
+        autoOpen: false,
+        modal: true,
+        minWidth: 600
+    });
+
+    $("#add_<%= @section %>_instr_button").bind("click", function(event){   
+        event.preventDefault();
+        $.ajax({
+            url: '/projects/<%= @extraction_form.project_id %>/extraction_forms/<%= @extraction_form.id.to_s %>/add_instr',
+            type: "POST",
+            data:{"model_title":"<%= @model_title %>", 
+                  "model_name":"<%= @model_name %>",
+            	  "section":"<%= @section %>",
+            	  "extraction_form_id":"<%= @extraction_form.id %>"}
+        });
+    });
+}
+document_init();
+// -->
+</script>

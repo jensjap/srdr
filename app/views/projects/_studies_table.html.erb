@@ -1,0 +1,296 @@
+<%  unless @studies.empty? && !defined? @search_results%>   
+    <br/><br/>
+    <% unless defined? @search_results %>
+        <%= render :partial=> "projects/study_search", :locals=>{:is_project_lead=>is_project_lead} %>
+        
+        Below is a list of studies previously added to this project. You may edit or delete these entries using the icons in the right column of the table. You may also search this list using the search feature to the right. Supported fields include titles, authors, PubMed ID and assigned user.<br/><br/>
+    <% end %>
+    
+    <%= render :inline=>"#{flash[:success_html]}" if flash.keys.include?(:success_html) %>
+    <%= render :inline=>"#{flash[:error_html]}" if flash.keys.include?(:error_html) %>
+    
+    <form action="comparestudies" method="GET" name="comparestudies" onsubmit='return checkSubmit()'>
+        <%#  form_tag({:controller=>'compare_studies',:action=>'comparestudies'}, :method=>'get', :name=>'comparestudies', :onsubmit=>'return checkSubmit()') %>
+        <script type="text/javascript">
+            
+            function checkSubmit() {
+                var n_checked = 0;
+                for (i = 0; i < <%= @studies.size() %>; i++) {
+                    if (eval("document.comparestudies.merge_"+i+".checked == 1")) {
+                        n_checked++;
+                    };  // end if
+                };      // end for
+                if (n_checked < 2) {
+                    alert("Please select 2 or more studies to compare");
+                    return(false);
+                } else {      
+                    return(true);
+                }
+            }
+        </script>
+        <div id="reassignment_modal" style='display:none; margin:0px; padding:10px; width:100%;'>
+        </div>
+        <input type="hidden" name="prj_id" value="<%= params[:id] %>">
+        <input type="hidden" name="nstudies" value="<%= @studies.size().to_s %>">
+
+        <table id="projects_list_studies_table" summary="projects list of studies table" class='list_table' style='border: 1px solid #aaa'>
+            <%# if !defined? @search_results %>
+            <tr>
+                <th class='header_bar'><br/>
+                    <div id='paginate_wrapper'><%# will_paginate @studies %></div>
+                    <!-- ITEMS PER PAGE -->
+                    <% selected = session[:items_per_page].nil? ? 5 : session[:items_per_page] %>
+                    <% opts = [5,10,15,20,30,40,50] %>
+                    <label for="items_per_page_selector">Items Per Page:</label> 
+                    <select id='items_per_page_selector'>
+                        <% opts.each do |option| %>
+                            <% sel = selected.to_i == option.to_i ? "selected" : "" %>
+                            <option value=<%= option %> <%= sel %>><%= option %></option> 
+                        <% end %>
+                    </select>
+
+                    <!-- SORT BY -->
+                    <% sorts = ['Date Updated (Recent First)', 'Creator', 'Date Created', 'Pubmed ID', 'First Author'] %>
+                    <% selected_sort = params[:sort_by].nil? ? 'Date Updated (Recent First)' : params[:sort_by] %>
+                    <label for="sort_by_selector">Sort By: </label><select id="sort_by_selector">
+                        <% sorts.each do |sort| %>
+                            <% sel = selected_sort == sort ? "selected" : "" %>
+                            <option value="<%= sort %>" <%= sel %>><%= sort %></option>
+                        <% end %>
+<%# BEGIN COMMENT FOR INCLUDING ALTERNATE IDS IN SORT DROPDOWN %>                        
+                        <%# also allow the user to sort by alternate primary publication identifiers %>
+                        <%# alternates = @alternate_ids.values.collect{|x| x.first} %>
+                        <%# alternates.delete_if{|x| x.nil?} %>
+                        <%# alternates = alternates.collect{|x| x.number_type} %>
+                        <%# unless alternates.empty? %>
+                            <%# alternates.uniq.sort{|a,b| a<=>b}.each do |alt| %>
+                           <!--<option value="alternate_<%# alt %>">
+                            <%# alt == 'internal' ? "Internal ID" : alt %>
+                           </option>  
+                       -->
+                            <%# end %>
+                        <%#end %>
+                    </select>
+                    
+<%
+    if @for_comparison && (@extraction_forms.size() > 1)
+%>
+                    <!-- Select EF for comparator -->
+                    <% selected_compef = params[:compef].nil? ? @extraction_forms[0].id.to_s : params[:compef] %>
+                    <label for="compef_selector"> Select Extraction Form: </label><select id="compef_selector">
+                    <% @extraction_forms.each do |ef| %>
+                        <% sel = selected_compef == ef.id.to_s ? "selected" : "" %>
+                        <option value="<%= ef.id.to_s %>" <%= sel %>><%= ef.title %></option>
+                    <% end %>
+                    </select>
+<%
+    end
+%>
+                    <% unless defined? @search_results %>
+                        <div class='actions' style='float:right;'>
+                            <%= link_to (image_tag("Add.png", :style=>"border-style:none;vertical-  align:bottom;") + " Add a New Study"), new_project_study_path(@project), :class => "positive" %>
+                        </div>
+                    <% else %>
+                        <div style='float:right;'>
+                            <div style='font-size:20px;font-weight:normal;'>Search Result: <span style='color:yellow;'><%=@search_term%></span></div><br/>
+                                <a href='/projects/<%=@project.id%>/studies' style='color:white;'>Back to My Complete List</a>
+                        </div>
+                    <% end %>
+                </th>
+            </tr>
+            <%# IF WE ARE JUST SHOWING SEARCH RESULTS, TELL THE USER HOW TO GET BACK TO THE FULL LIST %>
+            <%# else %>
+             <!--    <tr><th class='header_bar' style='padding-top:25px;'>
+                    <div style='float:right;'><a style='color:white; a:hover:yellow;' href='/projects/<%=@project.id%>/studies'>Back to My Complete List</a></div>
+                    <span style='font-size:20px; color: white; font-weight:normal;'>Search Results for: <span style='color:yellow;'><%= @search_term %></span></span>
+                    </th>
+                </tr>
+            <%# end %>   -->                                                  
+            <% study_idx = 0 %>
+            <tr>
+                <td class='pagination'>
+                    <% if !@studies.empty? %>
+                        <%= will_paginate @studies %>
+                    <% end %>
+                </td>
+            </tr>
+<% 
+    # If comparing studies - pickup which EF is to be used, then filter list of studies
+    use_ef_id = -1 # default to nil value
+    if @for_comparison && 
+        (@extraction_forms.size() > 1) && 
+        !params[:compef].nil? 
+        use_ef_id = params[:compef].to_i
+    end
+    @studies.each do |study|
+        show_study = use_ef_id.nil? || (use_ef_id == -1) || (@study_to_ef_map[study.id].include?(use_ef_id))
+        if show_study && @for_comparison
+            # Check if comparason - only allow non-merged studies
+            if !study.study_type.nil? && (study.study_type.index("[MERGED:") == 0)
+                show_study = false  # exclude this merged study
+            end
+        end
+        if show_study
+            study_pub_info = Study.get_primary_pub_info(study.id)
+%>
+                <tr>
+                    <td class='data'>
+                        <% if !study.study_type.nil? && (study.study_type.index("[MERGED:") == 0) %>
+                            <img alt="This is a merged study." src="/images/consensus.png" title="This Study is Merged" border="0"><strong>MERGED STUDY</strong>&nbsp;
+                        <% end %>
+                        <%= render :inline => study.get_citation(@alternate_ids[study.id]) %>
+                        <br/>
+                        <% 
+                            percent_complete = @study_completion[study.id].to_i
+                            bar_color = "#33c05a"
+                            if percent_complete < 25
+                                bar_color = "#b71d09"
+                            elsif percent_complete < 50
+                                bar_color = "#b77e39"
+                            elsif percent_complete < 75
+                                bar_color = "#e6d425"
+                            elsif percent_complete < 100
+                                bar_color = "#afd127"
+                            end
+                        %>
+                        <div style='float:right; text-align:center; width:170px;'>
+                            Progress: <%= percent_complete %>%<br/>
+                            <div style='width:150px; height: 20px; padding:0px; border:solid 1px gray; background-color: white; margin:auto;'>
+                                <div style='margin: 0px; width: <%= "#{percent_complete == 0 ? 2 : percent_complete}%"%>; height:100%;background-color: <%= bar_color %>; padding:0px;overflow:hide;'></div>
+                            </div>
+                        </div>
+                        <br/>
+                        <% if @study_notes.keys.include?(study.id) %>
+                            <strong>Extractor Note:</strong> <%= @study_notes[study.id] %><br/><br/> 
+                        <% end %>
+                        &nbsp;&nbsp;
+                        <% stitle = Study.get_title(study.id) %>
+                        <% unless @for_comparison %>
+                            <%= link_to image_tag("Pencil.png") + " Edit", edit_project_study_path(@project, study), :class=>'tooltip_edit_study', :title=>"Edit Study: #{stitle}" %>
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            <%= link_to image_tag("Bin_closed.png") + " Delete", project_study_path(@project,study), :method=>:delete, :confirm => "Are you sure?", :class=>'tooltip_delete_study', :title=>"Remove Study: #{stitle}" %>
+                            <% if is_project_lead %>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;<a href='#' title='Re-Assign this Study' class='reassign_link' creatorid="<%= study.creator_id %>" studyid="<%= study.id %>"><img src='/images/arrow_branch.png' alt='Re-assign this study'/> Re-Assign</a>
+                            <% end %>
+                        <% end %>
+
+                        <% if @for_comparison %>
+                        
+                            <strong>COMPARE: </strong>
+                            <div class='hidden-label'><Label for="<%= "merge_#{study_idx.to_s}"%>"><%= "Select for Comparison: Study: #{stitle}"%></label></div><input id="<%= "merge_#{study_idx.to_s}"  %>" type="checkbox" value="1" name="<%= "merge_#{study_idx.to_s}"  %>" class='cbox' title="<%= "Select for Comparison: Study: #{stitle}" %>">
+                            <input type="hidden" name="merge_<%= study_idx.to_s %>_study_id" value="<%= study.id.to_s %>">
+                            
+                        <% end %>
+
+                    </td>
+                </tr>
+<% 
+        end
+        study_idx = study_idx + 1
+    end
+%>
+            <tr>
+                <td class='pagination'>
+                    <% if @studies.empty? %>
+                        The search found no studies matching your query.
+                    <% else %>
+                        <%= will_paginate @studies %>
+                    <% end %>
+                </td>
+            </tr>
+        </table>
+        <% if @for_comparison %>
+            <button type="submit" class="inline" name="merge_button" title="Compare Selected Studies" style='float:right;margin-top: 3px;' value="">Compare Studies</button>
+        <% end %> 
+    </form>
+<% else %>
+<br/><br/>
+    This project does not yet have any associated studies. <br/><br/><br/>
+     <div class='actions'>
+                        <%= link_to (image_tag("Add.png", :style=>"border-style:none;vertical-align:bottom;") + " Add a New Study"), new_project_study_path(@project), :class => "positive" %>
+                    </div> 
+    <br/><br/><br/><br/><br/>
+<%  end %>
+
+<script type="text/javascript">
+var is_edit_page = false;
+$(document).ready(function(){
+    var searching = "<%= @search_results %>";
+    var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+    // Default values...
+    myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+    myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+    myMenu.oneSmOnly = false;             // One expanded submenu at a time
+    myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+
+    myMenu.init();
+
+    // SEPARATE FROM THE MENU ITSELF...
+    create_tabs();
+    $("#modal_div").dialog({
+        autoOpen: false
+    })
+    
+    $("#add_keyquestion_box").dialog({
+        autoOpen: false,
+        minWidth: 600
+    });
+
+    $("a.nav_active").first().addClass("nav-active");
+    $("a.nav_active").first().addClass("nav-selected");
+
+    $("#items_per_page_selector, #sort_by_selector").die();
+    $("#items_per_page_selector, #sort_by_selector").live("change",function(){
+        var per_page = $("#items_per_page_selector").val();
+        var sort_by = $("#sort_by_selector").val();
+        var comparison = <%= @for_comparison %>;
+        var user = "<%= @user %>";
+        var url = "";
+        if(searching){
+            url = "/projects/<%= @project.id %>/search?search_term=<%= @search_term %>&";
+        }else{
+            url = "/projects/<%= @project.id %>/studies?";
+        }
+        url = url + "page=1&items_per_page=" + per_page.toString() + "&sort_by="+sort_by.toString() + "&comparison=" + comparison.toString() + "&user=" + user.toString();
+        window.location.replace(url);
+    });
+
+    // ----- STUDY REASSIGNMENT ---
+    $("#reassignment_modal").dialog({
+        autoOpen: false,
+        minWidth: 600,
+        modal:true,
+        title: "Study Assignment Options"
+    });
+
+    $(".reassign_link").die()
+    $(".reassign_link").live("click", function(event)
+    {
+        event.preventDefault();
+        creator_id = $(this).attr("creatorid");
+        study_id = $(this).attr("studyid");
+        $.ajax({
+          url: "/projects/<%= @project.id %>/studies/show_assignment",
+          type: "POST",
+          data:({
+            study_id: study_id,
+            creator_id: creator_id,
+          })
+        });
+    });
+
+    $("#toggle_all_studies_assignment_box").die();
+    $("#toggle_all_studies_assignment_box").live("click",function(event){
+        var status = true;
+        if($(this).prop("checked") == false){
+            status = false;
+        }   
+        $(".study_assignment_selector").prop("checked",status);
+    });
+
+    <% unless params[:page].nil? %>
+        $("body").animate({scrollTop:$("#projects_list_studies_table").offset().top});
+    <% end %>
+    
+})
+</script>

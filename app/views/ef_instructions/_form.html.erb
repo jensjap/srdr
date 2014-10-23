@@ -1,0 +1,33 @@
+<%= form_for(@ef_instruction) do |f| %>
+  <% if @ef_instruction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ef_instruction.errors.count, "error") %> prohibited this ef_instruction from being saved:</h2>
+
+      <ul>
+      <% @ef_instruction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ef_id %><br />
+    <%= f.text_field :ef_id %>
+  </div>
+  <div class="field">
+    <%= f.label :section %><br />
+    <%= f.text_field :section %>
+  </div>
+  <div class="field">
+    <%= f.label :data_element %><br />
+    <%= f.text_field :data_element %>
+  </div>
+  <div class="field">
+    <%= f.label :instructions %><br />
+    <%= f.text_area :instructions %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,3 @@
+class ExtractionFormSectionsController < ApplicationController
+
+end

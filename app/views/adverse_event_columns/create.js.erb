@@ -1,0 +1,6 @@
+$("#new_adverse_entry").html("<%= escape_javascript(render :partial=>"adverse_event_columns/form") %>");
+$("#adverse_event_fields_table").html("<%= escape_javascript(render :partial=>"adverse_event_columns/table") %>");
+$("#new_adverse_entry").dialog('close');
+
+$("#saved_item_indicator_adverse").show().delay(500).fadeOut(300);
+$("#validation_message_adverse").html("");

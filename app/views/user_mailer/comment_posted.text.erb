@@ -1,0 +1,17 @@
+A <%= @comment.is_flag ? "flag" : "comment" %> has been posted to your SRDR project!
+
+================================================
+
+SRDR user <%= @poster.login %> has posted the following <%= @comment.is_flag ? "flag" : "comment" %> to an SRDR project that you lead: 
+
+"<%= @comment.comment_text %>"
+
+<%= @comment.is_flag ? ("This flag is marked" + comment.is_high_priority ? "high priority." : "low priority.") : "" %>
+
+This <%= @comment.is_flag ? "flag" : "comment" %> is located in: 
+Project: <%= @project.title %>
+<% if @comment.study_id != -1 %>Study: <%= Study.get_title(@comment.study_id) %><% end %>
+Section: <%= @comment.section_name %>
+Field: <%= @comment.field_name %>
+
+To view and respond to the <%= @comment.is_flag ? "flag" : "comment" %>, go to the SRDR location specified.

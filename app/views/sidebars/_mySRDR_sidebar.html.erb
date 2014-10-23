@@ -1,0 +1,53 @@
+<% unless current_user.nil? %>
+<!--################################################################ -->
+<!-- THE mySRDR LEFT NAVIGATION                                		     -->
+<!--#################################################################-->
+<%
+    # Get Properties for Report Builder URL
+    siteproperties = session[:guiproperties]
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+%>
+<ul class='skip'>
+	<li><a href="#content" tabindex=101>Skip to Main Content</a></li>
+</ul>
+<div class='left-nav-menu' id="nav-menu">
+	<br/>
+	<% unless !["member","admin","super-admin"].include?(current_user.user_type) %>
+		<p class='nav-active'>MY WORK</p>
+		<%= link_to "My Projects", "/projects", {:remote=>true,:class=>'nav-active', :tabindex=>102, :title=>"View your Projects"} %>
+		<%= link_to "Data Requests", "/home/data_requests", {:tabindex=>107,:title=>"View incoming requests or your own data inquiries"} %>
+		<%= link_to "View Collaborators *", "/home/coming_soon", {:remote=>true,:class=>'nav-active', :tabindex=>103, :title=>"(COMING SOON) See the list of those you're collaborating with"} %>
+		<%= link_to "Comments Summary *", "/home/coming_soon", {:remote=>true,:class=>'nav-active', :tabindex=>104,:title=>"(COMING SOON) View a summary of comments associated with various Projects"} %>
+		<% if User.hasAdminRights(current_user) %>
+		  <%= link_to "View User Feedback", "/home/feedback",{:tabindex=>105,:title=>"View feedback left by SRDR users"} %>
+		  <%= link_to "View User List", "/home/user_list",{:tabindex=>105, :title=>"View a list of current users"} %>
+		<% end %>
+	<% end %>
+	<p>mySRDR ACCOUNT</p>
+	<%= link_to "My Profile", "/account/edit", {:remote=>true, :tabindex=>106, :title=>"View/Modify your account profile"} %>
+	<%= link_to "Data Requests", "/home/data_requests", {:tabindex=>107,:title=>"View incoming requests or your own data inquiries"} %>
+	<%= link_to "Who's Online? *", "/home/coming_soon", {:remote=>true, :tabindex=>108,:title=>"(COMING SOON) View/Interact with SRDR users who are currently online"} %>
+	<p>FILING CABINET</p>
+	<%= link_to "Favorite Projects *", "/home/coming_soon", {:remote=>true, :tabindex=>109,:title=>"(COMING SOON) View Projects you have flagged as favorites"} %>
+	<%= link_to "Saved Searches *", "/home/coming_soon", {:remote=>true, :tabindex=>110, :title=>"(COMING SOON) View search query results that you have saved"} %>
+	<%= link_to "Reports *", "/home/coming_soon", {:remote=>true, :tabindex=>111, :title=>"(COMING SOON) Generate reports from the SRDR database"} %>
+	<p>HELP INFORMATION</p>
+	<a href='/help' tabindex=115 title="SRDR User Manual and Frequently Asked Questions">User Manual and FAQ</a>
+	<!--<a href='/help' tabindex=116>Video Tutorials</a>-->
+	<a href='#' class='feedback_link' tabindex=116 title="Leave SRDR Feedback">Feedback</a>
+	<p>OTHER RESOURCES</p>
+        <%= link_to "Registries", siteproperties.getRegistryURL()+"&action=SEARCH&login="+current_user.login,{:tabindex=>115,:class=>'form_link', :title=>"Registries"} %>
+	<a href="http://abstrackr.cebm.brown.edu/account/login" target="_blank" class='needs_exit_disclaimer' tabindex=112 title="The Abstrackr abstract screening tool">abstrackr <img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/></a>
+	<a href="http://tuftscaes.org/open_meta/" target="_blank"  class='needs_exit_disclaimer' tabindex=113 title="The OpenMetaAnalyst tool for Systematic Review Meta Analysis">OpenMeta[Analyst] <img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/></a>
+	<a href='http://www.clinicaltrials.gov' target="_blank"  class='needs_exit_disclaimer' tabindex=114 title='The U.S. National Database for Clinical Trials Data'>ClinicalTrials.gov <img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/></a>
+	<br/><br/>
+	<plain-text>Note: * = Coming Soon</plain-text><br/><br/>
+	<!--
+	<plain-text style='font-weight:normal;'>This graphic notice, <img src='/images/exit_disclaimer.gif'>, indicates that you are leaving this Federal Government Web site.  <a href='http://www.ahrq.gov/exitdisclaimer.htm' target='_blank'>Learn more</a></plain-text>
+	-->
+</div>
+
+<% end %>

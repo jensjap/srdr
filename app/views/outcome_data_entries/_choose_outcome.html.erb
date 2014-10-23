@@ -1,0 +1,369 @@
+<br/><strong>Step 1.</strong> <label for="outcome_selection_id">Choose the outcome and population to enter data for:</label>  
+<br/>
+<% unless @ef.is_diagnostic %>
+	<% options = [["--- Continuous ---",0]] + @cont_outcomes.map{|out| [out.title, out.id]} + [["--- Categorical ---",-1]] + @cat_outcomes.map{|out| [out.title,out.id]} + [["--- Time to Event ---",-2]] + @survival_outcomes.map{|out| [out.title,out.id]}%>
+<% else %>
+	<% options = [["--- Select an Outcome ---",0]] + @cont_outcomes.map{|out| [out.title, out.id]} %>
+<% end %>
+<%= select "outcome_selection", "id", options, {}, :tabindex=>'220' %> <a href='#' id='outcome_description_link'>Show Outcome Descriptions</a><br/>
+<div id='outcomes_reference' style='display:none;'>
+	<%= render :partial=>'outcome_data_entries/outcome_descriptions'%>
+	
+</div>
+
+<!-- THE LINK TO VIEW OR MODIFY EXISTING RESULTS -->
+<div id='view_modify_link_div'>
+	<%= render :partial=>'outcome_data_entries/view_modify_link'%>
+</div>
+
+<div id='existing_results_div' style='display:none'>
+  <% unless @ef.is_diagnostic %>
+  	<%= render :partial=>'outcome_data_entries/existing_results' %>
+  <% else %>
+  	<%= render :partial=>'outcome_data_entries/existing_diagnostic_results' %>
+  <% end %>
+</div>
+
+<div id="delete_confirm_modal" style="display:none;" title="Warning!">
+	
+</div>
+<span id='last_page_element'></span>
+<script type='text/javascript'>
+// <!--
+function results_init() {
+  try{
+  	////alert("Starting up...")
+    checkResultsLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+	prepareResults();
+	//alert("done preparing results.")
+  } catch( err ) {
+  	//alert("Caught an error, calling results_init again: " + err);
+    setTimeout('results_init()', 200);
+  }
+}
+
+function checkResultsLoaded() {
+	//alert("Checking... length is " + $("#existing_results_div").length.toString());
+	if ( $('#last_page_element').length == 0) $jquery.error( 'not ready, the length is ' + $("#last_page_element").length.toString() );
+}
+
+function has_data(){
+	forms = $("form");
+	var has_data = false;
+	for(i=1; i<forms.length; i++){
+		if($(forms[i]).hasClass('unsaved_form')){
+			has_data = true;
+		}
+	}
+	return(has_data);
+}
+
+function show_loading_icon(){
+	width = $("#result_table").width() + 5;
+	height = $("#result_table").height();
+	$("#result_table").before("<div id='loading_div' style='width:"+width+"px; height:"+height+"px; opacity:0.8;filter:alpha(opacity=80);z-index:2000; padding-top: 150px; background-color:#fff;position:absolute;'><center><img align='center' style='margin:auto' src='/images/loading_gif.gif' alt='' /></center></div>");
+}
+
+/* create_subgroup_dropdown
+   given an outcome id, use the subgroup hash to create a select box dropdown selector 
+   @params  outcome_id  - the id of the outcome that will be represented in the hash
+   @return  retVal      - an html string to be rendered next to the outcome selector
+*/
+function create_subgroup_dropdown(outcome_id, subgroups){
+  sgs = subgroups[outcome_id.toString()];
+  //alert("The value is " + subgroups[outcome_id.toString()]);
+  num_subgroups = sgs.length;
+  disabled = "";
+  // determine if the field should be disabled (if there's only one option)
+  if(sgs.length < 2){
+  	disabled = "disabled='disabled'";
+  }
+  retVal = "<select tabindex='221' style='margin-left:10px;' id='subgroup_selector' name='subgroup_selector' " + disabled + ">";  	
+  if(sgs.length > 1){
+  	retVal += "<option value=''>-- Select a Population --</option>";
+  }
+  if(sgs.length == 0){
+  	retVal += "<option value='0'>All Participants</option>";  	
+  }else{
+	  for(i=0; i<sgs.length; i++){
+	  	sg_id = sgs[i]["outcome_subgroup"]["id"].toString();
+	  	sg_title =sgs[i]["outcome_subgroup"]["title"];
+	    retVal += "<option value='"+sg_id+"'>"+sg_title+"</option>";  	
+	  }
+	}
+  return(retVal);
+}
+
+function prepareResults(){
+	//alert("entered prepareResults");
+	//alert("on line 96...");
+	var subgroups = "<%= escape_javascript(@subgroups) %>";
+	//alert("subgroups is " + subgroups);
+	subgroups = subgroups.replace(/&quot;/g,'"');
+	subgroups = jQuery.parseJSON(subgroups);
+	//alert("made it to line 100");
+	$("#outcome_selection_id").unbind("change");
+	$("#outcome_selection_id").bind("change", function(){
+		$("#subgroup_selector").remove();
+		var outcome_id = $("#outcome_selection_id").val();
+		var ef_id = "<%= @ef.id %>";
+		////alert("The last available subgroup is " + subgroups[id.toString()].last);
+		if(outcome_id > 0){
+			$("#choose_timepoint").html("");
+			$("#select_outcome_timepoints_display").html("");
+			$("#form_div").html("");
+			$("#modal_div").html("");
+			subgroup_selector = create_subgroup_dropdown(outcome_id, subgroups)
+			num_sgs = subgroups[outcome_id.toString()].length;
+			$(this).after(subgroup_selector);
+			//var json_string = "<%= @tp_json_string %>".toString();
+			////alert(timepoints[id.toString()]);
+			if(num_sgs < 2){
+				subgroup_id = 0
+				if(num_sgs == 1){
+				  subgroup_id = subgroups[outcome_id.toString()][0]["outcome_subgroup"]["id"].toString();
+				}
+				$.ajax({
+				  type: 'POST',
+				  url: "results/show_timepoints",
+				  success: function(){
+				  	$("#waitingGIF").remove();
+				  },
+				  data: ({
+					outcome_id: outcome_id,
+					subgroup_id: subgroup_id,
+					extraction_form_id: ef_id
+				  })
+				});
+			
+				$("#subgroup_selector").after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+			}
+		}else{
+			$("#subgroup_selector").remove();
+			$("#choose_arm").html("")
+			$("#choose_timepoint").html("")
+			$("#select_outcome_timepoints_display").html("")
+			$("#form_div").html("");
+			$("#modal_div").html("");
+		}
+	});
+	$("#outcome_description_link").die();
+	$("#outcome_description_link").live("click",function(event){
+		event.preventDefault();
+		$("#outcomes_reference").toggle();
+		if($("#outcomes_reference").css('display') != "block"){
+			$("#outcome_description_link").html("Show Outcome Reference");
+		}else{
+			$("#outcome_description_link").html("Hide Outcome Reference");
+		}
+	});
+
+	//alert("finished binding outcome selection id");
+	/* Whenever a subgroup selector is generated, bind an onchange event
+	   to update the results table. 
+	*/
+	$("#subgroup_selector").die("change");
+	$("#subgroup_selector").live("change",function(){
+		var subgroup_id = $(this).val();
+		var ef_id = "<%= @ef.id %>";
+		if(subgroup_id != ''){
+			outcome_id = $("#outcome_selection_id").val();
+			$("#form_div").html("");
+			$("#modal_div").html("");
+			$.ajax({
+			  type: 'POST',
+			  url: "results/show_timepoints",
+			  success: function(){
+			  	$("#waitingGIF").remove();
+			  },
+			  data: ({
+					outcome_id: outcome_id,
+					subgroup_id: subgroup_id,
+					extraction_form_id: ef_id
+			  })
+			});
+			$("#subgroup_selector").after("<img alt='' id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+		}else{
+			$("#choose_arm").html("")
+			$("#choose_timepoint").html("")
+			$("#select_outcome_timepoints_display").html("")
+			$("#form_div").html("");
+			$("#modal_div").html("");
+		}
+	})
+	//alert("finished binding subgroup selector");
+	/* 
+	  Handle the instance when users want to edit outcome data entries
+	  using a link in the existing results table. 
+	*/
+	$(".edit_existing_ocde_link").die("click");
+	$(".edit_existing_ocde_link").live("click",function(event){
+		event.preventDefault();
+		edit_link = $(this)
+		could_lose_information = has_data();
+		if(could_lose_information){
+			$("#confirmation_modal").html("To avoid losing data, please save any current changes before editing a different entry.")
+			$("#confirmation_modal").dialog({
+			 	resizable: false,
+				height: 160,
+				modal: true,
+				buttons: {
+					"Cancel": function(){
+						$(this).dialog("close");
+					},
+					"Continue without saving": function(){
+			  		$(this).dialog("close");
+						sgid = edit_link.attr("subgroup_id");
+						ocid = edit_link.attr("outcome_id");
+						efid = edit_link.attr("ef_id")
+						$("#subgroup_selector").remove();
+						$("#outcome_selection_id").val(ocid);
+						subgroup_select = create_subgroup_dropdown(ocid, subgroups);
+						$("#outcome_selection_id").after(subgroup_select);
+						$("#subgroup_selector").val(sgid);
+						$("#form_div").html("");
+						$.ajax({
+						  type: 'POST',
+						  url: "results/show_timepoints",
+						  success: function(){
+						  	$("#waitingGIF").remove();
+						  },
+						  data: ({
+								outcome_id: ocid,
+								subgroup_id: sgid,
+								extraction_form_id: efid
+						  })
+						})
+						/*toggle_existing_results_display();*/
+						$("#subgroup_selector").after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+			  	}
+				}	
+			})	
+		}else{
+			$(this).dialog("close");
+			sgid = edit_link.attr("subgroup_id");
+			ocid = edit_link.attr("outcome_id");
+			efid = edit_link.attr("ef_id")
+			$("#subgroup_selector").remove();
+			$("#outcome_selection_id").val(ocid);
+			subgroup_select = create_subgroup_dropdown(ocid, subgroups);
+			$("#outcome_selection_id").after(subgroup_select);
+			$("#subgroup_selector").val(sgid);
+			$("#form_div").html("");
+			$("#modal_div").html("");
+			$.ajax({
+			  type: 'POST',
+			  url: "results/show_timepoints",
+			  success: function(){
+			  	$("#waitingGIF").remove();
+			  },
+			  data: ({
+					outcome_id: ocid,
+					subgroup_id: sgid,
+					extraction_form_id: efid
+			  })
+			})
+			/*toggle_existing_results_display();*/
+			$("#subgroup_selector").after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+		}
+	})
+	//alert("finished with edit existing ocde link");
+	/* 
+	  Handle the instance when users want to remove outcome data entries
+	  using a link in the existing results table. 
+	*/
+	$(".remove_existing_ocde_link").die("click");
+	$(".remove_existing_ocde_link").live("click",function(event){
+		event.preventDefault();
+		remove_link = $(this)
+		could_lose_information = has_data();
+		if(could_lose_information){
+			$("#confirmation_modal").html("To avoid losing data, please save any current changes before editing a different entry.")
+			$("#confirmation_modal").dialog({
+			 	resizable: false,
+				height: 160,
+				modal: true,
+				buttons: {
+					"Cancel": function(){
+						$(this).dialog("close");
+					},
+					"Continue without saving": function(){
+						$(this).dialog("close");
+						$("#delete_confirm_modal").html("You are about to delete this data entry along with all corresponding data. Are you sure?")
+						$("#delete_confirm_modal").dialog({
+						  modal: true,
+						  autoOpen:true,
+						  buttons:{
+						  	"Cancel": function(){
+						  		$(this).dialog("close");
+						  	},
+						  	"Yes, Delete This Entry": function(){
+									$(this).dialog("close");
+									sgid = remove_link.attr("subgroup_id");
+									ocid = remove_link.attr("outcome_id");
+									$("#subgroup_selector").remove();
+									$("#outcome_selection_id").val(0);
+									$("#form_div").html("");
+									$("#modal_div").html("");
+									$.ajax({
+									  type: 'POST',
+									  url: "results/remove_data_entries",
+									  success: function(){
+									  	$("#waitingGIF").remove();
+									  },
+									  data: ({
+											outcome_id: ocid,
+											subgroup_id: sgid,
+											is_diagnostic: "<%= @is_diagnostic %>"
+									  })
+									})
+									$("#outcome_selection_id").after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...'/>");
+								}
+							}
+						})
+					}
+				}
+			})
+		}else{
+			$("#delete_confirm_modal").html("You are about to delete this data entry along with all corresponding data. Are you sure?")
+			$("#delete_confirm_modal").dialog({
+			  modal: true,
+			  autoOpen:true,
+			  buttons:{
+			  	"Cancel": function(){
+			  		$(this).dialog("close");
+			  	},
+			  	"Yes, Delete This Entry": function(){
+						$(this).dialog("close");
+						sgid = remove_link.attr("subgroup_id");
+						ocid = remove_link.attr("outcome_id");
+						$("#subgroup_selector").remove();
+						$("#outcome_selection_id").val(0);
+						$("#form_div").html("");
+						$("#modal_div").html("");
+						$.ajax({
+						  type: 'POST',
+						  url: "results/remove_data_entries",
+						  success: function(){
+						  	$("#waitingGIF").remove();
+						  },
+						  data: ({
+								outcome_id: ocid,
+								subgroup_id: sgid,
+								is_diagnostic: "<%= @is_diagnostic %>"
+						  })
+						})
+						$("#outcome_selection_id").after("<img id='waitingGIF' src='/images/waiting.gif' alt='waiting...' />");
+					}
+				}
+			})
+		}	
+	})
+	//alert("finished with remove existing ocde link");
+}
+//alert("Calling Results Init");
+// RUN IT
+results_init();
+
+// -->
+</script>

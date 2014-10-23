@@ -1,0 +1,34 @@
+<% if defined?(@extraction_forms) && !@extraction_forms.empty? %>
+
+	<table class="list_table" id="extraction_forms_list_table" summary="extraction_forms_list_table">
+	  <tr>
+	  	<th class='header_bar'>
+	  		Sorting Options
+	  	</th>
+	  </tr>
+	<% i=0 %>
+	<% @extraction_forms.each do |extraction_form| %>
+		<tr>
+		  	<td class='data'>
+		  		<h2><%= extraction_form.title %></h2> (<%= extraction_form.is_diagnostic == true ? "Diagnostic Test" : "RCT" %>)
+		  		<br/>
+		  		<strong>Created By:</strong> <%= User.get_name(extraction_form.creator_id) %>
+		  		&nbsp;&nbsp;|&nbsp;&nbsp;<strong>Key Questions Addressed:</strong> <%= @key_questions_assigned[extraction_form.id] %>
+		  		
+		  		<!--
+		  		<br/>
+		  		<strong>Description:</strong> Not Implemented Yet.<%# extraction_form.description.empty? ? "" : extraction_form.description %>-->
+		  		<br/><br/>
+		  		<% has_privilege = User.current_user_has_extraction_form_edit_privilege(extraction_form.id, current_user) %>
+				<% if has_privilege %>
+					&nbsp;&nbsp;<%= link_to (image_tag("Pencil.png", :style=>"border-style:none;vertical-align:middle;", :alt => "Edit") + " Edit"), edit_project_extraction_form_path(@project, extraction_form), :remote => false, :title => "Edit Extraction Form: #{extraction_form.title}" %>
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+					<%= link_to (image_tag("Bin_closed.png", :style=>"border-style:none;vertical-align:middle;", :class => "tooltip_delete_extraction_form") + " Delete"), extraction_form, :confirm => 'Are you sure?', :method => :delete, :class =>"tooltip_delete", :title=>"Remove Extraction Form: #{extraction_form.title}" %>
+				<% end %>
+		  	</td>
+	 	 </tr>
+	<% end %>
+	</table>
+<% else %>
+	There are no extraction forms yet.
+<% end %>

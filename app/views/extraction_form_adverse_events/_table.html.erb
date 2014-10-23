@@ -1,0 +1,34 @@
+
+<table class="classic-a" id="extraction_form_adverse_events_table" summary="extraction form adverse events table">
+  <thead><tr>
+  
+  	<th scope='column' id="adverse_event_title_header">Adverse Event Title</th>
+  	<th scope='column' id="adverse_event_description_header">Adverse Event Description</th>
+  	<!-- <th>User Note</th> -->
+  	<th scope='column' id="delete_adverse_event_header">Actions</th>
+	</tr></thead>
+	
+	<% if !@adverse_events.empty? %>
+    <% for ae in @adverse_events %>
+      <tr class="<%= cycle("even", "odd") %>" id="adverse_event_row_<%=ae.id.to_s %>">
+				
+				<td scope='col'><%= ae.title %></td>
+				<td scope='col'><%= render "shared/notes_tooltip", :section_name => "adverse", :item_id => ae.id, :item_notes => ae.description %></td>
+				<!-- <td><%= ae.note %></td> -->
+				<td scope='col'>
+
+					<%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt=>"Edit") + "Edit Adverse Event Suggestion", "/extraction_form_adverse_events/#{ae.id}/edit",{:project_id => params[:project_id],:remote=>true,:class => "tooltip_edit edit_btn edit_arm", :title=>"Edit Suggested Adverse Event: #{ae.title}"} %><br/>
+					<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Adverse Event Suggestion", ae, {:project_id => params[:project_id], :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "tooltip_delete", :title=>"Remove Suggested Adverse Event: #{ae.title}"} %>
+					
+				</td>
+			</tr>
+	  <% end %>
+
+	<% end%>
+</table>
+	  
+<% if @adverse_events.empty? %>
+	<br/>
+	You may specify a list of adverse events for this extraction form by clicking the "Add Adverse Event Title" button below.
+
+<% end %>

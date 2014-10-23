@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: study_key_questions
+#
+#  id                 :integer          not null, primary key
+#  study_id           :integer
+#  key_question_id    :integer
+#  extraction_form_id :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  id: 1
+  study_id: 1
+  key_question_id: 1
+  extraction_form_id: 1
+
+two:
+  id: 2
+  study_id: 2
+  key_question_id: 1
+  extraction_form_id: 1
+
+three: 
+  id: 3
+  study_id: 1
+  key_question_id: 2
+  extraction_form_id: 2

@@ -1,0 +1,76 @@
+# == Schema Information
+#
+# Table name: outcomes
+#
+#  id                 :integer          not null, primary key
+#  study_id           :integer
+#  title              :string(255)
+#  is_primary         :boolean
+#  units              :string(255)
+#  description        :text
+#  notes              :text
+#  outcome_type       :string(255)
+#  extraction_form_id :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+study1_outcome1:
+  id: 1
+  study_id: 1
+  title: Title of outcome 1
+  is_primary: true
+  units: inches
+  description: Description of outcome 1
+  outcome_type: Continuous
+  extraction_form_id: 1
+
+study1_outcome2:
+  id: 2
+  study_id: 1
+  title: Title of outcome 2
+  is_primary: false
+  units: inches
+  description: Description of outcome 2
+  outcome_type: Continuous
+  extraction_form_id: 1
+
+study1_outcome3:
+  id: 3
+  study_id: 1
+  title: Title of outcome 3
+  is_primary: false
+  units: inches
+  description: Description of outcome 3
+  outcome_type: Categorical
+  extraction_form_id: 1
+
+oc_no_title: 
+  id: 4
+  study_id: 1
+  is_primary: true
+  units: IQ
+  description: blah
+  outcome_type: Categorical
+  extraction_form_id: 1
+
+# being used to test remove_extracted_data in extrction_form
+ef_100_outcome1:
+  id: 5
+  study_id: 100
+  is_primary: true
+  units: IQ
+  description: blah
+  outcome_type: Categorical
+  extraction_form_id: 100
+
+ef_100_outcome2:
+  id: 6
+  study_id: 100
+  is_primary: true
+  units: IQ
+  description: blah
+  outcome_type: Categorical
+  extraction_form_id: 100

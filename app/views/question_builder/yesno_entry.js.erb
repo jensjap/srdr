@@ -1,0 +1,10 @@
+var n = $("#category_choices_<%= params[:page_name] %>").length;
+if (n == 0)
+{
+	$("#type_selector_<%= params[:page_name] %>").after("<%= escape_javascript(render(:partial=>@partial_name)) %>");
+}
+else
+{
+  $('div').remove("#category_choices_<%= params[:page_name] %>");
+	$("#type_selector_<%= params[:page_name] %>").after("<%= escape_javascript(render(:partial=>@partial_name)) %>");	
+}

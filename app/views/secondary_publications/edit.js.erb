@@ -1,0 +1,73 @@
+$("#secondary_publication_entry").html("<%= escape_javascript(render :partial=>'secondary_publications/form', :secondary_publication_numbers => @secondary_publication_numbers) %>");
+$("#secondary_publication_entry").dialog("option", "title", "Edit Secondary Publication Information");			
+$("#secondary_publication_entry").dialog('open');		
+
+$(".add_spi_button").bind("click", function(event)
+{
+	event.preventDefault();
+	$.ajax({
+	  url: 'secondary_publication_numbers/new',
+	  type: "POST",
+	  data: { secondary_publication: <%= @secondary_publication.id.nil? ?  -1 : @secondary_publication.id.to_s %>}
+	});
+});
+
+$(".remove_spi_button").bind("click", function(event)
+{
+	event.preventDefault();
+	var id = $(this).attr('id');
+	var id_split = id.split("_");
+	var id_num = id_split[3];
+	$.ajax({
+	  url: 'secondary_publication_numbers/destroy',
+	  type: "POST",
+	  data: { id: id_num,
+	  secondary_publication: <%= @secondary_publication.id.nil? ?  -1 : @secondary_publication.id.to_s %>}
+	});
+});
+
+
+
+$("#sp_identifier_list_blocks .form_table .number_field").each(function(index)
+{
+	var the_id = $(this).attr('id');
+	var split_id = the_id.split("_");
+	var num = parseInt(split_id[1]);
+	$(this).attr('id', 'secondary_publication_numbers_attributes_' + (num).toString() + "_number");
+	$(this).attr('name', 'secondary_publication_numbers_attributes[' + (num).toString() + "][number]");
+});
+
+$(".number_type_field").each(function(index)
+{
+	var the_id = $(this).attr('id');
+	var split_id = the_id.split("_");
+	var num = parseInt(split_id[2]);
+
+	$(this).attr('id', 'secondary_publication_numbers_attributes_' + (num).toString() + "_number_type");
+	$(this).attr('name', 'secondary_publication_numbers_attributes[' + (num).toString() + "][number_type]");
+	
+	$(this).bind("change", function(event) {
+	$.ajax({	
+		url: "/application/show_other",
+		data: {
+			"field_id":$(this).attr('id'),
+			"field_name":$(this).name,
+			"selected":$(this).val()
+			}
+	});
+	});
+	
+});
+
+
+$("#sp_identifier_list_blocks .form_table .id_field").each(function(index)
+{
+	var the_id = $(this).attr('id');
+	var split_id = the_id.split("_");
+	var num = parseInt(split_id[1]);
+
+	$(this).attr('id', 'secondary_publication_numbers_attributes_' + (num).toString() + "_id");
+	$(this).attr('name', 'secondary_publication_numbers_attributes[' + (num).toString() + "][id]");
+	
+
+});

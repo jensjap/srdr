@@ -1,0 +1,17 @@
+<div id="tc_preview_flat">
+<h2>Report by Extraction Form</h2><br/><br/>
+<%
+    # Load display configuration data
+    reportconfig = @tc_project["reportconfig"]
+    reportset = @tc_project["reportset"]
+    prj = @tc_project["project"]
+    for eidx in 0..reportconfig.getNumExtractionFormsItems() - 1
+        efid = reportconfig.getExtractionFormID(eidx)
+%>
+    <strong>Extraction Form: <%= reportset.getEFTitleByID(efid) %></strong><br/><hr width="100%"/><br/>
+    <%= raw reportset.renderHTMLPreview(efid,reportconfig) %>
+    <p/><br/>
+<%
+    end
+%>
+</div>

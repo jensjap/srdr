@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+</head>
+<body>
+<h1>New SRDR Training Account Created</h1>
+<p/><br/>
+<li>Account: <%= @registration.login %>
+<li>Name: <%= @registration.fname %> <%= @registration.lname %>
+<li>Organization: <%= @registration.organization %>
+<li>E-mail: <%= @registration.email %>
+<li>Posted: <%= @registration.created_at.to_s %>
+</body>
+</html>

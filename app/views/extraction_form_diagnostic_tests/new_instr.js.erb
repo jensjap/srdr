@@ -1,0 +1,4 @@
+$("#new_diagnostic_tests_instr_entry").html("<%= escape_javascript(render :partial=>'extraction_form_diagnostic_tests/instr_form')%>");
+$("#new_diagnostic_tests_instr_entry :button").removeAttr("disabled");
+$("#new_diagnostic_tests_instr_entry").dialog("option", "title", "Enter Diagnostic Test Instructions");		
+$("#new_diagnostic_tests_instr_entry").dialog('open');

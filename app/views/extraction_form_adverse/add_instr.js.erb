@@ -1,0 +1,4 @@
+$("#new_adverse_instr_entry").html("<%= escape_javascript(render :partial=>'extraction_form_adverse/instr_form')%>");
+$("#new_adverse_instr_entry :button").removeAttr("disabled");
+$("#new_adverse_instr_entry").dialog("option", "title", "Enter Adverse Events Instructions");		
+$("#new_adverse_instr_entry").dialog('open');

@@ -1,0 +1,4 @@
+$("#new_design_instr_entry").html("<%= escape_javascript(render :partial=>'extraction_form_design/instr_form')%>");
+$("#new_design_instr_entry :button").removeAttr("disabled");
+$("#new_design_instr_entry").dialog("option", "title", "Enter Design Instructions");		
+$("#new_design_instr_entry").dialog('open');

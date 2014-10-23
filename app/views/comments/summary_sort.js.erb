@@ -1,0 +1,1 @@
+$('#ui-tooltip-comments_li_<%= @project_id.to_s %>').qtip('option', 'content.text', "<%= escape_javascript(render :partial=>'comments/summary_thread', :locals=>{:comments => @comments, :value_at_comment_time => @value_at_comment_time, :project_id => @project_id, :current_sorting_order => @current_sorting_order}) %>");

@@ -1,0 +1,51 @@
+<%= form_tag "/projects/#{@project.id}/data_request_handler" do %>
+  <table class="form_table">
+    <input type='hidden' name='project_id' value='<%= @project.id %>'/>
+    <% resubmit = @request.nil? ? false : true %>
+    <input type='hidden' name='resubmission' value="<%= resubmit %>"/>
+    
+    <tr>
+      <th>Project:</th>
+      <td><%= @project.title %>
+    </tr>
+    <tr>
+      <th>Username:</th><td><%= current_user.login %></td>
+    </tr>
+    <tr>
+      <th>Message (Optional):</th>
+      <td>
+        <textarea name='message' rows=10 cols=90><%= "I would like to download data corresponding to your project titled #{@project.title}..." %>
+        </textarea>
+        
+      </td>
+    </tr>
+    <tr>
+      <th>Usage Agreement</th>
+      <td>
+        <%= render 'shared/creative_commons_note' %>
+        
+        <input type='checkbox' value='yes' name='usage_agreement' id='agreement_checkbox'/>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above.
+      </td>
+    </tr>
+    <tr>
+      <td colspan='2'>
+        <button type="submit" id="request_download_button" class="positive" onclick="return checkAgreement();">
+          <%= image_tag "Add.png", :alt => "Add" %> Submit
+        </button>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<script type='text/javascript'>
+<!--
+function checkAgreement(){
+  var checked = $("#agreement_checkbox").attr("checked");
+  var OK = checked == "checked"
+  if(!OK){
+    alert("You must accept the terms of use to continue.");
+  }
+  return OK;
+}
+-->
+</script>

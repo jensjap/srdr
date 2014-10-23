@@ -1,0 +1,208 @@
+<div id='left-navigation-div' tabindex=100>
+
+</div>
+<div id='content' tabindex=200>
+<h1>Study Preview</h1><br/><br/>
+<% begin %>
+<!--<div class="centered">
+	<%= link_to image_tag("Printer.png") + " Print this page", "#", :onclick => "javascript:window.print()" %> 
+	| <%= link_to image_tag("Layout_header.png") + ' Create PDF', study_path(params[:study_id]) + "/index_pdf", :target => "new" %>
+	<div class="pdf_plugin_link">
+		<%= link_to "download PDF plugin", "http://get.adobe.com/reader/", :target => "new" %> 
+		| To save as HTML, click File then Save Page As in your web browser.
+	</div>
+</div>
+
+<br/>
+-->
+<!-- SUMMARY HEADING DIV SECTION -->
+<div id="display_study_title" style="display:block">
+	<div class="summary_heading">Study Title and Description</div>
+	<div id="summary_text" style="display:inline;">
+		<br/><%= render "completed_tables/study_summary", :study => @study, :study_title => @study_title %>
+	</div>
+</div>
+<br/>
+
+<!-- KEY QUESTIONS DIV SECTION -->
+<div id="display_study_keyqs" style="display:block">
+	<div class="summary_heading">Key Questions Addressed</div>
+	<div id="key_questions_text" style="display:inline;">
+		<%= render "completed_tables/key_questions_study", :key_questions => @study_questions, :study => @study, :project => @project %>
+	</div>
+</div>
+<br/>
+<!-- PUBLICATION INFORMATION DIV SECTIONS -->
+<div id="display_study_pubinfo" style="display:block">
+	<div class="summary_heading">Primary Publication Information</div>
+	<div id="publications_text">
+		<%= render 'completed_tables/primary_publications', :primary_publication => @primary_publication, :study => @study, :project => @project %>	
+	</div>
+</div>
+<br/>
+<div id="display_study_secpubinfo" style="display:block">
+	<div class="summary_heading">Secondary Publication Information</div>
+	<div id="secpublications_text">
+		<%= render 'completed_tables/secondary_publications', :study => @study, :project => @project, :secondary_publications => @secondary_publications %>
+	</div>
+</div>
+<br/>
+	
+
+<!-- EXTRACTION FORM DATA SECTIONS -->
+  
+<% for extform in @extraction_forms %>
+	<% sections_list = ExtractionFormSection.get_included_sections_by_extraction_form_id(extform.extraction_form_id)%>
+	<% @one_extform = ExtractionForm.find(extform.extraction_form_id) %>
+		
+		<!-- STUDY ARMS DIV SECTION -->		
+		<span class='summary_heading'>Extraction Form: <%= @one_extform.title %></span><br/>
+		<% if sections_list.include?("arms") %>
+			<% @arms = Arm.where(:study_id => @study.id, :extraction_form_id => @one_extform.id).all %>
+		
+				<div id="display_study_arms_<%= @one_extform.id.to_s %>" style="display:block">
+					<div class="summary_heading">Arms</div>
+					<div id="study_arms_text">
+						<%= render 'completed_tables/study_arms', :arms => @arms, :study => @study, :project => @project %>
+					</div>
+					</div><br/>
+				<% end %>
+
+	
+		<!-- STUDY DESIGN DIV SECTION -->
+				
+		<% if sections_list.include?("design") %>	
+			<% @design_detail_extraction_form_fields = DesignDetail.where(:extraction_form_id => @one_extform.id).all %>
+	 
+				<div id="display_study_design_<%= @one_extform.id.to_s %>" style="display:block">
+					<div class="summary_heading">Design Details</div>
+					<div id="study_design_text">
+							<%= render 'completed_tables/design_details', :extraction_form => @one_extform, :study => @study, :project => @project, :design_detail_extraction_form_fields => @design_detail_extraction_form_fields %>
+					</div>
+				</div><br/>
+				<% end %>
+
+				
+		<!-- BASELINE CHARACTERISTICS DIV SECTION -->
+				
+		<% if sections_list.include?("baselines") %>	
+			<% @baseline_characteristic_extraction_form_fields = BaselineCharacteristic.where(:extraction_form_id => @one_extform.id).all %>	
+	  
+				<div id="display_study_baselines_<%= @one_extform.id.to_s %>" style="display:block">
+					<div class="summary_heading">Baseline Characteristics</div>
+					<div id="pop_char_text">
+						<%= render 'completed_tables/baseline_characteristics', :extraction_form => @one_extform, :arms=>@arms, :study => @study, :project => @project, :baseline_characteristic_extraction_form_fields => @baseline_characteristic_extraction_form_fields %>
+					</div>
+				</div><br/>
+		<% end %>
+
+
+
+		<!-- RESULTS -->
+		<br/><br/>
+		<div class='summary_heading'>Results &amp; Comparisons</div><br/>
+		<% unless @existing_results.empty? %>	
+			<%= render :partial=>'outcome_data_entries/existing_results', :locals=>{:no_links=>true} %>
+		<% else %>
+			No Results found.
+		<% end %>
+		<br/>
+
+		 <!-- ADVERSE EVENTS SECTION -->
+		  
+		<% if sections_list.include?("adverse") %>	
+			<% @extraction_form_adverse_event_columns = AdverseEventColumn.where(:extraction_form_id => @one_extform.id).all %>
+		  
+			<div id="display_study_advev_<%= @one_extform.id.to_s %>" style="display:block">
+				<div class="summary_heading">Adverse Events</div>
+				<div id="adverse_events_text">
+					<%= render 'completed_tables/adverse_events', :extraction_form => @one_extform, :adverse_events => @adverse_events, :arms => @arms, :study => @study, :project => @project, :extraction_form_adverse_event_columns => @extraction_form_adverse_event_columns %>	
+				</div>
+			</div>
+
+		<% end %>
+		<br/>
+	
+		<!-- QUALITY SECTION (DIMENSIONS AND RATING) -->
+		
+		<% if sections_list.include?("quality") %>	
+			<%# @quality_rating = QualityRatingDataPoint.where(:study_id => @study.id).first %>
+			<div id="display_study_qualitydimensions_<%= @one_extform.id.to_s %>" style="display:block">
+				
+				<%= render 'completed_tables/quality_preview', :extraction_form => @one_extform, :study => @study, :project => @project  %>
+			</div>
+			<br/>
+		<% end %>	
+	
+	
+<% end %>
+
+<script type="text/javascript">
+	$('.open_comments_link').bind("click", function(event) {
+
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   }			
+         }
+      });
+   });	
+</script>
+<% rescue Exception => e %>
+	We're sorry, it appears an error has occurred. Please see our contact page and let us know what happened.  
+	<%# e.message %><br/>
+	<%# e.backtrace %>
+<% end %>
+
+<script type='text/javascript'>
+$(document).ready(function(){
+	$(document).prop("title","Study Preview: <%= @study.id %>");
+});
+</script>
+</div>
+
+

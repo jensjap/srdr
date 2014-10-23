@@ -1,0 +1,4 @@
+$("#new_qd_entry").html("<%= escape_javascript(render :partial=>'quality_dimension_fields/form')%>");
+$("#new_qd_entry :button").removeAttr("disabled");
+$("#new_qd_entry").dialog("option", "title", "New Quality Dimension Field");
+$('#new_qd_entry').dialog('open');	

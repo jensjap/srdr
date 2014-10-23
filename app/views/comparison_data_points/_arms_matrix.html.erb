@@ -1,0 +1,84 @@
+<br/><hr><br/><% unless @arms.length < 2 %>
+<%= hidden_field_tag 'within_or_between', @type %>
+
+<% num_arms = @arms.length %>
+<strong>Step 4.</strong>Use the matrix below to select which arms you would like to <strong>compare at <%= @group_name %></strong>.<br/><br/>
+<!-- <span class='smallText'>Check the box below the matrix if the comparison is between more than 2 arms.</span><br/>-->
+<!--<table class='list_table'>-->
+	<table class='formatted_table' id="comparison_data_point_arms_matrix" summary="comparison data point arms matrix">
+	<tr>
+		<th id="comparison_data_point_arm_name_colheader">Arm name</th>
+		<% @arms.each do |arm| %>
+		  <th style='min-width:80px;' id="comparison_data_point_arm_name_colheader_<%= arm.id.to_s %>"><%= arm.title %></th>
+		<% end %>
+	</tr>
+	
+	<% num_arms.times do |i| %>
+	  <tr>
+	  	<th id="comparison_data_point_arm_name_colheader_<%= @arms[i].id.to_s %>"><%= @arms[i].title %></th>
+	  	<% num_arms.times do |j| %>
+	  	  <% cell_id = @arms[j].id.to_s + "_" + @arms[i].id.to_s %>
+	  		<td <%= "class='comparison_td'" unless j==i %> id="<%= cell_id %>" 
+	  			<%= "style='background: #466F9E url(/images/stripe7.png);'" if j == i %> 
+	  			<%= "style='background-color:#00A876;text-align:center;'" if @existing_comparisons.include?(cell_id) %> 
+	  			<%= "style='background-color:#fff;text-align:center;'" if !@existing_comparisons.include?(cell_id) %>
+	  			>
+	  			<% if @existing_comparisons.include?(cell_id) %>
+	  				"Saved."
+	  			<% else %>
+	  				<% unless j==i %>
+	  					<span class="in_matrix_text"><%= @arms[j].title.to_s %> <br/> vs. <br/> <%= @arms[i].title.to_s %></span>
+	  				<% end %>
+	  			<% end %>
+  			</td>
+	  	<% end %>
+	  </tr>
+	<% end %>
+</table><br/>
+
+<!-- <input type='checkbox' name="need_additional_arms" value="yes" title="need additional arms" /> This comparison is between more than 2 arms. -->
+
+<% else %>
+  <strong>You have not defined sufficient arms to enter a comparison for this outcome.</strong>
+<% end %>
+
+<script type='text/javascript'>
+ 
+	$(".comparison_td").bind("click",function(){
+		var clicked = $(this).attr("id");
+		var outcome = $("#outcome_selector").val();
+		var study_id = $("#study_id").val();
+		var extraction_form_id = $("#extraction_form_id").val();
+		var type = "<%= @type %>";
+		var group_id = "<%= @group_id %>";
+		$.ajax({
+			type: "POST",
+			url: "comparison_data_points/show_comparison_table",
+			data:{
+				clicked : clicked,
+				outcome_id : outcome,
+				study_id : study_id,
+				extraction_form_id : extraction_form_id,
+				type : type,
+				group_id : group_id
+			}
+		});
+	});
+	
+	var current_style = ""
+	
+	$(".comparison_td").bind("mouseover", function(){
+		current_style = $(this).attr("style")
+		$(this).attr("style",current_style + "cursor:pointer; background-color: yellow;");	
+	});
+	
+	$(".comparison_td").bind("mouseout",function(){
+		//alert(current_style);
+		if(current_style == ""){
+			$(this).removeAttr("style");
+		}else{
+			$(this).attr("style",current_style);	
+		}
+	});
+	
+</script>

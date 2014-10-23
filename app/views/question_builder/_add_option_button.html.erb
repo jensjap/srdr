@@ -1,0 +1,62 @@
+<div id='category_choices_<%= @page_name %>'>
+	<!-- The first option text field -->
+	<%= render :partial=>"question_builder/option_text_input" %>
+	
+	<!-- The second option text field -->
+	<span  id='<%= "row_2_div" %>'>
+	Option: <%= text_field @page_name, "choice_2", :class=>"question_option", :title => "question option" %> 
+	<%= check_box_tag "gets_sub[2]","2", true, :class=>'sq_assignment_cbox', :style=>"display:none;", :title => "question option" %>
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>"2"), :remote=>true, :class=>"delete_column_link" %>
+	<br/>
+	</span>
+	
+	<!-- The third option text field -->
+	<span  id='<%= "row_3_div" %>'>
+	Option: <%= text_field @page_name, "choice_3", :class=>"question_option", :title => "question option" %> 
+	<%= check_box_tag "gets_sub[3]","3", true, :class=>'sq_assignment_cbox', :style=>"display:none;", :title => "question option" %>
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>"3"), :remote=>true, :class=>"delete_column_link" %>
+	<br/>
+	</span>
+	
+	<!-- The fourth option text field -->
+	<span  id='<%= "row_4_div" %>'>
+	Option: <%= text_field @page_name, "choice_4", :class=>"question_option", :title => "question option" %> 
+	<%= check_box_tag "gets_sub[4]","4", true, :class=>'sq_assignment_cbox', :style=>"display:none;", :title => "question option" %>
+	<%= link_to image_tag('Silk_cross.png'), url_for(:controller=>:question_builder, :action=>:remove_choice, :row_num=>"4"), :remote=>true, :class=>"delete_column_link" %>
+	<br/>
+	</span>
+<br/>
+	<div class="actions" id="<%= "new_row_button_" + @page_name %>">
+	  <%= link_to "Add Another Option","", :id=>'add_option_button', :onclick => "event.preventDefault()" %>
+	</div>
+  <br/>
+	<%= check_box_tag "has_subquestion", "yes", false, :title => "has subquestion", :class=>"cbox" %> I would like to include a subquestion.
+	<div id="sq_text_div" style="display:none;"><br/><br/><strong>Followup Question:</strong><%= text_field_tag :subquestion_text, "", :size=>"40", :title => "follow-up question"%><br/>
+		<span class='smallText'>Use the check boxes to the right of each choice to specify whether or not to
+			associate the subquestion with that choice.</span>
+	</div>
+<script type="text/javascript">
+  $("#add_option_button").unbind("click");
+	$("#add_option_button").bind("click",function(event) {
+		event.preventDefault();
+  	$.ajax({
+  		url: 'question_builder/add_choice',
+  		data: {"previous_row":$(this).parent().prev().prev().attr("id"), "page_name":"<%= @model %>",
+  		       "has_sub":$("#has_subquestion").attr("checked")
+		}
+  	});		
+  });
+  $("#has_subquestion").unbind("click");
+	$("#has_subquestion").bind("change", function(){
+		if ($(this).attr("checked")){
+			$(".sq_assignment_cbox").css("display","inline");
+			$("#sq_text_div").css("display","inline");
+		}else{
+			$(".sq_assignment_cbox").css("display","none");
+			$("#sq_text_div").css("display","none");
+		}
+	});
+</script>
+
+</div>
+

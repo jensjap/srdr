@@ -1,0 +1,3 @@
+$("#modal_div").dialog("option","resizable",true);
+$("#modal_div").html("<%= escape_javascript(render :partial=>'/outcome_data_entries/measures_form')%>");
+$("#modal_div").dialog("open");

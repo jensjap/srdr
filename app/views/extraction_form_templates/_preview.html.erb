@@ -1,0 +1,258 @@
+<html>
+<head>
+  <title>SRDR Extraction Form Template: <%= @template.title %></title>
+  
+  <%= javascript_include_tag 'jquery.min', 'jquery-ui-1.8.12.custom', 'rails', 'application' %>
+  <link href='/stylesheets/tables.css' rel='stylesheet' media='screen,print' type='text/css'/>
+  <link href='/stylesheets/accessibility.css' rel='stylesheet' media='screen,print' type='text/css'/>
+  <style type='text/css'>
+    body{background-color:white;}
+    ol{margin-top:0;}
+    .title_bar{
+        text-decoration: none;
+    }
+    .title_bar_div{
+        width:650px; 
+        padding:5px; 
+        background-color:#f2f2f2; 
+        color:black; 
+        font-size:15px; 
+        font-weight:bolder;
+        border-bottom:solid 1px #AAA;
+        border-left:solid 1px #AAA;
+      }
+      .title_bar_show_hide{
+        float:right;
+        font-size:11px;
+        color:black;
+        text-decoration:underline !important;
+      }
+  </style>
+</head>
+<body>
+<!-- a form preview for the template selected -->
+<div style='width:800px; padding:10px;margin:auto;'>
+<strong>Extraction Form Template: <i><%= @template.title %></i></strong>
+<span style='float:right;margin-right:20px;'><a href='#' onclick="event.preventDefault();window.close();">Close</a></span>
+<br/><br/>
+<!-- ARMS -->
+<% if @sections.include?("arms") %>
+	<a href="#" class='title_bar' section="arms">
+		<div class='title_bar_div' >Suggested Arms (<%= @arms.length %>)<span class='title_bar_show_hide' section="arms">Hide</span></div>
+		
+	</a>
+	<div id='arms'>
+	<ol>
+	<% @arms.each do |arm| %>
+		<li><strong><%= arm.name %></strong><br/>
+		<% desc = arm.description.empty? ? "No Description Available" : arm.description %>
+		<i><%= desc %></i><br/>
+		<% unless arm.note.nil? %>
+			<strong>Note:</strong><%= arm.note %>
+		<% end %>
+		</li>
+	<% end %>
+	</ol>
+	</div>
+<% end %>
+
+<!-- ARM DETAILS -->
+<% if @sections.include?("arm_details") %>
+    <a href="#" class='title_bar' section="arm_details">
+        <div class='title_bar_div'>Arm Detail Questions (<%= @arm_details.length %>)
+        <span class='title_bar_show_hide' section="arms">Hide</span>
+        </div>
+    </a>
+    <div id="arm_details" style='width:100%; position:relative;padding-left:20px;'>
+        <% unless @arm_details.empty? %>
+            <table width=95%>           
+            <% @arm_details.each_with_index do |dd,index|%>
+                <tr>
+                  <td valign='top'>
+                    <%= dd.question_number %>. <strong><%= dd.question %></strong><br/>
+                    <% if dd.is_matrix %>
+                        <%= render :inline=>create_input(dd.id,"eft_arm_detail") %>
+                    <% else %>
+                        <%= render :inline=>create_input(dd.id,"eft_arm_detail") %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </table>
+        <% else %>
+          <i>There are no arm details defined for this form. </i>
+        <% end %>
+    </div>
+<% end %>
+
+
+<!-- DESIGN DETAILS -->
+<% if @sections.include?("design") %>
+	<a href="#" class='title_bar' section="design">
+		<div class='title_bar_div'>Design Detail Questions (<%= @design_details.length %>)
+		<span class='title_bar_show_hide' section="arms">Hide</span>
+		</div>
+	</a>
+	<div id="design" style='width:100%; position:relative;padding-left:20px;'>
+		<% unless @design_details.empty? %>
+			<table width=95%>			
+		    <% @design_details.each_with_index do |dd,index|%>
+    			<tr>
+    			  <td valign='top'>
+                    <%= dd.question_number %>. <strong><%= dd.question %></strong><br/>
+                    <% if dd.is_matrix %>
+                        <%= render :inline=>create_input(dd.id,"eft_design_detail") %>
+                    <% else %>
+                        <%= render :inline=>create_input(dd.id,"eft_design_detail") %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+			</table>
+		<% else %>
+		  <i>There are no design details defined for this form. </i>
+		<% end %>
+	</div>
+<% end %>
+
+<!-- BASELINE CHARACTERISTICS -->
+<% if @sections.include?("baselines") %>
+    <a href="#" class='title_bar' section="baselines">
+        <div class='title_bar_div'>Baseline Characteristic Questions (<%= @baseline_characteristics.length %>)
+        <span class='title_bar_show_hide' section="arms">Hide</span>
+        </div>
+    </a>
+    <div id="baselines" style='width:100%; position:relative;padding-left:20px;'>
+        <% unless @baseline_characteristics.empty? %>
+            <table width=95%>           
+            <% @baseline_characteristics.each_with_index do |dd,index|%>
+                <tr>
+                  <td valign='top'>
+                    <%= dd.question_number %>. <strong><%= dd.question %></strong><br/>
+                    <% if dd.is_matrix %>
+                        <%= render :inline=>create_input(dd.id,"eft_baseline_characteristic") %>
+                    <% else %>
+                        <%= render :inline=>create_input(dd.id,"eft_baseline_characteristic") %>
+                    <% end %>
+                    
+                  </td>
+                </tr>
+            <% end %>
+            </table>
+        <% else %>
+          <i>There are no baseline characteristics defined for this form. </i>
+        <% end %>
+    </div>
+<% end %>
+
+
+<!-- OUTCOMES -->
+<% if @sections.include?("outcomes") %>
+	<a href="#" class='title_bar' section="outcomes"><div class='title_bar_div'>Suggested Outcomes (<%= @outcomes.length %>)<span class='title_bar_show_hide' section="arms">Hide</span></div></a>
+	<div id="outcomes"><ol>
+	<% @outcomes.each do |outcome| %>
+		<li><strong><%= outcome.title %></strong> (<i><%= outcome.outcome_type %></i>)<br/>
+			<% unless outcome.note.empty? %>
+				<i><%= outcome.note %></i>
+			<% else %>
+			  <i>No Description Available</i>
+			<% end %>
+		</li>
+	<% end %>
+	</ol>
+	</div>
+<% end %>
+
+<!-- OUTCOME DETAILS -->
+<% if @sections.include?("outcome_details") %>
+    <a href="#" class='title_bar' section="outcome_details">
+        <div class='title_bar_div'>Outcome Detail Questions (<%= @outcome_details.length %>)
+        <span class='title_bar_show_hide' section="arms">Hide</span>
+        </div>
+    </a>
+    <div id="outcome_details" style='width:100%; position:relative;padding-left:20px;'>
+        <% unless @outcome_details.empty? %>
+            <table width=95%>           
+            <% @outcome_details.each_with_index do |dd,index|%>
+                <tr>
+                  <td valign='top'>
+                    <%= dd.question_number %>. <strong><%= dd.question %></strong><br/>
+                    <% if dd.is_matrix %>
+                        <%= render :inline=>create_input(dd.id,"eft_outcome_detail") %>
+                    <% else %>
+                        <%= render :inline=>create_input(dd.id,"eft_outcome_detail") %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+            </table>
+        <% else %>
+          <i>There are no outcome details defined for this form. </i>
+        <% end %>
+    </div>
+<% end %>
+
+<!-- ADVERSE EVENTS -->
+<% if @sections.include?("adverse") %>
+	<a href="#" class='title_bar' section="adverse"><div class='title_bar_div'>Adverse Event Headings (<%= @adverse_columns.length %>)<span class='title_bar_show_hide' section="arms">Hide</span></div></a>
+	<div id="adverse" style='margin-top:0'><ol>
+	<% @adverse_columns.each do |adverse| %>
+		<li><strong><%= adverse.name %></strong><br/>
+			<% unless adverse.description.empty? %>
+				<i><%= adverse.description %></i>
+			<% else %>
+			  <i>No Description Available</i>
+			<% end %>
+		</li>
+	<% end %>
+	</ol>
+	</div>
+<% end %>
+
+<% if @sections.include?("quality") %>
+	<!-- QUALITY DIMENSIONS -->
+	<a href="#" class='title_bar' section="quality_dimensions"><div class='title_bar_div'>Quality Dimensions (<%= @quality_dimensions.length %>)<span class='title_bar_show_hide' section="arms">Hide</span></div></a>
+	<div id="quality_dimensions" style='margin-top:0'><ol>
+	<% @quality_dimensions.each do |dimension| %>
+		<li><strong><%= dimension.title %></strong><br/>
+			<% field_notes = dimension.field_notes.nil? ? "" : dimension.field_notes %>
+			<% unless field_notes.empty? %>
+				<i><%= field_notes %></i>
+			<% else %>
+			  <i>No Description Available</i>
+			<% end %>
+		</li>
+	<% end %>
+	</ol>
+	</div>
+	
+	<!-- QUALITY RATINGS -->
+	<a href="#" class='title_bar' section="quality_ratings"><div class='title_bar_div'>Quality Rating Fields (<%= @quality_ratings.length %>)<span class='title_bar_show_hide' section="arms">Hide</span></div></a>
+	<div id="quality_ratings" style='margin-top:0'><ol>
+	<% @quality_ratings.each do |rating| %>
+		<li><strong><%= rating.rating_item %></strong></li>
+	<% end %>
+	</ol>
+	</div>
+
+<% end %>
+</div>
+
+<script type='text/javascript'>
+	$(".title_bar").bind("click",function(event){
+		event.preventDefault();
+		id_to_hide = '#' + $(this).attr('section');
+		display = $(id_to_hide).css('display');
+		if(display == 'none'){
+			$(id_to_hide).slideDown();
+			$(this).children("div").first().children("span").first().html("Hide");
+		}else{
+			$(id_to_hide).slideUp();
+			$(this).children("div").first().children("span").first().html("Show");
+		}
+	})
+</script>
+
+</body>
+</html>
+

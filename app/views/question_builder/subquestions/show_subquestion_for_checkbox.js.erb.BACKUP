@@ -1,0 +1,12 @@
+<% if @has_sq %>
+	<%# if the checkbox is checked, show the subquestion partial %>
+	<% if @checked=="true" %>
+		<%# render the subquestion partial for the correct one %>
+		 $("<%= @element_to_fill %>").html("<%= escape_javascript(render :partial=>"question_builder/subquestions/subquestion") %>"); %> 
+	<%# if the checkbox is not checked, empty the subquestion span %>
+	<% else %>
+	  $("<%= @element_to_fill %>").html("");
+	<% end %>
+<% end %>
+
+	

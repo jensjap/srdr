@@ -1,0 +1,50 @@
+<% if @secondary_publications.length > 0 %>
+	<table class="classic-a" id="secondary_pub_table" summary="secondary publications table">
+	<thead><tr>
+	<th scope='col'></th>
+	<th scope='col'>Title (UI)</th>
+	<th scope='col'>Author(s)</th>
+	<th scope='col'>Journal Title, Volume:Issue (Year)</th>
+	<th scope='col'>Affiliation</th>
+	<th scope='col'>Association</th>
+	<th scope='col'>Actions</th>
+	</tr></thead>
+	<% for pub in @secondary_publications %>
+		<tr class="<%= cycle("even", "odd") %>" id="pub_row_<%=pub.id.to_s %>">
+		<td scope='row'><%= pub.display_number %></td>
+		<% @ui_list = SecondaryPublication.get_pub_uis(pub.id) %>
+		
+		<td scope='row'><%= pub.title %> (<%= pub.pmid %>)
+			<% if !@ui_list.nil? %><br/>
+			<% for i in @ui_list %>
+				<%= i.number %> (<%= i.number_type %>)<br/>
+			<% end %>
+			<% end %>
+		</td>
+		<td scope='row'><%= pub.author %></td>
+		<td scope='row'>
+			<%= pub.journal %><% unless pub.journal.ends_with?(".")%>.<% end %> <%=pub.year%> 
+			<% unless pub.volume == "--" %>Vol.<%=pub.volume%><% end %>
+			<% unless pub.issue == "--" %>Issue:<%=pub.issue%><% end %>
+		</td>
+		<td scope='row'><%= pub.country %></td>
+		<td scope='row'><%= pub.association.gsub("_", " ")%></td>
+		<td scope='row'>
+		<% unless pub.display_number.nil? %>
+			<% if pub.display_number > 1 %>
+				<%= link_to image_tag("Silk_arrow_up.png", :style=>"border:0px") + " Move Up Publication", {:controller => :secondary_publications, :action => :moveup, :secondary_publication_id => pub.id, :extraction_form_id => params[:extraction_form_id]}, :remote=>true, :class => "tooltip_moveup" %><br/>
+			<% end %>
+		<% end %>
+		<%= link_to image_tag("Pencil.png", :style=>"border:0px") + " Edit Publication", edit_secondary_publication_path(pub), :remote=>true, :class => "tooltip_edit" %><br/>
+		<%= link_to image_tag("Bin_closed.png", :style=>"border:0px") + " Delete Publication", secondary_publication_path(pub), :remote=>true, :confirm => 'Are you sure?', :method=>:delete, :class => "tooltip_delete" %><br/>
+		<div class='comments_div'>
+			<%= render :partial => "comments/field_comments", :locals => {:section_name => "secondarypublications", :section_id => pub.id, :field_name => "title", :study_id => pub.study_id, :project_id => @project.id} %>			
+		</div>
+		</td>
+		</tr>
+	<% end %>
+<% else %>
+  There are currently no secondary publications associated with this study.
+<% end %>
+
+</table>

@@ -1,0 +1,35 @@
+
+<table class="list_table" id="extraction_form_quality_cols_table" summary="extraction form quality columns table">
+<thead>
+<tr>
+
+<th>Dimension</th>
+<th>Value</th>
+<th>Notes</th>
+</tr></thead>
+
+<%# ------------------- LISTING TEMPLATE FIELDS --------------------- %>
+
+<% if !@quality_dimension_extraction_form_fields.nil? && @quality_dimension_extraction_form_fields.length > 0 %>
+<% for qa in @quality_dimension_extraction_form_fields %>
+<tr class="<%= cycle("even", "odd") %>" id='<%= 'quality_aspect_' + qa.id.to_s %>'>
+
+<td><%= qa.title %></td>
+
+<% tmpl_id = qa.extraction_form_id %>
+
+<td><%= text_field "quality_value", "", :size => 3, :title => "quality value example field" %></td>
+
+
+<td>
+<%= text_field "quality_notes", "", :size => 3, :title => "quality notes example field" %>
+
+</td>
+
+</tr>
+<% end %>
+<% end %>
+
+<%# ------------------- END TEMPLATE FIELDS --------------------- %>
+
+</table><br/>

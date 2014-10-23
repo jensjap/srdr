@@ -1,0 +1,182 @@
+<%# if there are no arms defined, then we cannot proceed%>
+<% unless @arms.empty? || @extraction_form.is_diagnostic %>
+		
+	<br/>
+	<%# if there are arms, set up the data inputs%>
+	<%= form_for(@arm_detail_data_point, :remote => true) do |f| %>
+		<div class='container_div' style='min-width:450px; max-width:950px;'>
+			
+			<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
+			<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>	
+			Enter your Arm Detail information for each arm using the entry fields below. 
+			Remember to <strong>press the "Save" button</strong> before exiting the page<br/><br/>
+			<% num_fields = @arm_detail_extraction_form_fields.length %>
+			<br/>
+	
+			<!-- PROCESS THE EXTRACTION FORM FIELD ENTRIES -->
+			<% unless @arm_detail_extraction_form_fields.empty? || @arms.empty? %>
+			  <table class='list_table tab-list-table'>
+			  <% @arm_detail_extraction_form_fields.each do |armdetail| %>
+				<tr><td class='data' style='min-width:450px; max-width:950px !important;'>	
+				  	<div style='min-width:450px; max-width:950px !important; overflow:auto;'>
+					<strong><%= armdetail.question_number.to_s %>. <%= armdetail.question %></strong><br/>
+					<div>
+					<%# DISPLAY THE ENTRIES PER ARM %>
+					<% group_names = [] %>
+					<% @arms.each do |arm| %>
+						<div id="<%= 'q_' + armdetail.question_number.to_s + '_arm_' + arm.display_number.to_s %>" style='display: inline; float: left; padding-right: 27px; margin:0px;' class="by_arm_display">
+							<span style='font-style:italic;text-decoration:underline;'><%= arm.title %></span><br/> 
+							<%= render :inline=>create_input_by_arm(armdetail.id, arm.id, "arm_detail")%>
+						</div>
+						<% group_names << "arm_detail[#{armdetail.id}-#{arm.id}]" %>
+					<% end %>
+					
+					</div>
+					<% if armdetail.field_type == 'radio' %>
+					<br clear='all'/><br/><a href='#' class='clear_selection_link' question_name="<%= group_names.join(",") %>">Clear Selections</a>
+					<% end %>
+					<%# DISPLAY THE INSTRUCTIONS %>
+					<% unless armdetail.instruction.nil? || armdetail.instruction == "" %>
+						<br clear='all'>
+					  <span class="smallText" style='font-style:italic;'><%= armdetail.instruction %></span>
+					<% end %>
+					<br style='clear:both;'/><br/>
+					<div class='comments_div' style='float:left;'>
+						<%= render :partial => "comments/field_comments", :locals => {:section_name => "baselinecharacteristics", :section_id => armdetail.id, :field_name => "baseline", :study_id => @study.id, :project_id => params[:project_id]} %>	
+					</div>	
+				</div>
+					</td></tr>
+				<% end %>
+				</table>
+			<% else %>
+			  <strong>There are no Arm Details data points defined in this extraction form.</strong>
+			<% end %>
+		
+			<% unless @arms.empty? || (@arm_detail_custom_fields.empty? && @arm_detail_extraction_form_fields.empty?) %><br/><br/>
+				<div class="actions">
+					<button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
+						<%= image_tag "Accept.png", :alt => "Accept" %>Save Table Data
+					</button>
+					<div class="saved" id="saved_indicator_1" style='display:none;' >  
+						Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	<% end %> <%# END FORM %>
+<% else %>
+	<%#--------------------------------------
+	<%# DIAGNOSTIC TESTS!
+	<%# if it's a diagnostic test form, the Arm Details are not entered by arm. %>
+	<% if @extraction_form.is_diagnostic %>
+		<%= form_for(@arm_detail_data_point, :remote => true) do |f| %>
+		<div class='container_div'>
+			<%# START THE OVERFLOW: SCROLL DIV %>
+			<div style='overflow-x: auto; min-width:500px;'>
+			<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
+			<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>	
+			Enter your Arm Detail information using the entry fields below. 
+			Remember to <strong>press the "Save" button</strong> before exiting the page<br/><br/>
+			<% num_fields = @arm_detail_extraction_form_fields.length %>
+			<br/>
+		
+			<!-- PROCESS THE EXTRACTION FORM FIELD ENTRIES -->
+			<% unless @arm_detail_extraction_form_fields.empty? %>
+		  		<% @arm_detail_extraction_form_fields.each do |armdetail| %>
+				
+				  	<div style="float: right">
+						<%= render :partial => "comments/field_comments", :locals => {:section_name => "baselinecharacteristics", :section_id => armdetail.id, :field_name => "baseline", :study_id => @study.id, :project_id => params[:project_id]} %>	
+					</div>					
+					
+					<strong><%= armdetail.question_number.to_s %>. <%= armdetail.question %></strong><br/>
+					<div>
+					
+					<%# DISPLAY THE INSTRUCTIONS %>
+					<% unless armdetail.instruction.nil? || armdetail.instruction == "" %>
+						<br clear='all'>
+						<span class="smallText" style='font-style:italic;'><%= armdetail.instruction %></span>
+					<% end %>
+					<br clear='all'/><br/><hr><br/>
+				<% end %>
+				<div class="actions">
+					<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+						<%= image_tag "Accept.png", :alt => "Accept" %>Save Table Data
+					</button>
+					<div class="saved" id="saved_indicator_1" style='display:none;' >  
+						Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
+					</div>
+				</div>
+			<% else %>
+		  		<strong>There are no Arm Details data points defined in this extraction form.</strong>
+		  	<% end %>
+		  	</div>
+		</div>
+		<% end %>
+	<%# otherwise, just tell the user to go back and enter arms. %>
+	<% else %>
+		<br/>
+		<strong>You must define study arms before adding Arm Detail data.</strong>
+		<%= link_to 'Return to Study Arms', get_study_entry_url(params[:project_id],params[:study_id],params[:extraction_form_id],"arms"), :class=>"edit_link inline" %>
+	<% end %>
+<% end %>
+<br/><br/>
+
+
+<script type="text/javascript">
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });
+</script>

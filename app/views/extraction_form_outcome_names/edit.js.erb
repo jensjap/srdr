@@ -1,0 +1,20 @@
+//var str = "<%= @has_study_data %>" ;
+//var has_study_data = (str === 'true');
+var has_study_data = false;  // UPDATE THIS IF WE WANT TO RE-INCORPORATE HAS_STUDY_DATA
+if(has_study_data)
+	{
+		var message = "One or more studies have been created that use this data item. Changing this data item will change it for these studies as well. Are you sure you want to continue?";
+		if (confirm(message))
+		{
+			$("#new_outcome_entry").html("<%= escape_javascript(render :partial=>'extraction_form_outcome_names/form') %>");
+			$("#new_outcome_entry :button").removeAttr("disabled");						
+			$("#new_outcome_entry").dialog("option", "title", "Edit Suggested Outcome Title");					
+			$('#new_outcome_entry').dialog('open');	
+		}
+	}
+	else{
+		$("#new_outcome_entry").html("<%= escape_javascript(render :partial=>'extraction_form_outcome_names/form') %>");
+		$("#new_outcome_entry :button").removeAttr("disabled");					
+		$("#new_outcome_entry").dialog("option", "title", "Edit Suggested Outcome Title");					
+		$('#new_outcome_entry').dialog('open');		
+	}

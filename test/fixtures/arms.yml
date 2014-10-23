@@ -1,0 +1,71 @@
+# == Schema Information
+#
+# Table name: arms
+#
+#  id                    :integer          not null, primary key
+#  study_id              :integer
+#  title                 :string(255)
+#  description           :text
+#  display_number        :integer
+#  extraction_form_id    :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  is_suggested_by_admin :boolean          default(FALSE)
+#  note                  :string(255)
+#  efarm_id              :integer
+#  default_num_enrolled  :integer
+#  is_intention_to_treat :boolean          default(TRUE)
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+study1_arm1:
+  id: 1
+  study_id: 1
+  title: arm 1 in ef1
+  description: study 1 description
+  extraction_form_id: 1
+  is_suggested_by_admin:
+  note: 
+  efarm_id:
+  default_num_enrolled: 100
+  display_number: 1
+
+study1_arm2:
+  id: 2
+  study_id: 1
+  title: arm 2 ef 1
+  description: arm2 in ef1
+  extraction_form_id: 1
+  is_suggested_by_admin:
+  note:
+  efarm_id:
+  default_num_enrolled: 200
+  display_number: 2
+
+study1_arm3:
+  id: 3
+  study_id: 1
+  title: arm 1 in ef2
+  description: study 2 description
+  extraction_form_id: 2
+  is_suggested_by_admin:
+  note:
+  efarm_id:
+  default_num_enrolled: 200
+  display_number: 1
+
+study2_arm1:
+  id: 4
+  study_id: 2
+  title: arm1 in study 2 in ef3
+  description: blah blah
+  extraction_form_id: 3
+
+# this is being used to test remove_extracted_data in extraction_form
+army:
+  id: 5
+  study_id: 100
+  title: arm1 in study 2 in ef3
+  description: blah blah
+  extraction_form_id: 100

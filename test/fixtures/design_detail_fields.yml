@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: design_detail_fields
+#
+#  id               :integer          not null, primary key
+#  design_detail_id :integer
+#  option_text      :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  subquestion      :string(255)
+#  has_subquestion  :boolean
+#  column_number    :integer          default(0)
+#  row_number       :integer          default(0)
+#
+
+dd1_option1:
+  id: 1
+  design_detail_id: 1
+  option_text: RCT
+  subquestion:
+  has_subquestion: false
+
+dd1_option2:
+  id: 2
+  design_detail_id: 1
+  option_text: ABC
+  subquestion: What's that?
+  has_subquestion: true
+
+dd1_option3:
+  id: 3
+  design_detail_id: 1
+  option_text: EET
+  subquestion: What's that?
+  has_subquestion: true

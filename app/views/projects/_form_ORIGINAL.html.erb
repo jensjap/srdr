@@ -1,0 +1,127 @@
+<%= form_for(@project, :remote => true) do |f| %>
+  <%= @test %>
+	<%= f.hidden_field :creator_id, :value => @project.creator_id.nil? ? current_user.id : @project.creator_id %>
+	<input type='hidden' name='project_id', value="<%= @project.id.nil? ? (current_user.id * -1) : @project.id %>"/>
+
+<table class="form_table" id="new_project_form" summary="new project form">
+
+<tr class="field">
+<td class="label">
+    <label for="Project Title">
+		Project Title
+	</label>
+</td>
+<td>
+	<%= f.text_field :title, :class=> "editable_field", :tabindex => 1, :title => "project title" %>
+</td>
+<% if request.request_uri[-4, 4] == "edit" %>
+<td class="comment_td">
+	<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "title", :study_id => -1, :project_id => @project.id} %>
+</td>	
+<% end %>
+</tr>
+<tr class="field">
+<td class="label">
+    <label for="Project Description">
+		Project Description
+	</label>
+</td>
+<td class="proj_desc">
+
+	<%= f.text_area :description, :rows => 4, :style => "width: 100%", :tabindex => 2, :class=>"editable_field", :title => "project description" %>
+</td>
+<% if request.request_uri[-4, 4] == "edit" %>
+<td class="comment_td">
+	<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "description", :study_id => -1, :project_id => @project.id} %>
+</td>	
+<% end %>
+</tr>
+<tr class="field">
+<td class="label">
+    <label for="Funding Source">
+		Funding Source
+	</label>
+</td>
+<td>
+	<%= f.text_field :funding_source, :class => "editable_field", :tabindex => 3, :title => "project funding source" %>
+</td>
+<% if request.request_uri[-4, 4] == "edit" %>
+<td class="comment_td">
+	<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "funding", :study_id => -1, :project_id => @project.id} %>
+</td>	
+<% end %>
+</tr>
+<tr class="field">
+<td class="label">
+  	<label for="Project Notes">
+		Project Notes
+	</label>
+</td>
+<td class="proj_notes">
+
+	<%= f.text_area :notes, :rows => 4, :style => "width: 100%", :tabindex => 4, :class=>"editable_field", :title => "project notes" %>
+
+</td>
+<% if request.request_uri[-4, 4] == "edit" %>
+<td class="comment_td">
+	<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "notes", :study_id => -1, :project_id => @project.id} %>
+</td>	
+<% end %>
+</tr>
+<tr>
+<td class="label">
+	<label for="Key Questions">
+		Key Questions
+	</label>
+</td>
+<td class="subtable">
+	<div id="key_questions_table">
+	<%= render :partial => "key_questions/table", :locals => {:key_questions => @key_questions} %>
+	</div>
+
+	<div id="add_keyquestion_button" style="border: 1px solid #777; height: 50px; border-top:0px; text-align: center; padding-bottom: 10px;"><br/>
+	<div class="actions">
+		<button class="positive" id="add_kq_button" tabindex="5">
+			<%= image_tag "Add.png", :alt => "Add" %>Add Key Question
+		</button>
+		<div class="saved" id="saved_indicator_kqs" style='display:none;'>  Added Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+		<div class="saved" id="deleted_indicator_kqs" style='display:none;'>  Deleted Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+		
+		</div>
+
+	</div>
+
+
+	
+</td>
+</tr>
+<tr height="30"></tr>
+<tr>
+<td></td><td>
+<div class="actions">
+
+		  <button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>" tabindex="9" alt="Save and continue the project creation process">
+		  	<%= image_tag "Accept.png", :alt => "Accept" %> Save
+		  </button>
+		  
+		  	<div class="saved" id="project_save_message" style='display:none;'>  Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+</div>		  
+</td>
+</tr>
+</table>
+<% end %>
+
+<script type="text/javascript">
+
+
+$("#add_kq_button").bind("click", function(event)
+{
+	event.preventDefault();
+	$.ajax({
+	  url: 'key_questions/new',
+	  type: "POST",
+	  data: { project_id: $("#project_id_field").val()}
+	});
+});
+
+	</script>

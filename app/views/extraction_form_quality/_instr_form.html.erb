@@ -1,0 +1,40 @@
+<div id="validation_message_dd">
+<%= render "layouts/modal_info_messages" %>
+</div>
+<%= form_for @extraction_form_quality_instr, :remote=>true do |f|%>
+    <%= hidden_field_tag "page_name","quality" %>
+    <%= hidden_field_tag "quality[extraction_form_id]", @extraction_form.id %>
+    <%= hidden_field_tag "extraction_form_id", @extraction_form.id %>
+    <%= hidden_field_tag "section", "QUALITY" %>
+    <%= hidden_field_tag "data_element", "GENERAL" %>
+
+    <div class='field'>
+        <label for="Quality Instructions">Quality Instructions</label><br/>
+        <%= f.text_area "instructions", :cols => 50, :rows => 4, :class => "editable_field", :tabindex => 2, :title => "instructions" %>
+    </div>
+		
+    <div class='actions'>
+        <% if @editing %>
+        <button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+	    <%= image_tag "Add.png", :alt => "Add"  %>Save Edits
+        </button>
+        <% else %>
+        <button type='submit' class='positive' data-disable-with="<%= ajax_wait_msg %>" tabindex="3">
+            <%= image_tag "Add.png", :alt => "Add"  %>Save
+        </button>
+        <% end %>
+        <button class="negative" id="add_quality_instr_close" tabindex="4">
+            <%= image_tag "Cancel.png", :alt => "Cancel" %>Cancel
+        </button>
+    </div>
+<% end %>	
+
+<script type="text/javascript">
+
+$("#add_quality_instr_close").bind("click", function(event)
+{
+    event.preventDefault();
+    $('#new_quality_instr_entry').dialog('close');
+});
+
+</script>

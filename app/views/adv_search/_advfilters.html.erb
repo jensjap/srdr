@@ -1,0 +1,181 @@
+<%= form_tag({:controller=>'adv_search',:action=>'advfilter'}, :method=>'get', :name=>'advfilter') %>
+<script language="JavaScript">
+    function showSubSet(gid,id,v) {
+        document.advfilter.filtergroup.value = gid;
+        document.advfilter.filtername.value = id;
+        document.advfilter.filtervalue.value = v;
+        document.advfilter.submit();
+    }
+</script>
+<%= hidden_field_tag 'filtergroup' %>
+<%= hidden_field_tag 'filtername' %>
+<%= hidden_field_tag 'filtervalue' %>
+<br/>
+<%  
+    resultset = session[:search_results]
+    if !resultset["projects.categories"].nil?
+%>
+<hr width="100%">
+<h2>Summary Results:</h2><br/>&nbsp;
+<%
+        # Project category data
+        prj_categories = resultset["projects.categories"]
+        prj_list = prj_categories["project.published.year"]
+        if !prj_list.nil?
+%>
+<h3>Published Projects:</h3>
+<%
+            itemcount = 0
+            prj_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Published Projects in <%= key.to_s %>" onclick="showSubSet('projects.categories','project.published.year','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+        
+        prj_list = prj_categories["project.private.year"]
+        if !prj_list.nil?
+%>
+<h3>Unpublished Projects:</h3>
+<%
+            itemcount = 0
+            prj_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Unpublished Projects in <%= key.to_s %>" onclick="showSubSet('projects.categories','project.private.year','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+        
+        prj_list = prj_categories["project.fundingsource"]
+        if !prj_list.nil?
+%>
+<h3>Funding Source:</h3>
+<%
+            itemcount = 0
+            prj_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Projects funded by <%= key.to_s %>" onclick="showSubSet('projects.categories','project.fundingsource','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+        
+        prj_list = prj_categories["userinfo.organization"]
+        if !prj_list.nil?
+%>
+<h3>Organization:</h3>
+<%
+            itemcount = 0
+            prj_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Projects carried out by <%= key.to_s %>" onclick="showSubSet('projects.categories','userinfo.organization','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+    end
+
+    if !resultset["publications.categories"].nil?
+        pub_categories = resultset["publications.categories"]
+        pub_list = pub_categories["pub.pmid"]
+        if !pub_list.nil?
+%>
+<h3>PubMed ID:</h3>
+<%
+            itemcount = 0
+            pub_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Studies with PMID <%= key.to_s %>" onclick="showSubSet('publications.categories','pub.pmid','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+        
+        pub_list = pub_categories["pub.year"]
+        if !pub_list.nil?
+%>
+<h3>Publication Year:</h3>
+<%
+            itemcount = 0
+            pub_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Publicatins from the year <%= key.to_s %>" onclick="showSubSet('publications.categories','pub.year','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+        
+        pub_list = pub_categories["pub.journal"]
+        if !pub_list.nil?
+%>
+<h3>Journal:</h3>
+<%
+            itemcount = 0
+            pub_list.sort.map do |key,value|
+                if itemcount > 0
+%>
+,
+<%
+                end
+%>
+&nbsp;<b><%= key %></b> <a href="#" title="Found <%= value.length %> matches for Studies from the journal <%= key.to_s %>" onclick="showSubSet('publications.categories','pub.journal','<%= key.to_s %>')">(<%= value.length %>)</a>
+<%
+                itemcount = itemcount + 1
+            end
+%>
+<br/>&nbsp;
+<%
+        end
+    end
+%>
+&nbsp;<p/>

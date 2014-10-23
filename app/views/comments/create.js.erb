@@ -1,0 +1,32 @@
+<%
+    if @saved
+        if defined?(current_user) && !current_user.nil?
+            @show_both = User.current_user_is_collaborator(project_id,current_user)
+        end 
+%>
+$("#comments_number_<%= @section_name.to_s %>_id_<%= @section_id.to_s %>_field_<%= @field_name %>_study_<%= @study_id.to_s %>_project_<%= @project_id.to_s %>").html("<%= Comment.get_number_of_comments(@section_name, @section_id, @field_name, @study_id, @project_id, @show_both) %>");
+
+<% 
+        if defined?(@comment) && 
+            !@comment.nil? && 
+            @comment.is_flag 
+%>
+$(".flags_link_<%= @section_name.to_s %>_id_<%= @section_id.to_s %>_field_<%= @field_name %>_study_<%= @study_id.to_s %>_project_<%= @project_id.to_s %>").html("<%= escape_javascript(render :partial=>'comments/field_flags', :locals=>{:comments => @comments, :study_id => @study_id, :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :value_at_comment_time => @value_at_comment_time, :project_id => @project_id, :show_both => @show_both}) %>");
+<% 
+        end 
+%>
+
+$("#comments_messages_<%= @section_name.to_s %>_id_<%= @section_id.to_s %>_field_<%= @field_name %>_study_<%= @study_id.to_s %>_project_<%= @project_id.to_s %>").html("");
+$('#ui-tooltip-comments_li_<%= @section_name.to_s %>_id_<%= @section_id.to_s %>_field_<%= @field_name %>_study_<%= @study_id.to_s %>_project_<%= @project_id.to_s %>').qtip('option', 'content.text', "<%= escape_javascript(render :partial=>'comments/thread', :locals=>{:comments => @comments, :study_id => @study_id, :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :value_at_comment_time => @value_at_comment_time, :project_id => @project_id}) %>");
+$('#ui-tooltip-comment_form_tooltip').qtip('hide');
+$('#ui-tooltip-flag_form_tooltip').qtip('hide');
+
+<% 
+    else
+%>
+
+	$("#comments_messages_<%= @section_name.to_s %>_id_<%= @section_id.to_s %>_field_<%= @field_name %>_study_<%= @study_id.to_s %>_project_<%= @project_id.to_s %>").html("<%= escape_javascript(render :partial=>"layouts/info_messages") %>");
+
+<%
+    end
+%>

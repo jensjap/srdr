@@ -1,0 +1,178 @@
+<script type='text/javascript'>
+// <!--
+$(document).ready(function(){
+	var is_edit_page = false;
+});
+// -->
+</script>
+<div id='left-navigation-div' tabindex=100>
+	<% unless current_user.nil? %>
+		<% if User.current_user_has_study_edit_privilege(@project.id, current_user) %>
+			<%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "preview"} %>
+		<% else %>
+			<%= render :partial => "sidebars/mySRDR_sidebar", :locals => {:curr_page => "preview"} %>
+		<% end %>
+	<% end %>
+</div>
+<div id='content' tabindex=200>
+<%= render :partial => "page_title", :locals => {:page_title => "Project Summary"} %>
+
+
+<div id="display_project_title" style="display:block" class='container-div'>
+	
+	<div class="summary_heading">Title and Description</div>
+		<br/>
+		<table class="result_table" id="view_project_description_table" summary="view project description table">
+			<tr>
+				<td class="label" style="width:120px">Title</td>
+				<td><%= @project.title  %></td>
+				<td id="comments_link_projects_id_<%= @project.id.to_s %>_field_title_study_-1" class="comment_td">
+				<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "title", :study_id => -1, :project_id => @project.id} %>
+				</td>
+				</tr>		
+		<% if !@project.description.nil? %> 
+			<tr>
+				<td class="label" style="width:120px">Description</td>
+				<td><%= @project.description.force_encoding("UTF-8") %></td>
+                                <td class="comment_td">
+				<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "description", :study_id => -1, :project_id => @project.id} %>
+				</td>				
+			</tr>
+                <% end %>
+		<% if !@project.contributors.nil? && @project.contributors != "" %>
+			<tr>
+				<td class="label" style="width:120px">Contributor(s)</td>
+				<td><%= @project.contributors %></td>
+				<td class="comment_td">
+						<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "contributors", :study_id => -1, :project_id => @project.id} %>
+				</td>				
+			</tr>
+			<% end %>
+		<% if !@project.methodology.nil? && @project.methodology != "" %>
+			<tr>
+				<td class="label" style="width:120px">Methodology</td>
+				<td><%= @project.methodology %></td>
+				<td class="comment_td">
+						<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "methodology", :study_id => -1, :project_id => @project.id} %>
+				</td>				
+			</tr>
+			<% end %>
+		<% if !@project.funding_source.nil? && @project.funding_source != "" %>
+			<tr>
+				<td class="label">Funding Source</td>
+				<td><%= @project.funding_source %></td>
+				<td class="comment_td">
+					<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "funding", :study_id => -1, :project_id => @project.id} %>
+				</td>				
+			</tr>
+		        <% end %>
+	        <% if !@project.notes.nil? %>
+			<tr>
+				<td class="label">Notes</td>
+				<td><%= render :inline => @project.notes %></td>
+				<td class="comment_td">
+					<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "notes", :study_id => -1, :project_id => @project.id} %>
+				</td>								
+			</tr>
+	                <% end %>
+	  </table>
+	  </div>
+	<br/>
+
+
+<div id="display_project_keyqs" style="display:block">
+	<div class="summary_heading">Key Questions</div>
+	<br/>
+	<div class='container-div'>
+		<%= render 'completed_tables/key_questions', :key_questions => @key_questions %>	
+		</br>
+	</div>
+</div>
+
+
+
+
+		<% has_privilege = current_user.nil? ? false : User.current_user_has_project_edit_privilege(@project.id, current_user) %>
+	<% if has_privilege && !@project.is_public %>
+		<div id="display_project_collabs" style="display:block">
+			<div class="summary_heading">Collaborators</div>
+				<br/>
+<table class="result_table" id="view_project_collaborators_table" summary="view project collaborators table">
+<tr><td class="label" width="150">
+					Project Leads
+</td><td>					<%= Project.get_project_leads_string(@project.id) %></td></tr>
+<tr><td class="label">
+Project Collaborators
+</td><td>
+					<% collab_str = Project.get_project_collabs_string(@project.id) %>
+					<% if !collab_str.nil? && collab_str != "" %>
+						<%= Project.get_project_collabs_string(@project.id) %>
+					<% end %>
+				</td></tr></table>
+
+		</div>				<br/><br/>
+				<% end %>
+				
+				
+				
+<div id="display_project_efs" style="display:block">
+	<div class="summary_heading">Associated Extraction Forms</div>
+	<br/>
+	<%= render 'completed_tables/extraction_forms' %>
+ <br/>
+</div><br/>		
+		
+<div id="display_project_studies" style="display:block">
+	<div class="summary_heading">Associated Studies (<strong>each link opens a new tab</strong>)</div>
+	<br/>
+	<%= render 'completed_tables/study_list' %>	
+
+</div><br/><br/><br/>
+<%  if defined?(@project) && !@project.nil? && @project.is_public %>
+<%= render 'shared/creative_commons_note' %>
+<%  end %>
+<!--
+<table id="bottom_nav" summary="bottom of page navigation table">
+	<tr>
+		<td align="left">
+			<%= link_to image_tag("Silk_bullet_back.png", :alt => "Back", :style => "border:0px; vertical-align:text-top") + " Back to Study List", "/projects/" + @project.id.to_s + "/studies" %>
+		</td>
+		<td align="right">
+			<a href="/projects/<%= @project.id.to_s %>/publish">Continue to Publish this Project  <%= image_tag("Silk_bullet_go.png", :alt => "Continue", :style => "border:0px; vertical-align:text-top") %>
+			</a>
+  	</td>
+</tr>
+</table>
+-->
+</div>
+
+<script type='text/javascript'>
+// <!--
+	$(document).ready(function(){
+		
+		<% if defined?(params[:open_study]) && !params[:open_study].nil? && params[:open_study] != "false" %>
+			$("#preview_study_div").dialog('open').load("<%= '/projects/'+params[:id].to_s+'/studies/'+params[:open_study] %>");			
+		<% end %>
+
+		$("#preview_ef_div").dialog({
+			autoOpen: false,
+			minWidth: 600,
+			position: 'top',
+			 open: function() {
+				window.scrollTo(0, 0);
+				},
+				title: "Viewing Extraction Form"
+		});
+		
+		$("#preview_study_div").dialog({
+			autoOpen: false,
+			minWidth: 700,
+			position: 'top',
+			 open: function() {
+				window.scrollTo(0, 0);
+				},
+				title: "Preview Study"
+		});
+	});	
+// -->
+</script>

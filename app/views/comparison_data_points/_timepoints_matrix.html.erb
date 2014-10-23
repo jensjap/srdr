@@ -1,0 +1,85 @@
+<br/><hr><br/>
+<% unless @outcome_timepoints.length < 2 %>
+<%= hidden_field_tag 'within_or_between', @type %>
+
+<% num_timepoints = @outcome_timepoints.length %>
+<strong>Step 4.</strong> Use the matrix below to select which timepoints you would like to <strong>compare for <%= @group_name %></strong>.<br/><br/>
+<table class='formatted_table' id="outcome_comparison_results_timepoints_matrix" summary="outcome comparison results timepoints matrix">
+	<tr>
+		<th></th>
+		<% @outcome_timepoints.each do |timepoint| %>
+		  <th style='min-width:80px;'><%= timepoint.number.to_s %> <%= timepoint.time_unit %></th>
+		<% end %>
+	</tr>
+	
+	<% num_timepoints.times do |i| %>
+	  <tr>
+	  	<th><%= @outcome_timepoints[i].number.to_s + " " + @outcome_timepoints[i].time_unit %></th>
+	  	<% num_timepoints.times do |j| %>
+	  	  <% cell_id = @outcome_timepoints[j].id.to_s + "_" + @outcome_timepoints[i].id.to_s %>
+	  		<td <%= "class='comparison_td'" unless j==i %> id="<%= cell_id %>" 
+	  			<%= "style='background: #466F9E url(/images/stripe7.png);'" if j == i %> 
+	  			<%= "style='background-color:#00A876;text-align:center;'" if @existing_comparisons.include?(cell_id) %> 
+	  			<%= "style='background-color:#fff;text-align:center;'" if !@existing_comparisons.include?(cell_id) %>>
+	  			<% if @existing_comparisons.include?(cell_id) %>
+	  				Saved.
+	  			<% else %>
+	  				<% unless j==i %>
+	  					<span class="in_matrix_text">
+	  						<%= @outcome_timepoints[j].number.to_s + " " + @outcome_timepoints[j].time_unit %>
+	  						<br/> vs. <br/>
+	  						<%= @outcome_timepoints[i].number.to_s + " " + @outcome_timepoints[i].time_unit %>
+  						</span>
+	  				<% end %>
+	  			<% end %>
+	  		</td>
+	  	<% end %>
+	  </tr>
+	<% end %>
+</table><br/>
+
+
+<% else %>
+  <strong>You have not entered sufficient timepoints to enter a comparison for this outcome.</strong>
+<% end %>
+
+<script type='text/javascript'>
+ 
+	$(".comparison_td").bind("click",function(){
+		var clicked = $(this).attr("id");
+		var outcome = $("#outcome_selector").val();
+		var study_id = $("#study_id").val();
+		var extraction_form_id = $("#extraction_form_id").val();
+		var type = "<%= @type %>";
+		var group_id = "<%= @group_id %>";
+		$.ajax({
+			type: "POST",
+			url: "comparison_data_points/show_comparison_table",
+			data:{
+				clicked : clicked,
+				outcome_id : outcome,
+				study_id : study_id,
+				extraction_form_id : extraction_form_id,
+				type : type,
+				group_id : group_id
+			}
+		});
+	});
+	
+	var current_style = ""
+	
+	$(".comparison_td").bind("mouseover", function(){
+		current_style = $(this).attr("style")
+		$(this).attr("style",current_style + "cursor:pointer; background-color: yellow;");	
+	});
+	
+	$(".comparison_td").bind("mouseout",function(){
+		//alert(current_style);
+		if(current_style == ""){
+			$(this).removeAttr("style");
+		}else{
+			$(this).attr("style",current_style);	
+		}
+	});
+	
+</script>

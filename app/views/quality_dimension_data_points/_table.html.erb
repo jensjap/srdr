@@ -1,0 +1,119 @@
+<% @quality_dimension_custom_fields = QualityDimensionField.where(:study_id => @study.id, :extraction_form_id => params[:extraction_form_id]).all %>
+<% @quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => params[:extraction_form_id], :study_id => nil).all %>
+<%= form_for @quality_dimension_data_point, :remote => true, :html=>{:id=>"quality_dimension_data_point_form"} do |f| %>
+
+<%= f.hidden_field "study_id", :value => @study.id %>
+<%= f.hidden_field "extraction_form_id", :value => params[:extraction_form_id] %>
+
+<table class="classic-a" id="quality_dim_table" summary="quality dimension data table">
+<thead><tr>
+<th scope='col'>Dimension</th>
+<th scope='col'>Value</th>
+<th scope='col'>Notes</th>
+<th scope='col'>Instructions</th>
+<th scope='col'>Actions</th>
+</tr></thead>
+
+<%# ------------------- LISTING FIELDS --------------------- %>
+
+<% if !@quality_dimension_extraction_form_fields.nil? && @quality_dimension_extraction_form_fields.length > 0 %>
+<% for qa in @quality_dimension_extraction_form_fields %>
+<tr class="<%= cycle("even", "odd") %>" id='<%= 'quality_aspect_' + qa.id.to_s %>'>
+
+<td  scope='row' valign="top"><%= qa.title %></td>
+
+<% tmpl_id = qa.extraction_form_id %>
+<% val = QualityDimensionDataPoint.get_data_point(qa, @study.id, "value") %>
+<% arr = QualityDimensionField.get_dropdown_options(qa) %>
+<% selected_other = !arr.collect{|x| x[1]}.include?(val) && !val.blank? %>
+
+<td scope='row' valign="top"><%= select :quality_value, qa.id.to_s, arr, {:selected=> selected_other ? "other" : val}, :value => selected_other ? "other" : val, :class => "inline-field", :title =>"Select Value for Dimensoin: #{qa.title}" , :style => "width: 100px"%>
+	<% if selected_other %>
+		<%= render :inline => show_other_filled("quality_value_#{qa.id.to_s}", val, "quality_value[#{qa.id.to_s}]") %>
+	<% end %>
+</td>
+<td scope='row' valign="top">
+<% val = QualityDimensionDataPoint.get_data_point(qa, @study.id, "notes") %>
+<%= text_area "quality_notes", qa.id.to_s, :value => val, :title => "Enter notes for Dimension: #{qa.title}", :id => "quality_notes_" + qa.id.to_s, :rows => 3, :cols => 15 %>
+</td>
+<td scope='row' valign="top"><%= qa.field_notes %><%# render "shared/notes_tooltip", :section_name => "quality_fnotes", :item_id => qa.id, :item_notes => qa.field_notes %></td>
+<td scope='row' valign="top">
+<%= render :partial => "comments/field_comments", :locals => {:section_name => "qualitydimensions", :section_id => qa.id, :field_name => "dimension", :study_id => @study.id, :project_id => @project.id} %>
+</td>
+</tr>
+<%= render :inline=> attach_listener_for_other("quality_value_#{qa.id.to_s}") %>
+<% end %>
+<% end %>
+
+<%# ------------------- END FIELDS --------------------- %>
+
+</table>
+<br/><div class="actions">
+		<button type="submit" class="positive" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Accept.png", :alt => "Accept" %>Save Table Data
+		</button><div class="saved" id="saved_indicator_1" style='display:none;'>  Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+		</div>
+<% end %>
+
+<div id="quality_dimension_validation_message"></div>
+<br/>
+
+
+<script type="text/javascript">
+   $('.open_comments_link').bind("click", function(event) {
+      var self = $(this);
+      var qtip = '.qtip.ui-tooltip';
+   
+      // Create the tooltip
+      self.qtip({
+         overwrite: false,
+		id: $(this).attr('id'),
+				 position:{
+		 my: 'top right', at: 'bottom center'
+		 },
+         content: {
+			title: {
+                  text: 'Item Comments',
+                  button: true
+			},
+			text: "Loading...",
+			ajax: {
+				url: 'get_comment_content', 
+				type: 'POST',
+				data: {
+					div_id: $(this).attr('id')
+				} 
+			}			
+         },
+         show: {
+            event: "click", 
+            ready: true, 
+            solo:  true
+         },
+         hide: {
+            delay: 100,
+            event: 'click',
+            fixed: true 
+         },
+         style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            tip: false,
+			width: '600'
+         },
+         events: {
+            // Toggle an active class on each menus activator
+            toggle: function(event, api) {
+               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+            },
+			// make qtip movable on render
+		   render: function(event, api) {
+			   api.elements.tooltip.draggable();
+		   },
+		   focus: function(event, api) {
+         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+         event.preventDefault();
+		}
+         }
+      });
+   });
+</script>

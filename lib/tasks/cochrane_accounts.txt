@@ -1,0 +1,24 @@
+Rene|Spijker|rspijker@amc.uva.nl
+Elizabeth|Pienaar|elizabeth.pienaar@mrc.ac.za
+Julian|Elliott|julian.elliott@alfred.org.au
+Gabriel|Rada|radagabriel@gmail.com
+Joanne|Yaffe|joanne.yaffe@utah.edu
+Peter|Robertson|probertson@entnet.org
+Ling-Ling|Lee|tr.leelingling@gmail.com
+Douglas|Salzwedel|doug.salzwedel@ti.ubc.ca
+Henrik|Helmo Larsen|helmoe@gmail.com
+Jessica|Thomas|jessica@ims.cochrane.org
+Jill|Haynes|jill.haynes@kp.org
+Craig|Robbins|craig.w.robbins@kp.org
+Ornella|Clavisi|ornella.clavisi@monash.edu
+Susan|Wieland|lswieland@gmail.com
+John|Hilton|jhilton@cochrane.org
+Evi|Nagler|evi.nagler@ugent.be
+Veerle|Liebaut|veerle.liebaut@4cconsulting.com
+Eric|Manheimer|emanheimer@compmed.umm.edu
+Agustin|Ciapponi|aciapponi@iecs.org.ar
+Lyn|Charland|lyn.charland@videotron.ca
+Gladys|Tom|gladys.i.tom@kp.org
+Miyoung|Choi|mychoi@neca.re.kr
+Marguerite|Koster|marguerite.a.koster@kp.org
+Therese|Svanberg|therese.svanberg@vgregion.se

@@ -1,0 +1,45 @@
+<%
+    prj_id = params["prj_id"]
+    nstudies = params["nstudies"]
+    merge_button = params["merge_button"]
+    urlstr = "/projects/"+prj_id.to_s+"/comparestudies.html?prj_id="+prj_id.to_s+"&nstudies="+nstudies.to_s
+    for studyidx in (0..nstudies.to_i - 1)
+        merge_x = params["merge_"+studyidx.to_s]
+        if !merge_x.nil?
+            urlstr = urlstr + "&merge_"+studyidx.to_s+"="+merge_x.to_s
+        end    
+    end
+    if merge_button.nil?
+        merge_button = ""
+    end
+    puts "........ urlstr = "+urlstr
+    urlstr = urlstr + "&merge_button="+merge_button.to_s
+    
+    # Get and set bread crumb to current page
+    urlhistory = session[:urlhistory]
+    if urlhistory.nil?
+        urlhistory = Breadcrumb.new
+    end
+    urlhistory.setCurrentPage("Data Comparison","Data Comparison",urlstr)
+    session[:urlhistory] = urlhistory
+    # @project = session[:comp_project] 
+%>
+<div id='left-navigation-div' tabindex=100>
+    <%= render :partial => "sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+<h1>Project: <%= @project.title %>
+<% if @project.is_public %>
+    <span class="status" style='position:absolute;right:30px;'>Public Report <span class="complete">Complete</span></span>
+<% else %>
+    <span class="status" style='position:absolute;right:30px;'>Private Report <span class="incomplete">Incomplete</span></span>
+<% end %>
+</h1><br/>
+<div class='hr'></div>
+<br/>
+<span class='page_heading'>Comparing Studies:</span><br/>
+<% for studyidx in (0..@compareset.size() - 1) %>
+<h1 style='color:black;'><%= @alphabet[studyidx] %>.</h1> <%= @compareset.getTitle(studyidx) %> (<%= @compareset.getAuthor(studyidx).split(",").first %>)<br/><br/>
+<% end %>
+<%= render 'compareform' %>
+</div>

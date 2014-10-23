@@ -1,0 +1,119 @@
+<%= render :partial=>"extraction_forms/page_title", :locals => {:page_title => "Optional: Import Sections from Previous Forms"} %>
+	
+	Below is a list of extraction forms that you previously defined for this project.
+	You may choose to this previous information into the new 
+	extraction form to save yourself some time.
+	<br/><br/>
+
+	
+<h3>Previous Forms</h3><br/><br/>
+<table class="list_table" id="import_from_previous_forms_table" summary="import sections from previous forms table">
+<thead>
+<th>Form Title</th>
+<th>Questions Addressed</th>
+<th>Can Import</th>
+</thead>
+<tbody>
+		<% allowed_forms = Array.new %>
+		<% @previous_extraction_forms.each do |form| %>
+<tr class="<%= cycle("even", "odd") %>">
+<td>
+			<%= form.title %>
+</td>
+<td>
+<%= @assigned_questions_hash[form.id].join(", ") %>
+</td>
+<td>
+			<% if @borrowers.collect{|x| x[0]}.include?(form.id)%> 
+			  Information cannot be imported from this form because it already imports 
+			  from the form you're currently editing.
+			<% else %>
+				Yes
+			  <% allowed_forms << form %>
+			<% end %>
+</td></tr>
+		<% end %>
+</tbody></table>
+
+<br/><br/>
+		Choose the sections to import into your extraction form. You may only import one extraction form per section.
+		
+<br/><br/>
+	<%= form_tag url_for(:controller=>:extraction_form_section_copies, :action=>:save_import_request) do %>
+	<%= hidden_field_tag "extraction_form_id",params[:extraction_form_id] %>
+	<%= hidden_field_tag "project_id",params[:project_id] %>
+		
+		<%# build the table %>
+
+		<table class='list_table' id="import_from_previous_forms_sections_table" summary="import from previous forms sections table">
+		<% unless allowed_forms.empty? %>
+		  <% sections = ["arms","design","baselines","outcomes","results","comparisons","adverse","quality"]%>
+		  <tr>
+		  	<th>Section</th>
+		  	<% allowed_forms.each do |form| %>
+		  	  <th><%= shrink_text(form.title,4)%></th>
+		  	<% end %>
+		  	<th></th>
+		  </tr>
+		<% end %>
+		<% unless sections.nil? %>
+		<% sections.each do |section| %>
+		  <% already_selected = false %>
+		  <% show_it = false %>
+			<% allowed_forms.each do |f|%>
+		  	<% if @included_sections_hash[f.id].include?(section)%>
+		  	  <% show_it = true %>
+		  	<% end %>
+		  <% end %>
+		  <% if show_it %>
+				<tr class="<%= cycle("even", "odd") %>">
+					<td><%= section %></td>
+					<% allowed_forms.each do |form| %>
+					  <td>
+					  	<% if @included_sections_hash[form.id].include?(section) %>
+					  		<% checked = "" %>
+					  		<% disabled = "" %>
+								<% if @checked_boxes[form.id].include?(section) %>
+									<% checked = "checked" %>
+									<% already_selected = true%>
+									<%# disable any previously entered buttons %>
+									<script type='text/javascript'>
+									  $("input."+section+"_import").attr("disabled", true)
+									</script>
+								<% end %>
+								<% if already_selected %>
+								  <% disabled = "disabled" %>
+								<% end %>
+								<input type='radio' name="import_section[<%= section %>]" value="<%= form.id %>" class='<%= section + "_import" %> cbox editable_field ' <%= checked %> <%= disabled %> >
+					  	<% end %>
+					  </td>
+					<% end %>
+					<td>
+							<%= link_to image_tag("Cancel.png") + ' Clear', 'clear', :class=>'clear_radio',:id=>'text_link',:sec=>section %>
+					  </td>
+				</tr>
+			<% end %>
+		<% end %>
+	  <% end %>
+		</table>
+		<div class="actions">
+			<br/>
+			<button type="submit" class="positive" data-disable-with='<%= ajax_wait_msg %>' style="float:right">
+				<% if flash[:success] =~ /initiated/%>
+					<%= image_tag "Note_go.png", :alt => "Save and Continue" %>Save and Continue
+				<% else %>
+					<%= image_tag "Note_go.png", :alt => "Save" %>Save
+				<% end %>
+			</button>
+	  </div>
+	  <br/><br/>
+	<% end %> <%# END FORM TAG%>
+</div>			
+
+<script type='text/javascript'>
+	$(".clear_radio").bind("click",function(event){
+		event.preventDefault();
+		var section = $(this).attr("sec");
+		$("."+section+"_import").attr("checked",false)
+	}); 
+</script>

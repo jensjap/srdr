@@ -1,0 +1,9 @@
+ <% if @saved %>
+ 	<% assignedkqs = ExtractionForm.get_assigned_question_numbers(@extraction_form.id) %>
+	$("#page_title").html("<%= escape_javascript(render :partial => "projects/page_title", :locals => {:page_title => "Editing Extraction Form: #{@extraction_form.title} -- (#{assignedkqs.length > 1 ? "Questions" : "Question"} #{assignedkqs.join(", ")})", :in_ef => true}) %>");
+
+
+<% else %>
+	$("#info_messages").html("<%= escape_javascript(render "layouts/info_messages") %>");
+	window.scrollTo(0,0);	
+<% end %>

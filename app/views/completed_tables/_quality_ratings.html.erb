@@ -1,0 +1,10 @@
+<% if !quality_rating.nil? %>
+
+<%= render :partial => "comments/field_comments", :locals => {:section_name => "qualityratings", :section_id => quality_rating.id, :field_name => "qualityratings", :study_id => study.id, :project_id => project.id} %>
+
+<strong>Overall Rating of Study:</strong> <%= quality_rating.current_overall_rating %>
+<br/>
+<strong>Quality Guideline Used in Assessment:</strong> <%= quality_rating.guideline_used %>
+<% else %>
+No quality rating has been assigned to this study yet.
+<% end %>

@@ -1,0 +1,114 @@
+<br/><hr><br/>
+<strong>Step 4. </strong>Fill out the study results table<br/>
+<span class='smallText'>(You may use the Add/Edit Measurements button to add and edit
+	measures for this result)</span><br/><br/>
+<%= form_for @outcome_data_point, :remote => true, :html=>{:id=>"outcome_data_point_form"} do |f| %>
+
+<%= f.hidden_field "study_id", :value => @study.id %>
+<%= f.hidden_field "extraction_form_id", :value => @extraction_form.id %>
+
+<table class="outcome_data_points_table formatted_table" id="outcome_data_points_table_categorical_form" summary="outcome data points table categorical form">
+<th colspan="100%"><%= @outcome.title %>: <%= @outcome.outcome_type %> Outcome Results Data Table</th>
+<tr>
+	<th rowspan="2" class="table_header">Outcome</th>
+	<th rowspan="2" class="table_header">Arm</th>
+	<th rowspan="2" class="table_header">
+		Measure<br/>
+		<button class="positive" style="vertical-align: middle" id="add_measure_btn">
+			Manage Measures
+		</button>
+	</th>
+	<% if @outcome_timepoints.length > 0 %>
+		<% @outcome_timepoints.each do |timepoint| %>
+			<th class="table_header"><%= timepoint.number.to_s %> <%= timepoint.time_unit %></th>
+		<% end %>
+		</tr>
+		<% @outcome_timepoints.each do |timepoint| %>
+			<th class="table_header">Value</th>
+		<% end %>
+		</tr>
+	<% else %>
+</tr><td style="display:none"></td></tr>
+	<% end %>
+</tr>
+
+
+<tr>
+<% @measures_length = @outcome_measures.length > 0 ? @outcome_measures.length : 1 %>
+<td rowspan="<%= @arms.length * @measures_length %>" class="table_header">
+	<%= @outcome.title %>
+</td>
+
+<% @arms.each do |arm| %>
+<td rowspan="<%= @measures_length %>" class="table_header">
+	<%= arm.title %>
+</td>
+
+	<% if @outcome_measures.length > 0 %>
+		<% @outcome_measures.each do |measure| %>
+			<td><%= measure.measure_name %> <%= (measure.unit.nil? || measure.unit == "" || measure.unit == "N/A") ? "" : "(" + measure.unit + ")" %></td>
+		<% if @outcome_timepoints.length > 0 %>
+		<% @outcome_timepoints.each do |timepoint| %>
+			<td><%= text_field_tag "outcome_datapoint_outcome_" + @outcome.id.to_s + "_arm_" + arm.id.to_s + "_timepoint_" + timepoint.id.to_s + "_measure_" + measure.id.to_s, nil, {:class => "editable_field outcome_data_point_field", :value => OutcomeDataPoint.get_data_point_value(@outcome.id, arm.id, timepoint.id, measure.id)} %>
+
+			<hr class="thin" />
+			
+			N: <%= text_field_tag "n_enrolled_outcome_" + @outcome.id.to_s + "_arm_" + arm.id.to_s + "_timepoint_" + timepoint.id.to_s + "_measure_" + measure.id.to_s, nil, {:class => "editable_field outcome_data_point_field", :size => 5, :value => OutcomeDataPoint.get_data_point_n_enrolled(@outcome.id, arm.id, timepoint.id, measure.id)} %>
+			
+			</td>
+		<% end %>
+		</td>
+		<% else %>
+			</td>
+		<% end %>		
+		</tr>
+		<% end %>
+
+	<% else %>
+		<td colspan="<%= @outcome_timepoints.length + 1 %>"></td>
+	<% end %>
+
+</tr>
+<% end %>
+
+</table>
+
+<br/><div class="actions">
+		<button type="submit" class="positive" id="save_outcome_data_points_btn" data-disable-with="<%= ajax_wait_msg %>">
+			<%= image_tag "Accept.png", :alt => "Accept" %> Save Table Data
+		</button>
+		<button class="negative" id="cancel_dp_button" onClick="event.preventDefault()">
+			<%= image_tag "Cancel.png", :alt => "Cancel" %> Cancel &amp; Delete Table
+		</button>
+		<div class="saved" id="saved_indicator_1" style='display:none;'>  Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %></div>
+		</div>
+
+<% end %>
+
+
+
+</div>
+
+
+<script type="text/javascript">
+	$("#cancel_dp_button").bind("click",function(event){
+  	event.preventDefault();
+  	$.ajax({
+			type: "POST",
+			url: 'outcome_data_points/cancel_results_creation',
+			data: {
+				outcome_id : "<%= @outcome.id %>",
+				selected_arms : "<%= @arms.collect{|a| a.id}.to_json %>",
+				extraction_form_id : "<%= @extraction_form.id %>",
+				selected_timepoints: "<%= @outcome_timepoints.collect{|a| a.id}.to_json %>"
+			}
+		});
+  });
+	
+  $("#add_measure_btn").unbind("click")
+	$("#add_measure_btn").bind("click", function(e){
+		e.preventDefault();
+		$("#add_measure_modal").dialog('open');
+	});
+
+</script>

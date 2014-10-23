@@ -1,0 +1,62 @@
+<div id="measure_import_form">
+			<!-- DIV FOR ADDING/EDITING A NEW MEASURE -->
+			<% unless @previous_measures.empty? || !@comparison_measures.empty? %>
+				<div class='form_content'>
+				  <%= form_tag "comparison_measures/import_measures", :remote=>true do %>
+					  <div class='field'>
+					   	<%= hidden_field_tag "comparison_id", @comparison.id %>
+							<strong>Previous comparisons in this study used the following set of measures:</strong><br/>
+						 	<% i = 0%>
+							<% @previous_measures.each do |measure| %>	
+								<%= hidden_field_tag "titles["+i.to_s+"]", measure["title"] %>
+								<%= hidden_field_tag "descriptions["+i.to_s+"]", measure["description"] %>  
+								<%= hidden_field_tag "units["+i.to_s+"]", measure["unit"] %>
+								<%= check_box_tag "chosen["+measure["title"]+"]", i, :checked=>true, :title => "measure option" %> <%= measure["title"] %> (<%= measure["unit"] %>)<br/>
+								<% i += 1%>
+							<% end %>
+						</div>
+					
+					 <div class='actions'>
+						 	<button type='submit' class='positive' id="import_measures_button" data-disable-with='<%= ajax_wait_msg %>'>
+						 		<%= image_tag "Accept.png", :alt => "Accept" %>
+						 		Use These Measures!
+							 </button>
+			    	</div>
+			 	  <% end %>
+				</div>
+				<br/>
+			  <hr>
+			  <br/>
+			<% end %>
+		</div> <%# end measure import form div %>
+
+		<!-- DIV FOR EDITING EXISTING MEASURES -->
+		<div id='measure_display_div'>
+			<%= render :partial=>"comparison_measures/measure_list"%>
+		</div>
+	
+<div class="actions" style="text-align:right">
+			<button class="positive" id="open_add_measure_dialog_button">
+				<%= image_tag "Add.png", :style=>"vertical-align:text-top;", :alt => "Add" %> Add New Comparison Measure
+		  </button>
+			<button class="negative" onClick="event.preventDefault();$('#add_measure_modal').dialog('close');">
+				<%= image_tag "Cancel.png", :style=>"vertical-align:text-top;", :alt => "Cancel" %> Close Window
+		  </button>
+</div>
+
+<script type="text/javascript">
+
+		$("#measure_form_div").dialog({
+			autoOpen: false,
+			minWidth: 650,
+			title: "Add New Comparison Measure"
+		});
+	$("#open_add_measure_dialog_button").bind("click", function(event){
+		event.preventDefault();		
+		$("#measure_form_div").dialog('open');
+	});
+</script>
+
+		<div id="measure_form_div">
+			<%= render :partial=>"comparison_measures/form" %>
+		</div>

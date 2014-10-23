@@ -1,0 +1,35 @@
+if ($("#outcome_timepoints_list_blocks .form_table").last().length > 0){
+	var div_id = $("#outcome_timepoints_list_blocks .form_table").last().attr('id');
+	var split_id = div_id.split("_");
+	var num = parseInt(split_id[4]);
+}
+else
+{
+	var num = 0;
+}
+
+<% @num = 0 %>
+
+$("#outcome_timepoints_form_list_tables").append("<%= escape_javascript(render :partial => "outcome_timepoints/form_append", :locals => { :outcome => @outcome, :study => @study, :one_tp => @outcome_timepoint, :num => @num}) %>");
+
+$("#outcome_timepoints_list_blocks .form_table").last().attr('id', 'outcomes_form_timepoints_table_' + (num + 1).toString());
+$("#outcome_timepoints_list_blocks .form_table .remove_tp_button").last().attr('id', 'remove_tp_button_' + (num + 1).toString());
+
+// set input id and input name for :time_unit and :number fields
+$("#outcome_timepoints_list_blocks .form_table .number_field").last().attr('id', 'new_outcome_timepoints_attributes_' + (num + 1).toString() + "_number");
+$("#outcome_timepoints_list_blocks .form_table .number_field").last().attr('name', 'new_outcome_timepoints_attributes[' + (num + 1).toString() + "][number]");
+$("#outcome_timepoints_list_blocks .form_table .time_unit_field").last().attr('id', 'new_outcome_timepoints_attributes_' + (num + 1).toString() + "_time_unit");
+$("#outcome_timepoints_list_blocks .form_table .time_unit_field").last().attr('name', 'new_outcome_timepoints_attributes[' + (num + 1).toString() + "][time_unit]");
+$("#outcome_timepoints_list_blocks .form_table .id_field").last().attr('id', 'new_outcome_timepoints_attributes_' + (num + 1).toString() + "_id");
+$("#outcome_timepoints_list_blocks .form_table .id_field").last().attr('name', 'new_outcome_timepoints_attributes[' + (num + 1).toString() + "][id]");
+
+$("#outcome_timepoints_list_blocks .form_table .time_unit_field").last().bind("change", function(event) {
+$.ajax({	
+	url: "/application/show_other",
+	data: {
+		"field_id":this.id,
+		"field_name":this.name,
+		"selected":this.value
+		}
+	});
+});

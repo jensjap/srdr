@@ -1,0 +1,285 @@
+<% content_for :title, content='Home' %>
+
+<%
+    # Get and set bread crumb to current page
+    urlhistory = Breadcrumb.new
+    urlhistory.setCurrentPage("Home","Home","/")
+    session[:urlhistory] = urlhistory
+
+    # Get site properties
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+%>
+<!--################################################################ -->
+<!-- THE HOMEPAGE COLLAGE AND LOGIN SECTION                          -->
+<!--#################################################################-->
+<div id="homepage-collage-div">
+    <!--<img alt="" src="images/homepage/hero_txt_welcome.gif" width=359 height=69 style='position:absolute; top:20px; left:20px;z-index:100'/>-->
+    <div style='position:absolute; top:20px; left:20px; z-index:100; color: #045d9a; font-size:35px; font-family:Helvetica, Arial, sans-serif;line-height:40px;text-shadow: #045d9a .05em .05em .1em;'>
+        Welcome to the Systematic<br/>Review Data Repository
+    </div>
+    <img alt="Welcome to the Systematic Review Data Repository" src="/images/homepage/homepage_collage.jpg" alt='Welcome to the Systematic Review Data Repository' style="position:absolute;right:0px;top:0px;height:100%;z-index:99"/>
+    <div id="welcome-text" >
+        The Systematic Review Data Repository (SRDR) is a powerful and easy-to-use tool for the extraction and management of data for systematic 
+        review or meta-analysis. It is also an open and searchable archive of systematic reviews and their data.
+        <p/>
+        
+        <!-- <div class='actions'> -->
+            <!-- <button class="positive" id="training_button">
+                RSVP Today for SRDR Training Webinars! <%= image_tag "Silk_bullet_go.png", :alt => "Continue to Training Information" %>
+            </button> -->
+            <!--
+            <button class="positive" id="training_button">
+                <%# image_tag "Silk_bullet_go.png", :alt => "Get Assistance over the Holidays" %> Need Assistance During the Holidays?
+            </button> -->
+        <!-- </div> -->
+
+        <!-- <div class='announcement'>
+          Scheduled maintenance in <span id='dayCntr'></span> day(s).<br>
+          <span id='introjs' class='tiny'>Click me for more details.</span><br>
+        </div> -->
+
+    </div>
+    <div id='login-window'>
+        <div id='login-div'>
+            To contribute data or comment on deposited projects, simply <%= link_to "Register", "/register", {:title=>"Register for a new account", :class=>'register_link'}  %> for an account.<br/><br/><br/>
+            <div id='login_form_div'>
+                <%  if !defined?(current_user) || current_user.nil? %>
+                    Registered users, log in below:<br/>
+                    <%= render "user_sessions/login_form", :locals => {:user_session => @user_session} %>
+                <% else %>
+                    Account Details: <br/><br/>
+                    You are logged in as <%= current_user.login %> <%# request.session_options[:id] %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <a href='#' style='position:absolute; bottom:10px; right:10px;'>Forgot Password?</a>
+</div>
+<!--################################################################ -->
+<!-- THE HOMEPAGE CONTENT SECTION                                    -->
+<!--#################################################################-->
+<div id='home-content'>
+    <!-- THE LEFT PANEL OF RECENT SUBMISSIONS -->
+    <div id="home-left-panel">
+        <table width="100%">
+            <tr>
+                <td align="LEFT">
+                <h2>Recently Completed and Deposited Reports Data</h2>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT">
+                <%= render 'reports_tabs' %>
+                </td>
+            </tr>
+        </table>
+        <p/><br/>
+        <%= render 'shared/creative_commons_note' %>
+    </div>
+    <div id="home-right-panel">
+        <h2>Popular Resources</h2>
+        <div class='hr'></div>
+        <br/>
+        <ul class='link_list'>
+            <!--<li><a href='#' title='(COMING SOON) Discuss SRDR with the user community'>SRDR Help Forum *</a></li>-->
+            <li><a href='/about' title='Learn about SRDR'>About SRDR</a></li>
+            <!--<li><a href='<%= siteproperties.getTrainingSiteURL() %>' title='Try SRDR in the sandbox training environment'>SRDR Training Site</a></li>-->
+            <!--<li><a href='#' title='(COMING SOON) Request to become a collaborating center'>Become a Collaborating Center *</a></li>-->
+            <li>Check back soon for additional features.</li>
+        </ul>
+        <br/><br/>
+        <h2>Help</h2>
+        <div class='hr'></div>
+        <br/>
+        <ul class='link_list'>
+            <li>
+                <a href='/help' title='SRDR Help Pages'>Visit the Help Pages and User Manual</a></li>
+            <li>
+        </ul>
+        
+        <h2>SRDR Announcements</h2>
+        <div class='hr'></div>
+        <br/>
+        <ul class='link_list'>
+<%
+    if siteproperties.isSiteTypeProduction()
+%>
+            <li>
+                The <a href='<%= siteproperties.getTrainingSiteURL() %>' target='_blank'>SRDR Training Site</a> is now available
+            </li><br/><br/>
+<%
+    end
+%>
+            <li>
+                Our first <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3351737/" class='needs_exit_disclaimer' target="_blank">SRDR publication <img alt="WARNING: This link will direct you away form our site." src="/images/exit_disclaimer.gif"/></a> has been published!
+            </li>
+        </ul>
+        <br/><br/>
+        &nbsp;<p/>
+        <h2>Statistics</h2>
+        <div class='hr'></div>
+        <br/>
+        <ul class='link_list'>
+            <li><strong>Launch Date:</strong> June 20, 2012</li>
+            <li><strong>Registered Users: </strong><%= User.count - 1 %></li>
+            <li><strong>Projects In Progress: </strong><%= Project.count %></li>
+        </ul>
+
+        <br/>
+        <h2 data-intro="Here you will find all available information regarding planned outages. We will do our best to post information as soon as possible so you can plan ahead and schedule accordingly." data-step='1'>Maintenance Schedule</h2>
+        <div class='hr'></div>
+        <br/>
+            <ul class='link_list'>
+                <li>There is no maintenance scheduled as of <%= Time.now.strftime("%m/%d/%Y") %></li>
+            </ul>
+            <!-- <ul class='link_list'>
+                <li><strong>Maintenance scheduled for Sunday, September 29th, 2013.</strong></li>
+                <br/>
+                <li>Starting at 10:00am EST the SRDR servers will be undergoing scheduled maintenance. The site will be unavailable for an estimated 2 hours. We apologize for any inconvenience this may cause.</li>
+            </ul> -->
+        <br/>
+        <span id='page_end'></span>
+        <!--This graphic notice, <img alt="WARNING: This link will redirect you away from our site." src='/images/exit_disclaimer.gif'>, indicates that you are leaving this Federal Government Web site.  <a href='http://www.ahrq.gov/exitdisclaimer.htm' target='_blank'>Learn more</a>
+        <br/><br/><br/>&nbsp;-->
+        <!--
+        <table width="100%">
+            <tr>
+                <td align="LEFT">
+                <h2>Popular Resources</h2>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT">
+                <%= render 'srdr_events' %>
+                </td>
+            </tr>
+        </table>
+         -->
+    </div>
+</div>
+<script type='text/javascript'>
+//<!--
+function index_init() {
+  try{
+    checkLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+    set_index_js();
+  } catch( err ) {
+    setTimeout('index_init()', 200);
+  }
+}
+function checkLoaded() {
+    if ( $('#page_end').length == 0) $jquery.error( 'not ready' );
+}
+function set_index_js(){
+    $("#forgot_password").unbind();
+    $("#forgot_password").bind("click",function(event){
+        event.preventDefault();
+        window.location.replace("/forgot_password");
+    });
+
+    // add a pop-up notifier for any links that are in need of an exit disclaimer
+    $(".needs_exit_disclaimer").unbind();
+    $(".needs_exit_disclaimer").live("click",function(event){
+        event.preventDefault();
+        var url = $(this).attr("href");
+        $("#exiting_modal").dialog({
+            resizable: false,
+            title: "Exit Disclaimer",
+            width: 550,
+            modal: true,
+            buttons:{
+                "Return to SRDR":function(){
+                    $(this).dialog("close");
+                },
+                "Continue to External Site": function(){
+                    $(this).dialog("close");
+                    window.open(url,"_blank");
+                    //document.location.href = $(this).attr("href");
+                }
+            }
+        })
+    });
+    $("#training_button").unbind();
+    $("#training_button").bind("click",function(event){
+        //window.location.assign("/home/training_sessions");
+        window.location.assign("/help?selected=6");
+    });
+}
+index_init();
+
+
+;COUNTDOWN = {
+
+  getDaysUntilMaintenance: function(){
+
+    var today = new Date();
+    var maintenanceDate = new Date();
+
+    // Set maintenance date. Months are 0 indexed.
+    maintenanceDate.setFullYear(2013,9-1,29);
+
+    // Use get time to get milliseconds since epoch.
+    var msToday = today.getTime();
+    var msMaintenanceDate = maintenanceDate.getTime();
+
+    // Get difference.
+    var msDayDelta = msMaintenanceDate - msToday;
+
+    // Do some conversion
+    var seconds = msDayDelta/1000;
+    var minutes = seconds/60
+    var hours = minutes/60
+    var days = Math.floor(hours/24);
+
+    return days;
+  },
+  updateHtml: function(days){
+    // Insert the result.
+    $('span#dayCntr').text(days);
+    $('div.announcement').css({"font-size":"1.3em", "color":"red"})
+    $('span.tiny').css({"font-size":"0.8em", "color":"red"})
+  },
+  showMaintenanceAnnouncement: function(){
+    $('div.announcement').show();
+  },
+  hideMaintenanceAnnouncement: function(){
+    $('div.announcement').hide();
+  },
+  highlightAnnouncement: function(){
+    $('div.announcement').effect("highlight", {}, 3000);
+  },
+};
+
+$(document).ready(function() {
+
+  // Set days until maintenance.
+  var days = COUNTDOWN.getDaysUntilMaintenance();
+
+  COUNTDOWN.updateHtml(days);
+  if (days<0)
+    {
+    COUNTDOWN.hideMaintenanceAnnouncement();
+    }
+  else if (days<7)
+    {
+    COUNTDOWN.showMaintenanceAnnouncement();
+    COUNTDOWN.highlightAnnouncement();
+    }
+  else
+    {
+    COUNTDOWN.hideMaintenanceAnnouncement();
+    }
+
+  $('span#introjs').on( "click", function() {
+    introJs().start();
+  })
+});
+
+    
+//-->
+</script>

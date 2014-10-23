@@ -1,0 +1,6 @@
+$("#dd_fields_entry").html("<%= escape_javascript(render :partial=>"design_detail_fields/form") %>");
+$("#extraction_form_preview_table_dd").html("<%= escape_javascript(render :partial=>"question_builder/extraction_form_preview") %>");
+$("#dd_fields_entry").dialog('close');
+
+$("#saved_item_indicator_dd").show().delay(500).fadeOut(300);
+$("#validation_message_dd").html("");

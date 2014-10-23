@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: secondary_publication_numbers
+#
+#  id                       :integer          not null, primary key
+#  secondary_publication_id :integer
+#  number                   :string(255)
+#  number_type              :string(255)
+#  created_at               :datetime
+#  updated_at               :datetime
+#
+
+first:
+  id: 1
+  secondary_publication_id: 1
+  number: ct_123456
+  number_type: Clinical Trials
+
+second:
+  id: 2
+  secondary_publication_id: 1
+  number: NP_122534
+  number_type: NCBI Protein Entry

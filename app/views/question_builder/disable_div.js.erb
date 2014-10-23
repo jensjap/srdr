@@ -1,0 +1,6 @@
+$("<%= @choices_div %> :input").attr('disabled','disabled');
+$("<%= @choices_div %>").addClass('disabled');
+
+$("#<%= @model %>_matrix_rows").attr("disabled","disabled");
+$("#<%= @model %>_matrix_columns").attr("disabled","disabled");
+$("#matrix_setup_<%= @model %>").addClass("disabled");

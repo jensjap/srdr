@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: Footnote
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (F)</a> &raquo; 
+    
+    
+    <span class="title">Footnote</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Footnote
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">ActiveRecord::Base</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActiveRecord::Base</li>
+          
+            <li class="next">Footnote</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/models/footnote.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+
+
+  
+
+
+  
+
+  
+    <h2>
+      Class Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cat_field_ids-class_method" title="get_cat_field_ids (class method)">+ (Object) <strong>get_cat_field_ids</strong>(study_id, extraction_form_categorical_columns, categorical_outcomes, categorical_timepoints, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_cont_field_ids-class_method" title="get_cont_field_ids (class method)">+ (Object) <strong>get_cont_field_ids</strong>(study_id, extraction_form_continuous_columns, continuous_outcomes, continuous_timepoints, extraction_form_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#get_note_number-class_method" title="get_note_number (class method)">+ (Object) <strong>get_note_number</strong>(footnote_id) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+return the number for a given footnote.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove_entries-class_method" title="remove_entries (class method)">+ (Object) <strong>remove_entries</strong>(sid, page_name) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+remove footnotes for the given study id.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="get_cat_field_ids-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_cat_field_ids</strong>(study_id, extraction_form_categorical_columns, categorical_outcomes, categorical_timepoints, extraction_form_id) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/footnote.rb', line 33</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_cat_field_ids'>get_cat_field_ids</span><span class='lparen'>(</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_categorical_columns'>extraction_form_categorical_columns</span><span class='comma'>,</span> <span class='id identifier rubyid_categorical_outcomes'>categorical_outcomes</span><span class='comma'>,</span> <span class='id identifier rubyid_categorical_timepoints'>categorical_timepoints</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@study</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_study_id'>study_id</span><span class='rparen'>)</span>	
+	<span class='ivar'>@study_arms</span> <span class='op'>=</span> <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>	
+	<span class='ivar'>@study_arm_ids</span> <span class='op'>=</span> <span class='ivar'>@study_arms</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_arm'>arm</span><span class='op'>|</span> <span class='id identifier rubyid_arm'>arm</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>	
+
+	<span class='ivar'>@cat_outcome_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_categorical_outcomes'>categorical_outcomes</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_catOut'>catOut</span><span class='op'>|</span> <span class='id identifier rubyid_catOut'>catOut</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>	
+	<span class='ivar'>@cat_cols</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_categorical_columns'>extraction_form_categorical_columns</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_catCols'>catCols</span><span class='op'>|</span> <span class='id identifier rubyid_catCols'>catCols</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	
+	<span class='id identifier rubyid_categorical_fields'>categorical_fields</span> <span class='op'>=</span> <span class='const'>OutcomeResult</span><span class='period'>.</span><span class='id identifier rubyid_get_list_of_field_ids'>get_list_of_field_ids</span><span class='lparen'>(</span><span class='ivar'>@cat_outcome_ids</span><span class='comma'>,</span> <span class='ivar'>@study_arm_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_categorical_timepoints'>categorical_timepoints</span><span class='comma'>,</span> <span class='ivar'>@cat_cols</span><span class='rparen'>)</span>	
+	<span class='ivar'>@cat_field_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_categorical_fields'>categorical_fields</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
+	<span class='ivar'>@cat_field_ids</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[\&quot;\[\]]</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='ivar'>@cat_field_ids</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_cont_field_ids-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_cont_field_ids</strong>(study_id, extraction_form_continuous_columns, continuous_outcomes, continuous_timepoints, extraction_form_id) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/footnote.rb', line 19</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_cont_field_ids'>get_cont_field_ids</span><span class='lparen'>(</span><span class='id identifier rubyid_study_id'>study_id</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_continuous_columns'>extraction_form_continuous_columns</span><span class='comma'>,</span> <span class='id identifier rubyid_continuous_outcomes'>continuous_outcomes</span><span class='comma'>,</span> <span class='id identifier rubyid_continuous_timepoints'>continuous_timepoints</span><span class='comma'>,</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@study</span> <span class='op'>=</span> <span class='const'>Study</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_study_id'>study_id</span><span class='rparen'>)</span>	
+	<span class='ivar'>@study_arms</span> <span class='op'>=</span> <span class='const'>Arm</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='comma'>,</span> <span class='symbol'>:extraction_form_id</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_extraction_form_id'>extraction_form_id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>	
+	<span class='ivar'>@study_arm_ids</span> <span class='op'>=</span> <span class='ivar'>@study_arms</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_arm'>arm</span><span class='op'>|</span> <span class='id identifier rubyid_arm'>arm</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>	
+
+	<span class='ivar'>@cont_outcome_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_continuous_outcomes'>continuous_outcomes</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_contOut'>contOut</span><span class='op'>|</span> <span class='id identifier rubyid_contOut'>contOut</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	<span class='ivar'>@cont_cols</span> <span class='op'>=</span> <span class='id identifier rubyid_extraction_form_continuous_columns'>extraction_form_continuous_columns</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_contCols'>contCols</span><span class='op'>|</span> <span class='id identifier rubyid_contCols'>contCols</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rbrace'>}</span>
+	
+	<span class='id identifier rubyid_continuous_fields'>continuous_fields</span> <span class='op'>=</span> <span class='const'>OutcomeResult</span><span class='period'>.</span><span class='id identifier rubyid_get_list_of_field_ids'>get_list_of_field_ids</span><span class='lparen'>(</span><span class='ivar'>@cont_outcome_ids</span><span class='comma'>,</span> <span class='ivar'>@study_arm_ids</span><span class='comma'>,</span> <span class='id identifier rubyid_continuous_timepoints'>continuous_timepoints</span><span class='comma'>,</span> <span class='ivar'>@cont_cols</span><span class='rparen'>)</span>	
+	<span class='ivar'>@cont_field_ids</span> <span class='op'>=</span> <span class='id identifier rubyid_continuous_fields'>continuous_fields</span><span class='period'>.</span><span class='id identifier rubyid_to_json'>to_json</span>
+	<span class='ivar'>@cont_field_ids</span><span class='period'>.</span><span class='id identifier rubyid_gsub!'>gsub!</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>[\&quot;\[\]]</span><span class='regexp_end'>/</span></span><span class='comma'>,</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='ivar'>@cont_field_ids</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="get_note_number-class_method">
+  
+    + (<tt>Object</tt>) <strong>get_note_number</strong>(footnote_id) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+return the number for a given footnote.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/footnote.rb', line 14</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_note_number'>get_note_number</span><span class='lparen'>(</span><span class='id identifier rubyid_footnote_id'>footnote_id</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_note'>note</span> <span class='op'>=</span> <span class='const'>Footnote</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_footnote_id'>footnote_id</span><span class='rparen'>)</span>
+	<span class='kw'>return</span> <span class='id identifier rubyid_note'>note</span><span class='period'>.</span><span class='id identifier rubyid_note_number'>note_number</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove_entries-class_method">
+  
+    + (<tt>Object</tt>) <strong>remove_entries</strong>(sid, page_name) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+remove footnotes for the given study id
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+4
+5
+6
+7
+8
+9
+10
+11</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/models/footnote.rb', line 4</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_remove_entries'>remove_entries</span><span class='lparen'>(</span><span class='id identifier rubyid_sid'>sid</span><span class='comma'>,</span> <span class='id identifier rubyid_page_name'>page_name</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_footnotes'>footnotes</span> <span class='op'>=</span> <span class='const'>Footnote</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:study_id</span><span class='op'>=&gt;</span><span class='id identifier rubyid_sid'>sid</span><span class='comma'>,</span> <span class='symbol'>:page_name</span><span class='op'>=&gt;</span><span class='id identifier rubyid_page_name'>page_name</span><span class='rparen'>)</span>
+	<span class='kw'>unless</span> <span class='id identifier rubyid_footnotes'>footnotes</span><span class='period'>.</span><span class='id identifier rubyid_empty?'>empty?</span>
+		<span class='id identifier rubyid_footnotes'>footnotes</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_fnote'>fnote</span><span class='op'>|</span>
+			<span class='id identifier rubyid_fnote'>fnote</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+		<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:47 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

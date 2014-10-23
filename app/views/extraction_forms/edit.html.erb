@@ -1,0 +1,70 @@
+<div id='left-navigation-div' tabindex=100>
+	<%= render :partial=>"sidebars/project_sidebar" %>
+</div>
+<div id='content' tabindex=200>
+	<!-- some divs used for modal windows -->
+	<div id="modal_div">
+	</div>
+	
+	
+	<div id="page_title">
+		<% assignedkqs = ExtractionForm.get_assigned_question_numbers(@extraction_form.id) %>
+		<%= render :partial => "projects/page_title", :locals => {:page_title => "Editing Extraction Form: #{@extraction_form.title} -- (#{assignedkqs.length > 1 ? "Questions" : "Question"} #{assignedkqs.join(", ")})", :in_ef => true} %>
+	</div>
+	<br/><br/>
+	<div id="notification_div">
+	<%= render :inline=>"#{flash[:success_html]}" if flash.keys.include?(:success_html) %>
+	</div>
+	<div id="extraction_form_container">
+		<div id="extraction_form_div">
+			<%= render :partial=>"extraction_forms/extraction_form_tabs" %>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+// <!--
+$(document).ready(function(){
+
+	// SEPARATE FROM THE MENU ITSELF...
+	create_tabs();
+	$("#modal_div").dialog({
+		autoOpen: false,
+		modal: true
+	})
+	
+	$("#add_keyquestion_box").dialog({
+        autoOpen: false,
+		minWidth: 600,
+		modal: true
+    });
+
+    // Listen for the included section dropdowns to allow users to opt out of some sections in their forms.
+    $(".include_section_dropdown").live("change",function(){
+    	id = $(this).attr('id');
+    	id_arr = id.split("_");
+    	section_id = id_arr[2];
+    	section_name = id_arr.slice(3,id_arr.length).join("_");
+    	value = $(this).val();
+    	ef_id = <%= @extraction_form.id %>;
+    	//alert('The ef id is ' + ef_id.toString() + ' and the section is ' + section.toString() + ' and the value is ' + $(this).val().toString());
+    	$.ajax({
+		  url: 'extraction_forms/toggle_section_inclusion',
+		  type: "POST",
+		  data:({
+		  	section_id: section_id,
+		  	section_name: section_name,
+		  	toggle_value: value,
+		  	extraction_form_id : ef_id
+		  }),
+		  success: function(){
+		  	$("#spinner").remove();
+		  }
+		});
+		$("#saved_display_section_"+section_name).html("<img src='/images/waiting.gif' id='spinner'/>");
+
+    });
+
+    setTimeout(function() {$("#notification_div").fadeOut();}, 2500);
+});
+// -->
+</script>

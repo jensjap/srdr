@@ -1,0 +1,1307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Class: CommentsController
+  
+    &mdash; Documentation by YARD 0.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (C)</a> &raquo; 
+    
+    
+    <span class="title">CommentsController</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: CommentsController
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName"><span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">ActionController::Base</li>
+          
+            <li class="next"><span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></li>
+          
+            <li class="next">CommentsController</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">app/controllers/comments_controller.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>
+The comments controller contains methods for creating, updating, deleting
+and replying to individual comments. It also contains methods for opening
+the comment summary dialog windows found on Project Summary and My Work
+pages.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
+
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#create-instance_method" title="#create (instance method)">- (Object) <strong>create</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+save a newly created comment this method contains commented deprecated code
+that was used to determine whether to &#8220;post comment&#8221; or
+&#8220;post and email user&#8221; and send an email based on the
+user&#8217;s choice.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#destroy-instance_method" title="#destroy (instance method)">- (Object) <strong>destroy</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+can only be used by admin so far - controlled using delete buttons in
+views/comments/_single_comment.html.erb.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#go_to_edit_section-instance_method" title="#go_to_edit_section (instance method)">- (Object) <strong>go_to_edit_section</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+based on the comment, fetch and redirect_to the URL of the editing page
+that contains the section the comment was originally added to.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#go_to_view_section-instance_method" title="#go_to_view_section (instance method)">- (Object) <strong>go_to_view_section</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+based on the comment, fetch and redirect_to the URL of the viewing page
+that contains the section the comment was originally added to.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new-instance_method" title="#new (instance method)">- (Object) <strong>new</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+shows the comment form in a dialog window.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#new_flag-instance_method" title="#new_flag (instance method)">- (Object) <strong>new_flag</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+opens the form for adding a new flag.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#remove-instance_method" title="#remove (instance method)">- (Object) <strong>remove</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+remove the comment from the list.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show-instance_method" title="#show (instance method)">- (Object) <strong>show</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+show the comment list based on the ID of the button clicked (sent via
+ajax).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_reply_form-instance_method" title="#show_reply_form (instance method)">- (Object) <strong>show_reply_form</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+display the form that allows users to enter a reply to a given note.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#show_summary-instance_method" title="#show_summary (instance method)">- (Object) <strong>show_summary</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+show the comment summary based on the ID of the button clicked (sent via
+ajax).
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#sort-instance_method" title="#sort (instance method)">- (Object) <strong>sort</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+re-display comment list based on params[:sort_by].
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#summary_sort-instance_method" title="#summary_sort (instance method)">- (Object) <strong>summary_sort</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+re-display comment summary based on params[:sort_by].
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="ApplicationController.html" title="ApplicationController (class)">ApplicationController</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="ApplicationController.html#escape_quotes-instance_method" title="ApplicationController#escape_quotes (method)">#escape_quotes</a></span>, <span class='object_link'><a href="ApplicationController.html#set_as_current-instance_method" title="ApplicationController#set_as_current (method)">#set_as_current</a></span>, <span class='object_link'><a href="ApplicationController.html#show_other-instance_method" title="ApplicationController#show_other (method)">#show_other</a></span>, <span class='object_link'><a href="ApplicationController.html#show_other_filled-instance_method" title="ApplicationController#show_other_filled (method)">#show_other_filled</a></span>, <span class='object_link'><a href="ApplicationController.html#toggle_ahrq_header-instance_method" title="ApplicationController#toggle_ahrq_header (method)">#toggle_ahrq_header</a></span></p>
+
+  
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="create-instance_method">
+  
+    - (<tt>Object</tt>) <strong>create</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+save a newly created comment this method contains commented deprecated code
+that was used to determine whether to &#8220;post comment&#8221; or
+&#8220;post and email user&#8221; and send an email based on the
+user&#8217;s choice.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_create'>create</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:value_at_comment_time</span><span class='rbracket'>]</span>    
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:section_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:section_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:field_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@page_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:page_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@extraction_form_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:extraction_form_id</span><span class='rbracket'>]</span>	
+	
+	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:comment_text</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:comment_text</span><span class='rbracket'>]</span> <span class='op'>!=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	
+		<span class='ivar'>@comment</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:comment</span><span class='rbracket'>]</span><span class='rparen'>)</span>	
+		<span class='kw'>if</span> <span class='ivar'>@study_id</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_end'>&quot;</span></span>
+			<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='op'>-</span><span class='int'>1</span>
+		<span class='kw'>end</span>
+	<span class='comment'># save comment
+</span>		<span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_study_id'>study_id</span> <span class='op'>=</span> <span class='ivar'>@study_id</span>
+		<span class='ivar'>@saved</span> <span class='op'>=</span> <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_save'>save</span>	
+	
+	<span class='comment'># Below is the code to choose whether to &quot;post and email user&quot; or just &quot;post&quot; a comment.
+</span>	<span class='comment'># as of 1-19-2012 this feature is not being used
+</span>	<span class='comment'>#	@how_to_comment = params[:how_to_comment]
+</span>
+	<span class='comment'>#	if (@how_to_comment == &quot;Post and Email User&quot;)
+</span>	<span class='comment'>#		# email user about the comment
+</span>	<span class='comment'>#		# get comment user
+</span>	<span class='comment'>#		# comment is a reply
+</span>	<span class='comment'>#		# get the reply_to comment
+</span>	<span class='comment'>#		@replying_to = Comment.find(params[:comment][:reply_to])
+</span>	<span class='comment'>#		@user_id = @replying_to.commenter_id
+</span>	<span class='comment'>#		@replying_to_commenter = User.find(@user_id)
+</span>	<span class='comment'>#		# get user email address		
+</span>	<span class='comment'>#		@address_to_email = @replying_to_commenter.email	
+</span>	<span class='comment'>#		# construct an email body
+</span>	<span class='comment'>#		# send the mail to the user
+</span>	<span class='comment'>#		UserMailer.reply_posted(@comment, @address_to_email).deliver
+</span>	<span class='comment'>#	end	
+</span>		
+	<span class='comment'>#	if (@how_to_comment == &quot;Post and Email Project Leads&quot;)
+</span>	<span class='comment'>#		# comment is not a reply
+</span>	<span class='comment'>#		# email project lead
+</span>	<span class='comment'>#		# get the project leads email info
+</span>	<span class='comment'>#		@project_leads_emails = Project.get_project_leads_emails_array(@project_id)
+</span>	<span class='comment'>#		UserMailer.comment_posted(@comment, @project_leads_emails).deliver		
+</span>	<span class='comment'>#		# construct an email body
+</span>	<span class='comment'>#		# send the mail to the user(s)
+</span>	<span class='comment'>#	end
+</span>
+	<span class='kw'>else</span>
+		<span class='comment'># comment text is empty - deal with it.
+</span>		 <span class='id identifier rubyid_flash'>flash</span><span class='lbracket'>[</span><span class='symbol'>:error_message</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>You must enter a comment.</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>end</span>
+	
+	<span class='ivar'>@current_sorting_order</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>recent</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@comments</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_comments_and_flags'>get_comments_and_flags</span><span class='lparen'>(</span><span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='ivar'>@show_both</span><span class='comma'>,</span> <span class='ivar'>@current_sorting_order</span><span class='rparen'>)</span>	
+	<span class='id identifier rubyid_render'>render</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>comments/create.js.erb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comments</span> <span class='op'>=&gt;</span> <span class='ivar'>@comments</span><span class='comma'>,</span> <span class='symbol'>:section_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='symbol'>:section_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='symbol'>:field_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='symbol'>:value_at_comment_time</span> <span class='op'>=&gt;</span> <span class='ivar'>@value_at_comment_time</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="destroy-instance_method">
+  
+    - (<tt>Object</tt>) <strong>destroy</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+can only be used by admin so far - controlled using delete buttons in
+views/comments/_single_comment.html.erb
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+97
+98
+99
+100</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 97</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_destroy'>destroy</span>
+  <span class='ivar'>@comment</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+  <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="go_to_edit_section-instance_method">
+  
+    - (<tt>Object</tt>) <strong>go_to_edit_section</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+based on the comment, fetch and redirect_to the URL of the editing page
+that contains the section the comment was originally added to.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+148
+149
+150
+151
+152
+153
+154
+155
+156</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 148</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_go_to_edit_section'>go_to_edit_section</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:div_id</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_field_name_arr'>field_name_arr</span> <span class='op'>=</span> <span class='ivar'>@field_name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@comment_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+	<span class='ivar'>@comment</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@comment_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@url</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_edit_url'>get_edit_url</span><span class='lparen'>(</span><span class='ivar'>@comment</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='ivar'>@url</span>
+	<span class='comment'>#render &quot;edit_specific.js.erb&quot;		
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="go_to_view_section-instance_method">
+  
+    - (<tt>Object</tt>) <strong>go_to_view_section</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+based on the comment, fetch and redirect_to the URL of the viewing page
+that contains the section the comment was originally added to.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 160</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_go_to_view_section'>go_to_view_section</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:div_id</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_field_name_arr'>field_name_arr</span> <span class='op'>=</span> <span class='ivar'>@field_name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@comment_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>3</span><span class='rbracket'>]</span>
+	<span class='ivar'>@comment</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@comment_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_section_id'>section_id</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_field_name'>field_name</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_study_id'>study_id</span>
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='ivar'>@comment</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>	
+	<span class='ivar'>@url</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_view_url'>get_view_url</span><span class='lparen'>(</span><span class='ivar'>@comment</span><span class='rparen'>)</span>
+	<span class='ivar'>@open_study</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_view_open_study'>get_view_open_study</span><span class='lparen'>(</span><span class='ivar'>@comment</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_redirect_to'>redirect_to</span> <span class='ivar'>@url</span>
+	<span class='comment'>#render &quot;view_specific.js.erb&quot;
+</span><span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+shows the comment form in a dialog window. The dialog type used is qtip2.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 223</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new'>new</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:value_at_comment_time</span><span class='rbracket'>]</span>    
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:field_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span> 
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='rparen'>)</span>	
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@study_id</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='symbol'>:partial</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>comments/comment_form</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comment</span> <span class='op'>=&gt;</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='comma'>,</span> <span class='symbol'>:section_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='symbol'>:section_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='symbol'>:field_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="new_flag-instance_method">
+  
+    - (<tt>Object</tt>) <strong>new_flag</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+opens the form for adding a new flag
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 238</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_new_flag'>new_flag</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:value_at_comment_time</span><span class='rbracket'>]</span>    
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:field_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span> 
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='rparen'>)</span>	
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@study_id</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='kw'>nil</span>
+	<span class='kw'>end</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='symbol'>:partial</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>comments/flag_form</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comment</span> <span class='op'>=&gt;</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='comma'>,</span> <span class='symbol'>:section_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='symbol'>:section_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='symbol'>:field_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="remove-instance_method">
+  
+    - (<tt>Object</tt>) <strong>remove</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+remove the comment from the list.  after it is removed, refresh the view
+partial and show the updated list of comments.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 104</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_remove'>remove</span>
+	<span class='ivar'>@div_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:div_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@div_id_arr</span> <span class='op'>=</span> <span class='ivar'>@div_id</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@comment_id</span> <span class='op'>=</span> <span class='ivar'>@div_id_arr</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span>  
+<span class='id identifier rubyid_comment'>comment</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@comment_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_value_at_comment_time'>value_at_comment_time</span>
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_section_name'>section_name</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_section_id'>section_id</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_field_name'>field_name</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_study_id'>study_id</span>
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_project_id'>project_id</span>
+<span class='comment'># delete the note and all associated replies
+</span>	<span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_is_reply'>is_reply</span>
+<span class='id identifier rubyid_replies'>replies</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_where'>where</span><span class='lparen'>(</span><span class='symbol'>:is_reply</span> <span class='op'>=&gt;</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='symbol'>:reply_to</span><span class='op'>=&gt;</span><span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
+<span class='id identifier rubyid_replies'>replies</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_reply'>reply</span><span class='op'>|</span>
+	<span class='id identifier rubyid_reply'>reply</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+<span class='kw'>end</span>
+	<span class='kw'>end</span>
+<span class='ivar'>@saved</span> <span class='op'>=</span> <span class='id identifier rubyid_comment'>comment</span><span class='period'>.</span><span class='id identifier rubyid_destroy'>destroy</span>
+	<span class='ivar'>@current_sorting_order</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>recent</span><span class='tstring_end'>&quot;</span></span>	
+	<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='id identifier rubyid_project_id'>project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@comments</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_comments_and_flags'>get_comments_and_flags</span><span class='lparen'>(</span><span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='ivar'>@show_both</span><span class='comma'>,</span> <span class='ivar'>@current_sorting_order</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>comments/create.js.erb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comments</span> <span class='op'>=&gt;</span> <span class='ivar'>@comments</span><span class='comma'>,</span> <span class='symbol'>:section_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='symbol'>:section_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='symbol'>:field_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='symbol'>:value_at_comment_time</span> <span class='op'>=&gt;</span> <span class='ivar'>@value_at_comment_time</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+show the comment list based on the ID of the button clicked (sent via ajax)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 177</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_show'>show</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:value_at_comment_time</span><span class='rbracket'>]</span>  
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:div_id</span><span class='rbracket'>]</span>
+	<span class='comment'># field name format: comments_section_X_id_Y_field_Z_study_Q_project_R
+</span>	<span class='comment'># X = section_name
+</span>	<span class='comment'># Y = section_id
+</span>	<span class='comment'># Z = field_name
+</span>	<span class='comment'># Q = study_id
+</span>	<span class='comment'># R = project_id
+</span>	<span class='id identifier rubyid_field_name_arr'>field_name_arr</span> <span class='op'>=</span> <span class='ivar'>@field_name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>4</span><span class='rbracket'>]</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>6</span><span class='rbracket'>]</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>8</span><span class='rbracket'>]</span> 
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>10</span><span class='rbracket'>]</span> 
+	<span class='kw'>if</span> <span class='lparen'>(</span><span class='ivar'>@study_id</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>-1</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='op'>-</span><span class='int'>1</span>
+	<span class='kw'>end</span>
+	<span class='ivar'>@current_sorting_order</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>recent</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='kw'>else</span>
+<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='ivar'>@comments</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_comments_and_flags'>get_comments_and_flags</span><span class='lparen'>(</span><span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='ivar'>@show_both</span><span class='comma'>,</span> <span class='ivar'>@current_sorting_order</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_print'>print</span> <span class='ivar'>@comments</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='symbol'>:partial</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>comments/thread</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comments</span> <span class='op'>=&gt;</span> <span class='ivar'>@comments</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_reply_form-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show_reply_form</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+display the form that allows users to enter a reply to a given note
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 130</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_show_reply_form'>show_reply_form</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:value_at_comment_time</span><span class='rbracket'>]</span>    
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:field_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span> 
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span> 
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@div_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:div_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@div_id_arr</span> <span class='op'>=</span> <span class='ivar'>@div_id</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@comment_id</span> <span class='op'>=</span> <span class='ivar'>@div_id_arr</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span>
+	<span class='ivar'>@replying_to</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='ivar'>@comment_id</span><span class='rparen'>)</span>
+	<span class='ivar'>@comment_reply</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>show_reply_form.js.erb</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="show_summary-instance_method">
+  
+    - (<tt>Object</tt>) <strong>show_summary</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+show the comment summary based on the ID of the button clicked (sent via
+ajax)
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 207</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_show_summary'>show_summary</span>
+	<span class='ivar'>@value_at_comment_time</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:value_at_comment_time</span><span class='rbracket'>]</span>  
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:div_id</span><span class='rbracket'>]</span>
+	<span class='id identifier rubyid_field_name_arr'>field_name_arr</span> <span class='op'>=</span> <span class='ivar'>@field_name</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>_</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_field_name_arr'>field_name_arr</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> 
+	<span class='ivar'>@current_sorting_order</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>recent</span><span class='tstring_end'>&quot;</span></span>
+	<span class='kw'>if</span> <span class='kw'>defined?</span><span class='lparen'>(</span><span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_current_user'>current_user</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='kw'>else</span>
+<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='kw'>false</span>
+	<span class='kw'>end</span>
+	<span class='ivar'>@comments</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_project_comments_and_flags'>get_project_comments_and_flags</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='ivar'>@show_both</span><span class='comma'>,</span> <span class='ivar'>@current_sorting_order</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='symbol'>:partial</span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>comments/summary_thread</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comments</span> <span class='op'>=&gt;</span> <span class='ivar'>@comments</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='rbrace'>}</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="sort-instance_method">
+  
+    - (<tt>Object</tt>) <strong>sort</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+re-display comment list based on params[:sort_by]
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 72</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_sort'>sort</span>
+	<span class='ivar'>@current_sorting_order</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:sort_by</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@section_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:section_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@field_name</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:field_name</span><span class='rbracket'>]</span>
+	<span class='ivar'>@study_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:study_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@comments</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_comments_and_flags'>get_comments_and_flags</span><span class='lparen'>(</span><span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='ivar'>@show_both</span><span class='comma'>,</span> <span class='ivar'>@current_sorting_order</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>comments/sort.js.erb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comments</span> <span class='op'>=&gt;</span> <span class='ivar'>@comments</span><span class='comma'>,</span> <span class='symbol'>:section_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_name</span><span class='comma'>,</span> <span class='symbol'>:section_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@section_id</span><span class='comma'>,</span> <span class='symbol'>:field_name</span> <span class='op'>=&gt;</span> <span class='ivar'>@field_name</span><span class='comma'>,</span> <span class='symbol'>:study_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@study_id</span><span class='comma'>,</span> <span class='symbol'>:value_at_comment_time</span> <span class='op'>=&gt;</span> <span class='ivar'>@value_at_comment_time</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='symbol'>:current_sorting_order</span> <span class='op'>=&gt;</span> <span class='ivar'>@current_sorting_order</span><span class='rbrace'>}</span>		
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="summary_sort-instance_method">
+  
+    - (<tt>Object</tt>) <strong>summary_sort</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+re-display comment summary based on params[:sort_by]
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+87
+88
+89
+90
+91
+92
+93
+94</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'app/controllers/comments_controller.rb', line 87</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_summary_sort'>summary_sort</span>
+	<span class='ivar'>@current_sorting_order</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:sort_by</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project_id</span> <span class='op'>=</span> <span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span>
+	<span class='ivar'>@project</span> <span class='op'>=</span> <span class='const'>Project</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_params'>params</span><span class='lbracket'>[</span><span class='symbol'>:project_id</span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@show_both</span> <span class='op'>=</span> <span class='const'>User</span><span class='period'>.</span><span class='id identifier rubyid_current_user_is_collaborator'>current_user_is_collaborator</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user'>current_user</span><span class='rparen'>)</span>
+	<span class='ivar'>@comments</span> <span class='op'>=</span> <span class='const'>Comment</span><span class='period'>.</span><span class='id identifier rubyid_get_project_comments_and_flags'>get_project_comments_and_flags</span><span class='lparen'>(</span><span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='ivar'>@show_both</span><span class='comma'>,</span> <span class='ivar'>@current_sorting_order</span><span class='rparen'>)</span>
+	<span class='id identifier rubyid_render'>render</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>comments/summary_sort.js.erb</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='symbol'>:locals</span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span><span class='symbol'>:comments</span> <span class='op'>=&gt;</span> <span class='ivar'>@comments</span><span class='comma'>,</span> <span class='symbol'>:value_at_comment_time</span> <span class='op'>=&gt;</span> <span class='ivar'>@value_at_comment_time</span><span class='comma'>,</span> <span class='symbol'>:project_id</span> <span class='op'>=&gt;</span> <span class='ivar'>@project_id</span><span class='comma'>,</span> <span class='symbol'>:current_sorting_order</span> <span class='op'>=&gt;</span> <span class='ivar'>@current_sorting_order</span><span class='rbrace'>}</span>		
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Feb  1 16:26:51 2012 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.4 (ruby-1.9.2).
+</div>
+
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!--################################################################ -->
+<!-- THE AHRQ BANNER MARKUP                                  		 -->
+<!--#################################################################-->	
+
+<!-- THE SKIP NAVIGATION STUFF -->
+<ul class="skip">
+	<li><a href="#header" tabindex="1">Skip the AHRQ Header</a></li>
+</ul>
+<div id="ahrqbanner"> 
+    <div class="hhsportion"> 
+    	<a href="http://www.hhs.gov/" title="U.S. Department of Health and Human Services" tabindex=5>
+    		<%= image_tag "ahrq/hhs_banner.gif", :alt=>"U.S. Department of Health and Human Services" %>
+    	</a>
+    	<a href="http://www.hhs.gov/" title="www.hhs.gov/" class="hhsright" tabindex=6>
+    		<%= image_tag "ahrq/hhs_link.gif", :alt=>"www.hhs.gov/" %>
+    	</a>
+    </div>
+    	
+    <div class="ahrqportion">
+    	<a href="http://www.ahrq.gov/" title="Agency for Healthcare Research Quality" tabindex=7>
+    		<%= image_tag "ahrq/ahrq_banner.gif", :alt=>"Agency for Healthcare Research Quality"%>
+    	</a>
+    	<form name="searchForm" method="get" action="http://search.ahrq.gov/search" id="banner_searchform"> 
+    		<label for="search" style="z-index:-1;position:relative;margin-right:-65px; font-size:0px;">Search</label>
+    		<input name="q" type="text" value=" Search AHRQ" size="11" onfocus="this.value='';" class="gotext" id="search" title="ahrq search" tabindex=8 />
+            <input type="hidden" name="entqr" value="0" />
+            <input type="hidden" name="output" value="xml_no_dtd" />
+            <input type="hidden" name="proxystylesheet" value="AHRQ_GOV" />
+            <input type="hidden" name="client" value="AHRQ_GOV" />
+              <input type="hidden" name="site" value="default_collection" />
+    		<input src="/images/ahrq/topbn_gobutton.gif" class="gobtn" name="Submit" tabindex=9 onclick="javascript:document.searchForm.submit();" type="image" alt="Go" />            		
+    	</form>
+    	<a tabindex=10 href="/" class="ahrqright" >www.ahrq.gov</a>
+    </div>
+
+    <div class="ahrqlinks">
+    	<a href="http://www.ahrq.gov" tabindex=11>AHRQ Home</a> | 
+    	<a href="https://info.ahrq.gov/cgi-bin/ahrq.cfg/php/enduser/std_alp.php" tabindex=12>Questions?</a> | 
+    	<a href="http://www.ahrq.gov/info/customer.htm" tabindex=13>Contact Us</a> | 
+    	<a href="http://www.ahrq.gov/sitemap.htm" tabindex=14>Site Map</a> | 
+    	<a href="http://www.ahrq.gov/whatsnew.htm" tabindex=15>What's New</a> | 
+    	<a href="http://www.ahrq.gov/browse/" tabindex=16>Browse</a> | 
+    	<a href="http://www.ahrq.gov/consumer/espanoix.htm" tabindex=17>Información en español</a> | 
+    	<%= image_tag "ahrq/envelope1.jpg", :alt=>"", :style => "padding-left: 4px; padding-right: 3px; padding-bottom: 4px; vertical-align:middle" %> 
+    	<a href="https://subscriptions.ahrq.gov/service/multi_subscribe.html?code=USAHRQ" tabindex=18>
+    		E-mail Updates
+    	</a>
+    </div>
+
+
+<div id="PrintBanner">
+	<%= image_tag "ahrq/PrintBanner.gif", :alt=>"www.ahrq.gov/", :width=>"100%" %>
+</div>
