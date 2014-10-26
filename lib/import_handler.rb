@@ -358,15 +358,35 @@ class ImportHandler  #{{{1
         def _process_q_hash(section, q_hash, ef_id, study_id)  #{{{3
             case section
             when :AdverseEvent
-                # Test if question hash includes 'Harm'
+                # Test if question hash includes 'Harm' or 'Adverse Events'
                 # If it does then we use run method that allows for multiple
                 # Adverse Events per study; else use the one that only allows
                 # one.
                 ae_title_key = q_hash.keys.find { |k| k =~ /^harms?$|^adverse\s?events?$/i }
-                if ae_title_key
+                ae_arm_key = q_hash.keys.find { |l| l =~ /^arms?$/i }
+
+                if ( ae_title_key && ae_arm_key )
+                    # Set ae title and ae arm
                     ae_title = q_hash[ae_title_key]
+                    ae_arm = q_hash[ae_arm_key]
+
+                    # Remove the ae_title_key and ae_arm_key from the q_hash dict.
+                    q_hash.except!(ae_title_key)
+                    q_hash.except!(ae_arm_key)
+
+                    # Iterate over the remaining question answer columns
+                    q_hash.each do |q, a|
+                        ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
+                        errors = ae_import_handler.run(ae_title, ae_arm)
+                        @listOf_errors_processing_questions.concat errors unless errors.blank?
+                    end
+                elsif ae_title_key
+                    # Set ae title
+                    ae_title = q_hash[ae_title_key]
+
                     # Remove the ae_title_key from the q_hash dict.
                     q_hash.except!(ae_title_key)
+
                     q_hash.each do |q, a|
                         ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
                         errors = ae_import_handler.run(ae_title)
@@ -1367,26 +1387,26 @@ class ImportAdverseEventHandler  #{{{1
         @options       = nil
     end
 
-    def run(ae_title=nil)  #{{{2
-        _insert_adverse_event(ae_title)
+    def run(ae_title=nil, ae_arm=nil)  #{{{2
+        _insert_adverse_event(ae_title, ae_arm)
         return @listOf_errors
     end
 
     private  #{{{2
 
-        def _insert_adverse_event(ae_title)  #{{{3
+        def _insert_adverse_event(ae_title, ae_arm)  #{{{3
             ar_ae = _find_adverse_event(@section, @study_id, @ef_id, ae_title)
             if ar_ae
                 ar_aec = _find_adverse_event_column(@section, @question, @ef_id)
                 if ar_aec
                     # This is what the data points are called.
-                    _update_or_create_adverse_event_result(@section, ar_aec, ar_ae, @answer, @ef_id)
+                    _update_or_create_adverse_event_result(@section, ar_aec, ar_ae, @answer, @ef_id, ae_arm)
                 end
             end
         end
 
-        def _update_or_create_adverse_event_result(section, ae_column, ae, value, ef_id)  #{{{3
-            ar_aer = _find_adverse_event_result(section, ae_column, ae, ef_id)
+        def _update_or_create_adverse_event_result(section, ae_column, ae, value, ef_id, ae_arm)  #{{{3
+            ar_aer = _find_adverse_event_result(section, ae_column, ae, ef_id, ae_arm)
             if ar_aer
                 ar_aer.value = value
                 return ar_aer.save
@@ -1395,7 +1415,18 @@ class ImportAdverseEventHandler  #{{{1
             end
         end
 
-        def _find_adverse_event_result(section, ae_column, ae, ef_id, arm_id=-1)  #{{{3
+        def _find_adverse_event_result(section, ae_column, ae, ef_id, ae_arm)  #{{{3
+            # If ae_arm is given then we find the arm ID
+            if ae_arm
+                arm_id = _find_arm_id(ef_id, ae_arm)
+            else
+                arm_id = -1;
+            end
+
+            if arm_id.nil?
+                return nil
+            end
+
             ar_aer = "#{section.to_s}Result".constantize.\
                 where(["column_id=? AND adverse_event_id=? AND arm_id=?",
                        ae_column.id, ae.id, arm_id])
@@ -1411,6 +1442,33 @@ class ImportAdverseEventHandler  #{{{1
                            adverse_event_id: ae.id,
                            arm_id: arm_id)
                 return ar_aer
+            end
+        end
+
+        def _find_arm_id(ef_id, arm_title)
+            # Identify by @study_id, ef_id, title
+            if arm_title.is_a? String
+                arm_title = CGI.unescapeHTML(arm_title)
+            end
+
+            arm = Arm.where(["study_id=? AND title=? AND extraction_form_id=?",
+                      @study_id, arm_title, ef_id])
+            if arm.length == 1
+                return arm.first.id
+            elsif arm.length == 0
+                count_existing_arms = Arm.where(["study_id=? AND extraction_form_id=?",
+                                          @study_id, ef_id]).length
+                arm = Arm.create(study_id: @study_id,
+                                 title: arm_title,
+                                 display_number: count_existing_arms + 1,
+                                 extraction_form_id: ef_id,
+                                 is_suggested_by_admin: 0,
+                                 is_intention_to_treat: 1
+                      )
+                return arm.id
+            else
+                @listOf_errors << "Too many arms found with parameters: study_id=#{@study_id}, arm_title=#{arm_title}, ef_id#{ef_id}"
+                return nil
             end
         end
 
