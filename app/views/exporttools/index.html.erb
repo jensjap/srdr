@@ -57,16 +57,16 @@ tool instead.
         <td class="advance">
         <span id="export_tools_title">Advanced Data Export:</span>
         <p/><br/>
-        <span id="export_tools_link"><%= link_to "Report Builder", siteproperties.getReportBuilderURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Report Builder"} %></span><br />
+        <!--span id="export_tools_link"><%#= link_to "Report Builder", siteproperties.getReportBuilderURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Report Builder"} %></span><br /-->
     
-    <% if current_user.is_admin? %>
+    <!--% if current_user.is_admin? %-->
     <form method="post" action="http://<%= siteproperties.getSiteURL() %>:8080/srdrj/advanceddataexport">
         <input type="hidden" name="start_process" value="true" />
         <input type="hidden" name="user.login" value="<%= current_user.login %>" />
         <input type="hidden" name="prj_id" value="<%= @project.id.to_s %>" />
-        <input type="submit" name="enter_button" value="Start Process" /> 
+        <input type="submit" name="enter_button" value="Load Advanced Data Export" /> 
     </form>
-    <% end %>
+    <!--% end %-->
 
 <br/>
         <p/><br/>
