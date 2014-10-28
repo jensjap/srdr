@@ -968,14 +968,23 @@ class Study < ActiveRecord::Base
   # @return the new status (true or false)
   def self.toggle_section_complete study_id, extraction_form_id, section, user_id
     complete = true
+    # Keep track of section names already worked on during section == 'all' routine
+    section_names = []
+
     if section == 'all'
         puts "\n\nThe section is ALL\n\n"
-        entry = CompleteStudySection.find(:all, :conditions=>["study_id=? AND extraction_form_id=?",study_id,extraction_form_id],:select=>["id","is_complete"])
+        entry = CompleteStudySection.find(:all, :conditions=>["study_id=? AND extraction_form_id=?",study_id,extraction_form_id],:select=>["id","is_complete", "section_name"])
         complete = entry.empty? ? true : entry.first.is_complete == true ? false : true
         entry.each do |e|
-            e.is_complete = complete
-            e.flagged_by_user = user_id
-            e.save
+            # Sometimes we encounter duplicate entries...we destroy them here
+            if section_names.include? e.section_name
+                e.destroy
+            else
+                e.is_complete = complete
+                e.flagged_by_user = user_id
+                e.save
+                section_names.push e.section_name
+            end
         end
     else
         entry = CompleteStudySection.find(:first, :conditions=>["study_id=? AND extraction_form_id=? AND section_name=?",study_id, extraction_form_id, section], :select=>["id","is_complete","flagged_by_user"])
@@ -1055,15 +1064,17 @@ class Study < ActiveRecord::Base
             
         study_ids.each do |sid|
             begin
+                # List of unique extraction form ids for this study id
                 these_efs = study_efs.select{|sef| sef.study_id == sid}.collect{|x| x.extraction_form_id}.uniq
             
-                # we add 2 to total sections to account for key questions and publications tabs.
+                # we add count of 2 to total sections to account for key questions and publications tabs for each extraction form
                 total_sections = 2 * these_efs.length
                 these_efs.each do |ef|
                     total_sections += included_section_counts[ef]
                 end
+
                 t_entries = all_entries.count{|y| y.is_complete == true && y.study_id == sid && these_efs.include?(y.extraction_form_id)}
-                
+
                 unless t_entries == 0 || total_sections == 0
                     #retVal[sid] = (t_entries.length.to_f / these_entries.length) * 100
                     retVal[sid] = (t_entries.to_f / total_sections) * 100
