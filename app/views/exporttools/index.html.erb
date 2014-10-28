@@ -60,7 +60,7 @@ tool instead.
         <!--span id="export_tools_link"><%#= link_to "Report Builder", siteproperties.getReportBuilderURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Report Builder"} %></span><br /-->
     
     <!--% if current_user.is_admin? %-->
-    <form method="post" action="http://<%= siteproperties.getSiteURL() %>:8080/srdrj/advanceddataexport">
+    <form method="post" action="<%= siteproperties.getData("app-server", "url") %>/srdrj/advanceddataexport">
         <input type="hidden" name="start_process" value="true" />
         <input type="hidden" name="user.login" value="<%= current_user.login %>" />
         <input type="hidden" name="prj_id" value="<%= @project.id.to_s %>" />
