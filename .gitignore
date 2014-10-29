@@ -1,7 +1,3 @@
-# Do not track files in the following folders
-tmp/
-log/
-
 # Do not track the following files
 tags
 coverage
