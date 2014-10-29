@@ -41,6 +41,11 @@ user-admin-dev:
   activation: 0
 # Report caching properties ------------------------------------------
 cache-project-path: cache/projects/
+# Java Application Server -------------------------------------------
+app-server:
+  url: http://localhost:8080
+  url-production: http://localhost:8080
+  url-training: http://localhost:8080
 # SRDRJ Properties ---------------------------------------------
 srdrj:
   url: http://localhost:8080/srdrj/index.jsp
