@@ -2,6 +2,14 @@
 <!--<div id='modal_div'>
 </div>
 -->
+<% 
+@users = []
+if current_user.is_super_admin?
+    uids = @all_projects.collect{|x| x.creator_id} 
+    uids.uniq!
+    @users = User.find(:all, :conditions=>["id IN (?)",uids])
+end
+%>
 <div class='actions' style="float:right; margin-top:5px; z-index:100px; position:relative;">
         <%= link_to image_tag("Add.png", :style=>"border-style:none;vertical-align:middle;") + " Create a New Project", "/projects/new", :id => "new_project_btn", :title=>"Click to Create a New Project", :style=>"position:relative; z-index:100;" %>
 </div>

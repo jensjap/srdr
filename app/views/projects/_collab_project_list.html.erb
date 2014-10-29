@@ -52,6 +52,11 @@
             <%= pluralize(num_ext_forms, 'Extraction Form') %>,    
             <%# Project.get_status_string(project.id) %><br/>
             <span class='bold'>Date Created: </span><%= project.created_at.strftime("%b %d, %Y") %><br/>
+            <% if current_user.is_super_admin? %>
+                    <% user = @users.find{|x| x.id == project.creator_id} %>
+                    <%= render :inline=>"<strong>Creator:</strong> #{user.login} (#{user.fname} #{user.lname})" unless user.nil? %>
+                    <br/>
+                <% end %>
             <span class='bold'>Last Update: </span><%= project.updated_at.strftime("%b %d, %Y %I:%M%p") %> GMT<br/>
             <span class='bold'>Description: </span><%= project.description.empty? ? "None Provided" : project.description.force_encoding("UTF-8") %>
             <br/><br/>
