@@ -358,65 +358,70 @@ class ImportHandler  #{{{1
         def _process_q_hash(section, q_hash, ef_id, study_id)  #{{{3
             case section
             when :AdverseEvent
-                # Test if question hash includes 'Harm' or 'Adverse Events'
-                # If it does then we use run method that allows for multiple
-                # Adverse Events per study; else use the one that only allows
-                # one.
-                ae_title_key = q_hash.keys.find { |k| k =~ /^harms?$|^adverse\s?events?$/i }
-                ae_arm_key = q_hash.keys.find { |l| l =~ /^arms?$/i }
-
-                if ( ae_title_key && ae_arm_key )
-                    # Set ae title and ae arm
-                    ae_title = q_hash[ae_title_key]
-                    ae_arm = q_hash[ae_arm_key]
-
-                    # Remove the ae_title_key and ae_arm_key from the q_hash dict.
-                    q_hash.except!(ae_title_key)
-                    q_hash.except!(ae_arm_key)
-
-                    # Iterate over the remaining question answer columns
-                    q_hash.each do |q, a|
-                        ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
-                        errors = ae_import_handler.run(ae_title, ae_arm)
-                        @listOf_errors_processing_questions.concat errors unless errors.blank?
-                    end
-                elsif ae_title_key
-                    # Set ae title
-                    ae_title = q_hash[ae_title_key]
-
-                    # Remove the ae_title_key from the q_hash dict.
-                    q_hash.except!(ae_title_key)
-
-                    q_hash.each do |q, a|
-                        ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
-                        errors = ae_import_handler.run(ae_title)
-                        @listOf_errors_processing_questions.concat errors unless errors.blank?
-                    end
-                else
-                    q_hash.each do |q, a|
-                        ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
-                        errors = ae_import_handler.run
-                        @listOf_errors_processing_questions.concat errors unless errors.blank?
-                    end
-                end
+                _process_q_hash_adverse_event(section, q_hash, ef_id, study_id)
             when :QualityDimension
                 #!!! Not ready yet
             when :QualityRating
                 #!!! Not ready yet
             when :Arm
-                arm_import_handler = ImportArmHandler.new(section, ef_id, study_id, q_hash)
-                errors = arm_import_handler.run
-                @listOf_errors_processing_questions.concat errors unless errors.blank?
+                _process_q_hash_arm(section, q_hash, ef_id, study_id)
             when :Outcome
-                outcome_import_handler = ImportOutcomeHandler.new(section, ef_id, study_id, q_hash)
-                errors = outcome_import_handler.run
-                @listOf_errors_processing_questions.concat errors unless errors.blank?
+                _process_q_hash_outcome(section, q_hash, ef_id, study_id)
             else # Defaults for :DesignDetail, :ArmDetail, :BaselineCharacteristic, :OutcomeDetail
-                q_hash.each do |q, a|
-                    default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, q, a)
-                    errors = default_import_handler.run
-                    @listOf_errors_processing_questions.concat errors unless errors.blank?
-                end
+                _process_q_hash_default(section, q_hash, ef_id, study_id)
+            end
+        end
+
+        def _process_q_hash_adverse_event(section, q_hash, ef_id, study_id)
+            # Test if question hash includes 'Harm' or 'Adverse Events'
+            # If it does then we use run method that allows for multiple
+            # Adverse Events per study; else use the one that only allows
+            # one.
+            ae_title_key = q_hash.keys.find { |k| k =~ /^harms?$|^adverse\s?events?$/i }
+            ae_description_key = q_hash.keys.find { |k| k =~ /^harms?\s?descriptions?$|^adverse\s?events?\s?descriptions?$/i }
+            ae_arm_key = q_hash.keys.find { |l| l =~ /^arms?$/i }
+
+            # Set defaults
+            ae_title       = nil
+            ae_description = nil
+            ae_arm         = nil
+
+            # If keys were found in the header then assign values
+            ae_title       = q_hash[ae_title_key]       if ae_title_key
+            ae_description = q_hash[ae_description_key] if ae_description_key
+            ae_arm         = q_hash[ae_arm_key]         if ae_arm_key
+
+            # If keys were found in the header then remove key from q_hash
+            q_hash.except!(ae_title_key)       if ae_title_key
+            q_hash.except!(ae_description_key) if ae_description_key
+            q_hash.except!(ae_arm_key)         if ae_arm_key
+
+
+            # Iterate over the remaining question answer columns
+            q_hash.each do |q, a|
+                ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
+                errors = ae_import_handler.run(ae_title, ae_description, ae_arm)
+                @listOf_errors_processing_questions.concat errors unless errors.blank?
+            end
+        end
+
+        def _process_q_hash_arm(section, q_hash, ef_id, study_id)
+            arm_import_handler = ImportArmHandler.new(section, ef_id, study_id, q_hash)
+            errors = arm_import_handler.run
+            @listOf_errors_processing_questions.concat errors unless errors.blank?
+        end
+
+        def _process_q_hash_outcome(section, q_hash, ef_id, study_id)
+            outcome_import_handler = ImportOutcomeHandler.new(section, ef_id, study_id, q_hash)
+            errors = outcome_import_handler.run
+            @listOf_errors_processing_questions.concat errors unless errors.blank?
+        end
+
+        def _process_q_hash_default(section, q_hash, ef_id, study_id)
+            q_hash.each do |q, a|
+                default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, q, a)
+                errors = default_import_handler.run
+                @listOf_errors_processing_questions.concat errors unless errors.blank?
             end
         end
 
@@ -1387,15 +1392,15 @@ class ImportAdverseEventHandler  #{{{1
         @options       = nil
     end
 
-    def run(ae_title=nil, ae_arm=nil)  #{{{2
-        _insert_adverse_event(ae_title, ae_arm)
+    def run(ae_title=nil, ae_description=nil, ae_arm=nil)  #{{{2
+        _insert_adverse_event(ae_title, ae_description, ae_arm)
         return @listOf_errors
     end
 
     private  #{{{2
 
-        def _insert_adverse_event(ae_title, ae_arm)  #{{{3
-            ar_ae = _find_adverse_event(@section, @study_id, @ef_id, ae_title)
+        def _insert_adverse_event(ae_title, ae_description, ae_arm)  #{{{3
+            ar_ae = _find_adverse_event(@section, @study_id, @ef_id, ae_title, ae_description)
             if ar_ae
                 ar_aec = _find_adverse_event_column(@section, @question, @ef_id)
                 if ar_aec
@@ -1530,18 +1535,23 @@ class ImportAdverseEventHandler  #{{{1
             return ar_aec
         end
 
-        def _find_adverse_event(section, study_id, ef_id, ae_title)  #{{{3
+        def _find_adverse_event(section, study_id, ef_id, ae_title, ae_description)  #{{{3
             if ae_title
-                ar_ae = "#{section.to_s}".constantize.where(["study_id=? AND extraction_form_id=? AND title=?",
+                ar_aes = "#{section.to_s}".constantize.where(["study_id=? AND extraction_form_id=? AND title=?",
                                                              study_id, ef_id, ae_title])
             else
-                ar_ae = "#{section.to_s}".constantize.where(["study_id=? AND extraction_form_id=?",
+                ar_aes = "#{section.to_s}".constantize.where(["study_id=? AND extraction_form_id=?",
                                                              study_id, ef_id])
             end
-            if ar_ae.length == 1
-                return ar_ae.first
-            elsif ar_ae.length == 0
-                ar_ae = _create_adverse_event(section, study_id, ef_id, ae_title)
+            if ar_aes.length == 1
+                # Update the description in case it has changed.
+                ar_ae = ar_aes.first
+                ar_ae.description = ae_description
+                ar_ae.save
+
+                return ar_ae
+            elsif ar_aes.length == 0
+                ar_ae = _create_adverse_event(section, study_id, ef_id, ae_title, ae_description)
                 return ar_ae
             else
                 @listOf_errors << "Too many adverse events found for study id '#{study_id}' and extraction form id '#{ef_id}'."
@@ -1549,12 +1559,12 @@ class ImportAdverseEventHandler  #{{{1
             end
         end
 
-        def _create_adverse_event(section, study_id, ef_id, ae_title)  #{{{3
+        def _create_adverse_event(section, study_id, ef_id, ae_title, ae_description)  #{{{3
             ar_ae = "#{section.to_s}".constantize.\
                 create(study_id: study_id,
                        extraction_form_id: ef_id,
                        title: ae_title,
-                       description: nil)
+                       description: ae_description)
             return ar_ae
         end
 end
