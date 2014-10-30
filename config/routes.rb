@@ -335,6 +335,7 @@ Srdr::Application.routes.draw do
     match 'quality_dimension_fields/:id/confirm_delete' => 'quality_dimension_fields#confirm_delete'
     match 'quality_dimension_fields/:id/edit' => 'quality_dimension_fields#edit'
     match 'quality_dimension_fields/:id/destroy' => 'quality_dimension_fields#destroy'
+    match '/*section/quality_dimension_fields/reorder' => 'quality_dimension_fields#reorder'
     match 'quality_rating_fields/:id/confirm_delete' => 'quality_rating_fields#confirm_delete'
     match '/*section/quality_rating_fields/:id/destroy' => 'quality_rating_fields#destroy'
     match 'quality_rating_fields/:id/edit' => 'quality_rating_fields#edit'

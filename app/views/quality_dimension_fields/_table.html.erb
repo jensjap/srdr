@@ -1,13 +1,17 @@
 <table class="classic-a" id="quality_dimf_table" summary="quality dimension fields table">
 <thead><tr>
+<th scope='col'>#</th>
 <th scope='col'>Dimension Name</th>
 <th scope='col'>Instructions</th>
 <th scope='col'>Actions</th>
 </tr></thead>
 <tbody>
 <% if @quality_dimension_fields.length > 0 %>
-<% for qa in @quality_dimension_fields %>
+<% @quality_dimension_fields.each_with_index do |qa, i|%>
 <tr>
+<% num_options = (1..@quality_dimension_fields.length).to_a.collect{|x| [x,x]} %>
+<% qnum = qa.question_number.blank? ? i+1 : qa.question_number %>
+<td scope='row'><%= select_tag "question_number_#{qnum}", options_for_select(num_options,qnum), :class=>'qdfield_qnum_select', :title => "question number", :id => qa.id %></td>
 <td scope='row'><%= qa.title %></td>
 <td scope='row'><%= qa.field_notes %></td>
 <td scope='row'>
@@ -19,3 +23,39 @@
 <% end %>
 </tbody>
 </table>
+<div id='qd_final_div'></div>
+<script type='text/javascript'>
+    // <!--
+  function qd_init(){
+    try{
+      checkQDLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
+      prepareQD();
+    } catch( err ) {
+      setTimeout('qd_init()', 200);
+    }
+  }
+
+  function checkQDLoaded(){
+      if ($('#qd_final_div').length == 0) $jquery.error( 'not ready' );
+  }
+
+  function prepareQD(){
+    
+    // for switching up question numbers
+    $(".qdfield_qnum_select").unbind();
+    $(".qdfield_qnum_select").bind("change",function(){
+      $.ajax({
+        type: "POST",
+        url: 'quality_dimension_fields/reorder',
+        data: {
+          selector_id: $(this).attr("id"),
+          new_row_num: $(this).val(),
+          extraction_form_id: "<%= @extraction_form.id %>",
+          project_id: "<%= @project.id %>"
+        }
+      })
+    })
+  }
+  qd_init();
+  // -->
+</script>

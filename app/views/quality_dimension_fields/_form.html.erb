@@ -7,47 +7,33 @@
 			
 	<div class="form_content">
 
-		<%= render :inline => attach_listener_for_other("quality_dimension_field_title", "medium") %>
+		<%# render :inline => attach_listener_for_other("quality_dimension_field_title", "medium") %>
 	  	<table class='form_table'>
 	  		<% form_type = @extraction_form.is_diagnostic == true ? "diagnostic" : "RCT" %>
-	  		<% @quality_dimension_list = QualityDimensionField.get_dimension_list(form_type) %>
+	  		<%# @quality_dimension_list = QualityDimensionField.get_dimension_list(form_type) %>
 			<tr>
 				<td class='label top'>
 					<label for="Dimension Name">Dimension Name:</label>
 				</td>
 				<td class='input top'>
-					<%= f.select :title, @quality_dimension_list, {}, {:class => "editable_field", :title => "title", :style => "width: 300px;"} %>
-					<% if @editing %>
-						<% show_other = !@quality_dimension_list.include?(@quality_dimension_field.title) %>
-						<% if show_other %>
-							<script type="text/javascript">
-							    //<!--
-							    //alert("The title was " + "<%= @quality_dimension_field.title %>");
-							    //alert("The list is " + "<%= @quality_dimension_list.to_json %>");
-							    //alert("The index is " + "<%= @quality_dimension_list.index(@quality_dimension_field.title) %>");
-								$.ajax({url: "/application/show_other_filled",
-											type: "POST",
-											data: {
-												"field_name": "quality_dimension_field[title]", 						
-												"field_size": "medium",
-												"field_id": "quality_dimension_field_title", 
-												"value": "<%= @quality_dimension_field.title %>"
-											}
-										});
-								//-->
-							</script>
-						<% end %>
+					<% if !@editing %>
+						<div id='default_selector'>
+						<%= render :inline => default_quality_dimensions_dropdown({:include_custom=>true, :desired_id=>'quality_dimension_field_selected_default', :desired_name => 'quality_dimension_field[selected_default]'}) %>
+						<span id='custom_text_span'></span>
+						</div>
+					<% else %>
+						<textarea id='quality_dimension_field_custom' name='quality_dimension_field[custom]'><%= @quality_dimension_field.title %></textarea>
 					<% end %>
+					<!-- don't forget about if @editing -->
 				</td>
 			</tr>
-
-			
 			<tr>
+				<% display = @editing ? "block" : "none" %>
 				<td class='label'>
-				    <label for="Field Notes">Instructions:</label>
+				    <label for="Field Notes" style="display:<%=display %>;" id='notes_label'>Instructions:</label>
 				</td>
 				<td class='input'>
-		    		<%= f.text_area :field_notes, :rows => 4, :cols => 40, :class => "editable_field", :title => "field notes" %>
+		    		<%= f.text_area :field_notes, :rows => 4, :cols => 40, :class => "editable_field", :title => "field notes", :style=>"display:#{display};'"%>
 		    	</td>
 		    </tr>
 		</table>
@@ -72,6 +58,19 @@
 <% end %>
 
 <script type="text/javascript">
+$("#quality_dimension_field_selected_default").on('change',function(){
+	event.preventDefault();
+	if($(this).val() == 'custom'){
+		$("#custom_text_span").html("<br/><textarea id='quality_dimension_field_custom' name='quality_dimension_field[custom]'><%= @quality_dimension_field.title %></textarea>");
+		$("#notes_label").css("display","block");
+		$("#quality_dimension_field_field_notes").css("display","block");
+
+	}else{
+		$("#custom_text_span").html("");
+		$("#notes_label").css("display","none");
+		$("#quality_dimension_field_field_notes").css("display","none");
+	}
+});
 
 $("#close_dim_btn").bind("click", function(event)
 {

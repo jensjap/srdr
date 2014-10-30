@@ -25,41 +25,41 @@ class QualityDimensionField < ActiveRecord::Base
 
 	# get the list of quality dimensions to display in the drop down menu in the extraction form quality tab
 	# @return [array] dim_fields the list of dimension fields, formatted for a rails select menu
-	def self.get_dimension_list(form_type="RCT")
-		puts "THE FORM TYPE IS #{form_type}\n\n\n\n"
-		@dim_fields = []	
-		diagnostic_fields = ["Stard - quality for diagnostic tests","QUADAS2"]
-		fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
-		dimensions_file = YAML::load(File.open(fn))
+	# def self.get_dimension_list(form_type="RCT")
+	# 	puts "THE FORM TYPE IS #{form_type}\n\n\n\n"
+	# 	@dim_fields = []	
+	# 	diagnostic_fields = ["Stard - quality for diagnostic tests","QUADAS2"]
+	# 	fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
+	# 	dimensions_file = YAML::load(File.open(fn))
 
-		@dim_fields << ["Choose a quality dimension", "choose"]		
-		if (defined?(dimensions_file) && !dimensions_file.nil?)
-			# go through quality_dimensions.yml
-			dimensions_file.each do |section|
-				unless form_type == "diagnostic" && !diagnostic_fields.include?(section['section-title'])
-					@dim_fields << ["--------" + section['section-title'] + "--------","-"]
-					if defined?(section['dimensions']) && !section['dimensions'].nil?
-						section['dimensions'].each do |dimension|
-							@str = ""					
-							@str = dimension['question'] + " ["
-							@options = []
-							if !dimension['options'].nil?
-								dimension['options'].each do |option|
-									@options << option['option']
-								end
-							end
-							@str = @str + @options.join(", ") + "]"
-							@dim_fields << [@str,@str]						
-						end
-						# add "add all section X dimensions" link
-						 @dim_fields << ["Add all " + section['section-title'] + " Dimensions", "add all "+ section['section-title']]
-					end
-				end
-			end
-		end
-		@dim_fields << ["Add other dimension not in this list", "Other"]
-		return @dim_fields
-	end
+	# 	@dim_fields << ["Choose a quality dimension", "choose"]		
+	# 	if (defined?(dimensions_file) && !dimensions_file.nil?)
+	# 		# go through quality_dimensions.yml
+	# 		dimensions_file.each do |section|
+	# 			unless form_type == "diagnostic" && !diagnostic_fields.include?(section['section-title'])
+	# 				@dim_fields << ["--------" + section['section-title'] + "--------","-"]
+	# 				if defined?(section['dimensions']) && !section['dimensions'].nil?
+	# 					section['dimensions'].each do |dimension|
+	# 						@str = ""					
+	# 						@str = dimension['question'] + " ["
+	# 						@options = []
+	# 						if !dimension['options'].nil?
+	# 							dimension['options'].each do |option|
+	# 								@options << option['option']
+	# 							end
+	# 						end
+	# 						@str = @str + @options.join(", ") + "]"
+	# 						@dim_fields << [@str,@str]						
+	# 					end
+	# 					# add "add all section X dimensions" link
+	# 					 @dim_fields << ["Add all " + section['section-title'] + " Dimensions", "add all "+ section['section-title']]
+	# 				end
+	# 			end
+	# 		end
+	# 	end
+	# 	@dim_fields << ["Add other dimension not in this list", "Other"]
+	# 	return @dim_fields
+	# end
 
 	
 
@@ -70,7 +70,7 @@ class QualityDimensionField < ActiveRecord::Base
 	# is created.
 	# @param [integer] quality_dimension_id the id of the quality dimension to generate an options array for
 	# @return [array] arr the array to use in the dropdown for options based on the quality dimension selected
-	# NO LONGER IN USE!
+	# NO LONGER IN USE ONCE QUESTION BUILDER VERSION GOES LIVE!
 	def self.get_dropdown_options(quality_dimension_id)
 		@quality_dimension = QualityDimensionField.find(quality_dimension_id)
 		@qd_text = @quality_dimension.title
@@ -119,46 +119,92 @@ class QualityDimensionField < ActiveRecord::Base
 	# @param [integer] id the quality dimension field id
 	# @return [boolean] whether any quality dimension data points exist for that study
 	def self.has_study_data(id)
-		datapoints = QualityDimensionDataPoint.where(:quality_dimension_field_id => id).all
-		if datapoints.nil? || (datapoints.length == 0)
-			return "false"
-		else
+		datapoints = QualityDimensionDataPoint.where(:quality_dimension_field_id => id).count()
+		if datapoints > 0
 			return "true"
+		else
+			return "false"
 		end
 	end	
 
-	# get the list of quality dimensions from the section specified. 
-	# the dimension name begins with "add all " and the text after that is the name of the section.
-	# @param [string] dimension_title
-	def self.add_all_dimensions_from_section(dimension_title, extraction_form_id)
-		@section_string = dimension_title[8, dimension_title.length]
-		fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
-		dimensions_file = YAML::load(File.open(fn))
-		if (defined?(dimensions_file) && !dimensions_file.nil?)
-			# go through quality_dimensions.yml
-			dimensions_file.each do |section|
-				if section['section-title'] == @section_string
-					if defined?(section['dimensions']) && !section['dimensions'].nil?
-						section['dimensions'].each do |dimension|
-							@str = " ["
-							@options = []
-							if !dimension['options'].nil?
-								dimension['options'].each do |option|
-									@options << option['option']
-								end
-							end
-							@str = @str + @options.join(", ") + "]"							
-							@new_dimension = QualityDimensionField.new		
-							@new_dimension.title = dimension['question'] + @str
-							@new_dimension.field_notes = dimension['description']
-							@new_dimension.extraction_form_id = extraction_form_id
-							@new_dimension.save							
-						end
-					end
-				end
-			end
-		end
+	# # get the list of quality dimensions from the section specified. 
+	# # the dimension name begins with "add all " and the text after that is the name of the section.
+	# # @param [string] dimension_title
+	# def self.add_all_dimensions_from_section(dimension_title, extraction_form_id)
+	# 	@section_string = dimension_title[8, dimension_title.length]
+	# 	fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
+	# 	dimensions_file = YAML::load(File.open(fn))
+	# 	if (defined?(dimensions_file) && !dimensions_file.nil?)
+	# 		# go through quality_dimensions.yml
+	# 		dimensions_file.each do |section|
+	# 			if section['section-title'] == @section_string
+	# 				if defined?(section['dimensions']) && !section['dimensions'].nil?
+	# 					section['dimensions'].each do |dimension|
+	# 						@str = " ["
+	# 						@options = []
+	# 						if !dimension['options'].nil?
+	# 							dimension['options'].each do |option|
+	# 								@options << option['option']
+	# 							end
+	# 						end
+	# 						@str = @str + @options.join(", ") + "]"							
+	# 						@new_dimension = QualityDimensionField.new		
+	# 						@new_dimension.title = dimension['question'] + @str
+	# 						@new_dimension.field_notes = dimension['description']
+	# 						@new_dimension.extraction_form_id = extraction_form_id
+	# 						@new_dimension.save							
+	# 					end
+	# 				end
+	# 			end
+	# 		end
+	# 	end
+	# end
+
+	# get the list of quality dimensions to be created, and create them
+	# using the legacy question type. THIS WILL BE PHASED OUT WHEN QUESTION BUILDER GOES LIVE
+	# params q_id 
+	#    if dimension_id = section_x, find all questions in the section with an ID of x and generate them
+	#    else generate just the dimension with an ID of x 
+	def self.generate_legacy_quality_dimensions(ef_id, dimension_id)
+		unless dimension_id == ''
+			fn = File.dirname(File.expand_path(__FILE__)) + '/../../config/quality_dimensions.yml'
+	    input = YAML::load(File.open(fn))
+	    
+	    # get the max question number, create the questions, etc.
+	    QualityDimensionField.transaction do 
+	    	nextnum = QualityDimensionField.where(:extraction_form_id=>ef_id).maximum(:question_number)
+	    	if nextnum.nil?
+	    		self.assign_initial_qnums(ef_id)
+	    		nextnum = QualityDimensionField.where(:extraction_form_id=>ef_id).maximum(:question_number)
+	    	end
+	    	nextnum = nextnum.nil? ? 1 : nextnum + 1
+	    	
+	    	# if we need to create an entire section of dimensions...
+		    if dimension_id.match('section_')
+		    	section_id = dimension_id.split("_")[1]
+		    	dimensions = input.find{|x| x['id'] == section_id.to_i}['dimensions']
+		    	dimensions.each do |d|
+		    		QualityDimensionField.create(:title=>d['question'], :field_notes=>d['description'], :question_number => nextnum, :extraction_form_id=>ef_id)
+		    		nextnum += 1
+		    	end
+		    # otherwise find the individual dimension
+		    else
+		    	dim = input.collect{|a| a['dimensions']}
+					dim = dim.flatten
+					dim = dim.find{|x| x['id'] == dimension_id.to_i} 
+					QualityDimensionField.create(:title=>dim['question'], :field_notes=> dim['description'], :question_number => nextnum, :extraction_form_id => ef_id)
+		    end	
+	    end
+	  end
 	end
+
+	def self.assign_initial_qnums(efid)
+    qds = QualityDimensionField.find(:all, :conditions=>["extraction_form_id = ?",efid], :order=>["created_at ASC"])
+    qds.each_with_index do |qd,i|
+      qd.question_number = i+1
+      qd.save
+    end
+  end
 
 	# get the list of quality dimensions to be created, and create them
 	# using the question builder interface. This accounts for both individual

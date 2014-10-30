@@ -199,7 +199,7 @@ class ExtractionFormsController < ApplicationController
 		@donors = ExtractionFormSectionCopy.get_donor_forms(@extraction_form.id,"quality")
 		if @donors.empty?
 			@quality_dimension_field = QualityDimensionField.new
-			@quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => params[:extraction_form_id], :study_id => nil).all
+			@quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => params[:extraction_form_id]).order("question_number ASC")
 			@quality_rating_field = QualityRatingField.new
 			@quality_rating_fields =QualityRatingField.find(:all, :conditions => {:extraction_form_id => params[:extraction_form_id]}, :order => "display_number ASC")
 		else

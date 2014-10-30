@@ -1015,10 +1015,12 @@ module ApplicationHelper
     end
 
     # build the default quality dimensions list
-    def default_quality_dimensions_dropdown(options={:form_type=>"RCT", :include_custom=>false})
+    def default_quality_dimensions_dropdown(options={:form_type=>"RCT", :include_custom=>false, :desired_id=>'desired_dimensions', :desired_name=>'desired_dimensions'})
         form_type = options[:form_type]
         include_custom = options[:include_custom]
-        retVal = "<select id='desired_dimensions'><option value='' selected>Choose a quality dimension</option>"  
+        desired_id = options[:desired_id]
+        desired_name = options[:desired_name]
+        retVal = "<select id='#{desired_id}' name='#{desired_name}' style='width:300px;'><option value='' selected>Choose a quality dimension</option>"  
         if include_custom 
             retVal += "<option value='custom'>Create a Custom Quality Dimension</option>"
         end

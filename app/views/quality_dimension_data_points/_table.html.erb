@@ -1,5 +1,5 @@
-<% @quality_dimension_custom_fields = QualityDimensionField.where(:study_id => @study.id, :extraction_form_id => params[:extraction_form_id]).all %>
-<% @quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => params[:extraction_form_id], :study_id => nil).all %>
+<%# @quality_dimension_custom_fields = QualityDimensionField.where(:study_id => @study.id, :extraction_form_id => params[:extraction_form_id]).all %>
+<%# @quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => params[:extraction_form_id], :study_id => nil).all %>
 <%= form_for @quality_dimension_data_point, :remote => true, :html=>{:id=>"quality_dimension_data_point_form"} do |f| %>
 
 <%= f.hidden_field "study_id", :value => @study.id %>
@@ -27,8 +27,10 @@
 <% arr = QualityDimensionField.get_dropdown_options(qa) %>
 <% selected_other = !arr.collect{|x| x[1]}.include?(val) && !val.blank? %>
 
-<td scope='row' valign="top"><%= select :quality_value, qa.id.to_s, arr, {:selected=> selected_other ? "other" : val}, :value => selected_other ? "other" : val, :class => "inline-field", :title =>"Select Value for Dimensoin: #{qa.title}" , :style => "width: 100px"%>
-	<% if selected_other %>
+<td scope='row' valign="top">
+
+   <%=select :quality_value, qa.id.to_s, arr, {:selected=> selected_other ? "other" : val}, :value => selected_other ? "other" : val, :class => "inline-field", :title =>"Select Value for Dimensoin: #{qa.title}" , :style => "width: 100px"%>
+   <% if selected_other %>
 		<%= render :inline => show_other_filled("quality_value_#{qa.id.to_s}", val, "quality_value[#{qa.id.to_s}]") %>
 	<% end %>
 </td>

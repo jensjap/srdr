@@ -27,82 +27,54 @@ class QualityDimensionFieldsController < ApplicationController
 	puts "Editing is #{@editing}"
   end
 
-  # save updates to a quality dimension field (custom field)
+  # create a quality dimension field (custom field)
   def create
-  	@quality_dimension_field = QualityDimensionField.new(params[:quality_dimension_field])
-	@extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
-	@project = Project.find(@extraction_form.project_id)	
-	@already_saved = false
-	if (params[:quality_dimension_field][:title][0,8] == "add all ")
-		QualityDimensionField.add_all_dimensions_from_section(params[:quality_dimension_field][:title], @extraction_form.id)
-		@quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => @extraction_form.id).all
-		@already_saved = true
-	end
-	if (!@already_saved)
-		if (@saved = @quality_dimension_field.save)
-			if !params[:study_id].nil?
-				@study = Study.find(params[:study_id])
-				@quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => @quality_dimension_field.extraction_form_id).all
-				@quality_dimension_data_point = QualityDimensionDataPoint.new
-				@study_arms = Arm.where(:study_id => @study.id, :extraction_form_id => @quality_dimension_field.extraction_form_id).all
-			else
-				if (params[:quality_dimension_field][:title] == "other")
-					@quality_dimension_field.title = params[:quality_dimension_field_title_other]
-				elsif (params[:quality_dimension_field][:title] == "")
-					@quality_dimension_field.destroy
-					problem_html = "That is not a valid selection. Please choose a valid dimension from the list or choose 'Other'."	
-				else
-					@quality_dimension_field.save
-					@quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => @quality_dimension_field.extraction_form_id).all
-				end
-			end
-		else
-			problem_html = create_error_message_html(@quality_dimension_field.errors)
-			flash[:modal_error] = problem_html
-		end
-	end
+    qd_params = params[:quality_dimension_field]
+    selected_default = qd_params[:selected_default]
+    field_notes = qd_params[:field_notes]
+    extraction_form_id = qd_params[:extraction_form_id]
+    unless selected_default == 'custom'
+      QualityDimensionField.generate_legacy_quality_dimensions(extraction_form_id, selected_default)
+    else
+      title = qd_params[:custom]
+      unless title.blank?
+        QualityDimensionField.transaction do 
+          nextnum = QualityDimensionField.where(:extraction_form_id=>extraction_form_id).maximum(:question_number)
+          if nextnum.nil?
+            QualityDimensionField.assign_initial_qnums(ef_id)
+            nextnum = QualityDimensionField.where(:extraction_form_id=>extraction_form_id).maximum(:question_number)
+          end
+          nextnum += 1
+          QualityDimensionField.create(:title=>title, :field_notes => field_notes, :question_number => nextnum,:extraction_form_id=>extraction_form_id)
+        end
+      end    
+    end
+    @quality_dimension_fields = QualityDimensionField.where(:extraction_form_id=> extraction_form_id).order("question_number ASC")
+    @quality_dimension_field = QualityDimensionField.new
+    @extraction_form = ExtractionForm.find(extraction_form_id)
+    @project = Project.find(@extraction_form.project_id)
   end
 
   # save changes/update an existing quality dimension field (custom field)
   def update
     @quality_dimension_field = QualityDimensionField.find(params[:id])
-	@quality_dimension_field.update_attributes(params[:quality_dimension_field])
-	@extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
-	@project = Project.find(@extraction_form.project_id)	
+    qdparams = params[:quality_dimension_field]
+	  @quality_dimension_field.title = qdparams['custom']
+    @quality_dimension_field.field_notes = qdparams['field_notes']
     if @saved = @quality_dimension_field.save
-		if !params[:study_id].nil?
-			extraction_form_id = @quality_dimension_field.extraction_form_id
-			@study = Study.find(params[:study_id])
-			if !extraction_form_id.nil?
-				@quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => extraction_form_id).all
-			else
-				@quality_dimension_extraction_form_fields = nil
-			end
-			@quality_dimension_data_point = QualityDimensionDataPoint.new
-			@study_arms = Arm.where(:study_id => @study.id, :extraction_form_id => extraction_form_id).all		
-		else
-			if @quality_dimension_field.title == "other"
-				@quality_dimension_field.title = params[:quality_dimension_field_title_other]
-			elsif @quality_dimension_field.title.starts_with?("all ")
-				QualityDimensionField.add_all_dimensions_of_title_type(@quality_dimension_field)
-			end
-			if @quality_dimension_field.title == ""
-				problem_html = "That is not a valid selection. Please choose a valid dimension from the list or choose 'Other'."
-			else	
-				@quality_dimension_field.save
-				@quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => @quality_dimension_field.extraction_form_id).all
-			end	
-		end
-  else
-	problem_html = create_error_message_html(@quality_dimension_field.errors)
-	flash[:modal_error] = problem_html
-  end
+		  @extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
+      @project = Project.find(@extraction_form.project_id)  
+      @quality_dimension_fields = QualityDimensionField.where(:extraction_form_id=>@extraction_form.id).order("question_number ASC")
+    else
+	    problem_html = create_error_message_html(@quality_dimension_field.errors)
+	    flash[:modal_error] = problem_html
+    end
   end
   
   # delete a quality dimension field (custom field)
   def destroy
     @quality_dimension_field = QualityDimensionField.find(params[:id])
-  	@extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
+    @extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
   	@project = Project.find(@extraction_form.project_id)
   end
 
@@ -118,6 +90,35 @@ class QualityDimensionFieldsController < ApplicationController
       @model = @model_name.dup 
       @saved = true 
       render '/question_builder/create' 
+    end
+  end
+
+  def reorder
+    @project = Project.find(params[:project_id])
+    @extraction_form = ExtractionForm.find(params[:extraction_form_id])
+    qd = QualityDimensionField.find(params[:selector_id])
+    unless qd.nil?
+      new_row = params[:new_row_num]
+      QualityDimensionField.transaction do 
+        if qd.question_number.blank?
+          QualityDimensionField.assign_initial_qnums(@extraction_form.id)
+          qd = QualityDimensionField.find(params[:selector_id])
+        end
+        shift_question_numbers(qd, new_row)
+        qd.question_number = new_row.to_i
+        qd.save 
+      end
+    end
+    @quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => @extraction_form.id).order("question_number ASC")
+  end
+
+  def shift_question_numbers(dimension, new_qnum)
+    onum = dimension.question_number
+    nnum = new_qnum.to_i 
+    if onum < nnum 
+      ActiveRecord::Base.connection.execute("update quality_dimension_fields set question_number = question_number - 1 where extraction_form_id = #{dimension.extraction_form_id} and question_number > #{onum} and question_number <= #{nnum};")
+    elsif onum > nnum 
+      ActiveRecord::Base.connection.execute("update quality_dimension_fields set question_number = question_number + 1 where extraction_form_id = #{dimension.extraction_form_id} and question_number < #{onum} and question_number >= #{nnum};")
     end
   end
 end

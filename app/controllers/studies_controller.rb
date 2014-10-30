@@ -703,7 +703,7 @@ class StudiesController < ApplicationController
 			@quality_rating = @exists.nil? ? QualityRatingDataPoint.new : @exists
 			@quality_dimension_field = QualityDimensionField.new
 			@quality_dimension_data_point = QualityDimensionDataPoint.new
-			@quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => @ef_id).all
+			@quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => @ef_id).order("question_number ASC")
 		else
 			flash["error"] = "That section is not included in the current extraction form."
 			redirect_to edit_project_study_path(params[:project_id], @study.id)				
