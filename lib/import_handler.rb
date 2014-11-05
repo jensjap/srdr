@@ -98,12 +98,13 @@ class ImportHandler  #{{{1
             end
         end
 
-        # outcome_detail seems to always exist.
         ef_section_option_by_outcome = EfSectionOption.\
             where(["extraction_form_id=? AND section=?",
                    ef_id, "outcome_detail"]).first
-        ef_section_option_by_outcome.by_outcome = 0
-        ef_section_option_by_outcome.save
+        if ef_section_option_by_outcome
+          ef_section_option_by_outcome.by_outcome = 0
+          ef_section_option_by_outcome.save
+        end
     end
 
     def process_rows  #{{{2

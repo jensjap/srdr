@@ -1021,7 +1021,7 @@ class StudiesController < ApplicationController
         obj_file          = params[:simport_upload][:simport_file]
 
         # Need to convert the value received from params to proper boolean.
-        force = true ? force_create=="true" : false
+        force = force_create=="true" ? true : false
 
         begin
             # Prepare the file on the local file system.
