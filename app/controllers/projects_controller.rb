@@ -18,17 +18,17 @@ class ProjectsController < ApplicationController
   # show list of published projects, sorted by created date (todo: implement sorting on these)
   def published
   	puts "====================== calling projects::published"
-    @projects = Project.where(:is_public=>true).order("created_at DESC").paginate(:page=>params[:page], :per_page=>15)
-      @ef_ids = Hash.new    # Collect extraction forms attached to each project
-      @projects.each do |project|
-        efs = ExtractionForm.where(:project_id => project.id).all
-        if !efs.nil? && (efs.size > 0)
-            puts "........ loaded "+efs.size.to_s+" EFs for project "+project.id.to_s
-            @ef_ids[project.id.to_s] = efs
-        else
-            puts "no efs found for project "+project.id.to_s
-        end
+    @projects = Project.where(:is_public=>true).order("created_at DESC").paginate(:page=>params[:page], :per_page=>30)
+    @ef_ids = Hash.new    # Collect extraction forms attached to each project
+    @projects.each do |project|
+      efs = ExtractionForm.where(:project_id => project.id).all
+      if !efs.nil? && (efs.size > 0)
+          # puts "........ loaded "+efs.size.to_s+" EFs for project "+project.id.to_s
+          @ef_ids[project.id.to_s] = efs
+      else
+          puts "no efs found for project "+project.id.to_s
       end
+    end
   end
   
   # index
