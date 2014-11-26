@@ -41,7 +41,7 @@ class QualityDimensionFieldsController < ApplicationController
         QualityDimensionField.transaction do 
           nextnum = QualityDimensionField.where(:extraction_form_id=>extraction_form_id).maximum(:question_number)
           if nextnum.nil?
-            QualityDimensionField.assign_initial_qnums(ef_id)
+            QualityDimensionField.assign_initial_qnums(extraction_form_id)
             nextnum = QualityDimensionField.where(:extraction_form_id=>extraction_form_id).maximum(:question_number)
           end
           nextnum += 1
