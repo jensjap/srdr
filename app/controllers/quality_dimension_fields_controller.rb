@@ -76,6 +76,12 @@ class QualityDimensionFieldsController < ApplicationController
     @quality_dimension_field = QualityDimensionField.find(params[:id])
     @extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
   	@project = Project.find(@extraction_form.project_id)
+    QualityDimensionField.transaction do 
+      ActiveRecord::Base.connection.execute("UPDATE quality_dimension_fields SET question_number = question_number - 1 WHERE extraction_form_id = #{@extraction_form.id} AND question_number > #{@quality_dimension_field.question_number};")
+    end
+    @quality_dimension_field.destroy
+  
+    @quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => @extraction_form.id).order("question_number ASC")    
   end
 
   def create_from_defaults

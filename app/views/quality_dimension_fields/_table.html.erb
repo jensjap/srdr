@@ -16,7 +16,7 @@
 <td scope='row'><%= qa.field_notes %></td>
 <td scope='row'>
 <%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt => "Edit") + "Edit Quality Dimension", edit_quality_dimension_field_path(qa, :extraction_form_id => @extraction_form.id), :remote=>true, :class => "tooltip_edit inline-block",:title=>"Edit Quality Dimension: #{qa.title}" %><br/>
-<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Quality Dimension", quality_dimension_field_path(qa), :method=>:delete, :remote => true, :class => "tooltip_delete inline-block", :title=>"Remove Quality Dimension: #{qa.title}" %>
+<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Quality Dimension", quality_dimension_field_path(qa), :method=>:delete, :confirm=>"Are you sure? This operation will also remove any data already associated with this dimension.", :remote => true, :class => "inline-block", :title=>"Remove Quality Dimension: #{qa.title}" %>
 </td>
 </tr>
 <% end %>

@@ -1,19 +1,3 @@
-var str = "<%= @has_study_data %>" ;
-var has_study_data = (str === 'true');
-var message = "Are you sure you want to delete this column?";
-if(has_study_data){
-	message = "One or more studies have been created that use this data item. Removing this data item will remove it for these studies as well. Are you sure you want to continue?";
-}	
-if (confirm(message)){
-	<%
-	QualityDimensionField.transaction do 
-  	ActiveRecord::Base.connection.execute("UPDATE quality_dimension_fields SET question_number = question_number - 1 WHERE extraction_form_id = #{@extraction_form.id} AND question_number > #{@quality_dimension_field.question_number};")
-	end
-	@quality_dimension_field.destroy
-	%>
-	<% @quality_dimension_fields = QualityDimensionField.where(:extraction_form_id => @extraction_form.id).order("question_number ASC") %>			
-	$("#quality_dimension_fields_table").html("<%= escape_javascript(render :partial => "quality_dimension_fields/table") %>");
-	$("#removed_item_indicator_dim").show().delay(500).fadeOut(300);
-	$("#validation_message_dim").html("");			
-
-}
+$("#quality_dimension_fields_table").html("<%= escape_javascript(render :partial => "quality_dimension_fields/table") %>");
+$("#removed_item_indicator_dim").show().delay(500).fadeOut(300);
+$("#validation_message_dim").html("");			
