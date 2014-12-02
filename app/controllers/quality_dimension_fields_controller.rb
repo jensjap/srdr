@@ -44,6 +44,10 @@ class QualityDimensionFieldsController < ApplicationController
             QualityDimensionField.assign_initial_qnums(extraction_form_id)
             nextnum = QualityDimensionField.where(:extraction_form_id=>extraction_form_id).maximum(:question_number)
           end
+          # In cases where no quality dimension field exists yet, we need to start the counter
+          if nextnum.nil?
+            nextnum = 0
+          end
           nextnum += 1
           QualityDimensionField.create(:title=>title, :field_notes => field_notes, :question_number => nextnum,:extraction_form_id=>extraction_form_id)
         end
