@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131009001953) do
+ActiveRecord::Schema.define(:version => 20141029220724) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
 
   create_table "adverse_event_results", :force => true do |t|
     t.integer  "column_id"
-    t.string   "value"
+    t.text     "value"
     t.integer  "adverse_event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -318,6 +318,34 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
     t.string   "section_name"
   end
 
+  create_table "counts", :id => false, :force => true do |t|
+    t.integer "EFID",                   :default => 0
+    t.boolean "ArmD"
+    t.integer "nArmD",     :limit => 8, :default => 0
+    t.boolean "OutcomeD"
+    t.integer "nOutcomeD", :limit => 8, :default => 0
+    t.boolean "BaseD"
+    t.integer "nBaseD",    :limit => 8, :default => 0
+    t.boolean "DesignD"
+    t.integer "nDesignD",  :limit => 8, :default => 0
+    t.boolean "DxTestD"
+    t.integer "nDxTestD",  :limit => 8, :default => 0
+    t.integer "QualityD",  :limit => 8, :default => 0
+  end
+
+  create_table "data_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.string   "status",           :default => "pending"
+    t.text     "message"
+    t.datetime "requested_at"
+    t.integer  "responder_id"
+    t.datetime "responded_at"
+    t.datetime "last_download_at"
+    t.integer  "download_count",   :default => 0
+    t.integer  "request_count",    :default => 0
+  end
+
   create_table "default_adverse_event_columns", :force => true do |t|
     t.string   "header"
     t.string   "name"
@@ -378,10 +406,10 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
   end
 
   create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0, :null => false
-    t.integer  "attempts",   :default => 0, :null => false
-    t.text     "handler",                   :null => false
-    t.text     "last_error"
+    t.integer  "priority",                         :default => 0, :null => false
+    t.integer  "attempts",                         :default => 0, :null => false
+    t.text     "handler",    :limit => 2147483647,                :null => false
+    t.text     "last_error", :limit => 2147483647
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
@@ -557,11 +585,11 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
 
   create_table "eft_arm_details", :force => true do |t|
     t.integer "extraction_form_template_id"
-    t.text    "question"
+    t.text    "question",                    :limit => 16777215
     t.string  "field_type"
     t.string  "field_note"
     t.integer "question_number"
-    t.text    "instruction"
+    t.text    "instruction",                 :limit => 16777215
     t.boolean "is_matrix"
     t.boolean "include_other_as_option"
   end
@@ -660,11 +688,11 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
 
   create_table "eft_outcome_details", :force => true do |t|
     t.integer "extraction_form_template_id"
-    t.text    "question"
+    t.text    "question",                    :limit => 16777215
     t.string  "field_type"
     t.string  "field_note"
     t.integer "question_number"
-    t.text    "instruction"
+    t.text    "instruction",                 :limit => 16777215
     t.boolean "is_matrix"
     t.boolean "include_other_as_option"
   end
@@ -674,6 +702,26 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
     t.string  "note"
     t.integer "extraction_form_template_id"
     t.string  "outcome_type"
+  end
+
+  create_table "eft_quality_detail_fields", :force => true do |t|
+    t.integer "eft_quality_detail_id"
+    t.string  "option_text"
+    t.string  "subquestion"
+    t.boolean "has_subquestion"
+    t.integer "row_number"
+    t.integer "column_number"
+  end
+
+  create_table "eft_quality_details", :force => true do |t|
+    t.integer "extraction_form_id"
+    t.text    "question"
+    t.string  "field_type"
+    t.string  "field_note"
+    t.integer "question_number"
+    t.text    "instruction"
+    t.boolean "is_matrix"
+    t.boolean "include_other_as_option"
   end
 
   create_table "eft_quality_dimension_fields", :force => true do |t|
@@ -1115,7 +1163,7 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
     t.integer  "study_id"
     t.text     "title"
     t.text     "author"
-    t.string   "country"
+    t.text     "country"
     t.string   "year"
     t.string   "pmid"
     t.datetime "created_at"
@@ -1124,6 +1172,7 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
     t.string   "volume"
     t.string   "issue"
     t.string   "trial_title"
+    t.text     "abstract"
   end
 
   add_index "primary_publications", ["study_id"], :name => "StudyData"
@@ -1135,14 +1184,63 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
     t.text     "notes"
     t.string   "funding_source"
     t.integer  "creator_id"
-    t.boolean  "is_public",      :default => false
+    t.boolean  "is_public",                :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "contributors"
     t.text     "methodology"
+    t.string   "prospero_id"
+    t.string   "search_strategy_filepath"
+    t.boolean  "public_downloadable",      :default => false
   end
 
   add_index "projects", ["creator_id"], :name => "project_creator_idx"
+
+  create_table "quality_detail_data_points", :force => true do |t|
+    t.integer  "quality_detail_field_id"
+    t.text     "value"
+    t.text     "notes"
+    t.integer  "study_id"
+    t.integer  "extraction_form_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "subquestion_value"
+    t.integer  "row_field_id",            :default => 0
+    t.integer  "column_field_id",         :default => 0
+    t.integer  "arm_id",                  :default => 0
+    t.integer  "outcome_id",              :default => 0
+  end
+
+  add_index "quality_detail_data_points", ["quality_detail_field_id", "study_id"], :name => "qddp_odix"
+
+  create_table "quality_detail_fields", :force => true do |t|
+    t.integer  "quality_detail_id"
+    t.string   "option_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "subquestion"
+    t.boolean  "has_subquestion"
+    t.integer  "column_number",     :default => 0
+    t.integer  "row_number",        :default => 0
+  end
+
+  add_index "quality_detail_fields", ["quality_detail_id", "row_number"], :name => "qdf_odix"
+
+  create_table "quality_details", :force => true do |t|
+    t.text     "question"
+    t.integer  "extraction_form_id"
+    t.string   "field_type"
+    t.string   "field_note"
+    t.integer  "question_number"
+    t.integer  "study_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "instruction"
+    t.boolean  "is_matrix",               :default => false
+    t.boolean  "include_other_as_option"
+  end
+
+  add_index "quality_details", ["extraction_form_id", "question_number"], :name => "qd_efix"
 
   create_table "quality_dimension_data_points", :force => true do |t|
     t.integer  "quality_dimension_field_id"
@@ -1166,6 +1264,7 @@ ActiveRecord::Schema.define(:version => 20131009001953) do
     t.integer  "study_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "question_number"
   end
 
   add_index "quality_dimension_fields", ["extraction_form_id"], :name => "StudyData"
