@@ -5,6 +5,7 @@ class OutcomeDataEntriesController < ApplicationController
 	def show_timepoints
 		ocid = params[:outcome_id]
 		@outcome = Outcome.find(ocid, :select=>["id","title","description","units","study_id","extraction_form_id","outcome_type"])
+		@project_id = params[:project_id]
 		ef_id = params[:extraction_form_id]
 		@is_diagnostic = ExtractionForm.is_diagnostic?(ef_id)
 
@@ -64,6 +65,7 @@ class OutcomeDataEntriesController < ApplicationController
   	@outcome_id = params[:outcome_id]
   	@outcome = Outcome.find(@outcome_id)
   	@selected_timepoints = params[:selected_timepoints]
+  	@project_id = params[:project_id]
   	unless params[:subgroup_id].nil?
 			@subgroup = OutcomeSubgroup.find(params[:subgroup_id])
 		else
@@ -217,7 +219,6 @@ class OutcomeDataEntriesController < ApplicationController
 					ocde.destroy                 # remove the data entry object
 				end
 			end
-		
 			study = Study.find(outcome.study_id)
 			@existing_results = study.get_existing_results_for_session(@extraction_form_id)
 			@message_div = 'deleted_item_indicator'
@@ -229,6 +230,7 @@ class OutcomeDataEntriesController < ApplicationController
 			#-----------------------------------------
 			# update the existing comparisons table
 			#-----------------------------------------
+			@study_arms = Arm.find(:all, :conditions=>["study_id = ? AND extraction_form_id=?",study.id, @extraction_form_id], :order=>"display_number ASC", :select=>["id","title","description","display_number","extraction_form_id","note","default_num_enrolled","is_intention_to_treat"])
 			@existing_comparisons = OutcomeDataEntry.get_existing_comparisons_for_session(ocdes)
 			
 		else
