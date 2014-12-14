@@ -92,10 +92,12 @@ class OutcomesController < ApplicationController
       timepoint_numbers = params[:timepoint_numbers]
       timepoint_units = params[:timepoint_units]
       # put the timepoint numbers in the proper order by key
-      timepoint_numbers = timepoint_numbers.sort{|a,b| b[0].to_i<=>a[0].to_i}
-      timepoint_numbers.each do |numArray|
+      puts "Timepoint numbers is #{timepoint_numbers} and units is #{timepoint_units}"
+      timepoint_numbers = timepoint_numbers.sort{|a,b| a[0].to_i<=>b[0].to_i}
+
+      timepoint_numbers.each_with_index do |numArray, i|
         OutcomeTimepoint.create(:outcome_id=>@outcome.id, :number=>numArray[1],
-                                :time_unit=>timepoint_units[numArray[0]])
+                                :time_unit=>timepoint_units[numArray[0].to_s])
       end
       @outcome_timepoints = @outcome.outcome_timepoints
 
