@@ -87,6 +87,7 @@ class OutcomeDataEntriesController < ApplicationController
 	def update_table_rows
 	  	@outcome_id = params[:outcome_id]
 	  	@outcome = Outcome.find(@outcome_id)
+	  	@project_id = params[:project_id]
 	  	@is_diagnostic = ExtractionForm.is_diagnostic?(@outcome.extraction_form_id)
 	  	@checkbox_timepoints = @outcome.outcome_timepoints
 	  	unless params[:subgroup_id].nil?
@@ -194,6 +195,10 @@ class OutcomeDataEntriesController < ApplicationController
 			@all_comparators, @num_comparators, @comparison_datapoints, @wa_comparisons, @wa_measures, 
 			@wa_comparators, @wa_all_comparators, @wa_datapoints, @footnotes = OutcomeDataEntry.get_information_for_entry_table(@outcome,@subgroup,@selected_timepoints)
 	  	
+	  	# hack to get the project id back into the mix
+	  	ef = ExtractionForm.find(@extraction_form_id)
+	  	@project_id = ef.project_id
+    	
     	render '/outcome_data_entries/show_timepoints'
 	end
 	
@@ -410,6 +415,7 @@ class OutcomeDataEntriesController < ApplicationController
   	@outcome_id = params[:outcome_id]
   	@comparisons = OutcomeDataEntry.create_comparisons("between",@selected_tp_array,@outcome_id,subgroup_id)
   	@outcome = Outcome.find(@outcome_id)
+  	@project_id = params[:project_id]
 		
   	#-----------------------------------------
   	# Data for the entry table
@@ -430,6 +436,7 @@ class OutcomeDataEntriesController < ApplicationController
 	  @selected_timepoints = params[:selected_timepoints]
 	  @extraction_form_id = params[:extraction_form_id]
 	  @study_id = params[:study_id]
+	  @project_id = params[:project_id]
 	  @comparison_id = params[:comparison_id]
 	  outcome_type = params[:outcome_type]
 	  @subgroup_id = params[:subgroup_id] == "" ? 0 : params[:subgroup_id]
@@ -523,7 +530,8 @@ class OutcomeDataEntriesController < ApplicationController
 
 			@index_test_options, @reference_test_options = DiagnosticTest.get_select_options(@index_tests,@reference_tests,@thresholds)
 		end
-		
+			ef = ExtractionForm.find(@extraction_form_id)
+			@project_id = ef.project_id
 	  	render "outcome_data_entries/update_measures"
 	end
 	
@@ -574,7 +582,8 @@ class OutcomeDataEntriesController < ApplicationController
 			@index_test_options, @reference_test_options = DiagnosticTest.get_select_options(@index_tests,@reference_tests,@thresholds)
 		end
 		#----------------
-
+			ef = ExtractionForm.find(@extraction_form_id)
+			@project_id = ef.project_id 
 	  	render "/outcome_data_entries/show_timepoints"
 	end
 
@@ -601,7 +610,8 @@ class OutcomeDataEntriesController < ApplicationController
 		@measures, @datapoints, @arms, @comparisons, @comparison_measures, @comparators, 
 		@all_comparators, @num_comparators, @comparison_datapoints, @wa_comparisons, @wa_measures, 
 		@wa_comparators, @wa_all_comparators, @wa_datapoints, @footnotes = OutcomeDataEntry.get_information_for_entry_table(@outcome,@subgroup,@selected_timepoints)
-  	
+  	ef = ExtractionForm.find(@extraction_form_id)
+		@project_id = ef.project_id 
 		render '/outcome_data_entries/show_entry_table'
 	end
 	
@@ -620,7 +630,7 @@ class OutcomeDataEntriesController < ApplicationController
   	# comparisons within-arm are created on a row-by-row basis, using the row number as the group_id
   	OutcomeDataEntry.create_comparisons("within",[1],@outcome_id,subgroup_id)
   	@outcome = Outcome.find(@outcome_id)
-  	
+  	@project_id = params[:project_id]
   	unless params[:subgroup_id].nil?
 			@subgroup = OutcomeSubgroup.find(params[:subgroup_id])
 		else
@@ -661,7 +671,7 @@ class OutcomeDataEntriesController < ApplicationController
 	  @comparison_id = @comparison.id
 	  @wa_measures = OutcomeDataEntry.get_within_arm_measures([@comparison])
 	  @arms = Study.get_arms(study_id)
-
+	  @project_id = params[:project_id]
 	  render 'outcome_data_entries/wa_comparisons/add_within_arm_comparison_row.js.erb'
 	end
 	def remove_within_arm_comparison_row
@@ -670,7 +680,7 @@ class OutcomeDataEntriesController < ApplicationController
 		@study_id = @outcome.study_id
 		@extraction_form_id = @outcome.extraction_form_id
 		wac_id = params[:wac_id]
-		
+		@project_id = params[:project_id]
 		Comparison.destroy(wac_id)
 		@selected_timepoints = params[:selected_timepoints]
 		
@@ -696,6 +706,7 @@ class OutcomeDataEntriesController < ApplicationController
 	  @outcome_type = params[:outcome_type]
 	  @outcome_id = params[:outcome_id]
 	  @subgroup_id = params[:subgroup_id]
+	  @project_id = params[:project_id]
 	  # get a list of all measures
 	  @all_measures = DefaultComparisonMeasure.where(:outcome_type=>@outcome_type.downcase,:within_or_between=>0)
 	  # get the measures for this particular comparison

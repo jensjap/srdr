@@ -10,9 +10,10 @@
   <% comparator_ids = Hash.new%>
 	<%= form_tag url_for(:controller=>:outcome_data_points, :action=>:create), :remote=>true do %>
 
-		<input type='submit' value='Submit'/>
+		<!--<input type='submit' value='Submit'/>-->
 		<input type='hidden' name='subgroup_id' value="<%= @subgroup.nil? ? 0 : @subgroup.id %>">
   	<input type='hidden' name='outcome_id' value="<%= @outcome_id %>">
+    <input type='hidden' name='project_id' value="<%= @project_id %>">
   	<input type="hidden" name="selected_timepoints" value="<%= @selected_timepoints %>">
     <center><%= render :partial=>"save_indicators/default" %></center><br/>
 
@@ -727,7 +728,7 @@ function prepareForm(){
           selected_timepoints: "<%= @selected_timepoints %>", 
           outcome_id: "<%= @outcome.id %>",
           subgroup_id: $("#subgroup_selector").val(),
-          project_id: "<%= @project_id %>",
+          project_id: "<%= @project_id %>"
         }),
         success: function(){
           $("#loading_div").remove();
@@ -853,6 +854,7 @@ function prepareForm(){
           subgroup_id: $("#subgroup_selector").val(),
           outcome_type: "<%= @outcome.outcome_type %>",
           study_id: "<%= @study_id %>",
+          project_id: "<%= @project_id %>",
           extraction_form_id: "<%= @extraction_form_id %>",
           selected_timepoints: "<%= @selected_timepoints %>" 
         }),
@@ -1000,6 +1002,7 @@ function prepareForm(){
               outcome_id: "<%= @outcome.id %>",
               subgroup_id: $("#subgroup_selector").val(),
               study_id: "<%= @study_id %>",
+              project_id: "<%= @project_id %>",
               extraction_form_id: "<%= @extraction_form_id %>",
               comparison_type: "between"
             }),
@@ -1053,6 +1056,7 @@ function prepareForm(){
         data:({
           selected_timepoints: "<%= @selected_timepoints %>", 
           outcome_id: "<%= @outcome.id %>",
+          project_id: "<%= @project_id %>",
           subgroup_id: $("#subgroup_selector").val()
         }),
         success: function(){
@@ -1098,6 +1102,7 @@ function prepareForm(){
               outcome_id: "<%= @outcome.id %>",
               subgroup_id: $("#subgroup_selector").val(),
               study_id: "<%= @study_id %>",
+              project_id: "<%= @project_id %>",
               extraction_form_id: "<%= @extraction_form_id %>",
               comparison_type: "within"
             }),
@@ -1127,6 +1132,7 @@ function prepareForm(){
         subgroup_id: $("#subgroup_selector").val(),
         outcome_type: "<%= @outcome.outcome_type %>",
         study_id: "<%= @study_id %>",
+        project_id: "<%= @project_id %>",
         ef_id: "<%= @extraction_form_id %>",
         group_id: row_num,
         comparator_id: comparator_id,
@@ -1157,6 +1163,7 @@ function prepareForm(){
             data:({
               outcome_id: "<%= @outcome.id %>",
               subgroup_id: $("#subgroup_selector").val(),
+              project_id: "<%= @project_id %>",
               wac_id: wac_id,
               selected_timepoints: "<%= @selected_timepoints %>"
             }),
@@ -1200,6 +1207,7 @@ function prepareForm(){
                 comparison_id: comparison_id,
                 outcome_id: "<%= @outcome.id %>",
                 subgroup_id: $("#subgroup_selector").val(),
+                project_id: "<%= @project_id %>",
                 outcome_type: "<%= @outcome.outcome_type %>",
                 selected_timepoints: "<%= @selected_timepoints %>" 
               }),
@@ -1222,6 +1230,7 @@ function prepareForm(){
           comparison_id: comparison_id,
           outcome_id: "<%= @outcome.id %>",
           subgroup_id: $("#subgroup_selector").val(),
+          project_id: "<%= @project_id %>",
           outcome_type: "<%= @outcome.outcome_type %>",
           selected_timepoints: "<%= @selected_timepoints %>" 
         }),
@@ -1326,6 +1335,7 @@ function prepareForm(){
                 outcome_id: "<%= @outcome.id %>",
                 subgroup_id: $("#subgroup_selector").val(),
                 outcome_type: "<%= @outcome.outcome_type %>",
+                project_id: "<%= @project_id %>",
                 selected_timepoints: "<%= @selected_timepoints %>",
                 new_position: new_position,
                 ocde_id: ocde_id
@@ -1347,6 +1357,7 @@ function prepareForm(){
           subgroup_id: $("#subgroup_selector").val(),
           outcome_type: "<%= @outcome.outcome_type %>",
           selected_timepoints: "<%= @selected_timepoints %>",
+          project_id: "<%= @project_id %>",
           new_position: new_position,
           ocde_id: ocde_id
         }),
