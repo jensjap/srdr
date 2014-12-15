@@ -116,7 +116,9 @@
 	<% end %>
   <tr id="new_measure_title_row" class='new_measure_row'>
   	<th colspan='2'>
-  		<a href='#' id='define_measure_link'><img alt="Add a User-Defined measure" src='/images/add_user_defined_measure.png' title='Add a User-Defined Measure'/></a>
+      <% unless @project_id.to_i == 370 %>
+  		  <a href='#' id='define_measure_link'><img alt="Add a User-Defined measure" src='/images/add_user_defined_measure.png' title='Add a User-Defined Measure'/></a>
+      <% end %>
   	</th>
   </tr>
   

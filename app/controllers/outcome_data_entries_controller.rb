@@ -7,6 +7,8 @@ class OutcomeDataEntriesController < ApplicationController
 		@outcome = Outcome.find(ocid, :select=>["id","title","description","units","study_id","extraction_form_id","outcome_type"])
 		@project_id = params[:project_id]
 		ef_id = params[:extraction_form_id]
+		ef = ExtractionForm.find(ef_id)
+		@project_id = ef.project_id 
 		@is_diagnostic = ExtractionForm.is_diagnostic?(ef_id)
 
 		unless params[:subgroup_id].nil?
@@ -145,6 +147,7 @@ class OutcomeDataEntriesController < ApplicationController
 	def show_measures_form
 		@ocde_id = params[:ocde_id]
 		@subgroup_id = params[:subgroup_id]
+		@project_id = params[:project_id]
 		ocde = OutcomeDataEntry.find(@ocde_id)
 		@timepoint_id = params[:timepoint_id]
 		outcome_type = params[:outcome_type]

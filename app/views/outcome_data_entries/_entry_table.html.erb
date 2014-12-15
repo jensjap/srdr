@@ -1,6 +1,5 @@
 <%# The width to use for the comparator select boxes %>
 <% select_width = "175px" %>
-
 <!--<div style='display:block; width:auto; border-top: solid 1px #C5CACE; margin-top:10px;padding-top:3px'>
 </div>--><br/>
 <strong>Note:</strong> After successfully saving data to the table, you may double-click on the cell containing data to set footnotes and other options. 
@@ -604,6 +603,7 @@ function prepareForm(){
           outcome_id: "<%= @outcome.id %>",
           outcome_type: "<%= @outcome.outcome_type %>",
           subgroup_id: $("#subgroup_selector").val(),
+          project_id: "<%= @project_id %>",
           selected_timepoints: "<%= @selected_timepoints %>" 
         }),
         success: function(){
@@ -654,6 +654,7 @@ function prepareForm(){
                 outcome_type: "<%= @outcome.outcome_type %>",
                 study_id: "<%= @study_id %>",
                 extraction_form_id: "<%= @extraction_form_id %>",
+                project_id: "<%= @project_id %>",
                 selected_timepoints: "<%= @selected_timepoints %>",
                 subgroup_id: $("#subgroup_selector").val()
               }),
@@ -676,6 +677,7 @@ function prepareForm(){
           study_id: "<%= @study_id %>",
           extraction_form_id: "<%= @extraction_form_id %>",
           selected_timepoints: "<%= @selected_timepoints %>",
+          project_id: "<%= @project_id %>",
           subgroup_id: $("#subgroup_selector").val()
         }),
         success: function(){
@@ -705,6 +707,7 @@ function prepareForm(){
               data:({
                 selected_timepoints: "<%= @selected_timepoints %>", 
                 outcome_id: "<%= @outcome.id %>",
+                project_id: "<%= @project_id %>",
                 subgroup_id: $("#subgroup_selector").val()
               }),
               success: function(){
@@ -723,7 +726,8 @@ function prepareForm(){
         data:({
           selected_timepoints: "<%= @selected_timepoints %>", 
           outcome_id: "<%= @outcome.id %>",
-          subgroup_id: $("#subgroup_selector").val()
+          subgroup_id: $("#subgroup_selector").val(),
+          project_id: "<%= @project_id %>",
         }),
         success: function(){
           $("#loading_div").remove();
@@ -769,6 +773,7 @@ function prepareForm(){
               subgroup_id: $("#subgroup_selector").val(),
               study_id: "<%= @study_id %>",
               extraction_form_id: "<%= @extraction_form_id %>",
+              project_id: "<%= @project_id %>",
               ocde_id: ocde_id
             }),
             success: function(){
@@ -825,6 +830,7 @@ function prepareForm(){
                 subgroup_id: $("#subgroup_selector").val(),
                 outcome_type: "<%= @outcome.outcome_type %>",
                 study_id: "<%= @study_id %>",
+                project_id: "<%= @project_id %>",
                 extraction_form_id: "<%= @extraction_form_id %>",
                 selected_timepoints: "<%= @selected_timepoints %>" 
               }),
