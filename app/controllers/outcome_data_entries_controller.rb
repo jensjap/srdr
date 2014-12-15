@@ -153,7 +153,11 @@ class OutcomeDataEntriesController < ApplicationController
 		@timepoint_id = params[:timepoint_id]
 		outcome_type = params[:outcome_type]
 		outcome_type = outcome_type == "Time to Event" ? "survival" : outcome_type
-		@all_measures = DefaultOutcomeMeasure.find(:all,:conditions=>["outcome_type = ? AND measure_type <> ?", outcome_type.downcase, 0])		
+		if @project_id == 370
+			@all_measures = DefaultCevgMeasure.find(:all, :conditions=>["outcome_type = ? AND results_type=?",outcome_type, 0])
+		else
+			@all_measures = DefaultOutcomeMeasure.find(:all,:conditions=>["outcome_type = ? AND measure_type <> ?", outcome_type.downcase, 0])		
+		end
 		@selected_measures = ocde.get_measures(outcome_type)
 		@all_user_defined_measures = ocde.get_all_user_defined_measures
 		@selected_timepoints = params[:selected_timepoints] #indicates the timepoint in the dropdown
@@ -447,7 +451,11 @@ class OutcomeDataEntriesController < ApplicationController
 	  # get a list of all measures
 	  ocType = section_num.nil? ? outcome_type.downcase : "diagnostic_#{section_num}"
 	  ocType = ocType == "time to event" ? "survival" : ocType
-	  @all_measures = DefaultComparisonMeasure.where(:outcome_type=>ocType,:within_or_between=>1)
+	  if @project_id == 370
+	  	@all_measures = DefaultCevgMeasure.where(:outcome_type=>ocType,:results_type=>1)
+	  else
+	  	@all_measures = DefaultComparisonMeasure.where(:outcome_type=>ocType,:within_or_between=>1)
+	  end
 	  
 	  # get the measures for this particular comparison
 	  @selected_measures = ComparisonMeasure.where(:comparison_id=>@comparison_id)

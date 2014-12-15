@@ -180,8 +180,12 @@ class OutcomeDataEntry < ActiveRecord::Base
             if use_defaults
                 # account for the switch in nomenclature
                 type = type=="Time to Event" ? "survival" : type
-                default_measures = DefaultOutcomeMeasure.find(:all,:conditions=>["outcome_type=? AND is_default=?",type.downcase,true],:select=>["title","description","unit","measure_type"])
-
+                
+                if self.project_id == 370
+                    default_measures = DefaultCevgMeasure.find(:all, :conditions=>["outcome_type=? AND results_type=?",type.downcase,0],:select=>["title","description","unit","measure_type"])
+                else
+                    default_measures = DefaultOutcomeMeasure.find(:all,:conditions=>["outcome_type=? AND is_default=?",type.downcase,true],:select=>["title","description","unit","measure_type"])
+                end
                 #print "found #{default_measures.length} defaults\n"
                 default_measures.each do |m|
                     tmp = OutcomeMeasure.create(:outcome_data_entry_id=>self.id, :title=>m.title, :description=>m.description, :unit=>m.unit, :measure_type=>m.measure_type)
@@ -194,6 +198,10 @@ class OutcomeDataEntry < ActiveRecord::Base
         return measures
     end
 
+    def project_id
+        ef = ExtractionForm.find(self.extraction_form_id)
+        return ef.project_id
+    end
     # given an array of data entry objects, gather up the measures for each
     # and create a hash with the data entry object ID as the key
     def self.get_measures_for_ocde_array ocde_array, type
