@@ -141,7 +141,8 @@ class OutcomeDataEntry < ActiveRecord::Base
             outcome_ids_for_search = Outcome.find(:all, :conditions=>["study_id=? AND extraction_form_id=? AND outcome_type=?",self.study_id,self.extraction_form_id,type],:select=>["id"]).collect{|x| x.id}
             # find the most recently created outcome entries
             existing_entries = OutcomeDataEntry.find(:all, :conditions=>["study_id=? AND extraction_form_id=? AND outcome_id IN (?)",self.study_id,self.extraction_form_id,outcome_ids_for_search],:select=>["id"],:order=>"updated_at DESC")
-            unless existing_entries.empty?
+            # IF IT'S PROJECT 370 WE ALWAYS WANT NEW MEASURES
+            unless existing_entries.empty? || self.project_id.to_i == 370
                 #puts "\nCouldn't find existing measures. Beginning to search...\n"
                 while !done_searching
                     # flip through the entries to determine if they have measures assigned to them
@@ -177,7 +178,7 @@ class OutcomeDataEntry < ActiveRecord::Base
                 end
             end
             # if no others exist, use defaults
-            if use_defaults
+            if use_defaults || self.project_id.to_i == 370
                 # account for the switch in nomenclature
                 type = type=="Time to Event" ? "survival" : type
                 
@@ -438,16 +439,31 @@ class OutcomeDataEntry < ActiveRecord::Base
         do_sorting = true
         # there should be one ocde per timepoint that was selected
         unless timepoints.empty?
+            needs_comparisons = true
             timepoints.each do |tp|
               puts "Starting at timepoint #{tp.id}\n\n"
               tmp = OutcomeDataEntry.find(:first, :conditions=>["outcome_id=? AND extraction_form_id=? AND timepoint_id=? AND study_id=? AND subgroup_id=?",ocid,efid,tp.id,sid,sgid],:select=>["id","display_number","timepoint_id","subgroup_id","outcome_id","extraction_form_id","study_id"])
 
               if tmp.nil?
                 puts "I'll have to create a new OCDE\n\n"
+                ef = ExtractionForm.find(efid)
+                project_id = ef.project_id
                 displayNum = OutcomeDataEntry.find(:last, :conditions=>["outcome_id=? AND extraction_form_id=? AND study_id=? AND subgroup_id=?",ocid,efid,sid,sgid],:select=>["display_number"],:order=>["display_number ASC"])                                                                    
                 displayNum = displayNum.nil? ? 1 : (displayNum.display_number.nil? ? 1 : displayNum.display_number + 1)
                 tmp = OutcomeDataEntry.create(:outcome_id=>ocid, :extraction_form_id=>efid, :timepoint_id=>tp.id, 
                                               :study_id=>sid, :display_number => displayNum,:subgroup_id=>sgid)
+                # IF IT'S THE CEVG PROJECT, LET'S ALSO CREATE THE COMPARISONS SECTIONS FOR THEM
+                if project_id.to_i == 370 && needs_comparisons
+                    study = Study.find(sid)
+                    arms = study.arms.collect{|x| x.id}
+                    if arms.length > 1
+                        btwn = OutcomeDataEntry.create_comparisons("between",timepoints.collect{|t| t.id},ocid,sgid)
+                    end
+                    if timepoints.length > 1 
+                        within = OutcomeDataEntry.create_comparisons("within",arms,ocid,sgid)
+                    end
+                    
+                end
               end
               puts "I didn't have to create a new one, but the display number is #{tmp.display_number}\n\n"
               if tmp.display_number.nil? || tmp.display_number == "" || tmp.display_number == 0

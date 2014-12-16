@@ -148,7 +148,7 @@ class Comparison < ActiveRecord::Base
 					defaults = DefaultComparisonMeasure.where(:is_default=>true, :outcome_type=>oc_type, :within_or_between=>w_or_b)
 				end
 			else
-				defaults = DefaultCevgMeasure.where(:outcome_type=>oc_type)
+				defaults = DefaultCevgMeasure.where(:outcome_type=>oc_type, :results_type=>1)
 			end
 			defaults.each do |d|
 				ComparisonMeasure.create(:comparison_id=>self.id, :title=>d.title,:description=>d.description, :unit=>d.unit,:measure_type=>d.measure_type)
