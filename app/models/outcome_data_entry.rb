@@ -70,28 +70,30 @@ class OutcomeDataEntry < ActiveRecord::Base
         comparisons = Comparison.where(:within_or_between=>'within',:study_id=>study_id, 
                                        :extraction_form_id=>ef_id, :outcome_id=>outcome_id)
         unless comparisons.empty?
-            # if the timepoint is included in the within-arm comparison, then destroy
-            # that comparison
-            comparisons.each do |c|
-                #print "looking at comparison #{c.id}\n\n"
-              comparators = c.comparators
-              unless comparators.empty?
-                comparators = comparators.first.comparator.split("_")   
-              end
-              #print "comparators is #{comparators} and timepoint_id is {#{self.timepoint_id}\n\n"
-              if comparators.include?(self.timepoint_id.to_s)
-                dps = c.comparison_data_points
-                    unless dps.empty?
-                        dps.each do |dp|
-                            if dp.footnote_number > 0
-                                OutcomeDataEntry.update_footnote_numbers_on_delete(dp.footnote_number, outcome_id, subgroup_id)
-                                dp.destroy
-                            end 
-                        end
-                    end
-                c.destroy
+          puts "DELETING WITHIN ARM COMPARISONS"
+          # if the timepoint is included in the within-arm comparison, then destroy
+          # that comparison
+          comparisons.each do |c|
+              #print "looking at comparison #{c.id}\n\n"
+            comparators = c.comparators
+            unless comparators.empty?
+              comparators = comparators.first.comparator.split("_")   
+            end
+            #print "comparators is #{comparators} and timepoint_id is {#{self.timepoint_id}\n\n"
+            if comparators.include?(self.timepoint_id.to_s)
+              dps = c.comparison_data_points
+              unless dps.empty?
+                  dps.each do |dp|
+                      if dp.footnote_number > 0
+                          OutcomeDataEntry.update_footnote_numbers_on_delete(dp.footnote_number, outcome_id, subgroup_id)
+                          dp.destroy
+                      end 
+                  end
               end
             end
+            puts "DESTROYING #{c.id}"
+            c.destroy
+          end
         end
     end
 
@@ -1068,8 +1070,6 @@ class OutcomeDataEntry < ActiveRecord::Base
     # after being sorted based on the display numbers of the ocdes
     ocdes, timepoints = OutcomeDataEntry.get_ocde_objects(timepoints,outcome.id,outcome.study_id,outcome.extraction_form_id, subgroup_id)
     measures = OutcomeDataEntry.get_measures_for_ocde_array(ocdes,outcome.outcome_type)
-    measures.keys.each do |key|
-    end
     # retrieve the datapoints and footnotes for the table
     sgid = subgroup.nil? ? 0 : subgroup.id
     datapoints = OutcomeDataEntry.get_datapoints_for_ocde_array(ocdes)
