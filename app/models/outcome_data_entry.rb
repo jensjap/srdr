@@ -454,12 +454,13 @@ class OutcomeDataEntry < ActiveRecord::Base
                                               :study_id=>sid, :display_number => displayNum,:subgroup_id=>sgid)
                 # IF IT'S THE CEVG PROJECT, LET'S ALSO CREATE THE COMPARISONS SECTIONS FOR THEM
                 if project_id.to_i == 370 && needs_comparisons
+                    outcome = Outcome.find(ocid)
                     study = Study.find(sid)
                     arms = study.arms.collect{|x| x.id}
                     if arms.length > 1
                         btwn = OutcomeDataEntry.create_comparisons("between",timepoints.collect{|t| t.id},ocid,sgid)
                     end
-                    if timepoints.length > 1 
+                    if timepoints.length > 1 && outcome.outcome_type != 'survival'
                         within = OutcomeDataEntry.create_comparisons("within",[1],ocid,sgid)
                     end
                     

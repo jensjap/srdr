@@ -65,9 +65,17 @@ namespace :cevg_result_measures do
       survival_comparison.each do |title|
         print "."
         STDOUT.flush()
+        DefaultCevgMeasure.create(:outcome_type => 'survival', :title=>title, :is_default=>false, :results_type=>0)
+      end
+
+      survival_comparison.each do |title|
+        print "."
+        STDOUT.flush()
         DefaultCevgMeasure.create(:outcome_type => 'survival', :title=>title, :is_default=>false, :results_type=>1)
       end
   end
+
+
 
   desc "Run all default_data tasks"
   task :all => [:continuous, :categorical, :survival]
