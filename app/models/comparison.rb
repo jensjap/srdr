@@ -134,9 +134,7 @@ class Comparison < ActiveRecord::Base
 					end
 				end
 			end
-		end
-		# if there are still no comparisons containing measures, create new ones based on the defaults
-		if no_measures || ef.project_id.to_i == 370
+		elsif no_measures || ef.project_id.to_i == 370
 			oc = Outcome.find(ocid, :select=>[:outcome_type])
 			w_or_b = wORb == 'within' ? 0 : 1
 			oc_type = oc.outcome_type

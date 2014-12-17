@@ -460,7 +460,7 @@ class OutcomeDataEntry < ActiveRecord::Base
                         btwn = OutcomeDataEntry.create_comparisons("between",timepoints.collect{|t| t.id},ocid,sgid)
                     end
                     if timepoints.length > 1 
-                        within = OutcomeDataEntry.create_comparisons("within",arms,ocid,sgid)
+                        within = OutcomeDataEntry.create_comparisons("within",[1],ocid,sgid)
                     end
                     
                 end
