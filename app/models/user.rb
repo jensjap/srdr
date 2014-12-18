@@ -28,9 +28,15 @@
 # password encryption and password resetting. For more information see: https://github.com/binarylogic/authlogic
 # For specifics about setting up authlogic on rails 3, see http://www.dixis.com/?p=352
 class User < ActiveRecord::Base
+    before_save { email.downcase! }
+
     acts_as_authentic
 
-    validates :email, uniqueness: true
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    validates :email, presence:   true,
+                      format:     { with: VALID_EMAIL_REGEX },
+                      uniqueness: { case_sensitive: false }
+
     validates :login, uniqueness: true
     has_many :data_requests
     has_many :projects, :through => :user_project_roles
