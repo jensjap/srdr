@@ -13,24 +13,25 @@ continuous = [["Unit",""],
 							["N Analyzed","The number of patients analyzed"],
 							["Mean",""],
 							["Median",""],
+							["SD","Standard Deviation"],
+							["SE","Standard Error"],
 							["Least Squares Mean",""],
 							["Geometric Mean",""],
 							["Log Mean",""],
 						 ]
-continuous_defaults = ["N Analyzed", "Mean", "Standard Deviation"]
+continuous_defaults = ["N Analyzed", "Mean", "SD", "SE"]
 
 
 #-----------------------------------------------------------
 # DISPERSION
 #-----------------------------------------------------------								 
-continuous_dispersion = [["Standard Error",""],
-												 ["Mode",""],
+continuous_dispersion = [["Mode",""],
 												 ["Max",""],
 												 ["Min",""],
-												 ["95% Confidence Interval Lower Limit (95% LCI)",""],
-											   ["95% Confidence Interval Upper Limit (95% HCI)",""],
-											   ["90% Confidence Interval Lower Limit (90% LCI)",""],
-											   ["90% Confidence Interval Upper Limit (90% HCI)",""],
+												 ["95% CI low",""],
+											   ["95% CI high",""],
+											   ["90% CI low",""],
+											   ["90% CI high",""],
 											   ["25th Percentile",""],
 											   ["75th Percentile",""],
 												]
@@ -45,7 +46,7 @@ categorical = [["N Enrolled","The number of patients originally enrolled"],
 							["Incidence (per 1000)",""],
 							["Incidence (per 100,000)",""]
 						 ]
-categorical_defaults = ["N Enrolled", "Counts", "Standard Deviation"]		
+categorical_defaults = ["N Enrolled", "Counts"]		
 	 
 # SURVIVAL DATA
 #-----------------------------------------------------------								
@@ -54,12 +55,12 @@ survival = [["N Enrolled","The number of patients originally enrolled"],
 							["Counts",""],
 							["Proportions",""],
 							["Percentage",""],
-							["Standard Deviation",""],
-						  ["Standard Error",""],
-						  ["95% Confidence Interval Lower Limit (95% LCI)",""],
-						  ["95% Confidence Interval Upper Limit (95% HCI)",""],
-						  ["90% Confidence Interval Lower Limit (90% LCI)",""],
-						  ["90% Confidence Interval Upper Limit (90% HCI)",""],
+							["SD",""],
+						  ["SE",""],
+						  ["95% CI low",""],
+						  ["95% CI high",""],
+						  ["90% CI low",""],
+						  ["90% CI high",""],
 						  ["Follow-up in person-years (raw data)",""],
 						  ["Annual Rate as per Raw Data",""],
 						  ["Events per Kaplan Meier estimates",""],
@@ -73,7 +74,7 @@ survival = [["N Enrolled","The number of patients originally enrolled"],
 							["Follow-up Range",""],
 							["Event X/N",""]						  
 						 ]
-survival_defaults = ["N Enrolled", "Counts", "Standard Deviation"]
+survival_defaults = ["N Enrolled", "Counts", "SD"]
 
 
 ##############################################################
@@ -89,12 +90,12 @@ continuous_bac = [["N Enrolled","The number of patients originally enrolled"],
 										["Mean Difference (Net)",""],
 										["Median Difference",""],
 										["Median Difference (Net)",""],
-										["Standard Deviation",""],
-										["Standard Error",""],
-										["95% Confidence Interval Lower Limit (95% LCI)",""],
-						  			["95% Confidence Interval Upper Limit (95% HCI)",""],
-									  ["90% Confidence Interval Lower Limit (90% LCI)",""],
-									  ["90% Confidence Interval Upper Limit (90% HCI)",""],
+										["SD",""],
+										["SE",""],
+										["95% CI low",""],
+						  			["95% CI high",""],
+									  ["90% CI low",""],
+									  ["90% CI high",""],
 									  ["P-Value",""],
 									  ["Statistical Test:",""],
 									  ["Adjusted For:",""]
@@ -106,66 +107,66 @@ continuous_wac = [["N Enrolled","The number of patients originally enrolled"],
 										["Mean Difference (Net)",""],
 										["Median Difference",""],
 										["Median Difference (Net)",""],
-										["Standard Deviation",""],
-										["Standard Error",""],
-										["95% Confidence Interval Lower Limit (95% LCI)",""],
-									  ["95% Confidence Interval Upper Limit (95% HCI)",""],
-									  ["90% Confidence Interval Lower Limit (90% LCI)",""],
-									  ["90% Confidence Interval Upper Limit (90% HCI)",""],
+										["SD",""],
+										["SE",""],
+										["95% CI low",""],
+									  ["95% CI high",""],
+									  ["90% CI low",""],
+									  ["90% CI high",""],
 									  ["P-Value",""],
 									  ["Statistical Test:",""],
 									  ["Adjusted For:",""]
 								  ]
-continuous_wac_defaults = ["N Analyzed","Mean Difference","Standard Error"]
-continuous_bac_defaults = ["Mean Difference (Net)","Standard Error","P-Value"]	            
+continuous_wac_defaults = ["N Analyzed","Mean Difference","SE"]
+continuous_bac_defaults = ["Mean Difference (Net)","SE","P-Value"]	            
 # CATEGORICAL COMPARISONS
 #------------------------------------------------------
 categorical_bac = [["Statistical Test:","The type of test used"],
 									["Odds Ratio (OR)","Unadjusted Odds Ratio"],
 									["Risk Ratio (RR)","Unadjusted Risk Ratio"],
 									["Risk Difference (RD)","Unadjusted Risk Difference"],
-									["Standard Deviation",""],
-									["Standard Error",""],
-									["95% Confidence Interval Lower Limit (95% LCI)",""],
-								  ["95% Confidence Interval Upper Limit (95% HCI)",""],
-								  ["90% Confidence Interval Lower Limit (90% LCI)",""],
-								  ["90% Confidence Interval Upper Limit (90% HCI)",""],
+									["SD",""],
+									["SE",""],
+									["95% CI low",""],
+								  ["95% CI high",""],
+								  ["90% CI low",""],
+								  ["90% CI high",""],
 								  ["P-Value",""]
 							  ]
 categorical_adj_bac = [["Adj. Odds Ratio (OR)","Adjusted Odds Ratio"],
 											["Adj. Risk Ratio (RR)","Adjusted Risk Ratio"],
 											["Adj. Risk Difference (RD)","Adjusted Risk Difference"],
-											["Adj. Standard Deviation","Adjusted Standard Deviation"],
-											["Adj. Standard Error"," Adjusted Standard Error"],
-											["Adj. 95% Confidence Interval Lower Limit (95% LCI)",""],
-										  ["Adj. 95% Confidence Interval Upper Limit (95% HCI)",""],
-										  ["Adj. 90% Confidence Interval Lower Limit (90% LCI)",""],
-										  ["Adj. 90% Confidence Interval Upper Limit (90% HCI)",""],
+											["Adj. SD","Adjusted SD"],
+											["Adj. SE"," Adjusted SE"],
+											["Adj. 95% CI low",""],
+										  ["Adj. 95% CI high",""],
+										  ["Adj. 90% CI low",""],
+										  ["Adj. 90% CI high",""],
 										  ["Adj. P-Value",""],
 										  ["Adjusted For:",""]
 									  ]
 
-categorical_wac = [["Standard Deviation",""],
-									["Standard Error",""],
-									["95% Confidence Interval Lower Limit (95% LCI)",""],
-								  ["95% Confidence Interval Upper Limit (95% HCI)",""],
-								  ["90% Confidence Interval Lower Limit (90% LCI)",""],
-								  ["90% Confidence Interval Upper Limit (90% HCI)",""],
+categorical_wac = [["SD",""],
+									["SE",""],
+									["95% CI low",""],
+								  ["95% CI high",""],
+								  ["90% CI low",""],
+								  ["90% CI high",""],
 								  ["P-Value",""],
 								  ["Absolute Change",""],
 								  ["% Change",""]
 							  ]
-categorical_adj_wac = [["Adj. Standard Deviation","Adjusted Standard Deviation"],
-											["Adj. Standard Error"," Adjusted Standard Error"],
-											["Adj. 95% Confidence Interval Lower Limit (95% LCI)",""],
-										  ["Adj. 95% Confidence Interval Upper Limit (95% HCI)",""],
-										  ["Adj. 90% Confidence Interval Lower Limit (90% LCI)",""],
-										  ["Adj. 90% Confidence Interval Upper Limit (90% HCI)",""],
+categorical_adj_wac = [["Adj. SD","Adjusted SD"],
+											["Adj. SE"," Adjusted SE"],
+											["Adj. 95% CI low",""],
+										  ["Adj. 95% CI high",""],
+										  ["Adj. 90% CI low",""],
+										  ["Adj. 90% CI high",""],
 										  ["Adj. P-Value",""],
 										  ["Adjusted For:",""]
 									  ]			
 categorical_wac_defaults = ["Absolute Change","% Change"]
-categorical_bac_defaults = ["Odds Ratio (OR)","Standard Error","95% Confidence Interval Lower Limit (95% LCI)","95% Confidence Interval Upper Limit (95% HCI)","P-Value"]
+categorical_bac_defaults = ["Odds Ratio (OR)","SE","95% CI low","95% CI high","P-Value"]
 
 # SURVIVAL COMPARISONS
 #-----------------------------------------------------------								
@@ -174,12 +175,12 @@ survival_bac = [["N Enrolled","The number of patients originally enrolled"],
 							["Counts",""],
 							["Proportions",""],
 							["Percentage",""],
-							["Standard Deviation",""],
-						  ["Standard Error",""],
-						  ["95% Confidence Interval Lower Limit (95% LCI)",""],
-						  ["95% Confidence Interval Upper Limit (95% HCI)",""],
-						  ["90% Confidence Interval Lower Limit (90% LCI)",""],
-						  ["90% Confidence Interval Upper Limit (90% HCI)",""],
+							["SD",""],
+						  ["SE",""],
+						  ["95% CI low",""],
+						  ["95% CI high",""],
+						  ["90% CI low",""],
+						  ["90% CI high",""],
 						  ["Follow-up in person-years (raw data)",""],
 						  ["Annual Rate as per Raw Data",""],
 						  ["Events per Kaplan Meier estimates",""],
@@ -193,7 +194,7 @@ survival_bac = [["N Enrolled","The number of patients originally enrolled"],
 							["Follow-up Range",""],
 							["Event X/N",""]						  
 						 ]
-survival_bac_defaults = ["Hazard Ratio (HR)", "Standard Error", "Standard Deviation", "95% Confidence Interval Lower Limit (95% LCI)","95% Confidence Interval Upper Limit (95% HCI)"]
+survival_bac_defaults = ["Hazard Ratio (HR)", "SE", "SD", "95% CI low","95% CI high"]
 
 # DIAGNOSTIC COMPARISONS
 #-----------------------------------------------------------	
@@ -216,7 +217,7 @@ diagnostic_assuming_reference = [["2x2 Table","The standard 2x2 table"],
 				  ["Specificity 95% LCI","95% Confidence Interval Lower Limit for Specificity"],
 				  ["Specificity 95% HCI","95% Confidence Interval Upper Limit for Specificity"],
 				  ["ROC - AUC","Receiver Operating Characteristic - Area Under Curve"],
-				  ["ROC (AUC) +/- SD","Receiver Operating Characteristic - Area Under Curve Plus/Minus Standard Deviation"],
+				  ["ROC (AUC) +/- SD","Receiver Operating Characteristic - Area Under Curve Plus/Minus SD"],
 				  ["ROC (AUC) P-Value","Receiver Operating Characteristic - Area Under Curve P-Value"],
 
 				 ]
