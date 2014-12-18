@@ -6,7 +6,7 @@
 	<% possible_time_units = possible_time_units + @previous_outcome_timepoints.collect{|x| x.time_unit} %>
 	<input type='hidden' id='num_previous_timepoints' value="<%= @previous_outcome_timepoints.length %>">
 <% else %>
-	<input type='hidden' id='num_previous_timepoints' value="0">
+	<input type='hidden' id='num_previous_timepoints' value="1">
 <% end %>
 
 <% unless(@outcome_timepoints.empty?) %>
