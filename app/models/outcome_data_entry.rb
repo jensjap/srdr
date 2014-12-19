@@ -144,7 +144,7 @@ class OutcomeDataEntry < ActiveRecord::Base
             # find the most recently created outcome entries
             existing_entries = OutcomeDataEntry.find(:all, :conditions=>["study_id=? AND extraction_form_id=? AND outcome_id IN (?)",self.study_id,self.extraction_form_id,outcome_ids_for_search],:select=>["id"],:order=>"updated_at DESC")
             # IF IT'S PROJECT 370 WE ALWAYS WANT NEW MEASURES
-            unless existing_entries.empty? || self.project_id.to_i == 370
+            unless existing_entries.empty? || self.project_id.to_i == 427
                 #puts "\nCouldn't find existing measures. Beginning to search...\n"
                 while !done_searching
                     # flip through the entries to determine if they have measures assigned to them
@@ -180,11 +180,11 @@ class OutcomeDataEntry < ActiveRecord::Base
                 end
             end
             # if no others exist, use defaults
-            if use_defaults || self.project_id.to_i == 370
+            if use_defaults || self.project_id.to_i == 427
                 # account for the switch in nomenclature
                 type = type=="Time to Event" ? "survival" : type
                 
-                if self.project_id == 370
+                if self.project_id == 427
                     default_measures = DefaultCevgMeasure.find(:all, :conditions=>["outcome_type=? AND results_type=?",type.downcase,0],:select=>["title","description","unit","measure_type"])
                 else
                     default_measures = DefaultOutcomeMeasure.find(:all,:conditions=>["outcome_type=? AND is_default=?",type.downcase,true],:select=>["title","description","unit","measure_type"])
@@ -455,7 +455,7 @@ class OutcomeDataEntry < ActiveRecord::Base
                 tmp = OutcomeDataEntry.create(:outcome_id=>ocid, :extraction_form_id=>efid, :timepoint_id=>tp.id, 
                                               :study_id=>sid, :display_number => displayNum,:subgroup_id=>sgid)
                 # IF IT'S THE CEVG PROJECT, LET'S ALSO CREATE THE COMPARISONS SECTIONS FOR THEM
-                if project_id.to_i == 370 && needs_comparisons
+                if project_id.to_i == 427 && needs_comparisons
                     outcome = Outcome.find(ocid)
                     study = Study.find(sid)
                     arms = study.arms.collect{|x| x.id}

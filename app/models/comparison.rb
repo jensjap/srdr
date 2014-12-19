@@ -94,7 +94,7 @@ class Comparison < ActiveRecord::Base
 
 		# a hack to use comparison measures for CEVG
 		ef = ExtractionForm.find(efid)
-		unless comps.empty? || ef.project_id.to_i == 370
+		unless comps.empty? || ef.project_id.to_i == 427
 			puts "Searching comparisons..."
 			comps.each do |comp|
 				puts "searching #{comp.id}..."
@@ -134,12 +134,12 @@ class Comparison < ActiveRecord::Base
 					end
 				end
 			end
-		elsif no_measures || ef.project_id.to_i == 370
+		elsif no_measures || ef.project_id.to_i == 427
 			oc = Outcome.find(ocid, :select=>[:outcome_type])
 			w_or_b = wORb == 'within' ? 0 : 1
 			oc_type = oc.outcome_type
 			oc_type = oc_type == "Time to Event" ? "survival" : oc_type.downcase
-			unless ef.project_id.to_i == 370
+			unless ef.project_id.to_i == 427
 				if ExtractionForm.is_diagnostic?(efid)
 					defaults = DefaultComparisonMeasure.where(:is_default=>true, :outcome_type=>"diagnostic_#{self.section}", :within_or_between=>w_or_b)
 				else
