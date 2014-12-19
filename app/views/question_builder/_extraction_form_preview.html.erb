@@ -27,11 +27,12 @@
 				
 
 				<div class="indent_block" style='overflow:auto;' >
-					<%= render :inline=>create_input(q.id, @model) %>
-					<br/>
 					<% unless q.instruction.nil? %>
 						<span class="smallText" style='font-style:italic;'><%= q.instruction %></span>
 					<% end %>
+					<br/>
+					<%= render :inline=>create_input(q.id, @model) %>
+					
 				</div>
 			</div>
 			<div style='margin-bottom: 10px;'>

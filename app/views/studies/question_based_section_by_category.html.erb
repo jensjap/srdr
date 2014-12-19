@@ -59,6 +59,8 @@
     				<td class='data' style='min-width:450px; max-width:950px;'>
     					<%= raw(create_title(question[:q_num], question[:q_quest])) %><br/>
     					<div style='min-width:450px; max-width:950px !important; overflow:auto;'>
+                            <%= raw(include_instruction(question)) %>
+                            <br/>
     						<% @data[:categories].each do |cat| %>
     							<div style='text-decoration:underline;min-width:300px;margin-top:0px;'><%=cat.title%></div>
 
@@ -77,8 +79,6 @@
     							<% end %>
     							<br/>
     						<% end %>
-    						<br/>
-    						<%= raw(include_instruction(question)) %>
 
     						<br style='clear:both;'/>
     						<br/>

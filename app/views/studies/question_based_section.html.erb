@@ -16,6 +16,8 @@
 			<td class='data' style='min-width:450px; max-width:950px;'>
 				<%= raw(create_title(question[:q_num], question[:q_quest])) %><br/>
 				<div style='min-width:450px; max-width:950px !important; overflow:auto;'>
+          <%= raw(include_instruction(question)) %>
+          <br/>
 					<% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
 						<%= raw(build_multi_choice(question, @data[:model])) %>
 						
@@ -29,8 +31,6 @@
 						<%= raw(build_matrix(question, @data[:model])) %>
 
 					<% end %>
-					<br/>
-					<%= raw(include_instruction(question)) %>
 
 					<br style='clear:both;'/>
 					<br/>
