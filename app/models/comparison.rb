@@ -113,7 +113,7 @@ class Comparison < ActiveRecord::Base
 		end
 		# if there are none within that outcome, check the study to see if there are any in other outcomes
 		# that have measures. MAKE SURE TO ONLY USE OUTCOMES THAT ARE OF THE SAME TYPE
-		if no_measures && ef.project_id.to_i != 370
+		if no_measures && ef.project_id.to_i != 427
 			outcome_ids = Outcome.where(:study_id=>self.study_id, :extraction_form_id=>self.extraction_form_id,
 									    :outcome_type=>outcome_type).collect{|x| x.id}
 			# determine if there are other comparisons in this study that defined measures can be 
