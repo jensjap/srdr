@@ -25,17 +25,24 @@
 			<tbody>
 			<% for role in @project_users %>
 			<% if role.user_id != current_user.id %>
-			<tr class="<%= cycle("even", "odd") %>"><td>
-				<% @user = User.find(role.user_id) %>
-					<%= @user.fname %> <%= @user.lname %> 
-			</td>
-			<td>
-			<%= @user.login %>
-			</td>
-			<td><%= radio_button_tag("roles_" + role.user_id.to_s, "lead", role.role == "lead" ? true : false, :class => "cbox") %></td>
-			<td><%= radio_button_tag("roles_" + role.user_id.to_s, "editor", role.role == "editor" ? true : false, :class => "cbox") %></td>
-			<td><%= radio_button_tag("roles_" + role.user_id.to_s, "delete", false, :class => "cbox") %></td>
-			</tr>
+			
+				<% begin %>
+				<tr class="<%= cycle("even", "odd") %>">
+					<% @user = User.find(role.user_id) %>
+					
+					<td>
+						<%= @user.fname %> <%= @user.lname %> 
+					</td>
+					<td>
+					<%= @user.login %>
+					</td>
+					<td><%= radio_button_tag("roles_" + role.user_id.to_s, "lead", role.role == "lead" ? true : false, :class => "cbox") %></td>
+					<td><%= radio_button_tag("roles_" + role.user_id.to_s, "editor", role.role == "editor" ? true : false, :class => "cbox") %></td>
+					<td><%= radio_button_tag("roles_" + role.user_id.to_s, "delete", false, :class => "cbox") %></td>
+				</tr>
+				<% rescue Exception=>e %>
+					<tr><td>An error occurred.</td><td>Please contact the SRDR team</td><td></tr>
+				<% end %>
 			<% end %>
 			<% end %>
 	
