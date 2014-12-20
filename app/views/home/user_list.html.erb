@@ -20,6 +20,7 @@
 		<td scope='col'>Organization</td>
 		<td scope='col'>User Type</td>
 		<td scope='col'>Login Count</td>
+    <td scope='col'>Creation Date</td>
 <%
     if show_admin
 %>
@@ -38,6 +39,7 @@
 			<td scope='row'><%= user.organization.force_encoding("UTF-8") %></td>
 			<td scope='row'><%= user.user_type %></td>
 			<td scope='row'><%= user.login_count%></td>
+      <td scope='row'><%= user.created_at %></td>
 <%
     if show_admin
         if user.user_type == "PENDING"
