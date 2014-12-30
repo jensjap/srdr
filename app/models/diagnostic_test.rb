@@ -15,7 +15,7 @@ class DiagnosticTest < ActiveRecord::Base
 	belongs_to :study, :touch=>true
 	has_many :diagnostic_test_thresholds, :dependent=>:destroy
 	scope :sorted_by_created_date, lambda{|efid, study_id| where("extraction_form_id=? AND study_id=?", efid, study_id).
-                select(["id","test_type","title"]).
+                select(["id","test_type","title","description"]).
                 order("created_at ASC")}
 	# assign_thresholds
 	# Assign threshold values when creating or updating a diagnostic test object.
