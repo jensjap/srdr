@@ -1,11 +1,16 @@
 <br/><strong>Step 1.</strong> <label for="outcome_selection_id">Choose the outcome and population to enter data for:</label>  
 <br/>
+
 <% unless @ef.is_diagnostic %>
-	<% options = [["--- Continuous ---",0]] + @cont_outcomes.map{|out| [out.title, out.id]} + [["--- Categorical ---",-1]] + @cat_outcomes.map{|out| [out.title,out.id]} + [["--- Time to Event ---",-2]] + @survival_outcomes.map{|out| [out.title,out.id]}%>
+	<% options = [["--- Continuous ---",0]]     + @cont_outcomes.map{ |out|     [out.title, out.id, { title: out.description }] } +
+	             [["--- Categorical ---",-1]]   + @cat_outcomes.map{ |out|      [out.title, out.id, { title: out.description }] } +
+	             [["--- Time to Event ---",-2]] + @survival_outcomes.map{ |out| [out.title, out.id, { title: out.description }] } %>
 <% else %>
-	<% options = [["--- Select an Outcome ---",0]] + @cont_outcomes.map{|out| [out.title, out.id]} %>
+	<% options = [["--- Select an Outcome ---",0]] + @cont_outcomes.map{ |out| [out.title, out.id, { title: out.description }] } %>
 <% end %>
-<%= select "outcome_selection", "id", options, {}, :tabindex=>'220' %> <a href='#' id='outcome_description_link'>Show Outcome Descriptions</a><br/>
+<%= select "outcome_selection", "id", options, {}, :tabindex=>'220' %>
+
+<a href='#' id='outcome_description_link'>Show Outcome Descriptions</a><br/>
 <div id='outcomes_reference' style='display:none;'>
 	<%= render :partial=>'outcome_data_entries/outcome_descriptions'%>
 	
