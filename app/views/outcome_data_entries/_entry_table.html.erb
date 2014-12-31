@@ -66,7 +66,11 @@
       <th  scope='col' class='head_col' style='min-width:100px;'>Time Point</th>
       <th  scope='col' class='head_col'>Measure</th>
       <% @arms.each do |arm| %>
-        <th  scope='col' class='head_col' title="<%= arm.description %>"><span><%= arm.title %></th>
+        <% if arm.description.empty? || arm.description.nil? %>
+          <th  scope='col' class='head_col' title='No Description'><span><%= arm.title %></th>
+        <% else %>
+          <th  scope='col' class='head_col' title='Description: "<%= arm.description %>"'><span><%= arm.title %></th>
+        <% end %>
       <% end %>
       
       <%# CREATE THE SELECT BOXES TO DEFINE THE COMPARISONS                           %>
@@ -75,7 +79,7 @@
         <th  scope='col' class='head_col btwn_arm_comparison'>Measure</th>
         
         <%# BUILD THE OPTIONS FOR ARM SELECTORS %>
-        <% select_options = @arms.collect{|x| [x.title,x.id,{ title: x.description }]} %>
+        <% select_options = @arms.collect{|x| [x.title,x.id,{ title: 'Description: "' + x.description + '"' }]} %>
         <% select_options = [["--Choose an Arm--",'0']] + select_options %>
         <%# include combinations of arms to be used in crossover analyses %>
         <% unless @arms.length < 3 %>
@@ -381,7 +385,7 @@
                 Measure
               </th>
               <% @arms.each do |arm|%>
-                <th scope='col' class='wa_comparison' title="<%= arm.description %>">
+                <th scope='col' class='wa_comparison' title='Description: "<%= arm.description %>"'>
                   <%= arm.title %>
                 </th>
               <% end %>

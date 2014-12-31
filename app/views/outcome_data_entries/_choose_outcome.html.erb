@@ -2,11 +2,11 @@
 <br/>
 
 <% unless @ef.is_diagnostic %>
-	<% options = [["--- Continuous ---",0]]     + @cont_outcomes.map{ |out|     [out.title, out.id, { title: out.description }] } +
-	             [["--- Categorical ---",-1]]   + @cat_outcomes.map{ |out|      [out.title, out.id, { title: out.description }] } +
-	             [["--- Time to Event ---",-2]] + @survival_outcomes.map{ |out| [out.title, out.id, { title: out.description }] } %>
+	<% options = [["--- Continuous ---",0]]     + @cont_outcomes.map{ |out|     [out.title, out.id, { title: 'Description: "' + out.description + '"' }] } +
+	             [["--- Categorical ---",-1]]   + @cat_outcomes.map{ |out|      [out.title, out.id, { title: 'Description: "' + out.description + '"' }] } +
+	             [["--- Time to Event ---",-2]] + @survival_outcomes.map{ |out| [out.title, out.id, { title: 'Description: "' + out.description + '"' }] } %>
 <% else %>
-	<% options = [["--- Select an Outcome ---",0]] + @cont_outcomes.map{ |out| [out.title, out.id, { title: out.description }] } %>
+	<% options = [["--- Select an Outcome ---",0]] + @cont_outcomes.map{ |out| [out.title, out.id, { title: 'Description: "' + out.description + '"' }] } %>
 <% end %>
 <%= select "outcome_selection", "id", options, {}, :tabindex=>'220' %>
 
