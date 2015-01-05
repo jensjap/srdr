@@ -1,28 +1,5 @@
 <% content_for :title, content='Home' %>
 
-  <script>
-  $(function() {
-    $( "#dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      }
-    });
-  });
-  </script>
-
-<div id="dialog-message" title="Service Announcement">
-  <p>
-    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
-    Please note that support will be limited during Winter Break between Dec. 24th and Jan. 5th
-  </p>
-  <p>
-    The SRDR Team wishes you and your family happy holidays and a happy new year!
-  </p>
-</div>
-
 <%
     # Get and set bread crumb to current page
     urlhistory = Breadcrumb.new
