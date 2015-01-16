@@ -62,7 +62,13 @@
                             <%= raw(include_instruction(question)) %>
                             <br/>
     						<% @data[:categories].each do |cat| %>
-    							<div style='text-decoration:underline;min-width:300px;margin-top:0px;'><%=cat.title%></div>
+    							<div style='text-decoration:underline;min-width:300px;margin-top:0px;'>
+                                    <% if cat.description.nil? || cat.description.empty? %>
+                                        <span data-toggle="tooltip" data-placement="top" title='No Description'><%= cat.title %></span>
+                                    <% else %>
+                                        <span data-toggle="tooltip" data-placement="top" title='Description: "<%= cat.description %>"'><%= cat.title %></span>
+                                    <% end %>
+                                </div>
 
     							<% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
     								<%= raw(build_multi_choice(question, @data[:model], cat)) %>

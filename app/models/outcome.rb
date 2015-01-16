@@ -25,7 +25,7 @@ class Outcome < ActiveRecord::Base
     has_many :outcome_subgroups, :dependent=>:destroy
 
     scope :sorted_by_created_date, lambda{|efid, study_id| where("extraction_form_id=? AND study_id=?", efid, study_id).
-                select(["id","title"]).
+                select(["id","title","description"]).
                 order("created_at ASC")}
     #validates_presence_of :outcome_timepoints
     belongs_to :study

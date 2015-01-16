@@ -454,6 +454,11 @@ class StudiesController < ApplicationController
 			user_assigned = current_user.is_assigned_to_project(params[:project_id])
 			@data_point = OutcomeDetailDataPoint.new
 			action = ''
+
+			# Now get any additional user instructions for this section
+      @ef_instruction = EfInstruction.find(:first, :conditions=>["ef_id = ? and section = ? and data_element = ?", params[:extraction_form_id].to_s, "OUTCOME_DETAILS", "GENERAL"])
+      @ef_instruction = @ef_instruction.nil? ? "" : @ef_instruction.instructions
+
 			by_category = EfSectionOption.is_section_by_category?(params[:extraction_form_id], 'outcome_detail')
 			if by_category
 				@data = QuestionBuilder.get_questions("outcome_detail", params[:study_id], params[:extraction_form_id], {:user_assigned => user_assigned, :is_by_outcome=>true, :include_total=>false})
@@ -476,6 +481,11 @@ class StudiesController < ApplicationController
 			user_assigned = current_user.is_assigned_to_project(params[:project_id])
 			@data_point = QualityDetailDataPoint.new
 			action = ''
+
+			# Now get any additional user instructions for this section
+      @ef_instruction = EfInstruction.find(:first, :conditions=>["ef_id = ? and section = ? and data_element = ?", params[:extraction_form_id].to_s, "QUALITY", "GENERAL"])
+      @ef_instruction = @ef_instruction.nil? ? "" : @ef_instruction.instructions
+
 			by_category = EfSectionOption.is_section_by_category?(params[:extraction_form_id], 'quality_detail')
 			if by_category
 				@data = QuestionBuilder.get_questions("quality_detail", params[:study_id], params[:extraction_form_id], {:user_assigned => user_assigned, :is_by_outcome=>true, :include_total=>false})

@@ -25,7 +25,7 @@ class Arm < ActiveRecord::Base
     has_many :baseline_characteristic_data_points, :dependent=>:destroy
     validates :title, :presence => true
     scope :sorted_by_display_number, lambda{|efid, study_id| where("extraction_form_id=? AND study_id=?", efid, study_id).
-                select(["id","title"]).
+                select(["id","title","description"]).
                 order("display_number ASC")}
 
     # get_title
