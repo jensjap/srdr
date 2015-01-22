@@ -255,19 +255,48 @@ class Outcome < ActiveRecord::Base
     # Given an extraction form ID, find all outcomes that have previously been generated.
     # Store the data as a hash referenced by the title which should be unique, and the hash
     # should point to an array containing the description and type for the outcome option
-    def self.get_suggested_outcomes_for_ef(efid, current_study_id)
-        #outcomes = Outcome.find(:all, :conditions=>["extraction_form_id=? AND study_id != ?",efid,current_study_id])
-        outcomes = Outcome.find(:all, :conditions=>["extraction_form_id=?",efid], :order=>"lower(title) ASC")
-        unique_outcomes = Hash.new()
+    def self.get_suggested_outcomes_for_ef(ef_id, study_id)
+        ##outcomes = Outcome.find(:all, :conditions=>["extraction_form_id=? AND study_id != ?",ef_id,study_id])
+        #outcomes = Outcome.find(:all, :conditions=>["extraction_form_id=?",ef_id], :order=>"lower(title) ASC")
+        #unique_outcomes = Hash.new()
 
-        # loop through the outcomes and keep a unique hash of titles, descriptions, units, types
-        outcomes.each do |oc|
-            unless unique_outcomes.keys.map{|key| key.downcase}.include?(oc.title.downcase)
-                #unique_outcomes[oc.title] = {'description'=>oc.description, 'units'=>oc.units, 'type'=>oc.outcome_type}
-                unique_outcomes[oc.title] = [oc.description, oc.units, oc.outcome_type]
+        ## loop through the outcomes and keep a unique hash of titles, descriptions, units, types
+        #outcomes.each do |oc|
+        #    unless unique_outcomes.keys.map{|key| key.downcase}.include?(oc.title.downcase)
+        #        #unique_outcomes[oc.title] = {'description'=>oc.description, 'units'=>oc.units, 'type'=>oc.outcome_type}
+        #        unique_outcomes[oc.title] = [oc.description, oc.units, oc.outcome_type]
+        #    end
+        #end
+        #return unique_outcomes
+        begin
+            ###puts "Entered the get_dropdown_options... function with ef_id #{ef_id} and study_id #{study_id}\n\n"
+            retVal = Hash.new()
+            title_list = Array.new()
+            # get the suggested outcome names and descriptions from the extraction form
+            ef_outcomes = ExtractionFormOutcomeName.find(:all, :conditions=>["extraction_form_id = ? ", ef_id], :select=>["title","note","outcome_type"], :order=>"lower(title) ASC")
+            retVal["--- Extraction Form Suggestions ---"] = ['','',''] unless ef_outcomes.empty?
+
+            ef_outcomes.each do |efoc|
+                title_list << efoc.title.downcase
+                # TRYING TO REMOVE SPECIAL CHARACTERS THAT ARE BREAKING THINGS!
+                #retVal[efoc.title.scan(/[a-zA-z0-9\s]/).join("")] = [efoc.note.scan(/[a-zA-z0-9\s]/).join(""), "", efoc.outcome_type]
+                retVal[efoc.title] = [efoc.note, "", efoc.outcome_type]
             end
+
+            # get all other outcomes that have been added to the project for the same extraction form
+            other_outcomes = Outcome.find(:all, :conditions=>["extraction_form_id = ? AND lower(title) NOT IN (?)",ef_id,title_list], :select=>["title","description","units","outcome_type"], :order=>"lower(title) ASC")
+            retVal["--- Created by Data Extractors ---"] = ['','',''] unless other_outcomes.empty?
+            other_outcomes.each do |otheroc|
+                unless title_list.include?(otheroc.title.downcase)
+                    title_list << otheroc.title.downcase
+                    retVal[otheroc.title] = [otheroc.description, otheroc.units, otheroc.outcome_type]
+                end
+            end
+
+            return retVal
+        rescue Exception=>e
+            puts "encountered an error in get_dropdown_options_for_new_outcome: #{e.message}\n\n#{e.backtrace}\n\n"
         end
-        return unique_outcomes
     end
 
     # get_dropdown_options_for_new_outcome
