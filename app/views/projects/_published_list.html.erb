@@ -186,6 +186,9 @@
 <%
         path = "public/"+uploaded_path+"/"+project.id.to_s+"/publish/downloads/"
         Dir[path + "*.*"].each do|fn|
+            if fn.end_with?(".readme")
+                next
+            end
             filename = fn.split('/').last
 %>
     <tr>
