@@ -1058,4 +1058,13 @@ module ApplicationHelper
         return retVal 
     end
 
+    def loadDescription(file)
+        description = ''
+        f = File.open(file, "r")
+        f.each_line do |line|
+            description += line if line.match(/DESC/)
+        end
+        return description.match(/DESC:(.*)/).captures[0]
+    end
+
 end

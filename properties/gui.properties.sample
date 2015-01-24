@@ -41,6 +41,9 @@ user-admin-dev:
   activation: 0
 # Report caching properties ------------------------------------------
 cache-project-path: cache/projects/
+# Upload file(s) properties
+uploaded-files-path: reports/
+cache-project-path: cache/projects/
 # Java Application Server -------------------------------------------
 app-server:
   url: http://localhost:8080
