@@ -28,9 +28,8 @@ class AssignmentJob
     end
 
     def run    
-        begin
-            `/home/AHRQ/jens.jap/cron/sync_srdr_public`
-        rescue Exception => e
+        unless File.exists? (@filepath)
+            `scp jens.jap@10.4.20.195:#{@filepath} #{@filepath}`
         end
 
         success_count = 0
