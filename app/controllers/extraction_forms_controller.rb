@@ -623,7 +623,8 @@ def toggle_section_inclusion
 		end
 	when 'outcome_details'
 		if @included
-			other_sections = ['outcomes']
+      # Fixes a bug where users were able to enable outcome_details while results.
+			other_sections = ['outcomes', 'results']
 		end
 	end
 	other_ids = ExtractionFormSection.find(:all, :conditions=>['extraction_form_id=? AND section_name IN (?)', ef_id, other_sections],:select=>['id'])
