@@ -81,7 +81,9 @@ class QualityDimensionFieldsController < ApplicationController
     @extraction_form = ExtractionForm.find(@quality_dimension_field.extraction_form_id)
   	@project = Project.find(@extraction_form.project_id)
     QualityDimensionField.transaction do 
-      ActiveRecord::Base.connection.execute("UPDATE quality_dimension_fields SET question_number = question_number - 1 WHERE extraction_form_id = #{@extraction_form.id} AND question_number > #{@quality_dimension_field.question_number};")
+      unless @quality_dimension_field.question_number.nil?
+        ActiveRecord::Base.connection.execute("UPDATE quality_dimension_fields SET question_number = question_number - 1 WHERE extraction_form_id = #{@extraction_form.id} AND question_number > #{@quality_dimension_field.question_number};")
+      end
     end
     @quality_dimension_field.destroy
   
