@@ -90,7 +90,11 @@ class AssignmentJob
                                     :country=>citation[:country], :year=>citation[:year],
                                     :pmid=>line_array[@@pmID].strip,:journal=>citation[:journal],
                                     :volume=>citation[:volume],:issue=>citation[:issue])
-                                internalID = line_array[@@internalID].strip
+                                if line_array[@@internalID]
+                                    internalID = line_array[@@internalID].strip
+                                else
+                                    internalID = nil
+                                end
                                 unless internalID.blank?
                                     PrimaryPublicationNumber.create(:primary_publication_id=>ppub.id,:number=>internalID,:number_type=>'internal')
                                 end                  
