@@ -20,6 +20,8 @@ class BackgroundSimport
       # Process rows now.
       ih.process_rows
     end
+
+    puts "Import finished."
   end
 
 end
