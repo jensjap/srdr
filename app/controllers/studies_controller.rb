@@ -12,6 +12,8 @@ class StudiesController < ApplicationController
     #require 'question_list'
     require 'fileutils'
     require 'import_handler'
+    require 'background_simport'
+
 	# show the print layout in order to export a study summary to pdf.
   	def index_pdf
 		@study = Study.find(params[:study_id])
@@ -1057,18 +1059,19 @@ class StudiesController < ApplicationController
         workbook_is_valid = ih.validate_workbook
 
         if workbook_is_valid
-            ih.add_email_recipient('jens_jap@brown.edu')
-            ih.add_email_recipient(current_user.email)
+            # Send import to the background.
+            bsimport = BackgroundSimport.new
 
-            # Set the section options to 0 so that questions show up once only
-            ih.set_ef_section_options(ef_id)
+            # Delay.
+            bsimport.delay.import(user_id, project_id, ef_id, section, force, local_file, current_user.email)
 
-            # Process rows now
-            ih.process_rows
+            # No Delay.
+            # bsimport.import(user_id, project_id, ef_id, section, force, local_file, current_user.email)
 
             flash.keep[:success] = " File processing! Any errors will be reported via email."
         else
             flash.keep[:error] = ih.listOf_errors
+            return redirect_to "/projects/#{project_id}/edit"
         end
 
         respond_to do |format|
