@@ -13,81 +13,140 @@
 <br/>
 <% unless @projects.empty? %>
 	<%# render :partial=>'projects/published_list' %>
-    <table class='list_table' >
-        <tr>
-          <th class='header_bar'><br/>
-            <!-- ITEMS PER PAGE -->
-            <% selected = session[:items_per_page].nil? ? 5 : session[:items_per_page] %>
-            <% opts = [5,10,15,20,30,40,50] %>
-            <label for="items_per_page_selector">Items Per Page:</label> 
-            <select id='items_per_page_selector'>
-                <% opts.each do |option| %>
-                    <% sel = selected.to_i == option.to_i ? "selected" : "" %>
-                    <option value=<%= option %> <%= sel %>><%= option %></option> 
-                <% end %>
-            </select>
-          </th>
-        </tr>
-        <tr>
-          <td class='pagination' style='text-align:center;'>
-            <% if !@projects.empty? %>
-                <%= will_paginate @projects %>
+  <table class='list_table' >
+    <tr>
+      <th class='header_bar'><br/>
+        <!-- ITEMS PER PAGE -->
+        <% selected = session[:items_per_page].nil? ? 5 : session[:items_per_page] %>
+        <% opts = [5,10,15,20,30,40,50] %>
+        <label for="items_per_page_selector">Items Per Page:</label> 
+        <select id='items_per_page_selector'>
+            <% opts.each do |option| %>
+                <% sel = selected.to_i == option.to_i ? "selected" : "" %>
+                <option value=<%= option %> <%= sel %>><%= option %></option> 
             <% end %>
-          </td>
-        </tr>
-        <% @projects.each do |project| %>
-          <% 
-            num_studies = Project.get_num_studies(project)
-            num_key_qs = Project.get_num_key_qs(project)
-            num_ext_forms = Project.get_num_ext_forms(project)
-          %>
-          <tr>
-            <td class='data' style='position:relative;line-height:20px;'>
-                <span style='float:left;'>
-                   <h2><%= project.title %></h2><br/>
-                </span>
-                <span style='float:right;position:relative; right:30px; top:0px;' class='status'>
-                    Public Project
-                    <span class="complete">Complete</span><br/>
-                </span>
-                <br clear='all'>
-                <span class='bold'>Statistics:</span> <%= pluralize(num_studies, 'Study') %>,
-                <%= pluralize(num_key_qs, 'Key Question') %>,
-                <%= pluralize(num_ext_forms, 'Extraction Form') %>,    
-                <%# Project.get_status_string(project.id) %><br/>
-                <span class='bold'>Date Published: </span><%= project.updated_at.strftime("%b %d, %Y %I:%M%p") %><br/>
-
-                <div class='comment more'>
-                    <span class='bold'>Description: </span>
-                    <%= project.description.blank? ? "None Provided" : project.description.force_encoding("UTF-8") %>
-                </div>
-
-                <div class='comment more'>
-                    <span class='bold'>Contributor(s): </span>
-                    <%= project.contributors.blank? ? "None Provided" : project.contributors.force_encoding("UTF-8") %><br>
-                </div>
-
-                <div class='comment more'>
-                    <span class='bold'>Funding Source: </span>
-                    <%= project.funding_source.blank? ? "None Provided" : project.funding_source.force_encoding("UTF-8") %><br>
-                </div>
-
-                <div class="comment more">
-                    <span class='bold'>Methodology Description: </span>
-                    <%= project.methodology.blank? ? "None Provided" : project.methodology.force_encoding("UTF-8") %>
-                </div><br>
-            </td>
-            </tr>
+        </select>
+      </th>
+    </tr>
+    <tr>
+      <td class='pagination' style='text-align:center;'>
+        <% if !@projects.empty? %>
+            <%= will_paginate @projects %>
         <% end %>
-        <tr>
-          <td class='pagination'>
-            <% if !@projects.empty? %>
-                <%= will_paginate @projects %>
+      </td>
+    </tr>
+    <% @projects.each do |project| %>
+      <% 
+        num_studies = Project.get_num_studies(project)
+        num_key_qs = Project.get_num_key_qs(project)
+        num_ext_forms = Project.get_num_ext_forms(project)
+      %>
+      <tr>
+        <td class='data' style='position:relative;line-height:20px;'>
+          <span style='float:left;'>
+             <h2><%= project.title %></h2><br/>
+          </span>
+          <span style='float:right;position:relative; right:30px; top:0px;' class='status'>
+              Public Project
+              <span class="complete">Complete</span><br/>
+          </span>
+          <br clear='all'>
+          <span class='bold'>Statistics:</span> <%= pluralize(num_studies, 'Study') %>,
+          <%= pluralize(num_key_qs, 'Key Question') %>,
+          <%= pluralize(num_ext_forms, 'Extraction Form') %>,    
+          <%# Project.get_status_string(project.id) %><br/>
+          <span class='bold'>Date Published: </span><%= project.updated_at.strftime("%b %d, %Y %I:%M%p") %><br/>
+
+          <div class='comment more'>
+              <span class='bold'>Description: </span>
+              <%= project.description.blank? ? "None Provided" : project.description.force_encoding("UTF-8") %>
+          </div>
+
+          <div class='comment more'>
+              <span class='bold'>Contributor(s): </span>
+              <%= project.contributors.blank? ? "None Provided" : project.contributors.force_encoding("UTF-8") %><br>
+          </div>
+
+          <div class='comment more'>
+              <span class='bold'>Funding Source: </span>
+              <%= project.funding_source.blank? ? "None Provided" : project.funding_source.force_encoding("UTF-8") %><br>
+          </div>
+
+          <div class="comment more">
+              <span class='bold'>Methodology Description: </span>
+              <%= project.methodology.blank? ? "None Provided" : project.methodology.force_encoding("UTF-8") %>
+          </div><br>
+          <a href='#' class='downloadable_content_link' dlpid='<%= project.id %>'>Show Downloadable Content</a>
+          <div class='downloadable_content' id='dl_content_<%= project.id %>' style='display:none;'>
+          <br/>
+          <%# The root directory to downloadable info. %>
+          <% file_root = "#{RAILS_ROOT}/public/cache/projects" %>
+          <% excel_cache_path = "/cache/projects" %>
+          <!-- excel download links -->
+          <table id="export_tools_excel_table">
+            <tr>
+              <td class="title">Extraction Form</td>
+              <td class="title">EXCEL Spreadsheets</td>
+              <td class="title">Compile Date/Time</td>
+              <td class="title">Project Last Updated</td>
+            </tr>
+            <% @ef_ids[project.id.to_s].each do |ef| %>
+              <% if File.exist?("#{file_root}/project-#{project.id}-#{ef.id}.xlsx") %>
+                <tr>
+                  <td class="ef_data"><%= ef.title %></td>
+                  <td class="data">
+                    <A HREF=<%="#{excel_cache_path}/project-#{project.id}-#{ef.id}.xlsx"%>><IMG SRC="/images/Disk.png" border="0"> Excel</A>
+                  </td>
+                  <td class="data">
+                    <% if File.exist?("#{file_root}/project-#{project.id}.yml") %>
+                      <%= File.mtime("#{file_root}/project-#{project.id}.yml").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+                    <% end %>
+                  </td>
+                  <td class="data">
+                    <%= project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
-          </td>
-        </tr>
-    </table>
-    <br/><br/>
+            <tr>
+              <td class="title">Extraction Form</td>
+              <td class="title">EXCEL CSV Format</td>
+              <td class="title">Compile Date/Time</td>
+              <td class="title">Project Last Updated</td>
+            </tr>
+            <% @ef_ids[project.id.to_s].each do |ef| %>
+              <% if File.exist?("#{file_root}/project-#{project.id}-#{ef.id}.csv") %>
+                <tr>
+                  <td class="ef_data">
+                  <%= ef.title %>
+                  </td>
+                  <td class="data">
+                  <A HREF="<%= excel_cache_path %>/project-<%= project.id.to_s %>-<%= ef.id.to_s %>.csv"><IMG SRC="/images/Disk_csv.png" border="0"> CSV</A>
+                  </td>
+                  <td class="data">
+                  <%= File.mtime("#{file_root}/project-#{project.id}-#{ef.id}.csv").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+                  </td>
+                  <td class="data">
+                  <%= project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+          </div>
+        </td>
+      </tr>
+
+    <% end %>
+    <tr>
+      <td class='pagination'>
+        <% if !@projects.empty? %>
+            <%= will_paginate @projects %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+  <br/><br/>
 <% else %>
 	There are currently no publicly available projects in the system. 
 <% end %>
@@ -102,6 +161,20 @@ $("#items_per_page_selector, #sort_by_selector").live("change",function(){
     var url = "/projects/published?";
     url = url + "page=1&items_per_page=" + per_page.toString();
     window.location.replace(url);
+});
+$(".downloadable_content_link").die();
+$(".downloadable_content_link").live("click",function(e){
+  e.preventDefault();
+  pid = $(this).attr("dlpid");
+  pid = "#dl_content_" + pid;
+  var disp = $(pid).css("display");
+  if(disp == 'none'){
+    $(pid).css("display","block");
+    $(this).html("Hide Downloadable Content");
+  }else{
+    $(pid).css("display","none");
+    $(this).html("Show Downloadable Content");
+  }
 });
 -->
 </script>
