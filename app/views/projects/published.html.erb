@@ -76,7 +76,7 @@
               <span class='bold'>Methodology Description: </span>
               <%= project.methodology.blank? ? "None Provided" : project.methodology.force_encoding("UTF-8") %>
           </div><br>
-          <a href='#' class='downloadable_content_link' dlpid='<%= project.id %>'>Show Downloadable Content</a>
+          <a href="<%= "/projects/#{project.id.to_s}" %>"><%= image_tag("Zoom.png") %> Preview</a> | <a href='#' class='downloadable_content_link' dlpid='<%= project.id %>'>Show Downloadable Content</a>
           <div class='downloadable_content' id='dl_content_<%= project.id %>' style='display:none;'>
           <br/>
           <%# The root directory to downloadable info. %>
