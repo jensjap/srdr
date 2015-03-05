@@ -90,11 +90,20 @@ class AssignmentJob
                                     :country=>citation[:country], :year=>citation[:year],
                                     :pmid=>line_array[@@pmID].strip,:journal=>citation[:journal],
                                     :volume=>citation[:volume],:issue=>citation[:issue])
-                                internalID = line_array[@@internalID].strip
+                                if line_array[@@internalID]
+                                    internalID = line_array[@@internalID].strip
+                                else
+                                    internalID = nil
+                                end
                                 unless internalID.blank?
                                     PrimaryPublicationNumber.create(:primary_publication_id=>ppub.id,:number=>internalID,:number_type=>'internal')
                                 end                  
-                                assign_key_questions(study.id, line_array[@@kq].strip)
+                                if line_array[@@kq]
+                                    key_question = line_array[@@kq].strip
+                                else
+                                    key_question = nil
+                                end
+                                assign_key_questions(study.id, key_question)
                                 #assign_study_to_users(study.id, [curr_user])
                             end
                             success_count += 1
@@ -200,7 +209,7 @@ class AssignmentJob
     # if a key question has an extraction form assigned to it, create the
     # assignment in the proper tables
     def assign_key_questions(study_id, kq_entry)
-        kqs = kq_entry.empty? ? [] : kq_entry.gsub(/\"/,'').split(",")
+        kqs = kq_entry.blank? ? [] : kq_entry.gsub(/\"/,'').split(",")
         kqs.each do |kq|
             kq = kq.to_i
             if @kq_ef_map[kq].nil?

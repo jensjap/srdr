@@ -135,7 +135,6 @@ class ImportHandler  #{{{1
             puts "File already gone."
         end
     end
-    handle_asynchronously :process_rows, run_at: Time.now() + 1
 
     def add_email_recipient(email)  #{{{2
         @listOf_email_recipients << email
