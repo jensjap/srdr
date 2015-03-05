@@ -26,6 +26,16 @@
                 <option value=<%= option %> <%= sel %>><%= option %></option> 
             <% end %>
         </select>
+
+        <% sorts = ['Date Published (Recent First)', 'Date Published (Oldest First)','Title'] %>
+        <% selected_sort = params[:sort_by].nil? ? 'Date Updated (Recent First)' : params[:sort_by] %>
+        <label for="sort_by_selector">Sort By: </label>
+        <select id="sort_by_selector">
+        <% sorts.each do |sort| %>
+          <% sel = selected_sort == sort ? "selected" : "" %>
+          <option value="<%= sort %>" <%= sel %>><%= sort %></option>
+        <% end %>
+        </select>
       </th>
     </tr>
     <tr>
@@ -159,7 +169,7 @@ $("#items_per_page_selector, #sort_by_selector").live("change",function(){
     var per_page = $("#items_per_page_selector").val();
     var sort_by = $("#sort_by_selector").val();
     var url = "/projects/published?";
-    url = url + "page=1&items_per_page=" + per_page.toString();
+    url = url + "page=1&items_per_page=" + per_page.toString() + "&sort_by="+sort_by.toString();
     window.location.replace(url);
 });
 $(".downloadable_content_link").die();

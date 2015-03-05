@@ -20,10 +20,21 @@ class ProjectsController < ApplicationController
   	puts "====================== calling projects::published"
     session[:items_per_page] = params[:items_per_page].nil? ? (session[:items_per_page].nil? ? 5 : session[:items_per_page]) : params[:items_per_page]
     page_num = params[:page].nil? ? 1 : params[:page].to_i
-    @projects = Project.where(:is_public=>true).order("created_at DESC").paginate(:page=>page_num, :per_page=>session[:items_per_page])
+    sort_by = params[:sort_by].nil? ? 'Date Published (Recent First)' : params[:sort_by]
+    puts "SORT BY IS  #{sort_by}"
+    if sort_by == 'Date Published (Recent First)'
+      puts "sorting by date published"
+      @projects = Project.where(:is_public=>true).order("updated_at DESC").paginate(:page=>page_num, :per_page=>session[:items_per_page])
+    elsif sort_by == 'Date Published (Oldest First)'
+      puts "sorting by date published (oldest)"
+      @projects = Project.where(:is_public=>true).order("updated_at ASC").paginate(:page=>page_num, :per_page=>session[:items_per_page])
+    elsif sort_by == 'Title'
+      puts "Sorting by title"
+      @projects = Project.where(:is_public => true).order("title ASC").paginate(:page=>page_num, :per_page=>session[:items_per_page])
+    end
     
-
     @ef_ids = Hash.new    # Collect extraction forms attached to each project
+
     @projects.each do |project|
       efs = ExtractionForm.where(:project_id => project.id).all
       if !efs.nil? && (efs.size > 0)
