@@ -18,7 +18,11 @@ class ProjectsController < ApplicationController
   # show list of published projects, sorted by created date (todo: implement sorting on these)
   def published
   	puts "====================== calling projects::published"
-    @projects = Project.where(:is_public=>true).order("created_at DESC").paginate(:page=>params[:page], :per_page=>30)
+    session[:items_per_page] = params[:items_per_page].nil? ? (session[:items_per_page].nil? ? 5 : session[:items_per_page]) : params[:items_per_page]
+    page_num = params[:page].nil? ? 1 : params[:page].to_i
+    @projects = Project.where(:is_public=>true).order("created_at DESC").paginate(:page=>page_num, :per_page=>session[:items_per_page])
+    
+
     @ef_ids = Hash.new    # Collect extraction forms attached to each project
     @projects.each do |project|
       efs = ExtractionForm.where(:project_id => project.id).all
