@@ -150,43 +150,7 @@
                 </tr>
               <% end %>
             <% end %>
-            <%# look for uploaded data %>
-            <% unless Dir["public/"+uploaded_path+"/"+project.id.to_s+"/publish/downloads/*.*"].nil? %>
-              <% entries = Dir["public/"+uploaded_path+"/"+project.id.to_s+"/publish/downloads/*.*"] %>
-              <% if entries.length > 0 %>
-                <tr>
-                  <td class="title" colspan="4">Uploaded Document(s)</td>
-                </tr>
-                <tr>
-                  <td class='title' colspan='2'>File Description</td>
-                  <td class='title'>Download Link</td>
-                  <td class='title'>Date Uploaded</td>
-                </tr>
-                <% path = "/#{uploaded_path}/#{project.id}/publish/downloads/" %>
-                <% entries.each do |fn| %>
-                  <% next if fn.ends_with?(".readme") %>
-                  <% filename = fn.split("/").last %>
-                  <tr>
-                    <!-- File Description -->
-                    <td class = 'data'>
-                      <% if File.file?(filepath) %>
-                        <%= loadDescription(filepath) %>
-                      <% else %>
-                        No Description.
-                      <% end %>
-                    </td>
-                    <!-- Download Link -->
-                    <td class='data'>
-                      <a href="<%= "#{path}#{filename}.readme" %>"><img src='/images/Disk.png' border='0'/><%= filename %></a>
-                    </td>
-                    <!-- Uploaded Date -->
-                    <td class='data'>
-                      <%= File.mtime(fn).utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
-                    </td>
-                  </tr>
-                <% end %>
-              <% end %>
-            <% end %>    
+                
           </table>
           </div>
         </td>
