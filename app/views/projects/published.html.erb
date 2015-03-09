@@ -4,6 +4,14 @@
     urlhistory.setCurrentPage("Home","Home","/")
     urlhistory.setCurrentPage("Published Projects","Published Projects","/projects/published")
     session[:urlhistory] = urlhistory
+
+    siteproperties = session[:guiproperties]
+    siteproperties = nil
+    if siteproperties.nil?
+        siteproperties = Guiproperties.new
+        session[:guiproperties] = siteproperties
+    end
+    uploaded_path = siteproperties.getUploadedFilesPath()
 %>
 <div id='left-navigation-div' tabindex=100>
     <%= render :partial => "sidebars/mySRDR_sidebar" %>
@@ -104,15 +112,15 @@
               <% if File.exist?("#{file_root}/project-#{project.id}-#{ef.id}.xlsx") %>
                 <tr>
                   <td class="ef_data"><%= ef.title %></td>
-                  <td class="data">
+                  <td class="ef_data">
                     <A HREF=<%="#{excel_cache_path}/project-#{project.id}-#{ef.id}.xlsx"%>><IMG SRC="/images/Disk.png" border="0"> Excel</A>
                   </td>
-                  <td class="data">
+                  <td class="ef_data">
                     <% if File.exist?("#{file_root}/project-#{project.id}.yml") %>
                       <%= File.mtime("#{file_root}/project-#{project.id}.yml").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
                     <% end %>
                   </td>
-                  <td class="data">
+                  <td class="ef_data">
                     <%= project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
                   </td>
                 </tr>
@@ -130,23 +138,59 @@
                   <td class="ef_data">
                   <%= ef.title %>
                   </td>
-                  <td class="data">
+                  <td class="ef_data">
                   <A HREF="<%= excel_cache_path %>/project-<%= project.id.to_s %>-<%= ef.id.to_s %>.csv"><IMG SRC="/images/Disk_csv.png" border="0"> CSV</A>
                   </td>
-                  <td class="data">
+                  <td class="ef_data">
                   <%= File.mtime("#{file_root}/project-#{project.id}-#{ef.id}.csv").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
                   </td>
-                  <td class="data">
+                  <td class="ef_data">
                   <%= project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
                   </td>
                 </tr>
               <% end %>
             <% end %>
+            <%# look for uploaded data %>
+            <% unless Dir["public/"+uploaded_path+"/"+project.id.to_s+"/publish/downloads/*.*"].nil? %>
+              <% entries = Dir["public/"+uploaded_path+"/"+project.id.to_s+"/publish/downloads/*.*"] %>
+              <% if entries.length > 0 %>
+                <tr>
+                  <td class="title" colspan="4">Uploaded Document(s)</td>
+                </tr>
+                <tr>
+                  <td class='title' colspan='2'>File Description</td>
+                  <td class='title'>Download Link</td>
+                  <td class='title'>Date Uploaded</td>
+                </tr>
+                <% path = "/#{uploaded_path}/#{project.id}/publish/downloads/" %>
+                <% entries.each do |fn| %>
+                  <% next if fn.ends_with?(".readme") %>
+                  <% filename = fn.split("/").last %>
+                  <tr>
+                    <!-- File Description -->
+                    <td class = 'data'>
+                      <% if File.file?(filepath) %>
+                        <%= loadDescription(filepath) %>
+                      <% else %>
+                        No Description.
+                      <% end %>
+                    </td>
+                    <!-- Download Link -->
+                    <td class='data'>
+                      <a href="<%= "#{path}#{filename}.readme" %>"><img src='/images/Disk.png' border='0'/><%= filename %></a>
+                    </td>
+                    <!-- Uploaded Date -->
+                    <td class='data'>
+                      <%= File.mtime(fn).utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>    
           </table>
           </div>
         </td>
       </tr>
-
     <% end %>
     <tr>
       <td class='pagination'>
