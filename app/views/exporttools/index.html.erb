@@ -56,20 +56,22 @@ tool instead.
         </td>
         <td class="advance">
         <span id="export_tools_title">Advanced Data Export:</span>
-        <p/><br/>
+        <p/>
         <!--span id="export_tools_link"><%#= link_to "Report Builder", siteproperties.getReportBuilderURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>2,:class=>'form_link', :title=>"Report Builder"} %></span><br /-->
     
-    <!--% if current_user.is_admin? %-->
-    <form method="post" action="<%= siteproperties.getData("app-server", "url") %>/srdrj/advanceddataexport">
-        <input type="hidden" name="start_process" value="true" />
-        <input type="hidden" name="user.login" value="<%= current_user.login %>" />
-        <input type="hidden" name="prj_id" value="<%= @project.id.to_s %>" />
-        <input type="submit" name="enter_button" value="Load SRDR Report Builder" />
-    </form>
-    <!--% end %-->
+    <% if current_user.is_admin? %>
+        <form method="post" action="<%= siteproperties.getData("app-server", "url") %>/srdrj/advanceddataexport">
+            <input type="hidden" name="start_process" value="true" />
+            <input type="hidden" name="user.login" value="<%= current_user.login %>" />
+            <input type="hidden" name="prj_id" value="<%= @project.id.to_s %>" />
+            <input type="submit" name="enter_button" value="Load SRDR Report Builder" />
+        </form>
+    <% end %>
 
-<br/>
-        <p/><br/>
+        <p/>
+        <br/>
+        <p style="color: red;">The Report Builder Tool is undergoing maintenenance and is unavailable for use until further notice. We apologize for any inconvenience this may cause</p>
+        <br/>
         This option provides a variety of choices for customizing what data gets exported. You may select individual 
         fields one at a time or entire data collection instruments to export. 
         </td>
