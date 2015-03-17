@@ -18,6 +18,10 @@
 #
 
 class ArmDetailDataPoint < ActiveRecord::Base
+  include GlobalModelMethod
+
+	before_save :clean_string
+
 	belongs_to :arm_detail_field
 	belongs_to :study, :touch=>true
 	belongs_to :arm

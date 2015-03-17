@@ -14,6 +14,10 @@
 #
 
 class QualityDetailField < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
   belongs_to :study
   belongs_to :quality_detail
   has_many :quality_detail_data_points, :dependent=>:destroy

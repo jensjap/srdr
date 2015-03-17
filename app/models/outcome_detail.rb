@@ -17,6 +17,10 @@
 #
 
 class OutcomeDetail < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	has_many :outcome_detail_fields, :dependent=>:destroy
 	has_many :outcome_detail_data_points, :through=>:outcome_detail_fields
 	validates :question, :presence => true

@@ -21,6 +21,10 @@
 # These columns are handled in the adverse_event_columns files. An adverse event table may have many rows with many custom columns. 
 # Because of this each table cell data point is called an "adverse_event_result" which is specified by its column_id and adverse_event_id.
 class AdverseEvent < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	belongs_to :study, :touch=>true
 	has_many :adverse_event_results, :dependent=>:destroy
 	

@@ -17,6 +17,10 @@
 #
 
 class ArmDetail < ActiveRecord::Base
+    include GlobalModelMethod
+
+    before_save :clean_string
+
     belongs_to :extraction_form, :touch=>true
     has_many :arm_detail_fields, :dependent=>:destroy
     #has_many :arm_detail_data_points, :through=>:arm_detail_fields

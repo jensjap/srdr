@@ -18,6 +18,10 @@
 #
 
 class BaselineCharacteristicDataPoint < ActiveRecord::Base
+    include GlobalModelMethod
+
+    before_save :clean_string
+
     belongs_to :baseline_characteristic_field
     belongs_to :study, :touch=>true
     belongs_to :arm

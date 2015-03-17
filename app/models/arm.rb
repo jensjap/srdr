@@ -19,6 +19,9 @@
 
 # this class handles arms in study data entry.
 class Arm < ActiveRecord::Base
+    include GlobalModelMethod
+
+    before_save :clean_string
 
     belongs_to :study, :touch => true
     has_many :arm_detail_data_points, :dependent=>:destroy
