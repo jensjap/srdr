@@ -20,6 +20,10 @@
 # If the dimension does not match any of those listed, the default dropdown is created with options: Yes, No, No Data, Unsure, Not Applicable.
 # These default options can be changed in the get_dropdown_options function below.
 class QualityDimensionField < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	require 'yaml'
 	validates :title, :presence => true
 

@@ -17,6 +17,10 @@
 #
 
 class BaselineCharacteristic < ActiveRecord::Base
+    include GlobalModelMethod
+
+    before_save :clean_string
+
     belongs_to :extraction_form, :touch=>true
     has_many :baseline_characteristic_data_points, :through=>:baseline_characteristic_fields
     has_many :baseline_characteristic_fields, :dependent=>:destroy

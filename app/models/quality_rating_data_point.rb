@@ -14,6 +14,10 @@
 
 # This model handles the data in the quality ratings section, in study data entry.
 class QualityRatingDataPoint < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	belongs_to :study, :touch=>true
 	# get the extraction form fields if the extraction form exists, otherwise return nil
 	# @param [integer] study_id

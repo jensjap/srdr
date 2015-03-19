@@ -13,6 +13,10 @@
 
 # This model handles data points for adverse events. These data points are saved in the study adverse event data table.
 class AdverseEventResult < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	belongs_to :adverse_event, :touch=>true
 	# return an adverse event result (data point) based on adverse event id and column id inputs
 	# @param [integer] ae_id adverse event id

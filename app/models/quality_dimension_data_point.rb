@@ -15,6 +15,10 @@
 
 # This model handles quality dimension data points. A data point is a data item in the table cell in the Quality section of study data entry.
 class QualityDimensionDataPoint < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	belongs_to :study, :touch=>true
 	# get the requested data based on a particular field, study, and type of data requested (field or notes)
 	# @param [QualityDimensionField] field

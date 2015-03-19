@@ -16,6 +16,9 @@
 #
 
 class Outcome < ActiveRecord::Base
+    include GlobalModelMethod
+
+    before_save :clean_string
 
     belongs_to :study, :touch=>true
     has_many :comparisons, :dependent=>:destroy

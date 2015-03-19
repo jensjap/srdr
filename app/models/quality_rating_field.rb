@@ -13,6 +13,10 @@
 # This model handles the options in the quality ratings section, in extraction form creation. The default values are Good, Fair and Poor. 
 # The default values are set in config/default_questions.yml.
 class QualityRatingField < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
 	validates :rating_item, :presence => true
 
 	# get the new maximum display number of the current list of quality rating items for this particular extraction form

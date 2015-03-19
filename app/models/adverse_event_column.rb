@@ -14,6 +14,10 @@
 # They cannot be modified by the data extractor.
 # The adverse event column is linked to the extraction_form_id, and contains name and description.
 class AdverseEventColumn < ActiveRecord::Base
+    include GlobalModelMethod
+
+    before_save :clean_string
+
     belongs_to :extraction_form, :touch=>true
     validates :name, :presence => true
 

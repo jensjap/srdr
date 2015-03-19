@@ -17,6 +17,10 @@
 #
 
 class QualityDetail < ActiveRecord::Base
+  include GlobalModelMethod
+
+  before_save :clean_string
+
   has_many :quality_detail_fields, :dependent=>:destroy
   has_many :quality_detail_data_points, :through=>:quality_detail_fields
   validates :question, :presence => true
