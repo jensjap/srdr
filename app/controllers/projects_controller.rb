@@ -142,10 +142,10 @@ class ProjectsController < ApplicationController
         # project - for large projects this parameter list exceeds the maximum character length of the URL
         if !params[:user].nil? && params[:user].to_s == "listall"
             # construct array list of all study ids for this project
-            @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"], :order=>["created_at DESC"]).collect{|x| x.id}
+            @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"], :order=>["created_at DESC"]).paginate(:page => 1, :per_page => 100).collect{|x| x.id}
             @user = 'listall'
         else
-            @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).collect{|x| x.id}
+            @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
             @user = params[:user]
         end
         #puts "\n\nSTUDY IDS is #{@study_ids}\n\n"
@@ -157,14 +157,14 @@ class ProjectsController < ApplicationController
         # project - for large projects this parameter list exceeds the maximum character length of the URL
         if !params[:user].nil? && params[:user].to_s == "listall"
             # construct array list of all study ids for this project
-            @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).collect{|x| x.id}
+            @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).paginate(:page => 1, :per_page => 100).collect{|x| x.id}
             @user = "listall"
         else
             unless params[:user].nil?
               @user = params[:user]
-              @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).collect{|x| x.id}
+              @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
             else
-              @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).collect{|x| x.id}
+              @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
             end
         end
         @studies = Study.get_sorted_study_list(@project.id, @study_ids, sort_by, page_num, session[:items_per_page], user_type, current_user.id)    
