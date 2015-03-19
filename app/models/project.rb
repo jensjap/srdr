@@ -41,6 +41,7 @@ class Project < ActiveRecord::Base
     # returns an array of study ids
     def self.search(project_id, search_term, user)
         puts("Entered search with term: #{search_term} for user: #{user.login}\n")
+        requester = user
         study_ids = []
         user_search_id = 0 # set default user search to zero so we won't match if a user wasn't found
         if(user.is_lead(project_id) || user.is_super_admin?)
@@ -55,7 +56,7 @@ class Project < ActiveRecord::Base
             study_ids = study_ids.empty? ? [] : study_ids.collect{|x| x.id}
             unless study_ids.empty?
                 # we will be primarily searching publication records:
-                pubs = PrimaryPublication.find(:all, :conditions=>["study_id IN (?)",study_ids])
+                pubs = PrimaryPublication.find(:all, :conditions=>["study_id IN (?)",study_ids], :select =>["title","author","pmid","study_id"])
                 
                 # get ids with matching title term or author term or pubmedid term
                 pubs = pubs.select{|x| (x.title =~ /#{search_term}/im) || (x.author =~ /#{search_term}/im) || (x.pmid =~ /#{search_term}/im)}

@@ -76,30 +76,30 @@ class Study < ActiveRecord::Base
             case
             when sortBy == 'Default' then
                 #puts "sorting by default"
-                retVal = Study.where(:project_id => projID, :id=>study_ids, :creator_id=>users).order("id ASC").paginate(:page=>pageNum, :per_page => numPerPage)
+                retVal = Study.where(:project_id => projID, :creator_id=>users).order("id ASC").paginate(:page=>pageNum, :per_page => numPerPage)
             when sortBy == 'Creator' then
                 #puts "sorting by creator"
-                retVal = Study.find_by_sql("SELECT studies.*, users.login FROM studies INNER JOIN users on users.id = studies.creator_id where studies.project_id=#{projID} and studies.creator_id IN (#{users.join(',')}) AND studies.id IN (#{study_ids.join(',')}) order by users.login").paginate(:page=>pageNum,:per_page=>numPerPage)
+                retVal = Study.find_by_sql("SELECT studies.*, users.login FROM studies INNER JOIN users on users.id = studies.creator_id where studies.project_id=#{projID} and studies.creator_id IN (#{users.join(',')}) order by users.login").paginate(:page=>pageNum,:per_page=>numPerPage)
             when sortBy == "Date Created" then
                 #puts "sorting by date created"
-                retVal = Study.where(:project_id=>projID, :id=>study_ids, :creator_id=>users).order("created_at ASC").paginate(:page=>pageNum,:per_page=>numPerPage)
+                retVal = Study.where(:project_id=>projID, :creator_id=>users).order("created_at ASC").paginate(:page=>pageNum,:per_page=>numPerPage)
             when sortBy == 'Date Updated (Recent First)' then
                 #puts "sorting by date updated"
-                retVal = Study.where(:project_id=>projID, :id=>study_ids, :creator_id=>users).order("updated_at DESC").paginate(:page=>pageNum,:per_page=>numPerPage)
+                retVal = Study.where(:project_id=>projID, :creator_id=>users).order("updated_at DESC").paginate(:page=>pageNum,:per_page=>numPerPage)
             when sortBy == "Pubmed ID" then
                 #puts "sorting by pubmed id"
-                retVal = Study.find_by_sql("SELECT studies.*, primary_publications.pmid FROM studies INNER JOIN primary_publications on primary_publications.study_id = studies.id where studies.project_id=#{projID} AND studies.creator_id IN (#{users.join(',')}) AND studies.id IN (#{study_ids.join(',')}) ORDER BY IF(primary_publications.pmid = '' OR primary_publications.pmid IS NULL,1,0), primary_publications.pmid").paginate(:page=>pageNum,:per_page=>numPerPage)
+                retVal = Study.find_by_sql("SELECT studies.*, primary_publications.pmid FROM studies INNER JOIN primary_publications on primary_publications.study_id = studies.id where studies.project_id=#{projID} AND studies.creator_id IN (#{users.join(',')}) ORDER BY IF(primary_publications.pmid = '' OR primary_publications.pmid IS NULL,1,0), primary_publications.pmid").paginate(:page=>pageNum,:per_page=>numPerPage)
             when sortBy == "First Author" then
                 #puts "sorting first author"
-                retVal = Study.find_by_sql("SELECT studies.*, primary_publications.author FROM studies INNER JOIN primary_publications on primary_publications.study_id = studies.id where studies.project_id=#{projID} AND studies.creator_id IN (#{users.join(',')}) AND studies.id IN (#{study_ids.join(',')}) order by LEFT(primary_publications.author,5)").paginate(:page=>pageNum,:per_page=>numPerPage)
+                retVal = Study.find_by_sql("SELECT studies.*, primary_publications.author FROM studies INNER JOIN primary_publications on primary_publications.study_id = studies.id where studies.project_id=#{projID} AND studies.creator_id IN (#{users.join(',')}) order by LEFT(primary_publications.author,5)").paginate(:page=>pageNum,:per_page=>numPerPage)
             when sortBy.match(/^alternate_/) then
                 which = sortBy.gsub("alternate_","")
                 puts "sorting by alternate: #{which}"
-                retVal = Study.find_by_sql("SELECT s.*, pp.study_id, pp.id, ppn.number, ppn.number_type FROM studies AS s INNER JOIN primary_publications AS pp ON s.id = pp.study_id, primary_publication_numbers AS ppn WHERE pp.id = ppn.primary_publication_id AND ppn.number_type='#{which}' AND s.creator_id IN (#{users.join(',')}) AND s.id IN (#{study_ids.join(',')}) ORDER BY IF(ppn.number = '' OR ppn.number IS NULL,1,0), ppn.number ASC").paginate(:page=>pageNum,:per_page=>numPerPage)
+                retVal = Study.find_by_sql("SELECT s.*, pp.study_id, pp.id, ppn.number, ppn.number_type FROM studies AS s INNER JOIN primary_publications AS pp ON s.id = pp.study_id, primary_publication_numbers AS ppn WHERE pp.id = ppn.primary_publication_id AND ppn.number_type='#{which}' AND s.creator_id IN (#{users.join(',')}) ORDER BY IF(ppn.number = '' OR ppn.number IS NULL,1,0), ppn.number ASC").paginate(:page=>pageNum,:per_page=>numPerPage)
 
             else
                 puts "hit the else clause!"
-                retVal = Study.where(:project_id => projID, :id=>study_ids, :creator_id=>users).order("id ASC").paginate(:page=>pageNum, :per_page => numPerPage)
+                retVal = Study.where(:project_id => projID, :creator_id=>users).order("id ASC").paginate(:page=>pageNum, :per_page => numPerPage)
             end
             return retVal
         rescue Exception=>e
