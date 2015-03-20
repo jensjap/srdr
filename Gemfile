@@ -35,6 +35,7 @@ group :development, :test do
     gem 'guard-rspec', '1.2.1'
     gem 'guard-spork', '1.2.0'
     gem 'spork', '0.9.2'
+    gem 'pry-debugger'
 end
 
 group :development do
