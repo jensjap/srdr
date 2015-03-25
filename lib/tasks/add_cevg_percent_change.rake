@@ -17,12 +17,12 @@ namespace :add_cevg_percent_change do
 
     ocdes.each do |ocde|
       puts "Creating measure for ocde #{ocde.id}."
-      OutcomeMeasure.create(:outcome_data_entry_id => ocde.id, :title => 'Percent Change (mean)')
+      OutcomeMeasure.create(:outcome_data_entry_id => ocde.id, :title => 'Percent Change (median)')
     end
 
     comparisons.each do |comp|
       puts "Creating measure for comp #{comp.id}."
-      ComparisonMeasure.create(:comparison_id => comp.id, :title => 'Percent Change (mean)')
+      ComparisonMeasure.create(:comparison_id => comp.id, :title => 'Percent Change (median)')
     end
   end
   desc "Run all default_data tasks"
