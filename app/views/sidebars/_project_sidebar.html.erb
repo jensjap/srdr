@@ -121,41 +121,22 @@
 			<%= link_to "Progress Reports", "/projects/#{@project.id}/progress", {:tabindex=>running_index, :class=>'form_link', :remote=>true} %>
 			<a tabindex='<%= running_index + 1 %>' class='form_link' title="Finalize and Publish This Project" href="<%= "/projects/#{@project.id}/publish" %>">Publish Externally</a>
                         <a href="javascript:void(null);" onclick="showDialog();">Data Comparison Tool **</a>
-                        <div id="dialog-modal" title="Data Comparator Tool Note:" style="display: none;">
-                        Please note: THIS TOOL IS STILL UNDER DEVELOPMENT.
-                        <br/><br/><p/>
-                        At this time using this tool you may:
-                        <br/><br/><p/>
-                        1) Compare data values extracted from two or more studies into the same extraction form template.
-                        2) Reconcile data values extracted from two or more copies of a study into the same extraction form template.
-                        <br/><br/><p/>
-                        If you are using this project tool to reconcile data values between studies, please note that, ONLY data values entered into questions in these extraction form sections CAN be reconciled: 
-                        <br/><br/><p/>
-                        <LI>Study Design
-                        <LI>Baseline Characteristics
-                        <LI>Study Quality
-                        <br/><br/><p/>
-                        However, data values entered into questions on the following extraction form sections CANNOT be reconciled at this time:
-                        <br/><br/><p/>
-                        <LI>Arms
-                        <LI>Arm Details
-                        <LI>Outcome
-                        <LI>Outcome Details
-                        <LI>Results
-                        <LI>Adverse Events 
-                        <br/><br/><p/>
-                        We anticipate that the tool will be fully operational (support all sections) by May 15, 2014.
-                        <br/><br/><p/>
-                        Click link below to continue to the Data Comparison Tool.
-                        <br/><br/><p/>
+                        <div id="dialog-modal" title="Data Comparison Tool Note:" style="display: none;">
+                          The data comparison tool allows users to: <br/>
+                        1) Compare data values abstracted from two or more copies of a study into the same extraction form. <br/>
+                        2) Reconcile data values extracted from two or more copies of a study into the same extraction form. <br/><br/>
+                        <p style="color:red">
+                        Please note:<br/>
+                        The Data Comparison Tool is undergoing maintenance and is unavailable for use until further notice. We apologize for any inconvenience this may cause.
+                        </p>
 <%			
         if siteproperties.isReportBuilderURLLocal()
 %>
-                        <%= link_to "Data Comparison Tool **", project_studies_path(@project.id, :comparison=>true), {:tabindex=>running_index+2, :class=>'form_link', :title=>"Compare studies in this project"} %>
+                        <%#= link_to "Data Comparison Tool **", project_studies_path(@project.id, :comparison=>true), {:tabindex=>running_index+2, :class=>'form_link', :title=>"Compare studies in this project"} %>
 <%
         else
 %>
-                        <%= link_to "Data Comparison Tool **", siteproperties.getDataComparisonURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>running_index+2,:class=>'form_link', :title=>"Data Comparison Tool"} %>
+                        <%#= link_to "Data Comparison Tool **", siteproperties.getDataComparisonURL()+"&action=LOADPROJECT&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>running_index+2,:class=>'form_link', :title=>"Data Comparison Tool"} %>
 <%			
         end
 %>
