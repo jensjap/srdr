@@ -6,7 +6,7 @@ gem 'rails', '3.0.20'
 gem 'railties', '3.0.20'
 
 gem 'activerecord-mysql2-adapter', '0.0.3'
-gem 'mysql2', '0.2.18'
+gem 'mysql2', '>=0.2.18'
 
 gem 'authlogic', '3.2.0'
 gem 'escape_utils'

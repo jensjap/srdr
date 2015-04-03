@@ -44,14 +44,18 @@ class Project < ActiveRecord::Base
         requester = user
         study_ids = []
         user_search_id = 0 # set default user search to zero so we won't match if a user wasn't found
+        
         if(user.is_lead(project_id) || user.is_super_admin?)
             study_ids = Study.find(:all, :conditions=>["project_id = ?",project_id],:select=>["id","creator_id"])
+            
         elsif(user.is_editor(project_id))
             study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",project_id,user.id],:select=>["id,creator_id"])
+            
         end
 
-        user = User.find(:first, :conditions=>["login LIKE ?",search_term])
+        user = User.find(:first, :conditions=>["login LIKE ?","%#{search_term}%"])
         user_search_id = user.nil? ? 0 : user.id 
+        
         if user_search_id == 0
             study_ids = study_ids.empty? ? [] : study_ids.collect{|x| x.id}
             unless study_ids.empty?
@@ -64,13 +68,16 @@ class Project < ActiveRecord::Base
                 # gather the study_ids associated with just these publications
                 if pubs.empty?
                     study_ids = []
+                    
                 else 
                     study_ids = pubs.collect{|p| p.study_id}.uniq 
+                    
                 end
             end
         else
             study_ids = study_ids.select{|s| s.creator_id == user_search_id}
             study_ids = study_ids.empty? ? [] : study_ids.collect{|s| s.id}.uniq
+            
         end
         return study_ids
     end

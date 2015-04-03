@@ -133,6 +133,7 @@ class ProjectsController < ApplicationController
     user_type = current_user.is_lead(@project.id) ? 'lead' : current_user.is_editor(@project.id) ? 'editor' : ''
     user_type = 'lead' if current_user.is_super_admin?
 
+
     #puts "\n\nSORTING:\nItemsPerPage: #{session[:items_per_page]}\nSortBy: #{sort_by}\nPageNum: #{page_num}\nUserType: #{user_type}\n\n"
     # some calls will be ajax, others html
     respond_to do |format|
@@ -140,34 +141,34 @@ class ProjectsController < ApplicationController
         #puts "\n\nFOUND AN AJAX CALL \n\n"
         # :studies == "listall" selects all studies to be listed - this is used in place of passing an array of study ids for the entire
         # project - for large projects this parameter list exceeds the maximum character length of the URL
-        # if !params[:user].nil? && params[:user].to_s == "listall"
-        #     # construct array list of all study ids for this project
-        #     @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"], :order=>["created_at DESC"]).paginate(:page => 1, :per_page => 100).collect{|x| x.id}
-        #     @user = 'listall'
-        # else
-        #     @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
-        #     @user = params[:user]
-        # end
+        if !params[:user].nil? && params[:user].to_s == "listall"
+            # construct array list of all study ids for this project
+            @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
+            @user = 'listall'
+        else
+            @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
+            @user = params[:user]
+        end
         #puts "\n\nSTUDY IDS is #{@study_ids}\n\n"
-        @studies = Study.get_sorted_study_list(@project.id, nil, sort_by, page_num, session[:items_per_page], user_type, current_user.id) 
+        @studies = Study.get_sorted_study_list(@project.id, @study_ids, sort_by, page_num, session[:items_per_page], user_type, current_user.id) 
       }
       format.html{
         #puts "\n\nFOUND AN HTML CALL\n\n"
         # :studies == "listall" selects all studies to be listed - this is used in place of passing an array of study ids for the entire
         # project - for large projects this parameter list exceeds the maximum character length of the URL
-        # if !params[:user].nil? && params[:user].to_s == "listall"
-        #     # construct array list of all study ids for this project
-        #     @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).paginate(:page => 1, :per_page => 100).collect{|x| x.id}
-        #     @user = "listall"
-        # else
-        #     unless params[:user].nil?
-        #       @user = params[:user]
-        #       @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
-        #     else
-        #       @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
-        #     end
-        # end
-        @studies = Study.get_sorted_study_list(@project.id, nil, sort_by, page_num, session[:items_per_page], user_type, current_user.id)    
+        if !params[:user].nil? && params[:user].to_s == "listall"
+            # construct array list of all study ids for this project
+            @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
+            @user = "listall"
+        else
+            unless params[:user].nil?
+              @user = params[:user]
+              @study_ids = Study.find(:all, :conditions=>["project_id=? AND creator_id=?",@project.id, current_user.id], :select=>["id"], :order=>["created_at DESC"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
+            else
+              @study_ids = Study.find(:all, :conditions=>["project_id=?",@project.id],:select=>["id"]).paginate(:page => page_num, :per_page => session[:items_per_page]).collect{|x| x.id}
+            end
+        end
+        @studies = Study.get_sorted_study_list(@project.id, @study_ids, sort_by, page_num, session[:items_per_page], user_type, current_user.id)    
       }
     end
     
@@ -208,18 +209,20 @@ class ProjectsController < ApplicationController
     page_num = params[:page].nil? ? 1 : params[:page].to_i
     user_type = current_user.is_lead(@project.id) ? 'lead' : current_user.is_editor(@project.id) ? 'editor' : ''
     user_type = 'lead' if current_user.is_super_admin?
-
     @study_ids = Project.search(@project.id, params[:search_term],current_user)
+    
     unless @study_ids.empty?
       @studies = Study.get_sorted_study_list(@project.id, @study_ids, sort_by, page_num, session[:items_per_page], user_type, current_user.id)
     else
       @studies = []
     end
     @search_term = params[:search_term]
+    
     # get some supplementary information about the studies including:
     #   - any notes left by the data extractor
     #   - any alternate IDs defined for the study
     unless @studies.empty?
+      
       @study_notes = Study.get_notes_for_study_list(@studies.collect{|x| x.id})
       @study_completion = Study.get_completion_percentages(@studies.collect{|x| x.id})
       @alternate_ids = Hash.new()
