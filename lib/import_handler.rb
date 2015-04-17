@@ -218,7 +218,7 @@ class ImportHandler  #{{{1
             q_hash.each do |q, a|
                 #case q
                 #when /^affiliations?$|^journals?$|^volumes?$|^issues?$|^abstracts?$/i
-                if /^affiliations?$|^journals?$|^volumes?$|^issues?$|^abstracts?$/i.match(q)
+                if /^['"]*affiliation[s'"]*$|^['"]*journal[s'"]*$|^['"]*volume[s'"]*$|^['"]*issue[s'"]*$|^['"]*abstract[s'"]*$/i.match(q)
                     unless a.blank?
                         _optional_publication_info(study_id, q, a)
                     end
@@ -245,7 +245,7 @@ class ImportHandler  #{{{1
             end
 
             # Affiliations is actually saved under 'country' column.
-            q_value = q_value.sub(/^affiliations?$/, 'country')
+            q_value = q_value.sub(/^affiliations?$/i, 'country')
             #q.sub!(/^affiliations?$/, 'country')
 
             ar_pp[q_value] = a
@@ -800,7 +800,7 @@ class ImportHandler  #{{{1
 
         def _verify_kq_in_row(row)  #{{{3
             listOf_headers = row.keys
-            kq_candidates = listOf_headers.select { |h| h.match(/^k[ey]*[-_\s]*q[uestion]*$/i) }
+            kq_candidates = listOf_headers.select { |h| h.match(/^['"]*k[ey]*[-_\s]*q[uestion'"]*$/i) }
             #if kq_candidates.length == 0
             #    @listOf_errors << "Workbook must contain exactly 1 'Key Question' column. 0 found."
             #elsif kq_candidates.length > 1
@@ -841,7 +841,7 @@ class ImportHandler  #{{{1
 
         def _find_pmid_column  #{{{3
             listOf_headers = @headers.keys
-            pmid_candidates = listOf_headers.select { |h| h.match(/^pubmed[-_\s]*id$|^pmid$/i) }
+            pmid_candidates = listOf_headers.select { |h| h.match(/^['"]*pubmed[-_\s]*id['"]*$|^['"]*pmid['"]*$/i) }
             if pmid_candidates.length > 1
                 @listOf_errors << "Workbook may contain at most 1 'PMID' column. More than 1 found."
             end
@@ -850,7 +850,7 @@ class ImportHandler  #{{{1
 
         def _find_internal_id_column  #{{{3
             listOf_headers = @headers.keys
-            internal_id_candidates = listOf_headers.select { |h| h.match(/^internal[-_\s]*id$/i) }
+            internal_id_candidates = listOf_headers.select { |h| h.match(/^['"]*internal[-_\s]*id['"]*$/i) }
             if internal_id_candidates.length > 1
                 @listOf_errors << "Workbook may contain at most 1 'Internal ID' column. More than 1 found."
             end
@@ -861,11 +861,11 @@ class ImportHandler  #{{{1
             listOf_headers = @headers.keys
 
             # Try to find author columns first
-            author_candidates = listOf_headers.select { |h| h.match(/^authors?$/i) }
+            author_candidates = listOf_headers.select { |h| h.match(/^['"]*author[s'"]*$/i) }
             if author_candidates.length > 1
                 @listOf_errors << "Workbook may contain at most 1 'Author' column. More than 1 found."
             elsif author_candidates.length == 1
-                study_title_candidates = listOf_headers.select { |h| h.match(/^study[-_\s]*title$|^title$/i) }
+                study_title_candidates = listOf_headers.select { |h| h.match(/^['"]*study[-_\s]*title['"]*$|^['"]*title['"]*$/i) }
                 if study_title_candidates.length > 1
                     @listOf_errors << "Workbook may contain at most 1 'Title' column. More than 1 found."
                 elsif study_title_candidates.length == 1
@@ -875,11 +875,11 @@ class ImportHandler  #{{{1
             end
 
             # Try to find author_year columns
-            author_year_candidates = listOf_headers.select { |h| h.match(/^authors?[-_\s,]*year$/i) }
+            author_year_candidates = listOf_headers.select { |h| h.match(/^['"]*author[s'"]*[-_\s,]*year['"]*$/i) }
             if author_year_candidates.length > 1
                 @listOf_errors << "Workbook may contain at most 1 'Author, Year' column. More than 1 found."
             elsif author_year_candidates.length == 1
-                study_title_candidates = listOf_headers.select { |h| h.match(/^study[-_\s]*title$|^title$/i) }
+                study_title_candidates = listOf_headers.select { |h| h.match(/^['"]*study[-_\s]*title['"]*$|^['"]*title['"]*$/i) }
                 if study_title_candidates.length > 1
                     @listOf_errors << "Workbook may contain at most 1 'Title' column. More than 1 found."
                 elsif study_title_candidates.length == 1
