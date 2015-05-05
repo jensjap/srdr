@@ -49,6 +49,7 @@ Srdr::Application.routes.draw do
     # used for adding and removing extraction forms to and from studies
     match 'projects/published' => 'projects#published'
     match 'home/quarterly_training'
+    match 'home/external_resources'
     match 'register' => 'users#new'
     # MK Registration confirmation re-directs -----------------------------------------------
     match 'register/confirmation' => 'users#confirmation'
