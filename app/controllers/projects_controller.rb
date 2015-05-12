@@ -694,26 +694,33 @@ class ProjectsController < ApplicationController
   # download
   # Download the project Excel files
   def download
-    # Get site properties
-    # siteproperties = session[:guiproperties]
-    # siteproperties = nil
-    # if siteproperties.nil?
-    #     siteproperties = Guiproperties.new
-    #     session[:guiproperties] = siteproperties
-    # end
-    # excel_cache_path = siteproperties.getProjectCachePath()
-    format = params[:format]
-    excel_cache_path = "/public/cache/projects/"
-    
-    extraction_form_id=params[:extraction_form_id]
-    returnFile = ""
-    if current_user.is_assigned_to_project(params[:project_id])
-      returnFile = "project-#{params[:project_id]}-#{extraction_form_id}.#{format}"
-    else
-      project = Project.find(params[:project_id])
-      returnFile = project.get_download_filename(current_user.id, extraction_form_id, format)
+    dl_type = params[:dl_type]
+    cache_path = nil
+    return_file = nil
+
+    case dl_type
+    when "ef" 
+      format  = params[:format]
+      extraction_form_id = params[:extraction_form_id]
+      cache_path = "/public/cache/projects"
+      if current_user.is_assigned_to_project(params[:project_id])
+        return_file = "project-#{params[:project_id]}-#{extraction_form_id}.#{format}"
+      else
+        project = Project.find(params[:project_id])
+        return_file = project.get_download_filename(current_user.id, extraction_form_id, format)
+      end
+    when "supplement" 
+      return_file = params[:filename]
+      cache_path = "/public/reports/#{params[:project_id]}/publish/downloads"
+      if !current_user.is_assigned_to_project(params[:project_id])
+        project = Project.find(params[:project_id])
+        return_file = project.get_download_filename(current_user.id, nil, nil, return_file)
+        if return_file != params[:filename]
+          cache_path = "/public/cache/projects"
+        end
+      end
     end
-    send_file "#{Rails.root}/#{excel_cache_path}/#{returnFile}",:x_sendfile=>true
-    #<A HREF="/<%= excel_cache_path %>project-<%= project.id.to_s %>-<%= ef.id.to_s %>.xlsx"> Excel</A>
+    send_file "#{Rails.root}/#{cache_path}/#{return_file}",:x_sendfile=>true
+    
   end
 end

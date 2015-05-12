@@ -464,7 +464,7 @@ class Project < ActiveRecord::Base
         return retVal
     end
 
-    def get_download_filename(downloader_id, ef_id, format)
+    def get_download_filename(downloader_id, ef_id, format, filename = nil)
         request = DataRequest.find(:first, :conditions=>["user_id=? AND project_id=?", downloader_id, self.id])
         returnFile = "access_denied.txt"
         # if it's downloadable, then record the access and provide the 
@@ -482,8 +482,8 @@ class Project < ActiveRecord::Base
               request.download_count = request.download_count + 1
               request.save
             end
-            #returnFile = "topSecret.txt"
-            returnFile = "project-#{self.id}-#{ef_id}.#{format}"
+            
+            returnFile = filename.nil? ? "project-#{self.id}-#{ef_id}.#{format}" : filename
           end
         # if it's not downloadable, make sure their request has been approved.
         # if approved within 1 week ago, provide the file requested. If previously
@@ -498,8 +498,7 @@ class Project < ActiveRecord::Base
                     request.download_count = request.download_count + 1
                     request.save
                   end
-                  #returnFile = "topSecret.txt"     
-                  returnFile = "project-#{self.id}-#{ef_id}.#{format}"
+                  returnFile = filename.nil? ? "project-#{self.id}-#{ef_id}.#{format}" : filename
                 else
                   returnFile = "access_expired.txt"
                 end

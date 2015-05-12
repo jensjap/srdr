@@ -267,6 +267,7 @@ Srdr::Application.routes.draw do
     # requests to download project data
     match 'projects/:project_id/request_data' => 'projects#data_request_form'
     match 'projects/:project_id/extraction_forms/:extraction_form_id/download'=>'projects#download'
+    match 'projects/:project_id/downloads/download'=>'projects#download'
     match '/projects/:project_id/data_request_handler'=>'projects#data_request_handler'
     match '/home/data_requests' => 'projects#show_data_requests'
     match '/home/data_requests/update' => 'projects#update_data_requests'

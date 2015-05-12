@@ -1,0 +1,104 @@
+<div class='downloadable_content' id='dl_content_<%= project.id %>' style='display:none;'>
+  <br/>
+  <%# The root directory to downloadable info. %>
+  <% file_root = "#{RAILS_ROOT}/public/cache/projects" %>
+  <% excel_cache_path = "/cache/projects" %>
+  <!-- excel download links -->
+  <table id="export_tools_excel_table">
+    <tr>
+      <td class="title">Extraction Form</td>
+      <td class="title">EXCEL</td>
+      <td class="title">CSV</td>
+      <td class="title">Compile Date/Time</td>
+      <td class="title">Project Last Updated</td>
+    </tr>
+    <% @ef_ids[project.id.to_s].each do |ef| %>
+      <% has_xls = false %>
+      <% has_csv = false %>
+      <tr>
+        <!-- EF Title -->
+        <td style='text-align:center;'><%= ef.title %></td>
+
+        <!-- Excel Available? -->
+        <td style='text-align:center;'>
+          <% if File.exist?("#{file_root}/project-#{project.id}-#{ef.id}.xlsx") %>
+            <% has_xls = true %>
+            &#10003;
+          <% else %>
+            -- 
+          <% end %>
+        </td>
+
+        <!-- CSV Available? -->
+        <td style='text-align:center;'>
+          <% if File.exist?("#{file_root}/project-#{project.id}-#{ef.id}.csv") %>
+            &#10003;
+            <% has_csv = true %>
+          <% else %>
+            -- 
+          <% end %>
+        </td>
+
+        <!-- Compile Time -->
+        <td style='text-align:center;'>
+          <% if has_xls %>
+            <%= File.mtime("#{file_root}/project-#{project.id}-#{ef.id}.xlsx").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+          <% elsif has_csv %>
+            <%= File.mtime("#{file_root}/project-#{project.id}-#{ef.id}.csv").utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+          <% end %>
+        </td>
+
+        <!-- Project Last Updated -->
+        <td align='center'>
+          <%= project.updated_at.utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+        </td>
+      </tr>
+    <% end %>
+    
+    <%# look for uploaded data %>
+    <% unless Dir["public/reports/"+project.id.to_s+"/publish/downloads/*.*"].nil? %>
+      <% entries = Dir["public/reports/"+project.id.to_s+"/publish/downloads/*.*"] %>
+      <% if entries.length > 0 %>
+        <tr>
+          <td class="title" colspan="5" align='center'>Uploaded Document(s)</td>
+        </tr>
+        <tr>
+          <td class='title' colspan='2' align='center'>Filename</td>
+          <td class='title' colspan = '2' align='center'>Description</td>
+          <td class='title' colspan='1' align='center'>Date Uploaded</td>
+        </tr>
+        <% path = "public/reports/#{project.id}/publish/downloads/" %>
+        <% entries.each do |fn| %>
+          <% next if fn.ends_with?(".readme") %>
+          <% filename = fn.split("/").last %>
+          <tr>
+            <!-- Filename / Download Link -->
+            <td class='ef_data' colspan='2'>
+              <!-- <a href='<%= "/public/reports/#{project.id}/publish/downloads/#{filename}" %>' target='_blank'><img src='/images/Disk.png' border='0'/><%= filename %></a> -->
+              <%= filename %>
+            </td>
+            <!-- File Description -->
+            <td class = 'data' colspan='2' style='text-align:left;' >
+              <% fullpath = "/#{path}#{filename}.readme"%>
+              <% if File.file?(RAILS_ROOT + fullpath) %>
+                <%= loadDescription(RAILS_ROOT + fullpath) %>
+              <% else %>
+                No Description.
+              <% end %>
+            </td>
+            <!-- Uploaded Date -->
+            <td class='data' colspan='1'>
+              <%= File.mtime(fn).utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %> 
+    <tr>
+      <td colspan='5' style='border:none;'><center>
+        <a href='/projects/<%= project.id %>/request_data' style='font-size:17px; color: green;'>Go To Downloads Page</a>
+        </center>
+      </td>
+    </tr>
+  </table>
+</div>
