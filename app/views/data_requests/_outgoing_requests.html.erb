@@ -1,55 +1,17 @@
 <strong style='color:red;'><%= @message %></strong>
 <br/><br/>
-<% expirationTime = 1.week %>
-<% active = @outgoing_requests.select{|x| x.status == "pending" || (x.status == "accepted" && (Time.now() - x.responded_at) < expirationTime) ||  (x.status != "public" && (Time.now() - x.responded_at) < expirationTime)} %>
-<% unless active.empty? %>
-<h3>Open Requests:</h3>
-<table class='form_table'>
-	<tr><th>Project</th><th>Submission Date</th><th>Status</th><th>Response Date</th><th>Last Downloaded</th><th>Downloads</th></tr>
-	<% active.each do |act| %>
 
-		<tr>
-      <td><%= @projects.find{|x| x.id == act.project_id}.title %></td>
-      <td><%= act.requested_at.nil? ? "--" : act.requested_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
-      <td>
-        <% if act.status == "accepted"%>
-          <a href="/projects/<%= act.project_id %>/request_data">Download Now</a>
-        <% else %>
-          <%= act.status %>
-        <% end %>
-      </td>
-      <td><%= act.responded_at.nil? ? "--" : act.responded_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
-      <td><%= act.last_download_at.nil? ? "--" : act.last_download_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
-      <td><%= act.download_count %></td>
-    </tr>
-	<% end %>
-</table>
+<% unless @outgoing_requests.empty? %>
+  <table class='form_table'>
+  	<tr><th>Project</th><th>Last Downloaded</th><th>Download Count</th></tr>
+  	<% @outgoing_requests.each do |act| %>
+  		<tr>
+        <td><%= @projects.find{|x| x.id == act.project_id}.title %></td>
+        <td><%= act.last_download_at.nil? ? "--" : act.last_download_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+        <td><%= act.download_count %></td>
+      </tr>
+  	<% end %>
+  </table>
 <% else %>
-You have no outstanding data requests.
-<% end %>
-<br/><br/>
-<% closed = @outgoing_requests - active %>
-<% unless closed.empty? %>
-<h3>Completed or Expired Requests:</h3>
-<table class='form_table'>
-  <tr><th>Project</th><th>Submission Date</th><th>Status</th><th>Response Date</th><th>Last Downloaded</th><th>Downloads</th></tr>
-  <% closed.each do |clo| %>
-    <tr>
-      <% 
-      p = @projects.find{|x| x.id} 
-      proj_title = p.nil? ? "-- Error: Project Not Found. --" : p.title 
-      %>
-      <td><%= proj_title %></td>
-      <td><%= clo.requested_at.nil? ? "--" : clo.requested_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
-      <td>
-        <%= clo.status == "accepted" ? "expired" : clo.status %>
-      </td>
-      <td><%= clo.responded_at.nil? ? "--" : clo.responded_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
-      <td><%= clo.last_download_at.nil? ? "--" : clo.last_download_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
-      <td><%= clo.download_count %></td>
-    </tr>
-  <% end %>
-</table>
-<% else %>
-  
+You have not downloaded any project data.
 <% end %>
