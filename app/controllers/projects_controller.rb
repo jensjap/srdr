@@ -433,7 +433,7 @@ class ProjectsController < ApplicationController
     	if !@project.is_public
         @project.is_public = params[:project][:is_public]
       end
-      @project.public_downloadable = params[:project][:public_downloadable]
+      @project.public_downloadable = true 
       @project.save
     end
     	if params[:project][:is_public] == "false"

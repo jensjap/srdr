@@ -19,7 +19,7 @@
   <br/>
 <%= render 'shared/creative_commons_note' %>
   <br/><br/>
-	<input type='checkbox' name='creativeCommons_agree' id='cc_agree_cbox'>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above.<br/><br/>
+	<input type='checkbox' name='creativeCommons_agree' id='cc_agree_cbox'>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above, and I understand that the original contributor will be notified of this request.<br/><br/>
     <table id="export_tools_excel_table">
     <tr>
       <td class="title">Extraction Form</td>
@@ -100,9 +100,10 @@
   
 
 <% else %>
-	This project requires permission of the project lead before we can provide you with access to the tabular data. Please complete the form below.<br/><br/>
+	It appears that an error has occurred. Please contact the SRDR team at SRDR@ahrq.hhs.gov for assistance.<br/><br/>
+  <!-- This project requires permission of the project lead before we can provide you with access to the tabular data. Please complete the form below.<br/><br/> -->
 	
-  <%= render :partial=>"data_requests/form" %>
+  <%# render :partial=>"data_requests/form" %>
 
 <% end %>
 <br/><br/><br/>
