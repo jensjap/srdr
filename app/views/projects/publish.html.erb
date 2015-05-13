@@ -30,13 +30,7 @@ This section allows you to finalize your project and
  				<h4>Project Status:</h4><br/>
  				<%= f.radio_button "is_public",false, :class => "cbox", :selected=>true %>Incomplete (<em>May be viewed and edited only by project team members.</em>)<br/>
  				<br/><%= f.radio_button "is_public",true, :class => "cbox" %>Published (<em>May be searched for and viewed by other users. Edits can be made, but will be tracked.</em>)
- 				<br/><br/><br/>
-
- 				<h4>Set Data Availability</h4><br/>
- 				By setting this option to "Make Public", you are agreeing to allow users to download the "Simple Export" format of your data. To mandate that users first ask your permission to download the data, you should set this option to "Require My Permission".<br/><br/>
- 				
- 				<%= f.radio_button "public_downloadable",false, {:class => "cbox",:selected=>true} %>Require My Permission (<em>User requests for download will be emailed to you</em>)<br/><br/>
- 				<%= f.radio_button "public_downloadable",true, :class => "cbox" %>Make Public (<em>Registered users can download an Excel document representing the extracted data found in your project. All downloads will be recorded and viewed from your user profile.</em>)
+ 				<br/>
  			</div><br/>
             <div class='field'>
                 <hr width="100%">
@@ -60,45 +54,10 @@ This section allows you to finalize your project and
 		<br/><br/>
 		This project has been published and may be viewed by the SRDR user community. If this was not your intention please contact us at <a href="mailto: SRDR@ahrq.hhs.gov">SRDR@ahrq.hhs.gov</a>.
 		<br/><br/>
-		However, you may update the access level of your data below:<br/><br/>
-		<%= form_for @project, :url => "set_to_published" do |f| %>
- 			<%= hidden_field_tag "publishing","", :value=>true %>
- 			
- 			<div class='field'>
- 				<h4>Set Data Availability</h4><br/>
- 				By setting this option to "Make Public", you are agreeing to allow users to download the "Simple Export" format of your data. To mandate that users first ask your permission to download the data, you should set this option to "Require My Permission".<br/><br/>
- 				
- 				<%= f.radio_button "public_downloadable",false, {:class => "cbox",:selected=>@project.public_downloadable} %>Require My Permission (<em>User requests for download will be emailed to you</em>)<br/><br/>
- 				<%= f.radio_button "public_downloadable",true, {:class => "cbox", :selected=>@project.public_downloadable} %>Make Public (<em>Registered users can download an Excel document representing the extracted data found in your project. All downloads will be recorded and viewed from your user profile.</em>)
- 			</div><br/>
- 			<div class="actions">
-				<button type="submit" class="positive" id="publish_project_button" alt="publish this project">
-					<%= image_tag "Add.png", :alt => "Add" %>Save
-				</button>
-			</div>
- 		<% end %>
 
 <% end %>
 <br/><br/>
-<!--
-<table id="bottom_nav" summary="bottom page navigation table">
-	<tr>
-		<td align='left'>
-			<a href="<%= '/projects/' + @project.id.to_s %>">
-				<img alt="" src="/images/Silk_bullet_back.png" style="border:0px; vertical-align:text-top"/>
-  			Back to Project Summary	
-			</a>
-		</td>
-		<td align="right">
-			<a href="/">
-  			
-  			<img alt="" src="/images/Computer-silk.png" style="border:0px; vertical-align:text-top"/>
-  			Go to My Work
-  		</a>
-  	</td>
- </tr>
-</table>
--->
+
 
 
 </div><br/><br/>
@@ -107,18 +66,23 @@ This section allows you to finalize your project and
 var is_edit_page = false;
 $("#publish_project_button").bind("click", function(e){
 	e.preventDefault();
-	if (($("#project_is_public_true").attr("checked") != "undefined") && ($("#project_is_public_true").attr("checked") == "checked"))
-	{
-		if (confirm('Are you sure? Once you publish your project to the system, this action cannot be undone.'))
-		{
-			$(this).closest("form").submit();
-		}
+  var checked = $("[name='user_agreement']").attr("checked");
+  if(checked == undefined){
+    alert("You must agree to the SRDR Terms of Use Policy.");
+  }else{
+
+  	if (($("#project_is_public_true").attr("checked") != "undefined") && ($("#project_is_public_true").attr("checked") == "checked"))
+  	{
+  		if (confirm('Are you sure? Once you publish your project to the system, this action cannot be undone.'))
+  		{
+  			$(this).closest("form").submit();
+  		}
+  	}
+  	else
+  	{
+  			$(this).closest("form").submit();	
+  	}
 	}
-	else
-	{
-			$(this).closest("form").submit();	
-	}
-	
 });
 </script>
 
