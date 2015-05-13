@@ -18,7 +18,6 @@
 	<% unless !["member","admin","super-admin"].include?(current_user.user_type) %>
 		<p class='nav-active'>MY WORK</p>
 		<%= link_to "My Projects", "/projects", {:remote=>true,:class=>'nav-active', :tabindex=>102, :title=>"View your Projects"} %>
-		<%= link_to "Data Requests", "/home/data_requests", {:tabindex=>107,:title=>"View incoming requests or your own data inquiries"} %>
 		<%= link_to "View Collaborators *", "/home/coming_soon", {:remote=>true,:class=>'nav-active', :tabindex=>103, :title=>"(COMING SOON) See the list of those you're collaborating with"} %>
 		<%= link_to "Comments Summary *", "/home/coming_soon", {:remote=>true,:class=>'nav-active', :tabindex=>104,:title=>"(COMING SOON) View a summary of comments associated with various Projects"} %>
 		<% if User.hasAdminRights(current_user) %>
