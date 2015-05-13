@@ -612,7 +612,6 @@ class ProjectsController < ApplicationController
   # data_request_form
   # Request to download the Excel spreadsheet corresponding to a particular project. 
   # If the project is publicly downloadable, you must agree to some terms and the data is yours.
-  # If not, an email is sent to the project lead to ask permission.
   def data_request_form
     @project = Project.find(params[:project_id])
     @page_title = @project.title
@@ -694,6 +693,7 @@ class ProjectsController < ApplicationController
   # download
   # Download the project Excel files
   def download
+    puts "ENTERED DOWNLOAD FUNCTION"
     dl_type = params[:dl_type]
     cache_path = nil
     return_file = nil
@@ -720,7 +720,6 @@ class ProjectsController < ApplicationController
         end
       end
     end
-    send_file "#{Rails.root}/#{cache_path}/#{return_file}",:x_sendfile=>true
-    
+    send_file "#{Rails.root}/#{cache_path}/#{return_file}",:x_sendfile=>true 
   end
 end
