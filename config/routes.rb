@@ -124,6 +124,8 @@ Srdr::Application.routes.draw do
 
     # copy a project
     match 'projects/show_copy_form'
+    match 'projects/show_copy_request_form'
+    match 'projects/request_a_copy'
     match 'projects/copy'
 
     # key questions routes

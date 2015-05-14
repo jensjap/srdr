@@ -626,13 +626,36 @@ class ProjectsController < ApplicationController
   #   1) projects belonging to this user
   #   2) projects this user has requested data for
   def show_data_requests
-    @outgoing_requests = DataRequest.find(:all, :conditions=>["user_id=?",current_user.id])
+    titles = {'incoming' => "Requests for My Data",
+              'outgoing' => "Data I Have Requested",
+              'incopy' => "Copies of My Projects",
+              'outcopy' => "Projects I Have Copied"}
+    
+    @request_type = params[:request_type]
+    @title = titles[params[:request_type]]
+    @records = []
+    
     user_project_ids = UserProjectRole.find(:all, :conditions=>["user_id=? and role = ?",current_user.id, "lead"],:select=>["project_id"])
     user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.project_id}
-    @incoming_requests = user_project_ids.empty? ? [] : DataRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
-    @users = User.find(:all, :conditions=>["id IN (?)",@incoming_requests.collect{|x| x.user_id}.uniq])
-    proj_ids = @outgoing_requests.collect{|x| x.project_id}.uniq + user_project_ids
-    @projects = Project.find(:all, :conditions=>["id IN (?)",proj_ids], :select=>["id","title"])
+    
+    case @request_type
+    when 'incoming'
+      @records = user_project_ids.empty? ? [] : DataRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])
+      @users = User.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.user_id}])
+    when 'outgoing'
+      @records = DataRequest.find(:all, :conditions=>["user_id=?",current_user.id])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])
+    
+    when 'incopy'
+      @records = ProjectCopyRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",(@records.collect{|x| x.project_id} + @records.collect{|x| x.clone_id}).uniq])
+      @users = User.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.user_id}])
+
+    when 'outcopy'
+      @records = ProjectCopyRequest.find(:all, :conditions => ["user_id = ?", current_user.id])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])
+    end
     render "/data_requests/show"
   end
 
@@ -721,5 +744,23 @@ class ProjectsController < ApplicationController
       end
     end
     send_file "#{Rails.root}/#{cache_path}/#{return_file}",:x_sendfile=>true 
+  end
+
+  def show_copy_request_form
+    @project_title = params[:project_title]
+    @project_id = params[:project_id]
+  end
+
+  # send a notification to the admin to request a copy of a published project
+  def request_a_copy
+    levels = params[:copy_level].split("_")
+    requests_ef = levels.length >= 1
+    requests_studies = levels.length >= 2
+    requests_data = levels.length >= 3
+    ProjectCopyRequest.create(:user_id => current_user.id,
+                              :project_id => params[:project_id],
+                              :include_forms => requests_ef,
+                              :include_studies => requests_studies,
+                              :include_data  => requests_data)
   end
 end

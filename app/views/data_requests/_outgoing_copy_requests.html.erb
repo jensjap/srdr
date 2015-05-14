@@ -1,0 +1,24 @@
+<strong style='color:red;'><%= @message %></strong>
+<br/><br/>
+
+<% unless @records.empty? %>
+  <table class='form_table'>
+  	<tr><th>Project</th><th>Copy Request Date</th><th>Completion Date</th><th>My Copy</th></tr>
+  	<% @records.each do |act| %>
+  		<tr>
+        <td><%= @projects.find{|x| x.id == act.project_id}.title %></td>
+        <td><%= act.created_at.nil? ? "--" : act.created_at.localtime.strftime("%m/%d/%y %l:%M%p") %></td>
+        <td><%= act.clone_id.nil? ? "Pending" : @projects.find{|x| x.id == act.clone_id}.created_at.localtime.strftime("%m/%d/%y %l:%M%p") %></td>
+        <td>
+          <% if act.clone_id.nil? %>
+            --
+          <% else %>
+            <a href='/projects/<%= act.clone_id %>/edit'>Edit</a>
+          <% end %>
+        </td>
+      </tr>
+  	<% end %>
+  </table>
+<% else %>
+  You have not downloaded any data published to SRDR.
+<% end %>

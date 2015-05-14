@@ -27,7 +27,10 @@
 	<% end %>
 	<p>mySRDR ACCOUNT</p>
 	<%= link_to "My Profile", "/account/edit", {:remote=>true, :tabindex=>106, :title=>"View/Modify your account profile"} %>
-	<%= link_to "Data Requests", "/home/data_requests", {:tabindex=>107,:title=>"View incoming requests or your own data inquiries"} %>
+	<%= link_to "Requests for My Data", "/home/data_requests?request_type=incoming", {:tabindex=>107,:title=>"View requests to download your data"} %>
+	<%= link_to "Data I've Requested", "/home/data_requests?request_type=outgoing", {:tabindex=>107,:title=>"View my requests to download published data"} %>
+	<%= link_to "Copies of My Projects", "/home/data_requests?request_type=incopy", {:tabindex=>107,:title=>"View copies of my projects that have been created"} %>
+	<%= link_to "Projects I've Copied", "/home/data_requests?request_type=outcopy", {:tabindex=>107,:title=>"View projects that I have copied"} %>
 	<%= link_to "Who's Online? *", "/home/coming_soon", {:remote=>true, :tabindex=>108,:title=>"(COMING SOON) View/Interact with SRDR users who are currently online"} %>
 	<p>FILING CABINET</p>
 	<%= link_to "Favorite Projects *", "/home/coming_soon", {:remote=>true, :tabindex=>109,:title=>"(COMING SOON) View Projects you have flagged as favorites"} %>

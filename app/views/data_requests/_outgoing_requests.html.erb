@@ -1,17 +1,17 @@
 <strong style='color:red;'><%= @message %></strong>
 <br/><br/>
 
-<% unless @outgoing_requests.empty? %>
+<% unless @records.empty? %>
   <table class='form_table'>
   	<tr><th>Project</th><th>Last Downloaded</th><th>Download Count</th></tr>
-  	<% @outgoing_requests.each do |act| %>
+  	<% @records.each do |act| %>
   		<tr>
         <td><%= @projects.find{|x| x.id == act.project_id}.title %></td>
-        <td><%= act.last_download_at.nil? ? "--" : act.last_download_at.localtime.strftime("%m/%d/%y at %l:%M%p") %></td>
+        <td><%= act.last_download_at.nil? ? "--" : act.last_download_at.localtime.strftime("%m/%d/%y %l:%M%p") %></td>
         <td><%= act.download_count %></td>
       </tr>
   	<% end %>
   </table>
 <% else %>
-You have not downloaded any project data.
+  You have not downloaded any data published to SRDR.
 <% end %>
