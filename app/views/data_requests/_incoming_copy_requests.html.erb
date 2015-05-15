@@ -2,7 +2,7 @@
 <br/><br/>
 <% unless @records.empty? %>
 <table class='form_table'>
-  <tr><th>Project</th><th>User</th><th>Email</th><th>Request Date</th><th>Completion Date</th></tr>
+  <tr><th>Project</th><th>User</th><th>Email</th><th>Request Type</th><th>Request Date</th><th>Completion Date</th></tr>
   <% @records.each do |clo| %>
     <% usr = @users.find{|u| u.id == clo.user_id} %>
     <% unless usr.nil? %>
@@ -10,6 +10,7 @@
         <td><%= @projects.find{|x| x.id == clo.project_id}.title %></td>
         <td><%= usr.nil? ? "Not Found" : usr.login %></td>
         <td><%= usr.email %></td>
+        <td><%= clo.to_s %></td>
         <td><%= clo.created_at.nil? ? "--" : clo.created_at.localtime.strftime("%m/%d/%y %l:%M%p") %></td>
         <td><%= clo.clone_id.nil? ? "Pending" : "Get Clone Date" %></td>
       </tr>
