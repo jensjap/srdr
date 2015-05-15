@@ -5,14 +5,35 @@
 <table class='form_table with_comment_rows' id='new_project_form' summary='New Project Form'>
     <tr>
         <td colspan='2'>
-            Use this form to modify your project, then click the "Save and Continue"
-            button to follow the process shown at the right.
+            Use this form to modify your project, then click the "Save and Continue" button to follow the process shown at the right.
         </td>
         <tr>
 
             <tr>
                 <td colspan='2'>
                     <font color = "red" size=+2 >*</font> required fields.
+                </td>
+            </tr>
+            <!-- ATTRIBUTION & PARENT PROJECT -->
+            <tr>
+                <tr>
+                <td class="label top" for='project_attribution'>
+                    <div><label for='project_title' >Attribution:</label></div>
+                </td>
+                <td class='input top'>
+                    <%= f.text_area :attribution, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
+                    <% unless @project.parent_id.nil? %>
+                      <span id='parent_info'>
+                      <br/>
+                      <% parent = @project.parent %>
+                      Parent Project: <%= parent.title %>
+                      <p style='float:right;'>
+                      <% if parent.is_public %>
+                        <a href="/projects/<%= parent.id %>" target='_blank'>View Parent</a> |
+                      <% end %>
+                      <a href='#' id='remove_parent_link'>Remove Association</a></p>
+                      </span>
+                    <% end %>
                 </td>
             </tr>
             <!-- THE PROJECT TITLE ROW -->
@@ -255,4 +276,15 @@
         </table><br/>
         <br/><br/>
     <% end %>
+<script type='text/javascript'>
+<!--
+$("#remove_parent_link").on("click",function(e){
+  e.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/projects/<%= @project.id %>/remove_parent_association',
+  }); 
+});
 
+-->
+</script>

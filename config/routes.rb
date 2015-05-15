@@ -127,6 +127,7 @@ Srdr::Application.routes.draw do
     match 'projects/show_copy_request_form'
     match 'projects/request_a_copy'
     match 'projects/copy'
+    match 'projects/:project_id/remove_parent_association' => 'projects#remove_parent_association'
 
     # key questions routes
     match 'key_questions/new' => 'key_questions#new'

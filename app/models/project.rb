@@ -29,6 +29,7 @@ class Project < ActiveRecord::Base
     has_many :extraction_forms, :dependent=>:destroy
     has_many :data_requests
     validates :title, :presence => true
+    belongs_to :parent, :class_name => "Project", :foreign_key => :parent_id 
 
     # info via http://stackoverflow.com/questions/408872/rails-has-many-through-find-by-extra-attributes-in-join-model
     has_many  :lead_users, :through => :user_project_roles, :class_name => "Project", :source => :project, :conditions => ['user_project_roles.role = ?',"lead"]
@@ -109,6 +110,7 @@ class Project < ActiveRecord::Base
         new_proj.is_public = false
         new_proj.updated_at = nil
         new_proj.created_at = Time.now
+        new_proj.parent_id = self.id 
 
         # copy all key questions associated with the project.
         #----------------------------------------------------

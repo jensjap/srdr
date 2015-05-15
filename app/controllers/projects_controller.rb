@@ -763,4 +763,10 @@ class ProjectsController < ApplicationController
                               :include_studies => requests_studies,
                               :include_data  => requests_data)
   end
+
+  def remove_parent_association
+    p = Project.find(params[:project_id])
+    p.parent_id = nil 
+    p.save 
+  end
 end
