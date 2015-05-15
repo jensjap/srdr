@@ -92,6 +92,14 @@ class Project < ActiveRecord::Base
     # @params [boolean] copy_efs      - copy extraction forms?
     # @params [boolean] copy_studies  - copy studies?
     # @return [boolean] success       - was the copy process successful?
+    class << self
+      def init_copy(project_id, user_id, new_title, copy_efs, copy_studies, copy_study_data)
+        p = Project.find(project_id)
+        p.copy(user_id,new_title,copy_efs,copy_studies,copy_study_data)
+      end
+      handle_asynchronously :init_copy, :run_at => Time.now() + 1
+    end
+    
     def copy(user_id, new_title, copy_efs, copy_studies, copy_study_data)
         puts "\n\n---------------- In the Copy Function.----------------\n\n"
         success = false # the return value
@@ -144,8 +152,6 @@ class Project < ActiveRecord::Base
         end
         return success
     end
-    handle_asynchronously :copy, :run_at => Time.now() + 1
-
 
     def self.get_status_string(id)
         @project = Project.find(id)

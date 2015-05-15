@@ -395,14 +395,7 @@ class ProjectsController < ApplicationController
     project = Project.find(params[:project_id])
 
     unless title == project.title
-=begin      
-      if project.copy(current_user.id, title,copy_efs,copy_studies,copy_study_data)
-        @table_container = "project_list_div"
-        @table_partial = "projects/project_list"
-        flash[:success_message] = "The project was copied successfully."
-      end
-=end
-      success = project.copy(current_user.id, title,copy_efs,copy_studies,copy_study_data)
+      Project.init_copy(project.id, current_user.id, title,copy_efs,copy_studies,copy_study_data)
       # flash[:success] = "We're working on copying the project now and will email you to let you know that everything goes smoothly. If so, your project should appear in your list shortly."
       @original_title = project.title
       @new_title = title
@@ -635,8 +628,15 @@ class ProjectsController < ApplicationController
     @title = titles[params[:request_type]]
     @records = []
     
-    user_project_ids = UserProjectRole.find(:all, :conditions=>["user_id=? and role = ?",current_user.id, "lead"],:select=>["project_id"])
-    user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.project_id}
+    user_project_ids = []
+    if current_user.is_admin?
+      user_project_ids = Project.find(:all, :select=>['id'])
+      user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.id}
+    else
+      user_project_ids = UserProjectRole.find(:all, :conditions=>["user_id=? and role = ?",current_user.id, "lead"],:select=>["project_id"])
+      user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.project_id}
+    end
+    
     
     case @request_type
     when 'incoming'
@@ -651,7 +651,6 @@ class ProjectsController < ApplicationController
       @records = ProjectCopyRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
       @projects = Project.find(:all, :conditions=>["id IN (?)",(@records.collect{|x| x.project_id} + @records.collect{|x| x.clone_id}).uniq])
       @users = User.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.user_id}])
-
     when 'outcopy'
       @records = ProjectCopyRequest.find(:all, :conditions => ["user_id = ?", current_user.id])
       @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])

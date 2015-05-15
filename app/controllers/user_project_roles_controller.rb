@@ -15,6 +15,7 @@ before_filter :require_user
 		new_user = params["new_user"]
 		uname_exists = User.username_exists(new_user)
 		email_exists = User.email_exists(new_user)
+		project = Project.find(params[:project_id])
 		if !uname_exists && !email_exists
 			#redirect - no username or email exists
 			the_notice = "A user with that information does not exist. Please contact that person and have them register with SRDR before adding them to this project."
@@ -26,6 +27,7 @@ before_filter :require_user
 				@upr.project_id = params[:project_id]
 				@upr.role = params[:new_role]
 				@upr.save
+				ProjectCopyRequest.mark_completed(@user.id, project.parent_id, project.id)
 				the_notice = "User added successfully."		
 			else
 				the_notice = "You may not assign yourself to additional project roles."
@@ -38,6 +40,7 @@ before_filter :require_user
 				@upr.project_id = params[:project_id]
 				@upr.role = params[:new_role]
 				@upr.save
+				ProjectCopyRequest.mark_completed(@user.id, project.parent_id, project.id)
 				the_notice = "User added successfully."
 			else
 				the_notice = "You may not assign yourself to additional project roles."
