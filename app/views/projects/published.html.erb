@@ -96,7 +96,7 @@
               <%= project.methodology.blank? ? "None Provided" : project.methodology.force_encoding("UTF-8") %>
           </div><br>
           <a href="<%= "/projects/#{project.id.to_s}" %>"><%= image_tag("Zoom.png") %> Preview</a> | <a href='#' class='downloadable_content_link' dlpid='<%= project.id %>'>Show Downloadable Content</a>
-          <% unless current_user.nil? %>
+          <% if !current_user.nil? && User.current_user_has_new_project_privilege(current_user) %>
           | <a href='#' class='copy_project_link' title="Copy Project <%= project.id%>" project_id="<%= project.id %>" project_title="<%= project.title %>"><img alt="Copy the Project titled: <%= project.title %>" src='/images/copy.png'/> Request a Copy</a>
           <% end %>
           

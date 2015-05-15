@@ -18,10 +18,14 @@ class ProjectCopyRequest < ActiveRecord::Base
     ProjectCopyRequest.transaction do 
       entry = ProjectCopyRequest.find(:first, 
         :conditions => ["user_id = ? AND project_id = ? 
-          AND clone_id = ?", user_id, project_id, nil])
+          AND clone_id IS NULL", user_id, project_id])
+
       unless entry.nil?
         entry.clone_id = clone_id
         entry.save
+        puts "Entry is #{entry.id}"
+      else
+        puts "Entry is NIL"
       end
     end
   end

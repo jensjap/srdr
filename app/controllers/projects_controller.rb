@@ -622,7 +622,9 @@ class ProjectsController < ApplicationController
     titles = {'incoming' => "Requests for My Data",
               'outgoing' => "Data I Have Requested",
               'incopy' => "Copies of My Projects",
-              'outcopy' => "Projects I Have Copied"}
+              'outcopy' => "Projects I Have Copied",
+              'admin_incoming' => "All Data Requests",
+              'admin_incopy' => "All Copy Requests"}
     
     @request_type = params[:request_type]
     @title = titles[params[:request_type]]
@@ -630,6 +632,7 @@ class ProjectsController < ApplicationController
     
     user_project_ids = []
     if current_user.is_admin?
+      @title = titles["admin_#{params[:request_type]}"]
       user_project_ids = Project.find(:all, :select=>['id'])
       user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.id}
     else
@@ -653,7 +656,7 @@ class ProjectsController < ApplicationController
       @users = User.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.user_id}])
     when 'outcopy'
       @records = ProjectCopyRequest.find(:all, :conditions => ["user_id = ?", current_user.id])
-      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| [x.project_id, x.clone_id]}.flatten.uniq])
     end
     render "/data_requests/show"
   end

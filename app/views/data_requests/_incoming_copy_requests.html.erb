@@ -13,22 +13,35 @@
     <% usr = @users.find{|u| u.id == clo.user_id} %>
     <% unless usr.nil? %>
       <tr>
-        <td><%= @projects.find{|x| x.id == clo.project_id}.title %></td>
+        <td>
+          <% if current_user.is_admin? %>
+            <a href='/projects/<%= clo.project_id %>/edit'>
+          <% end %>
+          <%= @projects.find{|x| x.id == clo.project_id}.title %>
+          <% if current_user.is_admin? %>
+            </a>
+          <% end %>
+        </td>
         <% if current_user.is_admin? %>
-          <td><a href='#' class='copy_project_link' title="Copy Project <%= clo.project_id%>" project_id="<%= clo.project_id %>">Copy</a>
+          <td>
+            <% if clo.clone_id.nil? %>
+              <a href='#' class='copy_project_link' title="Copy Project <%= clo.project_id%>" project_id="<%= clo.project_id %>">Copy</a>
+            <% else %>
+              <a href='/projects/<%= clo.clone_id %>/edit'>View Copy</a>
+            <% end %>
           </td>
         <% end %>
         <td><%= usr.nil? ? "Not Found" : usr.login %></td>
         <td><%= usr.email %></td>
         <td><%= clo.to_s %></td>
         <td><%= clo.created_at.nil? ? "--" : clo.created_at.localtime.strftime("%m/%d/%y %l:%M%p") %></td>
-        <td><%= clo.clone_id.nil? ? "Pending" : "Get Clone Date" %></td>
+        <td><%= clo.clone_id.nil? ? "Pending" : @projects.find{|x| x.id == clo.clone_id}.created_at.localtime.strftime("%m/%d/%y %l:%M%p") %></td>
       </tr>
     <% end %>
   <% end %>
 </table>
 <% else %>
-  None of our published products have been downloaded by an SRDR user.
+  None of your published products have been downloaded by an SRDR user.
 <% end %>
 <% if current_user.is_admin? %>
 <script type='text/javascript'>
