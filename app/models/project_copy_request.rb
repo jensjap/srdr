@@ -4,11 +4,11 @@ class ProjectCopyRequest < ActiveRecord::Base
 
   def to_s
     if self.include_data == true 
-      return "Extraction Forms Only"
+      return "Extraction Forms, Studies & Extracted Data"
     elsif self.include_studies == true 
       return "Extraction Forms & Study List"
     elsif self.include_forms == true
-      return "Extraction Forms, Studies & Extracted Data"
+      return "Extraction Forms Only"
     else
       return "--"
     end
