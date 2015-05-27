@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	before_filter :require_user, :except => [:published, :show]
   before_filter :require_project_membership, :only => [:show]
 	before_filter :require_lead_role, :only => [:manage,:edit,:update,:publish,:destroy, :import_new_data, :update_existing_data, :confirm_publication_request]
-  before_filter :require_admin, :only => [:make_public]
+  before_filter :require_admin, :only => [:make_public, :show_publication_requests]
   #before_filter :require_editor_role, :only => [:show_progress]
 	# index_pdf
 	# show print layout for printing a project summary or saving as PDF
