@@ -28,6 +28,7 @@
 	<p>mySRDR ACCOUNT</p>
 	<%= link_to "My Profile", "/account/edit", {:remote=>true, :tabindex=>106, :title=>"View/Modify your account profile"} %>
 	<% if current_user.is_admin? %>
+		<%= link_to "Publication Requests", "/home/publication_requests", {:tabindex=>107, :title=>"View requests for project publication"} %>
 		<%= link_to "Data Requests", "/home/data_requests?request_type=incoming", {:tabindex=>107,:title=>"View requests to download your data"} %>
 		<%= link_to "Project Copy Requests", "/home/data_requests?request_type=incopy", {:tabindex=>107,:title=>"View copies of my projects that have been created"} %>
 	<% else %>

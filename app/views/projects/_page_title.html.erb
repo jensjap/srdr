@@ -17,7 +17,11 @@
 	            </span>
 			<% else %>
 				<span class="status" style='position:absolute;right:30px; top:3px;'>Private Report 
-					<span class="incomplete">Incomplete</span>
+					<span class="incomplete">
+						Private Report 
+						<% c = @project.publication_requested_at.nil? ? 'incomplete' : 'pending' %>
+						<span class="<%= c %>"><%= c.capitalize %></span>
+					</span>
 				</span>
 			<% end %>
 		<% else %>
@@ -29,7 +33,9 @@
 	            </span>
 			<% else %>
 				<span class="status" style='position:absolute;right:30px; top:3px;'>
-					Private Report <span class="incomplete">Incomplete</span>
+					Private Report 
+					<% c = @project.publication_requested_at.nil? ? 'incomplete' : 'pending' %>
+					<span class="<%= c %>"><%= c.capitalize %></span>
 				</span>
 				<br/><br/>
 			<% end %>

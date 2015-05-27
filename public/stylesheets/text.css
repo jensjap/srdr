@@ -55,6 +55,10 @@ h4{
 	background-color: #399632;
 }
 
+.status .pending{
+	background-color: #ffb619;
+}
+
 .status .incomplete{
 	background-color: red;
 }

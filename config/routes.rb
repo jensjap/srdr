@@ -263,17 +263,20 @@ Srdr::Application.routes.draw do
     match 'projects/:project_id/manage/saveinfo' => 'user_project_roles#saveinfo'
     match 'projects/:project_id/manage/adduser' => 'user_project_roles#add_new_user'
 
-    # publishing projects
+    # requests to publish projects (user)
     match 'projects/:project_id/publish' => 'projects#publish'
-    match 'projects/:project_id/set_to_published'=>'projects#set_to_published'
+    match 'projects/request_publication' => 'projects#request_publication'
+    match '/projects/:project_id/confirm_publication' => 'projects#confirm_publication_request'
+
+    # publishing projects (admin)
+    match '/home/publication_requests' => 'projects#show_publication_requests'
+    match '/projects/:project_id/make_public' => 'projects#make_public'
 
     # requests to download project data
     match 'projects/:project_id/request_data' => 'projects#data_request_form'
     match 'projects/:project_id/extraction_forms/:extraction_form_id/download'=>'projects#download'
     match 'projects/:project_id/downloads/download'=>'projects#download'
-    # match '/projects/:project_id/data_request_handler'=>'projects#data_request_handler'
     match '/home/data_requests' => 'projects#show_data_requests'
-    # match '/home/data_requests/update' => 'projects#update_data_requests'
 
     # extraction form sections
     match '/*section/extraction_forms/toggle_section_inclusion' => 'extraction_forms#toggle_section_inclusion'

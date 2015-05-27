@@ -2,8 +2,9 @@
 <%= render :partial => "sidebars/project_sidebar", :locals => {:curr_page => "publish"} %>
 </div>
 <div id='content' tabindex=200>
+  <div id='modal_div' style='width:550px;'></div>
 <%= render :partial => "page_title", :locals => {:page_title => "Publish this Project"} %>
-
+<br/><br/>
 
 <script type='text/javascript'>
 	function confirm_submit(){
@@ -17,21 +18,27 @@
 <% unless @project.is_public %>
 This section allows you to finalize your project and
 		make it available for viewing to the SRDR user population. <br/><br/>
-		<strong>Please note</strong> that this cannot
+		<!--<strong>Please note</strong> that this cannot
 		be reversed; these changes are final. You may still make edits to your project
 		after it has been published, but all changes will be tracked and made available via
 		the SRDR wiki.
 
-		<br/><br/>
+		<br/><br/>-->
  		<%= form_for @project, :url => "set_to_published" do |f| %>
  			<%= hidden_field_tag "publishing","", :value=>true %>
  			
  			<div class='field'>
  				<h4>Project Status:</h4><br/>
- 				<%= f.radio_button "is_public",false, :class => "cbox", :selected=>true %>Incomplete (<em>May be viewed and edited only by project team members.</em>)<br/>
- 				<br/><%= f.radio_button "is_public",true, :class => "cbox" %>Published (<em>May be searched for and viewed by other users. Edits can be made, but will be tracked.</em>)
- 				<br/>
- 			</div><br/>
+        <% if @project.publication_requested_at.nil? %>
+   				<%= f.radio_button "is_public",false, :class => "cbox", :selected=>true %>Incomplete (<em>May be viewed and edited only by project team members.</em>)<br/>
+   				<br/><%= f.radio_button "is_public",true, :class => "cbox" %>Published (<em>May be searched for and viewed by other users. Edits can be made, but will be tracked.</em>)
+   				<br/>
+        <% else %>
+          <strong>PENDING:</strong> Your project is currently under review for publication.
+        <% end %>
+ 			</div>
+      <% if @project.publication_requested_at.nil? %>
+        <br/>
             <div class='field'>
                 <hr width="100%">
                 <h2>SRDR Usage Agreement</h2><br/><br/>
@@ -46,7 +53,7 @@ This section allows you to finalize your project and
 					<%= image_tag "Add.png", :alt => "Add" %>Save
 				</button>
 			</div>
-			
+			<% end %>
  		<% end %>
 
 <% else %>
@@ -71,19 +78,40 @@ $("#publish_project_button").bind("click", function(e){
     alert("You must agree to the SRDR Terms of Use Policy.");
   }else{
 
-  	if (($("#project_is_public_true").attr("checked") != "undefined") && ($("#project_is_public_true").attr("checked") == "checked"))
-  	{
-  		if (confirm('Are you sure? Once you publish your project to the system, this action cannot be undone.'))
-  		{
-  			$(this).closest("form").submit();
+  	if (($("#project_is_public_true").attr("checked") != "undefined") && ($("#project_is_public_true").attr("checked") == "checked")){
+  		if (confirm('Are you sure? Once you publish your project to the system, this action cannot be undone.')){
+  			e.preventDefault();
+        var projID = "<%= @project.id %>";
+        var projTitle = "<%= @project.title %>";
+        $.ajax({
+          type: 'POST',
+          url: "/projects/request_publication",
+          data:({
+              project_id: projID,
+              project_title: projTitle
+          })
+        })
   		}
-  	}
-  	else
-  	{
-  			$(this).closest("form").submit();	
   	}
 	}
 });
+
+$(function(){
+
+  $diag = $("#modal_div");
+  var dialogOpts = {
+      width: 550,
+      title: "Publishing Your Project",
+      height: 550,
+      minWidth: 550,
+      minHeight: 550,
+      maxWidth: 550,
+      modal: true,
+      autoOpen: false
+  };
+  $diag.dialog(dialogOpts); // This instantiates the dialog once.
+}
+);
 </script>
 
 

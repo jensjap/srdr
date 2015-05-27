@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
 	before_filter :require_user, :except => [:published, :show]
-        before_filter :require_project_membership, :only => [:show]
-	before_filter :require_lead_role, :only => [:manage,:edit,:update,:publish,:destroy, :import_new_data, :update_existing_data]
+  before_filter :require_project_membership, :only => [:show]
+	before_filter :require_lead_role, :only => [:manage,:edit,:update,:publish,:destroy, :import_new_data, :update_existing_data, :confirm_publication_request]
+  before_filter :require_admin, :only => [:make_public]
   #before_filter :require_editor_role, :only => [:show_progress]
 	# index_pdf
 	# show print layout for printing a project summary or saving as PDF
@@ -418,24 +419,42 @@ class ProjectsController < ApplicationController
   	@project = Project.find(params[:id])
   end
   
-  # set_to_published
-  # based on the input to the project publishing form, update project and redirect to "publish"  
-  def set_to_published
-  	Project.transaction do
+  def request_publication
+    @project = Project.find(params[:project_id])
+  end
+
+  def confirm_publication_request
+    
+    @project = Project.find(params[:project_id])
+    @project.publication_requested_at = Time.now 
+    @project.save 
+    flash[:notice] = "Thank you. Your request for publication of your SRDR project has been submitted. 
+    You will receive feedback from the SRDR Administrator concerning your project's eligibility for publication
+    within 48 hours."
+    
+    redirect_to "/projects/#{@project.id}/publish"
+  end
+
+  def show_publication_requests
+    @projects = Project.find(:all, :conditions => ["is_public = ? AND publication_requested_at IS NOT NULL", false])
+    @users = User.find(:all, :conditions => ["id IN (?)",@projects.collect{|x| x.creator_id}.uniq])
+    render '/projects/publishing/requests'
+  end
+
+  def make_public
+    Project.transaction do
       @project = Project.find(params[:project_id])  
-    	if !@project.is_public
-        @project.is_public = params[:project][:is_public]
+      if !@project.is_public
+        @project.is_public = true
       end
       @project.public_downloadable = true 
-      @project.save
+      if @project.save
+        flash[:success] = "The project was successfully published."
+      else
+        flash[:notice] = "It appears something has gone wrong."
+      end
     end
-    	if params[:project][:is_public] == "false"
-    		flash[:notice] = "No changes made. Choose the 'Publish' option if you would like to make your project public."
-    	else
-    		flash[:success] = "Project published successfully."	
-    	end
-    	redirect_to "/projects/" + @project.id.to_s + "/publish"
-    
+    redirect_to "/home/publication_requests"
   end
   
   # destroy

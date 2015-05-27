@@ -1,0 +1,33 @@
+
+<h2>Congratulations on completing your SRDR project!</h2>
+<br/><br/>You are about to send a request to publish your project to the SRDR. As a reminder, publication means that you have done all of the following:
+<ul class='normal_list'>
+  <li>created a project</li>
+  <li>entered key questions into your project</li>
+  <li>created abstraction forms</li>
+  <li>entered the data from studies according to the abstraction forms</li>
+  <li>verified the data as accurately reflecting the original study data and you believe that the data can be accessed and interpreted with ease</li>
+</ul>
+Furthermore, according to the creative commons license, if you choose to publish your project, you acknowledge that you are now contributing to the publicly accessible SRDR published projects page.<br/><br/>
+<input type='checkbox' id='verified'/> I verify that I have read and agree with the above statement (<strong>Required</strong>)
+<br><br/>
+<form action='/projects/<%= @project.id %>/confirm_publication' onsubmit="return ensureChecked()" method='post'>
+<button id='publish_button' class='positive' type='submit'>Submit Publication Request</button> <button id='publish_cancel_button' class='negative'>Cancel</button>
+</form>
+<script type='text/javascript'>
+<!--
+function ensureChecked(){
+  var checked = $("#verified").attr("checked");
+  if(checked == undefined){
+    alert("You must first verify that you have read the statements above.");
+    return false;
+  }
+  return true;
+}
+
+$("#publish_cancel_button").bind("click", function(e){
+  e.preventDefault();
+  $("#modal_div").dialog("close");
+});
+-->
+</script>
