@@ -6,9 +6,9 @@ class Recentreports
         siteproperties = Guiproperties.new
         # TODO - add constraints last 12 months or last 10 or by site...
         if siteproperties.isMySQL()
-            @recent_projects = Project.find(:all, :conditions=>["is_public = 1"], :order=> "created_at DESC")  
+            @recent_projects = Project.find(:all, :conditions=>["is_public = 1"], :order=> "updated_at DESC")
         else
-            @recent_projects = Project.find(:all, :conditions=>["is_public = 't'"], :order=> "created_at DESC")  
+            @recent_projects = Project.find(:all, :conditions=>["is_public = 't'"], :order=> "updated_at DESC")
         end
     end
     
