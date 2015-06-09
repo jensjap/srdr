@@ -202,6 +202,10 @@ Srdr::Application.routes.draw do
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/arm_details' => 'studies#arm_details'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/diagnostics' => 'studies#diagnostics'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/design' => 'studies#design'
+
+    # JENS @ 2015-06-08
+    match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/split' => 'studies#split'
+    
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/baselines' => 'studies#baselines'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/outcomes' => 'studies#outcomes'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/outcome_details' => 'studies#outcome_details'

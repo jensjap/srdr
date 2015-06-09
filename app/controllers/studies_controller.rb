@@ -6,13 +6,36 @@ class StudiesController < ApplicationController
 	before_filter :require_lead_role, :only=>[:batch_assignment, :simport]
 	before_filter :require_editor_role, :except=>[:index, :show]
 	before_filter :require_project_membership, :only => [:show]
+
 	#layout "two_column_layout", :except=>[:new,:show]
+
     require 'assignment_job'
     #require 'study_record'
     #require 'question_list'
     require 'fileutils'
     require 'import_handler'
     require 'background_simport'
+
+    def split
+		begin
+			user_assigned = current_user.is_assigned_to_project(params[:project_id])
+			@data = QuestionBuilder.get_questions("design_detail", params[:study_id], params[:extraction_form_id], {:user_assigned => user_assigned})
+			@data_point = DesignDetailDataPoint.new
+			
+			# Now get any additional user instructions for this section
+	        @ef_instruction = EfInstruction.find(:first, :conditions=>["ef_id = ? and section = ? and data_element = ?", params[:extraction_form_id].to_s, "DESIGN", "GENERAL"])
+	        @ef_instruction = @ef_instruction.nil? ? "" : @ef_instruction.instructions
+
+			if @data[:by_arm] == true || @data[:by_outcome] == true
+				render :action=>'question_based_section_by_category', :layout => false
+			else
+				render :action=>'question_based_section_split', :layout => "split_screen"
+			end
+		rescue Exception => e
+			puts "ERROR: #{e.message}\n\n#{e.backtrace}"
+		end
+
+    end
 
 	# show the print layout in order to export a study summary to pdf.
   	def index_pdf

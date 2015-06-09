@@ -362,6 +362,30 @@ div, td{
 	overflow: hidden;
 	border-bottom: 1px solid #C3C3C3;
 }
+
+#container-split {
+	/*background-color: #fff;
+	background-image: url('/images/left_nav/left-nav-bg.png');
+	background-position:left;
+	background-repeat: repeat-y;*/
+	margin:0;
+	padding:0;
+	padding-top:0px;
+	width:100%;
+	overflow: hidden;
+	border-bottom: 1px solid #C3C3C3;
+}
+
+#extraction-form-split-left {
+	width: 50%;
+	float: left;
+}
+
+#extraction-form-split-right {
+	width: 50%;
+	float: right;
+}
+
 /************ END HOMEPAGE STYLES *****************/
 
 /************ NAVIGATION-SPECIFIC STYLES *****************/

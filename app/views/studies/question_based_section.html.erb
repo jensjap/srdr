@@ -1,6 +1,9 @@
 <div class='tab-div'>
 	<br/>
 	<h2><%= @data[:page_title] %></h2><br/><br/>
+
+	    <%= link_to '<button type="button">Split screen</button>'.html_safe, url_for(controller: :studies, action: :split) %>
+
 	<%= form_for(@data_point, :remote => true) do |f| %>
 	<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
 	<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
