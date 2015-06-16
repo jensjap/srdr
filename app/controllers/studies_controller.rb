@@ -26,6 +26,11 @@ class StudiesController < ApplicationController
 	        @ef_instruction = EfInstruction.find(:first, :conditions=>["ef_id = ? and section = ? and data_element = ?", params[:extraction_form_id].to_s, "DESIGN", "GENERAL"])
 	        @ef_instruction = @ef_instruction.nil? ? "" : @ef_instruction.instructions
 
+	        # Fetch document_html from DAA API
+	        #!!! Stubbed for now. Needs to make actual call and fetch document.
+	        response = HTTParty.get('http://api.daa-dev.com:3030/v1/documents/1')
+	        @document_html = response
+
 			if @data[:by_arm] == true || @data[:by_outcome] == true
 				render :action=>'question_based_section_by_category', :layout => false
 			else

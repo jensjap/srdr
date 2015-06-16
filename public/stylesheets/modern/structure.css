@@ -377,13 +377,24 @@ div, td{
 }
 
 #extraction-form-split-left {
-	width: 50%;
+	width: 45%;
 	float: left;
 }
 
 #extraction-form-split-right {
-	width: 50%;
+	width: 45%;
 	float: right;
+	border: dotted orange;
+	border-width: 10px;
+}
+
+#sidebar {
+	display: none;
+}
+
+#page-container {
+	width: 50%;
+	left: 50% !important;
 }
 
 /************ END HOMEPAGE STYLES *****************/
