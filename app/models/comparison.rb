@@ -134,32 +134,13 @@ class Comparison < ActiveRecord::Base
 					end
 				end
 			end
-		elsif no_measures && ef.project_id.to_i == 427
+		elsif no_measures && (ef.project_id.to_i == 427 || ef.project_id.to_i == 553)
 			oc = Outcome.find(ocid, :select=>[:outcome_type])
 			w_or_b = wORb == 'within' ? 0 : 1
 			oc_type = oc.outcome_type
 			oc_type = oc_type == "Time to Event" ? "survival" : oc_type.downcase
 			puts "Outcome type is #{oc_type}"
-			unless ef.project_id.to_i == 427
-				if ExtractionForm.is_diagnostic?(efid)
-					defaults = DefaultComparisonMeasure.where(:is_default=>true, :outcome_type=>"diagnostic_#{self.section}", :within_or_between=>w_or_b)
-				else
-					defaults = DefaultComparisonMeasure.where(:is_default=>true, :outcome_type=>oc_type, :within_or_between=>w_or_b)
-				end
-			else
-				defaults = DefaultCevgMeasure.where(:outcome_type=>oc_type, :results_type=>1)
-				puts "Found #{defaults.length} defaults"
-			end
-			defaults.each do |d|
-				ComparisonMeasure.create(:comparison_id=>self.id, :title=>d.title,:description=>d.description, :unit=>d.unit,:measure_type=>d.measure_type)
-			end
-		elsif no_measures && ef.project_id.to_i == 553
-			oc = Outcome.find(ocid, :select=>[:outcome_type])
-			w_or_b = wORb == 'within' ? 0 : 1
-			oc_type = oc.outcome_type
-			oc_type = oc_type == "Time to Event" ? "survival" : oc_type.downcase
-			puts "Outcome type is #{oc_type}"
-			unless ef.project_id.to_i == 553
+			unless (ef.project_id.to_i == 427 || ef.project_id.to_i == 553)
 				if ExtractionForm.is_diagnostic?(efid)
 					defaults = DefaultComparisonMeasure.where(:is_default=>true, :outcome_type=>"diagnostic_#{self.section}", :within_or_between=>w_or_b)
 				else
