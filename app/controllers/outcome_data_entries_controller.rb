@@ -155,6 +155,8 @@ class OutcomeDataEntriesController < ApplicationController
 		outcome_type = outcome_type == "Time to Event" ? "survival" : outcome_type
 		if @project_id == 427
 			@all_measures = DefaultCevgMeasure.find(:all, :conditions=>["outcome_type = ? AND results_type=?",outcome_type, 0])
+		elsif @project_id == 553
+			@all_measures = DefaultCevgMeasure.find(:all, :conditions=>["outcome_type = ? AND results_type=?",outcome_type, 0])
 		else
 			@all_measures = DefaultOutcomeMeasure.find(:all,:conditions=>["outcome_type = ? AND measure_type <> ?", outcome_type.downcase, 0])		
 		end
@@ -452,6 +454,8 @@ class OutcomeDataEntriesController < ApplicationController
 	  ocType = section_num.nil? ? outcome_type.downcase : "diagnostic_#{section_num}"
 	  ocType = ocType == "time to event" ? "survival" : ocType
 	  if @project_id == 427
+	  	@all_measures = DefaultCevgMeasure.where(:outcome_type=>ocType,:results_type=>1)
+	  elsif @project_id == 553
 	  	@all_measures = DefaultCevgMeasure.where(:outcome_type=>ocType,:results_type=>1)
 	  else
 	  	@all_measures = DefaultComparisonMeasure.where(:outcome_type=>ocType,:within_or_between=>1)
