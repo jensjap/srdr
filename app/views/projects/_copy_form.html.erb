@@ -1,4 +1,4 @@
-<% form_tag("projects/copy", {:remote=>false,:onSubmit=>"pleaseBePatient()"}) do %>
+<% form_tag("/projects/copy", {:remote=>false,:onSubmit=>"pleaseBePatient()"}) do %>
 <input type='hidden' name='project_id' value="<%= @project.id %>">
 <div style='width:auto; padding:10px;'>
 	This form will allow you to make a copy of the project titled "<%= @project.title %>". Please enter a title for the duplicate project and choose the elements that you would like to copy:<br/><br/>

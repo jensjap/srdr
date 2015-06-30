@@ -19,12 +19,12 @@
   <br/>
 <%= render 'shared/creative_commons_note' %>
   <br/><br/>
-	<input type='checkbox' name='creativeCommons_agree' id='cc_agree_cbox'>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above.<br/><br/>
+	<input type='checkbox' name='creativeCommons_agree' id='cc_agree_cbox'>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above, and I understand that the original contributor will be notified of this request and will be notified of my SRDR username and email address.<br/><br/>
     <table id="export_tools_excel_table">
     <tr>
       <td class="title">Extraction Form</td>
-      <td class="title">Option 1</td>
-      <td class="title">Option 2</td>
+      <td class="title">Excel</td>
+      <td class="title">CSV</td>
       <td class="title">Compile Date/Time</td>
     </tr>
     <% @extraction_forms.each do |ef| %>
@@ -36,7 +36,7 @@
         <td class="data">
           <% if File.exist?("#{Rails.root}/#{excel_cache_path}project-#{@project.id}-#{ef.id}.xlsx") %>
             <% timestamp = File.mtime("#{Rails.root}#{excel_cache_path}project-#{@project.id}-#{ef.id}.xlsx") %>
-            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=xlsx" %>
+            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=xlsx&dl_type=ef" %>
             <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk.png" border="0"> Excel</a>
           <% else %>
             - Not Found -
@@ -44,7 +44,7 @@
         </td>
         <td class="data">
           <% if File.exist?("#{Rails.root}/#{excel_cache_path}project-#{@project.id}-#{ef.id}.csv") %>
-            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=csv" %>
+            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=csv&dl_type=ef" %>
             <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk_csv.png" border="0"> CSV</a>
           <% else %>
             - Not Found -
@@ -58,17 +58,52 @@
           <% end %>
           <%# timestamp < @project.updated_at ? "(old version)" : "" %>
         </td>
-    </td>
     </tr>
+   
+    <% end %>
+     <%# look for uploaded data %>
+
+    <% unless Dir["public/reports/#{@project.id}/publish/downloads/*.*"].nil? %>
+      <% entries = Dir["public/reports/#{@project.id}/publish/downloads/*.*"] %>
+      <% if entries.length > 0 %>
+        <tr>
+          <td class='title' colspan='1'>Supplementary Data</td>
+          <td class='title' colspan='2'>Description</td>
+          <td class='title' colspan='1'>Upload Data/Time</td>
+        </tr>
+        <% path = "public/reports/#{@project.id}/publish/downloads/" %>
+        <% entries.each do |entry| %>
+          <% next if entry.ends_with?(".readme") %>
+          <% filename = entry.split("/").last %>
+          <% fullpath = "#{path}#{filename}" %>
+          <tr>
+            <td class='data' colspan='1'>
+              <% url = "/projects/#{@project.id}/downloads/download?dl_type=supplement&filename=#{filename}" %>
+              <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk_csv.png" border="0"><%= filename %></a>
+            </td>
+            <td class='data' colspan='2'>
+              <% if File.file?(RAILS_ROOT + fullpath) %>
+                <%= loadDescription(RAILS_ROOT + fullpath) %>
+              <% else %>
+                No Description.
+              <% end %>
+            </td>
+            <td class='data' colspan='1'>
+              <%= File.mtime(entry).utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
     <% end %>
     </table>
 
   
 
 <% else %>
-	This project requires permission of the project lead before we can provide you with access to the tabular data. Please complete the form below.<br/><br/>
+	It appears that an error has occurred. Please contact the SRDR team at SRDR@ahrq.hhs.gov for assistance.<br/><br/>
+  <!-- This project requires permission of the project lead before we can provide you with access to the tabular data. Please complete the form below.<br/><br/> -->
 	
-  <%= render :partial=>"data_requests/form" %>
+  <%# render :partial=>"data_requests/form" %>
 
 <% end %>
 <br/><br/><br/>

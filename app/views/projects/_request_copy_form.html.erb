@@ -1,0 +1,32 @@
+<% form_tag("/projects/request_a_copy", {:remote=>true,:onSubmit=>"wrapUp()"}) do %>
+<input type='hidden' name='project_id' value='<%= project_id %>'>
+<div style='width:auto; padding:10px;'>
+  Please use this form to request that a copy of the following published project be added to your MySRDR projects list:<br/><br/>
+  <strong><%= project_title %></strong><br/><br/>
+  
+  Please select your desired data elements and an SRDR administrator will carry out your request. We will contact you via email at <strong><%= current_user.email %></strong> when your request is complete (may take up to 48 hours).
+  <br/><br/>
+  
+    <input type='radio' name="copy_level" checked class='copy_selector' id='copy_efs' value="EF">
+    <label for="copy_efs">Extraction Forms Only</label>
+    <br/><br/>
+
+      <input type='radio' name="copy_level" class='copy_selector' id='copy_studies' value="EF_Studies">
+      <label for="copy_studies">Extraction Forms &amp; Associated Studies</label>
+      <br/><br/>
+      <input type='radio' name="copy_level" class='copy_selector' id='copy_study_data' value="EF_Studies_Data">
+      <label for="copy_study_data">Extraction Forms &amp; Studies &amp; Study Data</label>
+      <br/><br/>
+    
+  <center>
+    <button type="submit" id="request_copy_button" class="positive" data-disable-with='<%= ajax_wait_msg %>'>
+      <%= image_tag "Add.png", :alt => "Add" %> Submit
+    </button>
+  </center>
+  <br/><br/>
+</div>
+<center><span id="be_patient" style='display:none;'>Please be patient. Depending on the size of your project, this could take a minute.</span></center>
+<% end %> <%# end the form%>
+
+
+</script>

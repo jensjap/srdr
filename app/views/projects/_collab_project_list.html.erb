@@ -31,7 +31,11 @@
                 access_label = "Complete"
             else
                 access_state = "Private Report"
-                access_label = "Incomplete"
+                if project.publication_requested_at.nil? 
+                    access_label = "Incomplete"
+                else
+                    access_label = "Pending"
+                end
             end
             num_studies = Project.get_num_studies(project)
             num_key_qs = Project.get_num_key_qs(project)

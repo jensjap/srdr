@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141029220724) do
+ActiveRecord::Schema.define(:version => 20150527161539) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -256,7 +256,7 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
   add_index "comparators", ["comparison_id"], :name => "comparator_comparison_idx"
 
   create_table "comparison_data_points", :force => true do |t|
-    t.string   "value"
+    t.text     "value"
     t.string   "footnote"
     t.boolean  "is_calculated"
     t.integer  "comparison_measure_id"
@@ -352,6 +352,16 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "default_cevg_measures", :force => true do |t|
+    t.integer "results_type"
+    t.string  "outcome_type"
+    t.string  "title"
+    t.string  "description"
+    t.string  "unit"
+    t.integer "measure_type", :default => 1
+    t.boolean "is_default",   :default => false
   end
 
   create_table "default_comparison_measures", :force => true do |t|
@@ -990,7 +1000,7 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
 
   create_table "outcome_data_points", :force => true do |t|
     t.integer  "outcome_measure_id"
-    t.string   "value"
+    t.text     "value"
     t.string   "footnote"
     t.boolean  "is_calculated",      :default => false
     t.integer  "arm_id"
@@ -1178,6 +1188,19 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
   add_index "primary_publications", ["study_id"], :name => "StudyData"
   add_index "primary_publications", ["study_id"], :name => "primarypublication_study_idx"
 
+  create_table "project_copy_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "clone_id"
+    t.boolean  "include_forms"
+    t.boolean  "include_studies"
+    t.boolean  "include_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_copy_requests", ["user_id"], :name => "index_project_copy_requests_on_user_id"
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -1192,6 +1215,10 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.string   "prospero_id"
     t.string   "search_strategy_filepath"
     t.boolean  "public_downloadable",      :default => false
+    t.string   "management_file_url"
+    t.datetime "publication_requested_at"
+    t.integer  "parent_id"
+    t.text     "attribution"
   end
 
   add_index "projects", ["creator_id"], :name => "project_creator_idx"

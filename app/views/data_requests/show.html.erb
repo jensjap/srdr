@@ -2,10 +2,16 @@
 <%= render :partial => "sidebars/mySRDR_sidebar" %>
 </div>
 <div id='content' tabindex=200>
-	<h3 style='color:blue;'>Requests for My Data</h3>
-	<%= render :partial=>"/data_requests/incoming_requests" %>
 	<br/><br/>
-	<h3 style='color:blue;'>Data I Have Requested</h3>
-	<%= render :partial=>"/data_requests/outgoing_requests" %>
-
+  <h1><%= @title %></h1>
+	<% case @request_type %>
+  <% when 'incoming' %>
+    <%= render :partial=>"/data_requests/incoming_requests" %>
+  <% when 'outgoing' %>
+    <%= render :partial=>"/data_requests/outgoing_requests" %>
+  <% when 'incopy' %>
+    <%= render :partial=>"/data_requests/incoming_copy_requests" %>
+  <% when 'outcopy' %>
+    <%= render :partial=>"/data_requests/outgoing_copy_requests" %>
+  <% end %>
 </div>

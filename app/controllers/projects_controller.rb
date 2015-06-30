@@ -1,7 +1,8 @@
 class ProjectsController < ApplicationController
 	before_filter :require_user, :except => [:published, :show]
-        before_filter :require_project_membership, :only => [:show]
-	before_filter :require_lead_role, :only => [:manage,:edit,:update,:publish,:destroy, :import_new_data, :update_existing_data]
+  before_filter :require_project_membership, :only => [:show]
+	before_filter :require_lead_role, :only => [:manage,:edit,:update,:publish,:destroy, :import_new_data, :update_existing_data, :confirm_publication_request]
+  before_filter :require_admin, :only => [:make_public, :show_publication_requests]
   #before_filter :require_editor_role, :only => [:show_progress]
 	# index_pdf
 	# show print layout for printing a project summary or saving as PDF
@@ -395,14 +396,7 @@ class ProjectsController < ApplicationController
     project = Project.find(params[:project_id])
 
     unless title == project.title
-=begin      
-      if project.copy(current_user.id, title,copy_efs,copy_studies,copy_study_data)
-        @table_container = "project_list_div"
-        @table_partial = "projects/project_list"
-        flash[:success_message] = "The project was copied successfully."
-      end
-=end
-      success = project.copy(current_user.id, title,copy_efs,copy_studies,copy_study_data)
+      Project.init_copy(project.id, current_user.id, title,copy_efs,copy_studies,copy_study_data)
       # flash[:success] = "We're working on copying the project now and will email you to let you know that everything goes smoothly. If so, your project should appear in your list shortly."
       @original_title = project.title
       @new_title = title
@@ -425,24 +419,42 @@ class ProjectsController < ApplicationController
   	@project = Project.find(params[:id])
   end
   
-  # set_to_published
-  # based on the input to the project publishing form, update project and redirect to "publish"  
-  def set_to_published
-  	Project.transaction do
-      @project = Project.find(params[:project_id])  
-    	if !@project.is_public
-        @project.is_public = params[:project][:is_public]
-      end
-      @project.public_downloadable = params[:project][:public_downloadable]
-      @project.save
-    end
-    	if params[:project][:is_public] == "false"
-    		flash[:notice] = "No changes made. Choose the 'Publish' option if you would like to make your project public."
-    	else
-    		flash[:success] = "Project published successfully."	
-    	end
-    	redirect_to "/projects/" + @project.id.to_s + "/publish"
+  def request_publication
+    @project = Project.find(params[:project_id])
+  end
+
+  def confirm_publication_request
     
+    @project = Project.find(params[:project_id])
+    @project.publication_requested_at = Time.now 
+    @project.save 
+    flash[:notice] = "Thank you. Your request for publication of your SRDR project has been submitted. 
+    You will receive feedback from the SRDR Administrator concerning your project's eligibility for publication
+    within 48 hours."
+    
+    redirect_to "/projects/#{@project.id}/publish"
+  end
+
+  def show_publication_requests
+    @projects = Project.find(:all, :conditions => ["is_public = ? AND publication_requested_at IS NOT NULL", false])
+    @users = User.find(:all, :conditions => ["id IN (?)",@projects.collect{|x| x.creator_id}.uniq])
+    render '/projects/publishing/requests'
+  end
+
+  def make_public
+    Project.transaction do
+      @project = Project.find(params[:project_id])  
+      if !@project.is_public
+        @project.is_public = true
+      end
+      @project.public_downloadable = true 
+      if @project.save
+        flash[:success] = "The project was successfully published."
+      else
+        flash[:notice] = "It appears something has gone wrong."
+      end
+    end
+    redirect_to "/home/publication_requests"
   end
   
   # destroy
@@ -612,7 +624,6 @@ class ProjectsController < ApplicationController
   # data_request_form
   # Request to download the Excel spreadsheet corresponding to a particular project. 
   # If the project is publicly downloadable, you must agree to some terms and the data is yours.
-  # If not, an email is sent to the project lead to ask permission.
   def data_request_form
     @project = Project.find(params[:project_id])
     @page_title = @project.title
@@ -627,13 +638,45 @@ class ProjectsController < ApplicationController
   #   1) projects belonging to this user
   #   2) projects this user has requested data for
   def show_data_requests
-    @outgoing_requests = DataRequest.find(:all, :conditions=>["user_id=?",current_user.id])
-    user_project_ids = UserProjectRole.find(:all, :conditions=>["user_id=? and role = ?",current_user.id, "lead"],:select=>["project_id"])
-    user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.project_id}
-    @incoming_requests = user_project_ids.empty? ? [] : DataRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
-    @users = User.find(:all, :conditions=>["id IN (?)",@incoming_requests.collect{|x| x.user_id}.uniq])
-    proj_ids = @outgoing_requests.collect{|x| x.project_id}.uniq + user_project_ids
-    @projects = Project.find(:all, :conditions=>["id IN (?)",proj_ids], :select=>["id","title"])
+    titles = {'incoming' => "Requests for My Data",
+              'outgoing' => "Data I Have Requested",
+              'incopy' => "Copies of My Projects",
+              'outcopy' => "Projects I Have Copied",
+              'admin_incoming' => "All Data Requests",
+              'admin_incopy' => "All Copy Requests"}
+    
+    @request_type = params[:request_type]
+    @title = titles[params[:request_type]]
+    @records = []
+    
+    user_project_ids = []
+    if current_user.is_admin?
+      @title = titles["admin_#{params[:request_type]}"]
+      user_project_ids = Project.find(:all, :select=>['id'])
+      user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.id}
+    else
+      user_project_ids = UserProjectRole.find(:all, :conditions=>["user_id=? and role = ?",current_user.id, "lead"],:select=>["project_id"])
+      user_project_ids = user_project_ids.empty? ? [] : user_project_ids.collect{|x| x.project_id}
+    end
+    
+    
+    case @request_type
+    when 'incoming'
+      @records = user_project_ids.empty? ? [] : DataRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])
+      @users = User.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.user_id}])
+    when 'outgoing'
+      @records = DataRequest.find(:all, :conditions=>["user_id=?",current_user.id])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.project_id}])
+    
+    when 'incopy'
+      @records = ProjectCopyRequest.find(:all, :conditions=>["project_id IN (?)",user_project_ids])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",(@records.collect{|x| x.project_id} + @records.collect{|x| x.clone_id}).uniq])
+      @users = User.find(:all, :conditions=>["id IN (?)",@records.collect{|x| x.user_id}])
+    when 'outcopy'
+      @records = ProjectCopyRequest.find(:all, :conditions => ["user_id = ?", current_user.id])
+      @projects = Project.find(:all, :conditions=>["id IN (?)",@records.collect{|x| [x.project_id, x.clone_id]}.flatten.uniq])
+    end
     render "/data_requests/show"
   end
 
@@ -694,26 +737,57 @@ class ProjectsController < ApplicationController
   # download
   # Download the project Excel files
   def download
-    # Get site properties
-    # siteproperties = session[:guiproperties]
-    # siteproperties = nil
-    # if siteproperties.nil?
-    #     siteproperties = Guiproperties.new
-    #     session[:guiproperties] = siteproperties
-    # end
-    # excel_cache_path = siteproperties.getProjectCachePath()
-    format = params[:format]
-    excel_cache_path = "/public/cache/projects/"
-    
-    extraction_form_id=params[:extraction_form_id]
-    returnFile = ""
-    if current_user.is_assigned_to_project(params[:project_id])
-      returnFile = "project-#{params[:project_id]}-#{extraction_form_id}.#{format}"
-    else
-      project = Project.find(params[:project_id])
-      returnFile = project.get_download_filename(current_user.id, extraction_form_id, format)
+    puts "ENTERED DOWNLOAD FUNCTION"
+    dl_type = params[:dl_type]
+    cache_path = nil
+    return_file = nil
+
+    case dl_type
+    when "ef" 
+      format  = params[:format]
+      extraction_form_id = params[:extraction_form_id]
+      cache_path = "/public/cache/projects"
+      if current_user.is_assigned_to_project(params[:project_id])
+        return_file = "project-#{params[:project_id]}-#{extraction_form_id}.#{format}"
+      else
+        project = Project.find(params[:project_id])
+        return_file = project.get_download_filename(current_user.id, extraction_form_id, format)
+      end
+    when "supplement" 
+      return_file = params[:filename]
+      cache_path = "/public/reports/#{params[:project_id]}/publish/downloads"
+      if !current_user.is_assigned_to_project(params[:project_id])
+        project = Project.find(params[:project_id])
+        return_file = project.get_download_filename(current_user.id, nil, nil, return_file)
+        if return_file != params[:filename]
+          cache_path = "/public/cache/projects"
+        end
+      end
     end
-    send_file "#{Rails.root}/#{excel_cache_path}/#{returnFile}",:x_sendfile=>true
-    #<A HREF="/<%= excel_cache_path %>project-<%= project.id.to_s %>-<%= ef.id.to_s %>.xlsx"> Excel</A>
+    send_file "#{Rails.root}/#{cache_path}/#{return_file}",:x_sendfile=>true 
+  end
+
+  def show_copy_request_form
+    @project_title = params[:project_title]
+    @project_id = params[:project_id]
+  end
+
+  # send a notification to the admin to request a copy of a published project
+  def request_a_copy
+    levels = params[:copy_level].split("_")
+    requests_ef = levels.length >= 1
+    requests_studies = levels.length >= 2
+    requests_data = levels.length >= 3
+    ProjectCopyRequest.create(:user_id => current_user.id,
+                              :project_id => params[:project_id],
+                              :include_forms => requests_ef,
+                              :include_studies => requests_studies,
+                              :include_data  => requests_data)
+  end
+
+  def remove_parent_association
+    p = Project.find(params[:project_id])
+    p.parent_id = nil 
+    p.save 
   end
 end

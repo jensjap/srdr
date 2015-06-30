@@ -29,6 +29,7 @@ class Project < ActiveRecord::Base
     has_many :extraction_forms, :dependent=>:destroy
     has_many :data_requests
     validates :title, :presence => true
+    belongs_to :parent, :class_name => "Project", :foreign_key => :parent_id 
 
     # info via http://stackoverflow.com/questions/408872/rails-has-many-through-find-by-extra-attributes-in-join-model
     has_many  :lead_users, :through => :user_project_roles, :class_name => "Project", :source => :project, :conditions => ['user_project_roles.role = ?',"lead"]
@@ -91,6 +92,14 @@ class Project < ActiveRecord::Base
     # @params [boolean] copy_efs      - copy extraction forms?
     # @params [boolean] copy_studies  - copy studies?
     # @return [boolean] success       - was the copy process successful?
+    class << self
+      def init_copy(project_id, user_id, new_title, copy_efs, copy_studies, copy_study_data)
+        p = Project.find(project_id)
+        p.copy(user_id,new_title,copy_efs,copy_studies,copy_study_data)
+      end
+      handle_asynchronously :init_copy, :run_at => Time.now() + 1
+    end
+    
     def copy(user_id, new_title, copy_efs, copy_studies, copy_study_data)
         puts "\n\n---------------- In the Copy Function.----------------\n\n"
         success = false # the return value
@@ -109,6 +118,7 @@ class Project < ActiveRecord::Base
         new_proj.is_public = false
         new_proj.updated_at = nil
         new_proj.created_at = Time.now
+        new_proj.parent_id = self.id 
 
         # copy all key questions associated with the project.
         #----------------------------------------------------
@@ -142,8 +152,6 @@ class Project < ActiveRecord::Base
         end
         return success
     end
-    handle_asynchronously :copy, :run_at => Time.now() + 1
-
 
     def self.get_status_string(id)
         @project = Project.find(id)
@@ -464,15 +472,16 @@ class Project < ActiveRecord::Base
         return retVal
     end
 
-    def get_download_filename(downloader_id, ef_id, format)
-        request = DataRequest.find(:first, :conditions=>["user_id=? AND project_id=?", downloader_id, self.id])
+    def get_download_filename(downloader_id, ef_id, format, filename = nil)        
         returnFile = "access_denied.txt"
         # if it's downloadable, then record the access and provide the 
         # file requested
         currentTime = Time.now()
+        # EVERYTHING IS PUBLIC DOWNLOADABLE AS OF MAY 2015
         if self.public_downloadable
          
           DataRequest.transaction do
+            request = DataRequest.find(:first, :conditions=>["user_id=? AND project_id=?", downloader_id, self.id])
             if request.nil?
               request = DataRequest.create(:user_id=>downloader_id, :project_id=>self.id, :status=>"public", :requested_at=>nil, :responder_id=>nil, :responded_at=>nil, :last_download_at=>currentTime, :download_count=>1, :request_count=>0)
             else
@@ -482,36 +491,36 @@ class Project < ActiveRecord::Base
               request.download_count = request.download_count + 1
               request.save
             end
-            #returnFile = "topSecret.txt"
-            returnFile = "project-#{self.id}-#{ef_id}.#{format}"
+            
+            returnFile = filename.nil? ? "project-#{self.id}-#{ef_id}.#{format}" : filename
           end
+        end
         # if it's not downloadable, make sure their request has been approved.
         # if approved within 1 week ago, provide the file requested. If previously
         # approved but expired, provide accessExpired.txt
-        else
-          if !request.nil?
-            if !request.responded_at.nil?
-              if request.status == "accepted"
-                unless (currentTime - request.responded_at) > 1.week
-                  DataRequest.transaction do 
-                    request.last_download_at = currentTime
-                    request.download_count = request.download_count + 1
-                    request.save
-                  end
-                  #returnFile = "topSecret.txt"     
-                  returnFile = "project-#{self.id}-#{ef_id}.#{format}"
-                else
-                  returnFile = "access_expired.txt"
-                end
-              else
-                returnFile = "access_denied.txt"
-              end
-            end
-            # if no response has been received then they 
-            # are given an access denied file
-          end
-          # (If there is no request record then we'll just deny access)
-        end
+        # else
+        #   if !request.nil?
+        #     if !request.responded_at.nil?
+        #       if request.status == "accepted"
+        #         unless (currentTime - request.responded_at) > 1.week
+        #           DataRequest.transaction do 
+        #             request.last_download_at = currentTime
+        #             request.download_count = request.download_count + 1
+        #             request.save
+        #           end
+        #           returnFile = filename.nil? ? "project-#{self.id}-#{ef_id}.#{format}" : filename
+        #         else
+        #           returnFile = "access_expired.txt"
+        #         end
+        #       else
+        #         returnFile = "access_denied.txt"
+        #       end
+        #     end
+        #     # if no response has been received then they 
+        #     # are given an access denied file
+        #   end
+        #   # (If there is no request record then we'll just deny access)
+        # end
         return returnFile
     end
 end

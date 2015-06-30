@@ -1,0 +1,27 @@
+<h1>Requests for Project Publication</h1>
+<br/>
+<% if @projects.empty? %>
+<br/>
+No pending publication requests could be found.
+<% else %>
+<table class='form_table'>
+  <thead>
+    <th>Title</th>
+    <th>Creator Login</th>
+    <th>Creator E-Mail</th>
+    <th>Link</th>
+    <th>Action</th>
+  </thead>
+  <% @projects.each do |proj| %>
+    <% creator = @users.find{|x| x.id == proj.creator_id} %>
+    <tr>
+      <td><%= proj.title %></td>
+      <td><%= creator.nil? ? "Unknown" : "#{creator.login}" %></td>
+      <td><%= creator.nil? ? "" : "#{creator.email}" %></td>
+      <td><a href="/projects/<%= proj.id %>/edit">View</a></td>
+      <td><a href="/projects/<%= proj.id %>/make_public">Publish</a></td>
+    </tr>
+  <% end %>
+
+</table>
+<% end %>
