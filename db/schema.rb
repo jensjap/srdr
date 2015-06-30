@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150514150202) do
+ActiveRecord::Schema.define(:version => 20150527161539) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -1215,6 +1215,8 @@ ActiveRecord::Schema.define(:version => 20150514150202) do
     t.string   "prospero_id"
     t.string   "search_strategy_filepath"
     t.boolean  "public_downloadable",      :default => false
+    t.string   "management_file_url"
+    t.datetime "publication_requested_at"
     t.integer  "parent_id"
     t.text     "attribution"
   end
@@ -1484,16 +1486,6 @@ ActiveRecord::Schema.define(:version => 20150514150202) do
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "t1", :id => false, :force => true do |t|
-    t.string  "PMID"
-    t.integer "ProjID", :default => 0, :null => false
-  end
-
-  create_table "t2", :id => false, :force => true do |t|
-    t.string  "PMID"
-    t.integer "NumProjects", :limit => 8, :default => 0, :null => false
   end
 
   create_table "user_organization_roles", :force => true do |t|

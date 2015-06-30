@@ -1,6 +1,1484 @@
 <%
 intro_sections = ["What is the SRDR?","User Manual Goals","SRDR Overview"]
 public_sections = ["Data Viewing","Search"]
+commentator_sections = ["Data Viewing","Data Downloading","Search","Registration","Commenting"]
+contributor_sections = ["Data Viewing","Data Downloading","Search","Registration","Your Workspace and Basic Navigation","Help and SRDR Iconography"]
+how_to = ["Create a Project","Edit an Existing Project","Add/Edit Users and User Roles","Create an Extraction Form","Edit an Existing Extraction Form","Add a Study","Extract a Study","Assign Studies","Reassign Studies","Project Tools"]
+%>
+<div style='padding-top:10px; float:left;'>
+<h2>The SRDR User Manual</h2>
+<br/><div class='hr'></div><br/>
+<h2>Table of Contents</h2>
+<br/>
+<table class='form_table'>
+	<tr>
+		<td class='label'>
+			<h3>Introduction</h3>
+		</td>
+		<td class='input'>
+			<ul class='normal_list'>
+				<% intro_sections.each_with_index do |s,i| %>
+					<li><a href="#<%="intro#{i+1}"%>"><%= s %></a></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td class='label'>
+			<h3>Public Usage</h3>
+		</td>
+		<td class='input'>
+
+			<ul class='normal_list'>
+				<% public_sections.each_with_index do |s,i| %>
+					<li><a href="#<%="public#{i+1}"%>"><%= s %></a></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td class='label' >
+			<h3>Commentators</h3>
+		</td>
+		<td class='input'>
+			<ul class='normal_list'>
+				<% commentator_sections.each_with_index do |s,i| %>
+					<li><a href="#<%="commentator#{i+1}"%>"><%= s %></a></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td class='label' rowpsan=4>
+			<h3>Contributors</h3>
+		</td>
+		<td class='input'>
+			<ul class='normal_list'>
+				<% contributor_sections.each_with_index do |s,i| %>
+					<li><a href="#<%="contributor#{i+1}"%>"><%= s %></a></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td class='label' >
+			<h3>Contributors: How-To Reference</h3>
+		</td>
+		<td class='input'>
+			<ul class='normal_list'>
+				<% how_to.each_with_index do |s,i| %>
+					<li><a href="#<%="how#{i+1}"%>"><%= s %></a></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+
+</table><br/>
+<div class='hr'></div>
+<br/>
+<%#--------------------------------------
+			THE INTRODUCTION
+	----------------------------------------%>
+<h2>Introduction</h2><br/><br/>
+<a name="intro1"></a><div style='float:right;'><a href='#top'>Back to Top</a></div>
+<h3>What is the SRDR?</h3>
+<br/>
+The Systematic Review Data Repository (SRDR) is a Web-based tool for the extraction and management of data for systematic review or meta-analysis, launched on June 20th, 2012. It is also an open and searchable archive of systematic reviews and their data. 
+<br/><br/>
+<strong>With the SRDR you can:</strong>
+<ul class='normal_list'>
+<li>Create flexible extraction forms for use by your research team</li>
+<li>Manage team members and their privileges</li>
+<li>View, validate and analyze data extracted for your systematic review project</li>
+</ul>
+<br/>
+<strong>Forthcoming:</strong>
+<ul class='normal_list'>
+<li>Easily import data from previous reviews or extracted with other software, for simplified search and management</li>
+<li>Search for, view, and download all archived reviews, data, and extraction forms</li>
+</ul>
+The SRDR was designed and implemented by the Tufts Evidence-based Practice Center with funding from the Agency of Healthcare Research and Quality. Its goal is to reduce the burden of conducting systematic reviews by encouraging researchers to contribute data to a shared archive, allowing the wider scientific community to easily find, evaluate, and repurpose data in future research. The online software application component of the SRDR serves as the interface for this database as well as a compelling option for organizing and carrying out systematic review projects.
+<br/><br/>
+<a name="intro2"></a><div style='float:right;'><a href='#top'>Back to Top</a></div>
+<h3>User Manual Goals</h3>
+<br/>
+The purpose of this manual is to familiarize users with the SRDR software and archive, and to provide step-by-step instructions for all of the most common SRDR tasks. Specifically, users will be instructed how to:
+<br/><ul class='normal_list'>
+<li>Create and edit systematic review projects</li>
+<li>Add users to projects and adjust user privileges</li>
+<li>Create and edit extraction forms</li>
+<li>Use an extraction form to enter data into a systematic review project</li>
+</ul>
+<br/><br/>
+
+<!--This section provides a brief overview of the general conventions of the user manual as well as the SRDR Web site, including basic terminology, how to navigate your workspace, the typical workflow and lifecycle of an SRDR project, and how to access the system's online help resources.<br/><br/>-->
+<a name="intro3"></a><div style='float:right;'><a href='#top'>Back to Top</a></div>
+<h3>SRDR Overview</h3>
+All data within the SRDR are organized into projects. Projects are self-contained and comprise all information related to an individual systematic review. Among this information are the central research queries the project is intended to address, called key questions. At least one key question must be defined for any project. Projects further contain sub-elements called studies and extraction forms. Extraction forms are the dialogs by which users extract data from publications into an SRDR project. A study, as defined within the SRDR, represents an individual extracted publication (one filled in extraction form).  
+
+<ul class='normal_list'>
+	<li>
+		Project: All data deposited within the SRDR are organized as individual projects. A project contains all information related to one systematic review (e.g., extraction forms, key questions, extracted studies, etc.).
+	</li>
+	<li>
+		Key Question(s): The specific scientific queries an SRDR project is intended to address. All projects must include at least one key question.
+	</li>
+	<li>
+		Extraction Form: The user-defined dialogue by which collaborators extract data from relevant publications into an SRDR project.
+	</li>
+	<li>
+		Study: An individual publication extraction, consisting of one instance of a filled out extraction form.  
+ 	</li>
+ </ul>
+ <br/>
+<strong>Figure 1. SRDR Overview</strong><br/>
+<table class='image_with_caption'>
+	<tr>
+		<td class='image'>
+			<img src='/images/user_manual_images/figure_1.png' alt="Figure 1 presents a schematic of the logical organization of SRDR.  Specifically, it depicts the SRDR as containing many projects, each of which further contains a variable number of Key Questions, Extraction Forms, and Studies.  Extraction Forms are shown to address one or more Key Questions (with no overlap), and studies as representing individual instances of a completed Extraction Form." title="Figure 1 presents a schematic of the logical organization of SRDR.  Specifically, it depicts the SRDR as containing many projects, each of which further contains a variable number of Key Questions, Extraction Forms, and Studies.  Extraction Forms are shown to address one or more Key Questions (with no overlap), and studies as representing individual instances of a completed Extraction Form."/>
+		</td>
+	</tr><tr>
+		<td>
+			Figure 1 presents a schematic of the logical organization of SRDR.  Specifically, it depicts the SRDR as containing many projects, each of which further contains a variable number of Key Questions, Extraction Forms, and Studies.  Extraction Forms are shown to address one or more Key Questions (with no overlap), and studies as representing individual instances of a completed Extraction Form.
+		</td>
+	</tr>
+</table>
+<br/>
+Access to projects and certain elements of project functionality are restricted based on the user's role within a project (either lead or collaborator).  When a new project is created, the creator is automatically designated as lead.  The lead can add collaborators or designate new leads or collaborators (see Add/Edit Users and User Roles under How To for instructions).  Only leads may create extraction forms or manage users.  Collaborators may only use extraction forms to extract data into a project.
+<br/><br/>
+The general life-cycle of an SRDR project begins with its initial creation and then proceeds through the definition of the project's key question(s), design of one or more extraction forms, addition/extraction of one or more studies, and finally review and publication. "Publication" denotes a project's formal deposition into the SRDR, and the point at which it and its data become publically accessible.
+<br/><br/>
+<strong>Figure 2. SRDR Project Life-cycle</strong><br/>
+<table class='image_with_caption'>
+	<tr>
+		<td class='image'>
+			<img src='/images/user_manual_images/figure_2.png' alt="Figure 2 depicts the life-cycle of an SRDR project.  Specfically, SRDR projects are shown as proceeding through five sequential steps: 1) Create Project, 2) Enter Key Questions, 3) Create Extraction Form, 4) Extract Study, and 5) Publish Project.  Circular arrows next to steps 3 and 4 indicate that these steps are repeated as necessary per project." title="Figure 2 depicts the life-cycle of an SRDR project.  Specifically, SRDR projects are shown as proceeding through five sequential steps: 1) Create Project, 2) Enter Key Questions, 3) Create Extraction Form, 4) Extract Study, and 5) Publish Project.  Circular arrows next to steps 3 and 4 indicate that these steps are repeated as necessary per project."/>
+		</td>
+	</tr><tr>
+		<td>
+			Figure 2 depicts the life-cycle of an SRDR project.  Specfically, SRDR projects are shown as proceeding through five sequential steps: 1) Create Project, 2) Enter Key Questions, 3) Create Extraction Form, 4) Extract Study, and 5) Publish Project.  Circular arrows next to steps 3 and 4 indicate that these steps are repeated as necessary per project.
+		</td>
+	</tr>
+</table>
+<br/>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+<%#--------------------------------------
+			PUBLIC
+	----------------------------------------%>
+<h2>Public Use</h2><br/><br/>
+<a name="public1"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Data Viewing</h3>
+<br/>
+All members of the general public, including commentators and contributors, can view data from published projects from SRDR.
+<br/>
+<ul class='normal_list'>
+<li>Click Preview for the project of interest under the <strong>Published Projects</strong> tab on the SRDR homepage. This allows all users to see the <strong>Title and Description, Key Questions, Associated Extraction Forms</strong>, and <strong>Associated Studies</strong> within the project.
+</li>
+<li>
+Clicking an associated study will bring up the completed extraction form for a study.
+</li>
+</ul>
+<br/><br/>
+<a name="public2"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Search</h3>
+<br/>
+Within SRDR, the general public can search for both projects and studies using keywords.
+<br/><ul class='normal_list'>
+<li>Click within the textbox next to the Search icon in the upper right corner of the SRDR interface.</li>
+<li>Enter keywords most relevant to the project or study of interest.</li>
+<li>Click the Search button.</li>
+<li>Results will appear under 2 headings: Systematic Review Matches and Study Matches.</li>
+<li>
+	To choose the items you are interested in, simply click the title of the result within the list.
+	<ul class='normal_list'>
+		<li>Systematic Review Matches will reveal a description of the project and all studies included in the review.</li>
+		<li>Study-Level Results provide a description of the study as well as a description of the project to which it is included.</li>
+	</ul>
+</li>
+<li>Click the title of the result to open a description of the project or the study of interest.</li>
+ </ul>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+
+<%#--------------------------------------
+			COMMENTATOR
+	----------------------------------------%>
+<h2>Commentator</h2><br/><br/>
+<a name="commentator1"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Data Viewing</h3>
+<br/>
+All members of the general public, including commentators and contributors, can view data from published projects from SRDR.
+<ul class='normal_list'>
+<li>Click the project of interest under the <strong>Published Projects</strong> tab on the SRDR homepage. This allows all users to see the Title and Description, Key Questions, Associated Extraction Forms, and Associated Studies within the project.</li>
+<li>Clicking an associated study will bring up the completed extraction form for a study.</li>
+</ul>
+<br>
+
+<a name="commentator2"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Data Downloading</h3>
+<br/>All registered users, including commentators and contributors, can download data from published projects on the SRDR.
+<br/><br/>
+To do so:
+<ol class='normal_ordered_list'>
+<li>From the SRDR homepage, log into your profile using your SRDR username and password.</li>
+<li>Once you are logged in, check that you are in the <strong>MySRDR</strong> tab.</li>
+<li>Directly to the right of the MySRDR tab, click the <strong>Published Projects</strong> tab.</li>
+<li>On the <strong>Completed Systematic Reviews</strong> page, scroll through the list of published projects, and click the <strong>Show Downloadable Content</strong> link under the project that you would like to download data from.</li>
+<li>The “Show Downloadable Content” link will expand, and you will see a table showing the data available to download (Including data entered into extraction forms and uploaded documents) from the project and the formats they are available in (i.e., Excel or CSV formats).</li>
+<li>Below the table, click the <strong>Go to Downloads Page</strong> link.</li>
+<li>On the <strong>Downloading Data</strong> page for the project, first, read and agree to the terms and conditions of the Creative Commons Attribution Non-commercial licensing agreement, then click either the Excel or CSV link for the file you would like to download.</li>
+<li>Download the file to your computer.</li>
+</ol>
+<br>
+
+<a name="commentator3"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Search</h3>
+<br/>
+Within SRDR, you can search for both projects and studies using keywords.
+<ul class='normal_list'>
+<li>Click within the textbox next to the Search icon in the upper right corner of the SRDR interface.</li>
+<li>Enter keywords most relevant to the project or study of interest.</li>
+<li>Click the Search button.</li>
+<li>Results will appear under 2 headings: SR-Level Results or Study-Level Results.</li>
+<li>
+	To choose the items you are interested in, simply click the title of the result within the list.
+	<ul class='normal_list'>
+	  <li>Systematic Review Matches will reveal a description of the project and all studies included in the review.</li>
+	  <li>Study-Level Results provide a description of the study as well as a description of the project to which it is included.</li>
+	</ul>
+</li>
+<li>Click the title of the result to open a description of the project or the study of interest.</li>
+</ul>
+<br/>
+
+<a name="commentator4"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Registration</h3>
+<br/>
+Before you can leave a comment in SRDR, you should register to create an account. To do so:
+<ol class='normal_ordered_list'>
+<li>Click the Register link on the SRDR home page. 
+<li>On the Create New Account page, you will be asked whether you wish to be able to create or contribute to new SRDR projects, or if you simply wish to view and comment on existing projects.  
+<ol class='normal_lettered_list'>
+	<li>Fill out the provided form and choose a username and password indicating that you would like to become a Commentator.
+	<li>A verification email will be sent to the email address you provided with instructions on how to activate your account.
+	<li>Once your account has been activated, log in on the home page with your username and password.
+</ol>
+</li>
+</ol>
+<a name="commentator5"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h3>Commenting</h3>
+<br/>
+SRDR allows Commentators to add their comments on a particular project.
+<ul class='normal_list'>
+<li>To add a comment, click Post/View next to the Comment icon.</li>
+<li>In the pop-up window, you have the options of Post a Comment, Flag This Data Item, or sorting the comments to view.</li>
+<li>Post a Comment
+	<ul class='normal_list'>
+	<li>After choosing to comment, you may enter your Comment into the assigned text box and select whether this statement is one of Fact, Opinion, or Both.</li>
+	<li>One you have entered your comments, click Post Comment.</li>
+	<li>Your comment should now appear under Private Comments which may be sorted.</li>
+	</ul>
+</li>
+<li>Flag This Data Item
+	<ul class='normal_list'>
+<li>Click Post/View next to the Comment icon in order to flag an item. You will then choose whether your flag is for Unclear data, a Typo or Other under the Flag Type.</li>
+<li>Next select whether the flag is of Low or High priority.</li>
+<li>Enter any comments to the comment box and again choose whether they are of Fact, Opinion or Both.</li> 
+<li>Finally Submit Flag.</li>
+<li>Again your flag should appear under Private Comments.</li>
+</ul>
+</li>
+<li>Sort
+	<ul class='normal_list'>
+		<li>You can sort flags and comments by selecting one of the links above the Public Comment header.
+		<li>The options for sorting are:
+			<ul class='normal_list'>
+				<li>Newest flags first</li>
+				<li>Flag priority</li>
+				<li>Flag type</li>
+				<li>Most recent (Default)</li>
+				<li>Oldest</li>
+				<li>Fact/Opinion</li>
+			</ul>
+		</li>
+	</ul>
+</li>
+<li>Once comments and flags are posted, you can choose to Email User to direct their attention to your comment. </li>
+<li>After the user addresses the comment, he/she also has the option to Post Reply to the comment.</li>
+</ul>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+
+<%#--------------------------------------
+			CONTRIBUTOR
+	----------------------------------------%>
+<h2>Contributor</h2><br/><br/>
+<a name="contributor1"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Data Viewing</h3>
+<br/>
+All members of the general public, including commentators and contributors, can view data from published projects from SRDR.
+<ul class='normal_list'>
+<li>Click the project of interest under the <strong>Published Projects</strong> tab on the SRDR homepage. This allows all users to see the Title and Description, Key Questions, Associated Extraction Forms, and Associated Studies within the project.</li>
+<li>Clicking an associated study will bring up the completed extraction form for a study.</li>
+</ul>
+<br>
+<a name="contributor2"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Data Downloading</h3>
+<br/>All registered users, including commentators and contributors, can download data from published projects on the SRDR.
+<br/><br/>
+To do so:
+<ol class='normal_ordered_list'>
+<li>From the SRDR homepage, log into your profile using your SRDR username and password.</li>
+<li>Once you are logged in, check that you are in the <strong>MySRDR</strong> tab.</li>
+<li>Directly to the right of the MySRDR tab, click the <strong>Published Projects</strong> tab.</li>
+<li>On the <strong>Completed Systematic Reviews</strong> page, scroll through the list of published projects, and click the <strong>Show Downloadable Content</strong> link under the project that you would like to download data from.</li>
+<li>The “Show Downloadable Content” link will expand, and you will see a table showing the data available to download (Including data entered into extraction forms and uploaded documents) from the project and the formats they are available in (i.e., Excel or CSV formats).</li>
+<li>Below the table, click the <strong>Go to Downloads Page</strong> link.</li>
+<li>On the <strong>Downloading Data</strong> page for the project, first, read and agree to the terms and conditions of the Creative Commons Attribution Non-commercial licensing agreement, then click either the Excel or CSV link for the file you would like to download.</li>
+<li>Download the file to your computer.</li>
+</ol>
+<br>
+<a name="contributor3"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Search</h3>
+<br/>
+Within SRDR, you can search for both projects and studies using keywords.
+<ul class='normal_list'>
+<li>Click within the textbox next to the Search icon in the upper right corner of the SRDR interface.</li>
+<li>Enter keywords most relevant to the project or study of interest.</li>
+<li>Click the Search button.</li>
+<li>Results will appear under 2 headings: SR-Level Results or Study-Level Results.</li>
+<li>
+	To choose the items you are interested in, simply click the title of the result within the list.
+	<ul class='normal_list'>
+	  <li>Systematic Review Matches will reveal a description of the project and all studies included in the review.</li>
+	  <li>Study-Level Results provide a description of the study as well as a description of the project to which it is included.</li>
+	</ul>
+</li>
+<li>Click the title of the result to open a description of the project or the study of interest.</li>
+</ul>
+<br/>
+<a name="contributor4"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h3>Registration</h3>
+<br/>
+Before you can leave a comment in SRDR, you should register to create an account. To do so:
+<ol class='normal_ordered_list'>
+<li>Click the Register link on the SRDR home page. 
+<li>On the Create New Account page, you will be asked whether you wish to be able to create or contribute to new SRDR projects, or if you simply wish to view and comment on existing projects.  
+<ol class='normal_lettered_list'>
+	<li>Fill out the provided form and choose a username and password indicating that you would like to become a <strong>Contributor</strong>.
+	<li>A verification email will be sent to the email address you provided with instructions on how to activate your account.
+	<li>Once your account has been activated, log in on the home page with your username and password.
+</ol>
+</li>
+</ol>
+<br/>
+<a name="contributor5"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Your Workspace and Basic Navigation</h3>
+<br/>
+After logging into the SRDR, you may access the projects you lead or those you collaborate on by clicking the My Projects link and navigating to the relevant tab.  <br/><br/>
+<strong>To view a particular project:</strong>
+<ul class='normal_list'>
+<li>Click Edit under the project name. A navigation/action menu will be displayed on the left-hand side of the screen when working within a particular project. This menu will allow you to navigate within/among tasks/sections when interacting with the various components of your projects, as well as providing context-specific action buttons.</li></ul>
+<br/>
+<strong>To access individual extraction forms or studies associated with a particular project:</strong>
+<ul class='normal_list'>
+<li>Click the corresponding link (View Full List or Complete List, respectively) from the navigation/action menu.</li></ul>
+<br/><br/>
+<a name="contributor6"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Help and SRDR Iconography</h3><br/>
+You may access SRDR help resources from anywhere within the SRDR site.
+<ul class='normal_list'>
+	<li>Click the Help link.</li>
+<li>On the Help page, you can : 
+	<ul class='normal_list'>
+		<li>View SRDR tutorial videos.</li>
+		<li>Review the legend of commonly used icons and other graphical elements appearing within the SRDR (reproduced below).</li>
+		<li>Download the latest version of the SRDR manual.</li>
+	</ul>
+</li>
+</ul>
+<br/>
+<br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+<%#--------------------------------------
+			HOW-TO GUIDE
+	----------------------------------------%>
+<h2>How-To Guide (Contributor Only)</h2>
+<br/><br/>
+<%# CREATE A PROJECT %>
+<a name="how1"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Create a Project</h3>
+<br/>
+To create a new project, navigate to the My Projects page (use the My Projects link at the top of the page) and click New Project from the left-hand navigation/action menu.
+<br/><br/>
+<strong>Upon arriving at the Project Information page of your new project:</strong>
+<ol class='normal_ordered_list'>
+<li>Enter the project's title, description, funding source, and any additional project notes in the data fields provided.</li>
+</ol>
+<br/>
+<strong>You must also add key questions to your review project on this page. To do so:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add Key Question at the bottom of the page.</li>
+<li>Enter your question in the resulting pop-up.</li>
+<li>Click Save when finished, or Cancel if you'd like to return to the Project Information page without saving. 
+	<ol class='normal_lettered_list'>
+		<li>All key questions added to your project will appear in a table at the bottom of the page.</li>
+		<li>Questions are numbered in the order they are created; however, key questions can be reordered or deleted using the controls (the  [Move Up Question] and  [Delete Question] links, respectively) in the table's right-most column. </li>
+		<li>Questions may be edited by clicking the  [Edit Question] link next to the relevant question.</li>
+	</ol>
+</li>
+<li>Click Save when finished entering your project's information.</li>
+</ol><br/><br/>
+<a name="how2"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h3>Edit an Existing Project</h3>
+<br/>
+To edit an existing project, first navigate to the My Projects page and then click on the name of the project you'd like to edit in the <strong>Lead Role</strong> tab. Initially, you will be taken to the selected project's Project Information page. From here, you may edit the project's general information (title, description, etc.), or proceed to any of the project's other sections by using the navigation menu on the right-hand side of the page.
+<ol class='normal_ordered_list'>	
+<li>Edit the project's title, description, funding source, and any additional project notes in the data fields provided.</li>
+<li>You may also edit key questions by clicking the  [Edit Question] link next to the relevant question.</li>
+<li>Click Save and Continue when finished editing your project's information or Continue Without Saving to proceed to editing other sections of your project without saving any changes you may have made.</li>
+</ol>
+<br/><br/>
+<a name="how3"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h3>Add/Edit Users and User Roles</h3>
+<br/>
+To add or edit a project's users or their roles, first navigate to the My Projects page (use the My Projects link at the top of the page) and then click on the name of the desired project in the <strong>Lead Role</strong> tab. Initially, you will be taken to the selected project's Project Information page. From there, navigate to the Managing Users page by clicking on the Manage Users link in the left-hand navigation/action menu. <br/>
+<ul class='normal_list'>
+	<li>If you'd like to add a user:
+		<ul class='normal_list'>
+			<li>Enter the email address or SRDR username of the user in the provided field, select their role (Lead or Collaborator), and then click Add User to Project. All project users will appear in a table at the top of the page.</li>
+		</ul>
+	</li>
+	<li>If you'd like to change an existing user's role:
+		<ul class='normal_list'><li>Existing users' roles can be changed or users removed by selecting the corresponding option in the table at the top of the page and then clicking Update User Roles.</li>
+		</ul>
+	</li>
+</ul>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+<%# CREATE AN EXTRACTION FORM %>
+<a name="how4"></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h3>Create an Extraction Form</h3><br/>
+To create a new extraction form to use in an SRDR project, you must first navigate to the Extraction Forms page of the relevant project. If you've just created a new project and finished filling out the project's general information, you can simply click the Continue to Extraction Forms button at the bottom of the page (or click the Extraction Forms link in the left-hand navigation/action menu). 
+<br/><br/>
+To reach the Extraction Forms page from elsewhere within the SRDR site, first navigate to the My Projects page (use the My Projects link at the top of the page) and then click on the name of the project to which you'd like to add an extraction form in the <strong>Lead Role</strong> tab. Initially, you will be taken to the selected project's Project Information page. From there, navigate to the Extraction Forms page by clicking on Extraction Forms in the left-hand navigation/action menu. 
+<br/><br/>
+Upon reaching the Extraction Forms page, you may choose to either to Add Extraction Form or Browse Form Templates.
+<br/><br/>
+By choosing to Browse Form Templates, SRDR will open to a window with all templates added to the Extraction Form Bank. After previewing the extraction form of interest, simply click, Add to Project…under the extraction form selected to use the template in your project.
+<br/><br/>
+If you'd prefer to create an original extraction form, click Add Extraction Form to begin the extraction form creation dialogue.
+<br/><br/>
+<%# CREATE AN EXTRACTION FORM -> Title and Key Questions %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h4>Title and Key Questions</h4><br/>
+On the <strong>Title and KQs</strong> tab, you may specify the title of your extraction form, as well as the key question(s) it addresses.<br/>
+<ol class='normal_ordered_list'>
+<li>Enter the title of your extraction form in the field provided.</li>
+<li>Answer the question, Does this extraction form deal with test performance?, by selecting Yes or No from the dropdown menu.</li>
+<li>Finally, select the key question(s) that this extraction form will address by checking the corresponding boxes.</li>
+<li>Click Save when finished.</li>
+</ol>
+<br/>
+<%# CREATE AN EXTRACTION FORM -> Publications %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h4>Publications</h4><br/>
+<strong>Please note:</strong> Although not enabled within the extraction form creation dialogue, additional publication identifiers can be added during individual study extraction by entering the Pubmed ID and clicking the Retrieve button.
+<br/><br/>
+
+<%# CREATE AN EXTRACTION FORM -> Study Design %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Study Design</h4><br/>
+In the <strong>Study Design</strong> tab, you may specify the queries concerning study design that will appear on your extraction form. Two questions are provided by default. These may be edited (see instructions below) or deleted by clicking the Edit Question or Delete Question links, respectively, next to the relevant query. If you are happy with the default options, simply click Next to continue. Otherwise: 
+<br/> <br/>
+<strong>If you do not wish your extraction form to include a design details section:</strong>
+<ol class='normal_ordered_list'>
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like your extraction form to include additional design detail queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add a New Design Detail.</li>
+<li>In the resulting pop-up, enter the question's text and optional instructions to the extraction form's user in the fields provided, and then select the query's format from the drop-down menu. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When adding a sub-question, enter the text of the follow-up in the corresponding field and then choose which response option will trigger it by marking the relevant check box. When finished click Save, or to return to the <strong>Study Design</strong> tab without saving, click Cancel. </li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol>
+<br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+
+<%# CREATE AN EXTRACTION FORM -> Study Arms %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Study Arms</h4>
+<br/>
+In the <strong>Study Arms</strong> tab, you may suggest titles for the arms that will appear on your extraction form.<br/><br/>
+<strong>If you would like to pre-specify an arm to your extraction form:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add Arm.</li>
+<li>In the resulting pop-up, enter the title and description in the fields provided, and click Save. To return to the <strong>Arms</strong> tab without saving, click Cancel. (Note: Previously added arms can be edited or deleted using the corresponding controls in the right-most column of the arms table, outside the pop-up.)</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<br/>
+<strong>Figure 3. Suggesting a Study Arm</strong><br/>
+<table class='image_with_caption'>
+	<tr>
+		<td class='image'>
+			<img src='/images/user_manual_images/figure_3.png' alt="Figure 3 shows the use of a pop-up window in SRDR for suggesting a new Study Arm title to data extractors. Any suggested Arm titles and descriptions will be displayed as options during data extraction and will assist in data standardization." title="Figure 3 shows the use of a pop-up window in SRDR for suggesting a new Study Arm title to data extractors. Any suggested Arm titles and descriptions will be displayed as options during data extraction and will assist in data standardization."/>
+		</td>
+	</tr><tr>
+		<td>
+			Figure 3 shows the use of a pop-up window in SRDR for suggesting a new Study Arm title to data extractors. Any suggested
+			Arm titles and descriptions will be displayed as options during data extraction and will assist in data standardization
+		</td>
+	</tr>
+</table><br/><br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+
+<%# CREATE AN EXTRACTION FORM -> Arm Details %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Arm Details</h4><br/>
+In the <strong>Arm Details</strong> tab, you may ask specific questions relate to the interventions/comparators of a study. You may have those specific questions repeated for each arm of a study. The default option is to display the questions only once and it may be changed to display the questions for each arm defined in a study by checking the circle next to that option.
+<br/> <br/>
+<strong>If you would like your extraction form to include new arm details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add a New Arm Detail.</li>
+<li>In the resulting pop-up, enter the question's text and optional instructions to the extraction form's user in the fields provided, and then select the query's format from the drop-down menu. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When adding a sub-question, enter the text of the follow-up in the corresponding field and then choose which response option will trigger it by marking the relevant check box. When finished click Save, or to return to the <strong>Arm Details</strong> tab without saving, click Cancel. </li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol>
+<br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+
+<%# CREATE AN EXTRACTION FORM -> Baseline Characteristics %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Baseline Data</h4>
+<br/>
+In the <strong>Baseline Data</strong> tab, you may specify the queries concerning baseline characteristics that will appear on your extraction form.  
+<br/><br/>
+<strong>If you do not wish your extraction form to include a baseline characteristics section:</strong>
+<ol class='normal_ordered_list'>
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing your extraction form.</li>
+</ol> <br/>
+<strong>If you would like to add a new baseline characteristics query to your extraction form:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add a New Baseline Characteristic.</li>
+<li>In the resulting pop-up, enter the question's text and optional instructions to the extraction form's user in the fields provided, and then select the query's format from the drop-down menu. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When adding a sub-question, enter the text of the follow-up in the corresponding field, and then choose which response option will trigger it by marking the relevant check box. When finished click Save, or to return to the <strong>Baseline Data</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol>
+<br/>
+<strong>Figure 4. Entering a Baseline Characteristic</strong><br/>
+<table class='image_with_caption'>
+	<tr>
+		<td class='image'>
+			<img src='/images/user_manual_images/figure_4.png' alt="Figure 4 shows the entry form for a new Baseline Characteristic question in SRDR. In this example, we are entering a question titled 'Risk Level', with checkbox-style options of 'Low risk', 'Intermediate Risk', 'High Risk' with the subquestion of '%', which indicates that for any risk selected, the form asks to input the percentage risk." title="Figure 4 shows the entry form for a new Baseline Characteristic question in SRDR. In this example, we are entering a question titled 'Risk Level', with checkbox-style options of 'Low risk', 'Intermediate Risk', 'High Risk' with the subquestion of '%', which indicates that for any risk selected, the form asks to input the percentage risk."/>
+		</td>
+	</tr><tr>
+		<td>
+			Figure 4. Entering a question to the Baseline Characteristic section of the extraction form. Note the ability to add additional options, select the input method, and specify sub-questions for a given choice.
+		</td>
+	</tr>
+</table><br/><br/>
+
+<%# CREATE AN EXTRACTION FORM -> Outcomes %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Outcomes</h4>
+<br/>
+In the <strong>Outcomes</strong> tab, you may suggest the names of outcomes that will appear on your extraction form.  
+<br/><br/>
+<strong>If you do not wish your extraction form to include an outcomes section:</strong>
+<ol class='normal_ordered_list'>
+	<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+	<li>Click Next to continue editing your extraction form.</li>
+</ol>
+<br><strong>If you would like to add a new outcome to your extraction form:</strong>
+<ol class='normal_ordered_list'>
+	<li>Click Add a New Outcome Name</li>
+	<li>In the resulting pop-up, enter the outcome's title and description in the fields provided, and then specify whether the outcome is categorical or continuous by selecting the corresponding option. When finished click Save, or to return to the <strong>Outcomes</strong> tab without saving, click Cancel.</li>
+	<li>Repeat steps 1 and 2 as needed.</li>
+	<li>Click Next to continue editing the next section of your extraction form</li>
+</ol>
+<br/>
+<strong>Figure 5. The Outcomes Tab</strong><br/>
+<table class='image_with_caption'>
+	<tr>
+		<td class='image'>
+			<img src='/images/user_manual_images/figure_5.png' alt="Figure 5 shows the Extraction Form tab sections, with the Outcome section selected. On this tab users may add suggested outcome names and descriptions to be used by data extractors." title="Figure 5 shows the Extraction Form tab sections, with the Outcome section selected. On this tab users may add suggested outcome names and descriptions to be used by data extractors."/>
+		</td>
+	</tr><tr>
+		<td>
+			Figure 5 shows the Extraction Form tab sections, with the Outcome section selected. On this tab users may add suggested outcome names and descriptions to be used by data extractors.
+		</td>
+	</tr>
+</table><br/><br/>
+
+<%# CREATE AN EXTRACTION FORM -> Outcome Details %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Outcome Details</h4><br/>
+In the <strong>Outcome Details</strong> tab, you may also enter information related to your outcomes, just as in the <strong>Arm Details</strong> tab. 
+<br/> <br/>
+<strong>If you would like your extraction form to include new outcome details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add a New Outcome Detail.</li>
+<li>In the resulting pop-up, enter the question's text and optional instructions to the extraction form's user in the fields provided, and then select the query's format from the drop-down menu. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When adding a sub-question, enter the text of the follow-up in the corresponding field and then choose which response option will trigger it by marking the relevant check box. When finished click Save, or to return to the <strong>Outcome Details</strong> tab without saving, click Cancel. </li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol>
+<br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+
+<%# CREATE EXTRACTION FORM - Adverse Events %>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Adverse Events</h4>
+<br/>
+In the <strong>Adverse Events</strong> tab, you may specify what information concerning adverse events will be queried on your extraction form by adding columns to an Adverse Events table. A number of columns are provided by default. These can be deleted by clicking the <img src='/images/silk_cross.png' style='display:inline;' alt="The Delete Icon (X)" title="The Delete Icon (X)"/> next to the corresponding column header.  
+<br/><br/>
+<strong>If you do not wish your extraction form to include an adverse events section:</strong>
+<ol class='normal_ordered_list'>
+	<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+	<li>Click Next to continue editing your extraction form.</li>
+</ol>
+<br><strong>If you would like to change how adverse event data are entered:</strong>
+<ol class='normal_ordered_list'>
+	<li>Click the desired radio button option and then click Update Settings.</li>
+</ol>
+<br><strong>If you would like to add a new column to the adverse events table on your extraction form:</strong>
+<ol class='normal_ordered_list'>
+	<li>Click the Add a New Adverse Event Column.</li>
+	<li>In the resulting pop-up, enter the adverse event column title and description in the fields provided. You may also optionally specify a header. (Columns with the same header will be grouped together.) When finished click Add, or to return to the <strong>Adverse Events</strong> tab without saving, click Cancel.</li>
+	<li>Repeat steps 1 and 2 as needed.</li>
+	<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol>
+<br/><br/>
+
+<%# CREATE EXTRACTION FORM - Quality%>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Quality</h4>
+<br/>
+In the <strong>Quality</strong> tab, you may specify what information concerning study quality will be queried on your extraction form by adding columns to a Quality Dimensions Data table. You will also be able to define the rating scale used within your extraction form.   
+<br/><br/>
+<strong>If you do not wish your extraction form to include a quality section:</strong>
+<ol class='normal_ordered_list'>
+	<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+	<li>Click Next to continue editing your extraction form.</li>
+</ol>
+<br><strong>If you would like to add a new quality dimension field to the quality dimensions data table:</strong>
+<ol class='normal_ordered_list'>
+	<li>Click Add a New Quality Dimension Field.</li>
+	<li>In the resulting pop-up, choose the quality dimension name using the drop-down menu. A number of commonly used dimensions are provided as options, for your convenience; however, you may add one of your own by selecting the Add other dimension not in this list option at the bottom, and then specify it in the resulting text field. After specifying the dimension name, enter any relevant notes concerning this dimension to relate to users of your extraction form. When finished click Save, or to return to the <strong>Quality</strong> tab without saving, click Cancel.</li>
+</ol>
+<br/>
+<strong>If you would like to add values to a Quality Ratings scale:</strong>
+<ol class='normal_ordered_list'>
+	<li>Click Add a New Quality Rating Field.</li>
+	<li>In the resulting pop-up, enter the rating value in the field provided. When finished click Add New Item, or to return to the <strong>Quality</strong> tab without saving, click Cancel.</li>
+	<li>Repeat steps 1 and 2 as needed. Note that newly created ratings will appear in the order they are created, and that a preview of the drop-down menu that will be presented to users of your extraction form will appear below the table. Ratings may be reordered, edited, or deleted by using the  [Move Up Rating Option],  [Edit Ration Option], and  [Delete Rating Option] links, respectively, in the right-most column of the ratings table.</li>
+	<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol>
+<br/>
+<br/>
+
+<%# CREATE EXTRACTION FORM - Finalize%>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Finalize</h4>
+<br/>
+In the <strong>Finalize</strong> tab, you may indicate that the extraction form design is complete.
+<br/><br/>
+<ol class='normal_ordered_list'>
+	<li>Upon entering to this tab, you will see that your Current Status is marked as Incomplete (Private).</li>
+	<li>To finalize, click [Finalize this Extraction Form]. You will see the change to your Current Status as Finalized.</li>
+</ol>
+<br/>
+You may also choose to add your extraction for template to The Extraction Form Bank so it can be used for future projects.
+<ol class='normal_ordered_list'>
+	<li>To add your template to the Bank, you will need to provide a Name for the extraction form and any Description useful for future projects.</li>
+	<li>Next you can choose how public you would like this template to be. Simply select from the options:
+		<ul class='normal_list'>
+			<li>Make available to my team to share with only those assigned as users within your team, OR</li>
+			<li>Make available to the world to share with all other contributors to the SRDR system.</li>
+		</ul>
+	</li>
+</ol>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM %>
+<br/>
+<a name='how5'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h3>Edit an Existing Extraction Form</h3>
+<br/>
+To edit an existing extraction form, first navigate to the My Projects page (use the My Projects link at the top of the page) and then click on the name of the project to which the extraction form belongs in the <strong>Lead Role</strong> tab. Initially, you will be taken to the selected project's Project Information page. From there, navigate to the Extraction Forms page by clicking on the link in left-hand navigation/action menu. Finally, to begin editing an extraction form, click the corresponding  [Edit Extraction Form] link in the extraction form table.
+<br/><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Title and KQs</h4>
+<br/>
+On the Title and KQs tab, you may specify the title of your extraction form, as well as the key question(s) it addresses.
+<ol class='normal_ordered_list'>
+<li>Enter the title of your extraction form in the field provided, and select the key question(s) that this extraction form will address by checking the corresponding boxes.</li>
+<li>Click Save and Continue when finished.</li>
+</ol>
+<br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - publications%>
+<h4>Publications</h4>
+<br/>
+Please note: Although not enabled within the extraction form dialogue, additional publication identifiers can be added during individual study extraction by entering the Pubmed ID and clicking the Retrieve button.
+<br/><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - study design%>
+<h4>Study Design</h4>
+<br/>
+In the <strong>Study Design</strong> tab, you may specify the queries concerning study design that will appear on your extraction form. Two questions are provided by default. These may be edited (see instructions below) or deleted by clicking the  [Edit Question] or  [Delete Question] links, respectively, next to the relevant query. If you are happy with the default options, simply click Next to continue. Otherwise:  <br/><br/>
+<strong>If you do not wish your extraction form to include a design details section:</strong>
+<ol class='normal_ordered_list'>
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like to edit existing design details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click the  [Edit Question] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided, and then change the query's format from the drop-down menu as desired. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When finished click Save Edits, or to return to the <strong>Study Design</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like your extraction form to include additional study design queries, follow the same instructions relating to Study Design in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - study arms%>
+<h4>Study Arms</h4>
+<br/>
+<strong>If you would like to edit existing study arms queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click [Edit Arm Suggestion] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided. When finished click Save Edits, or to return to the <strong>Study Arms</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li> 
+</ol><br/><br/>
+<strong>If you would like your extraction form to include additional study arms queries, follow the same instructions relating to Study Arms in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - arm details%>
+<h4>Arm Details</h4>
+<br/>
+In the <strong>Arm Details</strong> tab, you may ask specific questions related to the interventions/comparators in a study. You may have those specific questions repeated for each arm of a study. The default option is set to display the questions only once and it may be changed to display the questions for each arm defined in a study by checking the circle next to that option.<br/><br/>
+<strong>If you would like to edit existing arm details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click [Edit Question] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided. You may also change the query's format from the drop-down menu as desired. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When finished click Save Edits, or to return to the <strong>Arm Details</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li> 
+</ol><br/><br/>
+<strong>If you would like your extraction form to include additional arm details queries, follow the same instructions relating to Arm Details in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - baseline data%>
+<h4>Baseline Data</h4>
+<br/>
+In the <strong>Baseline Data</strong> tab, you may specify the queries concerning baseline characteristics that will appear on your extraction form.  
+<br/><br/>
+<strong>If you do not wish your extraction form to include a baseline characteristics section:</strong>
+<ol class='normal_ordered_list'>
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing your extraction form.</li>
+</ol><br/>
+<strong>If you would like to edit existing baseline details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click [Edit Question] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided, and then change the query's format from the drop-down menu as desired. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When finished click Save Edits, or to return to the <strong>Baseline</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like your extraction form to include additional baseline data queries, follow the same instructions relating to Baseline Data in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - outcomes%>
+<h4>Outcomes</h4>
+<br/>
+In the <strong>Outcomes</strong> tab, you may suggest the names of outcomes that will appear on your extraction form.  
+<br/><br/>
+<strong>If you do not wish your extraction form to include an outcomes section:</strong>
+<ol class='normal_ordered_list'>
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing your extraction form.</li>
+</ol><br/>
+<strong>If you would like to edit existing outcome queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click [Edit Outcome Suggestion] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided. Edit the outcome type. When finished click Save Edits, or to return to the <strong>Outcomes</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like your extraction form to include additional outcome queries, follow the same instructions relating to Outcomes in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - outcome details%>
+<h4>Outcome Details</h4>
+<br/>
+In the <strong>Outcome Details</strong> tab, you may also enter information related to your outcomes, just as in the <strong>Arm Details</strong> tab.<br/><br/>
+<strong>If you would like to edit existing outcome details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click [Edit Question] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided. You may also change the query's format from the drop-down menu as desired. The format may be one of five options (each option has a short description next to its name). Selecting any format other than Text will further allow you to specify the options presented in your extraction form. Additionally, all formats other than Text will allow you to add sub-questions by marking the corresponding check box. When finished click Save Edits, or to return to the <strong>Outcome Details</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li> 
+</ol><br/><br/>
+<strong>If you would like your extraction form to include additional outcome details queries, follow the same instructions relating to Outcome Details in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<strong>If you would like to change the order of the questions:</strong>
+<ol class='normal_ordered_list'>
+<li>Open the dropdown menu next to the question you wish to move.</li>
+<li>Select the new rank of the question.</li>
+</ol>
+<br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - adverse events%>
+<h4>Adverse Events</h4><br/>
+In the <strong>Adverse Events</strong> tab, you may specify what information concerning adverse events will be queried on your extraction form by adding columns to an adverse events table. A number of columns are provided by default. These can be deleted by clicking the
+next to the corresponding column header.  
+<br/><br/>
+<strong>If you do not wish your extraction form to include an adverse events section:</strong>
+<ol class='normal_ordered_list'>
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing your extraction form.</li>
+</ol><br/>
+<strong>If you would like to change how adverse events data are entered:</strong>
+<ol class='normal_ordered_list'>
+<li>Click the desired radio button option and then click Update Settings.</li>
+</ol><br/>
+<strong>If you would like to change or remove adverse events:</strong>
+<ol class='normal_ordered_list'>
+<li>Click the <img src='/images/silk_cross.png' style='display:inline;' alt="The Delete Icon (X)" title="The Delete Icon (X)"/> next to the adverse event you would like to remove.</li>
+<li>To change an adverse event, first delete it following the above line of instruction and add a new adverse event by following the instructions given in the <em>Create an Extraction Form</em> section.</li>
+</ol><br/>
+<strong>If you would like your extraction form to include additional adverse events queries, follow the same instructions relating to Adverse Events in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - quality%>
+<h4>Quality</h4>
+<br/>
+In the <strong>Quality tab</strong>, you may specify what information concerning study quality will be queried on your extraction form by adding columns to a Quality Dimensions data table. You will also be able to define the rating scale used within your extraction form.   <br/><br/>
+<strong>If you do not wish your extraction form to include a quality section:</strong>
+<ol class='normal_ordered_list'>	
+<li>Select No from the drop-down menu within the shaded box at the top of the tab.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like to edit existing quality details queries:</strong>
+<ol class='normal_ordered_list'>
+<li>Click [Edit Quality Dimension] next to the relevant query.</li>
+<li>In the resulting pop-up, edit the question's text and optional instructions to the extraction form's user in the fields provided. When finished click Save Edits, or to return to the <strong>Quality</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue editing the next section of your extraction form.</li> 
+</ol><br/>
+<strong>If you would like to add values to a Quality Ratings scale:</strong>
+<ol class='normal_ordered_list'>
+<li>Click Add a New Quality Rating Field.</li>
+<li>In the resulting pop-up, enter the rating value in the field provided. When finished click Add New Item, or to return to the <strong>Quality</strong> tab without saving, click Cancel.</li>
+<li>Repeat steps 1 and 2 as needed. Note that newly created ratings will appear in the order they are created, and that a preview of the drop-down menu that will be presented to users of your extraction form will appear below the table. Ratings may be reordered, edited, or deleted by using the  [Move Up Rating Option],  [Edit Ration Option], and  [Delete Rating Option] links, respectively, in the right-most column of the ratings table.</li> 
+<li>Click Next to continue editing the next section of your extraction form.</li>
+</ol><br/>
+<strong>If you would like your extraction form to include additional quality queries, follow the same instructions relating to Quality in the <em>Create an Extraction Form</em> section.</strong>
+<br/> <br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- EDIT AN EXISTING EXTRACTION FORM - finalize%>
+<h4>Finalize</h4>
+<br>
+<ol class='normal__ordered_list'>
+<li>You may choose to edit within the <strong>Finalize</strong> tab by changing your choice of availability (i.e. Make available to my team vs. Make available to the world).</li>
+<li>After you make the necessary edits, click Send to the Bank.</li>
+</ol>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+<a name='how6'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# HOW TO ADD A STUDY %>
+<h3>Add a Study</h3>
+<br/>
+To add a study for extraction, navigate to the <strong>Lead Role</strong> tab in the My Projects page (use the My Projects link at the top of the page) and click the  [Add a Study] link (under the Actions column) of the project you would like modify. Alternatively, if you are already within the desired project, you may click the Study List link in the left-hand navigation/action menu and then click Add a New Study on the Add Studies to This Project page. (Note: You must have at least one extraction form associated with a project before adding a study.) 
+<br/> <br/>
+Upon arriving on the New Study page:
+<br><br/><strong>If you'd like to add studies individually:</strong>
+<ol class='normal_ordered_list'><li>Select the One study… radio button, and then indicate the key questions that are addressed by this study by marking the relevant check boxes. Click Save and Continue when finished.</li>
+<li>On the Publication Information page, enter the PubMed ID of the study you would like to add, and then click Retrieve. If the study is found, its identifying information will be automatically entered in the fields below.  You may also enter a study's information manually. </li>
+<li>Whether a study is automatically retrieved or entered manually, you may optionally add an additional identifier using the correspondingly labeled field at the bottom of the page.  Make sure to indicate the identifier type from the drop-down menu as well. If you'd like to add more than one additional modifier, click Add an Identifier and fill in the relevant information. Repeat as necessary.</li></ol>
+<br><br/><strong>If you'd like to associate one or more secondary publications with your study:</strong>
+<ol class='normal_ordered_list'><li>Click Add a New Secondary Publication at the bottom of the screen. The resulting pop-up will be identical to the primary publication information page with the addition of one drop-down menu, which allows for designation of the rationale for the secondary publication's inclusion. Click Save once all information has been entered (or Cancel if you would like to quit out of the secondary publication dialogue). Repeat as necessary.</li></ol>            
+<br><br/><strong>If you'd like to add multiple studies at once:</strong>
+<ol class='normal_ordered_list'><li>Select the Many studies… option, and then indicate the key questions that are addressed by the studies you will be adding by marking the relevant check boxes.
+<li>Enter the PubMed IDs of the studies you would like to add (note: individual IDs should be separated by at least one space or line) and click Add Studies. You will then be taken to the Add Studies to This Project page, where the newly added studies should now appear among the list of all studies added to the current project. </li></ol>
+
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+<%# HOW TO EXTRACT A STUDY %>
+<a name='how7'></a>
+<h3>Extract a Study</h3>
+<br/>
+To begin, complete, or edit the extraction of a study, you must first navigate to the Add Studies to this Project page of the relevant project. If you are the designated lead on the project, first open the <strong>Lead Role</strong> tab on the My Projects page (to reach the My Projects page, click the My Projects link at the top of the page), select the desired project, and then click the  [Add a Study] link in the right-hand navigation menu. If you are a Collaborator on the project, open the <strong>Collaborator</strong> tab on the My Projects page, and then select the relevant project. 
+<br/><br/>
+Upon arriving at the Add Studies to this Project page, click the  [Edit Study] link of the study you'd like to extract. Note: While you may proceed through each stage of extraction in order, you may alternatively use the left-hand navigation/action menu to view and/or edit particular portions of the study extraction dialogue. 
+
+<ol class='normal_ordered_list'><li>On the <Begin Data extraction> page, click Begin Editing to first define basic information regarding the study. To view a summary of the selected study at any time during the study extraction process, click View Study Preview at the top of the page.</li>
+<li>On the Key Questions page, indicate the key questions that are addressed by the selected study by marking all relevant check boxes, and then click Save Questions. Click Next when finished. (Note: The corresponding extraction form(s) [i.e., the extraction form or forms which have been previously designated as addressing the selected key questions] will be automatically chosen for you depending on your choices here.)</li>
+<li>On the Publication Information page, you may edit information concerning the primary publication from which the data for this particular study will be extracted. Data fields for title, authors, affiliation, and journal information (including name, year, volume, and issue) are provided by default. You may add additional identifying information by clicking Add an Identifier and filling out the resulting fields (and repeating as necessary). If the study was initially added manually and contains missing or incorrect information, you may opt to automatically retrieve identifying publication information by entering the PubMed ID into the appropriate field and clicking Retrieve. Once finished, click Save.
+</li></ol><br/><strong>If you'd like to associate a secondary publication(s) with your study:</strong>
+<ol class='normal_ordered_list'><li>Click Add a New Secondary Publication at the bottom of the screen. The resulting pop-up will be identical to the primary publication information page with the addition of one drop-down menu, which allows for designation of the rationale for the secondary publication's inclusion. Click Save once all information has been entered (or Cancel if you would like to quit out of the secondary publication dialogue). Repeat as necessary.
+<li>Click Next to begin extracting study data using the associated extraction form(s).</li>
+</ol><br/>  
+
+You will now proceed through the extraction form(s) associated with your study. The particular sections appearing, as well as your ability to add to or modify default data fields, will vary depending on how the extraction form was defined by the project lead. Due to this variability, explicit step-by-step instructions are not provided for all sections. However, direction is provided for several sections because of their relative complexity. These include instructions for the <strong>Study Design, Study Arms, Arm Details, Baseline, Outcomes, Outcome Details, Results, Adverse Events</strong> and <strong>Study Quality</strong> sections. They appear below.
+<br/><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Study Design</h4>
+<br/>
+To enter the design details for a study:
+<ol class='normal_ordered_list'><li>Click on the <strong>Study Design</strong> tab.</li>
+<li>Answer the prespecified questions regarding the study design:
+	<ol class='normal_lettered_list'>
+		<li>For text answers, click within the text box provided and type your answer.</li>
+		<li>For multiple choice questions, click within the circle or checkbox next to the appropriate answer.</li>
+	</ol>
+</li>
+<li>Click Save Data.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Study Arms</h4>
+<br/>
+To define an arm for extraction:
+
+<ol class='normal_ordered_list'><li>Click Add Arm.</li>
+<li>In the resulting pop-up, choose the arm title from the drop-down menu, and enter the description in the field provided. Suggested titles appearing in the drop-down menu are drawn from either the extraction form template (created by the project lead) or other previously extracted studies within the project. You may optionally enter your own arm title by selecting the Other option and filling in the corresponding text box. Click Save when finished. To return to the <strong>Arms</strong> tab without saving, click Cancel. (Note: Previously added arms can be edited or deleted using the corresponding controls in the right-most column of the arms table, outside the pop-up.)</li>
+<li>Repeat steps 1 and 2 as needed.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h4>Arm Details</h4>
+<br/>
+To enter the arm details for a study:
+
+<ol class='normal_ordered_list'><li>Click on the <strong>Arm Details</strong>.</li>
+<li>Answer the prespecified questions regarding the arm details:
+	<ol class='normal_lettered_list'>
+		<li>For text answers, click within the text box provided and type your answer.</li>
+		<li>For multiple choice questions, click within the circle or checkbox next to the appropriate answer.</li>
+	</ol>
+</li>
+<li>Click Save Data.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+
+<h4>Baseline</h4><br/>
+	To enter the baseline characteristics for a study:
+<br/>
+<ol class='normal_ordered_list'><li>Click on the <strong>Baseline</strong> tab.</li>
+<li>Answer the prespecified questions regarding the study population:
+	<ol class='normal_lettered_list'>
+		<li>For text answers, click within the text box provided and type your answer.</li>
+		<li>For multiple choice questions, click within the circle or checkbox next to the appropriate answer.</li>
+	</ol>
+</li>
+<li>Click Save Data.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Outcomes</h4><br/>
+
+	To add an outcome for extraction into your results table:
+
+<ol class='normal_ordered_list'><li>Click Add a New Outcome.</li>
+<li>In the resulting pop-up, choose the outcome's title from the drop-down menu, and enter the description in the field provided. Suggested titles appearing in the drop-down menu are drawn from either the extraction form template (created by the project lead) or other previously extracted studies within the project. You may optionally enter your own outcome title by selecting the Other option and filling in the corresponding text field.</li>
+<li>Specify whether the outcome is categorical, continuous or survival by selecting the corresponding option, and then enter the unit of the outcome measure in the corresponding text field.</li> 
+<li>Add timepoints by clicking the Add a New Timepoint link. Enter the value and unit of the new timepoint using the resulting text field and drop-down menu. Repeat as necessary.</li>
+<li>By default, the patient population designated for a particular outcome includes all participants. To add additional subgroups, click the Add a Subgroup link and fill in the name and description of the new subgroup in the fields provided.</li>
+<li>You may optionally add notes to your newly defined outcome using the text box at the bottom of the pop-up.</li>
+<li>When finished click Save, or to close the pop-up without saving, click Cancel. (Note: Previously added outcomes can be edited or deleted using the corresponding controls in the right-most column of the outcomes table, outside the pop-up.)</li>
+<li>Repeat steps 1 and 7 as needed.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h4>Outcome Details</h4>
+<br/>
+To enter the outcome details for a study:
+
+<ol class='normal_ordered_list'><li>Click on the <strong>Outcome Details</strong>.</li>
+<li>Answer the prespecified questions regarding the outcome details:
+	<ol class='normal_lettered_list'>
+		<li>For text answers, click within the text box provided and type your answer.</li>
+		<li>For multiple choice questions, click within the circle or checkbox next to the appropriate answer.</li>
+	</ol>
+</li>
+<li>Click Save Data.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+
+<h4>Results</h4><br/>
+	
+	To extract an outcome into your results table:
+
+<ol class='normal_ordered_list'><li>Select the outcome you wish to enter data for from the drop-down menu. (Note: Outcomes are arranged according to type [i.e., continuous, categorical, survival].)</li>
+<li>Select the subgroup you wish to enter data for.  (Note: If only one subgroup exists, it will be selected automatically.)</li>
+<li>Enter extracted data into the resulting table and click Save Table Data when finished. Each field in the outcome table may be appended with a footnote and marked as either having been drawn directly from the corresponding publication or calculated by the extractor. To do so, double-click in the desired field and fill out the resulting pop-up. (Make sure to click Save when finished). Calculated data fields will be highlighted with yellow in the results table, and those with a footnote will be marked with a numeral. (Note: At any point, you may click the View/Modify Existing Data Entries link to view all results which have been entered thus far, and edit or remove them by clicking the corresponding links in the preview.)</li>
+<li>Three measures are provided by default in the results table (N enrolled, counts, and standard deviation); however, you may add additional ones by clicking the Edit Measures link and marking the corresponding check boxes in the resulting pop-up. (You may also add a user-defined measure by clicking the corresponding link in the pop-up and filling out the resulting fields.)  In the pop-up, you may also designate whether these measures should appear for all timepoints or for only the currently selected one by selecting the appropriate radio button. When finished editing outcome measures, click Save, or to return to the results dialogue without saving, click Cancel.</li>
+<li>To add between-arm comparisons to your results table, click the Create Between-Arm Comparison button on the right-hand side of your table. In the newly expanded portion of the table, select the arms to compare from the drop-down menus, and then fill in the data fields. You may add additional columns (comparisons) to the table by clicking the Add Column link at the bottom of the table. Added columns can be similarly removed by clicking the Remove Column link below the corresponding column. The entirety of the comparisons table can also be removed by clicking the Remove Comparisons link (or simply hidden from view by clicking the Hide link at the right-hand side of the table.</li> 
+<li>Three measures are provided by default in the between-arms comparisons table (statistical test, odds ratio, and standard deviation); however, you may add additional ones by clicking the Edit Measures link and marking the corresponding check boxes in the resulting pop-up. (You may also add a user-defined measure by clicking the corresponding link in the pop-up and filling out the resulting fields.)  In the pop-up, you may also designate whether these measures should appear for all rows in the comparisons table or for only the currently selected one by selecting the appropriate radio button. When finished between-arm comparison measures, click Save, or to return to the results dialogue without saving, click Cancel.</li>
+<li>Repeat steps 1 through 6 for each outcome and population.
+<li>Click Next to continue on to the next section of the extraction dialogue.        
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Adverse Events</h4><br/>
+
+	To add an adverse event for extraction:
+
+<ol class='normal_ordered_list'><li>Click Add New Row and fill in the resulting data fields.  You can delete a row at any time by clicking the corresponding Delete Adverse Event link in the right-most column of the table. When finished extracting adverse events, click Save Table Data, OR</li>
+<li>If an adverse event has already been prespecified, just fill out the requested information.</li>
+<li>Click Next to continue on to the next section of the extraction dialogue.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+<h4>Study Quality</h4><br/>
+	
+	To enter the design details for a study:
+
+<ol class='normal_ordered_list'><li>Click on the <strong>Study Quality</strong> tab.</li>
+<li>Answer the prespecified questions for the quality dimensions:
+	<ol class='normal_lettered_list'>
+		<li>Select an answer from the dropdown menu.</li>
+		<li>Include comments in the textbox provided in the Notes column</li>
+	</ol>
+</li>
+<li>Click Save Table Data.</li>
+<li>To adjust the quality rating, enter the Quality Guideline Used in the textbox provided.</li>
+<li>Select a quality grade from the dropdown menu.
+	<ol class='normal_lettered_list'>
+		<li>Although not required, a text box is provided to enter any relevant notes addressing the quality of a particular study.</il>
+	</ol>
+</li>
+<li>Click Save Quality Rating.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<h4>Internal Commenting</h4><br/>
+SRDR allows members of a team to comment on any page as the data is being entered or reviewed
+<ul class='normal_list'>
+<li>To add a comment, click Post/View next to the Comment icon.</li>
+<li>In the pop-up window, you have the options of Post a Comment, Flag This Data Item, or sorting the comments to view.</li>
+<li>Post a Comment.
+	<ul class='normal_list'>
+		<li>After choosing to comment, you may enter your Comment into the assigned text box and select whether this statement is one of Fact, Opinion, or Both.</li>
+		<li>One you have entered your comments, click Post Comment.</li>
+		<li>Your comment should now appear under Private Comments which may be sorted.</li>
+	</ul>
+</li>
+<li>Flag This Data Item.
+	<ul class='normal_list'>
+		<li>Click Post/View next to the Comment icon in order to flag an item. You will then choose whether your flag is for Unclear data, a Typo or Other under the Flag Type.</li>
+		<li>Next select whether the flag is of Low or High priority.</li>
+		<li>Enter any comments to the comment box and again choose whether they are of Fact, Opinion or Both.</li>
+		<li>Finally Submit Flag.</li>
+		<li>Again your flag should appear under Private Comments.</li>
+	</ul>
+</li>
+<li>Sort.
+	<ul class='normal_list'>
+		<li>You can sort flags and comments by selecting one of the links above the Public Comment header.</li>
+		<li>The options for sorting are:
+			<ul class='normal_list'>
+				<li>Newest flags first</li>
+				<li>Flag priority</li>
+				<li>Flag type</li>
+				<li>Most recent (Default)</li>
+				<li>Oldest</li>
+				<li>Fact/Opinion</li>
+			</ul>
+		</li>
+	</ul>
+</li>
+<li>Once comments and flags are posted, you can choose to Email User to direct their attention to your comment. </li>
+<li>After the user addresses the comment, he/she also has the option to Post Reply to the comment.</li>
+</ul>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+
+<%# --- Assigning Studies -- %>
+<a name='how8'></a>
+<h3>Assign Studies in SRDR to Project Team Members</h3>
+<br/>
+It is possible to assign study records to individual members of your project team, but you must have project lead status in the project to do so. 
+<br/>
+<br/>
+<h4>Step 1: Preparing a Study Citation and User Assignment Import Form</h4>
+<br/>
+Sample Files and instructions for preparing a Study Citation and User Assignment Import Form are available to download from the Add a New Study Page of SRDR, accessible by navigating to the <strong>Lead Role</strong> tab in the MySRDR page (use the MySRDR link at the top of the page) and clicking the <strong>Add a Study</strong> link below the project you would like to modify; Or alternatively, if you are already within the desired project, click on <strong>Add a New Study</strong> under <strong>Project Study Data</strong> in the left-hand navigation/action menu. On the following page, select <strong>Upload a file of study citations and user assignments</strong>.
+<br/><br/>
+While preparing your assignment import form, it is important to keep in mind that the column headers on your import form must exactly match the column headers seen in the Study Citations and User Assignment Sample Files.
+<br/>
+Furthermore:
+<ul class='normal_list'>
+	<li>Project team members listed in the <strong>SRDR_Username</strong> column must be identified by their SRDR user names. Email addresses are not accepted by the SRDR system. </li>
+	<li>You can choose to add PubMed IDs or full PubMed study citation information to your import form. If you choose to include the PubMed IDs of studies on you import form, then SRDR will auto-populate publication information for each study based on the supplied PubMed ID. </li>
+	<li>The addition of KQs to your import form is optional. </li>
+</ul>
+<br/><br/>
+<h4> Step 2: Uploading the Study Citation and User Assignment Import Form to your Project</h4>
+<br/>
+Having saved your import form as a tab delimited (.txt) file, you may now upload it to the SRDR system.
+<br/>
+<ol class='normal_ordered_list'> <li>From the SRDR home page, log into your profile using your SRDR username and password. </li>
+<li>Once you are logged in, check that you are in the MySRDR tab.</li>
+<li>Click on the <strong>Add a Study</strong> link under the project to which you would like to add the studies. You will be directed to the Add a Study page where you are given 3 options to add a study to your project.</li>
+<li>Select the third option: <strong>Upload a file of study citations and user assignments</strong>.</li>
+<li>Click the <strong>Browse button</strong>.</li>
+<li>Select your saved import form.</li>
+<li>The file name will appear in the field next to the Browse button.</li>
+	<ol class='normal_lettered_list'>
+		<li>As mentioned in Step 1, below the Browse button are links to example import forms you can download and use as templates for your own import forms.</li>  
+	</ol>
+</li>
+<li>Click <strong>Upload</strong>.</li>
+<li>On the following page, you will be presented with a confirmation banner notifying you that SRDR has begun to add the study citations and user assignments you listed on the import form into your project. SRDR will continue this task in the background.</li>
+<li>Once the task is completed, the studies you have added to your project will appear in your project’s study list and you will receive a notification email.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# --- Reassigning Studies -- %>
+<div class='hr'></div>
+<br/>
+<a name='how9'></a>
+<h3> Reassign Studies in SRDR to Different Project Team Members</h3>
+<br/>
+It is also possible to reassign studies that have already been added to a project in SRDR to different members of your project team. To do so:
+<br/>
+<ol class='normal_ordered_list'> <li>First, navigate to your Project’s Study List by clicking <strong>Complete List</strong>, located under <strong>Project Study Data</strong> on the left-hand navigation menu.</li>
+<li>Select a study to be reassigned. </li>
+<li>Click the <strong>Re-Assign</strong>  link located directly below the study.</li>
+<li>After clicking the re-assign icon, the <strong>Study Assignment Options</strong> window will appear with a table of the studies currently assigned to the SRDR user listed under <strong>Current Assignment</strong>.</li>
+<li>Select the studies from the table that you would like to re-assign to another specific project team member (select studies by checking the box adjacent to them)
+	<ol class='normal_lettered_list'>
+		<li>Note: The study under which you clicked the re-assign icon will already be selected by default.</li>
+	</ol>
+</li>
+<li>Using the <strong>New Assignment</strong> dropdown bar, Select the SRDR username of the project team member the study or studies will be assigned to.</li>
+<li>Click the <strong>Re-Assign Studies</strong> button.</li>
+<li>You will be directed back to your project’s study list where you will see a confirmation banner notifying you of the success of your study reassignments.</li>
+</ol><br/>
+<div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
+
+<%# Project Tools %>
+<a name='how10'></a>
+<h3>Utilize Project Tools</h3><br/>
+Once data is entered into your project, there are a number of tools that can be used for data presentation, data cleaning, and project updates.
+<br/><br/>
+<h4>View Summary</h4>
+You can view the summary of your project, including all extraction forms and associated studies.
+<ul class='normal list'>
+	<li>Click View Summary under Project Tools.</li>
+	<li>Click on the links for Associated Extraction Forms or Associated Studies to view the data, print the page, or create a PDF.</li>
+</ul>
+<br/>
+<h4>Publish Externally Tool</h4>
+<br/>
+Once you have reviewed your project to your satisfaction, use the SRDR Publish Externally tool to submit a request to the SRDR Administrator to review and publish your project to the SRDR Published Projects page. Once published, the systematic review data in your project will be accessible to registered SRDR contributors, commentators, and the general public.
+<br/>
+To do so:
+<br/>
+<ol class='normal_ordered_list'><li>From the SRDR homepage, log into your project contributor account with your SRDR username and password.</li>
+	<li>Once you are logged in, check that you are in the <strong>MySRDR</strong> tab.</li>
+	<li>Click on the <strong>Edit</strong> link under the project that you would like to publish.</li>
+	<li>You will be directed to the <strong>Project Information</strong> page of the project.</li>
+	<li>Under <strong>Project Tools</strong> (at the bottom of the left-hand navigation menu), click the <strong>Publish Externally</strong> button.</li>
+	<li>You will be directed to the <strong>Publish this Project</strong> page.</li>
+	<li>On the Publish this Project page, under <strong>Project Status</strong>, select: <strong>“Published (May be searched for and viewed by other users. Edits can be made, but will be tracked)”</strong>.</li>
+	<li>Under the <strong>SRDR Usage Agreement</strong> on the same page, check the box next to <strong>“I agree to the SRDR Terms of Use Policy”</strong> to acknowledge the agreement.</li>
+	<li>Click the <strong>Save</strong> button.</li>
+	<li>On the resulting pop-up, click the <strong>Ok</strong> button if you are sure that you want to publish your project. If not, click the <strong>Cancel</strong> button.</li>
+	<li>On the <strong>Publishing Your Project</strong> pop-up, check the box next to <strong>“I verify that I have read and agree with the above statement” to acknowledge the agreement.</li>
+	<li>Click the <strong>Submit Publication Request</strong> button.</li>
+	<li>A confirmation banner will appear at the top of the Publish this Project page. It indicates that your request for publication of your SRDR project has been submitted and that you will receive feedback within 48 hours from the SRDR Administrator concerning your project’s eligibility for publication.</li>
+	<li>Finally, you can see the publication status of your project on the Publish this Project page under <strong>Project Status</strong>.</li>
+</ol> 
+<br/><br/>
+<h4>Copy a Published Project</h4>
+<br/>Only contributors may submit a request to copy a published project. This feature allows contributors who are creating their own systematic reviews to reuse extraction forms, study records, or data from projects already published to the SRDR.<br/>
+<br/>
+<br/>
+	<h5><strong>Part 1:</strong> Requesting a copy of a published project</h5> 
+	<ol class='normal_ordered_list'><li>From the SRDR homepage, log into your project contributor account with your SRDR username and password.</li>
+	<li>Once you are logged in, check that you are in the <strong>MySRDR</strong> tab.</li>
+	<li>Directly to the right of the MySRDR tab, click the <strong>Published Projects</strong> tab.</li>
+	<li>On the <strong>Completed Systematic Reviews</strong> page, scroll through the list of published projects. and click the <strong>Request a Copy</strong> link under the project from which you would like to download data.</li>
+	<li>You will be presented with a <strong>Request for Project Copy</strong> pop-up.</li>
+	<li>On the pop-up, select one of these three choices, based on the amount of data you want: 1) Extraction Forms Only; 2) Extraction Forms & Associated Studies; 3) Extraction Forms & Studies & Study Data.
+		<ol class='normal_lettered_list'>
+		<li>Please Note: The original contributors of the published project will be notified of your request and provided with your SRDR username and the email address associated with your SRDR account.</li>
+		</ol>
+	<li>Click the <strong>Submit</strong> button.</li>
+	<li>You will be presented with confirmation that your request has been submitted. Please allow up to 48 hours for the request to be processed.</li>
+	</ol>
+	<br/>
+	<h5><strong>Part 2:</strong> Checking on the status of a published project copy request</h5>
+	<ol class='normal_ordered_list'><li>From the SRDR homepage, log into your project contributor account using your SRDR username and password.</li>
+	<li>Once you are logged in, check that you are in the <strong>MySRDR</strong> tab.</li>
+	<li>On the navigation menu at the right of the MySRDR page, under <strong>mySRDR Account</strong>, click the <strong>Projects I’ve Copied</strong> button.</li>
+	<li>You will be directed to the <strong>Projects I have Copied</strong> page, where you will see the date of the copy request, the request type, and the date of completion of the request for each project for which you requested a copy.</li>
+		<ol class='normal_lettered_list'>
+			<li>Note: Until a request has been completed, the completion date for the request will say PENDING and under <strong>My Copy</strong>, you will see “--“. After the request has been completed, the completion date will be visible, and a link to the copy of the project will appear under <strong>My Copy</strong>.</li>
+		</ol>
+	</ol>
+	<br/>
+	<h5><strong>Part 3:</strong> Editing the copy of the published project you requested</h5>
+	<ol class='normal_ordered_list'><li>From the SRDR homepage, log into your project contributor account using your SRDR username and password.</li>
+	<li>Once you are logged in, check that you are in the <strong>MySRDR</strong> tab.</li>
+	<li>Click on the <strong>Edit</strong> link under the copy of the published project that you requested. The project will have the title: “(Original Published Project Title) – Copy Requested”.</li>
+	<li>You will be directed to the <strong>Project Information</strong> page of the project where you will see that the first data field, called <strong>Attribution</strong>, has already been populated with information about the published project from which your request for a copy was made.</li>
+	<li>To edit this field, simply type in the text box.</li>
+	<li>Once you have edited the text in the Attribution field, click the Save button at the bottom of the page.</li>
+		<ol class='normal_lettered_list'>
+			<li>Please note: You may edit the Attribution field and save your changes on the project information page at any time while you are working on your project.</li>
+		</ol>
+	<li>Below the Attribution field on the project information page, you will see the <strong>View Parent</strong> link, which gives you access to the Preview of the published project on the SRDR published projects page. You will also see the <strong>Remove Association</strong> link, which will permanently remove the View Parent link from the project information page of your project.</li>
+	<li>You may edit this project in any way you desire. When you are ready to publish your project, follow the instructions in the SRDR Manual for using the <strong>Publish Externally</strong> tool.</li>
+	</ol><br/> 	
+<h4>Data Comparison Tool</h4><br/>
+SRDR includes a feature whereby you can compare the double data extraction by the team. 
+<ul class='normal_list'>
+<li>After selecting the Data Comparison Tool on the left-hand side, choose the 2 studies to be compared by selecting the checkboxes in the far right column. Once the studies have been selected, click Compare Studies.</li>
+<li>In the window that appears you will see a new table with Data fields, extraction Created by user 1, extraction Created by user 2, and finally a Consensus Value.</li>
+<li>Within each accordion tab (Publication Information, Design Details, Baseline Characteristics, Adverse Events and Quality Dimensions), scan the results for inconsistencies. [Note that currently you cannot compare Results between studies with this comparison tool].</li>
+<li>When data is inconsistent, choose which user's extraction to use by clicking the radio button within that user's column or opt to add your own consensus value by entering it to the textbox in the Consensus Value column.</li>
+<li>Once this is complete, Merge/Create Consensus Study as your final version.</li>
+</ul><br/>
+<h4>SRDR Simple Data Export Tool</h4>
+<br/>
+It is possible to export your project’s entire dataset into Microsoft Excel files using the SRDR Simple Data Export tool. To do so:
+<br/>
+<ol class='normal_ordered_list'> <li>From the SRDR home page, log into your profile using your SRDR user name and password.</li>
+  <li>Once you are logged in, check that you are in the MySRDR tab.</li>
+  <li>Click on the <strong>Edit</strong> link under the project that you would like to export study data from.</li>
+  <li>You will be directed to the project editor page of the project you selected.</li>
+  <li>Under <strong>Project Tools</strong> (at the bottom of the left-hand navigation menu), click the <strong>Data Export Tool</strong> button.</li>
+  <li>You will be directed to the Export Data Tools page where you will see three boxes, each containing a link.</li>
+  <li>In the box labeled “Simple Data Export (one-click)”, click the <strong>Export Data Tool</strong> link.</li>
+  <li>Click the <strong>Excel</strong> icon directly to the right of the title of the file that you would like to download.</li>
+  <li>You will be presented with a file-selection pop-up window.
+  <li>Select the location on your computer where you would like to save the export file.</li>
+  <li>Click Save.</li>
+  <li>Repeat steps 9 through 12 to download additional export files.</li> 
+ </ol><br/>
+
+<h4>SRDR Report Builder Tool</h4>
+<br/>
+It is possible to export data from one or more fields in your project into customizable evidence tables, which may then be downloaded as Microsoft Excel (XLSX) or comma delimited text (CSV) files, using the SRDR Report Builder tool. To do so:
+<br/>
+<br/>
+ <h5><strong>Part 1:</strong> Access the SRDR Report Builder Tool</h5> 
+ <ol class='normal_ordered_list'> <li>From the SRDR home page, log into your profile using your SRDR user name and password.</li>
+ 	<li>Once you are logged in, check that you are in the MySRDR tab.</li>
+ 	<li>Click on the <strong>Edit</strong> link under the project that you would like to export study data from.</li>
+ 	<li>You will be directed to the project editor page of the project you selected.</li>
+ 	<li>Under <strong>Project Tools</strong> (at the bottom of the left-hand navigation menu), click the <strong>Data Export Tool</strong> button.</li>
+ 	<li>You will be directed to the Export Data Tools page where you will see three boxes, each containing a link.</li>
+ 	<li>Within the box labeled, “Advanced Data Export”, click the <strong>Report Builder</strong> link under Advanced Data Export.</li>
+ 	<li>You will be directed to a loading page.</li>
+ 	<li>After the page has loaded, you will be directed to the SRDR Summary Report Builder page.</li>
+ </ol><br/>
+ <h5><strong>Part 2:</strong> Create and Customize the Evidence Table</h5>
+ <ol class='normal_ordered_list' start=10> <li>At the top of the SRDR Summary Report Builder page, navigate to: <strong>Select one or more Extraction Form to export</strong>, located below the <strong>Go To Matrix Filter</strong> button.</li>
+ 	<li>Directly to the right of <strong>Select one or more Extraction Form to export</strong>, uncheck the boxes to the left of the KQs assigned to the extraction forms that you DO NOT want included in the evidence table.</li>
+ 	<li>Below the <strong>Project Questions</strong> header, you will see a list (organized by extraction form section) of the data fields included in the extraction form(s) you just selected.</li>
+ 	<li>Scroll through the list and check the boxes to the left of those data fields that you would like to include as columns in the evidence table.</li>
+	<li>To format the data in your evidence table by arms and/or outcomes, check the boxes to the left of those arms and/or outcomes that you would like to include in the evidence table.</li>
+	<li>Additional Options for Customization:</li>
+	 <ol type='a'> <li>To filter the data that will appear in the evidence table by a specific data field value:</li>
+	 	<ol type='i'> <li>Click the (+) icon to the left of the data field.</li>
+	 	 <li>You will be presented with a <strong>Filter by Question Value</strong> pop-up window.</li>
+	 	 <li>Check the box to the left of the data field value you would like to use to filter the data in your evidence table.</li>
+	 	 <li>Click the <strong>Close</strong> button.</li>
+	 	</ol>
+	 </ol>
+	<li>When you are ready to preview the evidence table, click <strong>Preview</strong>.</li>
+ </ol><br/>
+ <h5><strong>Part 3:</strong> Preview and Edit the Evidence Table</h5>
+ <ol class='normal_ordered_list' start=17> <li>After clicking Preview, scroll to the top of the data field list located under the <strong>Project Questions</strong> header.
+ 	<li>You will be presented with the evidence table as it will appear in Microsoft Excel.</li>
+ 	<li>Editing options:</li> 
+ 	 <ol type='a'> <li>To remove a column from the evidence table, uncheck the box at the top of the column you would like to remove.</li>
+ 	  <li>To remove an individual study record from the evidence table, uncheck the box directly to the left of the row containing the study record you would like to remove.</li>
+ 	 </ol>
+	<li>When you are ready to save the evidence table, click the <strong>Export</strong> button located directly above the table preview.</li>
+ </ol><br/>
+ <h5><strong>Part 4:</strong> Export the Evidence Table as a Microsoft Excel and/or CSV file</h5>
+ <ol class='normal_ordered_list' start=21> <li>After clicking Export, you will be presented with an <strong>Export Report</strong> pop-up window.</li>
+ 	<li>In the <strong>Report Name</strong> field, enter the title for your evidence table. DO NOT use spaces.</li>
+ 	<li>In the <strong>Description</strong> field, enter a description for your evidence table.</li>
+ 	<li>To specify whether the evidence table will be visible to only those members of your project team with project lead status, select <strong>Private</strong>. Otherwise, select the <strong>Public</strong> option. Selecting this option will make the evidence table visible to all members of your project team.</li>
+ 	<li>To save the evidence table as a CSV (comma delimited text) file, in addition to the default (XLSX) Microsoft Excel 2010 format, select the checkbox to the left of <strong>CSV (comma delimited text)</strong>.</li>
+ 	<li>Click <strong>Export</strong>.</li>
+ 	<li>You will then be directed to the SRDR <strong>Report Builder Reports Manager</strong> page.
+ 	<li>To download an evidence table, click the <strong>Excel</strong> or <strong>CSV</strong> icon directly to the right of the name of the table you would like to download.</li>
+ 	<li>You will be presented with a file-selection pop-up window.</li>
+ 	<li>Select the location on your computer where you would like to save the export file.</li>
+ 	<li>Click <strong>Save</strong>.</li>
+ 	<li>To return to the Export Data Tools page, click the <strong>Return to Export Tools</strong> button located below the <strong>MySRDR</strong> tab.</li>
+ 	<li>To return to the project editor page of the project from the Export Data Tools page, navigate to the top of the left-hand navigation menu.</li>
+ 	<li>Click the <strong>Project Information</strong> button.</li>
+ </ol><br/> 	
+
+<h4>SRDR Report Manager Tool</h4>
+<br/>
+It is possible to download, copy, delete, edit, and share evidence tables saved to a project in SRDR using the SRDR Reports Manager tool. It is also possible to upload documents to a project in SRDR using the SRDR Reports Manager tool.
+<br/>
+<br/>
+<h5><strong>Part 1:</strong> Managing Evidence Tables Generated by Yourself or Members of Your Project Team</h5>
+ <ol class='normal_ordered_list'> <li>From the SRDR home page, log into your profile using your SRDR user name and password.</li>
+ 	<li>Once you are logged in, check that you are in the MySRDR tab.</li>
+ 	<li>Click on the Edit link under the project that you would like to export study data from.</li>
+ 	<li>You will be directed to the project editor page of the project you selected.</li>
+ 	<li>Under <strong>Project Tools</strong> (at the bottom of the left-hand navigation menu), click the <strong>Data Export Tool</strong> button.</li>
+ 	<li>You will be directed to the Export Data Tools page where you will see three boxes, each containing a link.</li>
+ 	<li>Within the box labeled, “Project Reports”, click the <strong>Manage Reports</strong> link.
+ 	<li>You will be directed to a loading page.</li>
+ 	<li>After the page has loaded, you will be directed to the SRDR Report Builder Reports Manager page where you will see a listing of the evidence tables that have been saved by you or your project team members.</li>
+ 	<li>To toggle the privacy status of an evidence table in the list, click the <strong>Make Public</strong> or <strong>Make Private</strong> button located directly to the left of the summary report’s name.</li>
+ 	<li>To copy an evidence table, click the <strong>Copy</strong> icon located to the right of the summary report.</li>
+ 	<li>To delete an evidence table in the list, click the <strong>Delete</strong> icon located to the right of the summary report.
+ 	<li>To edit an evidence table, click the <strong>Edit</strong> icon located to the right of the summary report.</li>
+ 	<li>If you click the Edit icon, you will be directed to the Report Builder page of the SRDR Report Builder tool.</li>
+ 	<li>After modifying the evidence table using the Report Builder (see instructions above), resave the evidence table.</li>
+ 	<li>To return to the project editor page of your project, follow steps 32 through 34 in part 4 of the instructions for using the SRDR Report Builder Tool.</li>
+ </ol><br/> 
+ <h5><strong>Part 2:</strong> Uploading documents from your desktop to your project in SRDR</h5>
+  <ol class='normal_ordered_list'> 
+<li>Log into SRDR with your SRDR username and password.</li>
+<li>Check that you are in the MySRDR tab.</li>
+<li>Click the <strong>edit</strong> link under the project to which you would like to upload the document files.</li>
+<li>In the Navigation menu, on the left side of your project, click the <strong>Data Export Tool</strong> button located under Project Tools.</li>
+<li>Next, on the Export Data Tools page, click the <strong>Manage Reports</strong> link, located in the box labeled Project Reports to access the Manage Reports tool.</li>
+<li>On the following page, click the <strong>Add Report</strong> button.</li>
+<li>Under Upload Report, in the <strong>Description</strong> field, enter a brief description of the PDF file you want to upload to your project.
+<li>Next to the Description field, click the <strong>Choose File</strong> button to select the PDF file from your computer.</li>
+ 	<ol type='a'> <li>Note the File formats supported for upload by SRDR, at this time:</li>
+	 	<ul class='normal_list'> <li>i.	Microsoft Excel - 97 (XLS) and 2010 (XLSX)</li>
+	 	 <li>Comma delimited text file (CSV)</li>
+	 	 <li>Microsoft Word - 97 (DOC) and 2010 (DOCX)</li> 
+	 	 <li>Extensible Markup Language (XML)</li>
+	 	 <li>Yet Another Markup Language (YAML)</li>
+	 	 <li>JavaScript Object Notation (JSON)</li>
+	 	</ul>
+	 </ol>
+<li>Select the file.</li>
+<li>Below the Description field, click the <strong>Upload</strong> button, to upload the documents to your project.</li>
+<li>Repeat steps 1 through 10, to add additional document files to your project.</li>
+<li>To ensure that a document file added to your project will be viewable to the public and available to download after the project is published to SRDR, on the Project Reports page, next to the title of the file, click the button “Make Public”, then click the button, “Publish”. Do this for each of the document files you added to the project, otherwise the status of the files will remain “Private” and will not be accessible to the public on SRDR after the project is published. Please note, any file that you have selected to publish using the Manage Reports tool, may be returned to private status on the Project Reports page, by clicking the button, "Unpublish" next to the title of the file, and then clicking the button, "Make private".</li>
+<li>To return to the Project Information page of your project from the Project Reports page, at the top of the Project Reports page, below the MySRDR tab, click the <strong>Edit Project</strong> tab.</li>
+  </ol>  	
+<br/><br/>
+<h4>Search</h4><br/>
+Within SRDR, you can search for both projects and studies enter to the repository using keywords.
+<ul class='normal_list'><li>Click within the textbox next to the Search icon in the upper right corner of the SRDR interface.</li>
+<li>Enter keywords most relevant to the project or study of interest.</li>
+<li>Click the Search button.</li>
+<li>Results will appear under 2 headings: SR-Level Results or Study-Level Results.</li>
+<li>To choose the items you are interested in, simply click the title of the result within the list.
+	<ul class='normal_list'>
+		<li>SR-Level Results will reveal a description of the project and all studies included in the review.</li>
+		<li>Study-Level Results provide a description of the study as well as a description of the project to which it is included.</li>
+	</ul>
+</li>
+</ul>
+<br/><br/>
+<h4>Copy Project</h4><br/>
+SRDR allows you to copy a project currently entered to the system,
+<ul class='normal_list'>
+	<li>Click the Copy icon within the Actions column under My Projects.</li>
+	<li>You will be asked to provide a Title for this copy.</li>
+	<li>Once you've named your new project, please click Submit and the copied project should appear with the newly assigned name under My Projects.</li>
+</ul>
+<br/><br/>
+<a href='#top' title='Go back to the top of the page'>Back to Top</a><br/>
+<div class='hr'></div>
+<br/>
+</div>
+<%
+intro_sections = ["What is the SRDR?","User Manual Goals","SRDR Overview"]
+public_sections = ["Data Viewing","Search"]
 commentator_sections = ["Data Viewing","Search","Registration","Commenting"]
 contributor_sections = ["Data Viewing","Search","Registration","Your Workspace and Basic Navigation","Help and SRDR Iconography"]
 how_to = ["Create a Project","Edit an Existing Project","Add/Edit Users and User Roles","Create an Extraction Form","Edit an Existing Extraction Form","Add a Study","Extract a Study","Assign Studies","Reassign Studies","Project Tools"]
