@@ -305,7 +305,7 @@
         <!-- THE EDIT MEASURE BUTTONS -->
         <%# FOR RAW DATA %>
         <td  scope='row' colspan=<%=2 + @arms.length %> align='center' style='position:relative;' class='th' id='edit_raw_measures'>
-          <% unless @project_id.to_i == 427 %>
+          <% unless (@project_id.to_i == 427 || @project_id.to_i == 553) %>
           <a href='#' class='edit_measures_btn' title="<%= "Edit measures for the #{timepoint.number} #{timepoint.time_unit} data row"%>" ocde="<%=myOCDE.id%>" tpid="<%=timepoint.id%>" tabindex="<%= outcome_tabindex %>">Edit Measures </a>
           <% outcome_tabindex += 1 %>
           <% end %>
@@ -313,7 +313,7 @@
         <%# FOR COMPARISONS %>
         <% unless comparison.nil? %>
           <td  scope='row' class='btwn_arm_comparison comparison_btn_row th' id='edit_comparison_measure' comparison_id="<%= comparison.id %>" colspan="<%= @num_comparators+1%>" align='center' style='position:relative;'>
-            <% unless @project_id.to_i == 427 %>
+            <% unless (@project_id.to_i == 427 || @project_id.to_i == 553) %>
             <a href='#' class="edit_comparison_measures_btn" tpid="<%= timepoint.id %>" tabindex="<%= bac_tabindex %>" title="<%= "Edit comparison measures for the #{timepoint.number} #{timepoint.time_unit} comparison row"%>" comparison_id="<%= comparison.id %>">Edit Measures</a>
             <% bac_tabindex += 1%>
             <% end %>
@@ -448,7 +448,7 @@
                 <%# THE EDIT MEASURES BUTTON FOR WACs %>
                 <tr wac_row="<%= wac.group_id %>" class='wa_comparison'>
                   <td scope='row' class='th' colspan="<%= @arms.length + 2 %>" align='center'>
-                    <% unless @project_id.to_i == 427 %>
+                    <% unless (@project_id.to_i == 427 || @project_id.to_i == 553) %>
                     <a href="#" class='edit_wac_measures_btn' wac_id="<%= wac.id %>" title="<%= "Edit Measures for Within-Arm Comparison Row #{i+1}"%>">Edit Measures</a>
                     <% end %>
                   </td>

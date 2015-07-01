@@ -113,7 +113,7 @@ class Comparison < ActiveRecord::Base
 		end
 		# if there are none within that outcome, check the study to see if there are any in other outcomes
 		# that have measures. MAKE SURE TO ONLY USE OUTCOMES THAT ARE OF THE SAME TYPE
-		if no_measures && ef.project_id.to_i != 427
+		if no_measures && ef.project_id.to_i != 427 && ef.project_id.to_i != 553
 			outcome_ids = Outcome.where(:study_id=>self.study_id, :extraction_form_id=>self.extraction_form_id,
 									    :outcome_type=>outcome_type).collect{|x| x.id}
 			# determine if there are other comparisons in this study that defined measures can be 
@@ -134,13 +134,13 @@ class Comparison < ActiveRecord::Base
 					end
 				end
 			end
-		elsif no_measures && ef.project_id.to_i == 427
+		elsif no_measures && (ef.project_id.to_i == 427 || ef.project_id.to_i == 553)
 			oc = Outcome.find(ocid, :select=>[:outcome_type])
 			w_or_b = wORb == 'within' ? 0 : 1
 			oc_type = oc.outcome_type
 			oc_type = oc_type == "Time to Event" ? "survival" : oc_type.downcase
 			puts "Outcome type is #{oc_type}"
-			unless ef.project_id.to_i == 427
+			unless (ef.project_id.to_i == 427 || ef.project_id.to_i == 553)
 				if ExtractionForm.is_diagnostic?(efid)
 					defaults = DefaultComparisonMeasure.where(:is_default=>true, :outcome_type=>"diagnostic_#{self.section}", :within_or_between=>w_or_b)
 				else
