@@ -4,6 +4,7 @@ public_sections = ["Data Viewing","Search"]
 commentator_sections = ["Data Viewing","Data Downloading","Search","Registration","Commenting"]
 contributor_sections = ["Data Viewing","Data Downloading","Search","Registration","Your Workspace and Basic Navigation","Help and SRDR Iconography"]
 how_to = ["Create a Project","Edit an Existing Project","Add/Edit Users and User Roles","Create an Extraction Form","Edit an Existing Extraction Form","Add a Study","Extract a Study","Assign Studies","Reassign Studies","Project Tools"]
+project_tools = ["View Summary","Publish Externally Tool","Copy a Published Project","Data Comparison Tool","SRDR Simple Data Export Tool","SRDR Report Builder Tool","SRDR Report Manager Tool","Search","Copy Project"]
 %>
 <div style='padding-top:10px; float:left;'>
 <h2>The SRDR User Manual</h2>
@@ -68,6 +69,18 @@ how_to = ["Create a Project","Edit an Existing Project","Add/Edit Users and User
 			<ul class='normal_list'>
 				<% how_to.each_with_index do |s,i| %>
 					<li><a href="#<%="how#{i+1}"%>"><%= s %></a></li>
+				<% end %>
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td class='label' >
+			<h3>Project Tools</h3>
+		</td>
+		<td class='input'>
+			<ul class='normal_list'>
+				<% project_tools.each_with_index do |s,i| %>
+					<li><a href="#<%="project_tools#{i+1}"%>"><%= s %></a></li>
 				<% end %>
 			</ul>
 		</td>
@@ -1246,6 +1259,7 @@ It is also possible to reassign studies that have already been added to a projec
 <h3>Utilize Project Tools</h3><br/>
 Once data is entered into your project, there are a number of tools that can be used for data presentation, data cleaning, and project updates.
 <br/><br/>
+<a name='project_tools1'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>View Summary</h4>
 You can view the summary of your project, including all extraction forms and associated studies.
 <ul class='normal list'>
@@ -1253,6 +1267,7 @@ You can view the summary of your project, including all extraction forms and ass
 	<li>Click on the links for Associated Extraction Forms or Associated Studies to view the data, print the page, or create a PDF.</li>
 </ul>
 <br/>
+<a name='project_tools2'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>Publish Externally Tool</h4>
 <br/>
 Once you have reviewed your project to your satisfaction, use the SRDR Publish Externally tool to submit a request to the SRDR Administrator to review and publish your project to the SRDR Published Projects page. Once published, the systematic review data in your project will be accessible to registered SRDR contributors, commentators, and the general public.
@@ -1276,6 +1291,7 @@ To do so:
 	<li>Finally, you can see the publication status of your project on the Publish this Project page under <strong>Project Status</strong>.</li>
 </ol> 
 <br/><br/>
+<a name='project_tools3'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>Copy a Published Project</h4>
 <br/>Only contributors may submit a request to copy a published project. This feature allows contributors who are creating their own systematic reviews to reuse extraction forms, study records, or data from projects already published to the SRDR.<br/>
 <br/>
@@ -1317,6 +1333,7 @@ To do so:
 	<li>Below the Attribution field on the project information page, you will see the <strong>View Parent</strong> link, which gives you access to the Preview of the published project on the SRDR published projects page. You will also see the <strong>Remove Association</strong> link, which will permanently remove the View Parent link from the project information page of your project.</li>
 	<li>You may edit this project in any way you desire. When you are ready to publish your project, follow the instructions in the SRDR Manual for using the <strong>Publish Externally</strong> tool.</li>
 	</ol><br/> 	
+<a name='project_tools4'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>Data Comparison Tool</h4><br/>
 SRDR includes a feature whereby you can compare the double data extraction by the team. 
 <ul class='normal_list'>
@@ -1326,6 +1343,7 @@ SRDR includes a feature whereby you can compare the double data extraction by th
 <li>When data is inconsistent, choose which user's extraction to use by clicking the radio button within that user's column or opt to add your own consensus value by entering it to the textbox in the Consensus Value column.</li>
 <li>Once this is complete, Merge/Create Consensus Study as your final version.</li>
 </ul><br/>
+<a name='project_tools5'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>SRDR Simple Data Export Tool</h4>
 <br/>
 It is possible to export your project’s entire dataset into Microsoft Excel files using the SRDR Simple Data Export tool. To do so:
@@ -1344,6 +1362,7 @@ It is possible to export your project’s entire dataset into Microsoft Excel fi
   <li>Repeat steps 9 through 12 to download additional export files.</li> 
  </ol><br/>
 
+<a name='project_tools6'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>SRDR Report Builder Tool</h4>
 <br/>
 It is possible to export data from one or more fields in your project into customizable evidence tables, which may then be downloaded as Microsoft Excel (XLSX) or comma delimited text (CSV) files, using the SRDR Report Builder tool. To do so:
@@ -1402,6 +1421,7 @@ It is possible to export data from one or more fields in your project into custo
  	<li>Click the <strong>Project Information</strong> button.</li>
  </ol><br/> 	
 
+<a name='project_tools7'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>SRDR Report Manager Tool</h4>
 <br/>
 It is possible to download, copy, delete, edit, and share evidence tables saved to a project in SRDR using the SRDR Reports Manager tool. It is also possible to upload documents to a project in SRDR using the SRDR Reports Manager tool.
@@ -1451,6 +1471,7 @@ It is possible to download, copy, delete, edit, and share evidence tables saved 
 <li>To return to the Project Information page of your project from the Project Reports page, at the top of the Project Reports page, below the MySRDR tab, click the <strong>Edit Project</strong> tab.</li>
   </ol>  	
 <br/><br/>
+<a name='project_tools8'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>Search</h4><br/>
 Within SRDR, you can search for both projects and studies enter to the repository using keywords.
 <ul class='normal_list'><li>Click within the textbox next to the Search icon in the upper right corner of the SRDR interface.</li>
@@ -1465,6 +1486,7 @@ Within SRDR, you can search for both projects and studies enter to the repositor
 </li>
 </ul>
 <br/><br/>
+<a name='project_tools9'></a><div style='float:right;'><a href='#top' title='Go back to the top'>Back to Top</a></div>
 <h4>Copy Project</h4><br/>
 SRDR allows you to copy a project currently entered to the system,
 <ul class='normal_list'>
