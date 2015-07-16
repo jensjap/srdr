@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150527161539) do
+ActiveRecord::Schema.define(:version => 20150716003159) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -1215,10 +1215,10 @@ ActiveRecord::Schema.define(:version => 20150527161539) do
     t.string   "prospero_id"
     t.string   "search_strategy_filepath"
     t.boolean  "public_downloadable",      :default => false
-    t.string   "management_file_url"
     t.datetime "publication_requested_at"
     t.integer  "parent_id"
     t.text     "attribution"
+    t.string   "doi_id"
   end
 
   add_index "projects", ["creator_id"], :name => "project_creator_idx"

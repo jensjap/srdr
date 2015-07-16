@@ -177,6 +177,34 @@
                 </td>
             </tr>
 
+            <!-- DOI ROW -->
+            <tr >
+                <td class="label">
+                    <div>
+                        <label for="doi_id">DOI:</label>
+                    </div>
+                </td>
+                <td class="doi_id input">
+
+                    <% if @current_user.is_admin? %>
+                        <%= f.text_area :doi_id, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
+                        <div>Link to document</div>
+                    <% else %>
+                        <div>@project.doi_id</div>
+                        <div>Link to document</div>
+                    <% end %>
+
+                </td>
+            </tr>
+            <tr>
+                <td class='label comment_td'>&nbsp;</td>
+                <td class='comment_td'>
+                    <% if request.fullpath[-4, 4] == "edit" %>
+                        <%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "methodology", :study_id => -1, :project_id => @project.id} %>
+                <% end %>
+                </td>
+            </tr>
+
             <!-- THE PROJECT NOTES ROW -->
             <tr>
                 <td class="label">
@@ -285,6 +313,5 @@ $("#remove_parent_link").on("click",function(e){
     url: '/projects/<%= @project.id %>/remove_parent_association',
   }); 
 });
-
 -->
 </script>
