@@ -188,10 +188,12 @@
 
                     <% if @current_user.is_admin? %>
                         <%= f.text_area :doi_id, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
-                        <div>Link to document</div>
+                        <!-- <div>Link to document</div> -->
                     <% else %>
-                        <div>@project.doi_id</div>
-                        <div>Link to document</div>
+                        <% unless @project.doi_id.blank? %>
+                            <div><%= @project.doi_id %></div>
+                            <!-- <div>Link to document</div> -->
+                        <% end %>
                     <% end %>
 
                 </td>
