@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # This controller handles all pages for study data extraction, as well as basic creation, updating and deletion of studies.
 class StudiesController < ApplicationController
 

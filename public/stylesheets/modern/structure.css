@@ -377,15 +377,15 @@ div, td{
 }
 
 #extraction-form-split-left {
+	position: relative;
 	width: 45%;
-	float: left;
+	height: 600px;
+	overflow: scroll;
 }
 
-#extraction-form-split-right {
-	width: 45%;
-	float: right;
-	border: dotted orange;
-	border-width: 10px;
+.extraction-form-split-right {
+	position: relative;
+	height: 600px;
 }
 
 #sidebar {

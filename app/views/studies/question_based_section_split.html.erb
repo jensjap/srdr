@@ -29,13 +29,12 @@
 
 					        <% elsif question[:q_type] == 'text' %>
 						        <%= raw(build_text(question, @data[:model], 66)) %>
+                                <button class="daa-text-capture">Capture text</button>
 
 					        <% else %>
 						        <%= raw(build_matrix(question, @data[:model])) %>
 
 					        <% end %>
-
-                            <button class="daa-text-capture">Capture text</button>
 
 					        <br style='clear:both;'/>
 					        <br />
@@ -93,28 +92,9 @@
 </div><!-- end .tab-div -->
 
 <script type="text/javascript">
-    $(".daa-text-capture").on('click', function(e) {
-    	//var a = this.className
-        //var x = document.getElementById("design_detail_10461").id;
-    	//var textAreaObj = $(this).closest('textarea')
-    	//var textAreaId = textAreaObj.attr('class')
-    	var textAreaObj = document.getElementsByClassName('editable_field')[0]
-    	var cols = textAreaObj.cols
-    	var rows = textAreaObj.rows
-    	var id   = textAreaObj.id
-    	var name = textAreaObj.name
-
-        //alert(cols);
-        //alert(rows);
-        //alert(id);
-        //alert(name);
-        //alert(textAreaObj.innerHTML);
-        var selection = window.getSelection().getRangeAt(0)
-        textAreaObj.innerHTML = selection;
-        //alert(x);
-        //alert(a);
-    	//alert(JSON.stringify(textAreaObj, null, 4));
-    	//alert(textAreaId);
+    $(".daa-text-capture").on('click', function(event) {
+        var selection = window.getSelection().getRangeAt(0);
+        $(event.target).closest('div').find('textarea').val(selection);
     })
 
     $('.clear_selection_link').on('click', function(e) {
