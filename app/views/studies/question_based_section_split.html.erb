@@ -6,6 +6,8 @@
 	    <%= form_for(@data_point, :remote => true) do |f| %>
 	        <%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
 	        <%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
+	        <%= f.hidden_field :form_type, :value => 'split' %>
+	        <%= f.hidden_field :document_id, :value => @document_id %>
 	
 	        <%= render :partial=>'ef_instruction' %>
 	        <% questions = @data[:questions] %>
@@ -29,7 +31,11 @@
 
 					        <% elsif question[:q_type] == 'text' %>
 						        <%= raw(build_text(question, @data[:model], 66)) %>
-                                <button class="daa-text-capture">Capture text</button>
+                                <button type="button" class="daa-text-capture">Capture text</button>
+
+                            <% elsif question[:q_type] == 'multi_text' %>
+                            	<%= raw(build_multi_text(question, @data[:model])) %>
+                                <button type="button" class="daa-text-capture">Capture text</button>
 
 					        <% else %>
 						        <%= raw(build_matrix(question, @data[:model])) %>

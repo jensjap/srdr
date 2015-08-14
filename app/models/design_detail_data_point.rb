@@ -50,6 +50,8 @@ class DesignDetailDataPoint < ActiveRecord::Base
 	# save_data
 	# Save the values coming in from the design details table
 	def self.save_data(params,study_id)
+		# form_type is either 'split' or nil. 'split' means that it is coming from the split-screen used for DAA.
+		form_type = params[:design_detail_data_point][:form_type].blank? ? nil : params[:design_detail_data_point][:form_type]
 		dd = params[:design_detail]
 		# convert escaped quotes to normal before saving
 		dd = QuestionBuilder.unescape_quotes(dd)
@@ -129,22 +131,80 @@ class DesignDetailDataPoint < ActiveRecord::Base
 						else
 							puts "FOUND EXISTING...#{dat.id}"
 						end
-						dat.design_detail_field_id = qid
-						dat.row_field_id = rowid
-						dat.column_field_id = colid
-						dat.value = dd[key]
-						dat.study_id = study_id
-						dat.extraction_form_id = ef_id
-						unless dd_subquestions.nil?
-							unless dd_subquestions[key.to_s].nil?
-								dat.subquestion_value = dd_subquestions[key.to_s]
+						# Handle multi_text field type if:
+						# 1. This is a text question.
+						# 2. This request is coming from the split screen form.
+						if key.split('_').length == 1 && form_type == 'split'
+							design_detail_id = key.to_i
+							value = params[:design_detail][key]
+							document_id = params[:design_detail_data_point]["document_id"]
+							# Send request to save text to DAA and get back the citation id.
+							# The request should include some way to uniquely locate the text...this is important.
+							#!!! stubbed
+							citation_id = 1
+							search_string = ''
+
+							# Convert field_type to multi_text if DesignDetail isn't already.
+							field_type = DesignDetail.find(design_detail_id).field_type
+							unless field_type == 'multi_text'
+								#!!! not ready
+								#dd = convert_to_multi_text_field_type(design_detail_id, citation_id)
 							end
-						end
-						if !dat.save
-							success = false
-							puts "DID NOT SAVE PROPERLY."
+
+							# Count of DesignDetailField entries for this DesignDetail ID + 1.
+							cnt_ddf = DesignDetailField.where(design_detail_id: design_detail_id).length + 1
+
+							#!!!
+							# option_text will hold the daa citation ID.
+							# ddf = DesignDetailField.where(design_detail_id: design_detail_id,
+							# 								option_text: citation_id.to_s,
+							# 								column_number: 0).first
+							# if ddf.blank?
+							ddf = DesignDetailField.create(design_detail_id: design_detail_id,
+															option_text: citation_id.to_s,
+															column_number: 0,
+															row_number: cnt_ddf)
+							# end
+
+							# dddp = DesignDetailDataPoint.where(design_detail_field_id: design_detail_id,
+							# 									study_id: study_id,
+							# 									extraction_form_id: ef_id,
+							# 									row_field_id: ddf.id,
+							# 									column_field_id: 0,
+							# 									arm_id: 0,
+							# 									outcome_id: 0).first
+							# if dddp.blank?
+							dddp = DesignDetailDataPoint.create(design_detail_field_id: design_detail_id,
+																value: value,
+																study_id: study_id,
+																extraction_form_id: ef_id,
+																row_field_id: ddf.id,
+																column_field_id: 0,
+																arm_id: 0,
+																outcome_id: 0)
+							# else
+							# 	dddp.value = value
+							# 	dddp.save
+							# end
 						else
-							puts "SAVED PROPERLY!"
+
+							dat.design_detail_field_id = qid
+							dat.row_field_id = rowid
+							dat.column_field_id = colid
+							dat.value = dd[key]
+							dat.study_id = study_id
+							dat.extraction_form_id = ef_id
+							unless dd_subquestions.nil?
+								unless dd_subquestions[key.to_s].nil?
+									dat.subquestion_value = dd_subquestions[key.to_s]
+								end
+							end
+							if !dat.save
+								success = false
+								puts "DID NOT SAVE PROPERLY."
+							else
+								puts "SAVED PROPERLY!"
+							end
 						end
 					end
 				end
@@ -160,5 +220,11 @@ class DesignDetailDataPoint < ActiveRecord::Base
 		return success
 	end
 
-	
+	private
+		def convert_to_multi_text_field_type(design_detail_id, citation_id)
+			dd = DesignDetail.find(design_detail_id)
+			dd.field_type = 'multi_text'
+			dd.save
+			return dd
+		end
 end
