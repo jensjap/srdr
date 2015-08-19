@@ -98,9 +98,161 @@
 </div><!-- end .tab-div -->
 
 <script type="text/javascript">
+ 	// Taken from http://james.padolsey.com/javascript/find-and-replace-text-with-javascript/
+	function findAndReplace(searchText, replacement, searchNode) {
+	    if (!searchText || typeof replacement === 'undefined') {
+	        // Throw error here if you want...
+	        return;
+	    }
+	    var regex = typeof searchText === 'string' ?
+	                new RegExp(searchText, 'g') : searchText,
+	        childNodes = (searchNode || document.body).childNodes,
+	        cnLength = childNodes.length,
+	        excludes = 'html,head,style,title,link,meta,script,object,iframe';
+	    while (cnLength--) {
+	        var currentNode = childNodes[cnLength];
+	        if (currentNode.nodeType === 1 &&
+	            (excludes + ',').indexOf(currentNode.nodeName.toLowerCase() + ',') === -1) {
+	            arguments.callee(searchText, replacement, currentNode);
+	        }
+	        if (currentNode.nodeType !== 3 || !regex.test(currentNode.data) ) {
+	            continue;
+	        }
+	        var parent = currentNode.parentNode,
+	            frag = (function(){
+	                var html = currentNode.data.replace(regex, replacement),
+	                    wrap = document.createElement('div'),
+	                    frag = document.createDocumentFragment();
+	                wrap.innerHTML = html;
+	                while (wrap.firstChild) {
+	                    frag.appendChild(wrap.firstChild);
+	                }
+	                return frag;
+	            })();
+	        parent.insertBefore(frag, currentNode);
+	        parent.removeChild(currentNode);
+	    }
+	}
+
+	// Can wrap a substring.
+	function wrapText(text, startIdx, endIdx, wrapper) {
+		// Assign default value to wrapper.
+  		wrapper = typeof wrapper !== 'undefined' ? wrapper : 'b';
+
+  		var wrapped = text.slice(0, startIdx) + '<' + wrapper + ' style="background: yellow;">' + text.slice(startIdx, endIdx) + '</' + wrapper + '>' + text.slice(endIdx);
+  		return wrapped;
+	}
+
+	// Mark up the text.
+	function magicMark(daaDocumentDomElement,
+						anchorNodeType, anchorNodeValue, anchorOffset,
+						focusNodeType, focusNodeValue, focusOffset,
+						wrapper) {
+
+        // 2 cases:
+        //	(1) anchorNode and focusNode are the same and thus all the text is contained in one node.
+        //	(2) anchorNode and focusNode are different. This is split into 2 scenarios:
+        //		(a) The two nodes are adjacent to each other (easy).
+        //		(b) There is a node between the two (hard). We need to find the nodes in between and highlight them as well.
+        // In all cases we need to take a close look at the nodeType and use the offset information accordingly:
+        //	nodeType = 3: This means it's a text node...carry on...nothing special.
+        //	nodeType = 1: Uh ohh...this is a dom element. We have to assume that the entire element needs to be wrapped.
+
+        // Case (1):
+        if (anchorNodeValue === focusNodeValue) {
+        	console.log("Case (1): Selection is in the same node.");
+        	// If the node type is 3 (text node) then it's a straightforward text replacement using the offset values.
+        	if (anchorNodeType === 3) {
+        		console.log("TEXT Node");
+        		// Does a good job finding the unique location, because we look for the entire anchorNodeValue which is quite unique (not guaranteed to be unique but close).
+        		// Bug: For some reason it doubles the '?' at the end of a sentence once...applying multiple searches on the same term to highlight does not repeat this though.
+        		findAndReplace(anchorNodeValue, wrapText(anchorNodeValue, anchorOffset, focusOffset, wrapper), daaDocumentDomElement);
+
+        		// Alternative, but not as good. This finds every occurrence of the string we want to highlight.
+        		//findAndReplace('(' + anchorNodeValue.slice(anchorOffset, focusOffset) + ')', '<' + wrapper + ' style="background: yellow;">$1</' + wrapper + '>', daaDocumentDomElement);
+
+        	// If the node type is 1 (element node) then the offset doesn't really help. For the anchorNode it will always be 0 and for the focusNode it will always be 1.
+        	} else if (anchorNodeType === 1) {
+        		console.log("ELEMENT Node");
+        		findAndReplace(anchorNodeValue, wrapText(anchorNodeValue, 0, anchorNodeValue.length, wrapper), daaDocumentDomElement);
+        	} else {
+        		console.log("Ooops...did not properly identify node type.");
+        	}
+
+        // Case (2):
+        } else {
+        	console.log("Case (2): Selection spans multiple nodes.");
+        	// If the anchor node type is 3 (text node) then we start at the anchorOffset value but go straight to the end.
+        	if (anchorNodeType === 3) {
+        		console.log("anchor is a TEXT Node");
+        		findAndReplace(anchorNodeValue, wrapText(anchorNodeValue, anchorOffset, anchorNodeValue.length, wrapper), daaDocumentDomElement);
+        	} else if (anchorNodeType === 1) {
+        		console.log("anchor is an ELEMENT Node");
+        		findAndReplace(anchorNodeValue, wrapText(anchorNodeValue, 0, anchorNodeValue.length, wrapper), daaDocumentDomElement);
+        	} else {
+        		console.log("Ooops...did not properly identify anchor node type.");
+        	}
+
+        	// Do the same for the focus node type.
+        	if (focusNodeType === 3) {
+        		console.log("focus is a TEXT Node");
+        		findAndReplace(focusNodeValue, wrapText(focusNodeValue, 0, focusOffset, wrapper), daaDocumentDomElement);
+        	} else if (focusNodeType === 1) {
+        		console.log("focus is an ELEMENT Node");
+        		findAndReplace(focusNodeValue, wrapText(focusNodeValue, 0, focusNodeValue.length, wrapper), daaDocumentDomElement);
+        	} else {
+        		console.log("Ooops...did not properly identify focus node type.");
+        	}
+
+        	// Finally we need to find all the nodes between the anchor and the focus node and wrap them in their entirety.
+        	
+        }
+	}
+
     $(".daa-text-capture").on('click', function(event) {
-        var selection = window.getSelection().getRangeAt(0);
-        $(event.target).closest('div').find('textarea').val(selection);
+    	// Collect several pieces of information about the selection. We will attempt to reconstruct this later when
+    	// it is time to render with the highlighting.
+
+    	// CONSTANTS
+    	var WRAPPER = 'strong';
+
+        var s = window.getSelection();
+
+        var anchorNode = s.anchorNode;  // This is where the selection starts and could be one of several things.
+        var anchorNodeType = anchorNode.nodeType;  // 1=ELEMENT_NODE, 3=TEXT_NODE
+        if (anchorNodeType === 1) { var anchorNodeValue = anchorNode.textContent; }
+        if (anchorNodeType === 3) { var anchorNodeValue = anchorNode.wholeText; }
+        var anchorOffset = s.anchorOffset;  // At what index the selection starts -- if at the beginning then this should be 0.
+
+        var focusNode = s.focusNode;  // This is where the selection ends.
+        var focusNodeType = focusNode.nodeType;  // 1=ELEMENT_NODE, 3=TEXT_NODE
+        if (focusNodeType === 1) { var focusNodeValue = focusNode.textContent; }
+        if (focusNodeType === 3) { var focusNodeValue = focusNode.wholeText; }
+        var focusOffset = s.focusOffset;  // At what index the selection ends.
+
+        var logMsg  = "\n";
+        	logMsg += "anchorNodeType: " + anchorNodeType + "\n";
+            logMsg += "anchorNodeValue: " + anchorNodeValue + "\n";
+        	logMsg += "anchorOffset: " + anchorOffset + "\n";
+        	logMsg += "focusNodeType: " + focusNodeType + "\n";
+        	logMsg += "focusNodeValue: " + focusNodeValue + "\n";
+        	logMsg += "focusOffset: " + focusOffset + "\n";
+        console.log(logMsg);
+
+        $(event.target).closest('div').find('textarea').val(s);
+
+        // Let see if we can't manipulate the DOM directly and send it back to DAA? This might simplify highlighting because
+        // we do not need to reconstruct blindly.
+        var daaDocumentDomElement = document.getElementById('extraction-form-split-right');
+        var daaDocumentHtml = daaDocumentDomElement.innerHTML;
+        //console.log(daaDocumentDomElement);
+        //console.log(daaDocumentHtml);
+
+        // Let's try to wrap the anchorNode, focusNode and all the div's in-between.
+		magicMark(daaDocumentDomElement,
+					anchorNodeType, anchorNodeValue, anchorOffset,
+					focusNodeType, focusNodeValue, focusOffset,
+					WRAPPER);
     })
 
     $('.clear_selection_link').on('click', function(e) {
