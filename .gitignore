@@ -16,3 +16,9 @@ config/database.yml
 config/environment.rb
 properties/gui.properties
 
+# Ignore uploaded files in public folder
+public/*.xlsx
+public/*.conv
+public/*.xls
+public/*.txt
+!public/robots.txt
