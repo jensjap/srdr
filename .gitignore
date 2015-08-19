@@ -18,7 +18,8 @@ properties/gui.properties
 
 # Ignore uploaded files in public folder
 public/*.xlsx
-public/*.conv
 public/*.xls
+public/*.csv
+public/*.conv
 public/*.txt
 !public/robots.txt
