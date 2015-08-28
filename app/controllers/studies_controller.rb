@@ -30,7 +30,7 @@ class StudiesController < ApplicationController
 
 	        # Fetch document_html from DAA API
 	        #!!! Stubbed for now. Needs to make actual call and fetch document.
-			@document_id = "1"
+			@document_id = "3"
 	        response = HTTParty.get('http://api.daa-dev.com:3030/v1/documents/' + @document_id)
 	        @document_html = response
 
