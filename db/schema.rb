@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150716003159) do
+ActiveRecord::Schema.define(:version => 20150828200231) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -1218,7 +1218,7 @@ ActiveRecord::Schema.define(:version => 20150716003159) do
     t.datetime "publication_requested_at"
     t.integer  "parent_id"
     t.text     "attribution"
-    t.string   "doi_id"
+    t.string   "management_file_url"
   end
 
   add_index "projects", ["creator_id"], :name => "project_creator_idx"
@@ -1484,6 +1484,18 @@ ActiveRecord::Schema.define(:version => 20150716003159) do
     t.integer  "extraction_form_id"
     t.integer  "user_id"
     t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trial_participant_infos", :force => true do |t|
+    t.string   "age"
+    t.boolean  "readEnglish"
+    t.boolean  "experienceExtractingData"
+    t.string   "experienceLevel"
+    t.string   "articlesExtracted"
+    t.string   "email"
+    t.string   "submissionToken"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

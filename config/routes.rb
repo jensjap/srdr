@@ -43,6 +43,13 @@ Srdr::Application.routes.draw do
     # ---------- New Audit trail support ---------------
     get "audit_trails/new"
 
+    # ---------- DAA Info page ------------
+    get "daa/info" => "daa_info#info"
+    get "daa/eligibility" => "daa_info#eligibility"
+    get "daa/not_eligible" => "daa_info#not_eligible"
+    post "daa/eligible" => "daa_info#eligible"
+    post "daa/create_participant" => "daa_info#create"
+
     # hiding the ahrq header
     match '/application/go_full_screen' => 'application#toggle_ahrq_header'
 

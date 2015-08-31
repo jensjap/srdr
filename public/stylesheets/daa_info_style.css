@@ -1,0 +1,33 @@
+#header img.left {
+    padding-left: 6%;
+}
+
+#header img.right {
+    float: right;
+    padding-right: 8%;
+}
+
+p.clear {
+    clear: both;
+}
+
+div#navigation {
+    float: left;
+    width: 15%;
+    padding-left: 3%;
+}
+
+div#content {
+    float: right;
+    width: 75%;
+    padding-right: 3%;
+}
+
+div#footer {
+    text-align: center;
+    font-size: 0.7em;
+}
+
+p.result {
+    font-style: italic;
+}

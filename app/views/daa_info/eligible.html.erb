@@ -1,0 +1,52 @@
+<h1>Congratulations!</h1>
+<p class="result">You are eligible for our study. We will be in touch with you with instructions for participation</p>
+
+<%= form_for(@trial_participant_info, url: "create_participant", html: { id: "myForm", onsubmit: "attach_hidden_fields();" }) do |f| %>
+    <%= f.label :email, "Please enter your email address:" %>
+    <%= f.text_field :email %>
+    <%= f.submit "Submit email" %>
+<% end %>
+<p class="result">Please note that you we will not share your email address with any third party</p>
+
+<script>
+    function attach_hidden_fields() {
+        // Carry over the age information
+        var input_age = document.createElement("input"),
+            input_readEnglish = document.createElement("input"),
+            input_experienceExtractingData = document.createElement("input"),
+            input_experienceLevel = document.createElement("input"),
+            input_articlesExtracted = document.createElement("input");
+            input_submissionToken = document.createElement("input");
+
+        input_age.setAttribute("type", "hidden");
+        input_age.setAttribute("name", "trial_participant_info[age]");
+        input_age.setAttribute("value", "<%= @age %>");
+
+        input_readEnglish.setAttribute("type", "hidden");
+        input_readEnglish.setAttribute("name", "trial_participant_info[readEnglish]");
+        input_readEnglish.setAttribute("value", "<%= @readEnglish %>");
+
+        input_experienceExtractingData.setAttribute("type", "hidden");
+        input_experienceExtractingData.setAttribute("name", "trial_participant_info[experienceExtractingData]");
+        input_experienceExtractingData.setAttribute("value", "<%= @experienceExtractingData %>");
+
+        input_experienceLevel.setAttribute("type", "hidden");
+        input_experienceLevel.setAttribute("name", "trial_participant_info[experienceLevel]");
+        input_experienceLevel.setAttribute("value", "<%= @experienceLevel %>");
+
+        input_articlesExtracted.setAttribute("type", "hidden");
+        input_articlesExtracted.setAttribute("name", "trial_participant_info[articlesExtracted]");
+        input_articlesExtracted.setAttribute("value", "<%= @articlesExtracted %>");
+
+        input_submissionToken.setAttribute("type", "hidden");
+        input_submissionToken.setAttribute("name", "trial_participant_info[submissionToken]");
+        input_submissionToken.setAttribute("value", "<%= @submissionToken %>");
+
+        document.getElementById("myForm").appendChild(input_age);
+        document.getElementById("myForm").appendChild(input_readEnglish);
+        document.getElementById("myForm").appendChild(input_experienceExtractingData);
+        document.getElementById("myForm").appendChild(input_experienceLevel);
+        document.getElementById("myForm").appendChild(input_articlesExtracted);
+        document.getElementById("myForm").appendChild(input_submissionToken);
+    }
+</script>

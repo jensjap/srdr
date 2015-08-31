@@ -1,0 +1,71 @@
+<h1>Am I eligible?</h1>
+
+<%= form_tag("eligible", method: "POST", id: "myForm", onsubmit: "attach_hidden_fields();") do %>
+    <div id="phase_one">
+              <%= label_tag("age", "1. What is your age?") %>
+        <br /><%= radio_button_tag("age", "<20",         false, onclick: "next_phase('two', 'false');") %> <%= label_tag("age", "<20") %>
+        <br /><%= radio_button_tag("age", "20-29",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "20-29") %>
+        <br /><%= radio_button_tag("age", "30-39",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "30-39") %>
+        <br /><%= radio_button_tag("age", "40-49",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "40-49") %>
+        <br /><%= radio_button_tag("age", "50-59",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "50-59") %>
+        <br /><%= radio_button_tag("age", "60-69",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "60-69") %>
+        <br /><%= radio_button_tag("age", "70 or above", false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "70 or older") %>
+    </div>
+    <br />
+
+    <div id="phase_two" style="display: none;">
+              <%= label_tag("readEnglish", "2. Are you COMFORTABLE reading scientific articles in English?") %>
+        <br /><%= radio_button_tag("readEnglish", "no",  false, onclick: "next_phase('three', 'false');") %> <%= label_tag("readEnglish", "No") %>
+        <br /><%= radio_button_tag("readEnglish", "yes", false, onclick: "next_phase('three', 'true');") %>  <%= label_tag("readEnglish", "Yes") %>
+    </div>
+    <br />
+
+    <div id="phase_three" style="display: none;">
+              <%= label_tag("experienceExtractingData", "3. Do you have ANY EXPERIENCE in extracting data for systematic reviews?") %>
+        <br /><%= radio_button_tag("experienceExtractingData", "no",  false, onclick: "next_phase('four', 'false');") %> <%= label_tag("experienceExtractingData", "No") %>
+        <br /><%= radio_button_tag("experienceExtractingData", "yes", false, onclick: "next_phase('four', 'true');") %>  <%= label_tag("experienceExtractingData", "Yes") %>
+    </div>
+    <br />
+
+    <div id="phase_four" style="display: none;">
+              <%= label_tag("experienceLevel", "4. How would you consider your LEVEL OF EXPERIENCE in data abstraction?") %>
+        <br /><%= radio_button_tag("experienceLevel", "Slightly experienced",            false, onclick: "next_phase('five', 'true');") %> <%= label_tag("experienceLevel", "Slightly experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Somewhat/moderately experienced", false, onclick: "next_phase('five', 'true');") %> <%= label_tag("experienceLevel", "Somewhat/moderately experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Very experienced",                false, onclick: "next_phase('five', 'true');") %> <%= label_tag("experienceLevel", "Very experienced") %>
+    </div>
+    <br />
+
+    <div id="phase_five" style="display: none;">
+              <%= label_tag("articlesExtracted", "5. For how many ARTICLES have you abstracted data for systematic reviews?") %>
+        <br /><%= radio_button_tag("articlesExtracted", "1-9",        false, onclick: "next_phase('six', 'true');") %> <%= label_tag("articlesExtracted", "1-9") %>
+        <br /><%= radio_button_tag("articlesExtracted", "10 or more", false, onclick: "next_phase('six', 'true');") %> <%= label_tag("articlesExtracted", "10 or more") %>
+    </div>
+    <br />
+
+    <div id="phase_six" style="display: none;">
+        <%= submit_tag("Submit answers") %>
+    </div>
+<% end %>
+
+<script>
+    function next_phase(phase, proceed) {
+        var phase_two_div = document.getElementById("phase_" + phase);
+        if (proceed == 'true') {
+            phase_two_div.style.display = 'block';
+        } else {
+            window.location = "<%= url_for(daa_not_eligible_path) %>";
+        }
+    }
+
+    function attach_hidden_fields() {
+        var submissionToken = "<%= @submissionToken %>";
+        var input = document.createElement("input");
+
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", "submissionToken");
+        input.setAttribute("value", submissionToken);
+
+        //append to form element that you want .
+        document.getElementById("myForm").appendChild(input);
+    }
+</script>
