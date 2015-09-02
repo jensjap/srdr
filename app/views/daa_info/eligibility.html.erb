@@ -49,11 +49,17 @@
 
 <script>
     function next_phase(phase, proceed) {
-        var phase_two_div = document.getElementById("phase_" + phase);
+        // test if we should proceed to next question.
         if (proceed == 'true') {
-            phase_two_div.style.display = 'block';
+            // if true then we make sure this isn't the last question.
+            var next_phase_div = document.getElementById("phase_" + phase);
+            if (next_phase_div != "phase_six") {
+                // if it is not the last question then we re-hide the submit button in case it was accidentally shown previously.
+                document.getElementById("phase_six").style.display = 'none';
+            }
+            next_phase_div.style.display = 'block';
         } else {
-            window.location = "<%= url_for(daa_not_eligible_path) %>";
+            document.getElementById("phase_six").style.display = 'block';
         }
     }
 

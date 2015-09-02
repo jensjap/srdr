@@ -23,6 +23,13 @@ class DaaInfoController < ApplicationController
         @experienceLevel          = params["experienceLevel"]
         @articlesExtracted        = params["articlesExtracted"]
         @submissionToken          = params["submissionToken"]
+
+        # Text params to see if any of them disqualify the user.
+        if [@age, @readEnglish, @experienceExtractingData, @experienceLevel, @articlesExtracted, @submissionToken].map!(&:blank?).include?(true) ||
+                @age == "<20" || @readEnglish == "no" || @experienceExtractingData == "no"
+            redirect_to daa_not_eligible_path
+            return
+        end
     end
 
     def create
