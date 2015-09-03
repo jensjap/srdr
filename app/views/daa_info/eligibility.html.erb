@@ -1,65 +1,126 @@
 <h1>Am I eligible?</h1>
 
-<%= form_tag("eligible", method: "POST", id: "myForm", onsubmit: "attach_hidden_fields();") do %>
-    <div id="phase_one">
+<%= form_tag("eligible", method: "POST", id: "myForm", name: "myForm1", onsubmit: "attach_hidden_fields();") do %>
+    <div id="phase_one" class="questions">
               <%= label_tag("age", "1. What is your age?") %>
-        <br /><%= radio_button_tag("age", "<20",         false, onclick: "next_phase('two', 'false');") %> <%= label_tag("age", "<20") %>
-        <br /><%= radio_button_tag("age", "20-29",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "20-29") %>
-        <br /><%= radio_button_tag("age", "30-39",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "30-39") %>
-        <br /><%= radio_button_tag("age", "40-49",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "40-49") %>
-        <br /><%= radio_button_tag("age", "50-59",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "50-59") %>
-        <br /><%= radio_button_tag("age", "60-69",       false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "60-69") %>
-        <br /><%= radio_button_tag("age", "70 or above", false, onclick: "next_phase('two', 'true');") %>  <%= label_tag("age", "70 or older") %>
+        <br /><%= radio_button_tag("age", "<20",         false, onclick: "next_question('two', 'false');") %> <%= label_tag("age", "<20") %>
+        <br /><%= radio_button_tag("age", "20-29",       false, onclick: "next_question('two', 'true');") %>  <%= label_tag("age", "20-29") %>
+        <br /><%= radio_button_tag("age", "30-39",       false, onclick: "next_question('two', 'true');") %>  <%= label_tag("age", "30-39") %>
+        <br /><%= radio_button_tag("age", "40-49",       false, onclick: "next_question('two', 'true');") %>  <%= label_tag("age", "40-49") %>
+        <br /><%= radio_button_tag("age", "50-59",       false, onclick: "next_question('two', 'true');") %>  <%= label_tag("age", "50-59") %>
+        <br /><%= radio_button_tag("age", "60-69",       false, onclick: "next_question('two', 'true');") %>  <%= label_tag("age", "60-69") %>
+        <br /><%= radio_button_tag("age", "70 or above", false, onclick: "next_question('two', 'true');") %>  <%= label_tag("age", "70 or older") %>
     </div>
     <br />
 
-    <div id="phase_two" style="display: none;">
+    <div id="phase_two" class="questions" style="display: none;">
               <%= label_tag("readEnglish", "2. Are you COMFORTABLE reading scientific articles in English?") %>
-        <br /><%= radio_button_tag("readEnglish", "no",  false, onclick: "next_phase('three', 'false');") %> <%= label_tag("readEnglish", "No") %>
-        <br /><%= radio_button_tag("readEnglish", "yes", false, onclick: "next_phase('three', 'true');") %>  <%= label_tag("readEnglish", "Yes") %>
+        <br /><%= radio_button_tag("readEnglish", "no",  false, onclick: "next_question('three', 'false');") %> <%= label_tag("readEnglish", "No") %>
+        <br /><%= radio_button_tag("readEnglish", "yes", false, onclick: "next_question('three', 'true');") %>  <%= label_tag("readEnglish", "Yes") %>
     </div>
     <br />
 
-    <div id="phase_three" style="display: none;">
+    <div id="phase_three" class="questions" style="display: none;">
               <%= label_tag("experienceExtractingData", "3. Do you have ANY EXPERIENCE in extracting data for systematic reviews?") %>
-        <br /><%= radio_button_tag("experienceExtractingData", "no",  false, onclick: "next_phase('four', 'false');") %> <%= label_tag("experienceExtractingData", "No") %>
-        <br /><%= radio_button_tag("experienceExtractingData", "yes", false, onclick: "next_phase('four', 'true');") %>  <%= label_tag("experienceExtractingData", "Yes") %>
+        <br /><%= radio_button_tag("experienceExtractingData", "no",  false, onclick: "next_question('four', 'false');") %> <%= label_tag("experienceExtractingData", "No") %>
+        <br /><%= radio_button_tag("experienceExtractingData", "yes", false, onclick: "next_question('four', 'true');") %>  <%= label_tag("experienceExtractingData", "Yes") %>
     </div>
     <br />
 
-    <div id="phase_four" style="display: none;">
+    <div id="phase_four" class="questions" style="display: none;">
               <%= label_tag("experienceLevel", "4. How would you consider your LEVEL OF EXPERIENCE in data abstraction?") %>
-        <br /><%= radio_button_tag("experienceLevel", "Slightly experienced",            false, onclick: "next_phase('five', 'true');") %> <%= label_tag("experienceLevel", "Slightly experienced") %>
-        <br /><%= radio_button_tag("experienceLevel", "Somewhat/moderately experienced", false, onclick: "next_phase('five', 'true');") %> <%= label_tag("experienceLevel", "Somewhat/moderately experienced") %>
-        <br /><%= radio_button_tag("experienceLevel", "Very experienced",                false, onclick: "next_phase('five', 'true');") %> <%= label_tag("experienceLevel", "Very experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Slightly experienced",            false, onclick: "next_question('five', 'true');") %> <%= label_tag("experienceLevel", "Slightly experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Somewhat/moderately experienced", false, onclick: "next_question('five', 'true');") %> <%= label_tag("experienceLevel", "Somewhat/moderately experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Very experienced",                false, onclick: "next_question('five', 'true');") %> <%= label_tag("experienceLevel", "Very experienced") %>
     </div>
     <br />
 
-    <div id="phase_five" style="display: none;">
+    <div class="questions" style="display: none;">
               <%= label_tag("articlesExtracted", "5. For how many ARTICLES have you abstracted data for systematic reviews?") %>
-        <br /><%= radio_button_tag("articlesExtracted", "1-9",        false, onclick: "next_phase('six', 'true');") %> <%= label_tag("articlesExtracted", "1-9") %>
-        <br /><%= radio_button_tag("articlesExtracted", "10 or more", false, onclick: "next_phase('six', 'true');") %> <%= label_tag("articlesExtracted", "10 or more") %>
+        <br /><%= radio_button_tag("articlesExtracted", "1-9",        false, onclick: "next_question('six', 'true');") %> <%= label_tag("articlesExtracted", "1-9") %>
+        <br /><%= radio_button_tag("articlesExtracted", "10 or more", false, onclick: "next_question('six', 'true');") %> <%= label_tag("articlesExtracted", "10 or more") %>
     </div>
     <br />
 
-    <div id="phase_six" style="display: none;">
+    <div id="form-submit" style="display: none;">
         <%= submit_tag("Submit answers") %>
     </div>
 <% end %>
 
 <script>
-    function next_phase(phase, proceed) {
+    function next_question(phase, proceed) {
         // test if we should proceed to next question.
         if (proceed == 'true') {
-            // if true then we make sure this isn't the last question.
-            var next_phase_div = document.getElementById("phase_" + phase);
-            if (next_phase_div != "phase_six") {
-                // if it is not the last question then we re-hide the submit button in case it was accidentally shown previously.
-                document.getElementById("phase_six").style.display = 'none';
-            }
-            next_phase_div.style.display = 'block';
+            changeVisibilityOfNextUnansweredDiv('block');
         } else {
-            document.getElementById("phase_six").style.display = 'block';
+            // if user clicks on any of the disqualifying options then go ahead and offer to submit the form right away.
+            changeVisibilityOfNextUnansweredDiv('none');
+        }
+        displaySubmit();
+    }
+
+    function changeVisibilityOfNextUnansweredDiv(display) {
+        var questionDivs = document.getElementsByClassName('questions');
+        for (var i=0 ; i<questionDivs.length ; i++) {
+            var any_checked = false;
+            var radios = questionDivs[i].getElementsByTagName('input');
+            for (var j=0 ; j<radios.length ; j++) {
+                if (radios[j].checked) { any_checked = true; }
+            }
+
+            if (any_checked === false) {
+                questionDivs[i].style.display = display;
+                break;
+            }
+        }
+    }
+
+    function displaySubmit() {
+        document.getElementById('form-submit').style.display = 'none';
+        var ages = document.getElementsByName('age');
+        for (var i=0 ; i<ages.length ; i++) {
+            if (ages[i].checked) { 
+                if (ages[i].value == '<20') {
+                    document.getElementById('form-submit').style.display = 'block';
+                    changeVisibilityOfNextUnansweredDiv('none');
+                    return;
+                }
+            }
+        }
+
+        var readEnglishes = document.getElementsByName('readEnglish');
+        for (var i=0 ; i<readEnglishes.length ; i++) {
+            console.log(readEnglishes[i]);
+            if (readEnglishes[i].checked) {
+                if (readEnglishes[i].value =='no') {
+                    document.getElementById('form-submit').style.display = 'block';
+                    changeVisibilityOfNextUnansweredDiv('none');
+                    return;
+                }
+            }
+        }
+
+        var experienceExtractingDatas = document.getElementsByName('experienceExtractingData');
+        for (var i=0 ; i<experienceExtractingDatas.length ; i++) {
+            if (experienceExtractingDatas[i].checked) {
+                if (experienceExtractingDatas[i].value =='no') {
+                    document.getElementById('form-submit').style.display = 'block';
+                    changeVisibilityOfNextUnansweredDiv('none');
+                    return;
+                }
+            }
+        }
+
+        var experienceLevels = document.getElementsByName('experienceLevel');
+        for (var i=0 ; i<experienceLevels.length ; i++) {
+            if (experienceLevels[i].checked) {
+                var articlesExtracteds = document.getElementsByName('articlesExtracted');
+                for (var j=0 ; j<articlesExtracteds.length ; j++) {
+                    if (articlesExtracteds[j].checked) {
+                        document.getElementById('form-submit').style.display = 'block';
+                    }
+                }
+            }
         }
     }
 
@@ -74,4 +135,20 @@
         //append to form element that you want .
         document.getElementById("myForm").appendChild(input);
     }
+
+    function uncheckAll(formname, checktoggle) {
+        var checkboxes = new Array(); 
+        checkboxes = document["myForm1"].getElementsByTagName('input');
+ 
+        for (var i=0; i<checkboxes.length; i++)  {
+            //if (checkboxes[i].type == 'checkbox')   {
+            if (checkboxes[i].type == 'radio')   {
+                //checkboxes[i].checked = checktoggle;
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+
+    window.onload = function () { uncheckAll(); };
+
 </script>
