@@ -50,6 +50,10 @@ Srdr::Application.routes.draw do
     post "daa/eligible" => "daa_info#eligible"
     post "daa/create_participant" => "daa_info#create"
 
+    # ---------- EPC Questionnaire ----------
+    get "questionnaire/form" => "bryant_form#form"
+    post "questionnaire/save" => "bryant_form#save"
+
     # hiding the ahrq header
     match '/application/go_full_screen' => 'application#toggle_ahrq_header'
 

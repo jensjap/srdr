@@ -1,0 +1,66 @@
+#questionnaire {
+    width: 100%;
+    background-color: #565051;
+    padding: 15px;
+}
+
+#questionnaire h1 {
+    color: white;
+    font-weight: normal;
+}
+
+#questionnaire-sub {
+    width: 100%;
+    background-color: #B6B6B4;
+    padding: 15px;
+}
+
+#questionnaire-sub h1 {
+    color: black;
+    font-weight: normal;
+}
+
+ol.a {
+    list-style-type: decimal;
+    list-style-position: inside;
+}
+
+div.questions {
+    margin: 25px;
+}
+
+div.questions label {
+}
+
+table {
+    width: 100%;
+}
+
+table th {
+    text-align: center;
+}
+
+table td {
+    text-align: center;
+    vertical-align: middle !important;
+}
+
+table td:first-child {
+    text-align: left;
+}
+
+div span {
+}
+
+span.info {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+span.skip-message {
+    color: red;
+}
+
+div#container{
+	background-image: none;
+}
