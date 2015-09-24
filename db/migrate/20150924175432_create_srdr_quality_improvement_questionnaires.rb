@@ -5,12 +5,23 @@ class CreateSrdrQualityImprovementQuestionnaires < ActiveRecord::Migration
       t.string :q1_last
       t.string :q1_email
       t.string :q2
-      t.string :q3
+      t.string :q3_lead
+      t.string :q3_collaborator
       t.string :q4
       t.string :q5
       t.string :q6_month
       t.string :q6_year
-      t.string :q7
+      t.string :q7_abstrackr
+      t.string :q7_openmeta
+      t.string :q7_distiller
+      t.string :q7_covidence
+      t.string :q7_docdata
+      t.string :q7_eros
+      t.string :q7_sumari
+      t.string :q7_cast
+      t.string :q7_rayyan
+      t.string :q7_revman
+      t.string :q7_other
       t.string :q8
       t.string :q9
       t.string :q10
@@ -18,6 +29,7 @@ class CreateSrdrQualityImprovementQuestionnaires < ActiveRecord::Migration
       t.string :q12a
       t.string :q12b
       t.string :q13
+      t.string :q14
       t.string :q14_month
       t.string :q14_year
       t.string :q15
@@ -43,6 +55,7 @@ class CreateSrdrQualityImprovementQuestionnaires < ActiveRecord::Migration
       t.string :q23d
       t.string :q24
       t.string :q25
+      t.string :q26
       t.string :q26_month
       t.string :q26_year
       t.string :q27a
@@ -50,6 +63,7 @@ class CreateSrdrQualityImprovementQuestionnaires < ActiveRecord::Migration
       t.string :q27c
       t.string :q28
       t.string :q29
+      t.string :q30
       t.string :q30_month
       t.string :q30_year
       t.string :q31a
@@ -57,11 +71,13 @@ class CreateSrdrQualityImprovementQuestionnaires < ActiveRecord::Migration
       t.string :q31c
       t.string :q32
       t.string :q33
+      t.string :q34
       t.string :q34_month
       t.string :q34_year
       t.string :q35
       t.string :q36
       t.string :q37
+      t.string :q38
       t.string :q38_month
       t.string :q38_year
       t.string :q39a

@@ -5,6 +5,12 @@ class BryantFormController < ApplicationController
     end
 
     def save
-        pp params
+        begin
+            sqiq = SrdrQualityImprovementQuestionnaire.new(params.except(:utf8,:authenticity_token,
+                                                                         :commit,:controller,:action))
+            sqiq.save
+        rescue
+            QuestionnaireMailer.questionnaire_notifier(params).deliver
+        end
     end
 end

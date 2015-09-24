@@ -4,244 +4,244 @@
 
 <%= form_tag("save", method: "POST", id: "BryantForm", name: "BryantForm") do %>
     <div id="page1">
-        <div id="q1" class="questions">
+        <div id="question1" class="questions">
             <%= label_tag "1", "1. Please enter your name and email address" %>
             <br />
-            <%= label_tag "1_first", "First name" %>
-            <%= text_field_tag "1_first" %>
+            <%= label_tag "q1_first", "First name" %>
+            <%= text_field_tag "q1_first" %>
             <br />
-            <%= label_tag "1_last", "Last name" %>
-            <%= text_field_tag "1_last" %>
+            <%= label_tag "q1_last", "Last name" %>
+            <%= text_field_tag "q1_last" %>
             <br />
-            <%= label_tag "1_email", "Email" %>
-            <%= text_field_tag "1_email" %>
+            <%= label_tag "q1_email", "Email" %>
+            <%= text_field_tag "q1_email" %>
         </div>
 
-        <div id="q2" class="questions">
-            <%= label_tag "2", "2. Please enter your job position" %>
+        <div id="question2" class="questions">
+            <%= label_tag "q2", "2. Please enter your job position" %>
             <br />
-            <%= text_field_tag "2" %>
+            <%= text_field_tag "q2" %>
         </div>
 
-        <div id="q3" class="questions">
-            <%= label_tag "3", "3. What project roles have you held in an SRDR project" %>
+        <div id="question3" class="questions">
+            <%= label_tag "q3", "3. What project roles have you held in an SRDR project" %>
             <br />
             <label class="category-select">
-                <%= check_box_tag "3[]", value="lead", checked=false %>
+                <%= check_box_tag "q3_lead", value="1", checked=false %>
                 Project lead
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "3[]", value="collaborator", checked=false %>
+                <%= check_box_tag "q3_collaborator", value="1", checked=false %>
                 Project collaborator
             </label>
         </div>
 
-        <div id="q4" class="questions">
+        <div id="question4" class="questions">
             <%= label_tag "4", "4. Will you be completing the remainder of this questionnaire based on only your personal experience with SRDR or based on the collective feedback of your evidence-based practice center (EPC)?" %>
             <br />
-            <%= radio_button_tag "4", "personal" %>
-            <%= label_tag "4_personal", "Just my personal experience" %>
+            <%= radio_button_tag "q4", "personal" %>
+            <%= label_tag "q4_personal", "Just my personal experience" %>
             <br />
-            <%= radio_button_tag "4", "collective" %>
-            <%= label_tag "4_collective", "Collective feedback from the EPC" %>
+            <%= radio_button_tag "q4", "collective" %>
+            <%= label_tag "q4_collective", "Collective feedback from the EPC" %>
         </div>
 
-        <div id="q5" class="questions">
+        <div id="question5" class="questions">
             <%= label_tag "5", "5. How many EPC projects have you/your EPC worked on in SRDR?" %>
             <br />
-            <%= radio_button_tag "5", "none" %>
-            <%= label_tag "5_none", "None" %>
+            <%= radio_button_tag "q5", "none" %>
+            <%= label_tag "q5_none", "None" %>
             <br />
-            <%= radio_button_tag "5", "one" %>
-            <%= label_tag "5_one", "One EPC project" %>
+            <%= radio_button_tag "q5", "one" %>
+            <%= label_tag "q5_one", "One EPC project" %>
             <br />
-            <%= radio_button_tag "5", "more" %>
-            <%= label_tag "5_more", "More than one EPC project" %>
+            <%= radio_button_tag "q5", "more" %>
+            <%= label_tag "q5_more", "More than one EPC project" %>
         </div>
 
-        <div id="q6" class="questions">
+        <div id="question6" class="questions">
             <%= label_tag "6", "6. Approximately when did you last access SRDR?" %>
             <br />
-            <%= label_tag "6_month", "Month (mm)" %>
-            <%= text_field_tag "6_month" %>
+            <%= label_tag "q6_month", "Month (mm)" %>
+            <%= text_field_tag "q6_month" %>
             <br />
-            <%= label_tag "6_year", "Year (yyyy)" %>
-            <%= text_field_tag "6_year" %>
+            <%= label_tag "q6_year", "Year (yyyy)" %>
+            <%= text_field_tag "q6_year" %>
         </div>
 
-        <div id="q7" class="questions">
+        <div id="question7" class="questions">
             <%= label_tag "7", "7. Have you ever worked with any of the following systematic review tools?" %>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="abstrackr", checked=false %>
+                <%= check_box_tag "q7_abstrackr", value="1", checked=false %>
                 abstrackR
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="openmeta", checked=false %>
+                <%= check_box_tag "q7_openmeta", value="1", checked=false %>
                 OpenMeta[Analyst]
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="distiller", checked=false %>
+                <%= check_box_tag "q7_distiller", value="1", checked=false %>
                 distiller
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="covidence", checked=false %>
+                <%= check_box_tag "q7_covidence", value="1", checked=false %>
                 covidence
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="docdata", checked=false %>
+                <%= check_box_tag "q7_docdata", value="1", checked=false %>
                 DOC&trade; Data
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="eros", checked=false %>
+                <%= check_box_tag "q7_eros", value="1", checked=false %>
                 EROS (Early Review Organizing Software)
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="sumari", checked=false %>
+                <%= check_box_tag "q7_sumari", value="1", checked=false %>
                 SUMARI (System for the Unified Management, Assessment and Review of Information)
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="cast", checked=false %>
+                <%= check_box_tag "q7_cast", value="1", checked=false %>
                 Cochrane Author Support Tool
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="rayyan", checked=false %>
+                <%= check_box_tag "q7_rayyan", value="1", checked=false %>
                 Rayyan
             </label>
             <br />
             <label class="category-select">
-                <%= check_box_tag "7[]", value="revman", checked=false %>
+                <%= check_box_tag "q7_revman", value="1", checked=false %>
                 RevMan
             </label>
             <br />
             <label class="category-select">
                 Other (please specify):
-                <%= text_field_tag "7[]" %>
+                <%= text_field_tag "q7_other" %>
             </label>
             <br />
         </div>
 
-        <div id="q8" class="questions">
+        <div id="question8" class="questions">
             <%= label_tag "8", "8. Would you recommend other researchers to use SRDR for data extraction over alternate systematic review tools (e.g. Distiller, Covidence, etc.)?" %>
             <br />
-            <%= radio_button_tag "8", "yes" %>
-            <%= label_tag "8_yes", "Yes" %>
+            <%= radio_button_tag "q8", "yes" %>
+            <%= label_tag "q8_yes", "Yes" %>
             <br />
-            <%= radio_button_tag "8", "no" %>
-            <%= label_tag "8_no", "No" %>
+            <%= radio_button_tag "q8", "no" %>
+            <%= label_tag "q8_no", "No" %>
             <br />
-            <%= radio_button_tag "8", "dont_know" %>
-            <%= label_tag "8_dont_know", "Don't Know" %>
+            <%= radio_button_tag "q8", "dont_know" %>
+            <%= label_tag "q8_dont_know", "Don't Know" %>
         </div>
     </div><!-- end of #page1 -->
 
     <div id="page2">
-        <div id="q9" class="questions">
-            <%= label_tag "9", "9. Overall, what do you like most about SRDR?" %>
+        <div id="question9" class="questions">
+            <%= label_tag "q9", "9. Overall, what do you like most about SRDR?" %>
             <br />
-            <%= text_area_tag "9", nil, size: "50x1" %>
+            <%= text_area_tag "q9", nil, size: "50x1" %>
         </div>
 
-        <div id="q10" class="questions">
-            <%= label_tag "10", "10. Overall, what do you like least about SRDR? If you have thoughts on how to fix it, please share them" %>
+        <div id="question10" class="questions">
+            <%= label_tag "q10", "10. Overall, what do you like least about SRDR? If you have thoughts on how to fix it, please share them" %>
             <br />
-            <%= text_area_tag "10", nil, size: "50x1" %>
+            <%= text_area_tag "q10", nil, size: "50x1" %>
         </div>
 
-        <div id="q11" class="questions">
+        <div id="question11" class="questions">
             <%= label_tag "11", "11. Does your EPC enter report data into SRDR prospectively (using SRDR's built-in data extraction functions and templates) or retrospectively (importing/uploading data from other software, such as Excel or Word)?" %>
             <br />
-            <%= radio_button_tag "11", "prospectively" %>
-            <%= label_tag "11_prospectively", "Prospectively" %>
+            <%= radio_button_tag "q11", "prospectively" %>
+            <%= label_tag "q11_prospectively", "Prospectively" %>
             <br />
-            <%= radio_button_tag "11", "retrospectively" %>
-            <%= label_tag "11_retrospectively", "Retrospectively" %>
+            <%= radio_button_tag "q11", "retrospectively" %>
+            <%= label_tag "q11_retrospectively", "Retrospectively" %>
             <br />
-            <%= radio_button_tag "11", "no_preference" %>
-            <%= label_tag "11_no_preference", "No Preference (equal chance of using either)" %>
+            <%= radio_button_tag "q11", "no_preference" %>
+            <%= label_tag "q11_no_preference", "No Preference (equal chance of using either)" %>
             <br />
-            <%= radio_button_tag "11", "dont_know" %>
-            <%= label_tag "11_dont_know", "Don't know" %>
+            <%= radio_button_tag "q11", "dont_know" %>
+            <%= label_tag "q11_dont_know", "Don't know" %>
         </div>
 
-        <div id="q12" class="questions">
+        <div id="question12" class="questions">
             <%= label_tag "12", "12. Preference for Entering Data into SRDR" %>
             <br />
-            <%= label_tag "12a", "a. If your EPC preferably enters data into SRDR prospectively, please briefly explain why" %>
+            <%= label_tag "q12a", "a. If your EPC preferably enters data into SRDR prospectively, please briefly explain why" %>
             <br />
-            <%= text_area_tag "12a", nil, size: "50x1" %>
+            <%= text_area_tag "q12a", nil, size: "50x1" %>
             <br />
-            <%= label_tag "12b", "b. If your EPC preferably enters data into SRDR retrospectively, please briefly explain why" %>
+            <%= label_tag "q12b", "b. If your EPC preferably enters data into SRDR retrospectively, please briefly explain why" %>
             <br />
-            <%= text_area_tag "12b", nil, size: "50x1" %>
+            <%= text_area_tag "q12b", nil, size: "50x1" %>
         </div>
 
-        <div id="q13" class="questions">
-            <%= label_tag "13", "13. For how many EPC reports have you added data into SRDR?" %>
+        <div id="question13" class="questions">
+            <%= label_tag "q13", "13. For how many EPC reports have you added data into SRDR?" %>
             <br />
-            <%= text_field_tag "13" %>
+            <%= text_field_tag "q13" %>
             <br />
         </div>
 
-        <div id="q14" class="questions">
+        <div id="question14" class="questions">
             <span>14. Approximately when was the last time that you entered data into SRDR?</span>
             <br />
             <span class="skip-message">(If Never, skip to question 25)</span>
             <br />
-            <%= check_box_tag "14", value="never", checked=false %>
-            <%= label_tag "14", "Never" %>
+            <%= check_box_tag "q14", value="never", checked=false %>
+            <%= label_tag "q14", "Never" %>
             <br />
-            <%= label_tag "14_month", "Month (mm)" %>
-            <%= text_field_tag "14_month" %>
+            <%= label_tag "q14_month", "Month (mm)" %>
+            <%= text_field_tag "q14_month" %>
             <br />
-            <%= label_tag "14_year", "Year (yyyy)" %>
-            <%= text_field_tag "14_year" %>
+            <%= label_tag "q14_year", "Year (yyyy)" %>
+            <%= text_field_tag "q14_year" %>
         </div>
 
-        <div id="q15" class="questions">
+        <div id="question15" class="questions">
             <%= label_tag "15", "15. The last time you entered data into SRDR, were the data entered prospectively or retrospectively?" %>
             <br />
-            <%= radio_button_tag "15", "prospectively" %>
-            <%= label_tag "15_prospectively", "Prospectively" %>
+            <%= radio_button_tag "q15", "prospectively" %>
+            <%= label_tag "q15_prospectively", "Prospectively" %>
             <br />
-            <%= radio_button_tag "15", "retrospectively" %>
-            <%= label_tag "15_retrospectively", "Retrospectively" %>
+            <%= radio_button_tag "q15", "retrospectively" %>
+            <%= label_tag "q15_retrospectively", "Retrospectively" %>
             <br />
-            <%= radio_button_tag "15", "dont_know" %>
-            <%= label_tag "15_dont_know", "Don't know" %>
+            <%= radio_button_tag "q15", "dont_know" %>
+            <%= label_tag "q15_dont_know", "Don't know" %>
         </div>
 
-        <div id="q16" class="questions">
+        <div id="question16" class="questions">
             <%= label_tag "16", "16. How often do you enter data prospectively into SRDR?" %>
             <br />
             <span class="skip-message">(If Never, skip to question 18)</span>
             <br />
-            <%= radio_button_tag "16", "always" %>
-            <%= label_tag "16_always", "Always (For every EPC report entered into SRDR)" %>
+            <%= radio_button_tag "q16", "always" %>
+            <%= label_tag "q16_always", "Always (For every EPC report entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "16", "often" %>
-            <%= label_tag "16_often", "Often (For about 3/4 of EPC reports entered into sRDR)" %>
+            <%= radio_button_tag "q16", "often" %>
+            <%= label_tag "q16_often", "Often (For about 3/4 of EPC reports entered into sRDR)" %>
             <br />
-            <%= radio_button_tag "16", "sometimes" %>
-            <%= label_tag "16_sometimes", "Sometimes (For about 1/2 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q16", "sometimes" %>
+            <%= label_tag "q16_sometimes", "Sometimes (For about 1/2 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "16", "not_often" %>
-            <%= label_tag "16_not_often", "Not often (For about 1/4/ of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q16", "not_often" %>
+            <%= label_tag "q16_not_often", "Not often (For about 1/4/ of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "16", "never" %>
-            <%= label_tag "16_never", "Never" %>
+            <%= radio_button_tag "q16", "never" %>
+            <%= label_tag "q16_never", "Never" %>
         </div>
 
-        <div id="q17" class="questions">
+        <div id="question17" class="questions">
             <%= label_tag "17", "17. Please select the appropriate option" %>
             <br />
             <table class="table table-striped">
@@ -256,59 +256,59 @@
                 </tr>
                 <tr>
                     <td>17a. It was easy to enter data prospectively into SRDR</td>
-                    <td><%= radio_button_tag "17a", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "17a", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "17a", "neutral" %></td>
-                    <td><%= radio_button_tag "17a", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "17a", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "17a", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q17a", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q17a", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17a", "neutral" %></td>
+                    <td><%= radio_button_tag "q17a", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17a", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q17a", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>17b. I saved time entering data prospectively into SRDR compared to using non-SRDR alternatives for extracting data (e.g.  Distiller, Microsoft Excel, Covidence)</td>
-                    <td><%= radio_button_tag "17b", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "17b", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "17b", "neutral" %></td>
-                    <td><%= radio_button_tag "17b", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "17b", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "17b", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q17b", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q17b", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17b", "neutral" %></td>
+                    <td><%= radio_button_tag "q17b", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17b", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q17b", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>17c. Entering data prospectively into SRDR met my expectations for data extraction</td>
-                    <td><%= radio_button_tag "17c", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "17c", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "17c", "neutral" %></td>
-                    <td><%= radio_button_tag "17c", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "17c", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "17c", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q17c", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q17c", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17c", "neutral" %></td>
+                    <td><%= radio_button_tag "q17c", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17c", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q17c", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>17d. I would want to enter data prospectively into SRDR for another EPC report</td>
-                    <td><%= radio_button_tag "17d", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "17d", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "17d", "neutral" %></td>
-                    <td><%= radio_button_tag "17d", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "17d", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "17d", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q17d", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q17d", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17d", "neutral" %></td>
+                    <td><%= radio_button_tag "q17d", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17d", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q17d", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>17e. I would encourage other researchers to enter data prospectively into SRDR</td>
-                    <td><%= radio_button_tag "17e", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "17e", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "17e", "neutral" %></td>
-                    <td><%= radio_button_tag "17e", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "17e", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "17e", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q17e", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q17e", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17e", "neutral" %></td>
+                    <td><%= radio_button_tag "q17e", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q17e", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q17e", "no_opinion" %></td>
                 </tr>
             </table>
         </div>
 
-        <div id="q18" class="questions">
-            <%= label_tag "18", "18. How would you improve the way in which data are entered prospectively into SRDR?" %>
+        <div id="question18" class="questions">
+            <%= label_tag "q18", "18. How would you improve the way in which data are entered prospectively into SRDR?" %>
             <br />
-            <%= text_area_tag "18", nil, size: "50x1" %>
+            <%= text_area_tag "q18", nil, size: "50x1" %>
         </div>
 
-        <div id="q19" class="questions">
+        <div id="question19" class="questions">
 
             <span class="info">Questions 19-21 refer to using the Data Import tool, specifically, to enter data retrospectively into SRDR</span>
             <br />
@@ -318,23 +318,23 @@
             <br />
             <span class="skip-message">(If Never, skip to question 21)</span>
             <br />
-            <%= radio_button_tag "19", "always" %>
-            <%= label_tag "19_always", "Always (For every EPC report entered into SRDR)" %>
+            <%= radio_button_tag "q19", "always" %>
+            <%= label_tag "q19_always", "Always (For every EPC report entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "19", "often" %>
-            <%= label_tag "19_often", "Often (For about 3/4 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q19", "often" %>
+            <%= label_tag "q19_often", "Often (For about 3/4 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "19", "sometimes" %>
-            <%= label_tag "19_sometimes", "Sometimes (For about 1/2 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q19", "sometimes" %>
+            <%= label_tag "q19_sometimes", "Sometimes (For about 1/2 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "19", "not_often" %>
-            <%= label_tag "19_not_often", "Not often (For about 1/4 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q19", "not_often" %>
+            <%= label_tag "q19_not_often", "Not often (For about 1/4 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "19", "never" %>
-            <%= label_tag "19_never", "Never" %>
+            <%= radio_button_tag "q19", "never" %>
+            <%= label_tag "q19_never", "Never" %>
         </div>
 
-        <div id="q20" class="questions">
+        <div id="question20" class="questions">
             <%= label_tag "20", "20. Please select the appropriate option" %>
             <br />
             <table class="table table-striped">
@@ -349,68 +349,68 @@
                 </tr>
                 <tr>
                     <td>20a. It was easy to use the SRDR Data Import tool to enter data retrospectively into SRDR by importing data directly into SRDR extraction form templates</td>
-                    <td><%= radio_button_tag "20a", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "20a", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "20a", "neutral" %></td>
-                    <td><%= radio_button_tag "20a", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "20a", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "20a", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q20a", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q20a", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20a", "neutral" %></td>
+                    <td><%= radio_button_tag "q20a", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20a", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q20a", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>20b. I am satisfied with using the Data Import tool to enter data retrospectively into SRDR</td>
-                    <td><%= radio_button_tag "20b", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "20b", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "20b", "neutral" %></td>
-                    <td><%= radio_button_tag "20b", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "20b", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "20b", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q20b", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q20b", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20b", "neutral" %></td>
+                    <td><%= radio_button_tag "q20b", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20b", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q20b", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>20c. I would want to enter data for another EPC report retrospectively into SRDR, using just the Data Import tool</td>
-                    <td><%= radio_button_tag "20c", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "20c", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "20c", "neutral" %></td>
-                    <td><%= radio_button_tag "20c", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "20c", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "20c", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q20c", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q20c", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20c", "neutral" %></td>
+                    <td><%= radio_button_tag "q20c", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20c", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q20c", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>20d. I would want to enter data into SRDR for another EPC report using a combination of the Data Import tool and prospective data entry</td>
-                    <td><%= radio_button_tag "20d", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "20d", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "20d", "neutral" %></td>
-                    <td><%= radio_button_tag "20d", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "20d", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "20d", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q20d", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q20d", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20d", "neutral" %></td>
+                    <td><%= radio_button_tag "q20d", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20d", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q20d", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>20e. I would encourage other researchers to enter data prospectively into SRDR</td>
-                    <td><%= radio_button_tag "20e", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "20e", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "20e", "neutral" %></td>
-                    <td><%= radio_button_tag "20e", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "20e", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "20e", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q20e", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q20e", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20e", "neutral" %></td>
+                    <td><%= radio_button_tag "q20e", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20e", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q20e", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>20f. I would encourage other researchers to use the Data Import tool to enter data into SRDR</td>
-                    <td><%= radio_button_tag "20f", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "20f", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "20f", "neutral" %></td>
-                    <td><%= radio_button_tag "20f", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "20f", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "20f", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q20f", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q20f", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20f", "neutral" %></td>
+                    <td><%= radio_button_tag "q20f", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q20f", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q20f", "no_opinion" %></td>
                 </tr>
             </table>
         </div>
 
-        <div id="q21" class="questions">
-            <%= label_tag "21", "21. How would you improve the process of entering data retrospectively into SRDR using the SRDR Data Import tool?" %>
+        <div id="question21" class="questions">
+            <%= label_tag "q21", "21. How would you improve the process of entering data retrospectively into SRDR using the SRDR Data Import tool?" %>
             <br />
-            <%= text_area_tag "21", nil, size: "50x1" %>
+            <%= text_area_tag "q21", nil, size: "50x1" %>
         </div>
 
-        <div id="q22" class="questions">
+        <div id="question22" class="questions">
 
             <span class="info">Questions 22-24 refer to using the Report Manager tool, specifically, to enter data retrospectively into SRDR</span>
             <br />
@@ -420,23 +420,23 @@
             <br />
             <span class="skip-message">(If Never, skip to question 24)</span>
             <br />
-            <%= radio_button_tag "22", "always" %>
-            <%= label_tag "22_always", "Always (For every EPC report entered into SRDR)" %>
+            <%= radio_button_tag "q22", "always" %>
+            <%= label_tag "q22_always", "Always (For every EPC report entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "22", "often" %>
-            <%= label_tag "22_often", "Often (For about 3/4 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q22", "often" %>
+            <%= label_tag "q22_often", "Often (For about 3/4 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "22", "sometimes" %>
-            <%= label_tag "22_sometimes", "Sometimes (For about 1/2 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q22", "sometimes" %>
+            <%= label_tag "q22_sometimes", "Sometimes (For about 1/2 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "22", "not_often" %>
-            <%= label_tag "22_not_often", "Not often (For about 1/4 of EPC reports entered into SRDR)" %>
+            <%= radio_button_tag "q22", "not_often" %>
+            <%= label_tag "q22_not_often", "Not often (For about 1/4 of EPC reports entered into SRDR)" %>
             <br />
-            <%= radio_button_tag "22", "never" %>
-            <%= label_tag "22_never", "Never" %>
+            <%= radio_button_tag "q22", "never" %>
+            <%= label_tag "q22_never", "Never" %>
         </div>
 
-        <div id="q23" class="questions">
+        <div id="question23" class="questions">
             <%= label_tag "23", "23. Please select the appropriate option" %>
             <br />
             <table class="table table-striped">
@@ -451,77 +451,77 @@
                 </tr>
                 <tr>
                     <td>23a. It was easy to use the SRDR Report Manager tool to enter data retrospectively into SRDR</td>
-                    <td><%= radio_button_tag "23a", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "23a", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "23a", "neutral" %></td>
-                    <td><%= radio_button_tag "23a", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "23a", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "23a", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q23a", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q23a", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23a", "neutral" %></td>
+                    <td><%= radio_button_tag "q23a", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23a", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q23a", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>23b. I am satisfied with using the Report Manager tool to enter data retrospectively into SRDR</td>
-                    <td><%= radio_button_tag "23b", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "23b", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "23b", "neutral" %></td>
-                    <td><%= radio_button_tag "23b", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "23b", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "23b", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q23b", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q23b", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23b", "neutral" %></td>
+                    <td><%= radio_button_tag "q23b", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23b", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q23b", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>23c. I would want to enter data for another EPC report retrospectively into SRDR using a combination of the Data Import tool and the Report Manager tool</td>
-                    <td><%= radio_button_tag "23c", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "23c", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "23c", "neutral" %></td>
-                    <td><%= radio_button_tag "23c", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "23c", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "23c", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q23c", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q23c", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23c", "neutral" %></td>
+                    <td><%= radio_button_tag "q23c", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23c", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q23c", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>23d. I would encourage other researchers to use the Report Manager tools to enter data retrospectively into SRDR</td>
-                    <td><%= radio_button_tag "23d", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "23d", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "23d", "neutral" %></td>
-                    <td><%= radio_button_tag "23d", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "23d", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "23d", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q23d", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q23d", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23d", "neutral" %></td>
+                    <td><%= radio_button_tag "q23d", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q23d", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q23d", "no_opinion" %></td>
                 </tr>
             </table>
         </div>
 
-        <div id="q24" class="questions">
-            <%= label_tag "24", "24. How would you improve the process of entering data retrospectively into SRDR using the Report Manager tool?" %>
+        <div id="question24" class="questions">
+            <%= label_tag "q24", "24. How would you improve the process of entering data retrospectively into SRDR using the Report Manager tool?" %>
             <br />
-            <%= text_area_tag "24", nil, size: "50x1" %>
+            <%= text_area_tag "q24", nil, size: "50x1" %>
         </div>
     </div><!-- end of #page2 -->
 
     <div id="page3">
-        <div id="q25" class="questions">
+        <div id="question25" class="questions">
             <%= label_tag "25", "25. Are you aware that SRDR hosts live webinars for EPCs every 3 to 4 months?" %>
             <br />
-            <%= radio_button_tag "25", "yes" %>
-            <%= label_tag "25_yes", "Yes" %>
+            <%= radio_button_tag "q25", "yes" %>
+            <%= label_tag "q25_yes", "Yes" %>
             <br />
-            <%= radio_button_tag "25", "no" %>
-            <%= label_tag "25_no", "No" %>
+            <%= radio_button_tag "q25", "no" %>
+            <%= label_tag "q25_no", "No" %>
         </div>
 
-        <div id="q26" class="questions">
+        <div id="question26" class="questions">
             <%= label_tag "26", "26. Approximately when was the last time that you attended an SRDR live webinar?" %>
             <br />
             <span class="skip-message">(If Never, skip to question 28)</span>
             <br />
-            <%= check_box_tag "26", value="never", checked=false %>
-            <%= label_tag "26", "Never" %>
+            <%= check_box_tag "q26", value="never", checked=false %>
+            <%= label_tag "q26", "Never" %>
             <br />
-            <%= label_tag "26_month", "Month (mm)" %>
-            <%= text_field_tag "26_month" %>
+            <%= label_tag "q26_month", "Month (mm)" %>
+            <%= text_field_tag "q26_month" %>
             <br />
-            <%= label_tag "26_year", "Year (yyyy)" %>
-            <%= text_field_tag "26_year" %>
+            <%= label_tag "q26_year", "Year (yyyy)" %>
+            <%= text_field_tag "q26_year" %>
         </div>
 
-        <div id="q27" class="questions">
+        <div id="question27" class="questions">
             <%= label_tag "27", "27. Please select the appropriate option" %>
             <br />
             <table class="table table-striped">
@@ -536,66 +536,66 @@
                 </tr>
                 <tr>
                     <td>27a. I found the SRDR live webinar(s) I attended to be helpful introductions to new SRDR tools and features</td>
-                    <td><%= radio_button_tag "27a", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "27a", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "27a", "neutral" %></td>
-                    <td><%= radio_button_tag "27a", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "27a", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "27a", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q27a", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q27a", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q27a", "neutral" %></td>
+                    <td><%= radio_button_tag "q27a", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q27a", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q27a", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>27b. After watching a live webinar, I was confident that I could incorporate new SRDR tools and features into my SRDR projects</td>
-                    <td><%= radio_button_tag "27b", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "27b", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "27b", "neutral" %></td>
-                    <td><%= radio_button_tag "27b", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "27b", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "27b", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q27b", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q27b", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q27b", "neutral" %></td>
+                    <td><%= radio_button_tag "q27b", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q27b", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q27b", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>27c. I would recommend other researchers to attend future SRDR live webinars</td>
-                    <td><%= radio_button_tag "27c", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "27c", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "27c", "neutral" %></td>
-                    <td><%= radio_button_tag "27c", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "27c", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "27c", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q27c", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q27c", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q27c", "neutral" %></td>
+                    <td><%= radio_button_tag "q27c", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q27c", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q27c", "no_opinion" %></td>
                 </tr>
             </table>
         </div>
 
-        <div id="q28" class="questions">
-            <%= label_tag "28", "28. How would you improve the quarterly training webinars?" %>
+        <div id="question28" class="questions">
+            <%= label_tag "q28", "28. How would you improve the quarterly training webinars?" %>
             <br />
-            <%= text_area_tag "28", nil, size: "50x1" %>
+            <%= text_area_tag "q28", nil, size: "50x1" %>
         </div>
 
-        <div id="q29" class="questions">
+        <div id="question29" class="questions">
             <%= label_tag "29", "29. Are you aware that the SRDR Help & Training page (srdr.ahrq.gov/help) contains an SRDR Manual, Frequently Asked Questions section, Video Tutorials, and External Resources?" %>
             <br />
-            <%= radio_button_tag "29", "yes" %>
-            <%= label_tag "29_yes", "Yes" %>
+            <%= radio_button_tag "q29", "yes" %>
+            <%= label_tag "q29_yes", "Yes" %>
             <br />
-            <%= radio_button_tag "29", "no" %>
-            <%= label_tag "29_no", "No" %>
+            <%= radio_button_tag "q29", "no" %>
+            <%= label_tag "q29_no", "No" %>
         </div>
 
-        <div id="q30" class="questions">
+        <div id="question30" class="questions">
             <%= label_tag "30", "30. Approximately when was the last time that you went to any of the Help & Training pages?" %>
             <br />
             <span class="skip-message">(If Never, skip to question 32)</span>
             <br />
-            <%= check_box_tag "30", value="never", checked=false %>
-            <%= label_tag "30", "Never" %>
+            <%= check_box_tag "q30", value="never", checked=false %>
+            <%= label_tag "q30", "Never" %>
             <br />
-            <%= label_tag "30_month", "Month (mm)" %>
-            <%= text_field_tag "30_month" %>
+            <%= label_tag "q30_month", "Month (mm)" %>
+            <%= text_field_tag "q30_month" %>
             <br />
-            <%= label_tag "30_year", "Year (yyyy)" %>
-            <%= text_field_tag "30_year" %>
+            <%= label_tag "q30_year", "Year (yyyy)" %>
+            <%= text_field_tag "q30_year" %>
         </div>
 
-        <div id="q31" class="questions">
+        <div id="question31" class="questions">
             <%= label_tag "31", "31. Please select the appropriate option" %>
             <br />
             <table class="table table-striped">
@@ -610,112 +610,112 @@
                 </tr>
                 <tr>
                     <td>31a. I was able to easily find answers to my questions in the SRDR User Manual and Frequently Asked Questions sections of the SRDR Help & Training page</td>
-                    <td><%= radio_button_tag "31a", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "31a", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "31a", "neutral" %></td>
-                    <td><%= radio_button_tag "31a", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "31a", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "31a", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q31a", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q31a", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q31a", "neutral" %></td>
+                    <td><%= radio_button_tag "q31a", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q31a", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q31a", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>31b. The videos on the Video Tutorials tab of the SRDR Help & Training page helped me gain confidence in using SRDR tools and features</td>
-                    <td><%= radio_button_tag "31b", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "31b", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "31b", "neutral" %></td>
-                    <td><%= radio_button_tag "31b", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "31b", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "31b", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q31b", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q31b", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q31b", "neutral" %></td>
+                    <td><%= radio_button_tag "q31b", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q31b", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q31b", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>31c. The documents and URL links available on the external resources section proved useful in helping me to design my systematic review</td>
-                    <td><%= radio_button_tag "31c", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "31c", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "31c", "neutral" %></td>
-                    <td><%= radio_button_tag "31c", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "31c", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "31c", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q31c", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q31c", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q31c", "neutral" %></td>
+                    <td><%= radio_button_tag "q31c", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q31c", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q31c", "no_opinion" %></td>
                 </tr>
             </table>
         </div>
 
-        <div id="q32" class="questions">
-            <%= label_tag "32", "32. How would you improve the SRDR Help & Training page?" %>
+        <div id="question32" class="questions">
+            <%= label_tag "q32", "32. How would you improve the SRDR Help & Training page?" %>
             <br />
-            <%= text_area_tag "32", nil, size: "50x1" %>
+            <%= text_area_tag "q32", nil, size: "50x1" %>
         </div>
     </div><!-- end of #page3 -->
 
     <div id="page4">
-        <div id="q33" class="questions">
+        <div id="question33" class="questions">
             <%= label_tag "33", "33. Prior to completing this survey, were you aware that SRDR offers technical and instructional support to all SRDR users who contact the SRDR Support Team via email at SRDR@ahrq.hhs.gov or phone at 401- 863-5791?" %>
             <br />
-            <%= radio_button_tag "33", "yes" %>
-            <%= label_tag "33_yes", "Yes" %>
+            <%= radio_button_tag "q33", "yes" %>
+            <%= label_tag "q33_yes", "Yes" %>
             <br />
-            <%= radio_button_tag "33", "no" %>
-            <%= label_tag "33_no", "No" %>
+            <%= radio_button_tag "q33", "no" %>
+            <%= label_tag "q33_no", "No" %>
         </div>
 
-        <div id="q34" class="questions">
+        <div id="question34" class="questions">
             <%= label_tag "34", "34. Approximately when was the last time that you contacted the SRDR Support Team?" %>
             <br />
             <span class="skip-message">(If Never, skip to question 36)</span>
             <br />
-            <%= check_box_tag "34", value="never", checked=false %>
-            <%= label_tag "34", "Never" %>
+            <%= check_box_tag "q34", value="never", checked=false %>
+            <%= label_tag "q34", "Never" %>
             <br />
-            <%= label_tag "34_month", "Month (mm)" %>
-            <%= text_field_tag "34_month" %>
+            <%= label_tag "q34_month", "Month (mm)" %>
+            <%= text_field_tag "q34_month" %>
             <br />
-            <%= label_tag "34_year", "Year (yyyy)" %>
-            <%= text_field_tag "34_year" %>
+            <%= label_tag "q34_year", "Year (yyyy)" %>
+            <%= text_field_tag "q34_year" %>
         </div>
 
-        <div id="q35" class="questions">
+        <div id="question35" class="questions">
             <%= label_tag "35", "35. How responsive was SRDR Support staff to your request(s)?" %>
             <br />
-            <%= radio_button_tag "35", "extremely" %>
-            <%= label_tag "35_extremely", "Extremely responsive" %>
+            <%= radio_button_tag "q35", "extremely" %>
+            <%= label_tag "q35_extremely", "Extremely responsive" %>
             <br />
-            <%= radio_button_tag "35", "moderately" %>
-            <%= label_tag "35_moderately", "Moderately responsive" %>
+            <%= radio_button_tag "q35", "moderately" %>
+            <%= label_tag "q35_moderately", "Moderately responsive" %>
             <br />
-            <%= radio_button_tag "35", "not" %>
-            <%= label_tag "35_not", "Not at all responsive" %>
+            <%= radio_button_tag "q35", "not" %>
+            <%= label_tag "q35_not", "Not at all responsive" %>
         </div>
 
-        <div id="q36" class="questions">
+        <div id="question36" class="questions">
             <%= label_tag "36", "36. Are you aware of the Abstrackr abstract-screening tool located athttp://abstrackr.cebm.brown.edu?" %>
             <br />
-            <%= radio_button_tag "36", "yes" %>
-            <%= label_tag "36_yes", "Yes" %>
+            <%= radio_button_tag "q36", "yes" %>
+            <%= label_tag "q36_yes", "Yes" %>
             <br />
-            <%= radio_button_tag "36", "no" %>
-            <%= label_tag "36_no", "No" %>
+            <%= radio_button_tag "q36", "no" %>
+            <%= label_tag "q36_no", "No" %>
         </div>
 
-        <div id="q37" class="questions">
-            <%= label_tag "37", "37. What software or method do (or did) you use to screen abstracts, other than Abstrackr?" %>
+        <div id="question37" class="questions">
+            <%= label_tag "q37", "37. What software or method do (or did) you use to screen abstracts, other than Abstrackr?" %>
             <br />
-            <%= text_area_tag "37", nil, size: "50x1" %>
+            <%= text_area_tag "q37", nil, size: "50x1" %>
         </div>
 
-        <div id="q38" class="questions">
+        <div id="question38" class="questions">
             <%= label_tag "38", "38. Approximately when was the last time that you used the Abstrackr screening tool?" %>
             <br />
             <span class="skip-message">(If Never, skip to question 40)</span>
             <br />
-            <%= check_box_tag "38", value="never", checked=false %>
-            <%= label_tag "38", "Never" %>
+            <%= check_box_tag "q38", value="never", checked=false %>
+            <%= label_tag "q38", "Never" %>
             <br />
-            <%= label_tag "38_month", "Month (mm)" %>
-            <%= text_field_tag "38_month" %>
+            <%= label_tag "q38_month", "Month (mm)" %>
+            <%= text_field_tag "q38_month" %>
             <br />
-            <%= label_tag "38_year", "Year (yyyy)" %>
-            <%= text_field_tag "38_year" %>
+            <%= label_tag "q38_year", "Year (yyyy)" %>
+            <%= text_field_tag "q38_year" %>
         </div>
 
-        <div id="q39" class="questions">
+        <div id="question39" class="questions">
             <%= label_tag "39", "39. Please select the appropriate option" %>
             <br />
             <table class="table table-striped">
@@ -730,53 +730,53 @@
                 </tr>
                 <tr>
                     <td>39a. It was easy to screen abstracts using Abstrackr</td>
-                    <td><%= radio_button_tag "39a", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "39a", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "39a", "neutral" %></td>
-                    <td><%= radio_button_tag "39a", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "39a", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "39a", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q39a", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q39a", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39a", "neutral" %></td>
+                    <td><%= radio_button_tag "q39a", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39a", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q39a", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>39b. I saved time screening abstracts using Abstrackr compared to screening abstracts by other methods</td>
-                    <td><%= radio_button_tag "39b", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "39b", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "39b", "neutral" %></td>
-                    <td><%= radio_button_tag "39b", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "39b", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "39b", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q39b", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q39b", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39b", "neutral" %></td>
+                    <td><%= radio_button_tag "q39b", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39b", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q39b", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>39c. Abstrackr met my expectations for screening abstracts</td>
-                    <td><%= radio_button_tag "39c", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "39c", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "39c", "neutral" %></td>
-                    <td><%= radio_button_tag "39c", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "39c", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "39c", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q39c", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q39c", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39c", "neutral" %></td>
+                    <td><%= radio_button_tag "q39c", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39c", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q39c", "no_opinion" %></td>
                 </tr>
                 <tr>
                     <td>39d. I would encourage other researchers to screen abstracts using Abstrackr</td>
-                    <td><%= radio_button_tag "39d", "agree_strongly" %></td>
-                    <td><%= radio_button_tag "39d", "agree_somewhat" %></td>
-                    <td><%= radio_button_tag "39d", "neutral" %></td>
-                    <td><%= radio_button_tag "39d", "disagree_somewhat" %></td>
-                    <td><%= radio_button_tag "39d", "disagree_strongly" %></td>
-                    <td><%= radio_button_tag "39d", "no_opinion" %></td>
+                    <td><%= radio_button_tag "q39d", "agree_strongly" %></td>
+                    <td><%= radio_button_tag "q39d", "agree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39d", "neutral" %></td>
+                    <td><%= radio_button_tag "q39d", "disagree_somewhat" %></td>
+                    <td><%= radio_button_tag "q39d", "disagree_strongly" %></td>
+                    <td><%= radio_button_tag "q39d", "no_opinion" %></td>
                 </tr>
             </table>
         </div>
 
-        <div id="q40" class="questions">
-            <%= label_tag "40", "40. How would you improve the process of screening abstracts using Abstrackr?" %>
+        <div id="question40" class="questions">
+            <%= label_tag "q40", "40. How would you improve the process of screening abstracts using Abstrackr?" %>
             <br />
-            <%= text_area_tag "40", nil, size: "50x1" %>
+            <%= text_area_tag "q40", nil, size: "50x1" %>
         </div>
 
-        <div id="q41" class="questions">
-            <%= label_tag "41", "41. If you could design a single online tool to assist you in conducting systematic reviews and EPC reports, what would it look like?" %>
+        <div id="question41" class="questions">
+            <%= label_tag "q41", "41. If you could design a single online tool to assist you in conducting systematic reviews and EPC reports, what would it look like?" %>
             <br />
-            <%= text_area_tag "41", nil, size: "50x1" %>
+            <%= text_area_tag "q41", nil, size: "50x1" %>
         </div>
     </div><!-- end of #page4 -->
 
