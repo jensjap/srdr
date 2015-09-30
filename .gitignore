@@ -9,6 +9,7 @@ Gemfile.lock
 
 # Ignore vim swap files
 *.swp
+*.un~
 
 # Ignore configuration files
 config/application.rb

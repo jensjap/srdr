@@ -56,7 +56,14 @@ $(document).ready(function(){
 						<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "methodology", :study_id => -1, :project_id => @project.id} %>
 				</td>				
 			</tr>
-			<% end %>
+	        <% end %>
+		<tr>
+			<td class="label" style="width:120px">DOI</td>
+			<td><%= @project.doi_id %></td>
+			<td class="comment_td">
+				<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "doi", :study_id => -1, :project_id => @project.id} %>
+			</td>
+		</tr>
 		<% if !@project.funding_source.nil? && @project.funding_source != "" %>
 			<tr>
 				<td class="label">Funding Source</td>
