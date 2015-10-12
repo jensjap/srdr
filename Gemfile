@@ -29,6 +29,7 @@ gem 'roo'
 gem 'rubyXL'
 gem 'axlsx'
 gem 'daemons'
+gem 'fuzzy-string-match'
 
 group :development, :test do
     gem 'rspec-rails', '2.11.0'

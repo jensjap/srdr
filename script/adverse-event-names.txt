@@ -1,0 +1,336 @@
+Body System: Body As A Whole
+Abdominal Pain (Body As A Whole)
+Abscess (Body As A Whole)
+Accidental Injury (Body As A Whole)
+Asthenia (Body As A Whole)
+Back Pain (Body As A Whole)
+Cellulitis (Body As A Whole)
+Chest Pain (Body As A Whole)
+Cyst (Body As A Whole)
+Face Edema (Body As A Whole)
+Flu Syndrome (Body As A Whole)
+Headache (Body As A Whole)
+Hernia (Body As A Whole)
+Infection (Body As A Whole)
+Abnormal Lab Test (Body As A Whole)
+Pain (Body As A Whole)
+Reaction Unevaluable (Body As A Whole)
+Sepsis (Body As A Whole)
+Body System: Cardiovascular System
+Arrhythmia (Cardiovascular System)
+Cardiovascular Disorder (Cardiovascular System)
+Cerebrovascular Disorder (Cardiovascular System)
+Congestive Heart Failure (Cardiovascular System)
+Hemorrhage (Cardiovascular System)
+Myocardial Infarction (Cardiovascular System)
+Syncope (Cardiovascular System)
+Vasodilatation (Cardiovascular System)
+Body System: Digestive System
+Anorexia (Digestive System)
+Cholecystitis (Digestive System)
+Cholelithiasis (Digestive System)
+Colitis (Digestive System)
+Constipation (Digestive System)
+Diarrhea (Digestive System)
+Dry Mouth (Digestive System)
+Dyspepsia (Digestive System)
+Fecal Incontinence (Digestive System)
+Flatulence (Digestive System)
+Increased Appetite (Digestive System)
+Intestinal Obstruction (Digestive System)
+Intestinal Ulcer (Digestive System)
+Liver Function Tests Abnormal (Digestive System)
+Melena (Digestive System)
+Nausea (Digestive System)
+Rectal Hemorrhage (Digestive System)
+Thirst (Digestive System)
+Tooth Disorder (Digestive System)
+Vomiting (Digestive System)
+Body System: Endocrine System
+Diabetes Mellitus (Endocrine System)
+Body System: Hemic And Lymphatic System
+Anemia (Hemic And Lymphatic System)
+Ecchymosis (Hemic And Lymphatic System)
+Body System: Metabolic And Nutritional Disorder
+Alkaline Phosphatase Increased (Metabolic And Nutritional Disorders)
+Bun Increased (Metabolic And Nutritional Disorders)
+Edema (Metabolic And Nutritional Disorders)
+Glucose Tolerance Decreased (Metabolic And Nutritional Disorders)
+Gout (Metabolic And Nutritional Disorders)
+Hyperglycemia (Metabolic And Nutritional Disorders)
+Lactic Dehydrogenase Increased (Metabolic And Nutritional Disorders)
+Peripheral Edema (Metabolic And Nutritional Disorders)
+Sgot Increased (Metabolic And Nutritional Disorders)
+Sgpt Increased (Metabolic And Nutritional Disorders)
+Body System: Musculoskeletal System
+Arthralgia (Musculoskeletal System)
+Arthritis (Musculoskeletal System)
+Leg Cramps (Musculoskeletal System)
+Myalgia (Musculoskeletal System)
+Myasthenia (Musculoskeletal System)
+Rheumathoid Arthritis (Musculoskeletal System)
+Body System: Nervous System
+Abnormal Dreams (Nervous System)
+Amnesia (Nervous System)
+Anxiety (Nervous System)
+Ataxia (Nervous System)
+Circumoral Paresthesia (Nervous System)
+Confusion (Nervous System)
+Depression (Nervous System)
+Dizziness (Nervous System)
+Emotional Lability (Nervous System)
+Hypesthesia (Nervous System)
+Incoordination (Nervous System)
+Insomnia (Nervous System)
+Movement Disorder (Nervous System)
+Myoclonus (Nervous System)
+Nervousness (Nervous System)
+Neuropathy (Nervous System)
+Nystagmus (Nervous System)
+Paresthesia (Nervous System)
+Reflexes Decreased (Nervous System)
+Somnolence (Nervous System)
+Speech Disorder (Nervous System)
+Thinking Abnormal (Nervous System)
+Tremor (Nervous System)
+Vertigo (Nervous System)
+Body System: Respiratory System
+Asthma (Respiratory System)
+Bronchitis (Respiratory System)
+Carcinoma Of Lung (Respiratory System)
+Cough Increased (Respiratory System)
+Dyspnea (Respiratory System)
+Lung Disorder (Respiratory System)
+Pharyngitis (Respiratory System)
+Pneumonia (Respiratory System)
+Rhinitis (Respiratory System)
+Sinusitis (Respiratory System)
+Body System: Skin And Appendages
+Acne (Skin And Appendages)
+Dry Skin (Skin And Appendages)
+Herpes Simplex (Skin And Appendages)
+Pruritus (Skin And Appendages)
+Skin Benign Neoplasia (Skin And Appendages)
+Skin Disorder (Skin And Appendages)
+Skin Ulcer (Skin And Appendages)
+Sweating (Skin And Appendages)
+Body System: Special Senses
+Abnormal Vision (Special Senses)
+Amblyopia (Special Senses)
+Conjunctivitis (Special Senses)
+Deafness (Special Senses)
+Diplopia (Special Senses)
+Ear Disorder (Special Senses)
+Ear Pain (Special Senses)
+Eye Disorder (Special Senses)
+Otitis Media (Special Senses)
+Body System: Urogenital System
+Penis Disorder (Urogenital System)
+Scrotal Edema (Urogenital System)
+Urethral Pain (Urogenital System)
+Urinary Frequency (Urogenital System)
+Urinary Retention (Urogenital System)
+Any Adverse Event, Mild
+Any Adverse Event, Moderate
+Any Adverse Event, Severe
+Abdominal Pain (Body As A Whole), Mild
+Abdominal Pain (Body As A Whole), Moderate
+Abdominal Pain (Body As A Whole), Severe
+Abscess (Body As A Whole), Mild
+Abscess (Body As A Whole), Moderate
+Abscess (Body As A Whole), Severe
+Accidental Injury (Body As A Whole), Mild
+Accidental Injury (Body As A Whole), Moderate
+Accidental Injury (Body As A Whole), Severe
+Asthenia (Body As A Whole), Mild
+Asthenia (Body As A Whole), Moderate
+Asthenia (Body As A Whole), Severe
+Back Pain (Body As A Whole), Mild
+Back Pain (Body As A Whole), Moderate
+Back Pain (Body As A Whole), Severe
+Cellulitis (Body As A Whole), Mild
+Cellulitis (Body As A Whole), Moderate
+Cellulitis (Body As A Whole), Severe
+Chest Pain (Body As A Whole), Mild
+Chest Pain (Body As A Whole), Moderate
+Chest Pain (Body As A Whole), Severe
+Cyst (Body As A Whole), Mild
+Cyst (Body As A Whole), Moderate
+Cyst (Body As A Whole), Severe
+Face Edema (Body As A Whole), Mild
+Face Edema (Body As A Whole), Moderate
+Face Edema (Body As A Whole), Severe
+Flu Syndrome (Body As A Whole), Mild
+Flu Syndrome (Body As A Whole), Moderate
+Flu Syndrome (Body As A Whole), Severe
+Headache (Body As A Whole), Mild
+Headache (Body As A Whole), Moderate
+Headache (Body As A Whole), Severe
+Hernia (Body As A Whole), Mild
+Hernia (Body As A Whole), Moderate
+Hernia (Body As A Whole), Severe
+Infection (Body As A Whole), Mild
+Infection (Body As A Whole), Moderate
+Infection (Body As A Whole), Severe
+Abnormal Lab Test (Body As A Whole), Mild
+Abnormal Lab Test (Body As A Whole), Moderate
+Abnormal Lab Test (Body As A Whole), Severe
+Pain (Body As A Whole), Mild
+Pain (Body As A Whole), Moderate
+Pain (Body As A Whole), Severe
+Reaction Unevaluable (Body As A Whole), Mild
+Reaction Unevaluable (Body As A Whole), Moderate
+Reaction Unevaluable (Body As A Whole), Severe
+Sepsis (Body As A Whole), Mild
+Sepsis (Body As A Whole), Moderate
+Sepsis (Body As A Whole), Severe
+Arrhythmia (Cardiovascular System), Mild
+Arrhythmia (Cardiovascular System), Moderate
+Arrhythmia (Cardiovascular System), Severe
+Cardiovascular Disorder (Cardiovascular System), Mild
+Cardiovascular Disorder (Cardiovascular System), Moderate
+Cardiovascular Disorder (Cardiovascular System), Severe
+Cerebrovascular Accident (Cardiovascular System), Mild
+Cerebrovascular Accident (Cardiovascular System), Moderate
+Cerebrovascular Accident (Cardiovascular System), Severe
+Congestive Heart Failure (Cardiovascular System), Mild
+Congestive Heart Failure (Cardiovascular System), Moderate
+Congestive Heart Failure (Cardiovascular System), Severe
+Hemorrhage (Cardiovascular System), Mild
+Hemorrhage (Cardiovascular System), Moderate
+Hemorrhage (Cardiovascular System), Severe
+Myocardial Infarction (Cardiovascular System), Mild
+Myocardial Infarction (Cardiovascular System), Moderate
+Myocardial Infarction (Cardiovascular System), Severe
+Syncope (Cardiovascular System), Mild
+Syncope (Cardiovascular System), Moderate
+Syncope (Cardiovascular System), Severe
+Vasodilatation (Cardiovascular), Mild
+Vasodilatation (Cardiovascular), Moderate
+Vasodilatation (Cardiovascular), Severe
+Anorexia (Digestive System), Mild
+Anorexia (Digestive System), Moderate
+Anorexia (Digestive System), Severe
+Cholecystitis (Digestive System), Mild
+Cholecystitis (Digestive System), Moderate
+Cholecystitis (Digestive System), Severe
+Cholelithiasis (Digestive System), Mild
+Cholelithiasis (Digestive System), Moderate
+Cholelithiasis (Digestive System), Severe
+Colitis (Digestive System), Mild
+Colitis (Digestive System), Moderate
+Colitis (Digestive System), Severe
+Constipation (Digestive System), Mild
+Constipation (Digestive System), Moderate
+Constipation (Digestive System), Severe
+Diarrhea (Digestive System), Mild
+Diarrhea (Digestive System), Moderate
+Diarrhea (Digestive System), Severe
+Dry Mouth (Digestive System), Mild
+Dry Mouth (Digestive System), Moderate
+Dry Mouth (Digestive System), Severe
+Dyspepsia (Digestive System), Mild
+Dyspepsia (Digestive System), Moderate
+Dyspepsia (Digestive System), Severe
+Fecal Incontinence (Digestive System), Mild
+Fecal Incontinence (Digestive System), Moderate
+Fecal Incontinence (Digestive System), Severe
+Flatulence (Digestive System), Mild
+Flatulence (Digestive System), Moderate
+Flatulence (Digestive System), Severe
+Increased Appetite (Digestive System), Mild
+Increased Appetite (Digestive System), Moderate
+Increased Appetite (Digestive System), Severe
+Intestinal Obstruction (Digestive System), Mild
+Intestinal Obstruction (Digestive System), Moderate
+Intestinal Obstruction (Digestive System), Severe
+Intestinal Ulcer (Digestive System), Mild
+Intestinal Ulcer (Digestive System), Moderate
+Intestinal Ulcer (Digestive System), Severe
+Liver Function Tests Abnormal (Digestive System), Mild
+Liver Function Tests Abnormal (Digestive System), Moderate
+Liver Function Tests Abnormal (Digestive System), Severe
+Melena (Digestive System), Mild
+Melena (Digestive System), Moderate
+Melena (Digestive System), Severe
+Nausea (Digestive System), Mild
+Nausea (Digestive System), Moderate
+Nausea (Digestive System), Severe
+Rectal Hemorrhage (Digestive System), Mild
+Rectal Hemorrhage (Digestive System), Moderate
+Rectal Hemorrhage (Digestive System), Severe
+Thirst (Digestive System), Mild
+Thirst (Digestive System), Moderate
+Thirst (Digestive System), Severe
+Tooth Disorder (Digestive System), Mild
+Tooth Disorder (Digestive System), Moderate
+Tooth Disorder (Digestive System), Severe
+Vomiting (Digestive System), Mild
+Vomiting (Digestive System), Moderate
+Vomiting (Digestive System), Severe
+Diabetes Mellitus (Endocrine System), Mild
+Diabetes Mellitus (Endocrine System), Moderate
+Diabetes Mellitus (Endocrine System), Severe
+Body System: Hemic And Lymphatic System, Moderate
+Body System: Hemic And Lymphatic System, Severe
+Anemia (Hemic And Lymphatic System), Mild
+Anemia (Hemic And Lymphatic System), Moderate
+Anemia (Hemic And Lymphatic System), Severe
+Ecchymosis (Hemic And Lymphatic System), Mild
+Ecchymosis (Hemic And Lymphatic System), Moderate
+Ecchymosis (Hemic And Lymphatic System), Severe
+Alkaline Phosphatase Increased (Metabolic And Nutritional Disorders), Mild
+Alkaline Phosphatase Increased (Metabolic And Nutritional Disorders), Moderate
+Alkaline Phosphatase Increased (Metabolic And Nutritional Disorders), Severe
+Bun Increased (Metabolic And Nutritional Disorders), Mild
+Bun Increased (Metabolic And Nutritional Disorders), Moderate
+Bun Increased (Metabolic And Nutritional Disorders), Severe
+Edema (Metabolic And Nutritional Disorders), Mild
+Edema (Metabolic And Nutritional Disorders), Moderate
+Edema (Metabolic And Nutritional Disorders), Severe
+Glucose Tolerance Decreased (Metabolic And Nutritional Disorders), Mild
+Glucose Tolerance Decreased (Metabolic And Nutritional Disorders), Moderate
+Glucose Tolerance Decreased (Metabolic And Nutritional Disorders), Severe
+Gout (Metabolic And Nutritional Disorders), Mild
+Gout (Metabolic And Nutritional Disorders), Moderate
+Gout (Metabolic And Nutritional Disorders), Severe
+Hyperglycemia (Metabolic And Nutritional Disorders), Mild
+Hyperglycemia (Metabolic And Nutritional Disorders), Moderate
+Hyperglycemia (Metabolic And Nutritional Disorders), Severe
+Lactic Dehydrogenase Increased (Metabolic And Nutritional Disorders), Mild
+Lactic Dehydrogenase Increased (Metabolic And Nutritional Disorders), Moderate
+Lactic Dehydrogenase Increased (Metabolic And Nutritional Disorders), Severe
+Peripheral Edema (Metabolic And Nutritional Disorders), Mild
+Peripheral Edema (Metabolic And Nutritional Disorders), Moderate
+Peripheral Edema (Metabolic And Nutritional Disorders), Severe
+Sgot Increased (Metabolic And Nutritional Disorders), Mild
+Sgot Increased (Metabolic And Nutritional Disorders), Moderate
+Sgot Increased (Metabolic And Nutritional Disorders), Severe
+Sgpt Increased (Metabolic And Nutritional Disorders), Mild
+Sgpt Increased (Metabolic And Nutritional Disorders), Moderate
+Sgpt Increased (Metabolic And Nutritional Disorders), Severe
+Weight Gain (Metabolic And Nutritional Disorders), Mild
+Weight Gain (Metabolic And Nutritional Disorders), Moderate
+Weight Gain (Metabolic And Nutritional Disorders), Severe
+Weight Gain (Metabolic And Nutritional Disorders), Resulting In Discontinuation
+Body System: Nervous System, Resulting In Discontinuation
+Anxiety (Nervous System), Resulting In Discontinuation
+Ataxia (Nervous System), Resulting In Discontinuation
+Confusion (Nervous System), Resulting In Discontinuation
+Depression (Nervous System), Resulting In Discontinuation
+Dizziness (Nervous System), Resulting In Discontinuation
+Hypesthesia (Nervous System), Resulting In Discontinuation
+Movement Disorder (Nervous System), Resulting In Discontinuation
+Myoclonus (Nervous System), Resulting In Discontinuation
+Neuropathy (Nervous System), Resulting In Discontinuation
+Nystagmus (Nervous System), Resulting In Discontinuation
+Paresthesia (Nervous System), Resulting In Discontinuation
+Somnolence (Nervous System), Resulting In Discontinuation
+Speech Disorder (Nervous System), Resulting In Discontinuation
+Tremor (Nervous System), Resulting In Discontinuation
+Body System: Urogenital System, Resulting In Discontinuation
+Penis Disorder (Urogenital System), Resulting In Discontinuation
+Scrotal Disorder (Urogenital System), Resulting In Discontinuation
+Any adverse event
+Weight gain
+Death
