@@ -5,7 +5,7 @@
  */
 $( document ).ready (function () {
 
-    /** 
+    /**
      * Immediately Invoked Function Expression -- to work well
      * with other plugins, and still use jQuery $ alias.
      */
@@ -23,7 +23,7 @@ $( document ).ready (function () {
          * jQuery plugin interface for creating pintastic instances.
          */
         $.fn.pintastic = function() {
-            return this.data('pintastic', 
+            return this.data('pintastic',
                 new arguments.callee.support(this));
         }
 
@@ -45,7 +45,7 @@ $( document ).ready (function () {
             init: function(root) {
                 this.root    = root;
                 this.dragged = null;
-    
+
                 this.wireUpEvents();
             },
 
@@ -53,19 +53,19 @@ $( document ).ready (function () {
              * Wire up event handlers for the pintastic.
              */
             wireUpEvents: function() {
-               
+
                 // Save an object reference for event handlers.
                 var $this = this;
 
                 this.root
                     .find('img.draggable-pin').attr('draggable', 'true').end()
-   
+
                     .bind('dragstart', function(ev) {
                         $this.setDraggedFromEvent(ev);
                         $this.captureQuestionId(ev);
                         return true;
                     })
-                   
+
                     .bind('dragend', function(ev) {
                         $(ev.target).removeClass('dragging');
                         return false;
@@ -80,21 +80,21 @@ $( document ).ready (function () {
                         $this.updateDropFeedback(ev, 'clear');
                         return false;
                     })
-   
+
                     .bind('dragover', function(ev) {
                         if ( $(ev.target).hasClass('drop-zone') ) {
                             return false;
                         }
                         return true;
                     })
-   
+
                     .bind('drop', function(ev) {
                         ev.preventDefault();
                         $this.performDrop(ev);
                         $this.dragged = null;
                         return false;
                     });
-   
+
             },
 
             /**
@@ -119,7 +119,7 @@ $( document ).ready (function () {
              * in the dataTransfer object for later
              */
             captureQuestionId: function(ev) {
-            
+
                 // dragged property works for draggable-pin images only.
                 var node = $(ev.target);
                 while (node.tagName() != 'img') {
@@ -136,7 +136,7 @@ $( document ).ready (function () {
                     //ev.dataTransfer = dt;
                 }
             },
-    
+
             /**
              * Get the node dragged, whether captured by us or dragged in from
              * another window.
@@ -147,26 +147,26 @@ $( document ).ready (function () {
                     // Use the node captured at dragstart, if available.
                     node = this.dragged;
                 } else {
-    
+
                     // Look for HTML or text content dragged in from outside.
                     var dt = ev.originalEvent.dataTransfer;
                     var content = dt.getData('text/html');
                     if (!content) content = dt.getData('text/plain');
-                    
+
                     if (content) {
                         // If any content available, build a new node for drop.
                         node = $(document.createElement('li'));
                         node.attr('draggable', 'true');
                         node.append('<div>'+content+'</div>');
-    
+
                         // Remember this node for next check.
                         this.dragged = node;
                     }
-    
+
                 }
                 return node;
             },
-    
+
             /**
              * Determine details for potential drop, given an event from one of the
              * drop listeners.
@@ -178,32 +178,33 @@ $( document ).ready (function () {
                     land_child: ev.pageX > t_pos.left + 75,
                     allowed:
                         !this.dragged ||
-                        ( this.dragged && 
+                        ( this.dragged &&
                             ( target[0] != this.dragged[0] ) &&
                             ( $.inArray(this.dragged[0], target.parents()) == -1 )
                         )
                 };
                 return drop;
             },
-    
+
             /**
              * Update the feedback for drop on dragover.
              */
             updateDropFeedback: function(ev, action) {
                 if ( $(ev.target).hasClass('drop-zone') ) {
                     if (action === "highlight") {
-                        ev.target.style.background = "fuchsia";
+                        ev.target.style.backgroundColor = "fuchsia";
+                        ev.target.style.opacity = 0.3;
                     } else if (action === "clear") {
-                        ev.target.style.background = "";
+                        ev.target.removeAttribute('style');
                     }
                 }
             },
-    
+
             /**
              * Perform the drop suggested by the event.
              */
             performDrop: function(ev) {
-                
+
                 var target = ev.target,
                     dt     = ev.originalEvent.dataTransfer,
                     qId    = dt.getData('qId');
@@ -220,7 +221,7 @@ $( document ).ready (function () {
                 console.log(myClassList);
                 return false;
             },
-    
+
             /**
              * Find a child list for the given target, creating a new one if
              * necessary.
