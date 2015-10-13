@@ -218,7 +218,7 @@ class ImportHandler  #{{{1
             q_hash.each do |q, a|
                 #case q
                 #when /^affiliations?$|^journals?$|^volumes?$|^issues?$|^abstracts?$/i
-                if /^['"]*affiliation[s'"]*$|^['"]*journal[s'"]*$|^['"]*volume[s'"]*$|^['"]*issue[s'"]*$|^['"]*abstract[s'"]*$/i.match(q)
+                if /^['"]*affiliation[s'"\s]*$|^['"]*journal[s'"\s]*$|^['"]*volume[s'"\s]*$|^['"]*issue[s'"\s]*$|^['"]*abstract[s'"\s]*$/i.match(q)
                     unless a.blank?
                         _optional_publication_info(study_id, q, a)
                     end
@@ -273,6 +273,7 @@ class ImportHandler  #{{{1
                                       project_id, author, study_title])
             if ar_studies.length > 1
                 @listOf_errors_processing_rows << "More than 1 study find with author '#{author}' and study title '#{study_title}'."
+                @skipped_rows += 1
                 return false
             elsif ar_studies.length == 1
                 return ar_studies.first.id
@@ -290,6 +291,7 @@ class ImportHandler  #{{{1
                                       project_id, 'internal', internal_id])
             if ar_studies.length > 1
                 @listOf_errors_processing_rows << "More than 1 study find with internal id '#{internal_id}'."
+                @skipped_rows += 1
                 return false
             elsif ar_studies.length == 1
                 return ar_studies.first.id
@@ -861,7 +863,7 @@ class ImportHandler  #{{{1
             listOf_headers = @headers.keys
 
             # Try to find author columns first
-            author_candidates = listOf_headers.select { |h| h.match(/^['"]*author[s'"]*$/i) }
+            author_candidates = listOf_headers.select { |h| h.match(/^['"]*author[s'"\s]*$/i) }
             if author_candidates.length > 1
                 @listOf_errors << "Workbook may contain at most 1 'Author' column. More than 1 found."
             elsif author_candidates.length == 1
