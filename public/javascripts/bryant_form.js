@@ -77,8 +77,10 @@ window.onload = function() {
     function skipItemQ16(event) {
         if (q16_skip_item.checked) {
             document.getElementById("question17").style.display="none";
+            document.getElementById("question18").style.display="none";
         } else {
             document.getElementById("question17").style.display="block";
+            document.getElementById("question18").style.display="block";
         }
     }
 
@@ -110,8 +112,10 @@ window.onload = function() {
     function skipItemQ19(event) {
         if (q19_skip_item.checked) {
             document.getElementById("question20").style.display="none";
+            document.getElementById("question21").style.display="none";
         } else {
             document.getElementById("question20").style.display="block";
+            document.getElementById("question21").style.display="block";
         }
     }
 
@@ -143,8 +147,10 @@ window.onload = function() {
     function skipItemQ22(event) {
         if (q22_skip_item.checked) {
             document.getElementById("question23").style.display="none";
+            document.getElementById("question24").style.display="none";
         } else {
             document.getElementById("question23").style.display="block";
+            document.getElementById("question24").style.display="block";
         }
     }
 
@@ -156,8 +162,10 @@ window.onload = function() {
     function skipItemQ26(event) {
         if (q26_skip_item.checked) {
             document.getElementById("question27").style.display="none";
+            document.getElementById("question28").style.display="none";
         } else {
             document.getElementById("question27").style.display="block";
+            document.getElementById("question28").style.display="block";
         }
     }
 
@@ -169,8 +177,10 @@ window.onload = function() {
     function skipItemQ30(event) {
         if (q30_skip_item.checked) {
             document.getElementById("question31").style.display="none";
+            document.getElementById("question32").style.display="none";
         } else {
             document.getElementById("question31").style.display="block";
+            document.getElementById("question32").style.display="block";
         }
     }
 
@@ -195,8 +205,10 @@ window.onload = function() {
     function skipItemQ38(event) {
         if (q38_skip_item.checked) {
             document.getElementById("question39").style.display="none";
+            document.getElementById("question40").style.display="none";
         } else {
             document.getElementById("question39").style.display="block";
+            document.getElementById("question40").style.display="block";
         }
     }
 
