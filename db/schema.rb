@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150924175432) do
+ActiveRecord::Schema.define(:version => 20151015195809) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -1535,6 +1535,7 @@ ActiveRecord::Schema.define(:version => 20150924175432) do
     t.string   "q41"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "q1_can_followup"
   end
 
   create_table "studies", :force => true do |t|

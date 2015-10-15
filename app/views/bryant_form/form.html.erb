@@ -7,14 +7,19 @@
         <div id="question1" class="questions">
             <%= label_tag "1", "1. Please enter your name and email address" %>
             <br />
-            <%= label_tag "q1_first", "First name" %>
+            <%= label_tag "q1_first", "First name (optional)" %>
             <%= text_field_tag "q1_first" %>
             <br />
-            <%= label_tag "q1_last", "Last name" %>
+            <%= label_tag "q1_last", "Last name (optional)" %>
             <%= text_field_tag "q1_last" %>
             <br />
             <%= label_tag "q1_email", "Email" %>
             <%= text_field_tag "q1_email" %>
+            <br />
+            <label class="category-select">
+                <%= check_box_tag "q1_can_followup", value="1", checked=false %>
+                <strong>I am open to being contacted by SRDR staff in the event that I have provided feedback and/or comments that they would like to explore further.</strong>
+            </label>
         </div>
 
         <div id="question2" class="questions">
