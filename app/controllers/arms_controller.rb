@@ -21,6 +21,7 @@ class ArmsController < ApplicationController
 		unless params[:arm][:title] == "Choose a suggested arm..."
 			@editing = false  
 			@arm = Arm.new(params[:arm])
+            @arm.title.squish!
 			@arm.study_id = params[:study_id]
 			display_num = @arm.get_display_number(params[:study_id], params[:extraction_form_id])
 			@arm.display_number = display_num
@@ -52,7 +53,9 @@ class ArmsController < ApplicationController
 		@editing = false  
     @arm = Arm.find(params[:id])
 		if @saved = @arm.update_attributes(params[:arm])
-      @arms = Arm.where(:study_id => params[:study_id], :extraction_form_id => params[:extraction_form_id]).order("display_number ASC")
+          @arm.title = @arm.title.squish
+          @arm.save
+            @arms = Arm.where(:study_id => params[:study_id], :extraction_form_id => params[:extraction_form_id]).order("display_number ASC")
         
 			@extraction_form = ExtractionForm.find(params[:extraction_form_id])
 			if @extraction_form.adverse_event_display_arms == true
