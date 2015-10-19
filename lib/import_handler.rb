@@ -80,15 +80,20 @@ class ImportHandler  #{{{1
         ar_ef.is_ready = 1
         ar_ef.save
 
-        if ar_ef.is_diagnostic?
-            ef_section_option_by_diagnostic_test = EfSectionOption.\
-                where(["extraction_form_id=? AND section=?",
-                       ef_id, "diagnostic_test_detail"]).first
-            if ef_section_option_by_diagnostic_test
-                ef_section_option_by_diagnostic_test.by_diagnostic_test = 0
-                ef_section_option_by_diagnostic_test.save
+        # We want to set the by_section flag only when we are importing that
+        # particular section.
+        case @section
+        when :DiagnosticTestDetail
+            if ar_ef.is_diagnostic?
+                ef_section_option_by_diagnostic_test = EfSectionOption.\
+                    where(["extraction_form_id=? AND section=?",
+                           ef_id, "diagnostic_test_detail"]).first
+                if ef_section_option_by_diagnostic_test
+                    ef_section_option_by_diagnostic_test.by_diagnostic_test = 0
+                    ef_section_option_by_diagnostic_test.save
+                end
             end
-        else
+        when :ArmDetail
             ef_section_option_by_arm = EfSectionOption.\
                 where(["extraction_form_id=? AND section=?",
                        ef_id, "arm_detail"]).first
@@ -96,20 +101,20 @@ class ImportHandler  #{{{1
                 ef_section_option_by_arm.by_arm = 0
                 ef_section_option_by_arm.save
             end
-        end
-
-        ef_section_option_by_outcome = EfSectionOption.\
-            where(["extraction_form_id=? AND section=?",
-                   ef_id, "outcome_detail"]).first
-        if ef_section_option_by_outcome
-          ef_section_option_by_outcome.by_outcome = 0
-          ef_section_option_by_outcome.save
+        when :OutcomeDetail
+            ef_section_option_by_outcome = EfSectionOption.\
+                where(["extraction_form_id=? AND section=?",
+                       ef_id, "outcome_detail"]).first
+            if ef_section_option_by_outcome
+              ef_section_option_by_outcome.by_outcome = 0
+              ef_section_option_by_outcome.save
+            end
         end
     end
 
     def process_rows  #{{{2
         # Since we do not support by_section imports just yet, we enforce the setting here on the extraction form.
-        if [:DesignDetail, :ArmDetail, :BaselineCharacteristic, :OutcomeDetail].include? @section
+        if [:ArmDetail, :OutcomeDetail, :DiagnosticTestDetail].include? @section
             self.set_ef_section_options(@ef_id)
         end
 
