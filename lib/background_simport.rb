@@ -18,9 +18,6 @@ class BackgroundSimport
       ih.add_email_recipient('jens_jap@brown.edu')
       ih.add_email_recipient(email)
 
-      # Set the section options to 0 so that questions show up once only.
-      ih.set_ef_section_options(ef_id)
-
       # Process rows now.
       ih.process_rows
     end

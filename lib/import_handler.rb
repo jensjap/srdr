@@ -108,6 +108,11 @@ class ImportHandler  #{{{1
     end
 
     def process_rows  #{{{2
+        # Since we do not support by_section imports just yet, we enforce the setting here on the extraction form.
+        if [:DesignDetail, :ArmDetail, :BaselineCharacteristic, :OutcomeDetail].include? @section
+            self.set_ef_section_options(@ef_id)
+        end
+
         @data.each_with_index do |row, ind|
             if _validate_row(row)
                 puts "All's well. We can insert row #{ind + 2}."
