@@ -65,4 +65,17 @@ FactoryGirl.define do
         extraction_form_id    1
         key_question_id       1
     end
+
+    factory :arm_detail_data_point do
+      arm_detail_field_id     1
+      value                   "arm detail value"
+      notes                   "arm detail notes"
+      study_id                1
+      extraction_form_id      1
+      arm_id                  0
+      subquestion_value       "subquestion value"
+      row_field_id            1
+      column_field_id         1
+      outcome_id              1
+    end
 end
