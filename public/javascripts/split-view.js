@@ -193,7 +193,7 @@ $( document ).ready (function () {
                 if ( $(ev.target).hasClass('drop-zone') ) {
                     if (action === "highlight") {
                         ev.target.style.backgroundColor = "fuchsia";
-                        ev.target.style.opacity = 0.3;
+                        /*ev.target.style.opacity = 0.3;*/
                     } else if (action === "clear") {
                         ev.target.removeAttribute('style');
                     }
@@ -211,14 +211,10 @@ $( document ).ready (function () {
 
                 var myClassList = target.className.replace(" drop-zone", "");
 
-                console.log('Target element:');
-                console.log(target);
-                console.log('DataTransfer object:');
-                console.log(dt);
-                console.log('Question ID:');
-                console.log(qId);
-                console.log('Class:');
-                console.log(myClassList);
+                console.log('Target element: \n', target);
+                console.log('DataTransfer object: \n', dt);
+                console.log('Question ID: \n', qId);
+                console.log('Class: \n', myClassList);
                 return false;
             },
 
