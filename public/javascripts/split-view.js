@@ -11,6 +11,8 @@ $( document ).ready (function () {
      */
     (function ( $ ) {
 
+        var DAA_HOST = 'http://api.daa-dev.com:3030';
+
         /**
          * Get lowercase tagname for node.
          */
@@ -215,6 +217,21 @@ $( document ).ready (function () {
                 console.log('DataTransfer object: \n', dt);
                 console.log('Question ID: \n', qId);
                 console.log('Class: \n', myClassList);
+                // Let's do some Ajax.
+                var jqXHR = $.ajax({
+                    url: DAA_HOST + "/v1/document_stores"
+                }).done(function(data){
+                    for (i = 0; i<data.length; i++) {
+                        console.log("Number of documents in document store: " + data[i].document_count);
+                        console.log("Document store ID: " + data[i].id);
+                        console.log("Document store name: " + data[i].name);
+                    }
+                }).fail(function(){
+                    alert("I failz ={\n Looks like the DAA server is not reachable.");
+                }).always(function(){
+                    alert("I haz complete");
+                });
+
                 return false;
             },
 
