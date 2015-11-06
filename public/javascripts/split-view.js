@@ -207,9 +207,10 @@ $( document ).ready (function () {
              */
             performDrop: function(ev) {
 
-                var target = ev.target,
-                    dt     = ev.originalEvent.dataTransfer,
-                    qId    = dt.getData('qId');
+                var target     = ev.target,
+                    dt         = ev.originalEvent.dataTransfer,
+                    qId        = dt.getData('qId')
+                    documentId = document.getElementById('dForm').value;
 
                 var myClassList = target.className.replace(" drop-zone", "");
 
@@ -217,18 +218,23 @@ $( document ).ready (function () {
                 console.log('DataTransfer object: \n', dt);
                 console.log('Question ID: \n', qId);
                 console.log('Class: \n', myClassList);
+                console.log('Document ID: \n', documentId);
                 // Let's do some Ajax.
                 var jqXHR = $.ajax({
-                    url: DAA_HOST + "/v1/document_stores"
-                }).done(function(data){
-                    for (i = 0; i<data.length; i++) {
-                        console.log("Number of documents in document store: " + data[i].document_count);
-                        console.log("Document store ID: " + data[i].id);
-                        console.log("Document store name: " + data[i].name);
-                        console.log("#{@document_id}");
+                    url: DAA_HOST + "/v1/documents/" + documentId + "/document_markers",
+                    type: 'POST',
+                    data: {
+                        'document_marker[text]': '<placeholder>',
+                        'document_marker[position]': myClassList,
+                        'document_id': documentId
                     }
+                }).done(function(data){
+                    console.log("Document Marker ID: "     + data.id);
+                    console.log("Document Marker Text: "   + data.text);
+                    console.log("Document Marker Position" + data.position);
                 }).fail(function(){
-                    alert("I failz ={\n Looks like the DAA server is not reachable.");
+                    alert("I haz failed ={\n Looks like the DAA server " +
+                            "is not reachable. Please try again later");
                 }).always(function(){
                     alert("I haz completed");
                 });

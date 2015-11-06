@@ -16,6 +16,7 @@
                 <% section_name_for_comments = "#{@data[:model].gsub('_','')}s" %>
                 <% field_name_for_comments = "#{@data[:model].split("_").first.singularize}" %>
 
+                <!-- Document store and document drop-down selectors. Uses AngularJs element directive. -->
                 <select-document></select-document>
 
                 <% questions.each do |question| %>
