@@ -30,9 +30,10 @@ class StudiesController < ApplicationController
 
             # Fetch document_html from DAA API
             #!!! Stubbed for now. Needs to make actual call and fetch document.
-            @document_id = "1"
-            response = HTTParty.get("http://api.daa-dev.com:3030/v1/documents/#{@document_id}/html")
-            @document_html = response
+            #@document_id = "1"
+            #response = HTTParty.get("http://api.daa-dev.com:3030/v1/documents/#{@document_id}/html")
+            #@document_html = response
+            @document_html = ''
 
             if @data[:by_arm] == true || @data[:by_outcome] == true
                 render :action=>'question_based_section_by_category', :layout => false

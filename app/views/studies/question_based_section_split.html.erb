@@ -15,6 +15,9 @@
             <table class='list_table tab-list-table' style='margin-left:0px;'>
                 <% section_name_for_comments = "#{@data[:model].gsub('_','')}s" %>
                 <% field_name_for_comments = "#{@data[:model].split("_").first.singularize}" %>
+
+                <select-document></select-document>
+
                 <% questions.each do |question| %>
                     <tr>
                         <td class='data' style='min-width:450px; max-width:950px;'>
@@ -25,9 +28,11 @@
                                 <br />
                                 <% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
                                     <%= raw(build_multi_choice(question, @data[:model])) %>
+                                    <%= image_tag "Flag_red.png", class: "draggable-pin" %>
 
                                 <% elsif question[:q_type] == 'select' %>
                                     <%= raw(build_dropdown(question, @data[:model])) %>
+                                    <%= image_tag "Flag_red.png", class: "draggable-pin" %>
 
                                 <% elsif question[:q_type] == 'text' %>
                                     <%= raw(build_text(question, @data[:model], 66)) %>
@@ -37,7 +42,6 @@
                                 <% elsif question[:q_type] == 'multi_text' %>
                                     <%= raw(build_multi_text(question, @data[:model])) %>
                                     <button type="button" class="daa-text-capture">Capture text</button>
-                                    <%= image_tag "Flag_red.png", class: "draggable-pin" %>
 
                                 <% else %>
                                     <%= raw(build_matrix(question, @data[:model])) %>

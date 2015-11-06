@@ -225,11 +225,12 @@ $( document ).ready (function () {
                         console.log("Number of documents in document store: " + data[i].document_count);
                         console.log("Document store ID: " + data[i].id);
                         console.log("Document store name: " + data[i].name);
+                        console.log("#{@document_id}");
                     }
                 }).fail(function(){
                     alert("I failz ={\n Looks like the DAA server is not reachable.");
                 }).always(function(){
-                    alert("I haz complete");
+                    alert("I haz completed");
                 });
 
                 return false;
@@ -260,9 +261,6 @@ $( document ).ready (function () {
 
     // Remove default .draggable from images.
     $("img").attr('draggable', false);
-
-    // Set up the drop zones in the PDF.
-    $("div#page-container div.t").addClass('drop-zone');
 
     // Start up Pintastic
     $("#container-split").pintastic();

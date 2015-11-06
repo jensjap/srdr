@@ -1,0 +1,20 @@
+<div>
+  <form name="dsForm">
+    <select name="dsSelect" id="dsSelect" ng-model="sdCtrl.documentStoreSelect"
+            ng-change="sdCtrl.documentStoreChange()">
+      <option value="" disabled selected>Choose a document store...</option>
+      <option ng-repeat="option in sdCtrl.documentStores"
+              value="{{option.id}}">{{option.name}} ({{option.document_count}})</option>
+    </select>
+  </form>
+</div>
+<div ng-show="sdCtrl.documentStoreSelect">
+  <form name="dForm">
+    <select name="dForm" id="dForm" ng-model="sdCtrl.documentSelect"
+            ng-change="sdCtrl.documentChange()">
+      <option value="" disable selected>Choose a document...</option>
+      <option ng-repeat="option in sdCtrl.documents"
+              value="{{option.id}}">{{option.name}} ({{option.document_marker_count}})</option>
+    </select>
+  </form>
+</div>
