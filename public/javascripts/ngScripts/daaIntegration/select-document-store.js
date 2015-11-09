@@ -46,12 +46,12 @@
                                           sdCtrl.documentSelect + '/html';
                     $http.get(documentHtmlUrl)
                         .then(function successCallback(response){
-                            document.getElementById('extraction-form-split-right')
-                                .innerHTML = response.data;
                             // angular.element is an alias for jQuery function.
+                            angular.element("#extraction-form-split-right")[0]
+                                .innerHTML = response.data;
                             // Set up the drop zones in the PDF.
-                            angular.element("div#page-container div.t").
-                                addClass('drop-zone');
+                            angular.element("div#page-container div.t")
+                                .addClass('drop-zone');
                         }, function errorCallback(poopy){
                             console.log("(" + documentHtmlUrl + ") " +
                                         poopy.status + ": " + poopy.statusText);
