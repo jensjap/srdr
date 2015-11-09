@@ -229,9 +229,9 @@ $( document ).ready (function () {
                         'document_id': documentId
                     }
                 }).done(function(data){
-                    console.log("Document Marker ID: "     + data.id);
-                    console.log("Document Marker Text: "   + data.text);
-                    console.log("Document Marker Position" + data.position);
+                    console.log("Document Marker ID: "       + data.id);
+                    console.log("Document Marker Text: "     + data.text);
+                    console.log("Document Marker Position: " + data.position);
                 }).fail(function(){
                     alert("I haz failed ={\n Looks like the DAA server " +
                             "is not reachable. Please try again later");

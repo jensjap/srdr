@@ -34,6 +34,7 @@ class StudiesController < ApplicationController
             #response = HTTParty.get("http://api.daa-dev.com:3030/v1/documents/#{@document_id}/html")
             #@document_html = response
             @document_html = ''
+            @study = Study.find(params[:study_id])
 
             if @data[:by_arm] == true || @data[:by_outcome] == true
                 render :action=>'question_based_section_by_category', :layout => false
