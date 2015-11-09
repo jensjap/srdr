@@ -28,6 +28,7 @@ Srdr::Application.routes.draw do
 
     resources :studies do
         resources :arms
+        get 'data'
     end
 
     resources :feedback_items
@@ -205,7 +206,7 @@ Srdr::Application.routes.draw do
 
     # JENS @ 2015-06-08
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/split' => 'studies#split'
-    
+
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/baselines' => 'studies#baselines'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/outcomes' => 'studies#outcomes'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/outcome_details' => 'studies#outcome_details'

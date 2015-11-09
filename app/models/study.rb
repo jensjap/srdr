@@ -1106,4 +1106,20 @@ class Study < ActiveRecord::Base
     return ids.collect{|x| x.extraction_form_id}.uniq
   end
 
+  def data(options)
+      sections = ["design_detail", "arm_detail", "baseline_characteristic",
+                  "outcome_detail", "diagnostic_test_detail"]
+      data = []
+      extraction_forms = self.extraction_forms
+      extraction_forms.each do |ef|
+          sections.each do |section|
+              ef.send(section+'s').each do |section_detail|
+                  section_detail.send(section+'_data_points').each do |data_point|
+                      pp data_point
+                  end
+              end
+          end
+      end
+  end
+
 end

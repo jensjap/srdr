@@ -37,12 +37,28 @@ class StudiesController < ApplicationController
             @study = Study.find(params[:study_id])
 
             if @data[:by_arm] == true || @data[:by_outcome] == true
-                render :action=>'question_based_section_by_category', :layout => false
+                render :action=>'question_based_section_by_category_split',
+                       :layout => "split_screen"
             else
-                render :action=>'question_based_section_split', :layout => "split_screen"
+                render :action=>'question_based_section_split',
+                       :layout =>"split_screen"
             end
         rescue Exception => e
             puts "ERROR: #{e.message}\n\n#{e.backtrace}"
+        end
+    end
+
+    def data
+        @study        = Study.find(params[:study_id])
+        user_assigned = current_user.is_assigned_to_project(@study.project.id)
+        if user_assigned
+            @data = @study.data({
+                user_assigned: user_assigned
+            })
+            render :layout => "split_screen"
+        else
+            flash[:error] = "You do not have access to the requested resource."
+            redirect_to projects_url
         end
     end
 
