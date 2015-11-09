@@ -17,7 +17,8 @@
 # The data that is entered into a study is determined by the key questions it answers, which are linked to extraction forms.
 class Study < ActiveRecord::Base
     belongs_to :project, :touch=>true
-    #has_many :extraction_forms
+    has_many :study_extraction_forms
+    has_many :extraction_forms, through: :study_extraction_forms
     has_many :arms, :dependent=>:destroy
     has_many :outcome_results, :through => :outcomes
     has_many :outcome_timepoints, :through => :outcomes

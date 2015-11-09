@@ -16,5 +16,6 @@
 # This class contains the fields study_id and extraction_form_id. An entry in the study_extraction_form table indicates that
 # the study uses that particular extraction form for storing data.
 class StudyExtractionForm < ActiveRecord::Base
-	belongs_to :study, :touch=>true
+   belongs_to :study, touch: true
+   belongs_to :extraction_form, touch: true
 end

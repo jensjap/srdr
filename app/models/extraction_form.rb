@@ -35,6 +35,8 @@ class ExtractionForm < ActiveRecord::Base
     has_many :quality_rating_fields, :dependent=>:destroy
     has_many :adverse_event_columns, :dependent=>:destroy
     has_many :extraction_form_key_questions, :dependent=>:destroy
+    has_many :study_extraction_forms
+    has_many :studies, through: :study_extraction_forms
 
 
     # determine whether or not the extraction form is capable of being removed
