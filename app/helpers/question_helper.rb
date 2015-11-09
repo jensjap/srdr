@@ -196,15 +196,6 @@ module QuestionHelper
 	end
 
 	# ---------------------------------------------------------------------------------- #
-	# build_multi_text
-
-	# Given multiple text entry question, build an html string to represent the question
-	# in the view
-	# ---------------------------------------------------------------------------------- #
-	def build_multi_text(question, model, category=nil)
-	end
-
-	# ---------------------------------------------------------------------------------- #
 	# accessory
 	#
 	# a few accessory functions to assist in creating the questions
