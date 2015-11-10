@@ -443,46 +443,44 @@ class OutcomeDataEntry < ActiveRecord::Base
         unless timepoints.empty?
             needs_comparisons = true
             timepoints.each do |tp|
-              puts "Starting at timepoint #{tp.id}\n\n"
-              tmp = OutcomeDataEntry.find(:first, :conditions=>["outcome_id=? AND extraction_form_id=? AND timepoint_id=? AND study_id=? AND subgroup_id=?",ocid,efid,tp.id,sid,sgid],:select=>["id","display_number","timepoint_id","subgroup_id","outcome_id","extraction_form_id","study_id"])
+                puts "Starting at timepoint #{tp.id}\n\n"
+                tmp = OutcomeDataEntry.find(:first, :conditions=>["outcome_id=? AND extraction_form_id=? AND timepoint_id=? AND study_id=? AND subgroup_id=?",ocid,efid,tp.id,sid,sgid],:select=>["id","display_number","timepoint_id","subgroup_id","outcome_id","extraction_form_id","study_id"])
 
-              if tmp.nil?
-                puts "I'll have to create a new OCDE\n\n"
-                ef = ExtractionForm.find(efid)
-                project_id = ef.project_id
-                displayNum = OutcomeDataEntry.find(:last, :conditions=>["outcome_id=? AND extraction_form_id=? AND study_id=? AND subgroup_id=?",ocid,efid,sid,sgid],:select=>["display_number"],:order=>["display_number ASC"])                                                                    
-                displayNum = displayNum.nil? ? 1 : (displayNum.display_number.nil? ? 1 : displayNum.display_number + 1)
-                tmp = OutcomeDataEntry.create(:outcome_id=>ocid, :extraction_form_id=>efid, :timepoint_id=>tp.id, 
-                                              :study_id=>sid, :display_number => displayNum,:subgroup_id=>sgid)
-                # IF IT'S THE CEVG PROJECT, LET'S ALSO CREATE THE COMPARISONS SECTIONS FOR THEM
-                if (project_id.to_i == 427 || project_id.to_i == 553) && needs_comparisons
-                    outcome = Outcome.find(ocid)
-                    study = Study.find(sid)
-                    arms = study.arms.collect{|x| x.id}
-                    if arms.length > 1
-                        btwn = OutcomeDataEntry.create_comparisons("between",timepoints.collect{|t| t.id},ocid,sgid)
+                if tmp.nil?
+                    puts "I'll have to create a new OCDE\n\n"
+                    ef = ExtractionForm.find(efid)
+                    project_id = ef.project_id
+                    displayNum = OutcomeDataEntry.find(:last, :conditions=>["outcome_id=? AND extraction_form_id=? AND study_id=? AND subgroup_id=?",ocid,efid,sid,sgid],:select=>["display_number"],:order=>["display_number ASC"])                                                                    
+                    displayNum = displayNum.nil? ? 1 : (displayNum.display_number.nil? ? 1 : displayNum.display_number + 1)
+                    tmp = OutcomeDataEntry.create(:outcome_id=>ocid, :extraction_form_id=>efid, :timepoint_id=>tp.id, 
+                                                  :study_id=>sid, :display_number => displayNum,:subgroup_id=>sgid)
+                    # IF IT'S THE CEVG PROJECT, LET'S ALSO CREATE THE COMPARISONS SECTIONS FOR THEM
+                    if project_id.to_i == 427 && needs_comparisons
+                        outcome = Outcome.find(ocid)
+                        study = Study.find(sid)
+                        arms = study.arms.collect{|x| x.id}
+                        if arms.length > 1
+                            btwn = OutcomeDataEntry.create_comparisons("between",timepoints.collect{|t| t.id},ocid,sgid)
+                        end
+                        if timepoints.length > 1 && outcome.outcome_type != 'survival'
+                            within = OutcomeDataEntry.create_comparisons("within",[1],ocid,sgid)
+                        end
                     end
-                    if timepoints.length > 1 && outcome.outcome_type != 'survival'
-                        within = OutcomeDataEntry.create_comparisons("within",[1],ocid,sgid)
-                    end
-                    
                 end
-              end
-              puts "I didn't have to create a new one, but the display number is #{tmp.display_number}\n\n"
-              if tmp.display_number.nil? || tmp.display_number == "" || tmp.display_number == 0
-                puts "Setting do_sorting to false\n\n"
-                do_sorting = false
-              end
-              # doing this will result in a sorted array by display number
-              if do_sorting == true
-                puts "adding to sorted retVal"
-                  retVal[tmp.display_number - 1] = tmp
-                  sorted_timepoints[tmp.display_number - 1] = tp
-                else
-                    puts "adding to normal retVal"
-                    retVal << tmp
-                    sorted_timepoints << tp
+                puts "I didn't have to create a new one, but the display number is #{tmp.display_number}\n\n"
+                if tmp.display_number.nil? || tmp.display_number == "" || tmp.display_number == 0
+                    puts "Setting do_sorting to false\n\n"
+                    do_sorting = false
                 end
+                retVal.push tmp
+                sorted_timepoints.push tp
+            end
+            # Sort if requested.
+            if do_sorting == true
+                retVal            = retVal.sort_by { |tmp| tmp.display_number.to_i }
+                # We sort sorted_timepoints in the order of retVal by
+                # comparing retVal's timepoint_id value to the timepoint id.
+                sorted_timepoints = sorted_timepoints.sort_by { |tp| retVal.index { |ocde| ocde.timepoint_id == tp.id } }
             end
         end
         # now return the ocdes and timepoints ordered by the display number of the ocde
