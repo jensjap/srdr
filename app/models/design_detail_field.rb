@@ -18,7 +18,7 @@ class DesignDetailField < ActiveRecord::Base
 
 	before_save :clean_string
 
-	belongs_to :design_detail
+	belongs_to :design_detail, touch: true
 	has_many :design_detail_data_points, :dependent=>:destroy
 	scope :all_fields_for_questions, lambda{|q_list, model_name| where("#{model_name}_id IN (?)",q_list).order("row_number ASC")}
 

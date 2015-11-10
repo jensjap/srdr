@@ -22,8 +22,8 @@ class BaselineCharacteristic < ActiveRecord::Base
     before_save :clean_string
 
     belongs_to :extraction_form, :touch=>true
-    has_many :baseline_characteristic_data_points, :through=>:baseline_characteristic_fields
     has_many :baseline_characteristic_fields, :dependent=>:destroy
+    has_many :baseline_characteristic_data_points, foreign_key: "baseline_characteristic_field_id"
     validates :question, :presence => true
     scope :questions_for_ef, lambda{|efid| where("extraction_form_id=?",efid).
                 select(["id","question","question_number","field_type","instruction","is_matrix","include_other_as_option"]).

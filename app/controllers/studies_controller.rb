@@ -21,11 +21,16 @@ class StudiesController < ApplicationController
     def split
         begin
             user_assigned = current_user.is_assigned_to_project(params[:project_id])
-            @data = QuestionBuilder.get_questions("design_detail", params[:study_id], params[:extraction_form_id], {:user_assigned => user_assigned})
+            @data = QuestionBuilder.get_questions("design_detail",
+                                                  params[:study_id],
+                                                  params[:extraction_form_id],
+                                                  {:user_assigned => user_assigned})
             @data_point = DesignDetailDataPoint.new
 
             # Now get any additional user instructions for this section
-            @ef_instruction = EfInstruction.find(:first, :conditions=>["ef_id = ? and section = ? and data_element = ?", params[:extraction_form_id].to_s, "DESIGN", "GENERAL"])
+            @ef_instruction = EfInstruction.find(:first,
+                                                 :conditions=>["ef_id = ? and section = ? and data_element = ?",
+                                                               params[:extraction_form_id].to_s, "DESIGN", "GENERAL"])
             @ef_instruction = @ef_instruction.nil? ? "" : @ef_instruction.instructions
 
             # Fetch document_html from DAA API
@@ -49,7 +54,7 @@ class StudiesController < ApplicationController
     end
 
     def data
-        @study        = Study.find(params[:study_id])
+        @study = Study.find(params[:study_id])
         user_assigned = current_user.is_assigned_to_project(@study.project.id)
         if user_assigned
             @data = @study.data({

@@ -1,1 +1,16 @@
-<h1>Test</h1>
+<h1>Review Document Markers</h1>
+<% @data.each do |ef| %>
+    <div>
+        <h2>Extraction Form: <%= ef[:title] %></h2>
+        <% ef[:data].each do |d| %>
+            <h3>Section: <%= d[:section].camelize %> (<%= d[:datapoints].count %>)</h3>
+            <% d[:datapoints].each do |dp| %>
+                <div style="border-width: 2px; border-style: solid; padding: 8px; margin: 5px;">
+                    <strong>Question: </strong><%= dp.send(d[:section]).question %>
+                    <br>
+                    <strong>Value: </strong><%= dp.value %>
+                </div>
+            <% end %>
+        <% end %>
+    </div>
+<% end %>

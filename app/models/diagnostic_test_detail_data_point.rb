@@ -16,7 +16,7 @@
 #  diagnostic_test_id      :integer          default(0)
 
 class DiagnosticTestDetailDataPoint < ActiveRecord::Base
-	belongs_to :diagnostic_test_detail_field
+	belongs_to :diagnostic_test_detail, foreign_key: "diagnostic_test_detail_field_id"
 	belongs_to :study, :touch=>true
 	scope :all_datapoints_for_study, lambda{|q_list, study_id, model_name| where("#{model_name}_field_id IN (?) AND study_id=?", q_list, study_id).
 				select(["#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","diagnostic_test_id"])}
