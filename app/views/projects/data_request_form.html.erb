@@ -20,13 +20,16 @@
 <%= render 'shared/creative_commons_note' %>
   <br/><br/>
 	<input type='checkbox' name='creativeCommons_agree' id='cc_agree_cbox'>  I agree to the terms and conditions of the Creative Commons Attribution-NonCommerical licensing agreement outlined above, and I understand that the original contributor will be notified of this request and will be notified of my SRDR username and email address.<br/><br/>
-    <table id="export_tools_excel_table">
+    <table id="ef-table" class="export_tools_excel_table">
+    <thead>
     <tr>
-      <td class="title">Extraction Form</td>
-      <td class="title">Excel</td>
-      <td class="title">CSV</td>
-      <td class="title">Compile Date/Time</td>
+      <th class="title">Extraction Form</th>
+      <th class="title">Excel</th>
+      <th class="title">CSV</th>
+      <th class="title">Compile Date/Time</th>
     </tr>
+    </thead>
+    <tbody>
     <% @extraction_forms.each do |ef| %>
     <tr>
     <td class="ef_data">
@@ -58,43 +61,50 @@
           <% end %>
           <%# timestamp < @project.updated_at ? "(old version)" : "" %>
         </td>
+        </tbody>
     </tr>
    
     <% end %>
      <%# look for uploaded data %>
+    </table>
 
-    <% unless Dir["public/reports/#{@project.id}/publish/downloads/*.*"].nil? %>
-      <% entries = Dir["public/reports/#{@project.id}/publish/downloads/*.*"] %>
-      <% if entries.length > 0 %>
-        <tr>
-          <td class='title' colspan='1'>Supplementary Data</td>
-          <td class='title' colspan='2'>Description</td>
-          <td class='title' colspan='1'>Upload Data/Time</td>
-        </tr>
-        <% path = "public/reports/#{@project.id}/publish/downloads/" %>
-        <% entries.each do |entry| %>
-          <% next if entry.ends_with?(".readme") %>
-          <% filename = entry.split("/").last %>
-          <% fullpath = "#{path}#{filename}" %>
-          <tr>
-            <td class='data' colspan='1'>
-              <% url = "/projects/#{@project.id}/downloads/download?dl_type=supplement&filename=#{filename}" %>
-              <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk_csv.png" border="0"><%= filename %></a>
-            </td>
-            <td class='data' colspan='2'>
-              <% if File.file?(RAILS_ROOT + fullpath) %>
-                <%= loadDescription(RAILS_ROOT + fullpath) %>
-              <% else %>
-                No Description.
-              <% end %>
-            </td>
-            <td class='data' colspan='1'>
-              <%= File.mtime(entry).utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
-            </td>
-          </tr>
+    <table id="data-table" class="tablesorter export_tools_excel_table">
+        <% unless Dir["public/reports/#{@project.id}/publish/downloads/*.*"].nil? %>
+            <% entries = Dir["public/reports/#{@project.id}/publish/downloads/*.*"] %>
+            <% if entries.length > 0 %>
+                <thead>
+                    <tr>
+                        <th class='title' colspan='1'>Supplementary Data</th>
+                        <th class='title' colspan='2'>Description</th>
+                        <th class='title' colspan='1'>Upload Data/Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% path = "public/reports/#{@project.id}/publish/downloads/" %>
+                    <% entries.each do |entry| %>
+                        <% next if entry.ends_with?(".readme") %>
+                        <% filename = entry.split("/").last %>
+                        <% fullpath = "#{path}#{filename}" %>
+                        <tr>
+                            <td class='data' colspan='1'>
+                                <% url = "/projects/#{@project.id}/downloads/download?dl_type=supplement&filename=#{filename}" %>
+                                <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk_csv.png" border="0"><%= filename %></a>
+                            </td>
+                            <td class='data' colspan='2'>
+                                <% if File.file?(RAILS_ROOT + fullpath) %>
+                                    <%= loadDescription(RAILS_ROOT + fullpath) %>
+                                <% else %>
+                                    No Description.
+                                <% end %>
+                            </td>
+                            <td class='data' colspan='1'>
+                                <%= File.mtime(entry).utc.getlocal.strftime("%m/%d/%Y %I:%M %p") %>
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            <% end %>
         <% end %>
-      <% end %>
-    <% end %>
     </table>
 
   
@@ -122,6 +132,9 @@ $(".download_link").bind("click",function(event){
   }
 });
 
+$("#data-table").tablesorter();
+
 });
+
 -->
 </script>

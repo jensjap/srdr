@@ -1,5 +1,5 @@
 /*---------------- Export tools table style -----------------*/
-#export_tools_excel_table {
+.export_tools_excel_table {
     font-size: 1.0em;
     font-family: Tahoma;
     font-weight: normal;
@@ -8,8 +8,9 @@
     padding-top: 5px;
     padding-bottom: 10px;
     border: solid 1px #e0e0e0;
+    width: 80%;
 }
-#export_tools_excel_table td.title {   
+.export_tools_excel_table th {   
     background: #a0a0a0 none;
     font-size: 1.1em;
     font-family: Tahoma;
@@ -17,7 +18,7 @@
     text-align: center;
     padding: 5px;
 }         
-#export_tools_excel_table td.ef_data {   
+.export_tools_excel_table td.ef_data {   
     background: #e0e0e0 none;
     font-size: 1.0em;
     font-family: Tahoma;
@@ -25,7 +26,7 @@
     text-align: center;
     padding: 5px;
 }         
-#export_tools_excel_table td.data {   
+.export_tools_excel_table td.data {   
     background: #fff none;
     font-size: 1.0em;
     font-family: Tahoma;
