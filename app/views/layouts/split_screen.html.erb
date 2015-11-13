@@ -5,7 +5,6 @@
 <head>
     <%= javascript_include_tag 'jquery.min',
                                'jquery-ui-1.8.12.custom',
-                               'jquery.scrollTo.min',
                                'rails',
                                'browser_check',
                                'application',
@@ -25,6 +24,7 @@
                             "introjs.min",
                             "custom",
                              :media => "screen" %>
+
     <%= csrf_meta_tag %>
 
     <script type='text/javascript'>assignStylesheet();</script>
@@ -38,7 +38,7 @@
 </head>
 
 
-<body ng-app='daaIntegration'>
+<body ng-app="daaIntegration">
     <div id="message_div"></div>
      <noscript>Your web browser does not support Javascript, or you have it turned off. Please turn on Javascript or use a Javascript-compatible web browser to take advantage of the full functionality of SRDR.</noscript> 
     <div id="page-wrap">
@@ -80,13 +80,12 @@
 
             <%= render partial: "layouts/info_messages" %>
 
-            <div id="container-split">
+            <div id="container">
                 <div id="feedback_form" style="display:none">
                     <%= render :partial => "feedback_items/feedback_form" %>
                 </div>
                 <%= yield %>
             </div>
-
             <div style="clear: both;"></div>
 
             <div id="footer">

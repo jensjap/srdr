@@ -198,6 +198,44 @@ class StudiesController < ApplicationController
         end
     end
 
+    # displays study editing page in a split view
+    def edit_split
+        if !params[:study_id]
+            flash["error"] = "To add a new study, please choose a systematic review first."
+            redirect_to projects_paths
+        else
+            @study = Study.find(params[:study_id])
+            #puts "---------------------\n THE STUDY ID IS #{@study.id}\n\n"
+            @study_extforms = StudyExtractionForm.find(:all, :conditions=>["study_id=?",@study.id],:select=>["id","study_id","extraction_form_id"],:order=>"extraction_form_id ASC")
+            @extraction_forms = Array.new
+
+            # an array of hashes to keep track of key questions addressed by
+            # each individual section
+            @ef_kqs = Hash.new()
+            unless @study_extforms.empty?
+                @study_extforms.each do |ef|
+                    @ef_kqs[ef.extraction_form_id] = ExtractionForm.get_assigned_question_numbers(ef.extraction_form_id)
+                end
+            end
+            session[:project_id] = @study.project_id
+            @project = Project.find(@study.project_id)
+
+            unless @study_extforms.empty?
+                # get the study title, which is the same as the primary publication for the study
+                @study_title = PrimaryPublication.where(:study_id => @study.id).first
+                @study_title = @study_title.nil? ? "" : @study_title.title.to_s
+                #@extraction_form_list_array = Study.get_extraction_form_list_array(session[:project_id])
+                @extraction_forms = ExtractionForm.find(:all, :conditions=>["id in (?)",@study_extforms.collect{|x| x.extraction_form_id}])
+                @current_form_id = params[:extraction_form_id].nil? ? @extraction_forms.first.id : params[:extraction_form_id].to_i
+                @included_sections = ExtractionForm.get_included_sections(@current_form_id)
+            end
+            # Set up the session variables
+            makeStudyActive(@study)
+            session[:extraction_form_id] = @current_form_id
+            session[:completed_sections] = Study.get_completed_sections(@study.id, @current_form_id)
+        end
+        render :layout => "split_screen"
+    end
 
     # displays study extraction form page. 
     # enables the user to view and edit the extraction forms associated with this study

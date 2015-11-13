@@ -1117,6 +1117,7 @@ class Study < ActiveRecord::Base
       extraction_forms.each do |ef|
           ef_hash = {}
           ef_hash[:title] = ef.title
+          ef_hash[:id] = ef.id
           ef_hash[:data] = []
           sections.each do |section|
               section_hash = {}

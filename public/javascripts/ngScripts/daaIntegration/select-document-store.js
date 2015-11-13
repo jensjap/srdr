@@ -47,7 +47,7 @@
                     $http.get(documentHtmlUrl)
                         .then(function successCallback(response){
                             // angular.element is an alias for jQuery function.
-                            angular.element("#extraction-form-split-right")[0]
+                            angular.element("#split-right")[0]
                                 .innerHTML = response.data;
                             // Set up the drop zones in the PDF.
                             angular.element("div#page-container div.t")
