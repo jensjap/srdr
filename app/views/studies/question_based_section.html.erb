@@ -24,9 +24,11 @@
 						
 					<% elsif question[:q_type] == 'select' %>
 						<%= raw(build_dropdown(question, @data[:model])) %>
+                        <%= image_tag "Flag_red.png", class: "draggable-pin" %>
 					
 					<% elsif question[:q_type] == 'text' %>
 						<%= raw(build_text(question, @data[:model], 66)) %>
+                        <%= image_tag "Flag_red.png", class: "draggable-pin" %>
 					
 					<% else %>
 						<%= raw(build_matrix(question, @data[:model])) %>

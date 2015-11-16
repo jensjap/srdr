@@ -143,50 +143,54 @@ $( document ).ready (function () {
              * Get the node dragged, whether captured by us or dragged in from
              * another window.
              */
-            getDragged: function(ev) {
-                var node = null;
-                if (this.dragged) {
-                    // Use the node captured at dragstart, if available.
-                    node = this.dragged;
-                } else {
+            /**
+             * getDragged: function(ev) {
+             *     var node = null;
+             *     if (this.dragged) {
+             *         // Use the node captured at dragstart, if available.
+             *         node = this.dragged;
+             *     } else {
 
-                    // Look for HTML or text content dragged in from outside.
-                    var dt = ev.originalEvent.dataTransfer;
-                    var content = dt.getData('text/html');
-                    if (!content) content = dt.getData('text/plain');
+             *         // Look for HTML or text content dragged in from outside.
+             *         var dt = ev.originalEvent.dataTransfer;
+             *         var content = dt.getData('text/html');
+             *         if (!content) content = dt.getData('text/plain');
 
-                    if (content) {
-                        // If any content available, build a new node for drop.
-                        node = $(document.createElement('li'));
-                        node.attr('draggable', 'true');
-                        node.append('<div>'+content+'</div>');
+             *         if (content) {
+             *             // If any content available, build a new node for drop.
+             *             node = $(document.createElement('li'));
+             *             node.attr('draggable', 'true');
+             *             node.append('<div>'+content+'</div>');
 
-                        // Remember this node for next check.
-                        this.dragged = node;
-                    }
+             *             // Remember this node for next check.
+             *             this.dragged = node;
+             *         }
 
-                }
-                return node;
-            },
+             *     }
+             *     return node;
+             * },
+             */
 
             /**
              * Determine details for potential drop, given an event from one of the
              * drop listeners.
              */
-            checkDrop: function(ev, target) {
-                var t_pos = target.position();
-                var drop = {
-                    land_above: ev.pageY < t_pos.top + (target.height()/2),
-                    land_child: ev.pageX > t_pos.left + 75,
-                    allowed:
-                        !this.dragged ||
-                        ( this.dragged &&
-                            ( target[0] != this.dragged[0] ) &&
-                            ( $.inArray(this.dragged[0], target.parents()) == -1 )
-                        )
-                };
-                return drop;
-            },
+            /**
+             * checkDrop: function(ev, target) {
+             *     var t_pos = target.position();
+             *     var drop = {
+             *         land_above: ev.pageY < t_pos.top + (target.height()/2),
+             *         land_child: ev.pageX > t_pos.left + 75,
+             *         allowed:
+             *             !this.dragged ||
+             *             ( this.dragged &&
+             *                 ( target[0] != this.dragged[0] ) &&
+             *                 ( $.inArray(this.dragged[0], target.parents()) == -1 )
+             *             )
+             *     };
+             *     return drop;
+             * },
+             */
 
             /**
              * Update the feedback for drop on dragover.
@@ -207,24 +211,27 @@ $( document ).ready (function () {
              */
             performDrop: function(ev) {
 
-                var target     = ev.target,
-                    dt         = ev.originalEvent.dataTransfer,
-                    qId        = dt.getData('qId')
-                    documentId = document.getElementById('dForm').value;
+                var target      = ev.target,
+                    textContent = target.textContent;
+                    dt          = ev.originalEvent.dataTransfer,
+                    qId         = dt.getData('qId'),
+                    documentId  = document.getElementById('dForm').value,
+                    myClassList = target.className.replace(" drop-zone", "");
 
-                var myClassList = target.className.replace(" drop-zone", "");
-
-                console.log('Target element: \n', target);
-                console.log('DataTransfer object: \n', dt);
-                console.log('Question ID: \n', qId);
-                console.log('Class: \n', myClassList);
-                console.log('Document ID: \n', documentId);
+                /**
+                 * console.log('Target element: \n', target);
+                 * console.log('Text content: \n', textContent);
+                 * console.log('DataTransfer object: \n', dt);
+                 * console.log('Question ID: \n', qId);
+                 * console.log('Class: \n', myClassList);
+                 * console.log('Document ID: \n', documentId);
+                 */
                 // Let's do some Ajax.
                 var jqXHR = $.ajax({
                     url: DAA_HOST + "/v1/documents/" + documentId + "/document_markers",
                     type: 'POST',
                     data: {
-                        'document_marker[text]': '<placeholder>',
+                        'document_marker[text]': textContent,
                         'document_marker[position]': myClassList,
                         'document_id': documentId
                     }
@@ -236,7 +243,7 @@ $( document ).ready (function () {
                     alert("I haz failed ={\n Looks like the DAA server " +
                             "is not reachable. Please try again later");
                 }).always(function(){
-                    alert("I haz completed");
+                    //alert("I haz completed");
                 });
 
                 return false;
@@ -246,15 +253,16 @@ $( document ).ready (function () {
              * Find a child list for the given target, creating a new one if
              * necessary.
              */
-            getTargetUL: function(target) {
-                var ul = target.find('ul:first');
-                if (!ul.length) {
-                    target.append('<ul></ul>');
-                    ul = target.find('ul:first');
-                }
-                return ul;
-            },
-
+            /**
+             * getTargetUL: function(target) {
+             *     var ul = target.find('ul:first');
+             *     if (!ul.length) {
+             *         target.append('<ul></ul>');
+             *         ul = target.find('ul:first');
+             *     }
+             *     return ul;
+             * },
+             */
             EOF:null
         };
 
@@ -269,6 +277,6 @@ $( document ).ready (function () {
     $("img").attr('draggable', false);
 
     // Start up Pintastic
-    $("#container-split").pintastic();
+    $("#container").pintastic();
 
 });
