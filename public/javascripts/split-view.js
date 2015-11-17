@@ -133,7 +133,7 @@ $( document ).ready (function () {
 
                 if ( $(node.context).hasClass('draggable-pin') ) {
                     // Find the nearest .editable_field and extract its ID. This is the question ID.
-                    qId = node.prevAll('.editable_field:first').attr('id');
+                    qId = $(node).closest('tr').find('.editable_field').attr('id');
                     // We add information to the DataTransfer object for later.
                     var dt = ev.originalEvent.dataTransfer;
                     dt.setData('qId', qId);
@@ -261,7 +261,7 @@ $( document ).ready (function () {
             performDrop: function(ev) {
 
                 var target      = ev.target,
-                    textContent = target.textContent;
+                    textContent = target.textContent,
                     dt          = ev.originalEvent.dataTransfer,
                     qId         = dt.getData('qId'),
                     formId      = dt.getData('formId'),
@@ -294,7 +294,9 @@ $( document ).ready (function () {
                     },
                     // We may define custom data here.
                     customData: {
-                        dragged: this.dragged
+                        dragged: this.dragged,
+                        qId: qId,
+                        formId: formId
                     }
                 }).done(function(data){
                     var origColor;
@@ -309,12 +311,15 @@ $( document ).ready (function () {
                     console.log("Document Marker Position: " + markerData['marker_position']);
                     // Fetch custom data.
                     dragged = this.customData.dragged;
+                    qId = this.customData.qId;
+                    form = $("#" + this.customData.formId);
 
                     // Build up hidden input text to be attached to form.
                     var input = document.createElement('input');
                     input.type = 'hidden';
-                    input.name = 'document_markers[' + qId + ']' + '[marker_id]';
+                    input.name = 'document_markers[' + qId + ']' + '[marker_id][]';
                     input.value = markerData['marker_id'];
+                    input.id = "mId_" + markerData['marker_id'];
                     $(dragged).after(input);
 
                     // Build and attach li element to list under the pin.
@@ -324,11 +329,17 @@ $( document ).ready (function () {
 
                     // Attach hover over listener to scroll to element.
                     $(li)
+                        .on('mouseenter', function(){
+                            var position = this.textContent;
+                            var target = document.getElementsByClassName(position)[0];
+                            origColor = target.style.backgroundColor;
+                            target.style.border = "";
+                            target.style.backgroundColor = origColor;
+                        })
                         .on('click', function(){
                             var position = this.textContent;
                             var target = document.getElementsByClassName(position)[0];
                             $("#page-container").scrollTo($(target), 800);
-                            origColor = target.style.backgroundColor;
                             target.style.border = "thick dotted black";
                             target.style.backgroundColor = "yellow";
                         })
