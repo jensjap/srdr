@@ -312,7 +312,7 @@ $( document ).ready (function () {
                     // Fetch custom data.
                     dragged = this.customData.dragged;
                     qId = this.customData.qId;
-                    form = $("#" + this.customData.formId);
+                    //form = $("#" + this.customData.formId);
 
                     // Build up hidden input text to be attached to form.
                     var input = document.createElement('input');
