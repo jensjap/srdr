@@ -51,6 +51,7 @@ class DesignDetailDataPoint < ActiveRecord::Base
 	# Save the values coming in from the design details table
 	def self.save_data(params,study_id)
 		dd = params[:design_detail]
+        binding.pry
 		# convert escaped quotes to normal before saving
 		dd = QuestionBuilder.unescape_quotes(dd)
 		submitted_questions = []  # an array to keep record of the questions answered in this submission

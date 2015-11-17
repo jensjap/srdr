@@ -12,6 +12,7 @@ $( document ).ready (function () {
     (function ( $ ) {
 
         var DAA_HOST = 'http://api.daa-dev.com:3030';
+        var markerData;
 
         /**
          * Get lowercase tagname for node.
@@ -65,6 +66,8 @@ $( document ).ready (function () {
                     .bind('dragstart', function(ev) {
                         $this.setDraggedFromEvent(ev);
                         $this.captureQuestionId(ev);
+                        $this.captureFormId(ev);
+                        $this.captureDiv(ev);
                         return true;
                     })
 
@@ -92,7 +95,7 @@ $( document ).ready (function () {
 
                     .bind('drop', function(ev) {
                         ev.preventDefault();
-                        $this.performDrop(ev);
+                        markerData = $this.performDrop(ev);
                         $this.dragged = null;
                         return false;
                     });
@@ -134,6 +137,52 @@ $( document ).ready (function () {
                     // We add information to the DataTransfer object for later.
                     var dt = ev.originalEvent.dataTransfer;
                     dt.setData('qId', qId);
+                    // Copy the dt object over to the 'current' event.
+                    //ev.dataTransfer = dt;
+                }
+            },
+
+            /**
+             * Find the closest div (ancestor) and save it
+             * in the dataTransfer object for later
+             */
+            captureDiv: function(ev) {
+
+                // dragged property works for draggable-pin images only.
+                var node = $(ev.target);
+                while (node.tagName() != 'img') {
+                    node = node.parent();
+                }
+
+                if ( $(node.context).hasClass('draggable-pin') ) {
+                    // Find the nearest .editable_field and extract its ID. This is the question ID.
+                    parentDiv = node.prevAll('div:first');
+                    // We add information to the DataTransfer object for later.
+                    var dt = ev.originalEvent.dataTransfer;
+                    dt.setData('parentDiv', parentDiv);
+                    // Copy the dt object over to the 'current' event.
+                    //ev.dataTransfer = dt;
+                }
+            },
+
+            /**
+             * Find the form id from the nearest editable field and save it
+             * in the dataTransfer object for later
+             */
+            captureFormId: function(ev) {
+
+                // dragged property works for draggable-pin images only.
+                var node = $(ev.target);
+                while (node.tagName() != 'img') {
+                    node = node.parent();
+                }
+
+                if ( $(node.context).hasClass('draggable-pin') ) {
+                    // Find the nearest form and extract its ID. This is the form ID.
+                    formId = node.closest('form').attr('id');
+                    // We add information to the DataTransfer object for later.
+                    var dt = ev.originalEvent.dataTransfer;
+                    dt.setData('formId', formId);
                     // Copy the dt object over to the 'current' event.
                     //ev.dataTransfer = dt;
                 }
@@ -215,17 +264,25 @@ $( document ).ready (function () {
                     textContent = target.textContent;
                     dt          = ev.originalEvent.dataTransfer,
                     qId         = dt.getData('qId'),
+                    formId      = dt.getData('formId'),
+                    parentDiv   = dt.getData('parentDiv'),
                     documentId  = document.getElementById('dForm').value,
                     myClassList = target.className.replace(" drop-zone", "");
 
-                /**
-                 * console.log('Target element: \n', target);
-                 * console.log('Text content: \n', textContent);
-                 * console.log('DataTransfer object: \n', dt);
-                 * console.log('Question ID: \n', qId);
-                 * console.log('Class: \n', myClassList);
-                 * console.log('Document ID: \n', documentId);
-                 */
+                console.log('Target element: \n', target);
+                console.log('Text content: \n', textContent);
+                console.log('DataTransfer object: \n', dt);
+                console.log('Question ID: \n', qId);
+                console.log('Form ID: \n', formId);
+                console.log('Parent div: \n', parentDiv);
+                console.log('Document ID: \n', documentId);
+                console.log('Class: \n', myClassList);
+                console.log('Event: \n', ev);
+                console.log('Dragged: \n', this.dragged);
+
+                // clear markerData.
+                markerData = {};
+
                 // Let's do some Ajax.
                 var jqXHR = $.ajax({
                     url: DAA_HOST + "/v1/documents/" + documentId + "/document_markers",
@@ -234,11 +291,55 @@ $( document ).ready (function () {
                         'document_marker[text]': textContent,
                         'document_marker[position]': myClassList,
                         'document_id': documentId
+                    },
+                    // We may define custom data here.
+                    customData: {
+                        dragged: this.dragged
                     }
                 }).done(function(data){
-                    console.log("Document Marker ID: "       + data.id);
-                    console.log("Document Marker Text: "     + data.text);
-                    console.log("Document Marker Position: " + data.position);
+                    var origColor;
+
+                    markerData = {
+                        marker_id: data.id,
+                        marker_text: data.text,
+                        marker_position: data.position
+                    };
+                    console.log("Document Marker ID: "       + markerData['marker_id']);
+                    console.log("Document Marker Text: "     + markerData['marker_text']);
+                    console.log("Document Marker Position: " + markerData['marker_position']);
+                    // Fetch custom data.
+                    dragged = this.customData.dragged;
+
+                    // Build up hidden input text to be attached to form.
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'document_markers[' + qId + ']' + '[marker_id]';
+                    input.value = markerData['marker_id'];
+                    $(dragged).after(input);
+
+                    // Build and attach li element to list under the pin.
+                    var li = document.createElement('li');
+                    li.textContent = markerData['marker_position'];
+                    $(dragged).parents('ul:first').append(li);
+
+                    // Attach hover over listener to scroll to element.
+                    $(li)
+                        .on('click', function(){
+                            var position = this.textContent;
+                            var target = document.getElementsByClassName(position)[0];
+                            $("#page-container").scrollTo($(target), 800);
+                            origColor = target.style.backgroundColor;
+                            target.style.border = "thick dotted black";
+                            target.style.backgroundColor = "yellow";
+                        })
+                        .on('mouseleave', function(){
+                            var position = this.textContent;
+                            var target = document.getElementsByClassName(position)[0];
+                            target.style.border = "";
+                            target.style.backgroundColor = origColor;
+                        });
+
+
                 }).fail(function(){
                     alert("I haz failed ={\n Looks like the DAA server " +
                             "is not reachable. Please try again later");
@@ -247,6 +348,11 @@ $( document ).ready (function () {
                 });
 
                 return false;
+            },
+
+            appendMarkerToQuestion: function(){
+                var dragged = this.dragged;
+
             },
 
             /**
