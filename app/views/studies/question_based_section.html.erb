@@ -21,17 +21,41 @@
           <br/>
 					<% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
 						<%= raw(build_multi_choice(question, @data[:model])) %>
+                        <ul>
+                            <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                            <% if question[:q_daa_markers].length > 0 %>
+                                <% question[:q_daa_markers].each do |marker| %>
+                                    <li data-marker-position="<%= marker["position"] %>">
+                                        <%= truncate(marker["text"], length: 25, separator: ' ') %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ul>
 						
 					<% elsif question[:q_type] == 'select' %>
 						<%= raw(build_dropdown(question, @data[:model])) %>
                         <ul>
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                            <% if question[:q_daa_markers].length > 0 %>
+                                <% question[:q_daa_markers].each do |marker| %>
+                                    <li data-marker-position="<%= marker["position"] %>">
+                                        <%= truncate(marker["text"], length: 25, separator: ' ') %>
+                                    </li>
+                                <% end %>
+                            <% end %>
                         </ul>
 					
 					<% elsif question[:q_type] == 'text' %>
 						<%= raw(build_text(question, @data[:model], 66)) %>
                         <ul>
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                            <% if question[:q_daa_markers].length > 0 %>
+                                <% question[:q_daa_markers].each do |marker| %>
+                                    <li data-marker-position="<%= marker["position"] %>">
+                                      <%= truncate(marker["text"], length: 25, separator: ' ') %>
+                                    </li>
+                                <% end %>
+                            <% end %>
                         </ul>
 					
 					<% else %>
@@ -152,4 +176,33 @@
         $(".unsaved_div").css("display","block");
     });
 });
+
+var lsof_li = $('li');
+for (i=0;i<lsof_li.length;i++) {
+    if (lsof_li[i].hasAttribute('data-marker-position')) {
+        // Attach hover over listener to scroll to element.
+        $(lsof_li[i])
+            .on('mouseenter', function(){
+                var position = this.textContent;
+                var target = document.getElementsByClassName(position)[0];
+                origColor = target.style.backgroundColor;
+                target.style.border = "";
+                target.style.backgroundColor = origColor;
+            })
+            .on('click', function(){
+                var position = this.textContent;
+                var target = document.getElementsByClassName(position)[0];
+                $("#page-container").scrollTo($(target), 800);
+                target.style.border = "thick dotted black";
+                target.style.backgroundColor = "yellow";
+            })
+            .on('mouseleave', function(){
+                var position = this.textContent;
+                var target = document.getElementsByClassName(position)[0];
+                target.style.border = "";
+                target.style.backgroundColor = origColor;
+            });
+    }
+}
+
 </script>

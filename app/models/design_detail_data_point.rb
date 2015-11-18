@@ -25,7 +25,7 @@ class DesignDetailDataPoint < ActiveRecord::Base
     belongs_to :design_detail, foreign_key: "design_detail_field_id"
     belongs_to :study, :touch=>true
     scope :all_datapoints_for_study, lambda{|q_list, study_id, model_name| where("#{model_name}_field_id IN (?) AND study_id=?", q_list, study_id).
-                                            select(["#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","arm_id","outcome_id"])}
+                                            select(["id","#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","arm_id","outcome_id"])}
 
     # get_result
     # get the result (data point) from the given question
@@ -118,33 +118,41 @@ class DesignDetailDataPoint < ActiveRecord::Base
                     # AND IF ONLY A SINGLE VALUE HAS BEEN PASSED IN...
                 else
                     puts "SAVING DESIGN DETAIL DATA AND THE KEY IS #{key}\n\n"
-                    dat = DesignDetailDataPoint.find(:first, :conditions=>['design_detail_field_id=? AND study_id=? AND extraction_form_id=? AND (row_field_id=? OR row_field_id IS NULL) AND (column_field_id=? OR column_field_id IS NULL)',qid,study_id,ef_id,rowid,colid])
+                    dat = DesignDetailDataPoint.find(:first,
+                                                     :conditions=>['design_detail_field_id=? AND study_id=? AND extraction_form_id=? AND (row_field_id=? OR row_field_id IS NULL) AND (column_field_id=? OR column_field_id IS NULL)',
+                                                                   qid,study_id,ef_id,rowid,colid])
                     #dat = DesignDetailDataPoint.where(:design_detail_field_id=>key, :study_id=>study_id, :extraction_form_id => ef_id).first
-                    if dd[key].empty?
-                        dat.destroy unless dat.nil?
+                    if(dat.nil?)
+                        dat = DesignDetailDataPoint.new
+                        puts "CREATED A NEW DATAPOINT. \n"
                     else
-                        if(dat.nil?)
-                            dat = DesignDetailDataPoint.new
-                            puts "CREATED A NEW DATAPOINT. \n"
-                        else
-                            puts "FOUND EXISTING...#{dat.id}"
+                        puts "FOUND EXISTING...#{dat.id}"
+                    end
+                    dat.design_detail_field_id = qid
+                    dat.row_field_id = rowid
+                    dat.column_field_id = colid
+                    dat.value = dd[key]
+                    dat.study_id = study_id
+                    dat.extraction_form_id = ef_id
+                    unless dd_subquestions.nil?
+                        unless dd_subquestions[key.to_s].nil?
+                            dat.subquestion_value = dd_subquestions[key.to_s]
                         end
-                        dat.design_detail_field_id = qid
-                        dat.row_field_id = rowid
-                        dat.column_field_id = colid
-                        dat.value = dd[key]
-                        dat.study_id = study_id
-                        dat.extraction_form_id = ef_id
-                        unless dd_subquestions.nil?
-                            unless dd_subquestions[key.to_s].nil?
-                                dat.subquestion_value = dd_subquestions[key.to_s]
+                    end
+                    if !dat.save
+                        success = false
+                        puts "DID NOT SAVE PROPERLY."
+                    else
+                        puts "SAVED PROPERLY!"
+                        # Now that we know the datapoint is good we save the document markers.
+                        document_markers = params["document_markers"]
+                        document_markers.each do |key, value|
+                            if key.match /^design_detail_#{dat.design_detail_field_id}/
+                                marker_ids = value["marker_id"]
+                                marker_ids.each do |id|
+                                    DaaMarker.find_or_create_by_section_and_datapoint_id_and_marker_id("design_detail", dat.id, id)
+                                end
                             end
-                        end
-                        if !dat.save
-                            success = false
-                            puts "DID NOT SAVE PROPERLY."
-                        else
-                            puts "SAVED PROPERLY!"
                         end
                     end
                 end

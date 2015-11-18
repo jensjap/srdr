@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141029220724) do
+ActiveRecord::Schema.define(:version => 20151117190535) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -256,7 +256,7 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
   add_index "comparators", ["comparison_id"], :name => "comparator_comparison_idx"
 
   create_table "comparison_data_points", :force => true do |t|
-    t.string   "value"
+    t.text     "value"
     t.string   "footnote"
     t.boolean  "is_calculated"
     t.integer  "comparison_measure_id"
@@ -333,6 +333,14 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.integer "QualityD",  :limit => 8, :default => 0
   end
 
+  create_table "daa_markers", :force => true do |t|
+    t.string   "section"
+    t.integer  "datapoint_id"
+    t.integer  "marker_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "data_requests", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
@@ -352,6 +360,16 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "default_cevg_measures", :force => true do |t|
+    t.integer "results_type"
+    t.string  "outcome_type"
+    t.string  "title"
+    t.string  "description"
+    t.string  "unit"
+    t.integer "measure_type", :default => 1
+    t.boolean "is_default",   :default => false
   end
 
   create_table "default_comparison_measures", :force => true do |t|
@@ -990,7 +1008,7 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
 
   create_table "outcome_data_points", :force => true do |t|
     t.integer  "outcome_measure_id"
-    t.string   "value"
+    t.text     "value"
     t.string   "footnote"
     t.boolean  "is_calculated",      :default => false
     t.integer  "arm_id"
@@ -1178,6 +1196,19 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
   add_index "primary_publications", ["study_id"], :name => "StudyData"
   add_index "primary_publications", ["study_id"], :name => "primarypublication_study_idx"
 
+  create_table "project_copy_requests", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.integer  "clone_id"
+    t.boolean  "include_forms"
+    t.boolean  "include_studies"
+    t.boolean  "include_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_copy_requests", ["user_id"], :name => "index_project_copy_requests_on_user_id"
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -1192,6 +1223,11 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.string   "prospero_id"
     t.string   "search_strategy_filepath"
     t.boolean  "public_downloadable",      :default => false
+    t.datetime "publication_requested_at"
+    t.integer  "parent_id"
+    t.text     "attribution"
+    t.string   "doi_id"
+    t.string   "management_file_url"
   end
 
   add_index "projects", ["creator_id"], :name => "project_creator_idx"
@@ -1419,6 +1455,97 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.datetime "updated_at"
   end
 
+  create_table "srdr_quality_improvement_questionnaires", :force => true do |t|
+    t.string   "q1_first"
+    t.string   "q1_last"
+    t.string   "q1_email"
+    t.string   "q1_can_followup"
+    t.string   "q2"
+    t.string   "q3_lead"
+    t.string   "q3_collaborator"
+    t.string   "q4"
+    t.string   "q5"
+    t.string   "q6_month"
+    t.string   "q6_year"
+    t.string   "q7_abstrackr"
+    t.string   "q7_openmeta"
+    t.string   "q7_distiller"
+    t.string   "q7_covidence"
+    t.string   "q7_docdata"
+    t.string   "q7_eros"
+    t.string   "q7_sumari"
+    t.string   "q7_cast"
+    t.string   "q7_rayyan"
+    t.string   "q7_revman"
+    t.string   "q7_other"
+    t.string   "q8"
+    t.string   "q9"
+    t.string   "q10"
+    t.string   "q11"
+    t.string   "q12a"
+    t.string   "q12b"
+    t.string   "q13"
+    t.string   "q14"
+    t.string   "q14_month"
+    t.string   "q14_year"
+    t.string   "q15"
+    t.string   "q16"
+    t.string   "q17a"
+    t.string   "q17b"
+    t.string   "q17c"
+    t.string   "q17d"
+    t.string   "q17e"
+    t.string   "q18"
+    t.string   "q19"
+    t.string   "q20a"
+    t.string   "q20b"
+    t.string   "q20c"
+    t.string   "q20d"
+    t.string   "q20e"
+    t.string   "q20f"
+    t.string   "q21"
+    t.string   "q22"
+    t.string   "q23a"
+    t.string   "q23b"
+    t.string   "q23c"
+    t.string   "q23d"
+    t.string   "q24"
+    t.string   "q25"
+    t.string   "q26"
+    t.string   "q26_month"
+    t.string   "q26_year"
+    t.string   "q27a"
+    t.string   "q27b"
+    t.string   "q27c"
+    t.string   "q28"
+    t.string   "q29"
+    t.string   "q30"
+    t.string   "q30_month"
+    t.string   "q30_year"
+    t.string   "q31a"
+    t.string   "q31b"
+    t.string   "q31c"
+    t.string   "q32"
+    t.string   "q33"
+    t.string   "q34"
+    t.string   "q34_month"
+    t.string   "q34_year"
+    t.string   "q35"
+    t.string   "q36"
+    t.string   "q37"
+    t.string   "q38"
+    t.string   "q38_month"
+    t.string   "q38_year"
+    t.string   "q39a"
+    t.string   "q39b"
+    t.string   "q39c"
+    t.string   "q39d"
+    t.string   "q40"
+    t.string   "q41"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "studies", :force => true do |t|
     t.integer  "project_id"
     t.string   "study_type"
@@ -1457,6 +1584,18 @@ ActiveRecord::Schema.define(:version => 20141029220724) do
     t.integer  "extraction_form_id"
     t.integer  "user_id"
     t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "trial_participant_infos", :force => true do |t|
+    t.string   "age"
+    t.boolean  "readEnglish"
+    t.boolean  "experienceExtractingData"
+    t.string   "experienceLevel"
+    t.string   "articlesExtracted"
+    t.string   "email"
+    t.string   "submissionToken"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -621,6 +621,18 @@ class QuestionBuilder
 			# now add the fields and answers to the hash
 			q_fields = fields.select{|f| eval("f.#{model_name}_id == q.id")}
 			q_datapoints = datapoints.select{|dp| eval("dp.#{model_name}_field_id == q.id")}
+
+            # Attach DaaMarkers to datapoints.
+            q_datapoints.each do |dp|
+                lsof_daa_markers = []
+                lsof_daa_marker_ids = DaaMarker.where(datapoint_id: dp.id).collect { |dm| dm.marker_id }
+                lsof_daa_marker_ids.each do |marker_id|
+                    response = HTTParty.get("http://api.daa-dev.com:3030/v1/document_markers/#{marker_id}")
+                    lsof_daa_markers.push response
+                end
+                q_hash[:q_daa_markers] = lsof_daa_markers
+            end
+
 			# --- Radio, Checkboxes and Dropdowns
 			if ["radio","checkbox","yesno","select"].include?(q.field_type)  
 				q_hash[:fields] = self.create_multi_choice_field_hash(model_name,q_fields,q_datapoints, get_results_by)
