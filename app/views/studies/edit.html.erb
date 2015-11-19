@@ -22,11 +22,13 @@
     	<%= render :inline=>"#{flash[:error_html]}" if flash.keys.include?(:error_html) %>
 		<span id='study_citation'><%= render :inline=> @study.get_citation %></span>
         <br/><br/>
-        <%= link_to '<button type="button">Split screen</button>'.html_safe,
-            study_edit_split_path(@study),
-            html_options={ id: "split",
-                           class: "btn btn-default",
-                           role: "button" } %>
+        <% if [1,2130].include? current_user.id %>
+            <%= link_to '<button type="button">Split screen</button>'.html_safe,
+                study_edit_split_path(@study),
+                html_options={ id: "split",
+                               class: "btn btn-default",
+                               role: "button" } %>
+        <% end %>
 		
 		<% unless !defined?(@included_sections) %>
 			<% is_extforms = request.fullpath.split("/")[5] %>
