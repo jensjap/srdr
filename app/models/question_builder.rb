@@ -625,10 +625,11 @@ class QuestionBuilder
             # Attach DaaMarkers to datapoints.
             q_datapoints.each do |dp|
                 lsof_daa_markers = []
+                dict_documents = {}
                 lsof_daa_marker_ids = DaaMarker.where(datapoint_id: dp.id).collect { |dm| dm.marker_id }
                 lsof_daa_marker_ids.each do |marker_id|
-                    response = HTTParty.get("http://api.daa-dev.com:3030/v1/document_markers/#{marker_id}")
-                    lsof_daa_markers.push response
+                    daa_marker = HTTParty.get("http://api.daa-dev.com:3030/v1/document_markers/#{marker_id}")
+                    lsof_daa_markers.push daa_marker
                 end
                 q_hash[:q_daa_markers] = lsof_daa_markers
             end

@@ -25,8 +25,9 @@
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
                             <% if question[:q_daa_markers].length > 0 %>
                                 <% question[:q_daa_markers].each do |marker| %>
-                                    <li data-marker-position="<%= marker["position"] %>">
-                                        <%= truncate(marker["text"], length: 25, separator: ' ') %>
+                                    <li data-marker-position="<%= marker["position"] %>"
+                                        data-document-id="<%= marker["document"]["id"] %>">
+                                        <%= truncate(marker["text"], length: 50, separator: ' ') %>
                                     </li>
                                 <% end %>
                             <% end %>
@@ -38,8 +39,9 @@
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
                             <% if question[:q_daa_markers].length > 0 %>
                                 <% question[:q_daa_markers].each do |marker| %>
-                                    <li data-marker-position="<%= marker["position"] %>">
-                                        <%= truncate(marker["text"], length: 25, separator: ' ') %>
+                                    <li data-marker-position="<%= marker["position"] %>"
+                                        data-document-id="<%= marker["document"]["id"] %>">
+                                        <%= truncate(marker["text"], length: 50, separator: ' ') %>
                                     </li>
                                 <% end %>
                             <% end %>
@@ -51,8 +53,9 @@
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
                             <% if question[:q_daa_markers].length > 0 %>
                                 <% question[:q_daa_markers].each do |marker| %>
-                                    <li data-marker-position="<%= marker["position"] %>">
-                                      <%= truncate(marker["text"], length: 25, separator: ' ') %>
+                                    <li data-marker-position="<%= marker["position"] %>"
+                                        data-document-id="<%= marker["document"]["id"] %>">
+                                      <%= truncate(marker["text"], length: 50, separator: ' ') %>
                                     </li>
                                 <% end %>
                             <% end %>
@@ -177,31 +180,71 @@
     });
 });
 
+// Attach mouseenter, click and mouseleave events to all <li> elements that have
+// a data attribute called 'data-marker-position'.
 var lsof_li = $('li');
 for (i=0;i<lsof_li.length;i++) {
     if (lsof_li[i].hasAttribute('data-marker-position')) {
         // Attach hover over listener to scroll to element.
         $(lsof_li[i])
             .on('mouseenter', function(){
-                var position = this.textContent;
-                var target = document.getElementsByClassName(position)[0];
-                origColor = target.style.backgroundColor;
-                target.style.border = "";
-                target.style.backgroundColor = origColor;
             })
             .on('click', function(){
-                var position = this.textContent;
-                var target = document.getElementsByClassName(position)[0];
-                $("#page-container").scrollTo($(target), 800);
-                target.style.border = "thick dotted black";
-                target.style.backgroundColor = "yellow";
+                var position = this.getAttribute('data-marker-position');
+                var document_id = this.getAttribute('data-document-id');
+                // Check if document html has been cached.
+                if ( document_id in DAA['document_html'] ) {
+                    console.log("HTML already cached!");
+                    // Replace the innerHTML with the appropriate content.
+                    $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                    // Find scrollTo target.
+                    var target = document.getElementsByClassName(position)[0];
+                    // Scroll to the element.
+                    $("#page-container").scrollTo($(target), 800);
+                    // A bit of highlighting for visual feedback.
+                    target.style.border = "thick dotted black";
+                    DAA.origColor = target.style.backgroundColor;
+                    target.style.backgroundColor = "yellow";
+                    // Add drop-zone class to document elements.
+                    $("div#page-container div.t").addClass("drop-zone")
+                } else {
+                    console.log("Caching HTML");
+                    // Make synchronous call.
+                    $.ajax({
+                        url: "http://api.daa-dev.com:3030/v1/documents/" + document_id.toString() + "/html",
+                        success: function(resp){
+                            DAA['document_html'][document_id] = resp;
+                            // Replace the innerHTML with the appropriate content.
+                            $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                            // Find scrollTo target.
+                            var target = document.getElementsByClassName(position)[0];
+                            // Scroll to the element.
+                            $("#page-container").scrollTo($(target), 800);
+                            // A bit of highlighting for visual feedback.
+                            target.style.border = "thick dotted black";
+                            target.style.backgroundColor = "yellow";
+                            // Add drop-zone class to document elements.
+                            $("div#page-container div.t").addClass("drop-zone")
+                        },
+                        async: false
+                    });
+                }
             })
             .on('mouseleave', function(){
-                var position = this.textContent;
+                var position = this.getAttribute('data-marker-position');
                 var target = document.getElementsByClassName(position)[0];
                 target.style.border = "";
-                target.style.backgroundColor = origColor;
+                target.style.backgroundColor = DAA.origColor;
             });
+    }
+}
+
+if (typeof DAA == 'undefined') {
+    $('.draggable-pin').hide();
+    for (i=0;i<lsof_li.length;i++) {
+        if (lsof_li[i].hasAttribute('data-marker-position')) {
+            $(lsof_li[i]).hide();
+        }
     }
 }
 

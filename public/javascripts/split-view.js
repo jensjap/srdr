@@ -247,7 +247,8 @@ $( document ).ready (function () {
             updateDropFeedback: function(ev, action) {
                 if ( $(ev.target).hasClass('drop-zone') ) {
                     if (action === "highlight") {
-                        ev.target.style.backgroundColor = "fuchsia";
+                        ev.target.style.backgroundColor = "orange";
+                        ev.target.style.border = "thick dotted fuchsia";
                         /*ev.target.style.opacity = 0.3;*/
                     } else if (action === "clear") {
                         ev.target.removeAttribute('style');
@@ -295,12 +296,11 @@ $( document ).ready (function () {
                     // We may define custom data here.
                     customData: {
                         dragged: this.dragged,
+                        target: target,
                         qId: qId,
                         formId: formId
                     }
                 }).done(function(data){
-                    var origColor;
-
                     markerData = {
                         marker_id: data.id,
                         marker_text: data.text,
@@ -324,33 +324,36 @@ $( document ).ready (function () {
 
                     // Build and attach li element to list under the pin.
                     var li = document.createElement('li');
-                    li.textContent = markerData['marker_position'];
+                    li.textContent = markerData['marker_text'];
+                    li.setAttribute('data-marker-position', markerData['marker_position'])
                     $(dragged).parents('ul:first').append(li);
 
                     // Attach hover over listener to scroll to element.
                     $(li)
                         .on('mouseenter', function(){
-                            var position = this.textContent;
+                            var position = this.getAttribute('data-marker-position');
                             var target = document.getElementsByClassName(position)[0];
-                            origColor = target.style.backgroundColor;
+                            DAA.origColor = target.style.backgroundColor;
                             target.style.border = "";
-                            target.style.backgroundColor = origColor;
+                            target.style.backgroundColor = DAA.origColor;
                         })
                         .on('click', function(){
-                            var position = this.textContent;
+                            var position = this.getAttribute('data-marker-position');
                             var target = document.getElementsByClassName(position)[0];
                             $("#page-container").scrollTo($(target), 800);
                             target.style.border = "thick dotted black";
                             target.style.backgroundColor = "yellow";
                         })
                         .on('mouseleave', function(){
-                            var position = this.textContent;
+                            var position = this.getAttribute('data-marker-position');
                             var target = document.getElementsByClassName(position)[0];
                             target.style.border = "";
-                            target.style.backgroundColor = origColor;
+                            target.style.backgroundColor = DAA.origColor;
                         });
 
-
+                    // Clear target border color
+                    this.customData.target.style.border = "";
+                    this.customData.target.style.backgroundColor = "";
                 }).fail(function(){
                     alert("I haz failed ={\n Looks like the DAA server " +
                             "is not reachable. Please try again later");

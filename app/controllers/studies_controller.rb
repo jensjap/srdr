@@ -18,41 +18,6 @@ class StudiesController < ApplicationController
     require 'import_handler'
     require 'background_simport'
 
-    def split
-        begin
-            user_assigned = current_user.is_assigned_to_project(params[:project_id])
-            @data = QuestionBuilder.get_questions("design_detail",
-                                                  params[:study_id],
-                                                  params[:extraction_form_id],
-                                                  {:user_assigned => user_assigned})
-            @data_point = DesignDetailDataPoint.new
-
-            # Now get any additional user instructions for this section
-            @ef_instruction = EfInstruction.find(:first,
-                                                 :conditions=>["ef_id = ? and section = ? and data_element = ?",
-                                                               params[:extraction_form_id].to_s, "DESIGN", "GENERAL"])
-            @ef_instruction = @ef_instruction.nil? ? "" : @ef_instruction.instructions
-
-            # Fetch document_html from DAA API
-            #!!! Stubbed for now. Needs to make actual call and fetch document.
-            #@document_id = "1"
-            #response = HTTParty.get("http://api.daa-dev.com:3030/v1/documents/#{@document_id}/html")
-            #@document_html = response
-            @document_html = ''
-            @study = Study.find(params[:study_id])
-
-            if @data[:by_arm] == true || @data[:by_outcome] == true
-                render :action=>'question_based_section_by_category_split',
-                       :layout => "split_screen"
-            else
-                render :action=>'question_based_section_split',
-                       :layout =>"split_screen"
-            end
-        rescue Exception => e
-            puts "ERROR: #{e.message}\n\n#{e.backtrace}"
-        end
-    end
-
     def data
         @study = Study.find(params[:study_id])
         user_assigned = current_user.is_assigned_to_project(@study.project.id)
@@ -234,7 +199,7 @@ class StudiesController < ApplicationController
             session[:extraction_form_id] = @current_form_id
             session[:completed_sections] = Study.get_completed_sections(@study.id, @current_form_id)
         end
-        render :layout => "split_screen"
+        render :layout => "application_split"
     end
 
     # displays study extraction form page. 
