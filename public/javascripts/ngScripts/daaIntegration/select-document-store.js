@@ -10,7 +10,7 @@
             // Controller logic here.
             controller: function(){
                 var sdCtrl = this;
-                var remoteHost = 'http://api.daa-dev.com:3030';
+                var remoteHost = 'http://api.daa-dev.infalliblekitty.com';
 
                 // Models are bound to select elements in the template.
                 sdCtrl.documentStores = [ ];

@@ -11,7 +11,7 @@ $( document ).ready (function () {
      */
     (function ( $ ) {
 
-        var DAA_HOST = 'http://api.daa-dev.com:3030';
+        var DAA_HOST = 'http://api.daa-dev.infalliblekitty.com';
         var markerData;
 
         /**

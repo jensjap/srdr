@@ -23,7 +23,7 @@
 						<%= raw(build_multi_choice(question, @data[:model])) %>
                         <ul>
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
-                            <% if question[:q_daa_markers].length > 0 %>
+                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
                                 <% question[:q_daa_markers].each do |marker| %>
                                     <li data-marker-position="<%= marker["position"] %>"
                                         data-document-id="<%= marker["document"]["id"] %>">
@@ -37,7 +37,7 @@
 						<%= raw(build_dropdown(question, @data[:model])) %>
                         <ul>
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
-                            <% if question[:q_daa_markers].length > 0 %>
+                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
                                 <% question[:q_daa_markers].each do |marker| %>
                                     <li data-marker-position="<%= marker["position"] %>"
                                         data-document-id="<%= marker["document"]["id"] %>">
@@ -51,7 +51,7 @@
 						<%= raw(build_text(question, @data[:model], 66)) %>
                         <ul>
                             <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
-                            <% if question[:q_daa_markers].length > 0 %>
+                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
                                 <% question[:q_daa_markers].each do |marker| %>
                                     <li data-marker-position="<%= marker["position"] %>"
                                         data-document-id="<%= marker["document"]["id"] %>">
@@ -211,7 +211,7 @@ for (i=0;i<lsof_li.length;i++) {
                     console.log("Caching HTML");
                     // Make synchronous call.
                     $.ajax({
-                        url: "http://api.daa-dev.com:3030/v1/documents/" + document_id.toString() + "/html",
+                        url: "http://api.daa-dev.infalliblekitty.com/v1/documents/" + document_id.toString() + "/html",
                         success: function(resp){
                             DAA['document_html'][document_id] = resp;
                             // Replace the innerHTML with the appropriate content.

@@ -628,7 +628,7 @@ class QuestionBuilder
                 dict_documents = {}
                 lsof_daa_marker_ids = DaaMarker.where(datapoint_id: dp.id).collect { |dm| dm.marker_id }
                 lsof_daa_marker_ids.each do |marker_id|
-                    daa_marker = HTTParty.get("http://api.daa-dev.com:3030/v1/document_markers/#{marker_id}")
+                    daa_marker = HTTParty.get("http://api.daa-dev.infalliblekitty.com/v1/document_markers/#{marker_id}")
                     lsof_daa_markers.push daa_marker
                 end
                 q_hash[:q_daa_markers] = lsof_daa_markers
