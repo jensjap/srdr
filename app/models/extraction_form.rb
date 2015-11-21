@@ -22,10 +22,19 @@ class ExtractionForm < ActiveRecord::Base
     require 'yaml'
     belongs_to :project, :touch=>true
     attr_accessible :title, :project_id, :creator_id
-    has_many :design_detail_data_points, :through=>:design_details
-    has_many :design_details, :dependent=>:destroy
-    has_many :baseline_characteristic_data_points, :through=>:baseline_characteristics
-    has_many :baseline_characteristics, :dependent=>:destroy
+
+    has_many :design_details,           dependent: :destroy
+    has_many :arm_details,              dependent: :destroy
+    has_many :baseline_characteristics, dependent: :destroy
+    has_many :outcome_details,          dependent: :destroy
+    has_many :diagnostic_test_details,  dependent: :destroy
+
+    has_many :design_detail_data_points,           through: :design_details
+    has_many :arm_detail_data_points,              through: :arm_details
+    has_many :baseline_characteristic_data_points, through: :baseline_characteristics
+    has_many :outcome_detail_data_points,          through: :outcome_details
+    has_many :diagnostic_test_detail_data_points,  through: :diagnostic_test_details
+
     has_many :extraction_form_arms, :dependent=>:destroy
     has_many :extraction_form_outcome_names, :dependent=>:destroy
     has_many :extraction_form_sections, :dependent=>:destroy
@@ -35,6 +44,8 @@ class ExtractionForm < ActiveRecord::Base
     has_many :quality_rating_fields, :dependent=>:destroy
     has_many :adverse_event_columns, :dependent=>:destroy
     has_many :extraction_form_key_questions, :dependent=>:destroy
+    has_many :study_extraction_forms
+    has_many :studies, through: :study_extraction_forms
 
 
     # determine whether or not the extraction form is capable of being removed

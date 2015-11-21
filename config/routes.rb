@@ -28,6 +28,8 @@ Srdr::Application.routes.draw do
 
     resources :studies do
         resources :arms
+        get 'data'
+        get 'edit_split' => 'studies#edit_split'
     end
 
     resources :feedback_items
@@ -216,6 +218,7 @@ Srdr::Application.routes.draw do
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/arm_details' => 'studies#arm_details'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/diagnostics' => 'studies#diagnostics'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/design' => 'studies#design'
+
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/baselines' => 'studies#baselines'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/outcomes' => 'studies#outcomes'
     match 'projects/:project_id/studies/:study_id/extraction_forms/:extraction_form_id/outcome_details' => 'studies#outcome_details'

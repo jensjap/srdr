@@ -1,0 +1,57 @@
+<div id="extraction-form-split-left" class="col-md-6 col-lg-6">
+    <h1>Review Document Markers</h1>
+
+    <!-- Document store and document drop-down selectors. Uses AngularJs element directive. -->
+    <select-document></select-document>
+
+    <!-- Set up tabs for each section -->
+    <div id="tabs-ef">
+        <ul>
+            <% @data.each do |ef|%>
+                <li><a href="#tabs-ef-<%= ef[:id] %>"><%= ef[:title] %></a></li>
+            <% end %>
+        </ul>
+
+        <% @data.each do |ef| %>
+            <div id="tabs-ef-<%= ef[:id] %>">
+                <h2>Extraction Form: <%= ef[:title] %></h2>
+                <!-- Set up tabs for each section (nested within the extraction form) -->
+                <div id="tabs-section">
+                    <ul>
+                        <% ef[:data].each do |d| %>
+                            <li>
+                                <a href="#tabs-section-<%= d[:section] %>">
+                                    <%= d[:section].camelize %> (<%= d[:datapoints].count %>)
+                                </a>
+                            </li>
+                        <% end%><!-- ef[:data].each do |d| -->
+                    </ul>
+
+                    <% ef[:data].each do |d| %>
+                        <div id="tabs-section-<%= d[:section] %>">
+                            <% d[:datapoints].each do |dp| %>
+                                <div style="border-width: 1px; border-style: solid; padding: 8px; margin: 5px;">
+                                    <strong>
+                                        <%= dp.send(d[:section]).question_number %>. <%= dp.send(d[:section]).question %>
+                                    </strong>
+                                    <br>
+                                    <%= dp.value %>
+                                    <%= dp.subquestion_value if dp.subquestion_value %>
+                                </div>
+                            <% end %><!-- d[:datapoints].each do |dp| -->
+                        </div><!-- #tabs-section- -->
+                    <% end %><!-- ef[:data].each do |d| -->
+                </div><!-- #tabs-section -->
+            </div><!-- #tabs-ef- -->
+        <% end %><!-- @data.each do |ef| -->
+    </div><!-- #tabs-ef -->
+</div><!-- #extraction-form-split-left .col-md-6 col-lg-6 -->
+
+<div id="extraction-form-split-right" class="col-md-6 col-lg-6">
+</div><!-- #extraction-form-split-right .col-md-6 col-lg-6 -->
+
+<script type="text/javascript" charset="utf-8">
+    $("#tabs-ef").tabs();
+    $("#tabs-section").tabs();
+</script>
+

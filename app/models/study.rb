@@ -17,7 +17,8 @@
 # The data that is entered into a study is determined by the key questions it answers, which are linked to extraction forms.
 class Study < ActiveRecord::Base
     belongs_to :project, :touch=>true
-    #has_many :extraction_forms
+    has_many :study_extraction_forms
+    has_many :extraction_forms, through: :study_extraction_forms
     has_many :arms, :dependent=>:destroy
     has_many :outcome_results, :through => :outcomes
     has_many :outcome_timepoints, :through => :outcomes
@@ -27,6 +28,7 @@ class Study < ActiveRecord::Base
     has_many :arm_detail_data_points, :dependent=>:destroy
     has_many :baseline_characteristic_data_points, :dependent=>:destroy
     has_many :outcome_detail_data_points, :dependent=>:destroy
+    has_many :diagnostic_test_detail_data_points, :dependent=>:destroy
     has_many :adverse_event_arms, :through => :adverse_event
     has_many :adverse_events, :dependent=>:destroy
     has_many :secondary_publications, :dependent=>:destroy
@@ -1103,6 +1105,36 @@ class Study < ActiveRecord::Base
   def self.extraction_form_ids(study_id)
     ids = StudyKeyQuestion.find(:all, :conditions=>["study_id=>?",study_id],:select=>[:extraction_form_id])
     return ids.collect{|x| x.extraction_form_id}.uniq
+  end
+
+  def data(options)
+      sections = ["design_detail", "arm_detail", "baseline_characteristic",
+                  "outcome_detail", "diagnostic_test_detail"]
+      data = []
+      # Find all extraction forms that this study uses.
+      extraction_forms = self.extraction_forms
+
+      extraction_forms.each do |ef|
+          ef_hash = {}
+          ef_hash[:title] = ef.title
+          ef_hash[:id] = ef.id
+          ef_hash[:data] = []
+          sections.each do |section|
+              section_hash = {}
+              section_hash[:section] = section
+              section_hash[:datapoints] = []
+              # Get all 'section_detail'_data_points that belong to this study
+              # and group by extraction_form_id
+              datapoints = self.send(section+'_data_points').
+                  group_by { |d| d.extraction_form_id }
+              if datapoints[ef.id]
+                  section_hash[:datapoints] = datapoints[ef.id]
+                  ef_hash[:data].push section_hash
+              end
+          end
+          data.push ef_hash
+      end
+      data
   end
 
 end

@@ -22,11 +22,11 @@ class BaselineCharacteristicDataPoint < ActiveRecord::Base
 
     before_save :clean_string
 
-    belongs_to :baseline_characteristic_field
+    belongs_to :baseline_characteristic, foreign_key: "baseline_characteristic_field_id"
     belongs_to :study, :touch=>true
     belongs_to :arm
     scope :all_datapoints_for_study, lambda{|q_list, study_id, model_name| where("#{model_name}_field_id IN (?) AND study_id=?", q_list, study_id).
-                select(["#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","arm_id","outcome_id","diagnostic_test_id"])}
+                select(["id","#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","arm_id","outcome_id","diagnostic_test_id"])}
 
     # get_result
     # get the result (data point) based on a given question

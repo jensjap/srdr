@@ -30,6 +30,7 @@ gem 'rubyXL'
 gem 'axlsx'
 gem 'daemons'
 gem 'fuzzy-string-match'
+gem 'httparty'
 
 group :development, :test do
     gem 'rspec-rails', '2.11.0'

@@ -22,10 +22,10 @@ class OutcomeDetailDataPoint < ActiveRecord::Base
 
   before_save :clean_string
 
-	belongs_to :outcome_detail_field
+	belongs_to :outcome_detail, foreign_key: "outcome_detail_field_id"
 	belongs_to :study, :touch=>true
 	scope :all_datapoints_for_study, lambda{|q_list, study_id, model_name| where("#{model_name}_field_id IN (?) AND study_id=?", q_list, study_id).
-				select(["#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","outcome_id"])}
+				select(["id","#{model_name}_field_id","value","notes","subquestion_value","row_field_id","column_field_id","outcome_id"])}
 
 	
 	# get_result

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151015195809) do
+ActiveRecord::Schema.define(:version => 20151117190535) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -331,6 +331,14 @@ ActiveRecord::Schema.define(:version => 20151015195809) do
     t.boolean "DxTestD"
     t.integer "nDxTestD",  :limit => 8, :default => 0
     t.integer "QualityD",  :limit => 8, :default => 0
+  end
+
+  create_table "daa_markers", :force => true do |t|
+    t.string   "section"
+    t.integer  "datapoint_id"
+    t.integer  "marker_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "data_requests", :force => true do |t|

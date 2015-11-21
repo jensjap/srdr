@@ -22,7 +22,7 @@ class OutcomeDetail < ActiveRecord::Base
   before_save :clean_string
 
 	has_many :outcome_detail_fields, :dependent=>:destroy
-	has_many :outcome_detail_data_points, :through=>:outcome_detail_fields
+	has_many :outcome_detail_data_points, foreign_key: "outcome_detail_field_id"
 	validates :question, :presence => true
 	scope :questions_for_ef, lambda{|efid| where("extraction_form_id=?",efid).
 				select(["id","question","question_number","field_type","instruction","is_matrix","include_other_as_option"]).

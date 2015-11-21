@@ -17,10 +17,18 @@
 	<% page_name = page[page.length - 1]%>
 	<% unless @study.id.nil? %>
 		<%= render :partial=>"projects/page_title", :locals=>{:page_title=>"Editing Study:"} %>	
-		<br/><br/>
+        <br/><br/>
 		<%= render :inline=>"#{flash[:success_html]}" if flash.keys.include?(:success_html) %>
     	<%= render :inline=>"#{flash[:error_html]}" if flash.keys.include?(:error_html) %>
 		<span id='study_citation'><%= render :inline=> @study.get_citation %></span>
+        <br/><br/>
+        <% if [1,2130].include? current_user.id %>
+            <%= link_to '<button type="button">Split screen</button>'.html_safe,
+                study_edit_split_path(@study),
+                html_options={ id: "split",
+                               class: "btn btn-default",
+                               role: "button" } %>
+        <% end %>
 		
 		<% unless !defined?(@included_sections) %>
 			<% is_extforms = request.fullpath.split("/")[5] %>

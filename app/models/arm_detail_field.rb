@@ -19,7 +19,7 @@ class ArmDetailField < ActiveRecord::Base
 	before_save :clean_string
 
 	belongs_to :arm_detail, :touch=>true
-	#has_many :arm_detail_data_points, :dependent=>:destroy
+	has_many :arm_detail_data_points, :dependent=>:destroy
 	scope :all_fields_for_questions, lambda{|q_list, model_name| where("#{model_name}_id IN (?)",q_list).order("row_number ASC")}
 
 	# remove all previously saved question choices before

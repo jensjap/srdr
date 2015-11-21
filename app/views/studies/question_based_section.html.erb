@@ -1,6 +1,7 @@
 <div class='tab-div'>
 	<br/>
 	<h2><%= @data[:page_title] %></h2><br/><br/>
+
 	<%= form_for(@data_point, :remote => true) do |f| %>
 	<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
 	<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
@@ -20,12 +21,45 @@
           <br/>
 					<% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
 						<%= raw(build_multi_choice(question, @data[:model])) %>
+                        <ul>
+                            <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
+                                <% question[:q_daa_markers].each do |marker| %>
+                                    <li data-marker-position="<%= marker["position"] %>"
+                                        data-document-id="<%= marker["document"]["id"] %>">
+                                        <%= truncate(marker["text"], length: 50, separator: ' ') %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ul>
 						
 					<% elsif question[:q_type] == 'select' %>
 						<%= raw(build_dropdown(question, @data[:model])) %>
+                        <ul>
+                            <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
+                                <% question[:q_daa_markers].each do |marker| %>
+                                    <li data-marker-position="<%= marker["position"] %>"
+                                        data-document-id="<%= marker["document"]["id"] %>">
+                                        <%= truncate(marker["text"], length: 50, separator: ' ') %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ul>
 					
 					<% elsif question[:q_type] == 'text' %>
 						<%= raw(build_text(question, @data[:model], 66)) %>
+                        <ul>
+                            <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
+                                <% question[:q_daa_markers].each do |marker| %>
+                                    <li data-marker-position="<%= marker["position"] %>"
+                                        data-document-id="<%= marker["document"]["id"] %>">
+                                      <%= truncate(marker["text"], length: 50, separator: ' ') %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        </ul>
 					
 					<% else %>
 						<%= raw(build_matrix(question, @data[:model])) %>
@@ -145,4 +179,73 @@
         $(".unsaved_div").css("display","block");
     });
 });
+
+// Attach mouseenter, click and mouseleave events to all <li> elements that have
+// a data attribute called 'data-marker-position'.
+var lsof_li = $('li');
+for (i=0;i<lsof_li.length;i++) {
+    if (lsof_li[i].hasAttribute('data-marker-position')) {
+        // Attach hover over listener to scroll to element.
+        $(lsof_li[i])
+            .on('mouseenter', function(){
+            })
+            .on('click', function(){
+                var position = this.getAttribute('data-marker-position');
+                var document_id = this.getAttribute('data-document-id');
+                // Check if document html has been cached.
+                if ( document_id in DAA['document_html'] ) {
+                    console.log("HTML already cached!");
+                    // Replace the innerHTML with the appropriate content.
+                    $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                    // Find scrollTo target.
+                    var target = document.getElementsByClassName(position)[0];
+                    // Scroll to the element.
+                    $("#page-container").scrollTo($(target), 800);
+                    // A bit of highlighting for visual feedback.
+                    target.style.border = "thick dotted black";
+                    DAA.origColor = target.style.backgroundColor;
+                    target.style.backgroundColor = "yellow";
+                    // Add drop-zone class to document elements.
+                    $("div#page-container div.t").addClass("drop-zone")
+                } else {
+                    console.log("Caching HTML");
+                    // Make synchronous call.
+                    $.ajax({
+                        url: "http://api.daa-dev.infalliblekitty.com/v1/documents/" + document_id.toString() + "/html",
+                        success: function(resp){
+                            DAA['document_html'][document_id] = resp;
+                            // Replace the innerHTML with the appropriate content.
+                            $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                            // Find scrollTo target.
+                            var target = document.getElementsByClassName(position)[0];
+                            // Scroll to the element.
+                            $("#page-container").scrollTo($(target), 800);
+                            // A bit of highlighting for visual feedback.
+                            target.style.border = "thick dotted black";
+                            target.style.backgroundColor = "yellow";
+                            // Add drop-zone class to document elements.
+                            $("div#page-container div.t").addClass("drop-zone")
+                        },
+                        async: false
+                    });
+                }
+            })
+            .on('mouseleave', function(){
+                var position = this.getAttribute('data-marker-position');
+                var target = document.getElementsByClassName(position)[0];
+                target.style.border = "";
+                target.style.backgroundColor = DAA.origColor;
+            });
+    }
+}
+
+if (typeof DAA == 'undefined') {
+    $('.draggable-pin').hide();
+    for (i=0;i<lsof_li.length;i++) {
+        if (lsof_li[i].hasAttribute('data-marker-position')) {
+            $(lsof_li[i]).hide();
+        }
+    }
+}
+
 </script>
