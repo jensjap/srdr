@@ -146,11 +146,13 @@ class DesignDetailDataPoint < ActiveRecord::Base
                         puts "SAVED PROPERLY!"
                         # Now that we know the datapoint is good we save the document markers.
                         document_markers = params["document_markers"]
-                        document_markers.each do |key, value|
-                            if key.match /^design_detail_#{dat.design_detail_field_id}/
-                                marker_ids = value["marker_id"]
-                                marker_ids.each do |id|
-                                    DaaMarker.find_or_create_by_section_and_datapoint_id_and_marker_id("design_detail", dat.id, id)
+                        if document_markers.present?
+                            document_markers.each do |key, value|
+                                if key.match /^design_detail_#{dat.design_detail_field_id}/
+                                    marker_ids = value["marker_id"]
+                                    marker_ids.each do |id|
+                                        DaaMarker.find_or_create_by_section_and_datapoint_id_and_marker_id("design_detail", dat.id, id)
+                                    end
                                 end
                             end
                         end
