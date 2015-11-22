@@ -54,7 +54,8 @@ Srdr::Application.routes.draw do
 
     # --------- DAA Consent form ----------
     get "daa/consent" => "daa_info#consent"
-    post "daa/submit_consent" => "daa_info#submit_consent"
+    get "daa/thanks" => "daa_info#consent_thanks"
+    post "daa/consent" => "daa_info#consent_submit"
 
     # ---------- EPC Questionnaire ----------
     get "questionnaire/form" => "bryant_form#form"

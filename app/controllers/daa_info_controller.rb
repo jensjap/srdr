@@ -68,6 +68,21 @@ class DaaInfoController < ApplicationController
         @submission_token = create_submission_token
     end
 
+    def consent_submit
+        @consent = DaaConsent.new(params["daa_consent"])
+        if @consent.save
+            redirect_to daa_thanks_url
+        else
+            @submission_token = create_submission_token
+            flash.now[:error] = "Invalid submission. Please review the form and make sure all fields are filled out."
+            flash.now[:specifics] = @consent.errors
+            render 'consent'
+        end
+    end
+
+    def consent_thanks
+    end
+
     private
         def create_submission_token
             timeNow = Time.now
@@ -77,5 +92,4 @@ class DaaInfoController < ApplicationController
         def is_a_valid_email?(email)
             (email =~ /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
         end
-
 end

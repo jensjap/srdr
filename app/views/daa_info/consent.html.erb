@@ -3,8 +3,14 @@
     <div id="pager" ng-controller="PageController as pageCtrl">
 
         <div id="page-header">
-            <h1>Data Abstraction Assistant (DAA) Randomized Controlled Trial – Informed Consent</h1>
-            <h2>Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span></h2>
+            <h1 ng-hide="pageCtrl.activePage == 10 || pageCtrl.activePage == 11">
+                Data Abstraction Assistant (DAA) Randomized Controlled Trial – Informed Consent
+            </h1>
+            <h2 ng-hide="pageCtrl.activePage == 10 || pageCtrl.activePage == 11">
+                Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span>
+            </h2>
+            <h1 ng-show="pageCtrl.activePage == 10">Congratulations!</h1>
+            <h1 ng-show="pageCtrl.activePage == 11">Thank you!</h1>
         </div>
         <div id="page-1" ng-show="pageCtrl.activePage == 1">
             <p class="big">What you should know about this study</p>
@@ -60,26 +66,88 @@
             <p class="big">What happens if you leave the study early?</p>
             <p>To minimize incomplete data collection, we hope that once you are randomized in the study, you will complete the study, although you may choose to leave the study at any time. There will be no penalty if you decide to quit the study.</p>
         </div>
-        <div id="page-8" ng-show="pageCtrl.activePage == 8">
-            <p class="big">Clinical Trials</p>
-            <p>A description of this clinical trial will be available on <a href="http://www.ClinicalTrials.gov" target="_blank">http://www.ClinicalTrials.gov</a>, as required by United States law.</p>
-            <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
-            <p>Your agreement below means on this form means:</p>
-            <ul>
-                <li>You have been informed about this study’s purpose, procedures, possible benefits and risks.</li>
-                <li>You have been given the chance to ask questions before you sign.</li>
-                <li>You have voluntarily agreed to be in this study.</li>
-            </ul>
-            <div>
-                FORM
+        <%= form_for @consent, url: {action: "consent_submit"} do |f| %>
+            <div id="page-8" ng-show="pageCtrl.activePage == 8">
+                <p class="big">Clinical Trials</p>
+                <p>A description of this clinical trial will be available on <a href="http://www.ClinicalTrials.gov" target="_blank">http://www.ClinicalTrials.gov</a>, as required by United States law.</p>
+                <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
+                <p>Your agreement below means on this form means:</p>
+                <ul>
+                    <li>You have been informed about this study’s purpose, procedures, possible benefits and risks.</li>
+                    <li>You have been given the chance to ask questions before you sign.</li>
+                    <li>You have voluntarily agreed to be in this study.</li>
+                </ul>
+                <div>
+                    You must select agree before moving on: I&nbsp;
+                    <%= f.select :agree, [[ 'Do Not Agree', false], ['Agree', true]] %>
+                    <%= f.hidden_field :submissionToken, value: @submission_token %>
+                    to participate in this study.
+                </div>
             </div>
-        </div>
-        <div id="page-9" ng-show="pageCtrl.activePage == 9">
-            <p>Before you can complete the process Informed Consent for participating in this study, please answer the following two questions about this study.</p>
-            <div>
-                FORM
+            <div id="page-9" ng-show="pageCtrl.activePage == 9">
+                <% if flash[:specifics].present? %>
+                    <% if flash[:specifics][:qOne].present? %>
+                        <div class="alert alert-error">
+                            You have to answer question (1).
+                        </div>
+                    <% end %>
+                    <% if flash[:specifics][:qTwo].present? %>
+                        <div class="alert alert-error">
+                            You have to answer question (2).
+                        </div>
+                    <% end %>
+                <% end %>
+                <p>Before you can complete the process Informed Consent for participating in this study, please answer the following two questions about this study.</p>
+                <div>
+                    <p>
+                    <span class="error" ng-show="new_daa_consent.daa_consent[qOne].$error.required">&nbsp;</span>
+                    (1) Which of the following data systems will be used for data abstraction in this study? (Select one)<br>
+                    <%= f.radio_button :qOne, "Microsoft Access" %>
+                    <%= f.label :qOne_microsoft_access, "Microsoft Access" %><br>
+                    <%= f.radio_button :qOne, "Microsoft Excel" %>
+                    <%= f.label :qOne_microsoft_excel, "Microsoft Excel" %><br>
+                    <%= f.radio_button :qOne, "Systematic Review Data Repository (SRDR)" %>
+                    <%= f.label :qOne_systematic_review_data_repository_srdr, "Systematic Review Data Repository (SRDR)" %><br>
+                    <%= f.radio_button :qOne, "Distiller Systematic Reviews (Distiller SR)" %>
+                    <%= f.label :qOne_distiller_systematic_reviews_distiller_sr, "Distiller Systematic Reviews (Distiller SR)" %>
+                    </p>
+                    <p>
+                    (2) Is the following statement True or False?<br>
+                    "I have the right to discontinue participation in this study at any point of time.”<br>
+                    <%= f.radio_button :qTwo, "True" %>
+                    <%= f.label :qTwo_true, "True" %><br>
+                    <%= f.radio_button :qTwo, "False" %>
+                    <%= f.label :qTwo_false, "False" %>
+                    </p>
+                </div>
             </div>
-        </div>
+            <div id="page-10" ng-show="pageCtrl.activePage == 10">
+                <p>Thank you for consenting to participate in this study.</p>
+                <% if flash[:specifics].present? %>
+                    <% if flash[:specifics][:firstName].present? %>
+                        <div class="alert alert-error">
+                            Please enter your first name.
+                        </div>
+                    <% end %>
+                    <% if flash[:specifics][:lastName].present? %>
+                        <div class="alert alert-error">
+                            Please enter your last name.
+                        </div>
+                    <% end %>
+                    <% if flash[:specifics][:email].present? %>
+                        <div class="alert alert-error">
+                            Please enter a valid email address.
+                        </div>
+                    <% end %>
+                <% end %>
+                <p>Please enter your name and email address:</p>
+                <p><%= f.label :firstName, "First Name" %><%= f.text_field :firstName %></p>
+                <p><%= f.label :lastName, "Last Name" %><%= f.text_field :lastName %></p>
+                <p><%= f.label :email, "Email" %><%= f.email_field :email %></p>
+                <p><%= f.submit %></p>
+                <p>Please note that you we will not share your name or email address with any third party.</p>
+            </div>
+        <% end %>
 
         <div id='consent-navigation'>
             <div id="back" ng-click="pageCtrl.prevPage()">BACK</div>

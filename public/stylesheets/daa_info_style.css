@@ -88,3 +88,13 @@ h1 {
 li {
     list-style-type: none;
 }
+
+.alert.alert-error {
+    border: thick solid red;
+}
+
+input[type=submit] {
+    width: 200px;
+    height: 25px;
+    background-color: lightgreen;
+}
