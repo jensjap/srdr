@@ -1,0 +1,96 @@
+<div id="main-content" ng-app="daaConsent">
+
+    <div id="pager" ng-controller="PageController as pageCtrl">
+
+        <div id="page-header">
+            <h1>Data Abstraction Assistant (DAA) Randomized Controlled Trial – Informed Consent</h1>
+            <h2>Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span></h2>
+        </div>
+        <div id="page-1" ng-show="pageCtrl.activePage == 1">
+            <p class="big">What you should know about this study</p>
+            <ul>
+                <li>You are being asked to join a research study.</li>
+                <li>This website explains the research study and your part in the study.</li>
+                <li>Please read it carefully and take as much time as you need.</li>
+                <li>You are a volunteer. If you decide to join, we hope you will complete the study. You may decide not to join the study or to quit at any time. There will be no penalty if you decide to quit the study.</li>
+            </ul>
+        </div>
+        <div id="page-2" ng-show="pageCtrl.activePage == 2">
+            <p class="big">Purpose of research project</p>
+            <p>We are conducting a study to compare three different approaches for data abstraction for systematic reviews. Data abstraction refers to the step in which one or two persons read a research article, and obtain (“extract”) from the article relevant information about the research study. For all three approaches, you will be paired up with another participate of this study.</p>
+            <p class="indent">
+            <ul>
+                <li><strong>Approach A:</strong> We will ask one participant perform data abstraction with a software application we are developing, namely Data Abstraction Assistant (DAA). We will ask the second participant to verify the information abstracted.</li>
+                <li><strong>Approach B:</strong> This approach does not involve using DAA. We will ask one participant to abstract data and a second participant to verify the information abstracted.</li>
+                <li><strong>Approach C:</strong> This approach does not involve using DAA. The two participants will abstract data independently. Afterwards, the two participants will discuss and adjudicate discrepancies.</li>
+            </ul>
+            </p>
+            <p>For all three approaches, you will enter data abstracted directly in to an electronic form developed in an online data system called Systematic Review Data Repository (SRDR). Both DAA and SRDR are accessible online and work closely with each other. We are interested in comparing these three approaches to assess which approach results in fewer errors and takes less time.</p>
+        </div>
+        <div id="page-3" ng-show="pageCtrl.activePage == 3">
+            <p class="big">Why you are being asked to participate</p>
+            <p>You are being asked to participate because you have experience related to systematic reviews.</p>
+        </div>
+        <div id="page-4" ng-show="pageCtrl.activePage == 4">
+            <p class="big">Procedures</p>
+            <p>If you agree to join this study, we will ask you to do the following:</p>
+            <ul>
+                <li>Create user accounts in DAA and SRDR.</li>
+                <li>Complete the DAA and SRDR trainings.</li>
+                <li>If you meet the criteria for this study, you will be assigned to a sequence of approaches for data abstraction for six articles. The sequence is determined by a random process.</li>
+                <li>The order in which you complete the data abstraction matters. You will be asked to abstract articles in serial order according to the sequence assigned to you. You will be asked to abstract the next article only after the previous one is finished.</li>
+                <li>You can take a break between articles. You can complete data abstraction of one article in multiple sessions.</li>
+                <li>You have a total of 4 weeks to complete data abstraction. The Study Coordinator will send you instructions and reminders via email.</li>
+            </ul>
+        </div>
+        <div id="page-5" ng-show="pageCtrl.activePage == 5">
+            <p class="big">Risks/discomforts</p>
+            <p>We do not anticipate any risk of participating as a data abstractor. The Study Team will know your name and email address. We will not share your name or email address with any third party. When we disseminate our findings, we will report results in an aggregate form without personal identifying information.</p>
+            <p>We estimate that data abstraction will take approximately 50 minutes per article. Because adjudication of discrepant responses between two abstractors is needed for Approach C, we estimate that you will need between 6 and 8 hours of <span class="underline">total time commitment</span> for this study.</p>
+        </div>
+        <div id="page-6" ng-show="pageCtrl.activePage == 6">
+            <p class="big">Benefits</p>
+            <p>Your participation will help improve systematic review process. We will acknowledge all participants who complete the project in manuscripts, on the study webpage, and/or in another appropriate manner.</p>
+            <p class="big">Payment</p> 
+            <p>You will receive $250 for your time spent on the study. The payment will be issued via a check after you complete all data abstraction and adjudication assigned to you. You will not be paid if you do not complete the study.</p>
+        </div>
+        <div id="page-7" ng-show="pageCtrl.activePage == 7">
+            <p class="big">Protecting data confidentiality</p>
+            <p>If you decide to join the study, your information will be kept private. We will not use your name on any study form or data file. We will assign you a unique ID number and only ID numbers will be recorded on electronic forms and data files. We will keep the list matching your name, email, and the ID number confidential and will destroy the list after publishing our findings.</p>
+            <p class="big">What happens if you leave the study early?</p>
+            <p>To minimize incomplete data collection, we hope that once you are randomized in the study, you will complete the study, although you may choose to leave the study at any time. There will be no penalty if you decide to quit the study.</p>
+        </div>
+        <div id="page-8" ng-show="pageCtrl.activePage == 8">
+            <p class="big">Clinical Trials</p>
+            <p>A description of this clinical trial will be available on <a href="http://www.ClinicalTrials.gov" target="_blank">http://www.ClinicalTrials.gov</a>, as required by United States law.</p>
+            <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
+            <p>Your agreement below means on this form means:</p>
+            <ul>
+                <li>You have been informed about this study’s purpose, procedures, possible benefits and risks.</li>
+                <li>You have been given the chance to ask questions before you sign.</li>
+                <li>You have voluntarily agreed to be in this study.</li>
+            </ul>
+            <div>
+                FORM
+            </div>
+        </div>
+        <div id="page-9" ng-show="pageCtrl.activePage == 9">
+            <p>Before you can complete the process Informed Consent for participating in this study, please answer the following two questions about this study.</p>
+            <div>
+                FORM
+            </div>
+        </div>
+
+        <div id='consent-navigation'>
+            <div id="back" ng-click="pageCtrl.prevPage()">BACK</div>
+            <div id="next" ng-click="pageCtrl.nextPage()">NEXT</div>
+        </div>
+
+        <div id="help">
+            <h3>I have questions. Where can I find help?</h3>
+            <p>Please contact the Project Director Ian Saldanha, MBBS, MPH, PhD (<a href="mailto:isaldan1@jhmi.edu?Subject=DAA%20Inquiry" target="_top">isaldan1@jhmi.edu</a>) or the Principal Investigator Tianjing Li, MD, MHS, PhD (<a href="mailto:tli19@jhu.edu?Subject=DAA%20Inquiry" target="_top">tli19@jhu.edu</a>).</p>
+        </div>
+
+    </div><!-- #pager -->
+
+</div>

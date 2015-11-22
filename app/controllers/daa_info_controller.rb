@@ -1,14 +1,13 @@
 class DaaInfoController < ApplicationController
-	layout "daa_info_layout"
+    layout "daa_info_layout"
 
-	def index
-	end
+    def index
+    end
 
     def eligibility
-        timeNow = Time.now
         # Unique identifier for this particular eligibility form.
         # We will reject submitting the same submissionToken twice.
-        @submissionToken = (timeNow.hour * 3600 + timeNow.min * 60 + timeNow.sec).to_s
+        @submissionToken = create_submission_token
     end
 
     def not_eligible
@@ -26,7 +25,7 @@ class DaaInfoController < ApplicationController
 
         # Text params to see if any of them disqualify the user.
         if [@age, @readEnglish, @experienceExtractingData, @experienceLevel, @articlesExtracted, @submissionToken].map!(&:blank?).include?(true) ||
-                @age == "<20" || @readEnglish == "no" || @experienceExtractingData == "no"
+            @age == "<20" || @readEnglish == "no" || @experienceExtractingData == "no"
             redirect_to daa_not_eligible_path
             return
         end
@@ -64,7 +63,19 @@ class DaaInfoController < ApplicationController
         redirect_to daa_info_path
     end
 
-    def is_a_valid_email?(email)
-        (email =~ /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+    def consent
+        @consent = DaaConsent.new
+        @submission_token = create_submission_token
     end
+
+    private
+        def create_submission_token
+            timeNow = Time.now
+            return (timeNow.hour * 3600 + timeNow.min * 60 + timeNow.sec).to_s
+        end
+
+        def is_a_valid_email?(email)
+            (email =~ /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+        end
+
 end
