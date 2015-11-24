@@ -99,3 +99,7 @@ h1 {
 #congrats {
   padding-top: 20px;
 }
+
+label {
+  font-weight: normal !important;
+}
