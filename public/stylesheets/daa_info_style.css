@@ -11,21 +11,8 @@ p.clear {
     clear: both;
 }
 
-div#navigation {
-    float: left;
-    width: 15%;
-    padding-left: 3%;
-}
-
-div#content {
-    float: right;
-    width: 75%;
-    padding-right: 3%;
-}
-
 div#footer {
     text-align: center;
-    font-size: 0.7em;
     padding-top: 40px;
 }
 
@@ -41,35 +28,36 @@ p.result {
 
 div#page-header {
     text-align: center;
+    height: 140px;
 }
 
 div#consent-navigation {
     margin: 40px 0 100px 0;
 }
 
-div#consent-navigation div#back {
+/*
+div#consent-navigation #back {
     float: left;
     text-align: left;
     padding-left: 250px;
 }
+ */
 
-div#consent-navigation div#next {
-    float: right;
-    text-align: right;
-    padding-right: 250px;
+div#consent-navigation #next {
+    margin-left: 10px;
 }
 
 p.clear {
     clear: both;
 }
 
-.fade {
-    color: #b3b3b3;
-}
-
 #help h3,
 #help p {
     margin: 0;
+}
+
+#help {
+    padding-top: 80px;
 }
 
 .underline {
@@ -85,16 +73,29 @@ h1 {
     padding-top: 10px;
 }
 
-li {
-    list-style-type: none;
-}
-
 .alert.alert-error {
     border: thick solid red;
 }
 
-input[type=submit] {
-    width: 200px;
-    height: 25px;
-    background-color: lightgreen;
+#nav-title {
+    padding-left: 15px;
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+#header.row {
+    margin-bottom: 50px;
+}
+
+.consent-body {
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: solid thin lightgrey;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#congrats {
+  padding-top: 20px;
 }

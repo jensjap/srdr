@@ -76,11 +76,19 @@ class DaaInfoController < ApplicationController
             @submission_token = create_submission_token
             flash.now[:error] = "Invalid submission. Please review the form and make sure all fields are filled out."
             flash.now[:specifics] = @consent.errors
+            if flash[:specifics].present?
+                if flash[:specifics][:qOne].present? || flash[:specifics][:qTwo].present?
+                    @targetpage = 9
+                else
+                    @targetpage = 10
+                end
+            end
             render 'consent'
         end
     end
 
     def consent_thanks
+        flash[:success] = "Thank you for your submission."
     end
 
     private

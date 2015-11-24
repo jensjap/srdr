@@ -2,17 +2,16 @@
 
     <div id="pager" ng-controller="PageController as pageCtrl">
 
-        <div id="page-header">
-            <h1 ng-hide="pageCtrl.activePage == 10 || pageCtrl.activePage == 11">
+        <div id="page-header" data-targetpage="<%= @targetpage unless @targetpage.blank? %>">
+            <h2 ng-hide="pageCtrl.activePage == 10">
                 Data Abstraction Assistant (DAA) Randomized Controlled Trial – Informed Consent
-            </h1>
-            <h2 ng-hide="pageCtrl.activePage == 10 || pageCtrl.activePage == 11">
-                Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span>
             </h2>
-            <h1 ng-show="pageCtrl.activePage == 10">Congratulations!</h1>
-            <h1 ng-show="pageCtrl.activePage == 11">Thank you!</h1>
+            <h4 ng-hide="pageCtrl.activePage == 10">
+                Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span>
+            </h4>
+            <h2 id="congrats" ng-show="pageCtrl.activePage == 10">Congratulations!</h2>
         </div>
-        <div id="page-1" ng-show="pageCtrl.activePage == 1">
+        <div id="page-1" class="consent-body" ng-show="pageCtrl.activePage == 1">
             <p class="big">What you should know about this study</p>
             <ul>
                 <li>You are being asked to join a research study.</li>
@@ -21,7 +20,7 @@
                 <li>You are a volunteer. If you decide to join, we hope you will complete the study. You may decide not to join the study or to quit at any time. There will be no penalty if you decide to quit the study.</li>
             </ul>
         </div>
-        <div id="page-2" ng-show="pageCtrl.activePage == 2">
+        <div id="page-2" class="consent-body" ng-show="pageCtrl.activePage == 2">
             <p class="big">Purpose of research project</p>
             <p>We are conducting a study to compare three different approaches for data abstraction for systematic reviews. Data abstraction refers to the step in which one or two persons read a research article, and obtain (“extract”) from the article relevant information about the research study. For all three approaches, you will be paired up with another participate of this study.</p>
             <p class="indent">
@@ -33,11 +32,11 @@
             </p>
             <p>For all three approaches, you will enter data abstracted directly in to an electronic form developed in an online data system called Systematic Review Data Repository (SRDR). Both DAA and SRDR are accessible online and work closely with each other. We are interested in comparing these three approaches to assess which approach results in fewer errors and takes less time.</p>
         </div>
-        <div id="page-3" ng-show="pageCtrl.activePage == 3">
+        <div id="page-3" class="consent-body" ng-show="pageCtrl.activePage == 3">
             <p class="big">Why you are being asked to participate</p>
             <p>You are being asked to participate because you have experience related to systematic reviews.</p>
         </div>
-        <div id="page-4" ng-show="pageCtrl.activePage == 4">
+        <div id="page-4" class="consent-body" ng-show="pageCtrl.activePage == 4">
             <p class="big">Procedures</p>
             <p>If you agree to join this study, we will ask you to do the following:</p>
             <ul>
@@ -49,25 +48,25 @@
                 <li>You have a total of 4 weeks to complete data abstraction. The Study Coordinator will send you instructions and reminders via email.</li>
             </ul>
         </div>
-        <div id="page-5" ng-show="pageCtrl.activePage == 5">
+        <div id="page-5" class="consent-body" ng-show="pageCtrl.activePage == 5">
             <p class="big">Risks/discomforts</p>
             <p>We do not anticipate any risk of participating as a data abstractor. The Study Team will know your name and email address. We will not share your name or email address with any third party. When we disseminate our findings, we will report results in an aggregate form without personal identifying information.</p>
             <p>We estimate that data abstraction will take approximately 50 minutes per article. Because adjudication of discrepant responses between two abstractors is needed for Approach C, we estimate that you will need between 6 and 8 hours of <span class="underline">total time commitment</span> for this study.</p>
         </div>
-        <div id="page-6" ng-show="pageCtrl.activePage == 6">
+        <div id="page-6" class="consent-body" ng-show="pageCtrl.activePage == 6">
             <p class="big">Benefits</p>
             <p>Your participation will help improve systematic review process. We will acknowledge all participants who complete the project in manuscripts, on the study webpage, and/or in another appropriate manner.</p>
             <p class="big">Payment</p> 
-            <p>You will receive $250 for your time spent on the study. The payment will be issued via a check after you complete all data abstraction and adjudication assigned to you. You will not be paid if you do not complete the study.</p>
+            <p style="margin-top: -18px;">You will receive $250 for your time spent on the study. The payment will be issued via a check after you complete all data abstraction and adjudication assigned to you. You will not be paid if you do not complete the study.</p>
         </div>
-        <div id="page-7" ng-show="pageCtrl.activePage == 7">
+        <div id="page-7" class="consent-body" ng-show="pageCtrl.activePage == 7">
             <p class="big">Protecting data confidentiality</p>
             <p>If you decide to join the study, your information will be kept private. We will not use your name on any study form or data file. We will assign you a unique ID number and only ID numbers will be recorded on electronic forms and data files. We will keep the list matching your name, email, and the ID number confidential and will destroy the list after publishing our findings.</p>
             <p class="big">What happens if you leave the study early?</p>
             <p>To minimize incomplete data collection, we hope that once you are randomized in the study, you will complete the study, although you may choose to leave the study at any time. There will be no penalty if you decide to quit the study.</p>
         </div>
         <%= form_for @consent, url: {action: "consent_submit"} do |f| %>
-            <div id="page-8" ng-show="pageCtrl.activePage == 8">
+            <div id="page-8" class="consent-body" ng-show="pageCtrl.activePage == 8">
                 <p class="big">Clinical Trials</p>
                 <p>A description of this clinical trial will be available on <a href="http://www.ClinicalTrials.gov" target="_blank">http://www.ClinicalTrials.gov</a>, as required by United States law.</p>
                 <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
@@ -78,29 +77,26 @@
                     <li>You have voluntarily agreed to be in this study.</li>
                 </ul>
                 <div>
-                    You must select agree before moving on: I&nbsp;
-                    <%= f.select :agree, [[ 'Do Not Agree', false], ['Agree', true]] %>
-                    <%= f.hidden_field :submissionToken, value: @submission_token %>
-                    to participate in this study.
+                    You must select agree before moving on: <br><span style="float: right;" class="bg-warning">&nbsp;&nbsp;I&nbsp;
+                        <%= f.select :agree, [[ 'Do Not Agree', false], ['Agree', true]] %>
+                        <%= f.hidden_field :submissionToken, value: @submission_token %>
+                        to participate in this study.&nbsp;</span>
                 </div>
             </div>
-            <div id="page-9" ng-show="pageCtrl.activePage == 9">
+            <div id="page-9" class="consent-body" ng-show="pageCtrl.activePage == 9">
                 <% if flash[:specifics].present? %>
-                    <% if flash[:specifics][:qOne].present? %>
-                        <div class="alert alert-error">
-                            You have to answer question (1).
-                        </div>
-                    <% end %>
-                    <% if flash[:specifics][:qTwo].present? %>
-                        <div class="alert alert-error">
+                    <div class="alert alert-error">
+                        <% if flash[:specifics][:qOne].present? %>
+                            You have to answer question (1).<br>
+                        <% end %>
+                        <% if flash[:specifics][:qTwo].present? %>
                             You have to answer question (2).
-                        </div>
-                    <% end %>
+                        <% end %>
+                    </div>
                 <% end %>
                 <p>Before you can complete the process Informed Consent for participating in this study, please answer the following two questions about this study.</p>
                 <div>
                     <p>
-                    <span class="error" ng-show="new_daa_consent.daa_consent[qOne].$error.required">&nbsp;</span>
                     (1) Which of the following data systems will be used for data abstraction in this study? (Select one)<br>
                     <%= f.radio_button :qOne, "Microsoft Access" %>
                     <%= f.label :qOne_microsoft_access, "Microsoft Access" %><br>
@@ -121,44 +117,87 @@
                     </p>
                 </div>
             </div>
-            <div id="page-10" ng-show="pageCtrl.activePage == 10">
+            <div id="page-10" class="consent-body" ng-show="pageCtrl.activePage == 10">
                 <p>Thank you for consenting to participate in this study.</p>
-                <% if flash[:specifics].present? %>
-                    <% if flash[:specifics][:firstName].present? %>
-                        <div class="alert alert-error">
-                            Please enter your first name.
-                        </div>
-                    <% end %>
-                    <% if flash[:specifics][:lastName].present? %>
-                        <div class="alert alert-error">
-                            Please enter your last name.
-                        </div>
-                    <% end %>
-                    <% if flash[:specifics][:email].present? %>
-                        <div class="alert alert-error">
-                            Please enter a valid email address.
-                        </div>
-                    <% end %>
-                <% end %>
                 <p>Please enter your name and email address:</p>
-                <p><%= f.label :firstName, "First Name" %><%= f.text_field :firstName %></p>
-                <p><%= f.label :lastName, "Last Name" %><%= f.text_field :lastName %></p>
-                <p><%= f.label :email, "Email" %><%= f.email_field :email %></p>
-                <p><%= f.submit %></p>
-                <p>Please note that you we will not share your name or email address with any third party.</p>
+                <% if flash[:specifics].present? %>
+                    <div class="alert alert-error">
+                        <% if flash[:specifics][:firstName].present? %>
+                            Please enter your first name.<br>
+                        <% end %>
+                        <% if flash[:specifics][:lastName].present? %>
+                            Please enter your last name.<br>
+                        <% end %>
+                        <% if flash[:specifics][:email].present? %>
+                            Please enter a valid email address.
+                        <% end %>
+                    </div>
+                <% end %>
+                <div class="row">
+                    <div class="col-md-2">
+                        <%= f.label :firstName, "First Name" %>
+                    </div><!-- .col-md-* -->
+                    <div class="col-md-8">
+                        <%= f.text_field :firstName %>
+                    </div><!-- .col-md-* -->
+                </div><!-- .row -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <%= f.label :lastName, "Last Name" %>
+                    </div><!-- .col-md-* -->
+                    <div class="col-md-8">
+                        <%= f.text_field :lastName %>
+                    </div><!-- .col-md-* -->
+                </div><!-- .row -->
+                <div class="row">
+                    <div class="col-md-2">
+                        <%= f.label :email, "Email" %>
+                    </div><!-- .col-md-* -->
+                    <div class="col-md-8">
+                        <%= f.email_field :email %>
+                    </div><!-- .col-md-* -->
+                </div><!-- .row -->
+                <br>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <%= f.submit "Submit", { class: "btn btn-primary btn-large" } %>
+                    </div><!-- .col-md-2 -->
+                </div><!-- .row -->
+                <br>
+                <em>Please note that you we will not share your name or email address with any third party.</em>
             </div>
-        <% end %>
+        <% end %><!-- form_for @consent, url: {action: "consent_submit"} do |f| -->
 
         <div id='consent-navigation'>
-            <div id="back" ng-click="pageCtrl.prevPage()">BACK</div>
-            <div id="next" ng-click="pageCtrl.nextPage()">NEXT</div>
+            <div class+"row">
+                <div class="col-md-1">
+                    <button class="btn btn-large btn-info" id="back" ng-click="pageCtrl.prevPage()"><-- Back</button>
+                </div><!-- .col-md-* -->
+                <div class="col-md-1">
+                    <button class="btn btn-large btn-info" id="next" ng-click="pageCtrl.nextPage()">Next --></button>
+                </div><!-- .col-md-* -->
+            </div><!-- .row -->
         </div>
 
         <div id="help">
-            <h3>I have questions. Where can I find help?</h3>
+            <p class="lead">I have questions. Where can I find help?</p>
             <p>Please contact the Project Director Ian Saldanha, MBBS, MPH, PhD (<a href="mailto:isaldan1@jhmi.edu?Subject=DAA%20Inquiry" target="_top">isaldan1@jhmi.edu</a>) or the Principal Investigator Tianjing Li, MD, MHS, PhD (<a href="mailto:tli19@jhu.edu?Subject=DAA%20Inquiry" target="_top">tli19@jhu.edu</a>).</p>
         </div>
 
     </div><!-- #pager -->
 
 </div>
+
+<script type="text/javascript" charset="utf-8">
+
+document.getElementById("daa_consent_agree").addEventListener("change", function(){
+    var nextBtn = document.getElementById("next"),
+    consentValue = document.getElementById("daa_consent_agree").value;
+    if (consentValue === "true") {
+        nextBtn.className = nextBtn.className.replace(" hidden", "");
+    } else {
+        nextBtn.className = nextBtn.className + " hidden";
+    }
+});
+
+</script>

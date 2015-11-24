@@ -1,21 +1,41 @@
 (function(){
+    // Some AngularJs magic.
     var app = angular.module('daaConsent', []);
 
     app.controller('PageController', ["$scope", function($scope){
         var pageCtrl = this;
+        var targetPage = document.getElementById('page-header').getAttribute('data-targetpage');
+        var consentSelect;
+        var backBtn = document.getElementById("back"),
+            nextBtn = document.getElementById("next");
 
-        pageCtrl.activePage = 1;
+        if (targetPage === "9") {
+            pageCtrl.activePage = 9;
+        } else if (targetPage === "10") {
+            pageCtrl.activePage = 10;
+        } else {
+            pageCtrl.activePage = 1;
+        }
 
         $scope.$watch('pageCtrl.activePage', function(newValue, oldValue){
+            consentSelect = document.getElementById("daa_consent_agree");
             if (pageCtrl.activePage === 1) {
-                document.getElementById("back").className = "fade";
+                backBtn.className = backBtn.className + " hidden";
             } else {
-                document.getElementById("back").className = "";
+                backBtn.className = backBtn.className.replace(" hidden", "");
             }
-            if (pageCtrl.activePage === 10) {
-                document.getElementById("next").className = "fade";
+            // We want to see the next button on every page except page 10
+            // and while consentSelect.value is false on page 8.
+            if (pageCtrl.activePage === 8) {
+                if (consentSelect.value === "false") {
+                    nextBtn.className = nextBtn.className + " hidden";
+                } else {
+                    nextBtn.className = nextBtn.className.replace(" hidden", "");
+                }
+            } else if (pageCtrl.activePage === 10) {
+                nextBtn.className = nextBtn.className + " hidden";
             } else {
-                document.getElementById("next").className = "";
+                nextBtn.className = nextBtn.className.replace(" hidden", "");
             }
         });
 
@@ -37,5 +57,5 @@
             }
         };
     }]);
-
 })();
+
