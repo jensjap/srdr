@@ -279,8 +279,8 @@ class ImportHandler  #{{{1
 
         def _find_study_id_by_author_title(project_id, ef_id, internal_id, author, study_title, year, kq_hash)  #{{{3
             ar_studies = Study.joins(:primary_publication).\
-                               where(["studies.project_id=? AND primary_publications.author=? AND primary_publications.title=?",
-                                      project_id, author, study_title])
+                               where(["studies.project_id=? AND primary_publications.author like ? AND primary_publications.title like ?",
+                                      project_id, "%"+author+"%", "%"+study_title+"%"])
             if ar_studies.length > 1
                 @listOf_errors_processing_rows << "More than 1 study find with author '#{author}' and study title '#{study_title}'."
                 @skipped_rows += 1
