@@ -192,6 +192,18 @@ module QuestionHelper
 		answer, subq = get_answer(question, category, 'text')
 		str = "<textarea cols=#{num_cols} rows=1 class='editable_field' id='#{model}_#{question[:q_id]}#{cat_ext}' "\
 				"name='#{model}[#{question[:q_id]}#{cat_ext}]'>#{answer}</textarea><br/>"
+        str += "<ul>"
+        str += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin") + "</li>"
+                    if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0
+                        question[:q_daa_markers].each do |marker|
+        str += "            <li data-marker-position=" + marker["position"]
+        str += "                data-document-id=" + marker["document"]["id"].to_s + ">"
+        str +=                  truncate(marker["text"], length: 50, separator: ' ')
+        str += "            </li>"
+                        end
+                    end
+        str += "</ul>"
+
 		return str
 	end
 
