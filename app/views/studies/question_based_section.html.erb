@@ -35,18 +35,6 @@
 						
 					<% elsif question[:q_type] == 'select' %>
 						<%= raw(build_dropdown(question, @data[:model])) %>
-                        <ul>
-                            <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
-                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
-                                <% question[:q_daa_markers].each do |marker| %>
-                                    <li data-marker-position="<%= marker["position"] %>"
-                                        data-document-id="<%= marker["document"]["id"] %>">
-                                        <%= truncate(marker["text"], length: 50, separator: ' ') %>
-                                    </li>
-                                <% end %>
-                            <% end %>
-                        </ul>
-					
 					<% elsif question[:q_type] == 'text' %>
 						<%= raw(build_text(question, @data[:model], 66)) %>
 					<% else %>
