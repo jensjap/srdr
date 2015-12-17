@@ -1,151 +1,151 @@
 <div class='tab-div'>
-	<br/>
-	<h2><%= @data[:page_title] %></h2><br/><br/>
+    <br/>
+    <h2><%= @data[:page_title] %></h2><br/><br/>
 
-	<%= form_for(@data_point, :remote => true) do |f| %>
-	<%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
-	<%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
-	
-	<%= render :partial=>'ef_instruction' %>
-	<% questions = @data[:questions] %>
+    <%= form_for(@data_point, :remote => true) do |f| %>
+        <%= f.hidden_field :study_id, :value=>@study.nil? ? params[:study_id] : @study.id %>
+        <%= f.hidden_field :extraction_form_id, :value=> @extraction_form.nil? ? params[:extraction_form_id] : @extraction_form.id %>
 
-	<table class='list_table tab-list-table' style='margin-left:0px;'> 
-		<% section_name_for_comments = "#{@data[:model].gsub('_','')}s" %>
-		<% field_name_for_comments = "#{@data[:model].split("_").first.singularize}" %>
-		<% questions.each do |question| %> 
-		<tr>
-			<td class='data' style='min-width:450px; max-width:950px;'>
-				<%= raw(create_title(question[:q_num], question[:q_quest])) %><br/>
-				<div style='min-width:450px; max-width:950px !important; overflow:auto;'>
-          <%= raw(include_instruction(question)) %>
-          <br/>
-					<% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
-						<%= raw(build_multi_choice(question, @data[:model])) %>
-                        <ul>
-                            <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
-                            <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
-                                <% question[:q_daa_markers].each do |marker| %>
-                                    <li data-marker-position="<%= marker["position"] %>"
-                                        data-document-id="<%= marker["document"]["id"] %>">
-                                        <%= truncate(marker["text"], length: 50, separator: ' ') %>
-                                    </li>
-                                <% end %>
+        <%= render :partial=>'ef_instruction' %>
+        <% questions = @data[:questions] %>
+
+        <table class='list_table tab-list-table' style='margin-left:0px;'>
+            <% section_name_for_comments = "#{@data[:model].gsub('_','')}s" %>
+            <% field_name_for_comments = "#{@data[:model].split("_").first.singularize}" %>
+            <% questions.each do |question| %>
+                <tr>
+                    <td class='data' style='min-width:450px; max-width:950px;'>
+                        <%= raw(create_title(question[:q_num], question[:q_quest])) %><br/>
+                        <div style='min-width:450px; max-width:950px !important; overflow:auto;'>
+                            <%= raw(include_instruction(question)) %>
+                            <br/>
+                            <% if ['radio','checkbox','yesno'].include?(question[:q_type]) %>
+                                <%= raw(build_multi_choice(question, @data[:model])) %>
+                                <ul>
+                                    <li><%= image_tag "Flag_red.png", class: "draggable-pin" %></li>
+                                    <% if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0 %>
+                                        <% question[:q_daa_markers].each do |marker| %>
+                                            <li data-marker-position="<%= marker["position"] %>"
+                                                data-document-id="<%= marker["document"]["id"] %>">
+                                                <%= truncate(marker["text"], length: 50, separator: ' ') %>
+                                            </li>
+                                        <% end %>
+                                    <% end %>
+                                </ul>
+
+                            <% elsif question[:q_type] == 'select' %>
+                                <%= raw(build_dropdown(question, @data[:model])) %>
+                            <% elsif question[:q_type] == 'text' %>
+                                <%= raw(build_text(question, @data[:model], 66)) %>
+                            <% else %>
+                                <%= raw(build_matrix(question, @data[:model])) %>
                             <% end %>
-                        </ul>
-						
-					<% elsif question[:q_type] == 'select' %>
-						<%= raw(build_dropdown(question, @data[:model])) %>
-					<% elsif question[:q_type] == 'text' %>
-						<%= raw(build_text(question, @data[:model], 66)) %>
-					<% else %>
-						<%= raw(build_matrix(question, @data[:model])) %>
-					<% end %>
 
-					<br style='clear:both;'/>
-					<br/>
-					<div style='font-size:12px;'>
-						<%= render :partial => "comments/comments_link", :locals => {:section_name => section_name_for_comments, :section_id => question[:q_id], :field_name => "#{field_name_for_comments}", :study_id => session[:study_id], :project_id => session[:project_id], :num_comments=>question[:q_num_comments], :num_flags=>question[:q_num_flags]} %>	
-					</div>
-				</div><!-- end overflow div -->
-			</td>
-		</tr>
-		<% end %>
-						
-	</table>
-		<button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
-			<%= image_tag "Accept.png", :alt => "Accept" %>Save Data
-		</button>
-		<div class="saved" id="saved_indicator_1" style='display:none;'>  
-			Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
-		</div>
-	<!--<div id="design_detail_fields_table">-->
-	<%# render 'design_detail_data_points/table' %>
-	<!--</div>-->
-	<br/><br/>
-	<% 
-		# DUMB HARD-CODING OF SECTION NAME FOR THE COMPLETION STATUS 
-		sctn = case @data[:model]
-			when "design_detail" then "design"
-			when "baseline_characteristic" then "baselines"
-			when "outcome_detail" then "outcome_details"
-			when "arm_detail" then "arm_details"
-      when "quality_detail" then "quality_details"
-      when "diagnostic_test_detail" then "diagnostic_test_details"
-		end
-	%>
-	<%= render :partial=>'section_complete_status', :locals=>{:section=>sctn} %>
-	<br/>
-	<br/>
-	<%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+                            <br style='clear:both;'/>
+                            <br/>
+                            <div style='font-size:12px;'>
+                                <%= render :partial => "comments/comments_link", :locals => {:section_name => section_name_for_comments, :section_id => question[:q_id], :field_name => "#{field_name_for_comments}", :study_id => session[:study_id], :project_id => session[:project_id], :num_comments=>question[:q_num_comments], :num_flags=>question[:q_num_flags]} %>
+                            </div>
+                        </div><!-- end overflow div -->
+                    </td>
+                </tr>
+            <% end %>
 
-	<%= render 'shared/make_editable_and_confirm' %>
-	<% end %>
+        </table>
+        <button type="submit" class="saving" data-disable-with="<%= ajax_wait_msg %>">
+            <%= image_tag "Accept.png", :alt => "Accept" %>Save Data
+        </button>
+        <div class="saved" id="saved_indicator_1" style='display:none;'>
+            Saved Successfully <%= image_tag 'Accept.png', :alt => "Accept"  %>
+    </div>
+    <!--<div id="design_detail_fields_table">-->
+    <%# render 'design_detail_data_points/table' %>
+    <!--</div>-->
+    <br/><br/>
+    <%
+            # DUMB HARD-CODING OF SECTION NAME FOR THE COMPLETION STATUS
+        sctn = case @data[:model]
+               when "design_detail" then "design"
+               when "baseline_characteristic" then "baselines"
+               when "outcome_detail" then "outcome_details"
+               when "arm_detail" then "arm_details"
+               when "quality_detail" then "quality_details"
+               when "diagnostic_test_detail" then "diagnostic_test_details"
+               end
+           %>
+       <%= render :partial=>'section_complete_status', :locals=>{:section=>sctn} %>
+       <br/>
+       <br/>
+       <%= render :partial=>'extraction_forms/back_and_continue_buttons_modal' %>
+
+       <%= render 'shared/make_editable_and_confirm' %>
+   <% end %>
 </div><!-- end tab div -->
 <script type="text/javascript">
 
-    $('.clear_selection_link').on('click', function(e) {
-        var checkboxes = $(this).siblings('input')
+$('.clear_selection_link').on('click', function(e) {
+    var checkboxes = $(this).siblings('input')
         var matrix = $(this).parents('.matrix_question')
 
         checkboxes.removeClass('edited_field');
-        matrix.removeClass('edited_field');
-    })
+    matrix.removeClass('edited_field');
+})
 
-   $('.open_comments_link').bind("click", function(event) {
-      var self = $(this);
-      var qtip = '.qtip.ui-tooltip';
-   
-      // Create the tooltip
-      self.qtip({
-         overwrite: false,
-		id: $(this).attr('id'),
-				 position:{
-		 my: 'top right', at: 'bottom center'
-		 },
-         content: {
-			title: {
-                  text: 'Item Comments',
-                  button: true
-			},
-			text: "Loading...",
-			ajax: {
-				url: 'get_comment_content', 
-				type: 'POST',
-				data: {
-					div_id: $(this).attr('id')
-				} 
-			}			
-         },
-         show: {
-            event: "click", 
-            ready: true, 
+$('.open_comments_link').bind("click", function(event) {
+    var self = $(this);
+    var qtip = '.qtip.ui-tooltip';
+
+    // Create the tooltip
+    self.qtip({
+        overwrite: false,
+        id: $(this).attr('id'),
+        position:{
+            my: 'top right', at: 'bottom center'
+        },
+        content: {
+            title: {
+                text: 'Item Comments',
+                button: true
+            },
+            text: "Loading...",
+            ajax: {
+                url: 'get_comment_content',
+                type: 'POST',
+                data: {
+                    div_id: $(this).attr('id')
+                }
+            }
+        },
+        show: {
+            event: "click",
+            ready: true,
             solo:  true
-         },
-         hide: {
+        },
+        hide: {
             delay: 100,
             event: 'click',
-            fixed: true 
-         },
-         style: {
-            classes: 'ui-tooltip-nav ui-tooltip-light', 
+            fixed: true
+        },
+        style: {
+            classes: 'ui-tooltip-nav ui-tooltip-light',
             tip: false,
-			width: '600'
-         },
-         events: {
+            width: '600'
+        },
+        events: {
             // Toggle an active class on each menus activator
             toggle: function(event, api) {
-               api.elements.target.toggleClass('active', event.type === 'tooltipshow');
+                api.elements.target.toggleClass('active', event.type === 'tooltipshow');
             },
-			// make qtip movable on render
-		   render: function(event, api) {
-			   api.elements.tooltip.draggable();
-		   },
-		   focus: function(event, api) {
-         // make sure this qtip is always on the bottom i.e. below the comment form tooltip
-         event.preventDefault();
-		}
-         }
-      });
+            // make qtip movable on render
+            render: function(event, api) {
+                api.elements.tooltip.draggable();
+            },
+            focus: function(event, api) {
+                // make sure this qtip is always on the bottom i.e. below the comment form tooltip
+                event.preventDefault();
+            }
+        }
+    });
 
     $(".editable_field").live('change',function(){
         $(this).addClass('edited_field');
@@ -164,53 +164,53 @@ for (i=0;i<lsof_li.length;i++) {
         $(lsof_li[i])
             .on('mouseenter', function(){
             })
-            .on('click', function(){
-                var position = this.getAttribute('data-marker-position');
-                var document_id = this.getAttribute('data-document-id');
-                // Check if document html has been cached.
-                if ( document_id in DAA['document_html'] ) {
-                    console.log("HTML already cached!");
-                    // Replace the innerHTML with the appropriate content.
-                    $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
-                    // Find scrollTo target.
-                    var target = document.getElementsByClassName(position)[0];
-                    // Scroll to the element.
-                    $("#page-container").scrollTo($(target), 800);
-                    // A bit of highlighting for visual feedback.
-                    target.style.border = "thick dotted black";
-                    DAA.origColor = target.style.backgroundColor;
-                    target.style.backgroundColor = "yellow";
-                    // Add drop-zone class to document elements.
-                    $("div#page-container div.t").addClass("drop-zone")
-                } else {
-                    console.log("Caching HTML");
-                    // Make synchronous call.
-                    $.ajax({
-                        url: "http://api.daa-dev.infalliblekitty.com/v1/documents/" + document_id.toString() + "/html",
-                        success: function(resp){
-                            DAA['document_html'][document_id] = resp;
-                            // Replace the innerHTML with the appropriate content.
-                            $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
-                            // Find scrollTo target.
-                            var target = document.getElementsByClassName(position)[0];
-                            // Scroll to the element.
-                            $("#page-container").scrollTo($(target), 800);
-                            // A bit of highlighting for visual feedback.
-                            target.style.border = "thick dotted black";
-                            target.style.backgroundColor = "yellow";
-                            // Add drop-zone class to document elements.
-                            $("div#page-container div.t").addClass("drop-zone")
-                        },
-                        async: false
-                    });
-                }
-            })
-            .on('mouseleave', function(){
-                var position = this.getAttribute('data-marker-position');
+        .on('click', function(){
+            var position = this.getAttribute('data-marker-position');
+            var document_id = this.getAttribute('data-document-id');
+            // Check if document html has been cached.
+            if ( document_id in DAA['document_html'] ) {
+                console.log("HTML already cached!");
+                // Replace the innerHTML with the appropriate content.
+                $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                // Find scrollTo target.
                 var target = document.getElementsByClassName(position)[0];
-                target.style.border = "";
-                target.style.backgroundColor = DAA.origColor;
-            });
+                // Scroll to the element.
+                $("#page-container").scrollTo($(target), 800);
+                // A bit of highlighting for visual feedback.
+                target.style.border = "thick dotted black";
+                DAA.origColor = target.style.backgroundColor;
+                target.style.backgroundColor = "yellow";
+                // Add drop-zone class to document elements.
+                $("div#page-container div.t").addClass("drop-zone")
+            } else {
+                console.log("Caching HTML");
+                // Make synchronous call.
+                $.ajax({
+                    url: "http://api.daa-dev.infalliblekitty.com/v1/documents/" + document_id.toString() + "/html",
+                    success: function(resp){
+                        DAA['document_html'][document_id] = resp;
+                        // Replace the innerHTML with the appropriate content.
+                        $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                        // Find scrollTo target.
+                        var target = document.getElementsByClassName(position)[0];
+                        // Scroll to the element.
+                        $("#page-container").scrollTo($(target), 800);
+                        // A bit of highlighting for visual feedback.
+                        target.style.border = "thick dotted black";
+                        target.style.backgroundColor = "yellow";
+                        // Add drop-zone class to document elements.
+                        $("div#page-container div.t").addClass("drop-zone")
+                    },
+                    async: false
+                });
+            }
+        })
+        .on('mouseleave', function(){
+            var position = this.getAttribute('data-marker-position');
+            var target = document.getElementsByClassName(position)[0];
+            target.style.border = "";
+            target.style.backgroundColor = DAA.origColor;
+        });
     }
 }
 
