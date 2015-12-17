@@ -32,26 +32,30 @@ module QuestionHelper
             checked, subq_val = get_answer(field, category, 'multi-choice')
 
             checkbox_array = question[:q_type] == 'checkbox' ? '[]' : ''
-            str += "<input type='#{question[:q_type]}' class='cbox question_#{question[:q_type]}_input editable_field' section_name='#{model}' option_id=#{field[:f_id]} "\
-            "obj_id='#{question[:q_id]}' name='#{model}[#{question[:q_id]}#{cat_ext}]#{checkbox_array}' group_id='#{category.nil? ? '' : category.id}' value='#{CODER.encode(field[:f_text].to_s.gsub('"','\"'))}' "\
-                " id='#{model}_#{question[:q_id]}#{cat_ext}' #{checked}/><label>#{field[:f_text]}</label>"
-                if field[:f_has_subq] == true
-                    disabled = 'disabled'
-                    if category.nil?
-                        disabled = '' if field[:f_checked].present?
-                    else
-                        if field[category.id].present?
-                            disabled = '' if field[category.id][:f_checked].present?
-                        end
+            str += "<input type='#{question[:q_type]}' class='cbox question_#{question[:q_type]}_input editable_field' section_name='#{model}' option_id=#{field[:f_id]} "
+            str += "obj_id='#{question[:q_id]}' name='#{model}[#{question[:q_id]}#{cat_ext}]#{checkbox_array}' group_id='#{category.nil? ? '' : category.id}' value='#{CODER.encode(field[:f_text].to_s.gsub('"','\"'))}' "
+            str += "id='#{model}_#{question[:q_id]}#{cat_ext}' #{checked}/><label>#{field[:f_text]}</label>"
+            if question[:q_type] == 'checkbox'
+                # Add html markup for draggable-pin and existing document markers.
+                str += add_draggable_pin_html_markup(question)
+            end
+            if field[:f_has_subq] == true
+                disabled = 'disabled'
+                if category.nil?
+                    disabled = '' if field[:f_checked].present?
+                else
+                    if field[category.id].present?
+                        disabled = '' if field[category.id][:f_checked].present?
                     end
-                    str += "...<span class='#{question[:q_type]}_group_#{question[:q_id]}#{cat_ext.gsub('-','_')} editable_field' id='option_#{field[:f_id]}#{cat_ext.gsub('-','_')}_sq_span'>"
-                    #disabled = field[:f_checked].present? ? '' : 'disabled'
-
-                    checkbox_field_indicator = question[:q_type] == 'checkbox' ? "[#{field[:f_id]}]" : ""
-                    str += create_subquestion(question[:q_id], model, field[:f_subq], subq_val, disabled, cat_ext, checkbox_field_indicator)
-                    str += "</span>"
                 end
-                str += "<br/>"
+                str += "...<span class='#{question[:q_type]}_group_#{question[:q_id]}#{cat_ext.gsub('-','_')} editable_field' id='option_#{field[:f_id]}#{cat_ext.gsub('-','_')}_sq_span'>"
+                #disabled = field[:f_checked].present? ? '' : 'disabled'
+
+                checkbox_field_indicator = question[:q_type] == 'checkbox' ? "[#{field[:f_id]}]" : ""
+                str += create_subquestion(question[:q_id], model, field[:f_subq], subq_val, disabled, cat_ext, checkbox_field_indicator)
+                str += "</span>"
+            end
+            str += "<br/>"
         end
         # if this is a radio question, give the user the option to clear all previously selected elements
         if question[:q_type] == 'radio'
