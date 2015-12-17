@@ -55,8 +55,10 @@ module QuestionHelper
         end
         # if this is a radio question, give the user the option to clear all previously selected elements
         if question[:q_type] == 'radio'
-            str += "<br/><a href='#' class='clear_selection_link' question_name='#{@data[:model]}[#{question[:q_id]}#{cat_ext}]' "\
-                ">Clear Selections</a><br/>"
+            str += "<br/><a href='#' class='clear_selection_link' question_name='#{@data[:model]}[#{question[:q_id]}#{cat_ext}]'>"
+            str += "Clear Selections</a><br/>"
+            # Add html markup for draggable-pin and existing document markers.
+            str += add_draggable_pin_html_markup(question)
         end
 
         return str
