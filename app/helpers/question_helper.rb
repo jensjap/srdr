@@ -161,6 +161,11 @@ module QuestionHelper
                     str += "<td>-- err --</td>"
                 end
             end
+            # Add html markup for draggable-pin and existing document markers.
+            str += "<td>"
+            str += add_draggable_pin_html_markup(question)
+            str += "</td>"
+
             str += "</tr>"
 
         end
@@ -175,6 +180,11 @@ module QuestionHelper
             end
             #other_row[:r_answers].present? ? (other_row[:r_answers].empty? ? '' : other_row[:r_answers].first) : ''
             str += add_other_matrix_box(other_row[:r_id],model, question[:q_id], columns.length, value, cat_ext)
+
+            str += "<tr><td>"
+            # Add html markup for draggable-pin and existing document markers.
+            str += add_draggable_pin_html_markup(question)
+            str += "</tr></td>"
         end
 
         # if they are using radio buttons, give the user the ability to clear previously saved answers
@@ -236,6 +246,9 @@ module QuestionHelper
             end
         end
         text += "</ul>"
+
+    ########################################################################################
+    # This is what I want for the existing markers: http://codepen.io/CreativeJuiz/pen/oCBxz
 
         return text
     end
