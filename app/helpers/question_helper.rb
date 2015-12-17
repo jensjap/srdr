@@ -104,18 +104,8 @@ module QuestionHelper
 		end
 		str += "</span><br/>"
 
-        # Code to add the draggable-pin and existing document markers.
-        str += "<ul>"
-        str += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin") + "</li>"
-                    if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0
-                        question[:q_daa_markers].each do |marker|
-        str += "            <li data-marker-position=" + marker["position"]
-        str += "                data-document-id=" + marker["document"]["id"].to_s + ">"
-        str +=                  truncate(marker["text"], length: 50, separator: ' ')
-        str += "            </li>"
-                        end
-                    end
-        str += "</ul>"
+        # Add html markup for draggable-pin and existing document markers.
+        str += add_draggable_pin_html_markup(question)
 
 		return str
 	end
@@ -207,18 +197,8 @@ module QuestionHelper
 		str = "<textarea cols=#{num_cols} rows=1 class='editable_field' id='#{model}_#{question[:q_id]}#{cat_ext}' "\
 				"name='#{model}[#{question[:q_id]}#{cat_ext}]'>#{answer}</textarea><br/>"
 
-        # Code to add the draggable-pin and existing document markers.
-        str += "<ul>"
-        str += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin") + "</li>"
-                    if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0
-                        question[:q_daa_markers].each do |marker|
-        str += "            <li data-marker-position=" + marker["position"]
-        str += "                data-document-id=" + marker["document"]["id"].to_s + ">"
-        str +=                  truncate(marker["text"], length: 50, separator: ' ')
-        str += "            </li>"
-                        end
-                    end
-        str += "</ul>"
+        # Add html markup for draggable-pin and existing document markers.
+        str += add_draggable_pin_html_markup(question)
 
 		return str
 	end
@@ -229,6 +209,30 @@ module QuestionHelper
 	# a few accessory functions to assist in creating the questions
 	# ---------------------------------------------------------------------------------- #
 	private
+
+    # This function takes as argument a question variable and adds an unordered
+    # list with an image as its first element. This element is given the draggable-pin
+    # class. If the question variable contains the key :q_daa_markers then those are
+    # tagged on as well as additional list items. The function then returns the
+    # concatenated text string.
+    # @params Question
+    # @return text
+    def add_draggable_pin_html_markup(question)
+        text = ""
+        text += "<ul>"
+        text += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin") + "</li>"
+        if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0
+            question[:q_daa_markers].each do |marker|
+                text += "<li data-marker-position=" + marker["position"]
+                text += "   data-document-id=" + marker["document"]["id"].to_s + ">"
+                text +=     truncate(marker["text"], length: 50, separator: ' ')
+                text += "</li>"
+            end
+        end
+        text += "</ul>"
+
+        return text
+    end
 	
 	# def get_answer
 	# given a field or a question object and the type of question, figure out the 
