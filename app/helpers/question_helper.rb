@@ -37,7 +37,7 @@ module QuestionHelper
             str += "id='#{model}_#{question[:q_id]}#{cat_ext}' #{checked}/><label>#{field[:f_text]}</label>"
             if question[:q_type] == 'checkbox'
                 # Add html markup for draggable-pin and existing document markers.
-                str += add_draggable_pin_html_markup(question)
+                str += add_draggable_pin_and_existing_marker_html(question)
             end
             if field[:f_has_subq] == true
                 disabled = 'disabled'
@@ -62,7 +62,7 @@ module QuestionHelper
             str += "<br/><a href='#' class='clear_selection_link' question_name='#{@data[:model]}[#{question[:q_id]}#{cat_ext}]'>"
             str += "Clear Selections</a><br/>"
             # Add html markup for draggable-pin and existing document markers.
-            str += add_draggable_pin_html_markup(question)
+            str += add_draggable_pin_and_existing_marker_html(question)
         end
 
         return str
@@ -111,7 +111,7 @@ module QuestionHelper
         str += "</span><br/>"
 
         # Add html markup for draggable-pin and existing document markers.
-        str += add_draggable_pin_html_markup(question)
+        str += add_draggable_pin_and_existing_marker_html(question)
 
         return str
     end
@@ -163,7 +163,7 @@ module QuestionHelper
             end
             # Add html markup for draggable-pin and existing document markers.
             str += "<td>"
-            str += add_draggable_pin_html_markup(question)
+            str += add_draggable_pin_and_existing_marker_html(question)
             str += "</td>"
 
             str += "</tr>"
@@ -183,7 +183,7 @@ module QuestionHelper
 
             str += "<tr><td>"
             # Add html markup for draggable-pin and existing document markers.
-            str += add_draggable_pin_html_markup(question)
+            str += add_draggable_pin_and_existing_marker_html(question)
             str += "</tr></td>"
         end
 
@@ -214,7 +214,7 @@ module QuestionHelper
         "name='#{model}[#{question[:q_id]}#{cat_ext}]'>#{answer}</textarea><br/>"
 
         # Add html markup for draggable-pin and existing document markers.
-        str += add_draggable_pin_html_markup(question)
+        str += add_draggable_pin_and_existing_marker_html(question)
 
         return str
     end
@@ -233,7 +233,7 @@ module QuestionHelper
     # concatenated text string.
     # @params Question
     # @return text
-    def add_draggable_pin_html_markup(question)
+    def add_draggable_pin_and_existing_marker_html(question)
         text = ""
         text += "<ul>"
         text += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin") + "</li>"
