@@ -202,6 +202,10 @@ for (i=0;i<lsof_li.length;i++) {
     }
 }
 
+$("img.draggable-pin").click(function(){
+    $(this).closest("ul").find(".markerMenu").toggleClass("on");
+});
+
 if (typeof DAA == 'undefined') {
     $('.draggable-pin').hide();
     for (i=0;i<lsof_li.length;i++) {

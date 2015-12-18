@@ -1,0 +1,54 @@
+/* markerMenu appearance */
+.markerMenu {
+  position: absolute;
+  color: #716F6F;
+  padding: 10px;
+  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+  border: 1px solid grey;
+  border-radius: 4px;
+  background: white;
+  opacity: 0;
+  transition: opacity .4s;
+  z-index: 1;
+}
+.markerMenu:before {
+  position: absolute;
+  top: -7px;
+  left: 3px;
+  content: "";
+  display: block;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 10px solid grey;
+}
+.markerMenu:after {
+  position: absolute;
+  top: -6px;
+  left: 3px;
+  content: "";
+  display: block;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 10px solid white;
+}
+.markerMenu.on {
+  opacity: 1;
+}
+.markerMenu ul, li, li a {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.markerMenu li a {
+  padding: 4px;
+  color: #888 !important;
+  text-decoration: none !important;
+  transition: all .2s;
+}
+.markerMenu li a:hover,
+.markerMenu li a:focus {
+  background: #1ABC9C;
+  color: #fff !important;
+  text-decoration: none !important;
+}
