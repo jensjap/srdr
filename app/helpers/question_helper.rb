@@ -242,8 +242,8 @@ module QuestionHelper
             text += "        <div id=\"" + question[:q_id].to_s + "-markerMenu\" class=\"markerMenu\">"
             text += "            <ul>"
             question[:q_daa_markers].each do |marker|
-                text += "                <li data-marker-position=" + marker["position"]
-                text += "                    data-document-id=" + marker["document"]["id"].to_s + ">"
+                text += "                <li data-marker-position=\"" + marker["position"] + "\""
+                text += "                    data-document-id=\"" + marker["document"]["id"].to_s + "\">"
                 text += "                    <a href=\"#s\">"
                 text +=                          truncate(marker["text"], length: 50, separator: ' ')
                 text += "                    </a>"
