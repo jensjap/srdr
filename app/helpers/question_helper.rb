@@ -235,35 +235,34 @@ module QuestionHelper
     # @return text
     def add_draggable_pin_and_existing_marker_html(question)
         text = ""
-        text += "<ul>"
-        text += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin", data: question[:q_id]) + "</li>"
-        if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0
-            text += "    <li>"
-            text += "        <div id=\"" + question[:q_id].to_s + "-markerMenu\" class=\"markerMenu\">"
-            text += "            <ul>"
-            question[:q_daa_markers].each do |marker|
-                text += "                <li data-marker-position=\"" + marker["position"] + "\""
-                text += "                    data-document-id=\"" + marker["document"]["id"].to_s + "\">"
-                text += "                    <a href=\"#s\">"
-                text +=                          truncate(marker["text"], length: 50, separator: ' ')
-                text += "                    </a>"
-                text += "                </li>"
+        if [1,2130].include? current_user.id
+            text += "<ul>"
+            text += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin", data: question[:q_id]) + "</li>"
+            if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0
+                text += "    <li>"
+                text += "        <div id=\"" + question[:q_id].to_s + "-markerMenu\" class=\"markerMenu\">"
+                text += "            <ul>"
+                question[:q_daa_markers].each do |marker|
+                    text += "                <li data-marker-position=\"" + marker["position"] + "\""
+                    text += "                    data-document-id=\"" + marker["document"]["id"].to_s + "\">"
+                    text += "                    <a href=\"#s\">"
+                    text +=                          truncate(marker["text"], length: 50, separator: ' ')
+                    text += "                    </a>"
+                    text += "                </li>"
+                end
+                text += "            </ul>"
+                text += "        </div>"
+                text += "    </li>"
+                text += "</ul>"
+            else
+                text += "    <li>"
+                text += "        <div class=\"markerMenu\">"
+                text += "            <ul>"
+                text += "            </ul>"
+                text += "    </li>"
+                text += "</ul>"
             end
-            text += "            </ul>"
-            text += "        </div>"
-            text += "    </li>"
-            text += "</ul>"
-        else
-            text += "    <li>"
-            text += "        <div class=\"markerMenu\">"
-            text += "            <ul>"
-            text += "            </ul>"
-            text += "    </li>"
-            text += "</ul>"
         end
-
-    ########################################################################################
-    # This is what I want for the existing markers: http://codepen.io/CreativeJuiz/pen/oCBxz
 
         return text
     end
