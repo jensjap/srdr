@@ -87,6 +87,10 @@ h1 {
     margin-bottom: 50px;
 }
 
+body {
+    font-size: 18px;
+}
+
 .consent-body {
     height: 350px;
     overflow-y: auto;
