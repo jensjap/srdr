@@ -301,14 +301,17 @@ $( document ).ready (function () {
                         formId: formId
                     }
                 }).done(function(data){
+                    console.log(data);
                     markerData = {
                         marker_id: data.id,
                         marker_text: data.text,
-                        marker_position: data.position
+                        marker_position: data.position,
+                        document_id: data.document_id
                     };
                     console.log("Document Marker ID: "       + markerData['marker_id']);
                     console.log("Document Marker Text: "     + markerData['marker_text']);
                     console.log("Document Marker Position: " + markerData['marker_position']);
+                    console.log("Document ID: "              + markerData['document_id']);
                     // Fetch custom data.
                     dragged = this.customData.dragged;
                     qId = this.customData.qId;
@@ -323,10 +326,18 @@ $( document ).ready (function () {
                     $(dragged).after(input);
 
                     // Build and attach li element to list under the pin.
-                    var li = document.createElement('li');
-                    li.textContent = markerData['marker_text'];
-                    li.setAttribute('data-marker-position', markerData['marker_position'])
-                    $(dragged).parents('ul:first').append(li);
+                    var li = document.createElement('li'),
+                        a  = document.createElement('a');
+
+                    a.textContent = markerData['marker_text'];
+                    a.setAttribute('href', "#s");
+
+                    li.setAttribute('data-marker-position', markerData['marker_position']);
+                    li.setAttribute('data-document-id', markerData['document_id']);
+                    li.appendChild(a);
+
+                    //$(dragged).parents('ul:first').append(li);
+                    $(dragged).closest('ul').find('ul:first').append(li);
 
                     // Attach hover over listener to scroll to element.
                     $(li)
@@ -339,11 +350,54 @@ $( document ).ready (function () {
                         })
                         .on('click', function(){
                             var position = this.getAttribute('data-marker-position');
+                            var document_id = this.getAttribute('data-document-id');
+                            // Check if document html has been cached.
+                            if ( document_id in DAA['document_html'] ) {
+                                console.log("HTML already cached!");
+                                // Replace the innerHTML with the appropriate content.
+                                $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                                // Find scrollTo target.
+                                var target = document.getElementsByClassName(position)[0];
+                                // Scroll to the element.
+                                $("#page-container").scrollTo($(target), 800);
+                                // A bit of highlighting for visual feedback.
+                                target.style.border = "8px solid red";
+                                DAA.origColor = target.style.backgroundColor;
+                                //target.style.backgroundColor = "yellow";
+                                // Add drop-zone class to document elements.
+                                $("div#page-container div.t").addClass("drop-zone")
+                            } else {
+                                console.log("Caching HTML");
+                                // Make synchronous call.
+                                $.ajax({
+                                    //url: "http://api.daa-dev.infalliblekitty.com/v1/documents/" + document_id.toString() + "/html",
+                                    url: "http://api.daa-dev.com:3030/v1/documents/" + document_id.toString() + "/html",
+                                    success: function(resp){
+                                        DAA['document_html'][document_id] = resp;
+                                        // Replace the innerHTML with the appropriate content.
+                                        $("#split-right")[0].innerHTML = DAA['document_html'][document_id];
+                                        // Find scrollTo target.
+                                        var target = document.getElementsByClassName(position)[0];
+                                        // Scroll to the element.
+                                        $("#page-container").scrollTo($(target), 800);
+                                        // A bit of highlighting for visual feedback.
+                                        target.style.border = "8px solid red";
+                                        target.style.backgroundColor = "yellow";
+                                        // Add drop-zone class to document elements.
+                                        $("div#page-container div.t").addClass("drop-zone")
+                                    },
+                                    async: false
+                                });
+                            }
+                        })
+                        /*
+                            var position = this.getAttribute('data-marker-position');
                             var target = document.getElementsByClassName(position)[0];
                             $("#page-container").scrollTo($(target), 800);
                             target.style.border = "thick dotted black";
                             target.style.backgroundColor = "yellow";
                         })
+                        */
                         .on('mouseleave', function(){
                             var position = this.getAttribute('data-marker-position');
                             var target = document.getElementsByClassName(position)[0];

@@ -165,9 +165,9 @@ for (i=0;i<lsof_li.length;i++) {
                 // Scroll to the element.
                 $("#page-container").scrollTo($(target), 800);
                 // A bit of highlighting for visual feedback.
-                target.style.border = "thick dotted black";
+                target.style.border = "8px solid red";
                 DAA.origColor = target.style.backgroundColor;
-                target.style.backgroundColor = "yellow";
+                //target.style.backgroundColor = "yellow";
                 // Add drop-zone class to document elements.
                 $("div#page-container div.t").addClass("drop-zone")
             } else {
@@ -184,8 +184,8 @@ for (i=0;i<lsof_li.length;i++) {
                         // Scroll to the element.
                         $("#page-container").scrollTo($(target), 800);
                         // A bit of highlighting for visual feedback.
-                        target.style.border = "thick dotted black";
-                        target.style.backgroundColor = "yellow";
+                        target.style.border = "8px solid red";
+                        //target.style.backgroundColor = "yellow";
                         // Add drop-zone class to document elements.
                         $("div#page-container div.t").addClass("drop-zone")
                     },
