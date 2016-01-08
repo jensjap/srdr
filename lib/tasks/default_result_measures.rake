@@ -38,15 +38,14 @@ continuous_dispersion = [["Mode",""],
 	
 # CATEGORICAL DATA
 #-----------------------------------------------------------								
-categorical = [["N Enrolled","The number of patients originally enrolled"],
-							["N Analyzed","The number of patients analyzed"],
+categorical = [["N Analyzed","The number of patients analyzed"],
 							["Counts",""],
 							["Proportion",""],
 							["Percentage",""],
 							["Incidence (per 1000)",""],
 							["Incidence (per 100,000)",""]
 						 ]
-categorical_defaults = ["N Enrolled", "Counts"]		
+categorical_defaults = ["N Analyzed", "Counts"]
 	 
 # SURVIVAL DATA
 #-----------------------------------------------------------								
@@ -84,8 +83,7 @@ survival_defaults = ["N Enrolled", "Counts", "SD"]
 #
 # CONTINUOUS COMPARISONS
 #------------------------------------------------------
-continuous_bac = [["N Enrolled","The number of patients originally enrolled"],
-										["N Analyzed","The number of patients analyzed"],
+continuous_bac = [["N Analyzed","The number of patients analyzed"],
 										["Mean Difference",""],
 										["Mean Difference (Net)",""],
 										["Median Difference",""],
@@ -97,16 +95,12 @@ continuous_bac = [["N Enrolled","The number of patients originally enrolled"],
 									  ["90% CI low",""],
 									  ["90% CI high",""],
 									  ["P-Value",""],
-									  ["Statistical Test:",""],
 									  ["Adjusted For:",""]
 								  ]
 
-continuous_wac = [["N Enrolled","The number of patients originally enrolled"],
-										["N Analyzed","The number of patients analyzed"],
+continuous_wac = [["N Analyzed","The number of patients analyzed"],
 										["Mean Difference",""],
-										["Mean Difference (Net)",""],
 										["Median Difference",""],
-										["Median Difference (Net)",""],
 										["SD",""],
 										["SE",""],
 										["95% CI low",""],
@@ -114,16 +108,15 @@ continuous_wac = [["N Enrolled","The number of patients originally enrolled"],
 									  ["90% CI low",""],
 									  ["90% CI high",""],
 									  ["P-Value",""],
-									  ["Statistical Test:",""],
 									  ["Adjusted For:",""]
 								  ]
 continuous_wac_defaults = ["N Analyzed","Mean Difference","SE"]
 continuous_bac_defaults = ["Mean Difference (Net)","SE","P-Value"]	            
 # CATEGORICAL COMPARISONS
 #------------------------------------------------------
-categorical_bac = [["Statistical Test:","The type of test used"],
-									["Odds Ratio (OR)","Unadjusted Odds Ratio"],
+categorical_bac = [["Odds Ratio (OR)","Unadjusted Odds Ratio"],
 									["Risk Ratio (RR)","Unadjusted Risk Ratio"],
+                                    ["Hazard Ratio (HR)","Unadjusted Hazard Ratio"],
 									["Risk Difference (RD)","Unadjusted Risk Difference"],
 									["SD",""],
 									["SE",""],
@@ -135,6 +128,7 @@ categorical_bac = [["Statistical Test:","The type of test used"],
 							  ]
 categorical_adj_bac = [["Adj. Odds Ratio (OR)","Adjusted Odds Ratio"],
 											["Adj. Risk Ratio (RR)","Adjusted Risk Ratio"],
+                                            ["Adj. Hazard Ratio (HR)","Adjusted Hazard Ratio"],
 											["Adj. Risk Difference (RD)","Adjusted Risk Difference"],
 											["Adj. SD","Adjusted SD"],
 											["Adj. SE"," Adjusted SE"],
@@ -170,8 +164,7 @@ categorical_bac_defaults = ["Odds Ratio (OR)","SE","95% CI low","95% CI high","P
 
 # SURVIVAL COMPARISONS
 #-----------------------------------------------------------								
-survival_bac = [["N Enrolled","The number of patients originally enrolled"],
-							["N Analyzed","The number of patients analyzed"],
+survival_bac = [["N Analyzed","The number of patients analyzed"],
 							["Counts",""],
 							["Proportions",""],
 							["Percentage",""],
