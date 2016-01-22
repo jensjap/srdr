@@ -25,16 +25,8 @@
   <table class='list_table' >
     <tr>
       <th class='header_bar'><br/>
-        <!-- ITEMS PER PAGE -->
-        <% selected = session[:items_per_page].nil? ? 5 : session[:items_per_page] %>
-        <% opts = [5,10,15,20,30,40,50] %>
-        <label for="items_per_page_selector">Items Per Page:</label> 
-        <select id='items_per_page_selector'>
-            <% opts.each do |option| %>
-                <% sel = selected.to_i == option.to_i ? "selected" : "" %>
-                <option value=<%= option %> <%= sel %>><%= option %></option> 
-            <% end %>
-        </select>
+
+        <%= render "items_per_page_selector" %>
 
         <% sorts = ['Date Published (Recent First)', 'Date Published (Oldest First)','Title'] %>
         <% selected_sort = params[:sort_by].nil? ? 'Date Updated (Recent First)' : params[:sort_by] %>
@@ -130,8 +122,21 @@
 </div>
 <script type='text/javascript'>
 <!--
+
+var loading = function() {
+    var over = '<div id="loading_overlay"></div>';
+    $(over).appendTo('body');
+};
+
+var endLoading = function() {
+    var over = $("#loading_overlay");
+    over.remove();
+};
+
 $("#items_per_page_selector, #sort_by_selector").die();
 $("#items_per_page_selector, #sort_by_selector").live("change",function(){
+    $('html, body').animate({scrollTop:0}, 400);
+    loading();
     var per_page = $("#items_per_page_selector").val();
     var sort_by = $("#sort_by_selector").val();
     var url = "/projects/published?";

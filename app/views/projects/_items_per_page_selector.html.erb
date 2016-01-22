@@ -1,0 +1,10 @@
+<!-- ITEMS PER PAGE -->
+<% selected = session.fetch("items_per_page", 25) %>
+<% opts = [25,50,100,200,500,1000] %>
+<label for="items_per_page_selector">Items Per Page:</label>
+<select id='items_per_page_selector'>
+    <% opts.each do |option| %>
+        <% sel = selected.to_i == option.to_i ? "selected" : "" %>
+        <option value=<%= option %> <%= sel %>><%= option %></option>
+    <% end %>
+</select>

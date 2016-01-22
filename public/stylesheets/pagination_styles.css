@@ -1,3 +1,14 @@
+#loading_overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #999;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  z-index: 100;
+}
 .digg_pagination {
   float: left;
   max-width: 50%;
