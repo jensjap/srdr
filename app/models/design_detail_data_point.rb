@@ -83,10 +83,18 @@ class DesignDetailDataPoint < ActiveRecord::Base
 
                     existing.each do |entry|
                         if selection.include?(entry.value)
-                            if subq_values.include?(entry.subquestion_value)
-                                selection.delete(entry.value)
+                            # There's no point in checking whether the subquestion for this entry matches. Just find it and replace.
+                            # dd_subquestions contains two types though: 1-level Hash and 2-level Hash.
+                            if dd_subquestions[key].is_a? Hash
+                                entry.subquestion_value = _find_subquestion_in_nested(entry, dd_subquestions)
+                                if entry.save
+                                    selection.delete(entry.value)
+                                end
                             else
-                                entry.destroy()
+                                entry.subquestion_value = _find_subquestion(entry, dd_subquestions)
+                                if entry.save
+                                    selection.delete(entry.value)
+                                end
                             end
                         else
                             entry.destroy()
@@ -169,4 +177,39 @@ class DesignDetailDataPoint < ActiveRecord::Base
         end
         return success
     end
+
+    private
+
+    def self._find_subquestion(datapoint, dd_subquestions)
+        section_id       = _find_section_id(datapoint)
+        dd_subquestions.fetch(section_id.to_s, nil)
+    end
+
+    def self._find_subquestion_in_nested(datapoint, dd_subquestions)
+        section          = _parse_out_base_section(datapoint.class.to_s)
+        section_id       = _find_section_id(datapoint)
+        option_text      = datapoint.value
+        section_field_id = _find_section_field_id(section, section_id, option_text)
+        field_id_to_subquestion_value_hash = dd_subquestions.fetch(section_id.to_s, {})
+        field_id_to_subquestion_value_hash.fetch(section_field_id.to_s, nil)
+    end
+
+    def self._find_section_field_id(section, section_id, option_text)
+        field = "#{section}Field".constantize.find_by_design_detail_id_and_option_text(section_id, option_text)
+        if field
+            return field.id
+        else
+            return nil
+        end
+    end
+
+    def self._find_section_id(datapoint)
+        section     = _parse_out_base_section(datapoint.class.to_s)
+        section_id  = datapoint.send(section.underscore + "_field_id")
+    end
+
+    def self._parse_out_base_section(datapoint_klass_name)
+        /(.*)DataPoint$/.match(datapoint_klass_name)[1]
+    end
+
 end
