@@ -83,17 +83,19 @@ class DesignDetailDataPoint < ActiveRecord::Base
 
                     existing.each do |entry|
                         if selection.include?(entry.value)
-                            # There's no point in checking whether the subquestion for this entry matches. Just find it and replace.
-                            # dd_subquestions contains two types though: 1-level Hash and 2-level Hash.
-                            if dd_subquestions[key].is_a? Hash
-                                entry.subquestion_value = _find_subquestion_in_nested(entry, dd_subquestions)
-                                if entry.save
-                                    selection.delete(entry.value)
-                                end
-                            else
-                                entry.subquestion_value = _find_subquestion(entry, dd_subquestions)
-                                if entry.save
-                                    selection.delete(entry.value)
+                            if dd_subquestions.present? && dd_subquestions.has_key?(key)
+                                # There's no point in checking whether the subquestion for this entry matches. Just find it and replace.
+                                # dd_subquestions contains two types though: 1-level Hash and 2-level Hash.
+                                if dd_subquestions[key].is_a? Hash
+                                    entry.subquestion_value = _find_subquestion_in_nested(entry, dd_subquestions)
+                                    if entry.save
+                                        selection.delete(entry.value)
+                                    end
+                                else
+                                    entry.subquestion_value = _find_subquestion(entry, dd_subquestions)
+                                    if entry.save
+                                        selection.delete(entry.value)
+                                    end
                                 end
                             end
                         else
