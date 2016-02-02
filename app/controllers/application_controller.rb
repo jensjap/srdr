@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 		@field_id = params[:field_id]
 		if !params.nil? && !params[:selected].nil?
 			sel = params[:selected].downcase	
-			if !sel.nil? && (sel.match(/^other\.{3}$/i))
+			if !sel.nil? && (sel.match(/^other\.{3}?$/i))
 				@field_name = params[:field_name]
 				@new_field_id = 'other_' + @field_id.to_s				
 				render 'specify_other/show_input.js.erb'
