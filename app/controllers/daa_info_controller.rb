@@ -19,12 +19,20 @@ class DaaInfoController < ApplicationController
         @age                      = params["age"]
         @readEnglish              = params["readEnglish"]
         @experienceExtractingData = params["experienceExtractingData"]
-        @experienceLevel          = params["experienceLevel"]
         @articlesExtracted        = params["articlesExtracted"]
+        @hasPublished             = params["hasPublished"]
+        @followUpQuestionOne      = params["followUp_question_one"]
+        @recentExtraction         = params["recentExtraction"]
+        @trainingType             = params["trainingType"]
+        @experienceLevel          = params["experienceLevel"]
+        @currentStatus            = params["currentStatus"]
         @submissionToken          = params["submissionToken"]
 
         # Text params to see if any of them disqualify the user.
-        if [@age, @readEnglish, @experienceExtractingData, @experienceLevel, @articlesExtracted, @submissionToken].map!(&:blank?).include?(true) ||
+        if [@age, @readEnglish, @experienceExtractingData,
+            @articlesExtracted, @hasPublished, @recentExtraction,
+            @trainingType, @experienceLevel, @currentStatus,
+            @submissionToken].map!(&:blank?).include?(true) ||
             @age == "<20" || @readEnglish == "no" || @experienceExtractingData == "no"
             redirect_to daa_not_eligible_path
             return
@@ -32,30 +40,51 @@ class DaaInfoController < ApplicationController
     end
 
     def create
-        submissionToken = params["trial_participant_info"]["submissionToken"]
-        if submissionToken.blank?
+        email                     = params["trial_participant_info"]["email"]
+        @age                      = params["trial_participant_info"]["age"]
+        @readEnglish              = params["trial_participant_info"]["readEnglish"]
+        @experienceExtractingData = params["trial_participant_info"]["experienceExtractingData"]
+        @articlesExtracted        = params["trial_participant_info"]["articlesExtracted"]
+        @hasPublished             = params["trial_participant_info"]["hasPublished"]
+        @followUpQuestionOne      = params["trial_participant_info"]["followUpQuestionOne"]
+        @recentExtraction         = params["trial_participant_info"]["recentExtraction"]
+        @trainingType             = params["trial_participant_info"]["trainingType"]
+        @experienceLevel          = params["trial_participant_info"]["experienceLevel"]
+        @currentStatus            = params["trial_participant_info"]["currentStatus"]
+        @submissionToken          = params["trial_participant_info"]["submissionToken"]
+
+        if @submissionToken.blank?
             flash[:error] = "Your submission could not be processed at this time. Please try again later."
         else
-            if TrialParticipantInfo.find_by_submissionToken(submissionToken)
-                flash[:error] = "You cannot submit again without starting over the form. Please reload the form, fill it out and resubmit your request."
+            if TrialParticipantInfo.find_by_submissionToken(@submissionToken)
+                flash[:error] = "It appears you have already submitted this form. You may not submit the same form twice. Please reload the form, fill it out and resubmit your request."
             else
+                @trial_participant_info = TrialParticipantInfo.new
                 if is_a_valid_email?(params["trial_participant_info"]["email"])
-                    @trial_participant_info = TrialParticipantInfo.new
-                    @trial_participant_info.email = params["trial_participant_info"]["email"]
-                    @trial_participant_info.age = params["trial_participant_info"]["age"]
-                    @trial_participant_info.readEnglish = params["trial_participant_info"]["readEnglish"] == "yes" ? true : false
-                    @trial_participant_info.experienceExtractingData = params["trial_participant_info"]["experienceExtractingData"] == "yes" ? true : false
-                    @trial_participant_info.experienceLevel = params["trial_participant_info"]["experienceLevel"]
-                    @trial_participant_info.articlesExtracted = params["trial_participant_info"]["articlesExtracted"]
-                    @trial_participant_info.submissionToken = params["trial_participant_info"]["submissionToken"]
+                    @trial_participant_info.email                    = email
+                    @trial_participant_info.age                      = @age
+                    @trial_participant_info.readEnglish              = @readEnglish == "yes" ? true : false
+                    @trial_participant_info.experienceExtractingData = @experienceExtractingData == "yes" ? true : false
+                    @trial_participant_info.articlesExtracted        = @articlesExtracted
+                    @trial_participant_info.hasPublished             = @hasPublished
+                    @trial_participant_info.followUpQuestionOne      = @followUpQuestionOne
+                    @trial_participant_info.recentExtraction         = @recentExtraction
+                    @trial_participant_info.trainingType             = @trainingType
+                    @trial_participant_info.experienceLevel          = @experienceLevel
+                    @trial_participant_info.currentStatus            = @currentStatus
+                    @trial_participant_info.submissionToken          = @submissionToken
 
                     if @trial_participant_info.save
                         flash[:success] = "Thank you for your submission."
                     else
-                        flash[:error] = "Your submission could not be processed at this time. Please try again later."
+                        flash[:error] = @trial_participant_info.errors
+                        render action: :eligible
+                        return
                     end
                 else
                     flash[:error] = "Invalid email format."
+                    render action: :eligible
+                    return
                 end
             end
         end

@@ -21,24 +21,68 @@
     <br />
 
     <div id="phase_three" class="questions" style="display: none;">
-              <%= label_tag("experienceExtractingData", "3. Do you have ANY EXPERIENCE in extracting data for systematic reviews?") %>
+              <%= label_tag("experienceExtractingData", "3. Have you ever abstracted data from at least one article for a systematic review?") %>
         <br /><%= radio_button_tag("experienceExtractingData", "no",  false, onclick: "next_question('four', 'false');") %> <%= label_tag("experienceExtractingData", "No") %>
         <br /><%= radio_button_tag("experienceExtractingData", "yes", false, onclick: "next_question('four', 'true');") %>  <%= label_tag("experienceExtractingData", "Yes") %>
     </div>
     <br />
 
     <div id="phase_four" class="questions" style="display: none;">
-              <%= label_tag("experienceLevel", "4. How would you consider your LEVEL OF EXPERIENCE in data abstraction?") %>
-        <br /><%= radio_button_tag("experienceLevel", "Slightly experienced",            false, onclick: "next_question('five', 'true');") %> <%= label_tag("experienceLevel", "Slightly experienced") %>
-        <br /><%= radio_button_tag("experienceLevel", "Somewhat/moderately experienced", false, onclick: "next_question('five', 'true');") %> <%= label_tag("experienceLevel", "Somewhat/moderately experienced") %>
-        <br /><%= radio_button_tag("experienceLevel", "Very experienced",                false, onclick: "next_question('five', 'true');") %> <%= label_tag("experienceLevel", "Very experienced") %>
+              <%= label_tag("articlesExtracted", "4. For how many ARTICLES have you abstracted data for systematic reviews?") %>
+        <br /><%= radio_button_tag("articlesExtracted", "1-9",        false, onclick: "next_question('five', 'true');") %> <%= label_tag("articlesExtracted", "1-9") %>
+        <br /><%= radio_button_tag("articlesExtracted", "10-19",      false, onclick: "next_question('five', 'true');") %> <%= label_tag("articlesExtracted", "10-19") %>
+        <br /><%= radio_button_tag("articlesExtracted", "20 or more", false, onclick: "next_question('five', 'true');") %> <%= label_tag("articlesExtracted", "20 or more") %>
     </div>
     <br />
 
-    <div class="questions" style="display: none;">
-              <%= label_tag("articlesExtracted", "5. For how many ARTICLES have you abstracted data for systematic reviews?") %>
-        <br /><%= radio_button_tag("articlesExtracted", "1-9",        false, onclick: "next_question('six', 'true');") %> <%= label_tag("articlesExtracted", "1-9") %>
-        <br /><%= radio_button_tag("articlesExtracted", "10 or more", false, onclick: "next_question('six', 'true');") %> <%= label_tag("articlesExtracted", "10 or more") %>
+    <div id="phase_five" class="questions" style="display: none;">
+              <%= label_tag("hasPublished", "5. Have any systematic reviews that you abstracted data for either been published or are in press?") %>
+        <br /><%= radio_button_tag("hasPublished", "0", false, onclick: "next_question('six', 'true');") %> <%= label_tag("hasPublished", "No") %>
+        <br /><%= radio_button_tag("hasPublished", "1", false, onclick: "follow_up('one', 'false');") %>    <%= label_tag("hasPublished", "Yes") %>
+        <div id="followUp_div_one" class="followUp" style="display: none;">
+                  <%= label_tag("followUp_question_one", "Please specify how many:") %>
+            <br /><%= radio_button_tag("followUp_question_one", "1-2",       false, onclick: "next_question('six', 'true');") %> <%= label_tag("followUp_question_one", "1-2") %>
+            <br /><%= radio_button_tag("followUp_question_one", "3-5",       false, onclick: "next_question('six', 'true');") %> <%= label_tag("followUp_question_one", "3-5") %>
+            <br /><%= radio_button_tag("followUp_question_one", "6 or more", false, onclick: "next_question('six', 'true');") %> <%= label_tag("followUp_question_one", "6 or more") %>
+        </div>
+    </div>
+    <br />
+
+    <div id="phase_six" class="questions" style="display: none;">
+              <%= label_tag("recentExtraction", "6. When did you last abstract data for an article for a systematic review?") %>
+        <br /><%= radio_button_tag("recentExtraction", "0-6",       false, onclick: "next_question('seven', 'true');") %> <%= label_tag("recentExtraction", "Within the last 6 months") %>
+        <br /><%= radio_button_tag("recentExtraction", "6 or more", false, onclick: "next_question('seven', 'true');") %> <%= label_tag("recentExtraction", "6 or more months ago") %>
+    </div>
+    <br />
+
+    <div id="phase_seven" class="questions" style="display: none;">
+              <%= label_tag("trainingType", "7. Please select the type of training in the conduct of systematic reviews you have received.") %>
+        <br /><%= radio_button_tag("trainingType", "No training",
+                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "No training") %>
+        <br /><%= radio_button_tag("trainingType", "Took a systematic review methods course offered by a university or an institution",
+                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Took a systematic review methods course offered by a university or an institution") %>
+        <br /><%= radio_button_tag("trainingType", "Attended a systematic review methods workshop",
+                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Attended a systematic review methods workshop") %>
+        <br /><%= radio_button_tag("trainingType", "Received on-the-job training",
+                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Received on-the-job training") %>
+    </div>
+    <br />
+
+    <div id="phase_eight" class="questions" style="display: none;">
+              <%= label_tag("experienceLevel", "8. How would you consider your LEVEL OF EXPERIENCE in data abstraction for systematic reviews?") %>
+        <br /><%= radio_button_tag("experienceLevel", "Slightly experienced",            false, onclick: "next_question('nine', 'true');") %> <%= label_tag("experienceLevel", "Slightly experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Somewhat/moderately experienced", false, onclick: "next_question('nine', 'true');") %> <%= label_tag("experienceLevel", "Somewhat/moderately experienced") %>
+        <br /><%= radio_button_tag("experienceLevel", "Very experienced",                false, onclick: "next_question('nine', 'true');") %> <%= label_tag("experienceLevel", "Very experienced") %>
+    </div>
+    <br />
+
+    <div id="phase_nine" class="questions" style="display: none;">
+              <%= label_tag("currentStatus", "9. What is your current professional status?") %>
+        <br /><%= radio_button_tag("currentStatus", "Faculty",          false, onclick: "next_question('nine', 'true');") %> <%= label_tag("currentStatus", "Faculty") %>
+        <br /><%= radio_button_tag("currentStatus", "PhD Student",      false, onclick: "next_question('nine', 'true');") %> <%= label_tag("currentStatus", "PhD Student") %>
+        <br /><%= radio_button_tag("currentStatus", "Master's student", false, onclick: "next_question('nine', 'true');") %> <%= label_tag("currentStatus", "Master's student") %>
+        <br /><%= radio_button_tag("currentStatus", "Staff",            false, onclick: "next_question('nine', 'true');") %> <%= label_tag("currentStatus", "Staff") %>
+        <br /><%= radio_button_tag("currentStatus", "Other",            false, onclick: "next_question('nine', 'true');") %> <%= label_tag("currentStatus", "Other") %>
     </div>
     <br />
 
@@ -48,6 +92,28 @@
 <% end %>
 
 <script>
+    function follow_up(number, proceed) {
+        // test if we should proceed to next question.
+        if (proceed == 'true') {
+            changeVisibilityOfNextUnansweredDiv('block');
+        } else {
+            // if user clicks on something that requires a follow up we check first whether the follow up requirement was fulfilled.
+            var followUpFields = document.getElementsByName('followUp_question_one');
+            var any_checked = false;
+            for (var i=0 ; i<followUpFields.length ; i++) {
+                if (followUpFields[i].checked) { any_checked = true; }
+            }
+
+            if (any_checked) {
+                changeVisibilityOfNextUnansweredDiv('block');
+            } else {
+                changeVisibilityOfNextUnansweredDiv('none');
+            }
+        }
+        var followUpDiv = document.getElementById('followUp_div_' + number);
+        followUpDiv.style.display = 'block';
+    }
+
     function next_question(phase, proceed) {
         // test if we should proceed to next question.
         if (proceed == 'true') {
@@ -79,7 +145,7 @@
         document.getElementById('form-submit').style.display = 'none';
         var ages = document.getElementsByName('age');
         for (var i=0 ; i<ages.length ; i++) {
-            if (ages[i].checked) { 
+            if (ages[i].checked) {
                 if (ages[i].value == '<20') {
                     document.getElementById('form-submit').style.display = 'block';
                     changeVisibilityOfNextUnansweredDiv('none');
@@ -111,6 +177,28 @@
             }
         }
 
+        var hasPublished = document.getElementsByName('hasPublished');
+        for (var i=0 ; i<hasPublished.length ; i++) {
+            if (hasPublished[i].checked) {
+                if (hasPublished[i].value == '0') {
+                    document.getElementById('followUp_div_one').style.display = 'none';
+                }
+            }
+        }
+
+        var currentStatus = document.getElementsByName('currentStatus');
+        var any_checked = false;
+        for (i=0 ; i<currentStatus.length ; i++) {
+            if (currentStatus[i].checked) { any_checked = true; }
+        }
+
+        if (any_checked) {
+            document.getElementById('form-submit').style.display = 'block';
+        }
+
+        return false;
+
+        /*
         var experienceLevels = document.getElementsByName('experienceLevel');
         for (var i=0 ; i<experienceLevels.length ; i++) {
             if (experienceLevels[i].checked) {
@@ -122,6 +210,7 @@
                 }
             }
         }
+        */
     }
 
     function attach_hidden_fields() {

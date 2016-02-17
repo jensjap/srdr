@@ -10,13 +10,18 @@
 
 <script>
     function attach_hidden_fields() {
-        // Carry over the age information
-        var input_age = document.createElement("input"),
-            input_readEnglish = document.createElement("input"),
+        // Carry over input information
+        var input_age                      = document.createElement("input"),
+            input_readEnglish              = document.createElement("input"),
             input_experienceExtractingData = document.createElement("input"),
-            input_experienceLevel = document.createElement("input"),
-            input_articlesExtracted = document.createElement("input");
-            input_submissionToken = document.createElement("input");
+            input_articlesExtracted        = document.createElement("input"),
+            input_hasPublished             = document.createElement("input"),
+            input_followUpQuestionOne      = document.createElement("input"),
+            input_recentExtraction         = document.createElement("input"),
+            input_trainingType             = document.createElement("input"),
+            input_experienceLevel          = document.createElement("input"),
+            input_currentStatus            = document.createElement("input"),
+            input_submissionToken          = document.createElement("input");
 
         input_age.setAttribute("type", "hidden");
         input_age.setAttribute("name", "trial_participant_info[age]");
@@ -30,13 +35,34 @@
         input_experienceExtractingData.setAttribute("name", "trial_participant_info[experienceExtractingData]");
         input_experienceExtractingData.setAttribute("value", "<%= @experienceExtractingData %>");
 
+        input_articlesExtracted.setAttribute("type", "hidden");
+        input_articlesExtracted.setAttribute("name", "trial_participant_info[articlesExtracted]");
+        input_articlesExtracted.setAttribute("value", "<%= @articlesExtracted %>");
+
+        input_hasPublished.setAttribute("type", "hidden");
+        input_hasPublished.setAttribute("name", "trial_participant_info[hasPublished]");
+        input_hasPublished.setAttribute("value", "<%= @hasPublished %>");
+
+        input_followUpQuestionOne.setAttribute("type", "hidden");
+        input_followUpQuestionOne.setAttribute("name", "trial_participant_info[followUpQuestionOne]");
+        input_followUpQuestionOne.setAttribute("value", "<%= @followUpQuestionOne %>");
+
+        input_recentExtraction.setAttribute("type", "hidden");
+        input_recentExtraction.setAttribute("name", "trial_participant_info[recentExtraction]");
+        input_recentExtraction.setAttribute("value", "<%= @recentExtraction %>");
+
+        input_trainingType.setAttribute("type", "hidden");
+        input_trainingType.setAttribute("name", "trial_participant_info[trainingType]");
+        input_trainingType.setAttribute("value", "<%= @trainingType %>");
+
         input_experienceLevel.setAttribute("type", "hidden");
         input_experienceLevel.setAttribute("name", "trial_participant_info[experienceLevel]");
         input_experienceLevel.setAttribute("value", "<%= @experienceLevel %>");
 
-        input_articlesExtracted.setAttribute("type", "hidden");
-        input_articlesExtracted.setAttribute("name", "trial_participant_info[articlesExtracted]");
-        input_articlesExtracted.setAttribute("value", "<%= @articlesExtracted %>");
+        input_currentStatus.setAttribute("type", "hidden");
+        input_currentStatus.setAttribute("name", "trial_participant_info[currentStatus]");
+        input_currentStatus.setAttribute("value", "<%= @currentStatus %>");
+
 
         input_submissionToken.setAttribute("type", "hidden");
         input_submissionToken.setAttribute("name", "trial_participant_info[submissionToken]");
@@ -45,8 +71,13 @@
         document.getElementById("myForm").appendChild(input_age);
         document.getElementById("myForm").appendChild(input_readEnglish);
         document.getElementById("myForm").appendChild(input_experienceExtractingData);
-        document.getElementById("myForm").appendChild(input_experienceLevel);
         document.getElementById("myForm").appendChild(input_articlesExtracted);
+        document.getElementById("myForm").appendChild(input_hasPublished);
+        document.getElementById("myForm").appendChild(input_followUpQuestionOne);
+        document.getElementById("myForm").appendChild(input_recentExtraction);
+        document.getElementById("myForm").appendChild(input_trainingType);
+        document.getElementById("myForm").appendChild(input_experienceLevel);
+        document.getElementById("myForm").appendChild(input_currentStatus);
         document.getElementById("myForm").appendChild(input_submissionToken);
     }
 </script>

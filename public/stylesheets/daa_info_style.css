@@ -107,3 +107,7 @@ body {
 label {
   font-weight: normal !important;
 }
+
+.followUp {
+    padding-left: 5em;
+}
