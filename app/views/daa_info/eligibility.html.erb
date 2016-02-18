@@ -56,15 +56,17 @@
     <br />
 
     <div id="phase_seven" class="questions" style="display: none;">
-              <%= label_tag("trainingType", "7. Please select the type of training in the conduct of systematic reviews you have received.") %>
-        <br /><%= radio_button_tag("trainingType", "No training",
-                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "No training") %>
-        <br /><%= radio_button_tag("trainingType", "Took a systematic review methods course offered by a university or an institution",
-                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Took a systematic review methods course offered by a university or an institution") %>
-        <br /><%= radio_button_tag("trainingType", "Attended a systematic review methods workshop",
-                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Attended a systematic review methods workshop") %>
-        <br /><%= radio_button_tag("trainingType", "Received on-the-job training",
-                                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Received on-the-job training") %>
+               <%= label_tag("trainingType", "7. Please select the type of training in the conduct of systematic reviews you have received. (Select all that apply)") %>
+         <br /><%= check_box_tag("trainingType[]", "No training",
+                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "No training") %>
+         <br /><%= check_box_tag("trainingType[]", "Took a systematic review methods course offered by a university or an institution",
+                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Took a systematic review methods course offered by a university or an institution") %>
+         <br /><%= check_box_tag("trainingType[]", "Attended a systematic review methods workshop",
+                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Attended a systematic review methods workshop") %>
+         <br /><%= check_box_tag("trainingType[]", "Received on-the-job training",
+                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Received on-the-job training") %>
+         <br /><%= check_box_tag("trainingType[]", "Received other forms of training",
+                   false, onclick: "next_question('eight', 'true');") %> <%= label_tag("trainingType", "Received other forms of training") %>
     </div>
     <br />
 
