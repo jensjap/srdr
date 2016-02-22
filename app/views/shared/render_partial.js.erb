@@ -19,3 +19,13 @@ $("#<%= @div2_name %>").html("<%= escape_javascript(render :partial=> @partial2_
 	});
 <% end %>
 
+fields = $(".edited_field")
+for(i=0; i < fields.length; i++){
+    $(fields[i]).removeClass("edited_field");
+}
+
+forms = $(".unsaved_form")
+for(i=0; i < forms.length; i++){
+    $(forms[i]).removeClass("unsaved_form");
+}
+
