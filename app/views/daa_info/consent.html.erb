@@ -84,7 +84,7 @@
                 </div>
             </div>
             <div id="page-9" class="consent-body" ng-show="pageCtrl.activePage == 9">
-                <% if flash[:specifics].present? %>
+                <% if flash[:specifics] && (flash[:specifics][:qOne].present? || flash[:specifics][:qTwo].present?) %>
                     <div class="alert alert-error">
                         <% if flash[:specifics][:qOne].present? %>
                             You have to answer question (1).<br>
@@ -129,7 +129,7 @@
                             Please enter your last name.<br>
                         <% end %>
                         <% if flash[:specifics][:email].present? %>
-                            Please enter a valid email address.
+                            Email: <%= flash[:specifics][:email].join(' & ').to_s + "." %>
                         <% end %>
                     </div>
                 <% end %>
@@ -154,7 +154,7 @@
                         <%= f.label :email, "Email" %>
                     </div><!-- .col-md-* -->
                     <div class="col-md-8">
-                        <%= f.email_field :email %>
+                        <%= f.email_field :email, value: @email %>
                     </div><!-- .col-md-* -->
                 </div><!-- .row -->
                 <br>
