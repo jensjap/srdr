@@ -46,16 +46,17 @@ Srdr::Application.routes.draw do
     get "audit_trails/new"
 
     # ---------- DAA Info page ------------
-    get "daa/info" => "daa_info#info"
-    get "daa/eligibility" => "daa_info#eligibility"
-    get "daa/not_eligible" => "daa_info#not_eligible"
-    post "daa/eligible" => "daa_info#eligible"
-    post "daa/create_participant" => "daa_info#create"
+    get  "daa/info"                => "daa_info#info"
+    get  "daa/eligibility"         => "daa_info#eligibility"
+    get  "daa/not_eligible"        => "daa_info#not_eligible"
+    post "daa/eligible"            => "daa_info#eligible"
+    post "daa/create_participant"  => "daa_info#create"
 
     # --------- DAA Consent form ----------
-    get "daa/consent" => "daa_info#consent"
-    get "daa/thanks" => "daa_info#consent_thanks"
-    post "daa/consent" => "daa_info#consent_submit"
+    get  "daa/consent"      => "daa_info#consent"
+    get  "daa/thanks"       => "daa_info#consent_thanks"
+    get  "daa/consent_form" => "daa_info#consent_form"
+    post "daa/consent"      => "daa_info#consent_submit"
 
     # ---------- EPC Questionnaire ----------
     get "questionnaire/form" => "bryant_form#form"

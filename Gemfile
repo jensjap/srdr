@@ -31,6 +31,8 @@ gem 'axlsx'
 gem 'daemons'
 gem 'fuzzy-string-match'
 gem 'httparty'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
     gem 'rspec-rails', '2.11.0'

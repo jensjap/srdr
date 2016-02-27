@@ -95,7 +95,7 @@ class DaaInfoController < ApplicationController
     def consent
         @email = params[:email]
         @consent = DaaConsent.new
-        @submission_token = create_submission_token
+        @submission_token = create_submission_token + ":" + Digest::MD5.hexdigest(@email.to_s)
     end
 
     def consent_submit
@@ -119,6 +119,12 @@ class DaaInfoController < ApplicationController
     end
 
     def consent_thanks
+        @first_name      = params[:daa_consent_info][:firstName]
+        @last_name       = params[:daa_consent_info][:lastName]
+        @email           = params[:daa_consent_info][:email]
+        @consent_given   = params[:daa_consent_info][:agree]
+        @submissionToken = params[:daa_consent_info][:submissionToken]
+        # Need to create a consent form that the user can download and also email the user and Ian.
         flash[:success] = "Thank you for your submission."
     end
 
