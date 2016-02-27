@@ -40,7 +40,7 @@ class DaaInfoController < ApplicationController
     end
 
     def create
-        email                     = params["trial_participant_info"]["email"]
+        @email                    = params["trial_participant_info"]["email"]
         @age                      = params["trial_participant_info"]["age"]
         @readEnglish              = params["trial_participant_info"]["readEnglish"]
         @experienceExtractingData = params["trial_participant_info"]["experienceExtractingData"]
@@ -61,7 +61,7 @@ class DaaInfoController < ApplicationController
             else
                 @trial_participant_info = TrialParticipantInfo.new
                 if is_a_valid_email?(params["trial_participant_info"]["email"])
-                    @trial_participant_info.email                    = email
+                    @trial_participant_info.email                    = @email
                     @trial_participant_info.age                      = @age
                     @trial_participant_info.readEnglish              = @readEnglish == "yes" ? true : false
                     @trial_participant_info.experienceExtractingData = @experienceExtractingData == "yes" ? true : false
@@ -75,7 +75,7 @@ class DaaInfoController < ApplicationController
                     @trial_participant_info.submissionToken          = @submissionToken
 
                     if @trial_participant_info.save
-                        flash[:success] = "Thank you for your submission."
+                        flash[:success] = "Thank you for your submission. Please fill out the consent form next."
                     else
                         flash[:error] = @trial_participant_info.errors
                         render action: :eligible
@@ -89,10 +89,11 @@ class DaaInfoController < ApplicationController
             end
         end
 
-        redirect_to daa_info_path
+        redirect_to daa_consent_path(email: @email)
     end
 
     def consent
+        @email = params[:email]
         @consent = DaaConsent.new
         @submission_token = create_submission_token
     end
@@ -100,8 +101,9 @@ class DaaInfoController < ApplicationController
     def consent_submit
         @consent = DaaConsent.new(params["daa_consent"])
         if @consent.save
-            redirect_to daa_thanks_url
+            redirect_to daa_thanks_url(daa_consent_info: params["daa_consent"])
         else
+            @email = params[:daa_consent][:email]
             @submission_token = create_submission_token
             flash.now[:error] = "Invalid submission. Please review the form and make sure all fields are filled out."
             flash.now[:specifics] = @consent.errors
