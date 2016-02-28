@@ -104,7 +104,7 @@ class DaaInfoController < ApplicationController
             redirect_to daa_thanks_url(daa_consent_info: params["daa_consent"])
         else
             @email = params[:daa_consent][:email]
-            @submission_token = create_submission_token
+            @submission_token = create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
             flash.now[:error] = "Invalid submission. Please review the form and make sure all fields are filled out."
             flash.now[:specifics] = @consent.errors
             if flash[:specifics].present?
