@@ -1,5 +1,19 @@
-<h1>
-    Thank you!
-</h1>
-
-<p>Thank you for your interest and consideration of participation in our study! We wish you the best!</p>
+<div>
+    <h2>
+        Dear <%= @first_name %> <%= @last_name %>,
+    </h2>
+    <p>
+        Thank you for your interest and consideration of participation in our study! You have indicated that you
+        <% if @consent_given %>
+            <em>agree</em>
+        <% else %>
+            <em>do not agree</em>
+        <% end%>
+        to participate in the study. A copy of your consent form will be emailed to the following address:<br />
+        <span class="glyphicon glyphicon-envelope"></span> <%= @email %>
+    </p>
+    <p>
+        Please use this link to download your consent form manually:<br />
+        <a href="<%= daa_consent_form_url(format: :pdf, token: @submissionToken) %>" target="_blank">Consent Form</a>
+    </p>
+</div>

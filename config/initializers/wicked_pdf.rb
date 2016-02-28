@@ -12,7 +12,9 @@ require 'wicked_pdf_tempfile'
 WICKED_PDF = {
   #:wkhtmltopdf => '/usr/local/bin/wkhtmltopdf',
   #:layout => "pdf.html",
-  :exe_path => Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
+  #:exe_path => Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
+  #:exe_path => Rails.root.join('bin', 'wkhtmltopdf').to_s
+  #:exe_path => '/usr/local/bin/wkhtmltopdf'
 }
 
 class WickedPdf
@@ -21,8 +23,10 @@ class WickedPdf
 
   def initialize(wkhtmltopdf_binary_path = nil)
     #@exe_path = wkhtmltopdf_binary_path
-    @exe_path =Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
-	#@exe_path = 'which wkhtmltopdf'.gsub(/\n/, '')
+    #@exe_path =Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
+    #@exe_path =Rails.root.join('bin', 'wkhtmltopdf').to_s
+    #@exe_path = 'which wkhtmltopdf'.gsub(/\n/, '')
+    @exe_path = '/usr/local/bin/wkhtmltopdf'
     raise "Location of wkhtmltopdf unknown" if @exe_path.empty?
     raise "Bad wkhtmltopdf's path" unless File.exists?(@exe_path)
     raise "Wkhtmltopdf is not executable" unless File.executable?(@exe_path)

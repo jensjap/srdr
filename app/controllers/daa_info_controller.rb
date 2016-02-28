@@ -95,7 +95,7 @@ class DaaInfoController < ApplicationController
     def consent
         @email = params[:email]
         @consent = DaaConsent.new
-        @submission_token = create_submission_token + ":" + Digest::MD5.hexdigest(@email.to_s)
+        @submission_token = create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
     end
 
     def consent_submit
@@ -122,10 +122,35 @@ class DaaInfoController < ApplicationController
         @first_name      = params[:daa_consent_info][:firstName]
         @last_name       = params[:daa_consent_info][:lastName]
         @email           = params[:daa_consent_info][:email]
-        @consent_given   = params[:daa_consent_info][:agree]
+        @consent_given   = params[:daa_consent_info][:agree] == 'true' ? true : false
         @submissionToken = params[:daa_consent_info][:submissionToken]
         # Need to create a consent form that the user can download and also email the user and Ian.
         flash[:success] = "Thank you for your submission."
+        DaaMailer.daa_consent(token: @submissionToken, email: @email).deliver
+    end
+
+    def consent_form
+        @token       = params[:token]
+        @daa_consent = DaaConsent.find_by_submissionToken(@token)
+        if @daa_consent
+            filename     = 'DAA Consent - ' + [@daa_consent.firstName, @daa_consent.lastName].join(' ')
+            respond_to do |format|
+                format.pdf do
+                    render pdf:          filename,
+                           disposition:  'attachment',
+                           show_as_html: params.key?('debug'),
+                           template:     'daa_info/consent_form.pdf.erb',
+                           layout:       'layouts/pdf.html',
+                           save_to_file: Rails.root.join('public/consent_forms', "#{filename}.pdf")
+                end
+            end
+        else
+            respond_to do |format|
+                format.pdf do
+                    render inline: 'Invalid'
+                end
+            end
+        end
     end
 
     private
