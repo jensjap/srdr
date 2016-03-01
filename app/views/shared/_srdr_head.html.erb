@@ -38,10 +38,11 @@
             <a href='#' class='feedback_link form_link' tabindex=33>Feedback</a>
             <%# link_to 'Feedback', url_for(:controller=>'home', :action=>'feedback'), {:tabindex=>33} %> |
             <%= link_to "Help & Training", "/help", {:tabindex=>34, :class=>'form_link'}  %> |
-            <%= link_to "Contact Us", "/help?selected=6", {:tabindex=>35, :class=>'form_link'} %> |
-            <%= link_to "Citing SRDR", "/home/citing_srdr", {:tabindex=>35, :class=>'form_link'} %> |
-            <%= link_to "Usage Policies", "/home/policies", {:tabindex=>35, :class=>'form_link'} %> |
-            <%= link_to "Log Out", "/logout", {:tabindex=>36, :class=>'form_link'}  %>
+            <%= link_to "About Us", about_path, { tabindex: 35, class: 'form_link'} %> |
+            <%= link_to "Contact Us", "/help?selected=7", {:tabindex=>36, :class=>'form_link'} %> |
+            <%= link_to "Citing SRDR", "/home/citing_srdr", {:tabindex=>37, :class=>'form_link'} %> |
+            <%= link_to "Usage Policies", "/home/policies", {:tabindex=>38, :class=>'form_link'} %> |
+            <%= link_to "Log Out", "/logout", {:tabindex=>39, :class=>'form_link'}  %>
         <% else %>
 
             <% if siteproperties.isSiteTypeProduction() %>
@@ -52,9 +53,10 @@
             <%= link_to "Register", "/register", {:tabindex=>33, :class=>'form_link'}  %> |
             <a href='#' class='feedback_link' tabindex=34>Feedback</a> |
             <%= link_to "Help & Training", "/help", {:tabindex=>35, :class=>'form_link'}  %> |
-            <%= link_to "Contact Us", "/help?selected=6", {:tabindex=>35, :class=>'form_link'} %> |
-            <%= link_to "Citing SRDR", "/home/citing_srdr", {:tabindex=>35, :class=>'form_link'} %> |
-            <%= link_to "Usage Policies", "/home/policies", {:tabindex=>36, :class=>'form_link'} %>
+            <%= link_to "About Us", about_path, { tabindex: 36, class: 'form_link'} %> |
+            <%= link_to "Contact Us", "/help?selected=7", {:tabindex=>37, :class=>'form_link'} %> |
+            <%= link_to "Citing SRDR", "/home/citing_srdr", {:tabindex=>38, :class=>'form_link'} %> |
+            <%= link_to "Usage Policies", "/home/policies", {:tabindex=>39, :class=>'form_link'} %>
         <% end %>
     </div>
 
