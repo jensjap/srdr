@@ -8,7 +8,7 @@
     <u>Where</u>: Online, at the DAA Trial Informed Consent website, pages 1-8 which provide information about the study (http://srdr.ahrq.gov/daa/info)
 </p>
 <p>
-    <u>By whom</u>: <%= @daa_consent.firstName %> <%= @daa_consent.lastName %> (<%= @daa_consent.email %>) - <%= @daa_consent.created_at.localtime %>
+    <u>By whom</u>: <%= @daa_consent.firstName %> <%= @daa_consent.lastName %> (<%= @daa_consent.email %>) - <%= @daa_consent.created_at.in_time_zone("Eastern Time (US & Canada)") %>
 </p>
 <p>
     <u>Information obtained from</u>: Online self-completion by potentially eligible participant
