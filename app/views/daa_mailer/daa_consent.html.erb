@@ -4,10 +4,16 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi</h1>
+    <p>Hi <%= @firstName %></p>
     <p>
-      Something wonderous and exciting has happened. We've received a DAA consent form from <%= @firstName %> <%= @lastName %>.
-      Please click here to download it <a href=<%= daa_consent_form_url(format: :pdf, token: @token) %> target="_blank">Consent Form</a>
+        Thank you for your interest in participating in the Data Abstraction
+        Assistant (DAA) trial. Please click here to download your
+        <a href=<%= daa_consent_form_url(format: :pdf, token: @token) %> target="_blank">
+            Consent Form
+        </a>.<br />
+        We will contact you soon with next steps.
     </p>
+    <p>Ian Saldanha<br />Project Director</p>
+    <p>Tianjing Li<br />Principal Investigator</p>
   </body>
 </html>

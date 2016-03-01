@@ -1,15 +1,64 @@
 <p>
-    <u>Purpose</u>: To obtain informed consent from potentially eligible participants for the Data Data Abstraction Assistant (DAA) Trial
+    <span>Study Title:</span> Develop, test and disseminate a new technology to modernize data abstraction in systematic reviews
+    <br />
+    <span>Principal Investigator:</span> Li, Tianjing
+    <br />
+    <span>Institutional Review Board (IRB) No.:</span> IRB00006521
 </p>
+
 <p>
-    <u>When</u>: After a potential participant has been screened for eligibility and has been Appendices Appendix 7-1. Data Abstraction Assistant (DAA) Trial Informed Consent Form deemed to be eligible
+    This automatically generated document is to confirm that the individual named at the end of this document has received full
+    information about the Data Abstraction Assistant (DAA) Trial, and has provided consent to participate as a data abstractor
+    during the DAA Trial.
 </p>
+
 <p>
-    <u>Where</u>: Online, at the DAA Trial Informed Consent website, pages 1-8 which provide information about the study (http://srdr.ahrq.gov/daa/info)
+    The individual agrees to be contacted by the DAA Trial Project Director by email regarding participation in the DAA Trial
+    and completion of study responsibilities.
 </p>
+
+<br />
+<hr />
+
+<span>Where should all questions be directed?</span>
+<ul>
+    <li>
+        Contact the DAA Trial Project Director, Dr. Ian Saldanha, at <a href="tel:410-502-3593">410-502-3593</a> or
+        <a href="mailto:isaldan1@jhmi.edu?Subject=DAA">isaldan1@jhmi.edu</a>; or the Principal Investigator,
+        Dr. Tianjing Li, at <a href="tel:410-502-4630">410-502-4630</a> or <a href="mailto:tli19@jhu.edu?Subject=DAA">tli19@jhu.edu</a>.</li>
+    <li>
+        Contact the Johns Hopkins Bloomberg School of Public Health IRB Office for any questions about your rights as a study participant. The IRB contact information is:
+        <table border="0" cellspacing="5">
+            <tr><th></th></tr>
+            <tr><td>Address:</td><td>Johns Hopkins Bloomberg School of Public Health<br />615 N. Wolfe Street, Suite E1100, Baltimore, MD 21205</td></tr>
+            <tr><td>Telephone:</td><td><a href="tel:410-955-3193">410-955-3193</a></td></tr>
+            <tr><td>Toll Free:</td><td><a href="1-888-262-3242">1-888-262-3242</a></td></tr>
+            <tr><td>Fax:</td><td><a href="tel:410-502-0584">410-502-0584</a></td></tr>
+            <tr><td>E-mail:</td><td><a href="mailto:JHSPH.irboffice@jhu.edu">JHSPH.irboffice@jhu.edu</a></td></tr>
+        </table>
+    </li>
+</ul>
+
+<br />
+<br />
+<hr />
+<br />
+<br />
+
 <p>
-    <u>By whom</u>: <%= @daa_consent.firstName %> <%= @daa_consent.lastName %> (<%= @daa_consent.email %>) - <%= @daa_consent.created_at.in_time_zone("Eastern Time (US & Canada)") %>
+    First Name - <%= @daa_consent.firstName %><br />
+    Last Name  - <%= @daa_consent.lastName %><br />
+    Date - <%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m") %>/<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%d") %>/<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%Y") %><br />
+    Time - <%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%H") %>:<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%M") %> EST
 </p>
-<p>
-    <u>Information obtained from</u>: Online self-completion by potentially eligible participant
-</p>
+
+
+<style type="text/css" media="screen">
+p span {
+    font-weight: bold;
+}
+td {
+    padding-right: 20px;
+    vertical-align: top;
+}
+</style>
