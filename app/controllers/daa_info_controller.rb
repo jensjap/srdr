@@ -7,7 +7,7 @@ class DaaInfoController < ApplicationController
     def eligibility
         # Unique identifier for this particular eligibility form.
         # We will reject submitting the same submissionToken twice.
-        @submissionToken = create_submission_token
+        @submissionToken = _create_submission_token
     end
 
     def not_eligible
@@ -58,9 +58,10 @@ class DaaInfoController < ApplicationController
         else
             if TrialParticipantInfo.find_by_submissionToken(@submissionToken)
                 flash[:error] = "It appears you have already submitted this form. You may not submit the same form twice. Please reload the form, fill it out and resubmit your request."
+                redirect_to daa_eligibility_path
             else
                 @trial_participant_info = TrialParticipantInfo.new
-                if is_a_valid_email?(params["trial_participant_info"]["email"])
+                if _is_a_valid_email?(params["trial_participant_info"]["email"])
                     @trial_participant_info.email                    = @email
                     @trial_participant_info.age                      = @age
                     @trial_participant_info.readEnglish              = @readEnglish == "yes" ? true : false
@@ -76,8 +77,9 @@ class DaaInfoController < ApplicationController
 
                     if @trial_participant_info.save
                         flash[:success] = "Thank you for your submission. Please fill out the consent form next."
+                        redirect_to daa_consent_path(email: @email)
                     else
-                        flash[:error] = @trial_participant_info.errors
+                        flash[:error] = @trial_participant_info.errors.map{ |k, v| "#{k}: #{v}" }.join(", ")
                         render action: :eligible
                         return
                     end
@@ -154,12 +156,34 @@ class DaaInfoController < ApplicationController
     end
 
     private
-        def create_submission_token
+        def _create_submission_token
             timeNow = Time.now
             return (timeNow.hour * 3600 + timeNow.min * 60 + timeNow.sec).to_s
         end
 
-        def is_a_valid_email?(email)
+        def _is_a_valid_email?(email)
             (email =~ /\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
         end
+
+        def _is_user_eligible_by_email?(email)
+            trial_participant_info = TrialParticipantInfo.find_by_email(email)
+            return trial_participant_info.present? ? true : false
+        end
+
+        #def _handle_user_with_eligible_record(daa_consent_info)
+        #end
+
+        def _handle_user_without_eligible_record
+            flash[:error] = "You have not yet verified your eligibility. Please do so first."
+            redirect_to daa_eligibility_path
+        end
+
+        def _has_wrong_answer?(daa_consent_info)
+            if daa_consent_info[:qOne] == "Systematic Review Data Repository (SRDR)" && daa_consent_info[:qTwo] == "False"
+                return false
+            else
+                return true
+            end
+        end
 end
+

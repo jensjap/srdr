@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160217200817) do
+ActiveRecord::Schema.define(:version => 20160302144502) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(:version => 20160217200817) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "submissionToken"
+    t.integer  "attempt",         :default => 0
   end
 
   create_table "daa_markers", :force => true do |t|
@@ -1225,16 +1226,16 @@ ActiveRecord::Schema.define(:version => 20160217200817) do
     t.string   "title"
     t.text     "description"
     t.text     "notes"
-    t.string   "funding_source",           :limit => 510
+    t.string   "funding_source"
     t.integer  "creator_id"
-    t.boolean  "is_public",                               :default => false
+    t.boolean  "is_public",                :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "contributors"
     t.text     "methodology"
     t.string   "prospero_id"
     t.string   "search_strategy_filepath"
-    t.boolean  "public_downloadable",                     :default => false
+    t.boolean  "public_downloadable",      :default => false
     t.datetime "publication_requested_at"
     t.integer  "parent_id"
     t.text     "attribution"
