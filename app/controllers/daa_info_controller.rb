@@ -82,7 +82,7 @@ class DaaInfoController < ApplicationController
                         @trial_participant_info.submissionToken          = @submissionToken
 
                         if @trial_participant_info.save
-                            flash[:success] = "Thank you for your submission. Please fill out the consent form next."
+                            flash[:success] = "Thank you for your submission. Please fill out the consent form below."
                             redirect_to daa_consent_path(email: @email)
                         else
                             flash[:error] = @trial_participant_info.errors.map{ |k, v| "#{k}: #{v}" }.join(", ")
@@ -126,7 +126,7 @@ class DaaInfoController < ApplicationController
             # Check that @consent object is valid.
             if @consent.valid?
                 if _has_wrong_answer?(daa_consent_info)
-                    flash[:info] = "You've gotten at least one answer wrong on page 8. Please review the
+                    flash[:info] = "You've answered at least one question incorrectly on page 8. Please review the
                                     material and make corrections before re-submitting the form."
                     @targetpage = 1
                 else

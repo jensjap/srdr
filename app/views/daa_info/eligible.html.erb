@@ -16,6 +16,13 @@
 <p class="result">Please note that you we will not share your email address with any third party</p>
 
 <script>
+    window.onload = function() {
+        var myInput = document.getElementById('trial_participant_info_email_confirmation');
+        myInput.onpaste = function(e) {
+            e.preventDefault();
+        }
+    }
+
     function attach_hidden_fields() {
         // Carry over input information
         var input_age                      = document.createElement("input"),
