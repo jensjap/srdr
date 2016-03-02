@@ -67,23 +67,6 @@
         </div>
         <%= form_for @consent, url: {action: "consent_submit"} do |f| %>
             <div id="page-8" class="consent-body" ng-show="pageCtrl.activePage == 8">
-                <p class="big">Clinical Trials</p>
-                <p>A description of this randomized controlled trial is available at the following website: <a href="https://wwwcf.nlm.nih.gov/hsr_project/view_hsrproj_record.cfm?NLMUNIQUE_ID=20152269&SEARCH_FOR=Tianjing%20Li" target="_blank">PCORI/ME-1310-07009</a>.</p>
-                <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
-                <p>Your agreement below means on this form means:</p>
-                <ul>
-                    <li>You have been informed about this study’s purpose, procedures, possible benefits and risks.</li>
-                    <li>You have been given the chance to ask questions before you sign.</li>
-                    <li>You have voluntarily agreed to be in this study.</li>
-                </ul>
-                <div>
-                    You must select agree before moving on: <br><span style="float: right;" class="bg-warning">&nbsp;&nbsp;I&nbsp;
-                        <%= f.select :agree, [[ 'Do Not Agree', false], ['Agree', true]] %>
-                        <%= f.hidden_field :submissionToken, value: @submission_token %>
-                        to participate in this study.&nbsp;</span>
-                </div>
-            </div>
-            <div id="page-9" class="consent-body" ng-show="pageCtrl.activePage == 9">
                 <% if flash[:specifics] && (flash[:specifics][:qOne].present? || flash[:specifics][:qTwo].present?) %>
                     <div class="alert alert-error">
                         <% if flash[:specifics][:qOne].present? %>
@@ -115,6 +98,23 @@
                     <%= f.radio_button :qTwo, "False" %>
                     <%= f.label :qTwo_false, "False" %>
                     </p>
+                </div>
+            </div>
+            <div id="page-9" class="consent-body" ng-show="pageCtrl.activePage == 9">
+                <p class="big">Clinical Trials</p>
+                <p>A description of this randomized controlled trial is available at the following website: <a href="https://wwwcf.nlm.nih.gov/hsr_project/view_hsrproj_record.cfm?NLMUNIQUE_ID=20152269&SEARCH_FOR=Tianjing%20Li" target="_blank">PCORI/ME-1310-07009</a>.</p>
+                <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
+                <p>Your agreement below means on this form means:</p>
+                <ul>
+                    <li>You have been informed about this study’s purpose, procedures, possible benefits and risks.</li>
+                    <li>You have been given the chance to ask questions before you sign.</li>
+                    <li>You have voluntarily agreed to be in this study.</li>
+                </ul>
+                <div>
+                    You must select agree before moving on: <br><span style="float: right;" class="bg-warning">&nbsp;&nbsp;I&nbsp;
+                        <%= f.select :agree, [[ 'Do Not Agree', false], ['Agree', true]] %>
+                        <%= f.hidden_field :submissionToken, value: @submission_token %>
+                        to participate in this study.&nbsp;</span>
                 </div>
             </div>
             <div id="page-10" class="consent-body" ng-show="pageCtrl.activePage == 10">

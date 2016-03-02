@@ -9,8 +9,8 @@
         var backBtn = document.getElementById("back"),
             nextBtn = document.getElementById("next");
 
-        if (targetPage === "9") {
-            pageCtrl.activePage = 9;
+        if (targetPage === "8") {
+            pageCtrl.activePage = 8;
         } else if (targetPage === "10") {
             pageCtrl.activePage = 10;
         } else {
@@ -25,8 +25,8 @@
                 backBtn.className = backBtn.className.replace(" hidden", "");
             }
             // We want to see the next button on every page except page 10
-            // and while consentSelect.value is false on page 8.
-            if (pageCtrl.activePage === 8) {
+            // and while consentSelect.value is false on page 9.
+            if (pageCtrl.activePage === 9) {
                 if (consentSelect.value === "false") {
                     nextBtn.className = nextBtn.className + " hidden";
                 } else {
@@ -41,7 +41,7 @@
 
         pageCtrl.nextPage = function(){
             consentSelect = document.getElementById("daa_consent_agree");
-            if (pageCtrl.activePage === 8) {
+            if (pageCtrl.activePage === 9) {
                 if (consentSelect.value === "false") {
                     return;
                 }

@@ -41,6 +41,7 @@ class DaaInfoController < ApplicationController
 
     def create
         @email                    = params["trial_participant_info"]["email"]
+        @email_confirmation       = params["trial_participant_info"]["email_confirmation"]
         @age                      = params["trial_participant_info"]["age"]
         @readEnglish              = params["trial_participant_info"]["readEnglish"]
         @experienceExtractingData = params["trial_participant_info"]["experienceExtractingData"]
@@ -61,62 +62,96 @@ class DaaInfoController < ApplicationController
                 redirect_to daa_eligibility_path
             else
                 @trial_participant_info = TrialParticipantInfo.new
-                if _is_a_valid_email?(params["trial_participant_info"]["email"])
-                    @trial_participant_info.email                    = @email
-                    @trial_participant_info.age                      = @age
-                    @trial_participant_info.readEnglish              = @readEnglish == "yes" ? true : false
-                    @trial_participant_info.experienceExtractingData = @experienceExtractingData == "yes" ? true : false
-                    @trial_participant_info.articlesExtracted        = @articlesExtracted
-                    @trial_participant_info.hasPublished             = @hasPublished
-                    @trial_participant_info.followUpQuestionOne      = @followUpQuestionOne
-                    @trial_participant_info.recentExtraction         = @recentExtraction
-                    @trial_participant_info.trainingType             = @trainingType
-                    @trial_participant_info.experienceLevel          = @experienceLevel
-                    @trial_participant_info.currentStatus            = @currentStatus
-                    @trial_participant_info.submissionToken          = @submissionToken
+                unless @email == @email_confirmation
+                    flash[:error] = "There was a problem with the email and email confirmation. Please ensure they are not empty and match each other."
+                    render action: :eligible
+                    return
+                else
+                    if _is_a_valid_email?(params["trial_participant_info"]["email"])
+                        @trial_participant_info.email                    = @email
+                        @trial_participant_info.age                      = @age
+                        @trial_participant_info.readEnglish              = @readEnglish == "yes" ? true : false
+                        @trial_participant_info.experienceExtractingData = @experienceExtractingData == "yes" ? true : false
+                        @trial_participant_info.articlesExtracted        = @articlesExtracted
+                        @trial_participant_info.hasPublished             = @hasPublished
+                        @trial_participant_info.followUpQuestionOne      = @followUpQuestionOne
+                        @trial_participant_info.recentExtraction         = @recentExtraction
+                        @trial_participant_info.trainingType             = @trainingType
+                        @trial_participant_info.experienceLevel          = @experienceLevel
+                        @trial_participant_info.currentStatus            = @currentStatus
+                        @trial_participant_info.submissionToken          = @submissionToken
 
-                    if @trial_participant_info.save
-                        flash[:success] = "Thank you for your submission. Please fill out the consent form next."
-                        redirect_to daa_consent_path(email: @email)
+                        if @trial_participant_info.save
+                            flash[:success] = "Thank you for your submission. Please fill out the consent form next."
+                            redirect_to daa_consent_path(email: @email)
+                        else
+                            flash[:error] = @trial_participant_info.errors.map{ |k, v| "#{k}: #{v}" }.join(", ")
+                            render action: :eligible
+                            return
+                        end
                     else
-                        flash[:error] = @trial_participant_info.errors.map{ |k, v| "#{k}: #{v}" }.join(", ")
+                        flash[:error] = "Invalid email format."
                         render action: :eligible
                         return
                     end
-                else
-                    flash[:error] = "Invalid email format."
-                    render action: :eligible
-                    return
                 end
             end
         end
-
-        redirect_to daa_consent_path(email: @email)
     end
 
     def consent
         @email = params[:email]
         @consent = DaaConsent.new
-        @submission_token = create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
+        @submission_token = _create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
     end
 
     def consent_submit
-        @consent = DaaConsent.new(params["daa_consent"])
-        if @consent.save
-            redirect_to daa_thanks_url(daa_consent_info: params["daa_consent"])
-        else
-            @email = params[:daa_consent][:email]
-            @submission_token = create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
-            flash.now[:error] = "Invalid submission. Please review the form and make sure all fields are filled out."
-            flash.now[:specifics] = @consent.errors
-            if flash[:specifics].present?
-                if flash[:specifics][:qOne].present? || flash[:specifics][:qTwo].present?
-                    @targetpage = 9
+        daa_consent_info = params[:daa_consent]
+        # Apparently unanswered radio buttons are not carried in the params hash.
+        # We need to add it manually.
+        if params[:daa_consent][:qOne].blank?
+            daa_consent_info.merge!(qOne: "")
+        end
+        if params[:daa_consent][:qTwo].blank?
+            daa_consent_info.merge!(qTwo: "")
+        end
+        @email = daa_consent_info[:email]
+        # First determine whether we have an eligibility record for this email on record.
+        if _is_user_eligible_by_email?(@email)
+            # If eligibility is on record then find or create consent record.
+            @consent = DaaConsent.find_or_create_by_email(daa_consent_info[:email])
+            @submission_token = @consent.submissionToken || _create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
+            @consent.attempt += 1
+            @consent.update_attributes(daa_consent_info)
+            # Check that @consent object is valid.
+            if @consent.valid?
+                if _has_wrong_answer?(daa_consent_info)
+                    flash[:info] = "You've gotten at least one answer wrong on page 8. Please review the
+                                    material and make corrections before re-submitting the form."
+                    @targetpage = 1
                 else
-                    @targetpage = 10
+                    redirect_to daa_thanks_url(daa_consent_info: daa_consent_info)
+                    return
+                end
+            else
+                @email = params[:daa_consent][:email]
+                @submission_token = _create_submission_token + "_" + Digest::MD5.hexdigest(@email.to_s)
+                flash.now[:error] = "Invalid submission. Please review the form and make sure all fields are filled out."
+                flash.now[:specifics] = @consent.errors
+                if flash[:specifics].present?
+                    if flash[:specifics][:qOne].present? || flash[:specifics][:qTwo].present?
+                        @targetpage = 8
+                    else
+                        @targetpage = 10
+                    end
                 end
             end
+            @consent = DaaConsent.new(daa_consent_info)
             render 'consent'
+            return
+        else
+            # Else we send them to the eligibility page with a flash message.
+            _handle_user_without_eligible_record
         end
     end
 
@@ -174,7 +209,9 @@ class DaaInfoController < ApplicationController
         #end
 
         def _handle_user_without_eligible_record
-            flash[:error] = "You have not yet verified your eligibility. Please do so first."
+            flash[:error] = "We cannot find an eligibility record for the email you've provided.
+                             Please complete the following form to ensure you are eligible for
+                             this study."
             redirect_to daa_eligibility_path
         end
 

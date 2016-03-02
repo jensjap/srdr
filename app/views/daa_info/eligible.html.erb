@@ -2,9 +2,16 @@
 <p class="result">You are eligible for our study. We will be in touch with you with instructions for participation</p>
 
 <%= form_for(@trial_participant_info, url: "create_participant", html: { id: "myForm", onsubmit: "attach_hidden_fields();" }) do |f| %>
-    <%= f.label :email, "Please enter your email address:" %>
-    <%= f.text_field :email %>
-    <%= f.submit "Submit email" %>
+    <table border="0" cellspacing="5" cellpadding="5">
+        <tr>
+            <td><%= f.label :email, "Please enter your email address:" %></td>
+            <td><%= f.text_field :email %></td>
+        </tr>
+        <tr>
+            <td><%= f.label :email_confirmation, "Please confirm your email address:" %></td>
+            <td><%= f.text_field :email_confirmation %> <%= f.submit "Submit email" %></td>
+        </tr>
+    </table>
 <% end %>
 <p class="result">Please note that you we will not share your email address with any third party</p>
 
