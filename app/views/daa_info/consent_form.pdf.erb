@@ -20,35 +20,37 @@
 <br />
 <hr />
 
-<span>Where should all questions be directed?</span>
-<ul>
-    <li>
-        Contact the DAA Trial Project Director, Dr. Ian Saldanha, at <a href="tel:410-502-3593">410-502-3593</a> or
-        <a href="mailto:isaldan1@jhmi.edu?Subject=DAA">isaldan1@jhmi.edu</a>; or the Principal Investigator,
-        Dr. Tianjing Li, at <a href="tel:410-502-4630">410-502-4630</a> or <a href="mailto:tli19@jhu.edu?Subject=DAA">tli19@jhu.edu</a>.</li>
-    <li>
-        Contact the Johns Hopkins Bloomberg School of Public Health IRB Office for any questions about your rights as a study participant. The IRB contact information is:
-        <table border="0" cellspacing="5">
-            <tr><th></th></tr>
-            <tr><td>Address:</td><td>Johns Hopkins Bloomberg School of Public Health<br />615 N. Wolfe Street, Suite E1100, Baltimore, MD 21205</td></tr>
-            <tr><td>Telephone:</td><td><a href="tel:410-955-3193">410-955-3193</a></td></tr>
-            <tr><td>Toll Free:</td><td><a href="1-888-262-3242">1-888-262-3242</a></td></tr>
-            <tr><td>Fax:</td><td><a href="tel:410-502-0584">410-502-0584</a></td></tr>
-            <tr><td>E-mail:</td><td><a href="mailto:JHSPH.irboffice@jhu.edu">JHSPH.irboffice@jhu.edu</a></td></tr>
-        </table>
-    </li>
-</ul>
+<div class="sig">
+    <span>Where should all questions be directed?</span>
+    <ul>
+        <li>
+            Contact the DAA Trial Project Director, Dr. Ian Saldanha, at <a href="tel:410-502-3593">410-502-3593</a> or
+            <a href="mailto:isaldan1@jhmi.edu?Subject=DAA">isaldan1@jhmi.edu</a>; or the Principal Investigator,
+            Dr. Tianjing Li, at <a href="tel:410-502-4630">410-502-4630</a> or <a href="mailto:tli19@jhu.edu?Subject=DAA">tli19@jhu.edu</a>.</li>
+        <li>
+            Contact the Johns Hopkins Bloomberg School of Public Health IRB Office for any questions about your rights as a study participant. The IRB contact information is:
+            <table border="0" cellspacing="5">
+                <tr><th></th></tr>
+                <tr><td>Address:</td><td>Johns Hopkins Bloomberg School of Public Health<br />615 N. Wolfe Street, Suite E1100, Baltimore, MD 21205</td></tr>
+                <tr><td>Telephone:</td><td><a href="tel:410-955-3193">410-955-3193</a></td></tr>
+                <tr><td>Toll Free:</td><td><a href="1-888-262-3242">1-888-262-3242</a></td></tr>
+                <tr><td>Fax:</td><td><a href="tel:410-502-0584">410-502-0584</a></td></tr>
+                <tr><td>E-mail:</td><td><a href="mailto:JHSPH.irboffice@jhu.edu">JHSPH.irboffice@jhu.edu</a></td></tr>
+            </table>
+        </li>
+    </ul>
 
-<br />
-<hr />
-<br />
+    <br />
+    <hr />
+    <br />
 
-<p>
-    First Name - <%= @daa_consent.firstName %><br />
-    Last Name  - <%= @daa_consent.lastName %><br />
-    Date - <%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m") %>/<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%d") %>/<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%Y") %><br />
-    Time - <%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%H") %>:<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%M") %> EST
-</p>
+    <p>
+        First Name - <%= @daa_consent.firstName %><br />
+        Last Name  - <%= @daa_consent.lastName %><br />
+        Date - <%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%m") %>/<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%d") %>/<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%Y") %><br />
+        Time - <%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%H") %>:<%= @daa_consent.updated_at.in_time_zone("Eastern Time (US & Canada)").strftime("%M") %> EST
+    </p>
+</div>
 
 
 <style type="text/css" media="screen">
@@ -58,5 +60,8 @@
     td {
         padding-right: 20px;
         vertical-align: top;
+    }
+    .sig {
+        page-break-inside: avoid;
     }
 </style>
