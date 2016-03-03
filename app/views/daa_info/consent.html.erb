@@ -9,7 +9,7 @@
             <h4 ng-hide="pageCtrl.activePage == 10">
                 Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span>
             </h4>
-            <h2 id="congrats" ng-show="pageCtrl.activePage == 10">Congratulations!</h2>
+            <h2 id="congrats" ng-show="pageCtrl.activePage == 10">Thank you for consenting to participate in this study!</h2>
         </div>
         <div id="page-1" class="consent-body" ng-show="pageCtrl.activePage == 1">
             <p class="big">What you should know about this study</p>
@@ -118,7 +118,6 @@
                 </div>
             </div>
             <div id="page-10" class="consent-body" ng-show="pageCtrl.activePage == 10">
-                <p>Thank you for consenting to participate in this study.</p>
                 <p>Please enter your name and email address:</p>
                 <% if flash[:specifics] && (flash[:specifics][:firstName].present? || flash[:specifics][:lastName].present? || flash[:specifics][:email].present?) %>
                     <div class="alert alert-error">

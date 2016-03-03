@@ -1,3 +1,26 @@
+#modalNotice ul {
+    padding-left: 0;
+}
+
+.info-messages {
+    position: fixed;
+    z-index: 1;
+    background: white;
+    left: 8%;
+    width: 85%;
+    font-size: 1.5em;
+}
+
+.logos {
+    padding-top: 30px;
+}
+
+.container-fluid {
+    padding-right: 30px !important;
+    margin-right: 0;
+    margin-left: 0;
+}
+
 #header img.left {
     padding-left: 6%;
 }
@@ -74,7 +97,10 @@ h1 {
 }
 
 .alert.alert-error {
-    border: thick solid red;
+    border: none;
+    color: #dd3b3b;
+    background-color: #e7afaf;
+    border-color: #d48890;
 }
 
 #nav-title {

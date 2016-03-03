@@ -126,9 +126,9 @@ class DaaInfoController < ApplicationController
             # Check that @consent object is valid.
             if @consent.valid?
                 if _has_wrong_answer?(daa_consent_info)
-                    flash[:error] = "You've answered at least one question incorrectly on page 8. Please review the
-                                     material and make corrections before re-submitting the form."
-                    @targetpage = 8
+                    flash[:info] = "You've answered at least one question incorrectly on page 8. Please review the
+                                    material and make corrections before submitting again."
+                    @targetpage = 1
                 else
                     redirect_to daa_thanks_url(daa_consent_info: daa_consent_info)
                     return

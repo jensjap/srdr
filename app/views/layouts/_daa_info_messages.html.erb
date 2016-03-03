@@ -1,0 +1,54 @@
+<!-- Keys: error, success, notice
+     Images are in public/images. I've created symlinks to the filenames as not to break any old image tags -->
+
+<%# flash.each do |key, value| %>
+    <%# value = image_tag("#{key}.png", style: "border-style:none; vertical-align:top;", alt: "#{key}") + ' ' + key + value %>
+    <%#= content_tag(:div, value, class: "alert alert-#{key}") %>
+<%# end %>
+
+<% if flash.present? %>
+    <!-- Modal -->
+    <div class="modal fade" id="modalNotice" tabindex="-1" role="dialog" aria-labelledby="modalNoticeLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalNoticeLabel">Attention</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <% flash.each do |key, messages| %>
+                            <% if messages.is_a?(String) %>
+                                <% value = image_tag("#{key}.png", style: "border-style:none; vertical-align:top;", alt: "#{key}") + ' ' + messages.to_s %>
+                                <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+                            <% elsif messages.is_a?(Array) %>
+                                <% messages.each do |m| %>
+                                    <li>
+                                        <% value = image_tag("#{key}.png", style: "border-style:none; vertical-align:top;", alt: "#{key}") + ' ' + m.to_s %>
+                                        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+                                    </li>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+
+<script type="text/javascript" charset="utf-8">
+    var modalBody = document.querySelector(".modal-body"),
+        modal_body_text = "";
+
+    if (modalBody) {
+        modal_body_text = modalBody.innerHTML;
+    }
+
+    $(window).load(function(){
+        if (modal_body_text) {
+            $("#modalNotice").modal('show');
+        }
+    });
+</script>
+
