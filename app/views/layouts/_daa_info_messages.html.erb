@@ -50,5 +50,19 @@
             $("#modalNotice").modal('show');
         }
     });
+
+    var closeBtn = document.querySelector("button.close");
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", function(){
+            this.parentElement.className = " hide";
+        });
+    }
 </script>
+
+<style type="text/css" media="screen">
+    button.close {
+        padding-right: 5px;
+    }
+</style>
 

@@ -6,9 +6,10 @@
     position: fixed;
     z-index: 1;
     background: white;
-    left: 8%;
-    width: 85%;
+    width: 95%;
+    height: 180px;
     font-size: 1.5em;
+    padding-left: 0;
 }
 
 .logos {
