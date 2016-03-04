@@ -9,7 +9,7 @@
 <% if flash.present? %>
     <!-- Modal -->
     <div class="modal fade" id="modalNotice" tabindex="-1" role="dialog" aria-labelledby="modalNoticeLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -63,6 +63,10 @@
 <style type="text/css" media="screen">
     button.close {
         padding-right: 5px;
+    }
+
+    .modal-dialog {
+        font-size: 2em;
     }
 </style>
 
