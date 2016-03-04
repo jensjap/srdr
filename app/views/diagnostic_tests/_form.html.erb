@@ -42,7 +42,7 @@
 		<label for="Diagnostic Test Thresholds">Thresholds</label><br/>
 		<% if @thresholds.empty? %>
 			<div id="threshold_-1_div">
-				<input type="text" class="threshold_entry temporary_text" name="thresholds[-1]"  size=64 value="Enter a threshold value (e.g. 1 month)"/>
+				<input type="text" class="threshold_entry temporary_text" name="thresholds[-1]"  size=64 value="Enter a threshold value (e.g., Radiologist diagnostic impression: Abnormal but not clinically important)"/>
 			</div>
 		<% else %>
 			<% @thresholds.each do |th| %>
