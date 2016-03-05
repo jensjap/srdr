@@ -1,141 +1,149 @@
+#consent_div {
+  margin: 20px 0 50px 0;
+}
+
+#daa_consent_submit {
+  margin: 20px 0 !important;
+}
+
 #modalNotice ul {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 .info-messages {
-    position: fixed;
-    z-index: 1;
-    background: white;
-    width: 95%;
-    height: 180px;
-    font-size: 1.5em;
-    padding-left: 0;
+  position: fixed;
+  z-index: 1;
+  background: white;
+  width: 95%;
+  height: 180px;
+  font-size: 1.5em;
+  padding-left: 0;
 }
 
 .logos {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .container-fluid {
-    padding-right: 30px !important;
-    margin-right: 0;
-    margin-left: 0;
+  padding-right: 30px !important;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 #header img.left {
-    padding-left: 6%;
+  padding-left: 6%;
 }
 
 #header img.right {
-    float: right;
-    padding-right: 8%;
+  float: right;
+  padding-right: 8%;
 }
 
 p.clear {
-    clear: both;
+  clear: both;
 }
 
 div#footer {
-    text-align: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
 p.result {
-    font-style: italic;
+  font-style: italic;
 }
 
 .big {
-    font-weight: bold;
-    font-size: 2em;
-    margin-bottom: 0;
+  font-weight: bold;
+  font-size: 2em;
+  margin-bottom: 0;
 }
 
 div#page-header {
-    text-align: center;
-    height: 140px;
+  text-align: center;
+  height: 140px;
 }
 
 div#consent-navigation {
-    margin: 40px 0 100px 0;
+  margin: 40px 0 100px 0;
 }
 
 /*
 div#consent-navigation #back {
-    float: left;
-    text-align: left;
-    padding-left: 250px;
+float: left;
+text-align: left;
+padding-left: 250px;
 }
  */
 
-div#consent-navigation #next {
+  div#consent-navigation #next {
     margin-left: 10px;
-}
+  }
 
-p.clear {
+  p.clear {
     clear: both;
-}
+  }
 
-#help h3,
-#help p {
+  #help h3,
+  #help p {
     margin: 0;
-}
+  }
 
-#help {
+  #help {
     padding-top: 80px;
-}
+  }
 
-.underline {
+  .underline {
     text-decoration: underline;
-}
+  }
 
-h1 {
+  h1 {
     font-weight: normal;
-}
+  }
 
-.big.small {
+  .big.small {
     font-size: 1em;
     padding-top: 10px;
-}
+  }
 
-.alert.alert-error {
+  .alert.alert-error {
     border: none;
     color: #dd3b3b;
     background-color: #e7afaf;
     border-color: #d48890;
-}
+  }
 
-#nav-title {
+  #nav-title {
     padding-left: 15px;
     margin-bottom: 25px;
     font-size: 20px;
-}
+  }
 
-#header.row {
+  #header.row {
     margin-bottom: 50px;
-}
+  }
 
-body {
+  body {
     font-size: 18px !important;
-}
+  }
 
-.consent-body {
+  .consent-body {
     height: 350px;
     overflow-y: auto;
     overflow-x: hidden;
     border: solid thin lightgrey;
     border-radius: 10px;
     padding: 10px;
-}
+  }
 
-#congrats {
-  padding-top: 20px;
-}
+  #congrats {
+    padding-top: 20px;
+  }
 
-label {
-  font-weight: normal !important;
-}
+  label {
+    font-weight: normal !important;
+  }
 
-.followUp {
+  .followUp {
     padding-left: 5em;
-}
+  }

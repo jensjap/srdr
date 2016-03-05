@@ -5,11 +5,12 @@
         <div id="page-header" data-targetpage="<%= @targetpage unless @targetpage.blank? %>">
             <h2 ng-hide="pageCtrl.activePage == 10">
                 Data Abstraction Assistant (DAA) Randomized Controlled Trial – Informed Consent
+                <div>
+                    <small ng-hide="pageCtrl.activePage == 10">
+                        Page {{pageCtrl.activePage}} of 8
+                    </small>
+                </div>
             </h2>
-            <h4 ng-hide="pageCtrl.activePage == 10">
-                Page {{pageCtrl.activePage}} of 9 <span ng-show="pageCtrl.activePage == 9">- Test</span>
-            </h4>
-            <h2 id="congrats" ng-show="pageCtrl.activePage == 10">Thank you for consenting to participate in this study!</h2>
         </div>
         <div id="page-1" class="consent-body" ng-show="pageCtrl.activePage == 1">
             <p class="big">What you should know about this study</p>
@@ -77,7 +78,7 @@
                         <% end %>
                     </div>
                 <% end %>
-                <p>Before you can complete the process Informed Consent for participating in this study, please answer the following two questions about this study.</p>
+                <h3>Before you can complete the process Informed Consent for participating in this study, please answer the following two questions about this study.</h3>
                 <div>
                     <p>
                     (1) Which of the following data systems will be used for data abstraction in this study? (Select one)<br>
@@ -99,25 +100,19 @@
                     <%= f.label :qTwo_false, "False" %>
                     </p>
                 </div>
-            </div>
-            <div id="page-9" class="consent-body" ng-show="pageCtrl.activePage == 9">
-                <p class="big">Clinical Trials</p>
-                <p>A description of this randomized controlled trial is available at the following website: <a href="https://wwwcf.nlm.nih.gov/hsr_project/view_hsrproj_record.cfm?NLMUNIQUE_ID=20152269&SEARCH_FOR=Tianjing%20Li" target="_blank">PCORI/ME-1310-07009</a>.</p>
-                <p class="big small">What does your agreement to this consent Informed Consent form mean?</p>
-                <p>Your agreement below means on this form means:</p>
+                <div>
+                    <h3>Clinical Trials</h3>
+                    <p>A description of this randomized controlled trial is available at the following website: <a href="https://wwwcf.nlm.nih.gov/hsr_project/view_hsrproj_record.cfm?NLMUNIQUE_ID=20152269&SEARCH_FOR=Tianjing%20Li" target="_blank">PCORI/ME-1310-07009</a>.</p>
+                </div>
+                <div>
+                    <h3>What does your agreement to this consent Informed Consent form mean?</h3>
+                    <p>Your agreement below means on this form means:</p>
+                </div>
                 <ul>
                     <li>You have been informed about this study’s purpose, procedures, possible benefits and risks.</li>
                     <li>You have been given the chance to ask questions before you sign.</li>
                     <li>You have voluntarily agreed to be in this study.</li>
                 </ul>
-                <div>
-                    You must select agree before moving on: <br><span style="float: right;" class="bg-warning">&nbsp;&nbsp;I&nbsp;
-                        <%= f.select :agree, [[ 'Do Not Agree', false], ['Agree', true]] %>
-                        <%= f.hidden_field :submissionToken, value: @submission_token %>
-                        to participate in this study.&nbsp;</span>
-                </div>
-            </div>
-            <div id="page-10" class="consent-body" ng-show="pageCtrl.activePage == 10">
                 <p>Please enter your name and email address:</p>
                 <% if flash[:specifics] && (flash[:specifics][:firstName].present? || flash[:specifics][:lastName].present? || flash[:specifics][:email].present?) %>
                     <div class="alert alert-error">
@@ -156,14 +151,22 @@
                         <%= f.email_field :email, value: @email, readonly: true %>
                     </div><!-- .col-md-* -->
                 </div><!-- .row -->
-                <br>
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
+                <em class="small">Please note that you we will not share your name or email address with any third party.</em>
+                <div id="consent_div" class="row">
+                    <div class="col-md-8">
+                        <div>
+                            You must select agree before moving on: <br>
+                            <span class="bg-warning">&nbsp;&nbsp;I&nbsp;
+                                <%= f.select :agree, [[ 'Do Not Consent', false], ['Consent', true]] %>
+                                <%= f.hidden_field :submissionToken, value: @submission_token %>
+                                to participate in this study.&nbsp;
+                            </span>
+                        </div>
+                    </div><!-- .col-md-8 text-center -->
+                    <div class="col-md-4">
                         <%= f.submit "Submit", { class: "btn btn-primary btn-large" } %>
-                    </div><!-- .col-md-2 -->
+                    </div>
                 </div><!-- .row -->
-                <br>
-                <em>Please note that you we will not share your name or email address with any third party.</em>
             </div>
         <% end %><!-- form_for @consent, url: {action: "consent_submit"} do |f| -->
 
@@ -189,14 +192,61 @@
 
 <script type="text/javascript" charset="utf-8">
 
-document.getElementById("daa_consent_agree").addEventListener("change", function(){
-    var nextBtn = document.getElementById("next"),
-    consentValue = document.getElementById("daa_consent_agree").value;
-    if (consentValue === "true") {
-        nextBtn.className = nextBtn.className.replace(" hidden", "");
-    } else {
-        nextBtn.className = nextBtn.className + " hidden";
-    }
+var submitManager = (function(){
+
+    var qOne      = $('input[name="daa_consent[qOne]"]:checked').length,
+        qTwo      = $('input[name="daa_consent[qTwo]"]:checked').length,
+        firstName = $('#daa_consent_firstName').val().length,
+        lastName  = $('#daa_consent_lastName').val().length,
+        consent   = $('#daa_consent_agree').val();
+
+    return {
+
+        "alertMe" : function(){
+            alert(consent);
+        },
+
+        "isFormFilled" : function(){
+            var qOne      = $('input[name="daa_consent[qOne]"]:checked').length,
+                qTwo      = $('input[name="daa_consent[qTwo]"]:checked').length,
+                firstName = $('#daa_consent_firstName').val().length,
+                lastName  = $('#daa_consent_lastName').val().length,
+                consent   = $('#daa_consent_agree').val();
+
+            if ((qOne > 0 && qTwo > 0 && firstName > 0 && lastName > 0 && consent === 'true')) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        "toggleSubmitBtn" : function(){
+            if (this.isFormFilled()) {
+                $('#daa_consent_submit').prop('disabled', false);
+            } else {
+                $('#daa_consent_submit').prop('disabled', true);
+            }
+        },
+
+        "attachInputListeners" : function(){
+            $('input').change(this.toggleSubmitBtn.bind(this));
+            $('select').change(this.toggleSubmitBtn.bind(this));
+        },
+
+    }; // end of return
+}());
+
+submitManager.toggleSubmitBtn();
+submitManager.attachInputListeners();
+
+// Don't let user submit by pressing enter.
+$(document).ready(function() {
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
 });
 
 </script>

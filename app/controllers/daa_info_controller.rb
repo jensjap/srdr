@@ -142,7 +142,7 @@ class DaaInfoController < ApplicationController
                     if flash[:specifics][:qOne].present? || flash[:specifics][:qTwo].present?
                         @targetpage = 8
                     else
-                        @targetpage = 10
+                        @targetpage = 8
                     end
                 end
             end
