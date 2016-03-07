@@ -62,7 +62,7 @@ class DaaInfoController < ApplicationController
                 redirect_to daa_eligibility_path
             else
                 @trial_participant_info = TrialParticipantInfo.new
-                unless @email == @email_confirmation
+                unless @email.downcase == @email_confirmation.downcase
                     flash[:error] = "There was a problem with the email and email confirmation. Please ensure they are not empty and match each other."
                     render action: :eligible
                     return
