@@ -106,6 +106,7 @@ function prepareDxForm(){
         }
     });
 
+    /*
     $("#diagnostic_test_title").unbind();
     $("#diagnostic_test_title").bind("change",function(){
         var selected = $(this).val();
@@ -113,6 +114,7 @@ function prepareDxForm(){
         var obj = jQuery.parseJSON(descriptions);
         $("#diagnostic_test_description").text(obj[selected]);
     });
+    */
 
     $(".temporary_text").live("click",function(){
         $(this).val("");
