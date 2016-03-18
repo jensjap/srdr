@@ -193,7 +193,7 @@ class DaaInfoController < ApplicationController
     private
         def _create_submission_token
             timeNow = Time.now
-            return (timeNow.hour * 3600 + timeNow.min * 60 + timeNow.sec).to_s
+            return (timeNow.hour * 3600 + timeNow.min * 60 + timeNow.sec + Random.rand(10000000001)).to_s
         end
 
         def _is_a_valid_email?(email)
