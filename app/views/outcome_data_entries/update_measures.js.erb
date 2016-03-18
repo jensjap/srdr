@@ -1,3 +1,20 @@
 <% entry_table = @is_diagnostic ? "outcome_data_entries/diagnostic_entry_table" : "outcome_data_entries/entry_table" %>
-$("#form_div").html("<%= escape_javascript(render :partial=>entry_table)%>");
+
+// We lose the selections already made so we first capture in a dictionary.
+var selects = $("select[title=comparator]");
+var selectsDict = {};
+if (selects.length) {
+    for (i=0 ; i<selects.length ; i++) {
+        selectsDict[selects[i].id] = selects[i].value
+    }
+    console.log(selectsDict);
+}
+
+$("#form_div").html("<%= escape_javascript(render :partial=>entry_table) %>");
 $("#modal_div").dialog("close");
+
+// Restore the captured selections.
+for (var key in selectsDict) {
+    $("#" + key).val(selectsDict[key]);
+}
+
