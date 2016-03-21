@@ -33,89 +33,93 @@
                 <input type='hidden' name="<%= "comparison_measures[#{comparison.id}]" %>" value="<%= comparison_measures.collect{|x| x.id}.join('_') %>"/>
             <% end %>
             <%# Insert the measure rows, one for each measure %>
-            <% comparison_measures.each do |comparison_measure| %>
-                <% unless comparison_measures.index(comparison_measure) == 0 %>
-                    <tr class="<%= "section_#{section_number} comparison_measure_row"%>">
-                    <% end %>
-                    <td style='width:150;'>
-                        <%= comparison_measure.title %>
-                    </td>
-
-                    <%###########################################################################
-                        #                    DATA ENTRY FIELDS                                    #
-                        ###########################################################################%>
-                    <% unless @comparators[comparison.id].empty? %>
-                        <% col = 1 %>
-                        <% @comparators[comparison.id].each_with_index do |c,iter| %>
-                            <%# IF THE COMPARISON MEASURE HERE IS NIL %>
-                            <% unless comparison_measure.nil? %>
-                                <% meas_is_2x2 = comparison_measure.is_2x2_table? %>
-                                <% myComparatorID = c.id %>
-                                <%# print "Comparator id for comparison #{comparison.id} column #{col} is #{comparator_ids[comparison.id][col]}\n\n"%>
-
-                                <% value = "" %>
-                                <% td_style = "" %>
-                                <% dp = nil %>
-                                <% if myComparatorID.to_i > 0 %>
-
-                                    <% dp = @comparison_datapoints[comparison.id][myComparatorID][comparison_measure.id] %>
-                                    <% td_style = '' %>
-
-                                    <% unless dp.nil? %>
-                                        <% unless meas_is_2x2 %>
-                                            <% value = dp.value.empty? ? '' : dp.value %>
-                                            <% td_style = dp.is_calculated == true ? "style='background-color:yellow;'" : "style='background-color:#fff;'" %>
-                                        <% else %>
-                                            <% value = dp %>
-                                        <% end %>
-
-                                    <% end %>
-                                <% end %>
-                                <td class='btwn_arm_comparison' column="<%= iter + 1 %>" <%= td_style %> >
-                                    <% tabindex += (comparison_measures.length * col-1)%>
-                                    <% if meas_is_2x2 %>
-                                        <%# value %>
-                                        <%= render :partial => "outcome_data_entries/diagnostic_tests/two_by_two_table", :locals=>{:comparison_id=>comparison.id, :comparator_id=>c.id, :measure_id=>comparison_measure.id, :values=>value} %>
-                                    <% else %>
-                                        <input type='text' class='editable_field bac_data' name="<%= "comparison_datapoints[#{comparison.id}[#{c.id}[#{comparison_measure.id}]]]" %>" id="<%= "comparison_datapoints__#{comparison.id}_#{c.id}_#{comparison_measure.id}" %>" value="<%= value %>" tabindex="<%= tabindex %>" >
-                                    <% end %>
-                                    <% unless dp.nil? || meas_is_2x2 %>
-                                        <% fnum = dp.footnote_number %>
-                                        <% unless fnum == 0 %>
-                                            <span class='footnote_tag'><%= fnum %></span>
-                                        <% end %>
-                                    <% end %>
-                                    <% tabindex += 1 %>
-                                    <% col += 1%>
-                                </td>
-                                <%# IF THE COMPARISON MEASURE HERE IS NIL %>
-                            <% else %>
-                                <td class='btwn_arm_comparison' column="<%= iter + 1 %>"></td>
-                            <% end %>
-                        <% end %><%# end all_comparators.each do |c| %>
-                        <% else %> <%# ELSE unless @comparators[comparison.id].empty? %>
-                            <% unless @curr_tp == tp_id %>
-                                <% @next_comparator_id -= 1 %>
-                                <% @curr_tp = tp_id %>
-                            <% end %>
-                            <% td_style = "style='background-color:#fff;'" %>
-                            <td class="btwn_arm_comparison" column="1" style='background-color:#fff;'>
-                                <% unless comparison_measure.nil? %>
-                                    <% if comparison_measure.is_2x2_table? %>
-                                        <%= render :partial=>"outcome_data_entries/diagnostic_tests/two_by_two_table",:locals=>{:comparison_id=>comparison.id, :comparator_id=>@next_comparator_id, :measure_id=>comparison_measure.id,:values=>{}} %>
-                                    <% else %>
-                                        <input type='text' class='editable_field bac_data' name="<%= "comparison_datapoints[#{comparison.id}[#{@next_comparator_id}[#{comparison_measure.id}]]]" %>" id="<%= "comparison_datapoints__#{comparison.id}_#{@next_comparator_id}_#{comparison_measure.id}" %>">
-                                    <% end %>
-                                <% else %>
-
-                                <% end %>
-                            </td>
+            <% if comparison_measures.blank? %>
+                <% binding.pry %>
+            <% else %>
+                <% comparison_measures.each do |comparison_measure| %>
+                    <% unless comparison_measures.index(comparison_measure) == 0 %>
+                        <tr class="<%= "section_#{section_number} comparison_measure_row"%>">
                         <% end %>
+                        <td style='width:150;'>
+                            <%= comparison_measure.title %>
+                        </td>
+
                         <%###########################################################################
-                            #                    END DATA ENTRY FIELDS                                  #
+                            #                    DATA ENTRY FIELDS                                    #
                             ###########################################################################%>
-                </tr>
-            <% end %> <%# end comparison_measures.each do %>
+                        <% unless @comparators[comparison.id].empty? %>
+                            <% col = 1 %>
+                            <% @comparators[comparison.id].each_with_index do |c,iter| %>
+                                <%# IF THE COMPARISON MEASURE HERE IS NIL %>
+                                <% unless comparison_measure.nil? %>
+                                    <% meas_is_2x2 = comparison_measure.is_2x2_table? %>
+                                    <% myComparatorID = c.id %>
+                                    <%# print "Comparator id for comparison #{comparison.id} column #{col} is #{comparator_ids[comparison.id][col]}\n\n"%>
+
+                                    <% value = "" %>
+                                    <% td_style = "" %>
+                                    <% dp = nil %>
+                                    <% if myComparatorID.to_i > 0 %>
+
+                                        <% dp = @comparison_datapoints[comparison.id][myComparatorID][comparison_measure.id] %>
+                                        <% td_style = '' %>
+
+                                        <% unless dp.nil? %>
+                                            <% unless meas_is_2x2 %>
+                                                <% value = dp.value.empty? ? '' : dp.value %>
+                                                <% td_style = dp.is_calculated == true ? "style='background-color:yellow;'" : "style='background-color:#fff;'" %>
+                                            <% else %>
+                                                <% value = dp %>
+                                            <% end %>
+
+                                        <% end %>
+                                    <% end %>
+                                    <td class='btwn_arm_comparison' column="<%= iter + 1 %>" <%= td_style %> >
+                                        <% tabindex += (comparison_measures.length * col-1)%>
+                                        <% if meas_is_2x2 %>
+                                            <%# value %>
+                                            <%= render :partial => "outcome_data_entries/diagnostic_tests/two_by_two_table", :locals=>{:comparison_id=>comparison.id, :comparator_id=>c.id, :measure_id=>comparison_measure.id, :values=>value} %>
+                                        <% else %>
+                                            <input type='text' class='editable_field bac_data' name="<%= "comparison_datapoints[#{comparison.id}[#{c.id}[#{comparison_measure.id}]]]" %>" id="<%= "comparison_datapoints__#{comparison.id}_#{c.id}_#{comparison_measure.id}" %>" value="<%= value %>" tabindex="<%= tabindex %>" >
+                                        <% end %>
+                                        <% unless dp.nil? || meas_is_2x2 %>
+                                            <% fnum = dp.footnote_number %>
+                                            <% unless fnum == 0 %>
+                                                <span class='footnote_tag'><%= fnum %></span>
+                                            <% end %>
+                                        <% end %>
+                                        <% tabindex += 1 %>
+                                        <% col += 1%>
+                                    </td>
+                                    <%# IF THE COMPARISON MEASURE HERE IS NIL %>
+                                <% else %>
+                                    <td class='btwn_arm_comparison' column="<%= iter + 1 %>"></td>
+                                <% end %>
+                            <% end %><%# end all_comparators.each do |c| %>
+                            <% else %> <%# ELSE unless @comparators[comparison.id].empty? %>
+                                <% unless @curr_tp == tp_id %>
+                                    <% @next_comparator_id -= 1 %>
+                                    <% @curr_tp = tp_id %>
+                                <% end %>
+                                <% td_style = "style='background-color:#fff;'" %>
+                                <td class="btwn_arm_comparison" column="1" style='background-color:#fff;'>
+                                    <% unless comparison_measure.nil? %>
+                                        <% if comparison_measure.is_2x2_table? %>
+                                            <%= render :partial=>"outcome_data_entries/diagnostic_tests/two_by_two_table",:locals=>{:comparison_id=>comparison.id, :comparator_id=>@next_comparator_id, :measure_id=>comparison_measure.id,:values=>{}} %>
+                                        <% else %>
+                                            <input type='text' class='editable_field bac_data' name="<%= "comparison_datapoints[#{comparison.id}[#{@next_comparator_id}[#{comparison_measure.id}]]]" %>" id="<%= "comparison_datapoints__#{comparison.id}_#{@next_comparator_id}_#{comparison_measure.id}" %>">
+                                        <% end %>
+                                    <% else %>
+
+                                    <% end %>
+                                </td>
+                            <% end %>
+                            <%###########################################################################
+                                #                    END DATA ENTRY FIELDS                                  #
+                                ###########################################################################%>
+                    </tr>
+                <% end %> <%# end comparison_measures.each do %>
+                <% end %>
                 <tr class="<%= rowclass %>">
                     <td class="<%= "section_#{section_number} th edit_measure_row"%>" colspan="<%= 2 + numComparators %>">
                         <a href='#' class='edit_comparison_measures_btn', section="<%= section_number %>",  tpid="<%= this_tp.id %>", title="<%= "Edit comparison measures for the #{this_tp.number} #{this_tp.time_unit} comparison row"%>", comparison_id="<%= comparison.id %>", compID="<%= comparison.id %>">Edit Measures</a>
