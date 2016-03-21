@@ -92,9 +92,9 @@
                                 <% @all_comparators.each_with_index do |acomp,i| %>
                                     <% elements = acomp.split("_") %>
                                     <th class='btwn_arm_comparison' style='max-width:245;' column="<%= i + 1 %>">
-                                        <%= select_tag "comparator["+i.to_s+"[0]", options_for_select(@index_test_options,elements[0]), {:title=>"comparator", :style=>'max-width:230;'} %> vs.<br/>
+                                        <%= select_tag "comparator["+i.to_s+"[0]", options_for_select(@index_test_options.collect{ |i| [i[0],i[1],title: i[0]] }, elements[0]), { :style=>'max-width:230;' } %> vs.<br/>
 
-                                        <%= select_tag "comparator["+i.to_s+"[1]", options_for_select(@reference_test_options,elements[1]), {:title=>"comparator", :style=>'max-width:230;'} %>
+                                        <%= select_tag "comparator["+i.to_s+"[1]", options_for_select(@reference_test_options.collect{ |u| [u[0],u[1],title: u[0]] } ,elements[1]), { :style=>'max-width:230;' } %>
                                         <% unless i == 0 %>
                                             <br/>
                                             <a style='float:right;color:grey;' class="remove_comparison_column_btn" col_num="<%= i+1 %>" href='#'>Remove Column</a>

@@ -23,7 +23,7 @@
             <%# Insert the timepoint cell %>
             <% this_tp = @timepoints[tp_id] %>
             <% tp_title = "#{this_tp.number} #{this_tp.time_unit}" %>
-            <td rowspan="<%= num_rows %>" style='width:150; text-align:center;font-weight:bold;'>
+            <td rowspan="<%= num_rows.zero? ? 1 : num_rows %>" style='width:150; text-align:center;font-weight:bold;'>
                 <%= tp_title %><br/><br>
                 <a href="#" class='remove_comparison_link' title="<%= "Remove the #{this_tp.number} #{this_tp.time_unit} data row"%>" comparison_id="<%= comparison.id %>">Remove</a><br/>
             </td>
@@ -34,7 +34,6 @@
             <% end %>
             <%# Insert the measure rows, one for each measure %>
             <% if comparison_measures.blank? %>
-                <% binding.pry %>
             <% else %>
                 <% comparison_measures.each do |comparison_measure| %>
                     <% unless comparison_measures.index(comparison_measure) == 0 %>
