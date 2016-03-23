@@ -1,21 +1,21 @@
-	<% if !item_notes.nil? && item_notes.length >= 70 %>
-		<div class="<%= section_name %>_<%= item_id.to_s %>_long">
-			<%= item_notes[0..70] + "..." %>
-		</div>
-		<script type="text/javascript">
-			$('.<%= section_name %>_<%= item_id.to_s %>_long').qtip({
-				content: "<%= item_notes %>",
-				show: 'mouseover',
-				hide: 'mouseout',
-				position: {
-					my: 'center right',
-					at: 'center left'
-				},
-				style:{
-					classes: 'ui-tooltip-light'
-				}
-			});
-		</script>
-	<% elsif !item_notes.nil? %>
-		<%= item_notes %>
-	<% end %>
+<% if !item_notes.nil? && item_notes.length >= 70 %>
+    <div class="<%= section_name %>_<%= item_id.to_s %>_long">
+        <%= truncate(item_notes.gsub(/\r\n|\r|\n/, " "), length: 70, separator: " ") %>
+    </div>
+    <script type="text/javascript">
+$('.<%= section_name %>_<%= item_id.to_s %>_long').qtip({
+    content: "<%= item_notes.gsub(/\r\n|\r|\n/, " ") %>",
+    show: 'mouseover',
+    hide: 'mouseout',
+    position: {
+        my: 'center right',
+        at: 'center left'
+    },
+    style:{
+        classes: 'ui-tooltip-light'
+    }
+});
+    </script>
+<% elsif !item_notes.nil? %>
+    <%= item_notes.gsub(/\r\n|\r|\n/, " ") %>
+<% end %>
