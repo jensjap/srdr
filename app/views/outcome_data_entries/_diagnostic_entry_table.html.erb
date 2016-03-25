@@ -413,8 +413,13 @@ current_id = 0
 for(i=0; i<measure_rows.length; i++){
     // get the html for the last column's inputs and parse out the comparator_id
     myrow = measure_rows[i];
-    input = $(myrow).find("td.btwn_arm_comparison:last").html().trim();
-    input = input.replace(/\<span class=\"footnote_tag\"\>.*\<\/span\>/g,"");
+    input = $(myrow).find("td.btwn_arm_comparison:last").html();
+
+    if (!input) {
+        continue;
+    }
+
+    input = input.trim().replace(/\<span class=\"footnote_tag\"\>.*\<\/span\>/g,"");
     //alert("input is: " + input);
     if(input != ""){
         //update the id attribute of the input box
