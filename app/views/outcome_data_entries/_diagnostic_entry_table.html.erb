@@ -437,10 +437,10 @@ for(i=0; i<measure_rows.length; i++){
             this_id = parseInt(comparison_id[4]);
             if(current_id == 0){ current_id = this_id;}
             if(this_id != current_id){
-                next_comparator_id = next_comparator_id - 1;
                 current_id = this_id;
             }
             //assign the new comparator id
+            next_comparator_id = parseInt("-" + ($("#result_table")[0].rows[1].cells.length + 1).toString());
             comparison_id[4] = next_comparator_id;
             comparison_id = comparison_id.join("_");
             input = input.replace(/\"comparison_datapoints__\d*_.*_\d*\"/,comparison_id);
@@ -466,10 +466,10 @@ for(i=0; i<measure_rows.length; i++){
                 this_id = parseInt(comp_id[4]);
                 if(current_id == 0){ current_id = this_id;}
                 if(this_id != current_id){
-                    next_comparator_id = next_comparator_id - 1;
                     current_id = this_id;
                 }
                 //assign the new comparator id
+                next_comparator_id = parseInt("-" + ($("#result_table")[0].rows[1].cells.length + 1).toString());
                 comp_id[4] = next_comparator_id;
                 comp_id = comp_id.join("_");
                 //alert("new comp id is " + comp_id);
