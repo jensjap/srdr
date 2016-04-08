@@ -1029,3 +1029,27 @@
         - option: "Low RoB"
         - option: "High RoB"
         - option: "Unclear RoB"
+    - dimension: #dimension 17
+      id: 129
+      question: "COMPARATIVE....Baseline differences between groups accounted for"
+      description: "For RCT, LOW RoB unless there are important baseline differences that are not adjusted for. For nRCS, HIGH RoB if unadjusted or adjusted only for age and sex; LOW RoB if multivariate adjustment (more than age/sex) or propensity score analysis. There is low risk of selection bias if groups are similar at baseline for demographic factors, value of main outcome measure(s), and important prognostic factors (examples in the field of back and neck pain are duration and severity of complaints, vocational status, percentage of patients with neurological symptoms)."
+      options:
+        - option: "Low RoB"
+        - option: "High RoB"
+        - option: "Unclear RoB"
+    - dimension: #dimension 18
+      id: 130
+      question: "COMPARATIVE...Outcome assessment timing (across interventions)"
+      description: "There is low risk of detection bias if outcome assessments for all intervention groups were measured at the same time. If they report results at mean follow-up times, then HIGH risk of bias"
+      options:
+        - option: "Low RoB"
+        - option: "High RoB"
+        - option: "Unclear RoB"
+    - dimension: #dimension 19
+      id: 131
+      question: "ALL.....Dropouts/missing data (attrition bias)"
+      description: "There is a low risk of attrition bias if there were no missing outcome data. The percentage of withdrawals and drop-outs should not exceed 20% for short-term follow-up and 30% for long-term follow-up and should not lead to substantial bias."
+      options:
+        - option: "Low RoB"
+        - option: "High RoB"
+        - option: "Unclear RoB"
