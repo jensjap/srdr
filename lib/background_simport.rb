@@ -9,7 +9,7 @@ class BackgroundSimport
     unless File.file?(local_file)
       `/home/AHRQ/jens.jap/cron/sync_srdr_public`
     end
-    
+
     wb = ih.set_workbook(local_file)
     ih.parse_data(wb, ['^k[ey]*[\s_-]*q[uestion]*$', 'author, year', 'pmid'])
 

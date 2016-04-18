@@ -1548,7 +1548,10 @@ class ImportAdverseEventHandler  #{{{1
         end
 
         def _find_adverse_event(section, study_id, ef_id, ae_title, ae_description)  #{{{3
-            if ae_title
+            if ae_title && ae_description
+                ar_aes = "#{section.to_s}".constantize.where(["study_id=? AND extraction_form_id=? AND title=? AND description=?",
+                                                              study_id, ef_id, ae_title, ae_description])
+            elsif ae_title
                 ar_aes = "#{section.to_s}".constantize.where(["study_id=? AND extraction_form_id=? AND title=?",
                                                              study_id, ef_id, ae_title])
             else
@@ -1626,16 +1629,13 @@ class ImportArmHandler  #{{{1
 
         def _process_arm  #{{{3
             # If potentially nil then we need to use a hash
-            arm = Arm.where({ study_id: @study_id, title: @arm, description: @arm_description, extraction_form_id: @ef_id }).first
+            arm = Arm.where({ study_id: @study_id, title: @arm, description: @arm_description,
+                              extraction_form_id: @ef_id }).first
             #arm = Arm.where(["study_id=? AND title=? AND description=? AND extraction_form_id=?",
             #                 @study_id, @arm, @arm_description, @ef_id]).first
 
             unless arm
-                arm = Arm.where(["study_id=? AND title=? AND extraction_form_id=?",
-                                 @study_id, @arm, @ef_id]).first
-                unless arm
-                    arm = _create_arm
-                end
+                arm = _create_arm
             end
         end
 
@@ -1725,11 +1725,7 @@ class ImportOutcomeHandler  #{{{1
             outcome = Outcome.where({ study_id: @study_id, title: @outcome_name, description: @outcome_description, extraction_form_id: @ef_id }).first
 
             unless outcome
-                outcome = Outcome.where(["study_id=? AND title=? AND extraction_form_id=?",
-                                 @study_id, @outcome_name, @ef_id]).first
-                unless outcome
-                    outcome = _create_outcome
-                end
+                outcome = _create_outcome
             end
 
             outcome.description = @outcome_description

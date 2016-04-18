@@ -1122,7 +1122,7 @@ class StudiesController < ApplicationController
             bsimport.delay.import(user_id, project_id, ef_id, section, force, local_file, current_user.email)
 
             # No Delay.
-            # bsimport.import(user_id, project_id, ef_id, section, force, local_file, current_user.email)
+            #bsimport.import(user_id, project_id, ef_id, section, force, local_file, current_user.email)
 
             flash.keep[:success] = " File processing! Any errors will be reported via email."
         else
