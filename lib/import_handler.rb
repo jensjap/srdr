@@ -389,30 +389,33 @@ class ImportHandler  #{{{1
             # If it does then we use run method that allows for multiple
             # Adverse Events per study; else use the one that only allows
             # one.
-            ae_title_key = q_hash.keys.find { |k| k =~ /^harms?$|^adverse\s?events?$/i }
-            ae_description_key = q_hash.keys.find { |k| k =~ /^harms?\s?descriptions?$|^adverse\s?events?\s?descriptions?$/i }
-            ae_arm_key = q_hash.keys.find { |l| l =~ /^arms?$/i }
+            ae_title_key           = q_hash.keys.find { |k| k =~ /^harms?$|^adverse\s?events?$/i }
+            ae_description_key     = q_hash.keys.find { |k| k =~ /^harms?\s?descriptions?$|^adverse\s?events?\s?descriptions?$/i }
+            ae_arm_key             = q_hash.keys.find { |l| l =~ /^arms?$/i }
+            ae_arm_description_key = q_hash.keys.find { |l| l =~ /^arms?\s?descriptions?$/i }
 
             # Set defaults
-            ae_title       = nil
-            ae_description = nil
-            ae_arm         = nil
+            ae_title           = nil
+            ae_description     = nil
+            ae_arm             = nil
+            ae_arm_description = nil
 
             # If keys were found in the header then assign values
-            ae_title       = q_hash[ae_title_key]       if ae_title_key
-            ae_description = q_hash[ae_description_key] if ae_description_key
-            ae_arm         = q_hash[ae_arm_key]         if ae_arm_key
+            ae_title           = q_hash[ae_title_key]           if ae_title_key
+            ae_description     = q_hash[ae_description_key]     if ae_description_key
+            ae_arm             = q_hash[ae_arm_key]             if ae_arm_key
+            ae_arm_description = q_hash[ae_arm_description_key] if ae_arm_description_key
 
             # If keys were found in the header then remove key from q_hash
-            q_hash.except!(ae_title_key)       if ae_title_key
-            q_hash.except!(ae_description_key) if ae_description_key
-            q_hash.except!(ae_arm_key)         if ae_arm_key
-
+            q_hash.except!(ae_title_key)           if ae_title_key
+            q_hash.except!(ae_description_key)     if ae_description_key
+            q_hash.except!(ae_arm_key)             if ae_arm_key
+            q_hash.except!(ae_arm_description_key) if ae_arm_description_key
 
             # Iterate over the remaining question answer columns
             q_hash.each do |q, a|
                 ae_import_handler = ImportAdverseEventHandler.new(section, ef_id, study_id, q, a)
-                errors = ae_import_handler.run(ae_title, ae_description, ae_arm)
+                errors = ae_import_handler.run(ae_title, ae_description, ae_arm, ae_arm_description)
                 @listOf_errors_processing_questions.concat errors unless errors.blank?
             end
         end
@@ -1404,26 +1407,26 @@ class ImportAdverseEventHandler  #{{{1
         @options       = nil
     end
 
-    def run(ae_title=nil, ae_description=nil, ae_arm=nil)  #{{{2
-        _insert_adverse_event(ae_title, ae_description, ae_arm)
+    def run(ae_title=nil, ae_description=nil, ae_arm=nil, ae_arm_description=nil)  #{{{2
+        _insert_adverse_event(ae_title, ae_description, ae_arm, ae_arm_description)
         return @listOf_errors
     end
 
     private  #{{{2
 
-        def _insert_adverse_event(ae_title, ae_description, ae_arm)  #{{{3
+        def _insert_adverse_event(ae_title, ae_description, ae_arm, ae_arm_description)  #{{{3
             ar_ae = _find_adverse_event(@section, @study_id, @ef_id, ae_title, ae_description)
             if ar_ae
                 ar_aec = _find_adverse_event_column(@section, @question, @ef_id)
                 if ar_aec
                     # This is what the data points are called.
-                    _update_or_create_adverse_event_result(@section, ar_aec, ar_ae, @answer, @ef_id, ae_arm)
+                    _update_or_create_adverse_event_result(@section, ar_aec, ar_ae, @answer, @ef_id, ae_arm, ae_arm_description)
                 end
             end
         end
 
-        def _update_or_create_adverse_event_result(section, ae_column, ae, value, ef_id, ae_arm)  #{{{3
-            ar_aer = _find_adverse_event_result(section, ae_column, ae, ef_id, ae_arm)
+        def _update_or_create_adverse_event_result(section, ae_column, ae, value, ef_id, ae_arm, ae_arm_description)  #{{{3
+            ar_aer = _find_adverse_event_result(section, ae_column, ae, ef_id, ae_arm, ae_arm_description)
             if ar_aer
                 ar_aer.value = value
                 return ar_aer.save
@@ -1432,9 +1435,11 @@ class ImportAdverseEventHandler  #{{{1
             end
         end
 
-        def _find_adverse_event_result(section, ae_column, ae, ef_id, ae_arm)  #{{{3
+        def _find_adverse_event_result(section, ae_column, ae, ef_id, ae_arm, ae_arm_description)  #{{{3
             # If ae_arm is given then we find the arm ID
-            if ae_arm
+            if ae_arm && ae_arm_description
+                arm_id = _find_arm_id(ef_id, ae_arm, ae_arm_description)
+            elsif ae_arm
                 arm_id = _find_arm_id(ef_id, ae_arm)
             else
                 arm_id = -1;
@@ -1462,14 +1467,24 @@ class ImportAdverseEventHandler  #{{{1
             end
         end
 
-        def _find_arm_id(ef_id, arm_title)
+        def _find_arm_id(ef_id, arm_title, arm_description=nil)
             # Identify by @study_id, ef_id, title
             if arm_title.is_a? String
                 arm_title = CGI.unescapeHTML(arm_title)
             end
 
-            arm = Arm.where(["study_id=? AND title=? AND extraction_form_id=?",
-                      @study_id, arm_title, ef_id])
+            if arm_description.is_a? String
+                arm_description = CGI.unescapeHTML(arm_description)
+            end
+
+            if arm_description
+                arm = Arm.where(["study_id=? AND title=? AND description=? AND extraction_form_id=?",
+                                 @study_id, arm_title, arm_description, ef_id])
+            else
+                arm = Arm.where(["study_id=? AND title=? AND extraction_form_id=?",
+                            @study_id, arm_title, ef_id])
+            end
+
             if arm.length == 1
                 return arm.first.id
             elsif arm.length == 0
@@ -1477,6 +1492,7 @@ class ImportAdverseEventHandler  #{{{1
                                           @study_id, ef_id]).length
                 arm = Arm.create(study_id: @study_id,
                                  title: arm_title,
+                                 description: arm_description,
                                  display_number: count_existing_arms + 1,
                                  extraction_form_id: ef_id,
                                  is_suggested_by_admin: 0,

@@ -39,7 +39,7 @@ Description
 		<% for one_arm in @arms %>
 			
 			<tr class='<%= classname %>'>
-				<td scope='row' class="title_td"><%= one_arm.title %></td>
+                <td scope='row' class="title_td" title="<%= one_arm.description %>"><%= one_arm.title %></td>
 				
 				<% if first %>
 					<% is_other = false %>
