@@ -24,6 +24,7 @@ class Study < ActiveRecord::Base
     has_many :outcome_timepoints, :through => :outcomes
     has_many :outcomes, :dependent=>:destroy
     has_many :outcome_data_entries, :dependent=>:destroy
+    has_many :comparisons, dependent: :destroy
     has_many :design_detail_data_points, :dependent=>:destroy
     has_many :arm_detail_data_points, :dependent=>:destroy
     has_many :baseline_characteristic_data_points, :dependent=>:destroy
