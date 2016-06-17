@@ -51,7 +51,7 @@
     </div>
     <div id='login-window'>
         <div id='login-div'>
-            To contribute data or comment on deposited projects, simply <%= link_to "Register", "/register", {:title=>"Register for a new account", :class=>'register_link'}  %> for an account.<br/><br/><br/>
+            To contribute data or comment on deposited projects, simply <%= link_to "Register", register_path, {:title=>"Register for a new account", :class=>'register_link'} %> for an account.<br/><br/><br/>
             <div id='login_form_div'>
                 <%  if !defined?(current_user) || current_user.nil? %>
                     Registered users, log in below:<br/>
@@ -63,8 +63,7 @@
             </div>
         </div>
     </div>
-    <!--<a href='#' style='position:absolute; bottom:10px; right:10px;'>Forgot Password?</a>-->
-    <%= link_to "Forgot Password?", "#", html_options = {style:'position:absolute; bottom:10px; right:10px;'}%>
+    <%= link_to "Forgot Password?", "#", html_options = {style:'position:absolute; bottom:10px; right:10px;'} %>
 </div>
 <!--################################################################ -->
 <!-- THE HOMEPAGE CONTENT SECTION                                    -->
@@ -93,28 +92,25 @@
         <ul class='link_list popular-resources'>
             <br />
             <br />
-            <!--<li><a href='#' title='(COMING SOON) Discuss SRDR with the user community'>SRDR Help Forum *</a></li>-->
-            <%= link_to "About SRDR", "/about", html_options = { title: 'Learn about SRDR' }%>
-            <!--<li><a href='<%= siteproperties.getTrainingSiteURL() %>' title='Try SRDR in the sandbox training environment'>SRDR Training Site</a></li>-->
+            <%= link_to "About SRDR", about_path, html_options = { title: 'Learn about SRDR' } %>
             <br />
             <br />
-            <!--<li><a href='#' title='(COMING SOON) Request to become a collaborating center'>Become a Collaborating Center *</a></li>-->
-            <%= link_to "PROSPERO: International prospective register of systematic reviews", "http://www.crd.york.ac.uk/prospero", html_options = { class: "needs_exit_disclaimer", target: "_blank" }%>
+            <%= link_to "PROSPERO: International prospective register of systematic reviews", "http://www.crd.york.ac.uk/prospero", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
             <br />
             <br />
-            <%= link_to "The EQUATOR Network: Enhancing the QUAlity and Transparency Of health Research", "http://www.equator-network.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" }%>
+            <%= link_to "The EQUATOR Network: Enhancing the QUAlity and Transparency Of health Research", "http://www.equator-network.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
             <br />
             <br />
-            <%= link_to "AHRQ Methods Guide for Effectiveness and Comparative Effectiveness Reviews", "http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?productid=318&pageaction=displayproduct", html_options = { class: "needs_exit_disclaimer", target: "_blank" }%>
+            <%= link_to "AHRQ Methods Guide for Effectiveness and Comparative Effectiveness Reviews", "http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?productid=318&pageaction=displayproduct", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
             <br />
             <br />
-            <%= link_to "Cochrane Handbook for Systematic Reviews of Interventions", "http://handbook.cochrane.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" }%>
+            <%= link_to "Cochrane Handbook for Systematic Reviews of Interventions", "http://handbook.cochrane.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
             <br />
             <br />
-            <%= link_to "AHRQ Proposed Governance and Data Management Policy for the Systematic Review Data Repository (SRDR)", "http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?pageaction=displayproduct&productid=1266", html_options = { class: "needs_exit_disclaimer", target: "_blank" }%>
+            <%= link_to "AHRQ Proposed Governance and Data Management Policy for the Systematic Review Data Repository (SRDR)", "http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?pageaction=displayproduct&productid=1266", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
             <br />
             <br />
-            <%= link_to "The COMET Initiative", "http://www.comet-initiative.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" }%>
+            <%= link_to "The COMET Initiative", "http://www.comet-initiative.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
             <br />
             <br />
             <li>Check back soon for additional features.</li>
@@ -125,7 +121,7 @@
         <br/>
         <ul class='link_list'>
             <li>
-                <%= link_to "Visit the Help Pages and User Manual", "/help", html_options = { title: "Visit the Help Pages and User Manual" }%>
+                <%= link_to "Visit the Help Pages and User Manual", help_path, html_options = { title: "Visit the Help Pages and User Manual"} %>
             <li>
         </ul>
         
@@ -146,7 +142,7 @@
                 Our first <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3351737/" class='needs_exit_disclaimer' target="_blank">SRDR publication <img alt="WARNING: This link will direct you away form our site." src="/images/exit_disclaimer.gif"/></a> has been published!
             </li-->
             Check out the new External Resources<br />
-            tab on the <%= link_to "SRDR Help and Training page", "http://srdr.ahrq.gov/help" %>
+            tab on the <%= link_to "SRDR Help and Training page", help_path %>
             for links to recommended systematic<br />
             review reference materials, including:<br />
             published works, video series, and online resources.
