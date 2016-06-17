@@ -43,7 +43,7 @@
           <span id='introjs' class='tiny'>Click me for more details.</span><br>
         </div> -->
         <div style="color: red; line-height: 10px; font-size: 12px; padding-top: 5px; font-weight: normal;">
-            <strong>New</strong> courses offered through Evidence Synthesis Academy! These short courses are focused on methods and best practices to improve the quality and efficiency of conducting systematic reviews, as well as advanced methods to maximize the use of available clinical data. Register for our first course on Preparing Systematic Reviews and Meta-Analyses for Journal Publication via our <a href="http://www.brown.edu/academics/public-health/research/evidence-based-medicine/education-and-training/evidence-synthesis-academy">website</a>
+            <strong>New</strong> courses offered through Evidence Synthesis Academy! These short courses are focused on methods and best practices to improve the quality and efficiency of conducting systematic reviews, as well as advanced methods to maximize the use of available clinical data. Register for our first course on Preparing Systematic Reviews and Meta-Analyses for Journal Publication via our <%= link_to "website", "http://www.brown.edu/academics/public-health/research/evidence-based-medicine/education-and-training/evidence-synthesis-academy" %>
             <br>
             <small style="line-height: 6px; font-size: 8px;"><i>The Evidence Synthesis Academy, an Agency for Healthcare Research and Quality (AHRQ 1R25HS023299-01) funded program within the Center for Evidence-based Medicine at Brown University School of Public Health.</i></small>
         </div>
@@ -51,7 +51,7 @@
     </div>
     <div id='login-window'>
         <div id='login-div'>
-            To contribute data or comment on deposited projects, simply <%= link_to "Register", "/register", {:title=>"Register for a new account", :class=>'register_link'}  %> for an account.<br/><br/><br/>
+            To contribute data or comment on deposited projects, simply <%= link_to "Register", register_path, {:title=>"Register for a new account", :class=>'register_link'} %> for an account.<br/><br/><br/>
             <div id='login_form_div'>
                 <%  if !defined?(current_user) || current_user.nil? %>
                     Registered users, log in below:<br/>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <a href='#' style='position:absolute; bottom:10px; right:10px;'>Forgot Password?</a>
+    <%= link_to "Forgot Password?", "#", html_options = {style:'position:absolute; bottom:10px; right:10px;'} %>
 </div>
 <!--################################################################ -->
 <!-- THE HOMEPAGE CONTENT SECTION                                    -->
@@ -90,20 +90,29 @@
         <h2>Popular Resources</h2>
         <div class='hr'></div>
         <ul class='link_list popular-resources'>
-            <!--<li><a href='#' title='(COMING SOON) Discuss SRDR with the user community'>SRDR Help Forum *</a></li>-->
-            <li><a href='/about' title='Learn about SRDR'>About SRDR</a></li>
-            <!--<li><a href='<%= siteproperties.getTrainingSiteURL() %>' title='Try SRDR in the sandbox training environment'>SRDR Training Site</a></li>-->
-            <!--<li><a href='#' title='(COMING SOON) Request to become a collaborating center'>Become a Collaborating Center *</a></li>-->
-            <li><a href="http://www.crd.york.ac.uk/prospero" class="needs_exit_disclaimer" target="_blank">PROSPERO: International prospective register of systematic reviews</a></li>
-            <li><a href="http://www.equator-network.org" class="needs_exit_disclaimer" target="_blank">The EQUATOR Network: Enhancing the QUAlity and Transparency of health Research</a></li>
-            <br />
-            <li><a href="http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?productid=318&pageaction=displayproduct" class="needs_exit_disclaimer" target="_blank">AHRQ Methods Guide for Effectiveness and Comparative Effectiveness Reviews</a></li>
-            <br />
-            <li><a href="http://handbook.cochrane.org" class="needs_exit_disclaimer" target="_blank">Cochrane Handbook for Systematic Reviews of Interventions</a></li>
-            <li><a href="http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?pageaction=displayproduct&productid=1266" class="needs_exit_disclaimer" target="_blank">AHRQ Proposed Governance and Data Management Policy for the Systematic Review Data Repository (SRDR)</a></li>
             <br />
             <br />
-            <li><a href="http://www.comet-initiative.org" class="needs_exit_disclaimer" target="_blank">The COMET Initiative</a></li>
+            <%= link_to "About SRDR", about_path, html_options = { title: 'Learn about SRDR' } %>
+            <br />
+            <br />
+            <%= link_to "PROSPERO: International prospective register of systematic reviews", "http://www.crd.york.ac.uk/prospero", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
+            <br />
+            <br />
+            <%= link_to "The EQUATOR Network: Enhancing the QUAlity and Transparency Of health Research", "http://www.equator-network.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
+            <br />
+            <br />
+            <%= link_to "AHRQ Methods Guide for Effectiveness and Comparative Effectiveness Reviews", "http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?productid=318&pageaction=displayproduct", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
+            <br />
+            <br />
+            <%= link_to "Cochrane Handbook for Systematic Reviews of Interventions", "http://handbook.cochrane.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
+            <br />
+            <br />
+            <%= link_to "AHRQ Proposed Governance and Data Management Policy for the Systematic Review Data Repository (SRDR)", "http://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?pageaction=displayproduct&productid=1266", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
+            <br />
+            <br />
+            <%= link_to "The COMET Initiative", "http://www.comet-initiative.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
+            <br />
+            <br />
             <li>Check back soon for additional features.</li>
         </ul>
         <br/><br/>
@@ -112,7 +121,7 @@
         <br/>
         <ul class='link_list'>
             <li>
-                <a href='/help' title='SRDR Help Pages'>Visit the Help Pages and User Manual</a></li>
+                <%= link_to "Visit the Help Pages and User Manual", help_path, html_options = { title: "Visit the Help Pages and User Manual"} %>
             <li>
         </ul>
         
@@ -133,7 +142,7 @@
                 Our first <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3351737/" class='needs_exit_disclaimer' target="_blank">SRDR publication <img alt="WARNING: This link will direct you away form our site." src="/images/exit_disclaimer.gif"/></a> has been published!
             </li-->
             Check out the new External Resources<br />
-            tab on the <a href="http://srdr.ahrq.gov/help">SRDR Help and Training page</a><br />
+            tab on the <%= link_to "SRDR Help and Training page", help_path %>
             for links to recommended systematic<br />
             review reference materials, including:<br />
             published works, video series, and online resources.
