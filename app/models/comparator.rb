@@ -51,9 +51,13 @@ class Comparator < ActiveRecord::Base
 						tmpString = ""
 						composites.each do |c|
 							pieces = c.split("|")
-							tmp1 = DiagnosticTest.find(pieces[0])
-							tmp2 = DiagnosticTestThreshold.find(pieces[1])
-							tmpString += tmp1.nil? ? "ERROR" : "#{tmp1.title} -- #{tmp2.threshold}"
+							begin
+								tmp1 = DiagnosticTest.find(pieces[0])
+								tmp2 = DiagnosticTestThreshold.find(pieces[1])
+								tmpString += "#{tmp1.title} -- #{tmp2.threshold}"
+							rescue ActiveRecord::RecordNotFound
+								tmpString += "ERROR"
+							end
 							tmpString += " AND " unless composites.index(c) == composites.length - 1
 						end
 						title += tmpString
