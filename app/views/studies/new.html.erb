@@ -166,7 +166,7 @@
 						<span style='text-decoration:underline;'>Description:</span> An example including citation information for each assignment
 						</li>
 					</ul><br/>
-					<strong class='text-decoration:underline;'>NOTE:</strong>  You <span style='text-decoration:underline;'>must convert files of this format into tab-delimited text</span> files prior to upload.<br/><br/>
+          <strong class='text-decoration:underline;'>NOTE:</strong>  You <span style='text-decoration:underline;'>must convert files of this format into tab-delimited text</span> files prior to upload. Also, the name of the uploaded file must not include any "spaces".<br/><br/>
 			</div><br/>
 			<div class='form_content'>
 				<%= form_for :file_upload, :url=>"/projects/#{params[:project_id]}/studies/upload", :html => {:multipart => true} do |f| %>
