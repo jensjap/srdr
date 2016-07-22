@@ -38,7 +38,7 @@
 </div>    
 
 <br/><br/>
-<%= render :partial=>'section_complete_status', :locals=>{"section"=>"diagnostics"} %>
+<%= render :partial=>'section_complete_status', :locals=>{:section=>"diagnostics"} %>
 <br/><br/>
 <% this_page = request.request_uri %>
 <% current = this_page.split("/").last %>
