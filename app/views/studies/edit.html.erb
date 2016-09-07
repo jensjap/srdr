@@ -23,11 +23,7 @@
 		<span id='study_citation'><%= render :inline=> @study.get_citation %></span>
         <br/><br/>
         <% if [1,2130].include? current_user.id %>
-            <%= link_to '<button type="button">Split screen</button>'.html_safe,
-                study_edit_split_path(@study),
-                html_options={ id: "split",
-                               class: "btn btn-default",
-                               role: "button" } %>
+            <%#= link_to '<button type="button">Split screen</button>'.html_safe, study_edit_split_path(@study), html_options={ id: "split", class: "btn btn-default", role: "button" } %>
         <% end %>
 		
 		<% unless !defined?(@included_sections) %>
