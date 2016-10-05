@@ -1063,29 +1063,23 @@ class Study < ActiveRecord::Base
   def self.get_completion_percentages study_ids
     retVal = Hash.new()
     unless study_ids.empty?
-        
-        all_entries = CompleteStudySection.find(:all, :conditions=>["study_id IN (?)",study_ids], :select=>["study_id","extraction_form_id","is_complete"])
-        study_efs = StudyExtractionForm.find(:all, :conditions=>["study_id IN (?)",study_ids], :select=>["study_id","extraction_form_id"])
-        
+        all_entries = CompleteStudySection.find(:all, :conditions => ["study_id IN (?)", study_ids], :select => ["study_id", "extraction_form_id", "is_complete"])
+        study_efs = StudyExtractionForm.find(:all, :conditions => ["study_id IN (?)", study_ids], :select => ["study_id","extraction_form_id"])
         included_section_counts = Hash.new()
-        study_efs.collect{|x| x.extraction_form_id}.uniq.each do |efid|
-            
-            #efs.each do |efid|
-            included_section_counts[efid] = ExtractionFormSection.count(:conditions=>["extraction_form_id=? AND included=?",efid,true])
+        study_efs.collect{ |x| x.extraction_form_id }.uniq.each do |efid|
+            included_section_counts[efid] = ExtractionFormSection.count(:conditions => ["extraction_form_id=? AND included=?", efid, true])
         end
-            
         study_ids.each do |sid|
             begin
                 # List of unique extraction form ids for this study id
-                these_efs = study_efs.select{|sef| sef.study_id == sid}.collect{|x| x.extraction_form_id}.uniq
-            
-                # we add count of 2 to total sections to account for key questions and publications tabs for each extraction form
-                total_sections = 2 * these_efs.length
+                these_efs = study_efs.select{ |sef| sef.study_id == sid }.collect{ |x| x.extraction_form_id }.uniq
+                total_sections = 0
                 these_efs.each do |ef|
-                    total_sections += included_section_counts[ef]
+                    # we add count of 2 to total sections (for each extraction form) to account for key questions and publications tabs for each extraction form
+                    total_sections += included_section_counts[ef] + 2
                 end
 
-                t_entries = all_entries.count{|y| y.is_complete == true && y.study_id == sid && these_efs.include?(y.extraction_form_id)}
+                t_entries = all_entries.count{ |y| y.is_complete == true && y.study_id == sid && these_efs.include?(y.extraction_form_id) }
 
                 unless t_entries == 0 || total_sections == 0
                     #retVal[sid] = (t_entries.length.to_f / these_entries.length) * 100
@@ -1096,7 +1090,7 @@ class Study < ActiveRecord::Base
             rescue Exception => e
                 retVal[sid] = 0
             end
-        end         
+        end
     end
     return retVal
   end
