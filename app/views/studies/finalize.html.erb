@@ -66,11 +66,6 @@
 <script type='text/javascript'>
 //<!--
 
-// Remove .edited_field and .unsaved_form classes from forms and fields that have been saved
-$(".positive").on('click', function(e){
-    $("#toggle_section_link").siblings("select").removeClass("edited_field");
-})
-
 function finalize_init() {
   try{
     checkFinalizeLoaded(); // HOLD OFF UNTIL THE LAST ELEMENT IS LOADED
@@ -87,6 +82,10 @@ function loadFinalizeJS(){
 	$("#toggle_section_link").die();
 	$("#toggle_section_link").live("click",function(event){
 		event.preventDefault();
+
+        // Remove .edited_field and .unsaved_form classes from forms and fields that have been saved
+        $("#toggle_section_link").siblings("select").removeClass("edited_field");
+
 		section_name = $("#toggle_section_selector").val();
 		study_id = "<%= session[:study_id] %>";
 		extraction_form_id = "<%= session[:extraction_form_id] %>";
