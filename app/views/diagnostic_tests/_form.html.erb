@@ -95,7 +95,7 @@ function checkDxLoaded() {
 
 function prepareDxForm(){
 
-    $("#save").on("click", function() {
+    $(".positive").on("click", function() {
         forms = $(".unsaved_form");
         for(i=0; i < forms.length; i++){
             $(forms[i]).removeClass("unsaved_form");
