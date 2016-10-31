@@ -52,7 +52,7 @@
 	<!--<a href='/help' tabindex=116>Video Tutorials</a>-->
 	<a href='#' class='feedback_link' tabindex=116 title="Leave SRDR Feedback">Feedback</a>
 	<p>OTHER RESOURCES</p>
-        <%= link_to "Registries", siteproperties.getRegistryURL()+"&action=SEARCH&login="+current_user.login,{:tabindex=>115,:class=>'form_link', :title=>"Registries"} %>
+        <%= link_to "Registries", search_registry_path,{:tabindex=>115,:class=>'form_link', :title=>"Registries"} %>
 	<a href="http://abstrackr.cebm.brown.edu/account/login" target="_blank" class='needs_exit_disclaimer' tabindex=112 title="The Abstrackr abstract screening tool">abstrackr <img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/></a>
 	<a href="http://tuftscaes.org/open_meta/" target="_blank"  class='needs_exit_disclaimer' tabindex=113 title="The OpenMetaAnalyst tool for Systematic Review Meta Analysis">OpenMeta[Analyst] <img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/></a>
 	<a href='http://www.clinicaltrials.gov' target="_blank"  class='needs_exit_disclaimer' tabindex=114 title='The U.S. National Database for Clinical Trials Data'>ClinicalTrials.gov <img src='/images/exit_disclaimer.gif' alt='This graphic notice indicates that you are leaving this Federal Government Web site and entering a non-Federal Web site.'/></a>
