@@ -23,7 +23,7 @@
 # This class handles secondary publications for a study. A study can have unlimited secondary publications. A secondary publication can have
 # many secondary publication numbers.
 class SecondaryPublication < ActiveRecord::Base
-    require 'net/http'
+    require "open-uri"
     belongs_to :study, :touch=>true
     validates :title, :presence => true
     has_many :secondary_publication_numbers, :dependent => :destroy
@@ -93,12 +93,12 @@ class SecondaryPublication < ActiveRecord::Base
         pmid.strip!
 
         # pull the full record for this publication from PubMed at NCBI
-        url = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=" + pmid + "&retmode=xml"
+        url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=" + pmid + "&retmode=xml"
         puts "------- GETTING SUMMARY INFO BY PMID --------\n\n"
         puts "The initial URL is #{url}\n\n"
         puts "getting the XML for that URL..."
         # get the xml as a string
-        xml = Net::HTTP.get_response(URI.parse(url)).body
+        xml = URI.parse(url).read
         puts "XML was collected: and is #{xml.length} characters long\n"
         # create an xml document with nokogiri
         # set it to ignore blank nodes
