@@ -4,7 +4,7 @@
 <div class="tools">
 		<%= link_to image_tag("Printer.png") + " Print Page", "#", :onclick => "javascript:window.print()" %><br/>
 	<%= link_to image_tag("Layout_header.png") + ' Create PDF', project_path(params[:project_id]) + "/index_pdf", :target => "new" %><br/>
-<div class="pdf_plugin_link"><%= link_to "download PDF plugin", "http://get.adobe.com/reader/", :target => "new" %><br/> To save as HTML, click File then Save Page As in your web browser.</div><br/>
+<div class="pdf_plugin_link"><%= link_to "download PDF plugin", "https://get.adobe.com/reader/", :target => "new" %><br/> To save as HTML, click File then Save Page As in your web browser.</div><br/>
 </div>
 <% unless current_user.nil? %>	
 <% if User.current_user_has_project_edit_privilege(@project.id, current_user) %>

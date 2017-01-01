@@ -163,7 +163,7 @@
                     <% if @project.prospero_id.blank? %>
                     <span style='font-size:smaller;'>(This ID will be used to generate a link to your PROSPERO entry)</span>
                     <% else %>
-                    (<a href="http://www.crd.york.ac.uk/prospero/display_record.asp?ID=<%= @project.prospero_id %>" target="_blank">http://www.crd.york.ac.uk/prospero/display_record.asp?ID=<%=@project.prospero_id%></a>)
+                    (<a href="https://www.crd.york.ac.uk/prospero/display_record.asp?ID=<%= @project.prospero_id %>" target="_blank">https://www.crd.york.ac.uk/prospero/display_record.asp?ID=<%=@project.prospero_id%></a>)
                     <% end %>
 
                 </td>
@@ -190,12 +190,12 @@
                         <%= f.text_field :doi_id, :style => "width: 40%", :class=>"editable_field" %>
                         <br />
                         <%=
-                            link_to_if(@project.doi_id.present?, "http://dx.doi.org/" + @project.doi_id.to_s, "http://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
+                            link_to_if(@project.doi_id.present?, "https://dx.doi.org/" + @project.doi_id.to_s, "https://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
                             end
                         %>
                     <% else %>
                         <%=
-                            link_to_if(@project.doi_id.present?, "http://dx.doi.org/" + @project.doi_id.to_s, "http://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
+                            link_to_if(@project.doi_id.present?, "https://dx.doi.org/" + @project.doi_id.to_s, "https://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
                                 puts "No DOI ID available."
                             end
                         %>
