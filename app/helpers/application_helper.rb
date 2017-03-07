@@ -71,7 +71,7 @@ module ApplicationHelper
                 retVal = image_tag("Computer-silk.png", :style=> "border: 0px; vertical-align: top", :alt => "computer") + " "
                 retVal = retVal + link_to("My Work", "/") + " "
 
-                # remove the http://www.srdr.com bit from the array
+                # remove the https://www.srdr.com bit from the array
                 elements = elements[3..elements.length-1]
 
                 i = 0

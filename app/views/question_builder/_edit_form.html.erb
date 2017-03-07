@@ -1,7 +1,7 @@
 <div id="validation_message_<%= @model_name %>">
 <%# render "layouts/modal_info_messages" %>
 </div>
-	<div style='float:right;'><strong>Need assistance building your form?</strong><br/><a href='http://www.youtube.com/watch?v=CvRPv4XG6Rc&feature=youtu.be' class='needs_exit_disclaimer' target='_blank'>Click Here for a training video  <img alt='WARNING: this link will direct you away form our site.' src="/images/exit_disclaimer.gif"/></a> or <br/><%= link_to "Visit the 'Using Question Builder' section of our FAQ", "/help?selected=4#question_builder_faq", {:target=>"blank"} %></div><br/>
+	<div style='float:right;'><strong>Need assistance building your form?</strong><br/><a href='https://www.youtube.com/watch?v=CvRPv4XG6Rc&feature=youtu.be' class='needs_exit_disclaimer' target='_blank'>Click Here for a training video  <img alt='WARNING: this link will direct you away form our site.' src="/images/exit_disclaimer.gif"/></a> or <br/><%= link_to "Visit the 'Using Question Builder' section of our FAQ", "/help?selected=4#question_builder_faq", {:target=>"blank"} %></div><br/>
 	<br/>
 	<% if @has_study_data==true %>
 		<%= render :partial=>'has_data_warning' %>

@@ -34,7 +34,7 @@ end
         <ul>
             <li class="<%= selected=="home" ? "current" : "" %> horizontal-nav-link" href="/" tabindex=39 title="SRDR Home">Home</li>
             <li class="<%= selected=="published" ? "current" : "" %> horizontal-nav-link" href="/projects/published" tabindex=40 title="Published Projects">Published Projects</li>
-            <li class="<%= selected=="published" ? "current" : "" %> horizontal-nav-link" href="<%= siteproperties.getRegistryURL()+"&action=SEARCH&login=public" %>" tabindex=41 title="Registries">Registries</li>
+            <li class="<%= selected=="published" ? "current" : "" %> horizontal-nav-link" href="<%= search_registry_path %>" tabindex=41 title="Registries">Registries</li>
         </ul>
     <% else %>
         <ul>

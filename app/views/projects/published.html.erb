@@ -81,7 +81,7 @@
           <div class='comment more'>
               <span class='bold'>DOI: </span>
               <%=
-                  link_to_if(project.doi_id.present?, project.doi_id.to_s, "http://dx.doi.org/" + project.doi_id.to_s, confirm: "WARNING: this link will briefly direct you away form our site. Please confirm.", target: "_blank") do
+                  link_to_if(project.doi_id.present?, project.doi_id.to_s, "https://dx.doi.org/" + project.doi_id.to_s, confirm: "WARNING: this link will briefly direct you away form our site. Please confirm.", target: "_blank") do
                       "DOI pending."
                   end
               %>

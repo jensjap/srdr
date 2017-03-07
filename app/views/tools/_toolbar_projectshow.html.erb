@@ -1,7 +1,7 @@
 <div id="toolbox">
 <%= link_to image_tag("Printer.png") + " Print this page", "#", :onclick => "javascript:window.print()" %> 
 | <%= link_to image_tag("Layout_header.png") + ' Create PDF', project_path(params[:project_id]) + "/index_pdf", :target => "new" %><br/>
-<div class="pdf_plugin_link"><%= link_to "download PDF plugin", "http://get.adobe.com/reader/", :target => "new" %> | To save as HTML, click File then Save Page As in your web browser.</div>
+<div class="pdf_plugin_link"><%= link_to "download PDF plugin", "https://get.adobe.com/reader/", :target => "new" %> | To save as HTML, click File then Save Page As in your web browser.</div>
 <div style="display:none"><%= render "sticky_notes/page_notes" %></div>
 
 </div>

@@ -1,5 +1,7 @@
 Srdr::Application.routes.draw do
 
+  get "search_registry" => "registry_usage#search_registry"
+
     root :to => 'home#index'
 
     resources :ef_instructions

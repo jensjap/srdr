@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160302144502) do
+ActiveRecord::Schema.define(:version => 20161031071812) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -333,6 +333,13 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
     t.integer "QualityD",  :limit => 8, :default => 0
   end
 
+  create_table "daa_articles", :force => true do |t|
+    t.integer "article_number", :null => false
+    t.integer "study_1_id"
+    t.integer "study_2_id"
+    t.boolean "split_enabled"
+  end
+
   create_table "daa_consents", :force => true do |t|
     t.string   "email"
     t.string   "firstName"
@@ -352,6 +359,26 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
     t.integer  "marker_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "daa_study_accesses", :force => true do |t|
+    t.integer "study_id"
+    t.boolean "split_screen_access"
+  end
+
+  create_table "daa_trial_pairs", :force => true do |t|
+    t.integer  "pair_number",  :null => false
+    t.integer  "user1_id"
+    t.integer  "user2_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "access_token"
+  end
+
+  create_table "daa_user_accesses", :force => true do |t|
+    t.integer "user_id"
+    t.boolean "dashboard_access"
+    t.boolean "split_screen_access"
   end
 
   create_table "data_requests", :force => true do |t|
@@ -772,6 +799,19 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
     t.string  "section_name"
     t.boolean "included"
   end
+
+  create_table "extraction_clocks", :force => true do |t|
+    t.integer  "user_id",                                        :null => false
+    t.integer  "study_id",                                       :null => false
+    t.integer  "extraction_form_id",                             :null => false
+    t.integer  "section_id",                                     :null => false
+    t.datetime "last_loaded"
+    t.integer  "accumulated_time",   :limit => 8, :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "extraction_clocks", ["user_id", "study_id", "extraction_form_id", "section_id"], :name => "extraction_clocks_index", :unique => true
 
   create_table "extraction_form_adverse_events", :force => true do |t|
     t.string  "title"
@@ -1226,16 +1266,16 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
     t.string   "title"
     t.text     "description"
     t.text     "notes"
-    t.string   "funding_source"
+    t.string   "funding_source",           :limit => 510
     t.integer  "creator_id"
-    t.boolean  "is_public",                :default => false
+    t.boolean  "is_public",                               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "contributors"
     t.text     "methodology"
     t.string   "prospero_id"
     t.string   "search_strategy_filepath"
-    t.boolean  "public_downloadable",      :default => false
+    t.boolean  "public_downloadable",                     :default => false
     t.datetime "publication_requested_at"
     t.integer  "parent_id"
     t.text     "attribution"
@@ -1412,6 +1452,14 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "registry_usages", :force => true do |t|
+    t.string   "requestor_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "login"
+    t.integer  "project_id"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -1448,6 +1496,12 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
   end
 
   add_index "secondary_publications", ["study_id"], :name => "secondarypublication_study_idx"
+
+  create_table "sections", :force => true do |t|
+    t.string  "name"
+    t.boolean "default"
+    t.boolean "custom"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id",                       :null => false
@@ -1597,6 +1651,16 @@ ActiveRecord::Schema.define(:version => 20160302144502) do
     t.integer  "extraction_form_id"
     t.integer  "user_id"
     t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "track_times", :force => true do |t|
+    t.integer  "user_id",                                        :null => false
+    t.integer  "study_id",                                       :null => false
+    t.integer  "extraction_form_id",                             :null => false
+    t.integer  "section_id",                                     :null => false
+    t.integer  "accumulated_time",   :limit => 8, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

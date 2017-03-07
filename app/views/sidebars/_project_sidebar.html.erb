@@ -170,7 +170,7 @@ function showDialog()
 		<% end %>
 		
 	<% end %>
-        <%= link_to "Registries", siteproperties.getRegistryURL()+"&action=SEARCH&login="+current_user.login+"&prj_id="+@project.id.to_s,{:tabindex=>running_index+7,:class=>'form_link', :title=>"Registries"} %>
+        <%= link_to "Registries", search_registry_path(project_id: @project.id), {:tabindex=>running_index+7,:class=>'form_link', :title=>"Registries"} %>
 
         <%= link_to "Data Import Tool", "/projects/#{@project.id}/update_existing_data", { class: "form_link", title: "Data Import Tool", remote: true } %>
 

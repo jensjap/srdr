@@ -381,7 +381,7 @@ $("#add_comparison_column_btn").bind("click",function(event){
         html = $(comp_cell).html();
     col_num = parseInt($("#btw_arm_table_header_row > th:last").attr("column")) + 1;
     new_comparator_num = 0;
-    current_num = html.match(/id=\"comparator_._./)[0].split("_")[1];
+    current_num = html.match(/id=\"comparator_\d+_\d+/)[0].split("_")[1];
     reg1 = new RegExp("comparator_" + current_num, "g");
     reg2 = new RegExp("comparator\\[" + current_num, 'g');
     html = html.replace(reg1, "comparator_" + (parseInt(current_num) + 1));

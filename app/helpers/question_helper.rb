@@ -235,7 +235,8 @@ module QuestionHelper
     # @return text
     def add_draggable_pin_and_existing_marker_html(question)
         text = ""
-        if [1,2130].include? current_user.id
+        #if [1,2130].include? current_user.id
+        if [].include? current_user.id
             text += "<ul>"
             text += "    <li>" + image_tag("Flag_red.png", class: "draggable-pin", data: question[:q_id]) + "</li>"
             if question[:q_daa_markers].present? && question[:q_daa_markers].length > 0

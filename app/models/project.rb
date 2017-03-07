@@ -31,7 +31,7 @@ class Project < ActiveRecord::Base
     validates :title, :presence => true
     belongs_to :parent, :class_name => "Project", :foreign_key => :parent_id 
 
-    # info via http://stackoverflow.com/questions/408872/rails-has-many-through-find-by-extra-attributes-in-join-model
+    # info via https://stackoverflow.com/questions/408872/rails-has-many-through-find-by-extra-attributes-in-join-model
     has_many  :lead_users, :through => :user_project_roles, :class_name => "Project", :source => :project, :conditions => ['user_project_roles.role = ?',"lead"]
     has_many  :editor_users, :through => :user_project_roles, :class_name => "Project", :source => :project, :conditions => ['user_project_roles.role = ?',"editor"]
 
