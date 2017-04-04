@@ -9,6 +9,7 @@ No pending publication requests could be found.
     <th>Title</th>
     <th>Creator Login</th>
     <th>Creator E-Mail</th>
+    <th>Requested At</th>
     <th>Link</th>
     <th>Action</th>
   </thead>
@@ -18,6 +19,7 @@ No pending publication requests could be found.
       <td><%= proj.title %></td>
       <td><%= creator.nil? ? "Unknown" : "#{creator.login}" %></td>
       <td><%= creator.nil? ? "" : "#{creator.email}" %></td>
+      <td><%= proj.nil? ? "" : "#{proj.requested_at}" %></td>
       <td><a href="/projects/<%= proj.id %>/edit">View</a></td>
       <td><a href="/projects/<%= proj.id %>/make_public">Publish</a></td>
     </tr>
