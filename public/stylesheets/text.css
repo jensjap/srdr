@@ -218,3 +218,32 @@ table.image_with_caption{
 		text-align:left;
 		padding:4px 4px 6px 4px;
 }
+
+div.announcement_transition {
+  margin-left: 200px;
+  margin-right: 30px;
+  line-height: 120%;
+}
+
+div.announcement_transition h1 {
+  display: block;
+  text-align: center;
+  margin: 35px;
+}
+
+div.announcement_transition h3 {
+  text-align: center;
+  margin: 15px;
+}
+
+div.announcement_transition p.indent {
+  text-indent: 24px;
+}
+
+div.announcement_transition div {
+  margin-top: 24px;
+}
+
+div#welcome-text a {
+  color: red;
+}

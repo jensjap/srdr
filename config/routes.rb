@@ -488,6 +488,7 @@ Srdr::Application.routes.draw do
     match 'css_markup' => 'home#css_markup'
     match 'css_markup_home' => 'home#css_markup_home'
     match '/home/coming_soon'
+    get   'announcement' => 'home#announcement'
 
     # User account review and management
     match '/accountsmanager/delete/:user_id' => 'accountsmanager#delete'
