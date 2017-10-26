@@ -361,7 +361,7 @@ div, td{
 	padding-top:0px;
 	width:100%;
 	overflow: hidden;
-	border-bottom: 1px solid #C3C3C3;
+	/*border-bottom: 1px solid #C3C3C3;*/
 }
 
 #container-split {
