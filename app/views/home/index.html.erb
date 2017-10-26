@@ -30,6 +30,10 @@
         The Systematic Review Data Repository (SRDR) is a powerful and easy-to-use tool for the extraction and management of data for systematic 
         review or meta-analysis. It is also an open and searchable archive of systematic reviews and their data.
 
+        <div id='announcement-introjs' style='color: white; background: #fd4444; padding: 5px; width: 126px; border-radius: 3px;'>
+            New Announcement
+        </div>
+
         <!--
           <div class='actions'>
             <button class="positive" id="training_button">
@@ -41,12 +45,10 @@
           </div>
         -->
 
-        <!--
-          <div class='announcement'>
+        <!--div class='announcement'>
             Scheduled maintenance in <span id='dayCntr'></span> day(s).<br>
             <span id='introjs' class='tiny'>Click me for more details.</span><br>
-          </div>
-        -->
+        </div-->
 
     </div> <!-- END <div id="welcome-text" > -->
 
@@ -125,30 +127,37 @@
                 <%= link_to "Visit the Help Pages and User Manual", help_path, html_options = { title: "Visit the Help Pages and User Manual"} %>
             <li>
         </ul>
-        
+
         <h2>SRDR Announcements</h2>
         <div class='hr'></div>
         <br/>
         <ul class='link_list'>
-<!--%
-    if siteproperties.isSiteTypeProduction()
-%>
+            <li><span data-intro='Call for papers. Please follow the link to find out more.' data-step='1' style='background: red; padding: 2px; color: white; font-weight: bold; border-radius: 10px;'>New</span> Call for papers:<br /><a href='https://www.biomedcentral.com/collections/systrevautomation' style='line-height: 2.5;' class='needs_exit_disclaimer' target='_blank'>Automation in systematic reviews <img alt="WARNING: This link will direct you away form our site." src="/images/exit_disclaimer.gif" /></a></li>
+
+<!--
+            <%# if siteproperties.isSiteTypeProduction() %>
+
             <li>
-                The <a href='<%= siteproperties.getTrainingSiteURL() %>' target='_blank'>SRDR Training Site</a> is now available
+                The <a href='<%#= siteproperties.getTrainingSiteURL() %>' target='_blank'>SRDR Training Site</a> is now available
             </li><br/><br/>
-<%
-    #end
-%>
+
+            <%# end %>
+
             <li>
                 Our first <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3351737/" class='needs_exit_disclaimer' target="_blank">SRDR publication <img alt="WARNING: This link will direct you away form our site." src="/images/exit_disclaimer.gif"/></a> has been published!
-            </li-->
+            </li>
+
             Check out the new External Resources<br />
-            tab on the <%= link_to "SRDR Help and Training page", help_path %>
+            tab on the <%#= link_to "SRDR Help and Training page", help_path %>
             for links to recommended systematic<br />
             review reference materials, including:<br />
             published works, video series, and online resources.
+-->
         </ul>
+
+        <br />
         &nbsp;<p/>
+
         <h2>Statistics</h2>
         <div class='hr'></div>
         <br/>
@@ -158,7 +167,7 @@
         </ul>
 
         <br/>
-        <h2 data-intro="Here you will find all available information regarding planned outages. We will do our best to post information as soon as possible so you can plan ahead and schedule accordingly." data-step='1'>Maintenance Schedule</h2>
+        <!--h2 data-intro="Here you will find all available information regarding planned outages. We will do our best to post information as soon as possible so you can plan ahead and schedule accordingly." data-step='0'>Maintenance Schedule</h2-->
         <div class='hr'></div>
         <br/>
             <ul class='link_list'>
@@ -248,7 +257,7 @@ index_init();
     var maintenanceDate = new Date();
 
     // Set maintenance date. Months are 0 indexed.
-    maintenanceDate.setFullYear(2013,9-1,29);
+    maintenanceDate.setFullYear(2017,10-1,29);
 
     // Use get time to get milliseconds since epoch.
     var msToday = today.getTime();
@@ -305,6 +314,10 @@ $(document).ready(function() {
   $('span#introjs').on( "click", function() {
     introJs().start();
   })
+
+    $( 'div#announcement-introjs' ).on( 'click', function() {
+        introJs().start();
+    })
 });
 
     
