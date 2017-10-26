@@ -328,6 +328,7 @@ div, td{
 	#home-left-panel{
 		position: relative;
 		float:left;
+    margin-bottom: 140px;
 		top:0px; 
 		left: 0px;
 		width:78%;
