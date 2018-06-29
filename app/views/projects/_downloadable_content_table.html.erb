@@ -12,7 +12,7 @@
       <td class="title">Compile Date/Time</td>
       <td class="title">Project Last Updated</td>
     </tr>
-    <% @ef_ids[project.id.to_s].each do |ef| %>
+    <% @ef_ids[project.id.to_s].try(:each) do |ef| %>
       <% has_xls = false %>
       <% has_csv = false %>
       <tr>
