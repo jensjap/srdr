@@ -68,7 +68,14 @@
               <div id="search-tool">
                 <form action="https://search.ahrq.gov/search" id="banner_searchform" method="get"
                                                                                      name="searchForm-banner_searchform">
-                  <label for="search-input" style="display: none;">Search ahrq.gov</label>
+                  <label for="search-input" style="  position: absolute;
+                  width: 1px;
+                  height: 1px;
+                  padding: 0;
+                  margin: -1px;
+                  overflow: hidden;
+                  clip: rect(0,0,0,0);
+                  border: 0;">Search ahrq.gov</label>
                   <input class="header-search-text" id="search-input" name="q" onfocus="this.value='';"
                                                                                size="11" type="text" value="">
                   <input name="entqr" type="hidden" value="0">
