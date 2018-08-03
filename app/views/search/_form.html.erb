@@ -1,3 +1,11 @@
 <%= form_tag({:controller=>'search',:action=>'results'}, :method=>'get', :id => 'searchform') do %>
+    <%= label_tag 'user_input', 'User Search Parameters', style: '  position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;' %>
     <%= text_field_tag 'user_input', '', :class => 'search_input', :title => "Search box", :size => 20, :tabindex=>37, :style=>"float:left; margin-top:5px;", :title=>"Enter a search term."%><%= image_submit_tag("homepage/btn_Search_off.png",{:style=>"float:right;",:tabindex=>38, :title=>"Start Searching SRDR", alt: "Start searching SRDR"})%>
 <% end %>
