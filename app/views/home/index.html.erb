@@ -62,7 +62,6 @@
             To contribute data or comment on deposited projects, simply <%= link_to "Register", register_path, {:title=>"Register for a new account", :class=>'register_link'} %> for an account.<br/><br/><br/>
             <div id='login_form_div'>
                 <%  if !defined?(current_user) || current_user.nil? %>
-                    Registered users, log in below:<br/>
                     <%= render "user_sessions/login_form", :locals => {:user_session => @user_session} %>
                 <% else %>
                     Account Details: <br/><br/>
