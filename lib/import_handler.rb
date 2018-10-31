@@ -437,8 +437,8 @@ class ImportHandler  #{{{1
         end
 
         def _process_q_hash_default(section, q_hash, ef_id, study_id)
-            ad_arm_key             = q_hash.keys.find { |l| l =~ /^arms?$/i }
-            ad_arm_description_key = q_hash.keys.find { |l| l =~ /^arms?\s?descriptions?$/i }
+            ad_arm_key             = q_hash.keys.find { |l| l =~ /^Arm?$/i }
+            ad_arm_description_key = q_hash.keys.find { |l| l =~ /^Arm?\s?Description?$/i }
 
             ad_arm             = nil
             ad_arm_description = nil
@@ -447,7 +447,7 @@ class ImportHandler  #{{{1
             ad_arm_description = q_hash[ad_arm_description_key] if ad_arm_description_key
 
             q_hash.each do |q, a|
-                default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, ad_arm, ad_arm_details, q, a)
+                default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, ad_arm, ad_arm_description, q, a)
                 errors = default_import_handler.run()
                 @listOf_errors_processing_questions.concat errors unless errors.blank?
             end
@@ -1370,7 +1370,7 @@ class ImportSectionDetailHandler  #{{{1
                 @listOf_errors << "Found too many entries for #{section.to_s} data point. Study id '#{study_id}' and ef ID '#{ef_id}'"
                 return false
             elsif section_detail_data_points.length == 0
-                if _create_section_detail_data_point(section, section_detail, answer, study_id, ef_id)
+                if _create_section_detail_data_point(section, section_detail, answer, study_id, ef_id, 0, 0, arm_id)
                     return true
                 else
                     return false
@@ -1383,7 +1383,7 @@ class ImportSectionDetailHandler  #{{{1
         def _create_section_detail_data_point(section, section_detail,  #{{{3
                                               answer, study_id, ef_id,
                                               row_field_id=0, column_field_id=0,
-                                              arm_id=arm_id, outcome_id=0)
+                                              arm_id=0, outcome_id=0)
             "#{section.to_s}DataPoint".constantize.\
                 create("#{section.to_s.underscore}_field_id".to_sym => section_detail.id,
                        value: answer,
