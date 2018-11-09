@@ -3,7 +3,8 @@
 <!--#################################################################-->
 <div id="breadcrumbs-div">
     <ul class='breadcrumb'>
-<%                                                            
+      <li>
+<%
     # Get bread crumbs from session object. If nil, create a new one
     urlhistory = session[:urlhistory]
     if urlhistory.nil?
@@ -12,7 +13,7 @@
         session[:urlhistory] = urlhistory
     end
     #puts ">>>>>>>>>>>>>> url stack size is "+urlhistory.size.to_s
-    
+
     # Show bread crumbs
 
     descs = urlhistory.getDescriptionList
@@ -28,5 +29,6 @@
 <%
     end
 %>
+    </li>
     </ul>
 </div>

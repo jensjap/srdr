@@ -77,7 +77,7 @@
 <!--#################################################################-->
 <div id='home-content' style='border-bottom: none;'>
     <!-- THE LEFT PANEL OF RECENT SUBMISSIONS -->
-    <div id="home-left-panel">
+    <div id="home-left-panel" style='margin-bottom: 250px;'>
         <table width="100%">
             <tr>
                 <td align="LEFT">
@@ -97,30 +97,14 @@
         <h2>Popular Resources</h2>
         <div class='hr'></div>
         <ul class='link_list popular-resources'>
-            <br />
-            <br />
-            <%= link_to "About SRDR", about_path, html_options = { title: 'Learn about SRDR' } %>
-            <br />
-            <br />
-            <%= link_to "PROSPERO: International prospective register of systematic reviews", "https://www.crd.york.ac.uk/prospero", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
-            <br />
-            <br />
-            <%= link_to "The EQUATOR Network: Enhancing the QUAlity and Transparency Of health Research", "http://www.equator-network.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
-            <br />
-            <br />
-            <%= link_to "AHRQ Methods Guide for Effectiveness and Comparative Effectiveness Reviews", "https://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?productid=318&pageaction=displayproduct", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
-            <br />
-            <br />
-            <%= link_to "Cochrane Handbook for Systematic Reviews of Interventions", "http://handbook.cochrane.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
-            <br />
-            <br />
-            <%= link_to "AHRQ Proposed Governance and Data Management Policy for the Systematic Review Data Repository (SRDR)", "https://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?pageaction=displayproduct&productid=1266", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
-            <br />
-            <br />
-            <%= link_to "The COMET Initiative", "http://www.comet-initiative.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %>
-            <br />
-            <br />
-            <li>Check back soon for additional features.</li>
+          <li style='height: auto;'><%= link_to "About SRDR", about_path, html_options = { title: 'Learn about SRDR' } %> </li>
+          <li style='height: auto;'><%= link_to "PROSPERO: International prospective register of systematic reviews", "https://www.crd.york.ac.uk/prospero", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %></li>
+          <li style='height: auto;'><%= link_to "The EQUATOR Network: Enhancing the QUAlity and Transparency Of health Research", "http://www.equator-network.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %></li>
+          <li style='height: auto;'><%= link_to "AHRQ Methods Guide for Effectiveness and Comparative Effectiveness Reviews", "https://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?productid=318&pageaction=displayproduct", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %></li>
+          <li style='height: auto;'><%= link_to "Cochrane Handbook for Systematic Reviews of Interventions", "http://handbook.cochrane.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %></li>
+          <li style='height: auto;'><%= link_to "AHRQ Proposed Governance and Data Management Policy for the Systematic Review Data Repository (SRDR)", "https://effectivehealthcare.ahrq.gov/index.cfm/search-for-guides-reviews-and-reports/?pageaction=displayproduct&productid=1266", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %></li>
+          <li style='height: auto;'><%= link_to "The COMET Initiative", "http://www.comet-initiative.org", html_options = { class: "needs_exit_disclaimer", target: "_blank" } %></li>
+          <li style='height: auto;'>Check back soon for additional features.</li>
         </ul>
         <br/><br/>
         <h2>Help</h2>

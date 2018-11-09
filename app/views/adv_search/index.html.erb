@@ -99,7 +99,7 @@ display: inline;">
         </tr>
         <tr>
             <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_fromyear'><b>Year</b></label>
+            <label><b>Year</b></label>
             </td>
             <td align="LEFT" valign="TOP" colspan="2">
                 <label for='advsearch_project_fromyear'>From Year</label>
@@ -113,8 +113,8 @@ display: inline;">
             <label for='advsearch_project_status'><b>Status</b></label>
             </td>
             <td align="LEFT" valign="TOP" colspan="2">
-            <%= check_box_tag 'advsearch_project_status', '1' %>Published<br/>
-            <%= check_box_tag 'advsearch_project_status', '0' %>Unpublished
+            <%= check_box_tag 'advsearch_project_status_on',  '1' %>Published<br/>
+            <%= check_box_tag 'advsearch_project_status_off', '0' %>Unpublished
             </td>
         </tr>
         <tr>
@@ -162,7 +162,7 @@ display: inline;">
         </tr>
         <tr>
             <td align="LEFT" valign="TOP">
-                <label for='advsearch_study_fromyear'><b>Year</b></label>
+                <label ><b>Year</b></label>
             </td>
             <td align="LEFT" valign="TOP" colspan="2">
                 <label for='advsearch_study_fromyear'>From Year</label>

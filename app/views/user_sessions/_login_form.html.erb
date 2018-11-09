@@ -1,6 +1,6 @@
 <%= form_for @user_session, :url => {:controller => "user_sessions", :action => "create", :name => "userlogin_form"} do |f| %>
-<table class="login_table register_table" id="user_login_form_table" summary="user login form table">
-    <caption style="text-align: left; color: white;">Registered users, log in below:</caption>
+<div style="text-align: left; color: white;">Registered users, log in below:</div>
+<table class="login_table register_table" id="user_login_form_table">
     <tr class="field">
         <td colspan="2">
         <label for='user_session_login'>Username:</label>&nbsp;<%= f.text_field :login, :size => 30 %><br/>
@@ -50,6 +50,6 @@ function set_login_js(){
     });
 }
 login_init();
-    
+
 //-->
 </script>
