@@ -30,6 +30,7 @@ class ImportHandler  #{{{1
         @author_key        = nil
         @author_year_key   = nil
         @study_title_key   = nil
+        @arm_key           = nil
 
         # Helps determine how to identify studies
         @study_identifier_type = nil
@@ -93,14 +94,17 @@ class ImportHandler  #{{{1
                     ef_section_option_by_diagnostic_test.save
                 end
             end
-        when :ArmDetail
-            ef_section_option_by_arm = EfSectionOption.\
-                where(["extraction_form_id=? AND section=?",
-                       ef_id, "arm_detail"]).first
-            if ef_section_option_by_arm
-                ef_section_option_by_arm.by_arm = 0
-                ef_section_option_by_arm.save
-            end
+
+#        ### THIS SHOULD NOT BE REQUIRED
+#        when :ArmDetail
+#            ef_section_option_by_arm = EfSectionOption.\
+#                where(["extraction_form_id=? AND section=?",
+#                       ef_id, "arm_detail"]).first
+#            if ef_section_option_by_arm
+#                ef_section_option_by_arm.by_arm = 0
+#                ef_section_option_by_arm.save
+#            end
+
         when :OutcomeDetail
             ef_section_option_by_outcome = EfSectionOption.\
                 where(["extraction_form_id=? AND section=?",
@@ -433,9 +437,18 @@ class ImportHandler  #{{{1
         end
 
         def _process_q_hash_default(section, q_hash, ef_id, study_id)
+            ad_arm_key             = q_hash.keys.find { |l| l =~ /^Arm?$/i }
+            ad_arm_description_key = q_hash.keys.find { |l| l =~ /^Arm?\s?Description?$/i }
+
+            ad_arm             = nil
+            ad_arm_description = nil
+
+            ad_arm             = q_hash[ad_arm_key]             if ad_arm_key
+            ad_arm_description = q_hash[ad_arm_description_key] if ad_arm_description_key
+
             q_hash.each do |q, a|
-                default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, q, a)
-                errors = default_import_handler.run
+                default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, ad_arm, ad_arm_description, q, a)
+                errors = default_import_handler.run()
                 @listOf_errors_processing_questions.concat errors unless errors.blank?
             end
         end
@@ -905,6 +918,16 @@ class ImportHandler  #{{{1
 
             return false
         end
+
+        ### October 28, 2018: Here we are trying to find arm titles among columns
+        def _find_arm_columns
+            arm_candidates = listOf_headers.select { |h| h.match(/^Arm$/i) }
+            if arm_candidates.length > 1
+                @listOf_errors << "Workbook may contain at most 1 'Arm' column. More than 1 found."
+            elsif arm_candidates.length == 1
+              @arm_key = arm_candidates.first
+            end
+        end
 end
 
 
@@ -1051,14 +1074,17 @@ end
 
 class ImportSectionDetailHandler  #{{{1
 
-    def initialize(section, ef_id, study_id, question, answer)  #{{{2
-        @listOf_errors = Array.new
-        @section       = section
-        @ef_id         = ef_id
-        @study_id      = study_id
-        @question      = question
-        @answer        = answer
-        @options       = nil
+    def initialize(section, ef_id, study_id, arm, arm_description, question, answer)  #{{{2
+        @listOf_errors   = Array.new
+        @section         = section
+        @ef_id           = ef_id
+        @study_id        = study_id
+        @question        = question
+        @answer          = answer
+        @options         = nil
+        @arm             = arm
+        @arm_description = arm_description
+
     end
 
     def run  #{{{2
@@ -1153,10 +1179,10 @@ class ImportSectionDetailHandler  #{{{1
                 @options ||= _get_options_from_db(section, section_detail)
                 include_selection, exclude_selection = _sort_answer_selection(@options, lof_selection)
                 include_selection.each do |s|
-                    _insert_data_point_mult(@section, sd, s, @study_id, @ef_id)
+                    _insert_data_point_mult(@section, sd, s, @study_id, @ef_id, arm=@arm, arm_description=@arm_description)
                 end
                 exclude_selection.each do |s|
-                    _remove_data_point(@section, sd, s, @study_id, @ef_id)
+                    _remove_data_point(@section, sd, s, @study_id, @ef_id, arm=@arm, arm_description=@arm_description)
                 end
             else
                 return false
@@ -1178,19 +1204,49 @@ class ImportSectionDetailHandler  #{{{1
             return include_selection, exclude_selection
         end
 
-        def _remove_data_point(section, section_detail, value, study_id, ef_id)  #{{{3
-            datapoints = "#{section}DataPoint".constantize.\
-                where(["#{section.to_s.underscore}_field_id=? AND value=? AND study_id=? AND extraction_form_id=?",
-                       section_detail.id, value, study_id, ef_id])
+        def _remove_data_point(section, section_detail, value, study_id, ef_id, arm=nil, arm_description=nil)  #{{{3
+            ef_section_option_by_arm = EfSectionOption.\
+              where(["extraction_form_id=? AND section=?",
+                     ef_id, "arm_detail"]).first
+
+            datapoints = [ ]
+
+            if ef_section_option_by_arm and arm.present?
+              arm_id = _find_arm_id(ef_id, arm, arm_description)
+              datapoints = "#{section}DataPoint".constantize.\
+                  where(["#{section.to_s.underscore}_field_id=? AND value=? AND study_id=? AND extraction_form_id=? AND arm_id=?",
+                         section_detail.id, value, study_id, ef_id, arm_id])
+
+            else
+              datapoints = "#{section}DataPoint".constantize.\
+                  where(["#{section.to_s.underscore}_field_id=? AND value=? AND study_id=? AND extraction_form_id=?",
+                         section_detail.id, value, study_id, ef_id])
+            end
+
             datapoints.each do |dp|
                 dp.destroy
             end
         end
 
-        def _insert_data_point_mult(section, section_detail, value, study_id, ef_id)  #{{{3
-            section_detail_data_points = "#{section.to_s}DataPoint".constantize.\
-                where(["#{section.to_s.underscore}_field_id=? AND value=? AND study_id=? AND extraction_form_id=?",
-                       section_detail.id, value, study_id, ef_id])
+        def _insert_data_point_mult(section, section_detail, value, study_id, ef_id, arm=nil, arm_description=nil)  #{{{3
+            ef_section_option_by_arm = EfSectionOption.\
+              where(["extraction_form_id=? AND section=?",
+                     ef_id, "arm_detail"]).first
+
+            section_detail_data_points = [ ]
+            arm_id = 0
+
+            if ef_section_option_by_arm and arm.present?
+              arm_id = _find_arm_id(ef_id, arm, arm_description)
+              section_detail_data_points = "#{section.to_s}DataPoint".constantize.\
+                  where(["#{section.to_s.underscore}_field_id=? AND value=? AND study_id=? AND extraction_form_id=? AND arm_id=?",
+                         section_detail.id, value, study_id, ef_id, arm_id])
+            else
+              section_detail_data_points = "#{section.to_s}DataPoint".constantize.\
+                  where(["#{section.to_s.underscore}_field_id=? AND value=? AND study_id=? AND extraction_form_id=?",
+                         section_detail.id, value, study_id, ef_id])
+            end
+
             if section_detail_data_points.length > 1
                 @listOf_errors << "Found too many entries for #{section.to_s} data point. Answer choice '#{value}', ef ID '#{ef_id}', study id '#{study_id}'."
                 return false
@@ -1230,7 +1286,7 @@ class ImportSectionDetailHandler  #{{{1
             sd = _find_section_detail(@section, @ef_id, @question, question_type)
             b_valid_choice, option = _valid_choice(@section, sd, @answer)
             if b_valid_choice
-                return _insert_data_point(@section, sd, option, @study_id, @ef_id)
+                return _insert_data_point(@section, sd, option, @study_id, @ef_id, arm=@arm, arm_description=@arm_description)
             else
                 return false
             end
@@ -1240,7 +1296,7 @@ class ImportSectionDetailHandler  #{{{1
             sd = _find_section_detail(@section, @ef_id, @question, question_type)
             b_valid_choice, option = _valid_choice(@section, sd, @answer)
             if b_valid_choice
-                return _insert_data_point(@section, sd, option, @study_id, @ef_id)
+                return _insert_data_point(@section, sd, option, @study_id, @ef_id, arm=@arm, arm_description=@arm_description)
             else
                 return false
             end
@@ -1286,20 +1342,35 @@ class ImportSectionDetailHandler  #{{{1
 
         def _insert_text_type(question_type)  #{{{3
             sd = _find_section_detail(@section, @ef_id, @question, question_type)
-            b_success = _insert_data_point(@section, sd, @answer, @study_id, @ef_id)
+            b_success = _insert_data_point(@section, sd, @answer, @study_id, @ef_id, arm=@arm, arm_description=@arm_description)
 
             return b_success
         end
 
-        def _insert_data_point(section, section_detail, answer, study_id, ef_id)  #{{{3
-            section_detail_data_points = "#{section.to_s}DataPoint".constantize.\
-                where(["#{section.to_s.underscore}_field_id=? AND study_id=? AND extraction_form_id=?",
-                       section_detail.id, study_id, ef_id])
+        def _insert_data_point(section, section_detail, answer, study_id, ef_id, arm=nil, arm_description=nil)  #{{{3
+            ef_section_option_by_arm = EfSectionOption.\
+              where(["extraction_form_id=? AND section=?",
+                     ef_id, "arm_detail"]).first
+
+            section_detail_data_points = [ ]
+            arm_id = 0
+
+            if ef_section_option_by_arm and arm.present?
+              arm_id = _find_arm_id(ef_id, arm, arm_description)
+              section_detail_data_points = "#{section.to_s}DataPoint".constantize.\
+                  where(["#{section.to_s.underscore}_field_id=? AND study_id=? AND extraction_form_id=? AND arm_id=?",
+                         section_detail.id, study_id, ef_id, arm_id])
+            else
+              section_detail_data_points = "#{section.to_s}DataPoint".constantize.\
+                  where(["#{section.to_s.underscore}_field_id=? AND study_id=? AND extraction_form_id=?",
+                         section_detail.id, study_id, ef_id])
+            end
+
             if section_detail_data_points.length > 1
                 @listOf_errors << "Found too many entries for #{section.to_s} data point. Study id '#{study_id}' and ef ID '#{ef_id}'"
                 return false
             elsif section_detail_data_points.length == 0
-                if _create_section_detail_data_point(section, section_detail, answer, study_id, ef_id)
+                if _create_section_detail_data_point(section, section_detail, answer, study_id, ef_id, 0, 0, arm_id)
                     return true
                 else
                     return false
@@ -1391,6 +1462,44 @@ class ImportSectionDetailHandler  #{{{1
                         is_matrix: 0)
 
             return section_detail
+        end
+
+        def _find_arm_id(ef_id, arm_title, arm_description=nil)
+            # Identify by @study_id, ef_id, title
+            if arm_title.is_a? String
+                arm_title = CGI.unescapeHTML(arm_title)
+            end
+
+            if arm_description.is_a? String
+                arm_description = CGI.unescapeHTML(arm_description)
+            end
+
+            if arm_description
+                arm = Arm.where(["study_id=? AND title=? AND description=? AND extraction_form_id=?",
+                                 @study_id, arm_title, arm_description, ef_id])
+            else
+                arm = Arm.where(["study_id=? AND title=? AND extraction_form_id=?",
+                            @study_id, arm_title, ef_id])
+            end
+
+            if arm.length == 1
+                return arm.first.id
+            elsif arm.length == 0
+                count_existing_arms = Arm.where(["study_id=? AND extraction_form_id=?",
+                                          @study_id, ef_id]).length
+                arm = Arm.create(study_id: @study_id,
+                                 title: arm_title,
+                                 description: arm_description,
+                                 display_number: count_existing_arms + 1,
+                                 extraction_form_id: ef_id,
+                                 is_suggested_by_admin: 0,
+                                 is_intention_to_treat: 1
+                      )
+                return arm.id
+            else
+                @listOf_errors << "Too many arms found with parameters: study_id=#{@study_id}, arm_title=#{arm_title}, ef_id#{ef_id}"
+                return nil
+            end
         end
 end
 
