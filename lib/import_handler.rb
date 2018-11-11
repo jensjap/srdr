@@ -447,6 +447,7 @@ class ImportHandler  #{{{1
             ad_arm_description = q_hash[ad_arm_description_key] if ad_arm_description_key
 
             q_hash.each do |q, a|
+                next if /arms{0,2}/.match(q).present?
                 default_import_handler = ImportSectionDetailHandler.new(section, ef_id, study_id, ad_arm, ad_arm_description, q, a)
                 errors = default_import_handler.run()
                 @listOf_errors_processing_questions.concat errors unless errors.blank?
