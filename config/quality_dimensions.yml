@@ -1001,7 +1001,7 @@
     - dimension: #dimension 1
       id: 124
       question: "1.1 Is there potential for confounding of the effect of intervention in this study?"
-      description: "In rare situations, such as when studying harms that are very unlikely to be related to factors that influence treatment decisions, no confounding is expected and the study can be considered to be at low risk of bias due to confounding, equivalent to a fully randomized trial. There is no NI (No information) option for this signalling question. If N/PN to 1.1: the study can be considered to be at low risk of bias due to confounding and no further signalling questions need be considered. If Y/PY to 1.1: determine whether there is a need to assess time-varying confounding:"
+      description: "In rare situations, such as when studying harms that are very unlikely to be related to factors that influence treatment decisions, no confounding is expected and the study can be considered to be at low risk of bias due to confounding, equivalent to a fully randomized trial. There is no NI (No information) option for this signalling question.<br /><span style='color: red;'>If N/PN to 1.1: the study can be considered to be at low risk of bias due to confounding and no further signalling questions need be considered. If Y/PY to 1.1: determine whether there is a need to assess time-varying confounding:</span>"
       options:
         - option: "Y"
         - option: "PY"
@@ -1093,8 +1093,7 @@
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI"
-        - option: "Favors experimental"
+        - option: "NI Favours experimental"
         - option: "Favors comparator"
         - option: "Unpredictable"
     - dimension: #dimension 10
