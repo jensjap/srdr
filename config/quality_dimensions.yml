@@ -1020,8 +1020,8 @@
         - option: "NI"
     - dimension: #dimension 3
       id: 126
-      question: "1.3 Was the analysis based on splitting participants’ follow up time according to intervention received?"
-      description: "Were intervention discontinuations or switches likely to be related to factors that are prognostic for the outcome?<br /><span style='color: red;'>If N/PN, answer questions relating to baseline confounding (1.4 to 1.6).<br />If Y/PY, answer questions relating to both baseline and time-varying confounding (1.7 and 1.8).</span>"
+      question: "1.3 Were intervention discontinuations or switches likely to be related to factors that are prognostic for the outcome?"
+      description: "If intervention switches are unrelated to the outcome, for example when the outcome is an unexpected harm, then time-varying confounding will not be present and only control for baseline confounding is required.<br /><span style='color: red;'>If N/PN, answer questions relating to baseline confounding (1.4 to 1.6).<br />If Y/PY, answer questions relating to both baseline and time-varying confounding (1.7 and 1.8).</span>"
       options:
         - option: "NA"
         - option: "Y"
@@ -1086,18 +1086,24 @@
         - option: "NI"
     - dimension: #dimension 9
       id: 132
-      question: "Optional: What is the predicted direction of bias due to confounding?"
-      description: "Can the true effect estimate be predicted to be greater or less than the estimated effect in the study because one or more of the important confounding domains was not controlled for? Answering this question will be based on expert knowledge and results in other studies and therefore can only be completed after all of the studies in the body of evidence have been reviewed. Consider the potential effect of each of the unmeasured domains and whether all important confounding domains not controlled for in the analysis would be likely to change the estimate in the same direction, or if one important confounding domain that was not controlled for in the analysis is likely to have a dominant impact."
+      question: "Risk of bias judgement for BIAS DUE TO CONFOUNDING"
+      description: "See Table 1 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI Favours experimental"
-        - option: "Favors comparator"
-        - option: "Unpredictable"
+        - option: "NI"
     - dimension: #dimension 10
       id: 133
+      question: "Optional: What is the predicted direction of bias due to confounding?"
+      description: "Can the true effect estimate be predicted to be greater or less than the estimated effect in the study because one or more of the important confounding domains was not controlled for? Answering this question will be based on expert knowledge and results in other studies and therefore can only be completed after all of the studies in the body of evidence have been reviewed. Consider the potential effect of each of the unmeasured domains and whether all important confounding domains not controlled for in the analysis would be likely to change the estimate in the same direction, or if one important confounding domain that was not controlled for in the analysis is likely to have a dominant impact."
+      options:
+        - option: "Favours experimental"
+        - option: "Favors comparator"
+        - option: "Unpredictable"
+    - dimension: #dimension 11
+      id: 134
       question: "2.1. Was selection of participants into the study (or into the analysis) based on participant characteristics observed after the start of intervention?"
       description: "This domain is concerned only with selection into the study based on participant characteristics observed after the start of intervention. Selection based on characteristics observed before the start of intervention can be addressed by controlling for imbalances between experimental intervention and comparator groups in baseline characteristics that are prognostic for the outcome (baseline confounding).<br /><span style='color: red;'>If N/PN to 2.1: go to 2.4</span>"
       options:
@@ -1106,8 +1112,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 11
-      id: 134
+    - dimension: #dimension 12
+      id: 135
       question: "2.2. If Y/PY to 2.1: Were the post-intervention variables that influenced selection likely to be associated with intervention?"
       description: "Selection bias occurs when selection is related to an effect of either intervention or a cause of intervention and an effect of either the outcome or a cause of the outcome. Therefore, the result is at risk of selection bias if selection into the study is related to both the intervention and the outcome."
       options:
@@ -1117,8 +1123,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 12
-      id: 135
+    - dimension: #dimension 13
+      id: 136
       question: "2.3 If Y/PY to 2.2:  Were the post-intervention variables that influenced selection likely to be influenced by the outcome or a cause of the outcome?"
       description: ""
       options:
@@ -1128,8 +1134,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 13
-      id: 136
+    - dimension: #dimension 14
+      id: 137
       question: "2.4. Do start of follow-up and start of intervention coincide for most participants?"
       description: "If participants are not followed from the start of the intervention then a period of follow up has been excluded, and individuals who experienced the outcome soon after intervention will be missing from analyses. This problem may occur when prevalent, rather than new (incident), users of the intervention are included in analyses."
       options:
@@ -1138,8 +1144,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 14
-      id: 137
+    - dimension: #dimension 15
+      id: 138
       question: "2.5. If Y/PY to 2.2 and 2.3, or N/PN to 2.4: Were adjustment techniques used that are likely to correct for the presence of selection biases?"
       description: "It is in principle possible to correct for selection biases, for example by using inverse probability weights to create a pseudo-population in which the selection bias has been removed, or by modelling the distributions of the missing participants or follow up times and outcome events and including them using missing data methodology. However such methods are rarely used and the answer to this question will usually be ‘No’."
       options:
@@ -1149,22 +1155,28 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 15
-      id: 138
-      question: "Optional: What is the predicted direction of bias due to selection of participants into the study?"
-      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+    - dimension: #dimension 16
+      id: 139
+      question: "Risk of bias judgement for BIAS IN SELECTION OF PARTICIPANTS INTO THE STUDY"
+      description: "See Table 1 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "NI"
+    - dimension: #dimension 17
+      id: 140
+      question: "Optional: What is the predicted direction of bias due to selection of participants into the study?"
+      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+      options:
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
         - option: "Unpredictable"
-    - dimension: #dimension 16
-      id: 139
+    - dimension: #dimension 18
+      id: 141
       question: "3.1 Were intervention groups clearly defined?"
       description: "A pre-requisite for an appropriate comparison of interventions is that the interventions are well defined. Ambiguity in the definition may lead to bias in the classification of participants. For individual-level interventions, criteria for considering individuals to have received each intervention should be clear and explicit, covering issues such as type, setting, dose, frequency, intensity and/or timing of intervention. For population-level interventions (e.g. measures to control air pollution), the question relates to whether the population is clearly defined, and the answer is likely to be ‘Yes’"
       options:
@@ -1173,8 +1185,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 17
-      id: 140
+    - dimension: #dimension 19
+      id: 142
       question: "3.2 Was the information used to define intervention groups recorded at the start of the intervention?"
       description: "In general, if information about interventions received is available from sources that could not have been affected by subsequent outcomes, then differential misclassification of intervention status is unlikely. Collection of the information at the time of the intervention makes it easier to avoid such misclassification. For population-level interventions (e.g. measures to control air pollution), the answer to this question is likely to be ‘Yes’."
       options:
@@ -1183,8 +1195,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 18
-      id: 141
+    - dimension: #dimension 20
+      id: 143
       question: "3.3 Could classification of intervention status have been affected by knowledge of the outcome or risk of the outcome?"
       description: "Collection of the information at the time of the intervention may not be sufficient to avoid bias. The way in which the data are collected for the purposes of the NRSI should also avoid misclassification."
       options:
@@ -1193,22 +1205,28 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 19
-      id: 142
-      question: "Optional: What is the predicted direction of bias due to measurement of outcomes or interventions?"
-      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+    - dimension: #dimension 21
+      id: 144
+      question: "Risk of bias judgement for BIAS IN CLASSIFICATION OF INTERVENTIONS"
+      description: "See Table 1 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "NI"
+    - dimension: #dimension 22
+      id: 145
+      question: "Optional: What is the predicted direction of bias due to measurement of outcomes or interventions?"
+      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+      options:
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
         - option: "Unpredictable"
-    - dimension: #dimension 20
-      id: 143
+    - dimension: #dimension 23
+      id: 146
       question: "4.1. Were there deviations from the intended intervention beyond what would be expected in usual practice?"
       description: "Deviations that happen in usual practice following the intervention (for example, cessation of a drug intervention because of acute toxicity) are part of the intended intervention and therefore do not lead to bias in the effect of assignment to intervention. Deviations may arise due to expectations of a difference between intervention and comparator (for example because participants feel unlucky to have been assigned to the comparator group and therefore seek the active intervention, or components of it, or other interventions). Such deviations are not part of usual practice, so may lead to biased effect estimates. However these are not expected in observational studies of individuals in routine care."
       options:
@@ -1217,8 +1235,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 21
-      id: 144
+    - dimension: #dimension 24
+      id: 147
       question: "4.2. If Y/PY to 4.1: Were these deviations from intended intervention unbalanced between groups and likely to have affected the outcome?"
       description: "Deviations from intended interventions that do not reflect usual practice will be important if they affect the outcome, but not otherwise. Furthermore, bias will arise only if there is imbalance in the deviations across the two groups."
       options:
@@ -1228,8 +1246,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 22
-      id: 145
+    - dimension: #dimension 25
+      id: 148
       question: "4.3. Were important co-interventions balanced across intervention groups?"
       description: "Risk of bias will be higher if unplanned co-interventions were implemented in a way that would bias the estimated effect of intervention. Co-interventions will be important if they affect the outcome, but not otherwise. Bias will arise only if there is imbalance in such co-interventions between the intervention groups. Consider the co-interventions, including any pre-specified co-interventions, that are likely to affect the outcome and to have been administered in this study. Consider whether these co-interventions are balanced between intervention groups."
       options:
@@ -1238,8 +1256,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 23
-      id: 146
+    - dimension: #dimension 26
+      id: 149
       question: "4.4. Was the intervention implemented successfully for most participants?"
       description: "Risk of bias will be higher if the intervention was not implemented as intended by, for example, the health care professionals delivering care during the trial. Consider whether implementation of the intervention was successful for most participants."
       options:
@@ -1248,8 +1266,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 24
-      id: 147
+    - dimension: #dimension 27
+      id: 150
       question: "4.5. Did study participants adhere to the assigned intervention regimen?"
       description: "Risk of bias will be higher if participants did not adhere to the intervention as intended. Lack of adherence includes imperfect compliance, cessation of intervention, crossovers to the comparator intervention and switches to another active intervention. Consider available information on the proportion of study participants who continued with their assigned intervention throughout follow up, and answer ‘No’ or ‘Probably No’ if this proportion is high enough to raise concerns. Answer ‘Yes’ for studies of interventions that are administered once, so that imperfect adherence is not possible."
       options:
@@ -1258,8 +1276,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 25
-      id: 148
+    - dimension: #dimension 28
+      id: 151
       question: "4.6. If N/PN to 4.3, 4.4 or 4.5: Was an appropriate analysis used to estimate the effect of starting and adhering to the intervention?"
       description: "It is possible to conduct an analysis that corrects for some types of deviation from the intended intervention. Examples of appropriate analysis strategies include inverse probability weighting or instrumental variable estimation. It is possible that a paper reports such an analysis without reporting information on the deviations from intended intervention, but it would be hard to judge such an analysis to be appropriate in the absence of such information. Specialist advice may be needed to assess studies that used these approaches. If everyone in one group received a co-intervention, adjustments cannot be made to overcome this."
       options:
@@ -1269,22 +1287,24 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 26
-      id: 149
+    - dimension: #dimension 29
+      id: 152
+      question: "Risk of bias judgement for BIAS DUE TO DEVIATIONS FROM INTENDED INTERVENTIONS"
+      description: "See Table 2 in the ROBINS-I Tool"
+      options:
+        - option: "NI"
+    - dimension: #dimension 30
+      id: 153
       question: "Optional: What is the predicted direction of bias due to deviations from the intended interventions?"
       description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
       options:
-        - option: "Low"
-        - option: "Moderate"
-        - option: "Serious"
-        - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
         - option: "Unpredictable"
-    - dimension: #dimension 27
-      id: 150
+    - dimension: #dimension 31
+      id: 154
       question: "5.1 Were outcome data available for all, or nearly all, participants?"
       description: "‘Nearly all’ should be interpreted as ‘enough to be confident of the findings’, and a suitable proportion depends on the context. In some situations, availability of data from 95% (or possibly 90%) of the participants may be sufficient, providing that events of interest are reasonably common in both intervention groups. One aspect of this is that review authors would ideally try and locate an analysis plan for the study."
       options:
@@ -1293,8 +1313,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 28
-      id: 151
+    - dimension: #dimension 32
+      id: 155
       question: "5.2 Were participants excluded due to missing data on intervention status?"
       description: "Missing intervention status may be a problem. This requires that the intended study sample is clear, which it may not be in practice."
       options:
@@ -1303,8 +1323,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 29
-      id: 152
+    - dimension: #dimension 33
+      id: 156
       question: "5.3 Were participants excluded due to missing data on other variables needed for the analysis?"
       description: "This question relates particularly to participants excluded from the analysis because of missing information on confounders that were controlled for in the analysis."
       options:
@@ -1313,8 +1333,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 30
-      id: 153
+    - dimension: #dimension 34
+      id: 157
       question: "5.4 If PN/N to 5.1, orY/PY to 5.2 or 5.3: Are the proportion of participants and reasons for missing data similar across interventions?"
       description: "This aims to elicit whether either (i) differential proportion of missing observations or (ii) differences in reasons for missing observations could substantially impact on our ability to answer the question being addressed. ‘Similar’ includes some minor degree of discrepancy across intervention groups as expected by chance."
       options:
@@ -1324,8 +1344,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 31
-      id: 154
+    - dimension: #dimension 35
+      id: 158
       question: "5.5 If PN/N to 5.1, orY/PY to 5.2 or 5.3: Is there evidence that results were robust to the presence of missing data?"
       description: "Evidence for robustness may come from how missing data were handled in the analysis and whether sensitivity analyses were performed by the investigators, or occasionally from additional analyses performed by the systematic reviewers. It is important to assess whether assumptions employed in analyses are clear and plausible. Both content knowledge and statistical expertise will often be required for this.  For instance, use of a statistical method such as multiple imputation does not guarantee an appropriate answer. Review authors should seek naïve (complete-case) analyses for comparison, and clear differences between complete-case and multiple imputation-based findings should lead to careful assessment of the validity of the methods used. "
       options:
@@ -1335,22 +1355,28 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 32
-      id: 155
-      question: "Optional: What is the predicted direction of bias due to missing data?"
-      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+    - dimension: #dimension 36
+      id: 159
+      question: "Risk of bias judgement for BIAS DUE TO MISSING DATA"
+      description: "See Table 2 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
-        - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "Critial"
+        - option: "NI"
+    - dimension: #dimension 37
+      id: 160
+      question: "Optional: What is the predicted direction of bias due to missing data?"
+      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+      options:
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
         - option: "Unpredictable"
-    - dimension: #dimension 33
-      id: 156
+    - dimension: #dimension 38
+      id: 161
       question: "6.1 Could the outcome measure have been influenced by knowledge of the intervention received?"
       description: "Some outcome measures involve negligible assessor judgment, e.g. all-cause mortality or non-repeatable automated laboratory assessments. Risk of bias due to measurement of these outcomes would be expected to be low."
       options:
@@ -1359,8 +1385,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 34
-      id: 157
+    - dimension: #dimension 39
+      id: 162
       question: "6.2 Were outcome assessors aware of the intervention received by study participants?"
       description: "If outcome assessors were blinded to intervention status, the answer to this question would be ‘No’. In other situations, outcome assessors may be unaware of the interventions being received by participants despite there being no active blinding by the study investigators; the answer this question would then also be‘No’.  In studies where participants report their outcomes themselves, for example in a questionnaire, the outcome assessor is the study participant. In an observational study, the answer to this question will usually be ‘Yes’ when the participants report their outcomes themselves."
       options:
@@ -1369,8 +1395,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 35
-      id: 158
+    - dimension: #dimension 40
+      id: 163
       question: "6.3 Were the methods of outcome assessment comparable across intervention groups?"
       description: "Comparable assessment methods (i.e. data collection) would involve the same outcome detection methods and thresholds, same time point, same definition, and same measurements."
       options:
@@ -1379,8 +1405,8 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 36
-      id: 159
+    - dimension: #dimension 41
+      id: 164
       question: "6.4 Were any systematic errors in measurement of the outcome related to intervention received?"
       description: "This question refers to differential misclassification of outcomes. Systematic errors in measuring the outcome, if present, could cause bias if they are related to intervention or to a confounder of the intervention-outcome relationship. This will usually be due either to outcome assessors being aware of the intervention received or to non-comparability of outcome assessment methods, but there are examples of differential misclassification arising despite these controls being in place."
       options:
@@ -1389,23 +1415,29 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 37
-      id: 160
-      question: "Optional: What is the predicted direction of bias due to measurement of outcomes?"
-      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+    - dimension: #dimension 42
+      id: 165
+      question: "Risk of bias judgement for BIAS IN MEASUREMENT OF OUTCOMES"
+      description: "See Table 2 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "NI"
+    - dimension: #dimension 43
+      id: 166
+      question: "Optional: What is the predicted direction of bias due to measurement of outcomes?"
+      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+      options:
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
         - option: "Unpredictable"
-    - dimension: #dimension 38
-      id: 161
-      question: "7.1. ... multiple outcome measurements within the outcome domain?"
+    - dimension: #dimension 44
+      id: 167
+      question: "7.1 Is the reported effect estimate likely to be selected, on the basis of the results, from multiple outcome measurements within the outcome domain?"
       description: "For a specified outcome domain, it is possible to generate multiple effect estimates for different measurements. If multiple measurements were made, but only one or a subset is reported, there is a risk of selective reporting on the basis of results."
       options:
         - option: "Y"
@@ -1413,9 +1445,9 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 39
-      id: 162
-      question: "7.2 ... multiple analyses of the intervention-outcome relationship?"
+    - dimension: #dimension 45
+      id: 168
+      question: "7.2 Is the reported effect estimate likely to be selected, on the basis of the results, from multiple analyses of the intervention-outcome relationship?"
       description: "Because of the limitations of using data from non-randomized studies for analyses of effectiveness (need to control confounding, substantial missing data, etc), analysts may implement different analytic methods to address these limitations. Examples include unadjusted and adjusted models; use of final value vs change from baseline vs analysis of covariance; different transformations of variables; a continuously scaled outcome converted to categorical data with different cut-points; different sets of covariates used for adjustment; and different analytic strategies for dealing with missing data. Application of such methods generates multiple estimates of the effect of the intervention versus the comparator on the outcome. If the analyst does not pre-specify the methods to be applied, and multiple estimates are generated but only one or a subset is reported, there is a risk of selective reporting on the basis of results."
       options:
         - option: "Y"
@@ -1423,9 +1455,9 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 40
-      id: 163
-      question: "7.3 ... different subgroups?"
+    - dimension: #dimension 46
+      id: 169
+      question: "7.3 Is the reported effect estimate likely to be selected, on the basis of the results, from different subgroups?"
       description: "Particularly with large cohorts often available from routine data sources, it is possible to generate multiple effect estimates for different subgroups or simply to omit varying proportions of the original cohort. If multiple estimates are generated but only one or a subset is reported, there is a risk of selective reporting on the basis of results."
       options:
         - option: "Y"
@@ -1433,30 +1465,42 @@
         - option: "PN"
         - option: "N"
         - option: "NI"
-    - dimension: #dimension 41
-      id: 164
-      question: "Optional: What is the predicted direction of bias due to selection of the reported result?"
-      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+    - dimension: #dimension 47
+      id: 170
+      question: "Risk of bias judgement for BIAS IN SELECTION OF THE REPORTED RESULT"
+      description: "See Table 2 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "NI"
+    - dimension: #dimension 48
+      id: 171
+      question: "Optional: What is the predicted direction of bias due to selection of the reported result?"
+      description: "If the likely direction of bias can be predicted, it is helpful to state this. The direction might be characterized either as being towards (or away from) the null, or as being in favour of one of the interventions."
+      options:
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
         - option: "Unpredictable"
-    - dimension: #dimension 42
-      id: 165
-      question: "Optional: What is the overall predicted direction of bias for this outcome?"
-      description: ""
+    - dimension: #dimension 49
+      id: 172
+      question: "Risk of bias judgement for OVERALL BIAS"
+      description: "See Table 3 in the ROBINS-I Tool"
       options:
         - option: "Low"
         - option: "Moderate"
         - option: "Serious"
         - option: "Critical"
-        - option: "NI Favours experimental"
+        - option: "NI"
+    - dimension: #dimension 50
+      id: 173
+      question: "Optional: What is the overall predicted direction of bias for this outcome?"
+      description: ""
+      options:
+        - option: "Favours experimental"
         - option: "Favors comparator"
         - option: "Towards null"
         - option: "Away from null"
