@@ -1300,6 +1300,10 @@
       question: "Risk of bias judgement for BIAS DUE TO DEVIATIONS FROM INTENDED INTERVENTIONS"
       description: "See Table 2 in the ROBINS-I Tool"
       options:
+        - option: "Low"
+        - option: "Moderate"
+        - option: "Serious"
+        - option: "Critical"
         - option: "NI"
     - dimension: #dimension 30
       id: 154
