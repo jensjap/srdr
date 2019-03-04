@@ -53,7 +53,14 @@ class UserSessionsController < ApplicationController
                     @all_projects = Project.find(:all)
                 end
                 clearSessionProjectInfo()
-                redirect_to "/projects"
+                #redirect_to "/projects"
+                return_to = request.env["rack.session"]["return_to"]
+                if return_to.present?
+                  request.env["rack.session"]["return_to"] = nil
+                  redirect_to return_to
+                else
+                  redirect_to "/projects"
+                end
             else
                 str = ""
                 @user_session.errors.each do |key, value|
