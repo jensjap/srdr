@@ -43,6 +43,7 @@ Srdr::Application.routes.draw do
     #get "adv_search/index"
 
     resource :account, :controller => "users"
+    get "account/email_preferences" => "users#email_preferences"
 
     # ---------- New Audit trail support ---------------
     get "audit_trails/new"

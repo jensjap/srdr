@@ -38,7 +38,10 @@ class User < ActiveRecord::Base
                       uniqueness: { case_sensitive: false }
 
     validates :login, uniqueness: true
+
     has_many :data_requests
+
+    has_many :user_project_roles
     has_many :projects, :through => :user_project_roles
 
     # return the string of the users last and first name, and login

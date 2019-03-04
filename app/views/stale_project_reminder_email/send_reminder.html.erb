@@ -1,0 +1,29 @@
+Dear <%= @user.fname %>,
+
+First, thank you for using the Systematic Review Data Repository (SRDR).
+
+As curators of SRDR (Brown University Evidence-based Practice Center), we are writing because it has been a while since the data in at least one of your SRDR projects was last edited; however, we notice that you have not "published" the data.
+
+For your project(s) that might be completed (listed at the end of this email), we encourage you to make the extracted data openly available on the SRDR website. Doing so would provide an additional avenue by which your work can be made more visible to your audience. Moreover, it would help realize SRDR's mission of making systematic review data, and science in general, more accessible and transparent. Making your data available on SRDR is easy and can be completed within a matter of minutes (please see the attached document for instructions). If you would like any help in the process of doing this for your project, please let us know by emailing us at: SRDR@ahrq.hhs.gov.
+
+Please feel free to view other projects that have made their data available here: https://srdr.ahrq.gov/projects/published.
+
+Thank you very much for your time. Your projects are listed below.
+
+<% @projects.each do |project| %>
+  Project Title: <%= project.title %> (https://srdr.ahrq.gov/projects/<%= project.id %>/edit)
+<% end %>
+
+
+
+Best wishes,
+
+Bryant Smith
+
+
+
+Instructions for publishing project:
+https://s3.amazonaws.com/srdr/Publishing+Project+-+Instructions+for+User+Manual+-+Final+-+6-22-15+-+ver2.docx
+
+Please follow the link below to change your email preferences.
+https://srdr.ahrq.gov/account/email_preferences

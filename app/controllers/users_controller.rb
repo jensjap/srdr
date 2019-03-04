@@ -6,7 +6,7 @@
 # For specifics about setting up authlogic on rails 3, see http://www.dixis.com/?p=352
 class UsersController < ApplicationController
     before_filter :require_no_user, :only => [:new, :create]
-    before_filter :require_user, :only => [:show, :edit, :update]
+    before_filter :require_user, :only => [:show, :edit, :update, :email_preferences]
 
 
     # show the user registration screen
@@ -239,5 +239,9 @@ class UsersController < ApplicationController
             @registration.updated_at = Time.now
             @registration.save
         end
+    end
+
+    def email_preferences
+      @user = current_user
     end
 end

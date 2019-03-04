@@ -1,0 +1,15 @@
+<div id='content' tabindex=200>
+  <h2>Email preferences</h2>
+  <table class='classic-a'>
+    <tr>
+      <th>Project Title</th>
+      <th>Email Reminders</th>
+    </tr>
+    <% @user.projects.leading.each do |project| %>
+      <tr>
+        <td><%= project.title %></td>
+        <td><%= link_to 'Enabled', '#' %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
