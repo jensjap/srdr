@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20161031071812) do
+ActiveRecord::Schema.define(:version => 20190304125309) do
 
   create_table "add_type_to_roles", :force => true do |t|
     t.string   "type"
@@ -1609,6 +1609,15 @@ ActiveRecord::Schema.define(:version => 20161031071812) do
     t.string   "q39d"
     t.string   "q40"
     t.string   "q41"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "stale_project_reminders", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.boolean  "enabled",          :default => true
+    t.datetime "reminder_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -42,8 +42,11 @@ Srdr::Application.routes.draw do
     # ---------- not sure if needed [MK] ---------------
     #get "adv_search/index"
 
-    resource :account, :controller => "users"
-    get "account/email_preferences" => "users#email_preferences"
+    resource :account, :controller                     => "users"
+    get "account/email_preferences"                    => "users#email_preferences"
+    post "account/toggle_email_preference/:project_id" => "users#toggle_email_preference"
+    post "account/turn_on_all_email_reminders"         => "users#turn_on_all_email_reminders"
+    post "account/turn_off_all_email_reminders"        => "users#turn_off_all_email_reminders"
 
     # ---------- New Audit trail support ---------------
     get "audit_trails/new"

@@ -242,6 +242,29 @@ class UsersController < ApplicationController
     end
 
     def email_preferences
-      @user = current_user
+      @stale_project_reminders = current_user.find_stale_project_reminders
+    end
+
+    def toggle_email_preference
+      project_id = params[:project_id]
+      if current_user.is_lead(project_id)
+        spr = StaleProjectReminder.where(project_id: project_id, user_id: current_user).first
+        spr.toggle(:enabled)
+        spr.save
+      end
+
+      redirect_to '/account/email_preferences'
+    end
+
+    def turn_on_all_email_reminders
+      current_user.stale_project_reminders.map{ |spr| spr.update_attributes(enabled: true) }
+
+      redirect_to '/account/email_preferences'
+    end
+
+    def turn_off_all_email_reminders
+      current_user.stale_project_reminders.map{ |spr| spr.update_attributes(enabled: false) }
+
+      redirect_to '/account/email_preferences'
     end
 end

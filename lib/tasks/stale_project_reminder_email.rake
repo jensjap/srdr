@@ -18,28 +18,49 @@ namespace :stale_project_reminder_email do
           recipients[leader.email] = reminder
         end
 
-        unless opted_out_of_email_reminder(leader, project)
+        if stale_project_reminder_enabled_and_no_recent_email(leader, project)
           reminder.add_project_to_reminder(project)
         end
       end
     end
 
     recipients.each do |recipient_email, reminder|
-      if recipient_email == 'jensjap@gmail.com'
-        StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
-#      elsif recipient_email == 'srdr@ahrq.hhs.gov'
-#        StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
-#      elsif recipient_email == 'isaldanh@jhsph.edu'
-#        StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
+      unless reminder.projects.length == 0
+        if recipient_email == 'jensjap@gmail.com'
+          StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
+#        elsif recipient_email == 'srdr@ahrq.hhs.gov'
+#          StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
+#        elsif recipient_email == 'isaldanh@jhsph.edu'
+#          StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
+#        else
+#          StaleProjectReminderEmail.send_reminder(recipient_email, reminder.projects.keys).deliver
+        end
       end
     end
   end
 
-  task :all => [:go]
+  task :build_stale_project_reminders => :environment do
+    User.all.each do |u|
+      u.find_stale_project_reminders
+    end
+  end
+
+  task :all => [:build_stale_project_reminders, :go]
 end
 
-def opted_out_of_email_reminder(user, project)
-  return false
+def stale_project_reminder_enabled_and_no_recent_email(user, project)
+  spr = StaleProjectReminder.where(user_id: user, project_id: project).first
+  if spr.enabled
+    spr_recently_sent = (spr.reminder_sent_at != nil) && (spr.reminder_sent_at > 6.month.ago)
+    unless spr_recently_sent
+      spr.update_attributes(reminder_sent_at: Time.now)
+      return true
+    else
+      return false
+    end
+  else
+    return false
+  end
 end
 
 class Reminder

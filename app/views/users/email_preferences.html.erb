@@ -1,14 +1,30 @@
 <div id='content' tabindex=200>
-  <h2>Email preferences</h2>
+  <h2>Reminder Email Preferences</h2>
+  (
+  <%= link_to "Enable all reminders",
+    "turn_on_all_email_reminders",
+    method: :post %>,
+  <%= link_to "Disable all reminders",
+    "turn_off_all_email_reminders",
+    method: :post %>
+  )
   <table class='classic-a'>
     <tr>
+      <th>Project ID</th>
       <th>Project Title</th>
       <th>Email Reminders</th>
+      <th>Last Email Sent</th>
     </tr>
-    <% @user.projects.leading.each do |project| %>
+    <% @stale_project_reminders.each do |spr| %>
       <tr>
-        <td><%= project.title %></td>
-        <td><%= link_to 'Enabled', '#' %></td>
+        <td><%= spr.project.id %></td>
+        <td><%= spr.project.title %></td>
+        <td>
+          <%= link_to spr.enabled ? 'Enabled' : 'Disabled',
+            'toggle_email_preference/' + spr.project.id.to_s,
+            method: :post %>
+        </td>
+        <td><%= spr.reminder_sent_at %></td>
       </tr>
     <% end %>
   </table>

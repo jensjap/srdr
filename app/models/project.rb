@@ -35,6 +35,9 @@ class Project < ActiveRecord::Base
     has_many  :lead_users, :through => :user_project_roles, :class_name => "User", :source => :user, :conditions => ['user_project_roles.role = ?',"lead"]
     has_many  :editor_users, :through => :user_project_roles, :class_name => "User", :source => :user, :conditions => ['user_project_roles.role = ?',"editor"]
 
+    has_many :stale_project_reminders
+    has_many :stale_project_remindees, through: :stale_project_reminders, source: :project
+
     def self.leading
       where('user_project_roles.role=?', 'lead')
     end

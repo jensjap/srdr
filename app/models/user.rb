@@ -44,6 +44,26 @@ class User < ActiveRecord::Base
     has_many :user_project_roles
     has_many :projects, :through => :user_project_roles
 
+    has_many :stale_project_reminders
+    has_many :stale_projects, through: :stale_project_reminders, source: :user
+
+    # Finds or creates StaleProjectReminder for User.
+    def find_stale_project_reminders
+      stale_project_reminders = Array.new
+
+      User.get_user_lead_projects(self).each do |p|
+        # Try to find reminder using user and project composite key.
+        spr = self.stale_project_reminders.where(project_id: p.id).first
+        unless spr.present?
+          spr = self.stale_project_reminders.create(project: p)
+        end
+
+        stale_project_reminders << spr
+      end unless User.get_user_lead_projects(self).nil?
+
+      return stale_project_reminders
+    end
+
     # return the string of the users last and first name, and login
     # @return [string] a string in the format of "Firstname Lastname (Login)"
     def to_string
