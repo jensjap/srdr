@@ -14,6 +14,9 @@ class HomeController < ApplicationController
      session[:items_per_page] = session[:items_per_page].nil? ? 10 : session[:items_per_page]
   end
 
+  def blog
+  end
+
   # for all users, show the about srdr page
   def about
   end

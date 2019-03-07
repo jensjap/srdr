@@ -489,6 +489,7 @@ Srdr::Application.routes.draw do
     match 'test' => 'home#test'
     match 'about' => 'home#about'
     match 'help' => 'home#help'
+    match 'blog' => 'home#blog'
     match 'css_markup' => 'home#css_markup'
     match 'css_markup_home' => 'home#css_markup_home'
     match '/home/coming_soon'

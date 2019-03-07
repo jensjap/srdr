@@ -36,7 +36,7 @@
         review or meta-analysis. It is also an open and searchable archive of systematic reviews and their data.
 
         <div id='announcement-introjs' style='color: white; background: #fd4444; padding: 5px; width: 126px; border-radius: 3px;'>
-            New Announcement
+          <%= link_to 'New Announcement', '/blog', style: 'color: white;' %>
         </div>
 
         <!--
@@ -308,9 +308,9 @@ $(document).ready(function() {
     introJs().start();
   })
 
-    $( 'div#announcement-introjs' ).on( 'click', function() {
-        introJs().start();
-    })
+    //$( 'div#announcement-introjs' ).on( 'click', function() {
+    //    introJs().start();
+    //})
 });
 
     

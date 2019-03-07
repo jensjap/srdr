@@ -1,3 +1,13 @@
+.blog p {
+  margin: 30px 100px;
+  font-size: 21px;
+  line-height: 1.58;
+}
+
+.blog a:link {
+  font-size: 21px !important;
+}
+
 div.external-resources ol {
   list-style: decimal;
   list-style-position: outside;
