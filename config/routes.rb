@@ -72,6 +72,7 @@ Srdr::Application.routes.draw do
     match '/application/go_full_screen' => 'application#toggle_ahrq_header'
 
     # used for adding and removing extraction forms to and from studies
+    match 'projects/api_index_published' => 'projects#api_index_published'
     match 'projects/published' => 'projects#published'
     match 'home/quarterly_training'
     match 'home/external_resources'

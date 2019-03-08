@@ -1,9 +1,26 @@
 class ProjectsController < ApplicationController
-	before_filter :require_user, :except => [:published, :show]
+	before_filter :require_user, :except => [:published, :show, :api_index_published]
   before_filter :require_project_membership, :only => [:show]
 	before_filter :require_lead_role, :only => [:manage,:edit,:update,:publish,:destroy, :import_new_data, :update_existing_data, :confirm_publication_request]
   before_filter :require_admin, :only => [:make_public, :show_publication_requests]
   #before_filter :require_editor_role, :only => [:show_progress]
+
+  def api_index_published
+    projects_json = {}
+    @projects = Project.where(:is_public=>true).order("updated_at DESC").limit(3)
+    @projects.each_with_index do |p, idx|
+      projects_json[idx] = {}
+      projects_json[idx][:publication_requested_at] = p.publication_requested_at
+      projects_json[idx][:title] = p.title
+      projects_json[idx][:description] = p.description
+      projects_json[idx][:number_of_studies] = p.studies.count
+      projects_json[idx][:number_of_key_questions] = p.key_questions.count
+      projects_json[idx][:number_of_extraction_forms] = p.extraction_forms.count
+      projects_json[idx][:url] = "https://srdr.ahrq.gov/projects/#{ p.id.to_s }"
+    end
+    render :json => projects_json
+  end
+
 	# index_pdf
 	# show print layout for printing a project summary or saving as PDF
 	def index_pdf
