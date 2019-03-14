@@ -1,13 +1,13 @@
 <%# if flash.length > 0 %>
   <% flash.each do |key, value| %>
 		<% if key.to_s.include?("modal_error") %>
-			<div class="notice error"><%= image_tag("Exclamation.png", :style=>"border-style:none;vertical-align:top;", :alt => "Error" ) %> <%= value.html_safe %></div>
+			<div class="notice error"><%= image_tag("Exclamation.png", :style=>"border-style:none;vertical-align:top;", :alt => "Error" ) %> <%= raw(value) %></div>
 					<% flash.delete(key) %>		
 		<% elsif key.to_s.include?("modal_success") %>
-			<div class="notice success"><%= image_tag("Accept.png", :style=>"border-style:none;vertical-align:top;", :alt => "Accept" ) %> <%= value %></div>
+			<div class="notice success"><%= image_tag("Accept.png", :style=>"border-style:none;vertical-align:top;", :alt => "Accept" ) %> <%= raw(value) %></div>
 					<% flash.delete(key) %>		
 		<% elsif key.to_s.include?("modal_notice") %>
-		<div class="notice regular"><%= image_tag("Information-silk.png", :style=>"border-style:none;vertical-align:top;", :alt => "Information" ) %> <%= value %></div>	
+		<div class="notice regular"><%= image_tag("Information-silk.png", :style=>"border-style:none;vertical-align:top;", :alt => "Information" ) %> <%= raw(value) %></div>	
 		<% flash.delete(key) %>		
 		<% end %>
 	<% end %>

@@ -17,7 +17,7 @@
             <% page = request.fullpath.split("/") %>
             <% page_name = page[page.length - 1]%>
             <% unless @study.id.nil? %>
-                <%= link_to '<button type="button">Quit split screen</button>'.html_safe,
+                <%= link_to raw('<button type="button">Quit split screen</button>'),
                     edit_project_study_path(@project, @study),
                     html_options={ id: "quit-split",
                                    class: "btn",
