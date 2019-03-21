@@ -59,7 +59,12 @@ $(document).ready(function(){
 	        <% end %>
 		<tr>
 			<td class="label" style="width:120px">DOI</td>
-			<td><%= @project.doi_id %></td>
+      <td>
+        <%=
+          link_to_if(@project.doi_id.present?, "https://dx.doi.org/" + @project.doi_id.to_s, "https://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
+          end
+        %>
+      </td>
 			<td class="comment_td">
 				<%= render :partial => "comments/field_comments", :locals => {:section_name => "projects", :section_id => @project.id, :field_name => "doi", :study_id => -1, :project_id => @project.id} %>
 			</td>
