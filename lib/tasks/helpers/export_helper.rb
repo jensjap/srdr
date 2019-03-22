@@ -1154,8 +1154,6 @@ module ExportHelper
           eefps.link_to_type1 = eefps_name_dict[eefps.extraction_forms_projects_section.link_to_type1.section.name]
         end
       end
-
-      eefps_name_dict[eefps.extraction_forms_projects_section.section.name]
     end
 
     def self.find_extraction(study_id); @@id_dict[study_id] end
@@ -1174,7 +1172,7 @@ module ExportHelper
         #TODO: this is not the only way to make this comparison, extraction should know its study_id
         #TODO: this is not the only way to make this comparison, extraction should know its study_id
 
-        dp_eefpst1 = eefps.find_eefpst1 dp.t1_type, dp.t1_id
+        dp_eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.find_eefpst1 dp.t1_type, dp.t1_id
         if dp.study_id == eefps.extraction.citations_project.id
           @records << RecordWrapper.new(dp.name, dp_eefpst1)
         end
@@ -1225,7 +1223,7 @@ module ExportHelper
       @extractions_extraction_forms_projects_sections_question_row_column_fields = []
 
       #maybe we have a little dictionary here
-      @eefpst1_dict = {"Outcome" => {},"Arm" => {}, "Adverse Event" => {}, "Diagnostic Test" => {}}
+      # @eefpst1_dict = {"Outcome" => {},"Arm" => {}, "Adverse Event" => {}, "Diagnostic Test" => {}}
 
       case efps.section.name
       when "Outcomes"
@@ -1236,31 +1234,31 @@ module ExportHelper
           if outcome.outcome_type
             t1_type = Type1TypeWrapper.new outcome.outcome_type
           end
-         eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, units, t1_type)
+         eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, units, t1_type, "Outcome", outcome.id)
          @extractions_extraction_forms_projects_sections_type1s << eefpst1
-         @eefpst1_dict[outcome.id] = eefpst1
+         # @eefpst1_dict[outcome.id] = eefpst1
          eefpst1.create_populations outcome.id
         end
       when "Adverse Events"
         AdverseEvent.where(study_id: ex.citations_project.id).each do |ae|
           t1 = Type1Wrapper.new(ae.title, ae.description) #ignoring notes? There is no column for this
-          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil)
+          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil, "Adverse Event", ae.id)
           @extractions_extraction_forms_projects_sections_type1s << eefpst1
-          @eefpst1_dict[ae.id] = eefpst1
+          # @eefpst1_dict[ae.id] = eefpst1
         end
       when "Arms"
         Arm.where(study_id: ex.citations_project.id).each do |arm|
           t1 = Type1Wrapper.new(arm.title, arm.description) #ignoring notes? There is no column for this
-          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil)
+          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil, "Arm", arm.id)
           @extractions_extraction_forms_projects_sections_type1s << eefpst1
-          @eefpst1_dict[arm.id] = eefpst1
+          # @eefpst1_dict[arm.id] = eefpst1
         end
       when "Diagnostic Tests"
         DiagnosticTest.where(study_id: ex.citations_project.id).each do |dt|
           t1 = Type1Wrapper.new(dt.title, dt.description) #ignoring notes? There is no column for this
-          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil)
+          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil, "Diagnostic Test", dt.id)
           @extractions_extraction_forms_projects_sections_type1s << eefpst1
-          @eefpst1_dict[dt.id] = eefpst1
+          # @eefpst1_dict[dt.id] = eefpst1
         end
 
       when "Arm Details", "Outcome Details", "Design Details", "Diagnostic Test Details" #TODO: Adverse Events, Quality Dimensions, Baseline Characteristics, Comparisons
@@ -1277,14 +1275,15 @@ module ExportHelper
       end
     end
 
-    def find_eefpst1 t1_type, t1_id; debugger; @eefpst1_dict[t1_type][t1_id] end
+    # def find_eefpst1 t1_type, t1_id; debugger; @eefpst1_dict[t1_type][t1_id] end
   end
 
   class ExtractionsExtractionFormsProjectsSectionsType1Wrapper
     attr_accessor :id, :type1, :extractions_extraction_forms_projects_section, :extractions_extraction_forms_projects_sections_type1_rows, :type1_type, :units
     @@id_dict = {}
+    @@table_dict = {}
     @@id_count = 1
-    def initialize(eefps, t1, units, t1_type)
+    def initialize(eefps, t1, units, t1_type, table_name, table_id)
       @@id_dict[eefps.id] ||= {}
       if @@id_dict[eefps.id][t1.id]
         @id = @@id_dict[eefps.id][t1.id]
@@ -1295,6 +1294,10 @@ module ExportHelper
       end
       @type1 = t1
       @extractions_extraction_forms_projects_section = eefps
+
+      @@table_dict[table_name] ||= {}
+      @@table_dict[table_name][table_id] = self
+
       @extractions_extraction_forms_projects_sections_type1_rows = []
 
       @type1_type = t1_type
@@ -1306,6 +1309,7 @@ module ExportHelper
         @extractions_extraction_forms_projects_sections_type1_rows << ExtractionsExtractionFormsProjectsSectionsType1RowWrapper.new(os)
       end
     end
+    def self.find_eefpst1(table_name, table_id); @@table_dict[table_name][table_id] end
   end
 
   class ExtractionsExtractionFormsProjectsSectionsType1RowWrapper
