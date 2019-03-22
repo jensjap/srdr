@@ -191,46 +191,53 @@ module ExportHelper
   end
 
   class CitationWrapper
+    attr_accessor :id, :name, :abstract, :refman, :pmid, :keywords, :authors, :journal
+    @@id_counter = 1
     def initialize pp
       #we're ignoring secondary publications?
-      @pp = pp
-      @journal = JournalWrapper.new @pp
+      @id = @@id_counter
+      @@id_counter += 1
+      if pp.nil?
+        @name = ""
+        @abstract = ""
+        @pmid = ""
+      else
+        @name = pp.title
+        @abstract = pp.abstract
+        @pmid = pp.pmid
+      end
+      @refman = ""
+      @journal = JournalWrapper.new pp
+      @keywords = [] ## TODO: SEPARATE KWs
+      @authors = [] ## TODO: SEPARATE AUTHORs
     end
-
-    def id; @pp.id end
-    def name; @pp.title end
-    def abstract; @pp.abstract end
-    def refman; "" end
-    def pmid; @pp.pmid end
-    def journal; @journal end
-    def keywords; [] end ## TODO: SEPARATE KWs
-    def authors; [] end ## TODO: SEPARATE AUTHORs
   end
 
   class JournalWrapper
+    attr_accessor :id, :name, :volume, :issue
     def initialize pp
       @id = 1 #doesnt matter?
-      @name = pp.journal
-      @volume = pp.volume
-      @issue = pp.issue
+      if pp.nil?
+        @name = ""
+        @volume = ""
+        @issue = ""
+      else
+        @name = pp.journal
+        @volume = pp.volume
+        @issue = pp.issue
+      end
     end
-
-    def id; @id end
-    def name; @name end
-    def volume; @volume end
-    def issue; @issue end
-    def keywords; [] end #??????
-    def authors; [] end #??????
-    def labels; [] end #??????
-    def tags; [] end #??????
-    def notes; [] end #??????
   end
 
   class ExtractionFormsProjectWrapper
+    attr_accessor :t1_efps, :t2_efps, :other_efps
     def initialize ef, p
       @ef = ef
       @p = p
-      @efpsarr = []
+
+      @t1_efps = []
+      @t2_efps = []
+      @other_efps = []
 
       arms_efps = nil
       outcomes_efps = nil
@@ -238,25 +245,37 @@ module ExportHelper
 
       ef.extraction_form_sections.where( included: true, section_name: ["adverse","arm_details","arms","baselines","design","outcome_details","outcomes","quality","results"] ).each do |s|
         efps = ExtractionFormsProjectsSectionWrapper.new(s)
-        @efpsarr << efps
         case s.section_name
         when "arms"
+          @t1_efps << efps
           arms_efps = efps
         when "outcomes"
+          @t1_efps << efps
           outcomes_efps = efps
         when "diagnostic_tests"
+          @t1_efps << efps
           diagnostic_tests_efps = efps
+        when "arm_details","outcome_details", "quality_details", "diagnostic_test_details"
+          @t2_efps << efps
+        else
+          @other_efps << efps
         end
       end
 
-      @efpsarr.each do |efps|
+      @t2_efps.each do |efps|
         case efps.efs.section_name
         when "arm_details"
-          efps.link_to_type1 = arms_efps
+          if EfSectionOption.where(extraction_form_id: ef.id, section: "arm_detail").first.by_arm
+            efps.link_to_type1 = arms_efps
+          end
         when "outcome_details", "quality_details"
-          efps.link_to_type1 = outcomes_efps
+          if EfSectionOption.where(extraction_form_id: ef.id, section: "outcome_detail").first.by_outcome
+            efps.link_to_type1 = outcomes_efps
+          end
         when "diagnostic_test_details"
-          efps.link_to_type1 = diagnostic_tests_efps
+          if EfSectionOption.where(extraction_form_id: ef.id, section: "diagnostic_test").first.by_diagnostic_test
+            efps.link_to_type1 = diagnostic_tests_efps
+          end
         end
       end
 
@@ -269,7 +288,7 @@ module ExportHelper
     end
 
     def id; @ef.id end
-    def extraction_forms_projects_sections; @efpsarr end
+    def extraction_forms_projects_sections; @t1_efps + @t2_efps + @other_efps end
   end
 
   class ExtractionFormsProjectsSectionWrapper
@@ -279,6 +298,7 @@ module ExportHelper
       @efs = efs
       @ordering = OrderingWrapper.new 1 ##TODO: ALL OF THE POSITIONS ARE THE SAME
       @extraction_forms_projects_sections_type1s = []
+      @link_to_type1 = nil## TODO: link to right section
       @questions = []
       case efs.section_name
       when "adverse"
@@ -345,7 +365,6 @@ module ExportHelper
         end
       when "outcome_details"
         @section = SectionWrapper.new "Outcome Details"
-        @link_to_type1 ## TODO: link to right section
         @extraction_forms_projects_section_type = ExtractionFormsProjectsSectionTypeWrapper.new "Type 2"
         OutcomeDetail.where( extraction_form_id: efs.extraction_form.id ).each do |od|
           question = QuestionWrapper.new(od)
@@ -564,8 +583,6 @@ module ExportHelper
 
       case q.field_type
       when "text"
-        f = field_model.where(q_column => q.id).first
-
         qr = QuestionRowWrapper.new("")
         qrc = QuestionRowColumnWrapper.new("","text") ## set type inside qrc
         qrcf = QuestionRowColumnFieldWrapper.new
@@ -573,11 +590,8 @@ module ExportHelper
         qr.question_row_columns << qrc
         @question_rows << qr
 
-        if f
-          #TODO: WHERE IS THE EXTRACTION ASSOCIATION, DUMMY
-          dp = dp_model.where(field_column => f.id).first
-          #TODO: WHERE IS THE EXTRACTION ASSOCIATION, DUMMY
-          if dp then qrc.data_points << DataPointWrapper.new(dp) end
+        dp_model.where(field_column => q.id).each do |dp|
+          qrc.data_points << DataPointWrapper.new(dp)
         end
 
       when "checkbox"
@@ -940,7 +954,7 @@ module ExportHelper
             answer_dict = {}
             sq = nil
 
-            qrc = QuestionRowColumnWrapper.new(cf.option_text,"select") ## set type inside qrc
+            qrc = QuestionRowColumnWrapper.new(cf.option_text,"dropdown") ## set type inside qrc
             qrcf = QuestionRowColumnFieldWrapper.new
             qrc.question_row_column_fields << qrcf
             qr.question_row_columns << qrc
@@ -1129,19 +1143,29 @@ module ExportHelper
 
       @@id_dict[cp.id] = self
 
+      eefps_name_dict = {}
+
       efp.extraction_forms_projects_sections.each do |efps|
-        @extractions_extraction_forms_projects_sections << ExtractionsExtractionFormsProjectsSectionWrapper.new(self, efps)
+        eefps = ExtractionsExtractionFormsProjectsSectionWrapper.new(self, efps)
+        @extractions_extraction_forms_projects_sections << eefps
+        eefps_name_dict[eefps.extraction_forms_projects_section.section.name] = eefps
+
+        if eefps.extraction_forms_projects_section.link_to_type1
+          eefps.link_to_type1 = eefps_name_dict[eefps.extraction_forms_projects_section.link_to_type1.section.name]
+        end
       end
+
+      eefps_name_dict[eefps.extraction_forms_projects_section.section.name]
     end
 
     def self.find_extraction(study_id); @@id_dict[study_id] end
   end
 
   class ExtractionsExtractionFormsProjectsSectionsQuestionRowColumnFieldWrapper
-    attr_accessor :question_row_column_field, :record, :extractions_extraction_forms_projects_sections_type1
+    attr_accessor :question_row_column_field, :records, :extractions_extraction_forms_projects_sections_type1
     def initialize eefps, qrc
       @question_row_column_field = qrc.question_row_column_fields.first
-      @record = nil
+      @records = []
       qrc.data_points.each do |dp|
         #@dp_extraction = ExtractionWrapper.find_extraction(dp.study_id)
         #TODO: this is not the only way to make this comparison, extraction should know its study_id
@@ -1152,15 +1176,18 @@ module ExportHelper
 
         dp_eefpst1 = eefps.find_eefpst1 dp.t1_type, dp.t1_id
         if dp.study_id == eefps.extraction.citations_project.id
-          @record = RecordWrapper.new(dp.name, dp_eefpst1)
+          @records << RecordWrapper.new(dp.name, dp_eefpst1)
         end
       end
     end
   end
 
   class RecordWrapper
-    attr_accessor :name, :extractions_extraction_forms_projects_sections_type1
+    attr_accessor :id, :name, :extractions_extraction_forms_projects_sections_type1
+    @@id_counter = 1
     def initialize(name, eefpst1)
+      @id = @@id_counter
+      @@id_counter += 1
       @name = name
       @extractions_extraction_forms_projects_sections_type1 = eefpst1
     end
@@ -1182,16 +1209,16 @@ module ExportHelper
       @extraction = ex
       @extraction_forms_projects_section = efps
 
-      @link_to_type1 = nil
-      if efps.link_to_type1
-        if @@id_dict[ex.id][efps.link_to_type1]
-          @link_to_type1 = @@id_dict[ex.id][efps.link_to_type1]
-        else
-          @@id_dict[ex.id][efps.link_to_type1] = @@id_count
-          @link_to_type1 = @@id_dict[ex.id][efps.link_to_type1]
-          @@id_count += 1
-        end
-      end
+      # @link_to_type1 = nil
+      # if efps.link_to_type1
+      #   if @@id_dict[ex.id][efps.link_to_type1]
+      #     @link_to_type1 = @@id_dict[ex.id][efps.link_to_type1]
+      #   else
+      #     @@id_dict[ex.id][efps.link_to_type1] = @@id_count
+      #     @link_to_type1 = @@id_dict[ex.id][efps.link_to_type1]
+      #     @@id_count += 1
+      #   end
+      # end
 
       @data_points = []
       @extractions_extraction_forms_projects_sections_type1s = []
@@ -1204,14 +1231,14 @@ module ExportHelper
       when "Outcomes"
         Outcome.where(study_id: ex.citations_project.id).each do |outcome|
           t1 = Type1Wrapper.new(outcome.title, outcome.description) #ignoring notes? There is no column for this
-          units = outcome.units
+          units = outcome.units || ""
           t1_type = nil
           if outcome.outcome_type
             t1_type = Type1TypeWrapper.new outcome.outcome_type
           end
          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, units, t1_type)
          @extractions_extraction_forms_projects_sections_type1s << eefpst1
-         @eefpst1_dict['Outcome'][outcome.id] = eefpst1
+         @eefpst1_dict[outcome.id] = eefpst1
          eefpst1.create_populations outcome.id
         end
       when "Adverse Events"
@@ -1219,18 +1246,24 @@ module ExportHelper
           t1 = Type1Wrapper.new(ae.title, ae.description) #ignoring notes? There is no column for this
           eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil)
           @extractions_extraction_forms_projects_sections_type1s << eefpst1
-          @eefpst1_dict['Adverse Event'][ae.id] = eefpst1
+          @eefpst1_dict[ae.id] = eefpst1
         end
       when "Arms"
         Arm.where(study_id: ex.citations_project.id).each do |arm|
           t1 = Type1Wrapper.new(arm.title, arm.description) #ignoring notes? There is no column for this
           eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil)
           @extractions_extraction_forms_projects_sections_type1s << eefpst1
-          @eefpst1_dict['Arm'][arm.id] = eefpst1
+          @eefpst1_dict[arm.id] = eefpst1
         end
-      #when "Diagnostic Tests"
+      when "Diagnostic Tests"
+        DiagnosticTest.where(study_id: ex.citations_project.id).each do |dt|
+          t1 = Type1Wrapper.new(dt.title, dt.description) #ignoring notes? There is no column for this
+          eefpst1 = ExtractionsExtractionFormsProjectsSectionsType1Wrapper.new(self, t1, nil, nil)
+          @extractions_extraction_forms_projects_sections_type1s << eefpst1
+          @eefpst1_dict[dt.id] = eefpst1
+        end
 
-      when "Arm Details", "Outcome Details", "Design Details" #TODO: Adverse Events, Quality Dimensions, Baseline Characteristics, Comparisons
+      when "Arm Details", "Outcome Details", "Design Details", "Diagnostic Test Details" #TODO: Adverse Events, Quality Dimensions, Baseline Characteristics, Comparisons
         efps.questions.each do |q|
           q.question_rows.each do |qr|
             qr.question_row_columns.each do |qrc|
@@ -1244,7 +1277,7 @@ module ExportHelper
       end
     end
 
-    def find_eefpst1 t1_type, t1_id; @eefpst1_dict[t1_type][t1_id] end
+    def find_eefpst1 t1_type, t1_id; debugger; @eefpst1_dict[t1_type][t1_id] end
   end
 
   class ExtractionsExtractionFormsProjectsSectionsType1Wrapper
@@ -1265,7 +1298,7 @@ module ExportHelper
       @extractions_extraction_forms_projects_sections_type1_rows = []
 
       @type1_type = t1_type
-      @units = units
+      @units = units || ""
     end
 
     def create_populations(outcome_id)

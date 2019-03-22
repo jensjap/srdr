@@ -312,7 +312,7 @@ json.project do
                         json.name eefpst1.type1_type.name
                       end
                     end
-                    json.units = eefpst1.units
+                    json.units eefpst1.units
 
                     json.populations do
                       eefpst1.extractions_extraction_forms_projects_sections_type1_rows.each do |pop|
@@ -436,16 +436,17 @@ json.project do
               end
 
               if eefps.link_to_type1.present?
-                json.link_to_type1 eefps.link_to_type1
+                json.link_to_type1 eefps.link_to_type1.id
               end
 
               json.records do
                 eefps.extractions_extraction_forms_projects_sections_question_row_column_fields.each do |eefpsqrcf|
-                  if eefpsqrcf.record.present?
-                    json.set! eefpsqrcf.question_row_column_field.id do
-                      json.name eefpsqrcf.record.name
-                      if eefpsqrcf.record.extractions_extraction_forms_projects_sections_type1.present?
-                        json.extractions_extraction_forms_projects_sections_type1_id eefpsqrcf.record.extractions_extraction_forms_projects_sections_type1.id
+                  eefpsqrcf.records.each do |r|
+                    json.set! r.id do
+                      json.question_row_column_field_id eefpsqrcf.question_row_column_field.id
+                      json.name r.name
+                      if r.extractions_extraction_forms_projects_sections_type1.present?
+                        json.extractions_extraction_forms_projects_sections_type1_id r.extractions_extraction_forms_projects_sections_type1.id
                       end
                     end
                   end
