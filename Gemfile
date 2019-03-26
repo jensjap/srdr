@@ -6,7 +6,7 @@ gem 'rails', '3.0.20'
 gem 'railties', '3.0.20'
 
 gem 'activerecord-mysql2-adapter', '0.0.3'
-gem 'mysql2', '>=0.2.18'
+gem 'mysql2', '0.4.10'
 
 gem 'authlogic', '3.2.0'
 gem 'escape_utils'
@@ -30,16 +30,18 @@ gem 'rubyXL'
 gem 'axlsx'
 gem 'daemons'
 gem 'fuzzy-string-match'
-gem 'httparty'
+gem 'httparty', '0.11.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'jbuilder'
 
 group :development, :test do
-    gem 'rspec-rails', '2.11.0'
-    gem 'guard-rspec', '1.2.1'
-    gem 'guard-spork', '1.2.0'
-    gem 'spork', '0.9.2'
+    # gem 'rspec-rails', '2.11.0'
+    # gem 'guard-rspec', '1.2.1'
+    # gem 'guard-spork', '1.2.0'
+    # gem 'spork', '0.9.2'
     gem 'rb-readline'
+    gem 'debugger'
 end
 
 group :development do

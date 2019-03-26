@@ -190,12 +190,12 @@
                         <%= f.text_field :doi_id, :style => "width: 40%", :class=>"editable_field" %>
                         <br />
                         <%=
-                            link_to_if(@project.doi_id.present?, "https://dx.doi.org/" + @project.doi_id.to_s, "https://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
+                            link_to_if(@project.doi_id.present?, "https://doi.org/" + @project.doi_id.to_s, "https://doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
                             end
                         %>
                     <% else %>
                         <%=
-                            link_to_if(@project.doi_id.present?, "https://dx.doi.org/" + @project.doi_id.to_s, "https://dx.doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
+                            link_to_if(@project.doi_id.present?, "https://doi.org/" + @project.doi_id.to_s, "https://doi.org/" + @project.doi_id.to_s, confirm: "WARNING: this link will direct you away form our site. Please confirm.") do
                                 puts "No DOI ID available."
                             end
                         %>
