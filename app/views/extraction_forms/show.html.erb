@@ -78,6 +78,43 @@
 	</div>
   <% end %>
 
+
+
+
+
+
+
+  <% if @sections_list.include?("diagnostics") %>
+    <!-- DIAGNOSTICS DIV SECTION -->
+    <div id="extraction_form_view_diagnostic_tests_index" style="display:block">
+      <div class="summary_heading">Diagnostic: Index Test Name Suggestions</div>
+      <div id="diagnostic_test_text_index">
+        <%= render :partial=>"extraction_form_diagnostic_tests/test_table", :locals=>{:tests=>@index_test_list, :title=>"Index Tests"} %>
+      </div>
+      <br/>
+    </div>
+    <div id="extraction_form_view_diagnostic_tests_reference" style="display:block">
+      <div class="summary_heading">Diagnostic: Reference Test Name Suggestions</div>
+      <div id="diagnostic_test_text_reference">
+        <%= render :partial=>"extraction_form_diagnostic_tests/test_table", :locals=>{:tests=>@reference_test_list, :title=>"Reference Tests"} %>
+      </div>
+      <br/>
+    </div>
+  <% end %>
+
+  <% if @sections_list.include?("diagnostic_test_details") %>
+    <!-- DIAGNOSTIC TEST DETAILS DIV SECTION -->
+    <% @questions = DiagnosticTestDetail.where(:extraction_form_id => @extraction_form.id).order("question_number ASC") %>
+    <div id="extraction_form_view_diagnostic_test_detail" style="display:block">
+      <div class="summary_heading">Diagnostic Test Details</div>
+      <div id="diagnostic_test_detail_text"><br/>
+        <% @model = "diagnostic_test_detail" %>
+        <%= render 'question_builder/extraction_form_preview_noedit' %>
+      </div>
+      <br/>
+    </div>
+  <% end %>
+
   	<% if @sections_list.include?("baselines") %>
 	<!-- BASELINE CHARACTERISTICS DIV SECTION -->
 	<% @questions = BaselineCharacteristic.where(:extraction_form_id => @extraction_form.id).order("question_number ASC")%>	

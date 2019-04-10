@@ -221,11 +221,13 @@ class ExtractionFormsController < ApplicationController
 		@arms = ExtractionFormArm.where(:extraction_form_id => @extraction_form.id).all
 		proj_id = @extraction_form.project_id.nil? ? 1 : @extraction_form.project_id
 		@project = Project.find(proj_id)
-		@sections_list = ExtractionFormSection.where(:extraction_form_id => @extraction_form.id).all.collect{|item| item.section_name}
+		@sections_list = ExtractionFormSection.where(:extraction_form_id => @extraction_form.id, included: true).all.collect{|item| item.section_name}
 		@quality_dimension_extraction_form_fields = QualityDimensionField.where(:extraction_form_id => @extraction_form.id, :study_id => nil).all	
 		@extraction_form_adverse_event_columns = AdverseEventColumn.where(:extraction_form_id => @extraction_form.id)
 		@saved_names = ExtractionFormOutcomeName.where(:extraction_form_id=> @extraction_form.id)
 		@quality_rating_fields = QualityRatingField.where(:extraction_form_id => @extraction_form.id).all
+    @index_test_list = ExtractionFormDiagnosticTest.where(:extraction_form_id=>@extraction_form.id, :test_type=>1)
+    @reference_test_list = ExtractionFormDiagnosticTest.where(:extraction_form_id=>@extraction_form.id, :test_type=>2)
 	end
   
   # show the extraction form preview window. The preview window will pop up via an ajax call on the project summary pages. 
