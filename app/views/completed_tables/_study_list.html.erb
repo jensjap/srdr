@@ -23,8 +23,8 @@
       <a target="_blank" href="/projects/<%= params[:id].to_s %>/studies/<%= study.id.to_s %>" title="Preview Study: <%= title %>"><%= title %></a>
 
       <%# link_to study_pub_info.title.nil? ? "Untitled" : study_pub_info.title, '/projects/'+params[:id].to_s+'/studies/'+study.id.to_s, :id => "preview_study_link_" + study.id.to_s, :title=>"Preview Study: #{Study.get_title(study.id)}" %></td>
-    <td scope='row'><%= study_pub_info.author %></td>
-    <td scope='row'><%= study_pub_info.year %></td>
+    <td><%= study_pub_info.author %></td>
+    <td><%= study_pub_info.year %></td>
 
   </tr>
 

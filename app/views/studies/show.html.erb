@@ -75,7 +75,7 @@
 			<% @design_detail_extraction_form_fields = DesignDetail.where(:extraction_form_id => @one_extform.id).all %>
 	 
 				<div id="display_study_design_<%= @one_extform.id.to_s %>" style="display:block">
-					<div class="summary_heading">Design Details</div>
+					<div style="display: none;" class="summary_heading">Design Details</div>
 					<div id="study_design_text">
 							<%= render 'completed_tables/design_details', :extraction_form => @one_extform, :study => @study, :project => @project, :design_detail_extraction_form_fields => @design_detail_extraction_form_fields %>
 					</div>

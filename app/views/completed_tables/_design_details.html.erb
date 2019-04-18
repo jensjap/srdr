@@ -1,67 +1,60 @@
-<%# unless design_detail_extraction_form_fields.empty? && design_detail_custom_fields.empty? %>
 <% unless design_detail_extraction_form_fields.empty? %>
+  <table class="list_table" id="dddp_table_<%= extraction_form.id.to_s %>" summary="design detail data points table, completed">
+    <caption style="text-align: left; font-size: 16px; font-weight: bold;">Design Details</caption>
+    <%# CREATE TABLE HEADERS %>
+    <tr>
+      <th scope="col">Question... Follow Up</th>
+      <th scope="col">Answer</th>
+      <th scope="col">Follow-up Answer</th>
+      <th></th>
+    </tr>
 
-<table class="list_table" id="dddp_table_<%= extraction_form.id.to_s %>" summary="design detail data points table, completed">
+    <%# ------------------------------------------------------------------------------------ %>
+    <%#          GO THROUGH DESIGN DETAILS ----- TEMPLATE FIELDS -----             %>
+    <%# ------------------------------------------------------------------------------------ %>
 
-		<%# CREATE TABLE HEADERS %>
-		<thead>
-		<tr>
-		<th>Question... Follow Up</th>
-		<th>Answer</th>
-		<th>Follow-up Answer</th>
-		<th></th>
-		</tr>
-		</thead>
-		
-		<%# ------------------------------------------------------------------------------------ %>
-		<%#          GO THROUGH DESIGN DETAILS ----- TEMPLATE FIELDS ----- 						 %>
-		<%# ------------------------------------------------------------------------------------ %>
-			
-		<% unless design_detail_extraction_form_fields.empty? %>
-			<% design_detail_extraction_form_fields.each do |popchar| %>
-			  <% values = DesignDetailDataPoint.get_result(popchar, study.id) %>	
-			  <% has_subq = DesignDetailField.where(:design_detail_id=>popchar.id,:has_subquestion=>true).first %>
-				<% unless values.empty? %>
-					<% values.each do |dp| %>
-				 	  <% field_for_subq = DesignDetailField.where(:design_detail_id=>popchar.id,:option_text=>dp.value,:has_subquestion=>true).first %>
-						<% curr_index = values.index(dp) %>
-						<% if curr_index == 0 %>
-						  <tr id="pop_char_row_<%=popchar.id.to_s%>" %>
-						  <td rowspan=<%=values.length%>>
-						  	<%= popchar.question.to_s %>
-						  	<% unless field_for_subq.nil? %>
-						  	  <% unless has_subq.nil? %>
-						  			... <%= has_subq.subquestion %>
-						  		<% end %>
-						  	<% end %>
-						  </td>
-						<% else %>
-							<tr>
-						<% end %>
-						<td style='text-align:left;'>
-							<%= dp.value %>
-							<% unless field_for_subq.nil? %>
-							  ...
-							<% end %>
-						</td>
-						<td>
-							<%= dp.subquestion_value.nil? ? "" : dp.subquestion_value %>
-						</td>
-						<td class="comment_td">
-							<%= render :partial => "comments/field_comments", :locals => {:section_name => "designdetails", :section_id => popchar.id, :field_name => "design", :study_id => study.id, :project_id => project.id} %>		
-						</td>
-						</tr>
-					<% end %>
-				<% end %>								
-			<% end %>
-			
-		<%# END unless - design_details_extraction_form_fields.empty? %>
-		<% end %>
+    <% unless design_detail_extraction_form_fields.empty? %>
+      <% design_detail_extraction_form_fields.each do |popchar| %>
+        <% values = DesignDetailDataPoint.get_result(popchar, study.id) %>
+        <% has_subq = DesignDetailField.where(:design_detail_id=>popchar.id,:has_subquestion=>true).first %>
+        <% unless values.empty? %>
+          <% values.each do |dp| %>
+            <% field_for_subq = DesignDetailField.where(:design_detail_id=>popchar.id,:option_text=>dp.value,:has_subquestion=>true).first %>
+            <% curr_index = values.index(dp) %>
+            <% if curr_index == 0 %>
+              <tr id="pop_char_row_<%=popchar.id.to_s%>" %>
+                <td rowspan=<%=values.length%>>
+                  <%= popchar.question.to_s %>
+                  <% unless field_for_subq.nil? %>
+                    <% unless has_subq.nil? %>
+                      ... <%= has_subq.subquestion %>
+                    <% end %>
+                  <% end %>
+                </td>
+            <% else %>
+              <tr>
+            <% end %>  <%# END if curr_index == 0 %>
+                <td style='text-align:left;'>
+                  <%= dp.value %>
+                  <% unless field_for_subq.nil? %>
+                    ...
+                  <% end %>
+                </td>
+                <td>
+                  <%= dp.subquestion_value.nil? ? "" : dp.subquestion_value %>
+                </td>
+                <td class="comment_td">
+                  <%= render :partial => "comments/field_comments", :locals => {:section_name => "designdetails", :section_id => popchar.id, :field_name => "design", :study_id => study.id, :project_id => project.id} %>
+                </td>
+              </tr>
+          <% end %>  <%# END values.each do |dp| %>
+        <% end %>  <%# END unless values.empty? %>
+      <% end %>  <%# END design_detail_extraction_form_fields.each do |popchar| %>
+    <% end %>  <%# END unless design_detail_extraction_form_fields.empty? %>
+  </table>
+<% else %>
 
-		
-	</table>
-	<% else %>
-	
-		No design details have been defined for this extraction form.
-	
-<% end %><br/>
+  No design details have been defined for this extraction form.
+
+<% end %>  <%# END unless design_detail_extraction_form_fields.empty? %>
+<br />
