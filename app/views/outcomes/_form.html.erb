@@ -120,7 +120,7 @@
 				    	<td scope='row'>
 				    		<input type='text' name="<%= "timepoint_numbers[#{tp.id}]"%>" value="<%= tp.number %>" size=15 >
 				    	</td>
-				    	<td scope='row'>
+				    	<td>
 				    		<select class='timepoint_unit_field' id="<%= "timepoint_#{index}"%>" name="<%= "timepoint_units[#{tp.id}]"%>">
 								  <% possible_time_units.each do |val| %>
 								    <% selected = val == tp.time_unit ? "selected" : "" %>
@@ -134,7 +134,7 @@
 				    		<input type='text' name="<%= "timepoint_units[#{tp.id}]"%>" value="<%= tp.time_unit %>" size=8 >
 				    		-->
 				    	</td>
-				    	<td scope='row' style='width:20px;'>
+				    	<td style='width:20px;'>
 				    		<% unless index == 0 %>
 				    			<% if tp_has_data %>
 				    				(has_associated_results)
@@ -156,7 +156,7 @@
 					<% if defined?(@previous_outcome_timepoints) && @editing == false %>
 						<% @previous_outcome_timepoints.each_with_index do |tp,index| %>
 							<tr class='timepoint_row'>
-								<td>
+								<td scope="row">
 									<input type='text' name="<%= "timepoint_numbers[#{index*-1}]" %>" value="<%= tp.number %>" size=15 >
 								</td>
 								<td>
@@ -179,7 +179,7 @@
 						<% end %>
 					<% else %>
 					    <tr class='timepoint_row'>
-							<td>
+							<td scope="row">
 								<input class='new_row_title' type='text' name='timepoint_numbers[0]' value='Enter a numeric value or title (required)' >
 							</td>
 							<td>
@@ -223,12 +223,12 @@
 				    		<%= "All Participants" unless type == "text" %>
 				    		<input type="<%= type %>" name="<%= "subgroup_names[#{sg.id}]"%>" value="<%= sg.title %>" size=8 >
 				    	</td>
-				    	<td scope='row'>
+				    	<td>
 				    		<%= "All patients enrolled in this study. (Default)" unless type == "text" %>
 				    		<input type="<%= type %>" name="<%= "subgroup_descriptions[#{sg.id}]"%>" value="<%= sg.description %>" size=8 >
 				    	</td>
 
-				    	<td  scope='row'style='width:20px;'>
+				    	<td style='width:20px;'>
 				    		<% unless index == 0 %>
 				    			<% if sg_has_data %>
 										(has associated results)			    				
@@ -255,11 +255,11 @@
 					    		<%= "All Participants" unless type == "text" %>
 					    		<input type="<%= type %>" name="<%= "subgroup_names[#{index}]"%>" value="<%= sg.title %>" size=8>
 					    	</td>
-					    	<td scope='row'>
+					    	<td>
 					    		<%= "All patients enrolled in this study. (Default)" unless type == "text" %>
 					    		<input type="<%= type %>" name="<%= "subgroup_descriptions[#{index}]"%>" value="<%= sg.description %>" size=8>
 					    	</td>
-					    	<td scope='row' style='width:20px;'>
+					    	<td style='width:20px;'>
 					    		<% unless index == 0 %>
 					    			<a href='#' class='remove_subgroup_row_link'>Remove</a>
 					    		<% else %>
@@ -274,7 +274,7 @@
 								All Participants
 								<input type='hidden' name='subgroup_names[0]' value='All Participants'>
 							</td>
-							<td scope='row'>
+							<td>
 								All patients enrolled in this study. (Default)
 								<input type='hidden' name='subgroup_descriptions[0]' value='All patients enrolled in this study. (Default)'>
 							</td>

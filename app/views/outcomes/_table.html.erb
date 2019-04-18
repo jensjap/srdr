@@ -14,12 +14,12 @@
             </tr></thead>
             <% for oneoutcome in @outcomes %>
                 <tr class="<%= cycle("even", "odd") %>" id="<%= "outcome_"+oneoutcome.id.to_s %>">
-                    <td scope='row'><%= oneoutcome.title %></td>
-                    <td scope='row'><%= oneoutcome.outcome_type %>
+                    <td><%= oneoutcome.title %></td>
+                    <td><%= oneoutcome.outcome_type %>
                 </td>
-                <td scope='row'><%= oneoutcome.units %></td>
+                <td><%= oneoutcome.units %></td>
 
-                <td scope='row'>
+                <td>
                     <% outcome_timepoints = Outcome.get_timepoints(oneoutcome.id) %>
                     <%= outcome_timepoints %>
                 </td>
@@ -37,13 +37,13 @@
                         ---
                     <% end %>
                 </td>
-                <td scope='row'><%= render "shared/notes_tooltip", :section_name => "outcome_desc", :item_id => oneoutcome.id, :item_notes => oneoutcome.description %></td>
+                <td><%= render "shared/notes_tooltip", :section_name => "outcome_desc", :item_id => oneoutcome.id, :item_notes => oneoutcome.description %></td>
 
-                <td scope='row'>
+                <td>
                     <%= render "shared/notes_tooltip", :section_name => "outcome_notes", :item_id => oneoutcome.id, :item_notes => oneoutcome.notes %>
                 </td>
                 <% if !defined? @noedits %>
-                    <td scope='row'>
+                    <td>
                         <%= link_to  image_tag("Pencil.png", :style=>"border:0px") + " Edit Outcome", edit_outcome_path(oneoutcome, :extraction_form_id => defined?(@extraction_form) ? @extraction_form.id : params[:extraction_form_id], :study_id => defined?(@study) ? @study.id : params[:study_id]), :remote=>true, :class => "tooltip_edit", :title=>"Edit Outcome: #{oneoutcome.title}" %><br/>
                         <%= link_to  image_tag("Bin_closed.png", :style=>"border:0px") + " Delete Outcome", oneoutcome, :remote => true, :update => "outcomes_table", :confirm => 'Are you sure?', :method => :delete, :class => "tooltip_delete", :title=>"Remove Outcome: #{oneoutcome.title}" %><br/>
                         <%= render :partial => "comments/field_comments", :locals => {:section_name => "outcomes", :section_id => oneoutcome.id, :field_name => "outcomes", :study_id => oneoutcome.study_id, :project_id => params[:project_id]} %>

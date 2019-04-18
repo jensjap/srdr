@@ -13,10 +13,10 @@
     <% for onearm in @arms %>
       <tr id="arm_row_<%=onearm.id.to_s %>">
 				<td scope='row'><%= onearm.display_number %></td>
-				<td scope='row'><%= onearm.title %></td>
-				<td scope='row'><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
+				<td><%= onearm.title %></td>
+				<td><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
 				<!--<td><% if onearm.is_intention_to_treat%>Yes<% else %> No <% end %></td>-->
-				<td scope='row'>
+				<td>
 						<% if !onearm.display_number.nil? && onearm.display_number > 1 %>
 							<%= link_to image_tag("Silk_arrow_up.png", :style=>"border:0px") + "Move Up Arm", {:controller => "arms", :arm_id => onearm.id, :study_id => params[:study_id], :project_id => session[:project_id], :action => "moveup", :extraction_form_id => session[:extraction_form_id]}, :remote=>true, :class => "tooltip_moveup",:title=>"Move #{onearm.title} up the list" %><br/>
 						<% end %>

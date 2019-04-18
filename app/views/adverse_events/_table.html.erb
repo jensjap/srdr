@@ -43,7 +43,7 @@ Description
 				
 				<% if first %>
 					<% is_other = false %>
-					<td scope='row' rowspan="<%= @num_rows %>">
+					<td rowspan="<%= @num_rows %>">
 							<!-- There are <%# @suggested_ae_titles.length %> titles. -->
 							<% unless @suggested_ae_titles.empty? %>
 								<select name='title[<%= ae.id %>]' id='title_<%= ae.id %>' style='width:150px;'>
@@ -79,14 +79,14 @@ Description
 								<%= text_area "title", ae.id, :value=>ae.title, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
 							<% end %>
 					</td>				
-					<td scope='row' rowspan="<%= @num_rows %>">
+					<td rowspan="<%= @num_rows %>">
 							<%= text_area "description", ae.id, :value=>ae.description, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
 					</td>
 				<% end %>
 				
 				<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
 					<% for col in @extraction_form_adverse_event_columns %>
-						<td scope='row' >
+						<td>
 							<% val = AdverseEventResult.get_data_point(ae.id, col.id, one_arm.id) %>
 							<%= text_field "result_" + one_arm.id.to_s + "_" + ae.id.to_s, col.id, :value=>val, :size=>10, :class => "editable_field", :title => "Enter data for adverse event: #{ae.title} and arm: #{one_arm.title}" %>
 						</td>
@@ -94,7 +94,7 @@ Description
 				<% end %>
 				
 				<% if first %>
-					<td scope='row' rowspan="<%= @num_rows %>" align='center'>
+					<td rowspan="<%= @num_rows %>" align='center'>
 						<%= link_to  image_tag("Bin_closed.png", :style=>"border:0px") + "Delete Adverse Event", adverse_event_path(ae, :study_id => params[:study_id], :extraction_form_id => params[:extraction_form_id]), :remote=> true, :method=>:delete, :class=>"tooltip_delete", :confirm=>"Are you sure? This will delete this adverse event and all data in it, and all unsaved data will be lost." %><br/>
 						<%= render :partial => "comments/field_comments", :locals => {:section_name => "adverseevents", :section_id => ae.id, :field_name => "event", :study_id => ae.study_id, :project_id => @project.id} %>						
 					</td>
@@ -110,7 +110,7 @@ Description
 		<td scope='row' class="title_td">Total</td>
 			
 		<% if first %>
-			<td scope='row' rowspan="<%= @num_rows %>">
+			<td rowspan="<%= @num_rows %>">
 				<% unless @suggested_ae_titles.empty? %>
 					<select name='title[<%= ae.id %>]' id='title_<%= ae.id %>' style='width:150px;'>
 						<option value="">Select an Adverse Event...</option>
@@ -146,7 +146,7 @@ Description
 				<% end %>
 			</td>	
 
-			<td scope='row' rowspan="<%= @num_rows %>">
+			<td rowspan="<%= @num_rows %>">
 					<%= text_area "description", ae.id, :value=>ae.description, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell" %>	
 			</td>
 
@@ -154,7 +154,7 @@ Description
 			<td rowspan="<%= @num_rows %>">
 					<%= text_area "title", ae.id, :value=>ae.title, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell"  %>	
 			</td>
-			<td scope='row' rowspan="<%= @num_rows %>">
+			<td rowspan="<%= @num_rows %>">
 					<%= text_area "description", ae.id, :value=>ae.description, :class => "editable_field", :rows => "4", :cols => "12", :title => "adverse event data cell"  %>	
 			</td>
 		-->
@@ -170,7 +170,7 @@ Description
 		<% end %>
 			
 		<% if first %>
-			<td scope='row' rowspan="<%= @num_rows %>" align='center'>
+			<td rowspan="<%= @num_rows %>" align='center'>
 					<%= link_to  image_tag("Bin_closed.png", :style=>"border:0px") + " Delete Adverse Event", adverse_event_path(ae, :study_id => params[:study_id], :extraction_form_id => params[:extraction_form_id]), :remote=> true, :method=>:delete, :class=>"tooltip_delete", :confirm=>"Are you sure? This will delete this adverse event and all data in it, and all unsaved data will be lost." %><br/>
 					<%= render :partial => "comments/field_comments", :locals => {:section_name => "adverseevents", :section_id => ae.id, :field_name => "event", :study_id => ae.study_id, :project_id => @project.id} %>	
 			</td>

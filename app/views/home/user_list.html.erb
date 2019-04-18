@@ -32,25 +32,25 @@
 	<% @users.each do |user| %>
 		<tr>
 			<td scope='row'><%= user.id %></td>
-			<td scope='row'><%=user.login%></td>
-			<td scope='row'><%= user.fname.force_encoding("UTF-8") %></td>
-			<td scope='row'><%= user.lname.force_encoding("UTF-8") %></td>
-			<td scope='row'><%= user.email.force_encoding("UTF-8") %></td>
-			<td scope='row'><%= user.organization.force_encoding("UTF-8") %></td>
-			<td scope='row'><%= user.user_type %></td>
-			<td scope='row'><%= user.login_count%></td>
-      <td scope='row'><%= user.created_at %></td>
+			<td><%=user.login%></td>
+			<td><%= user.fname.force_encoding("UTF-8") %></td>
+			<td><%= user.lname.force_encoding("UTF-8") %></td>
+			<td><%= user.email.force_encoding("UTF-8") %></td>
+			<td><%= user.organization.force_encoding("UTF-8") %></td>
+			<td><%= user.user_type %></td>
+			<td><%= user.login_count%></td>
+      <td><%= user.created_at %></td>
 <%
     if show_admin
         if user.user_type == "PENDING"
 %>
-		<td scope='row'>
+		<td>
         <a href="/accountsmanager/approve_request/<%= user.id %>">Approve</a> <a href="/accountsmanager/delete/<%= user.id %>">Delete</a>
         </td>
 <%
         else
 %>
-            <td scope='row'>
+            <td>
             <a href="/accountsmanager/delete/<%= user.id %>">Delete</a>
             </td>
 <%
