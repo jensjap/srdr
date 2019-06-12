@@ -93,7 +93,7 @@ class SecondaryPublication < ActiveRecord::Base
         pmid.strip!
 
         # pull the full record for this publication from PubMed at NCBI
-        url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=" + pmid + "&retmode=xml"
+        url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&api_key=" + ENV["NCBI_API_KEY"] + "&id=" + pmid + "&retmode=xml"
         puts "------- GETTING SUMMARY INFO BY PMID --------\n\n"
         puts "The initial URL is #{url}\n\n"
         puts "getting the XML for that URL..."
