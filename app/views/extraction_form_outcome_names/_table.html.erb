@@ -11,10 +11,10 @@
 		
 	  <% for oc_name in @saved_names %>
 	    <tr>
-	    	<td scope='col'><%= oc_name.title %></td>
-	    	<td scope='col'><%= oc_name.note %></td>
-	    	<td scope='col'><%= oc_name.outcome_type %></td>
-	    	<td scope='col'>
+	    	<td><%= oc_name.title %></td>
+	    	<td><%= oc_name.note %></td>
+	    	<td><%= oc_name.outcome_type %></td>
+	    	<td>
 	    		<%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt=>"Edit") + "Edit Outcome Suggestion", edit_extraction_form_outcome_name_path(oc_name), {:remote=>true, :class=>"tooltip_edit", :title=>"Edit Suggested Outcome: #{oc_name.title}"} %><br/>
 	    		<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Outcome Suggestion",extraction_form_outcome_name_path(oc_name), {:remote=>true, :confirm=>'Are you sure?', :method=>:delete, :class=>"tooltip_delete", :title=>"Remove Suggested Outcome: #{oc_name.title}"} %>
 			  </td>    	

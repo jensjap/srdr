@@ -5,18 +5,18 @@
 		<%# CREATE TABLE HEADERS %>
 		<thead>
 		<tr>
-		<th rowspan=2 align='center'>Question</th>
+		<th rowspan=2 align='center' id='bc_questions'>Question</th>
 		<% @study_arms.each do |sa| %>
-		  <th colspan=2 align='center'><%= sa.title %></th>
+                  <th colspan=2 align='center' id="<%='bc_arm_'+sa.id.to_s%>"><%= sa.title %></th>
 		<% end %>
-		<th colspan=2 align='center'>Total</th>
-		<th rowspan="2">Comments</th>		
+		<th colspan=2 align='center' id='bc_total'>Total</th >
+		<th rowspan="2"i id='bc_comments'>Comments</th>		
 		</tr>
 		<tr>
 			<% @study_arms.each do |sa| %>
-			  <th>Answer</th><th>Follow-up</th>
+                          <th id="<%='bc_arm_answer_'+sa.id.to_s%>" headers="<%='bc_arm_'+sa.id.to_s%>">Answer</th><th id="<%='bc_arm_followup_'+sa.id.to_s%>" headers="<%='bc_arm_'+sa.id.to_s%>">Follow-up</th>
 			<% end %>
-			<th>Answer</th><th>Follow-up</th> <%# for the Total...%>
+			<th id='bc_answer_total' headers='bc_total'>Answer</th><th id='bc_followup_total' headers='bc_total'>Follow-up</th> <%# for the Total...%>
 		</tr>
 		</thead>
 		
@@ -67,17 +67,17 @@
 				<tr id="pop_char_row_<%=popchar.id.to_s %>">
 					<% rowspan = max_answer_count > 0 ? max_answer_count : 1%>
 					<% if has_data %>
-						<td rowspan=<%= rowspan %> ><%= popchar.question.to_s %></td>
+                                          <td rowspan=<%= rowspan %> id="<%='bc_question_'+popchar.id.to_s%>" headers='bc_questions'><%= popchar.question.to_s %></td>
 						<% for i in 0..max_answer_count - 1 %>
 							<% if i > 0 %><tr><% end %>
 							<% @study_arms.each do |sa| %>
-							  <td style='text-align:left;'>
+                                                          <td headers="<%='bc_question_'+popchar.id.to_s%> <%='bc_arm_answer_'+sa.id.to_s%> <%='bc_arm_'+sa.id.to_s%>" style='text-align:left;'>
 							  	<% unless answers[sa.id].empty? %>
 								  	<% answer = answers[sa.id][i].nil? ? "" : answers[sa.id][i][0]%>
 								  	<%= answer %>
 								  <% end %>
 							  </td>
-								<td>
+								<td headers="<%='bc_question_'+popchar.id.to_s%> <%='bc_arm_followup_'+sa.id.to_s%> <%='bc_arm_'+sa.id.to_s%>">
 									<% unless answers[sa.id].empty? %>
 										<% sq = answers[sa.id][i].nil? ? "" : answers[sa.id][i][1]%>	
 										<%= sq %>
@@ -86,18 +86,18 @@
 							<% end %>
 							<%# AND NOW FOR THE TOTAL VALUES...%>
 							<% if answers.keys.include?(0) %>
-								<td style='text-align:left;'>
+								<td headers="<%='bc_question_'+popchar.id.to_s%> bc_answer_total bc_total" style='text-align:left;'>
 							  		<% answer = answers[0][i].nil? ? "" : answers[0][i][0]%>
 							  		<%= answer %>
 							  </td>
-								<td>
+								<td headers="<%='bc_question_'+popchar.id.to_s%> bc_followup_total bc_total" >
 									<% sq = answers[0][i].nil? ? "" : answers[0][i][1]%>	
 									<%= sq %>
 								</td>
 							<% else %>
-								<td></td><td></td>
+								<td headers="<%='bc_question_'+popchar.id.to_s%> bc_answer_total bc_total"></td><td headers="<%='bc_question_'+popchar.id.to_s%> bc_followup_total bc_total"></td>
 							<% end %>
-						<td class="comment_td">
+						<td headers="<%='bc_question_'+popchar.id.to_s%> bc_comments" class="comment_td">
 							<%= render :partial => "comments/field_comments", :locals => {:section_name => "baselinecharacteristics", :section_id => popchar.id, :field_name => "baselines", :study_id => @study.id, :project_id => @project.id} %>		
 						</td>										
 							</tr>

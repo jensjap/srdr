@@ -34,7 +34,7 @@
 		<td class='heading'></td>
 		<% for i in 1..default_cols %>
 			<% value = "" %>
-			<td scope='col' id='matrix_column_<%= i.to_s %>' class='heading <%=@model%>_matrix_column_<%= i.to_s %>' style='width:60px !important;'>
+			<td id='matrix_column_<%= i.to_s %>' class='heading <%=@model%>_matrix_column_<%= i.to_s %>' style='width:60px !important;'>
 				<center>
 				<label for='<%=@model%>_matrix_column_<%= i.to_s %>' class='hidden-label'>
 					Enter column title for column <%= i.to_s %>
@@ -67,7 +67,7 @@
 			</td>
 			<%# FOR EACH COLUMN, PROVIDE A TEXT AREA FOR ENTERING OPTIONS %>
 			<% for j in 1..default_cols %>
-				<td scope='row' class='<%=@model%>_matrix_column_<%= j.to_s%>'>
+				<td class='<%=@model%>_matrix_column_<%= j.to_s%>'>
 					<%# Now get any dropdown options that were previously entered %>
 					<% value = "" %>
 					<% if editing %>
@@ -205,12 +205,12 @@ function attachDDListener(){
 					html="";
 					colItem = matrix_columns[i];
 					if(i == 0){
-						html += "<td scope='col' id='<%=@model%>_matrix_column_"+new_col_number.toString()+"' class='heading <%=@model%>_matrix_column_"+new_col_number.toString()+"' style='width:60px !important;'>";
+						html += "<td id='<%=@model%>_matrix_column_"+new_col_number.toString()+"' class='heading <%=@model%>_matrix_column_"+new_col_number.toString()+"' style='width:60px !important;'>";
 
 						html += "<center><label for='<%=@model%>_matrix_column_"+new_col_number.toString()+"' class='hidden-label'>Enter column title for column " + new_col_number.toString() + "</label><input type='text' name='<%=@model%>_matrix[columns]["+new_col_number.toString()+"]' id='<%=@model%>_matrix_column_"+new_col_number.toString()+"' title='Enter column title for column "+new_col_number.toString()+"' style='width:60px !important;' value=''/></center>";
 					}else{
 					    var colHTML = colItem.innerHTML;
-						html += "<td scope='row' class='<%=@model%>_matrix_column_"+new_col_number.toString()+"'>";
+						html += "<td class='<%=@model%>_matrix_column_"+new_col_number.toString()+"'>";
 						reg_name = new RegExp("_matrix\\[dropdown_options\\]\\[._"+current_count+"\\]");
 						reg_id = new RegExp("_matrix_dropdown_options_._"+current_count);
 						reg_title = new RegExp("options for row ., column " + current_count);

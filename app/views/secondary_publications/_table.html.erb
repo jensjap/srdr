@@ -11,25 +11,25 @@
 	</tr></thead>
 	<% for pub in @secondary_publications %>
 		<tr class="<%= cycle("even", "odd") %>" id="pub_row_<%=pub.id.to_s %>">
-		<td scope='row'><%= pub.display_number %></td>
+		<td><%= pub.display_number %></td>
 		<% @ui_list = SecondaryPublication.get_pub_uis(pub.id) %>
 		
-		<td scope='row'><%= pub.title %> (<%= pub.pmid %>)
+		<td><%= pub.title %> (<%= pub.pmid %>)
 			<% if !@ui_list.nil? %><br/>
 			<% for i in @ui_list %>
 				<%= i.number %> (<%= i.number_type %>)<br/>
 			<% end %>
 			<% end %>
 		</td>
-		<td scope='row'><%= pub.author %></td>
-		<td scope='row'>
+		<td><%= pub.author %></td>
+		<td>
 			<%= pub.journal %><% unless pub.journal.ends_with?(".")%>.<% end %> <%=pub.year%> 
 			<% unless pub.volume == "--" %>Vol.<%=pub.volume%><% end %>
 			<% unless pub.issue == "--" %>Issue:<%=pub.issue%><% end %>
 		</td>
-		<td scope='row'><%= pub.country %></td>
-		<td scope='row'><%= pub.association.gsub("_", " ")%></td>
-		<td scope='row'>
+		<td><%= pub.country %></td>
+		<td><%= pub.association.gsub("_", " ")%></td>
+		<td>
 		<% unless pub.display_number.nil? %>
 			<% if pub.display_number > 1 %>
 				<%= link_to image_tag("Silk_arrow_up.png", :style=>"border:0px") + " Move Up Publication", {:controller => :secondary_publications, :action => :moveup, :secondary_publication_id => pub.id, :extraction_form_id => params[:extraction_form_id]}, :remote=>true, :class => "tooltip_moveup" %><br/>

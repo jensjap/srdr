@@ -10,9 +10,9 @@
 	 	</tr></thead>
 	  <% for rating in @quality_rating_fields %>
 	    <tr class="<%= cycle("even", "odd") %>" id="qdr_row_<%=rating.id.to_s %>">
-				<td scope='row'><%= rating.display_number %></td>
-				<td scope='row'><%= rating.rating_item %></td>
-				<td scope='row'>
+				<td><%= rating.display_number %></td>
+				<td><%= rating.rating_item %></td>
+				<td>
 				<% if !rating.display_number.nil? && rating.display_number > 1 %>
 					<%= link_to image_tag("Silk_arrow_up.png", :style=>"border:0px") + "Move Up Rating Option",'#',:class => "tooltip_moveup quality_rating_moveup",:qrf_id=>rating.id %><br/>
 				<% end %>

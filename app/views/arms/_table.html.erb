@@ -12,7 +12,7 @@
 	</tr></thead>
     <% for onearm in @arms %>
       <tr id="arm_row_<%=onearm.id.to_s %>">
-				<td scope='row'><%= onearm.display_number %></td>
+				<td><%= onearm.display_number %></td>
 				<td><%= onearm.title %></td>
 				<td><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
 				<!--<td><% if onearm.is_intention_to_treat%>Yes<% else %> No <% end %></td>-->
