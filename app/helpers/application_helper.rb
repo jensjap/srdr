@@ -303,7 +303,7 @@ module ApplicationHelper
                         checked = "CHECKED"
                     end
 
-                    retVal += '<input class="cbox question_radio_input editable_field" title="option" type="radio" section_name="'+model_name+'" option_id="'+question_choices[i].id.to_s+'" obj_id="'+obj.id.to_s+'" name="'+model_name+'['+obj_id.to_s+']" value="' + coder.encode(option.to_s.gsub('"','\"')) + '" ' + 'id = "' + model_name + '_' + obj_id.to_s + '" ' + checked.to_s + '> <label>' + option.to_s + '</label>'
+                    retVal += '<input aria-label="Question Answer Option" class="cbox question_radio_input editable_field" title="option" type="radio" section_name="'+model_name+'" option_id="'+question_choices[i].id.to_s+'" obj_id="'+obj.id.to_s+'" name="'+model_name+'['+obj_id.to_s+']" value="' + coder.encode(option.to_s.gsub('"','\"')) + '" ' + 'id = "' + model_name + '_' + obj_id.to_s + '_' + question_choices[i].id.to_s + '" ' + checked.to_s + '> <label>' + option.to_s + '</label>'
 
                     if question_choices[i].has_subquestion
                         #retVal += '... <span class="radio_group_'+obj_id.to_s+'" id="option_' + question_choices[i].id.to_s + '_sq_span">'
@@ -381,7 +381,7 @@ module ApplicationHelper
                     if chosen_values.include?(option.to_s)
                         checked = "checked"
                     end
-                    retVal += '<input type="checkbox"  title="option"  section_name="'+model_name+'" class="cbox question_checkbox_input editable_field" ' + checked + ' option_id="'+question_choices[i].id.to_s+'" obj_id="'+obj_id.to_s+'" name="'+model_name+'['+obj_id.to_s+'][]" id="'+model_name+'_'+obj_id.to_s+'" value="' + coder.encode(option.to_s.gsub('"','\"')) + '"> <label>' + option.to_s + '</label>'
+                    retVal += '<input aria-label="Question Answer Field" type="checkbox"  title="option"  section_name="'+model_name+'" class="cbox question_checkbox_input editable_field" ' + checked + ' option_id="'+question_choices[i].id.to_s+'" obj_id="'+obj_id.to_s+'" name="'+model_name+'['+obj_id.to_s+'][]" id="'+model_name+'_'+obj_id.to_s+'_'+question_choices[i].id.to_s+'" value="' + coder.encode(option.to_s.gsub('"','\"')) + '"> <label>' + option.to_s + '</label>'
 
                     if question_choices[i].has_subquestion
                         retVal += '... <span class="checkbox_group_'+obj_id.to_s+'" id="option_' + question_choices[i].id.to_s + '_sq_span">'
@@ -405,7 +405,7 @@ module ApplicationHelper
                     value = "value='#{chosen_values[0]}'"
                 end
                 #retVal += '<input type="text"" class="editable_field" id="'+model_name+'_'+obj_id.to_s+'" name="'+model_name+'[' + obj_id.to_s+ ']"' + value +'>'
-                retVal += "<textarea cols=#{text_area_cols} rows=1 class='editable_field' id='#{model_name + '_' + obj_id.to_s}' name='#{model_name+'['+obj_id.to_s+']'}'>#{chosen_values.first}</textarea>"
+                retVal += "<textarea aria-label='Question Answer Field' cols=#{text_area_cols} rows=1 class='editable_field' id='#{model_name + '_' + obj_id.to_s}' name='#{model_name+'['+obj_id.to_s+']'}'>#{chosen_values.first}</textarea>"
             end
         end
         return retVal
@@ -434,7 +434,7 @@ module ApplicationHelper
         end
 
         # add the column headers
-        retVal += "<tr><td></td>"
+        retVal += "<tr><td>Row Headers</td>"
         cols.each do |col|
             retVal += "<td class='title'><center>#{col.option_text}</center></td>"
         end
@@ -484,7 +484,7 @@ module ApplicationHelper
                                 unless selected_options["#{row.id}_#{cols[i].id}#{current_arm}"].first.blank?
                                     retVal += "<option value='other' selected='selected'>Other...</option></select>"
                                     retVal += "<span id='other_#{model_name}_#{question.id}_#{row.id}_#{cols[i].id}#{current_arm}' class='other_field' style='padding:0px;'><br/><br/>"
-                                    retVal += 'Please specify: <input type="text" name="' + model_name + '[' + question.id.to_s + '_' + row.id.to_s + '_' + cols[i].id.to_s + current_arm + ']" id = "' + model_name + '_' + question.id.to_s + '_' + row.id.to_s + '_' + cols[i].id.to_s + current_arm + '_' + 'input" style="width:75%;"" title="other" value="' + selected_options["#{row.id}_#{cols[i].id}#{current_arm}"].first.strip + '" />'
+                                    retVal += 'Please specify: <input aria-label="Subquestion Answer Field" type="text" name="' + model_name + '[' + question.id.to_s + '_' + row.id.to_s + '_' + cols[i].id.to_s + current_arm + ']" id = "' + model_name + '_' + question.id.to_s + '_' + row.id.to_s + '_' + cols[i].id.to_s + current_arm + '_' + 'input" style="width:75%;"" title="other" value="' + selected_options["#{row.id}_#{cols[i].id}#{current_arm}"].first.strip + '" />'
                                     retVal += "</span></td>"
                                 else
                                     retVal += "<option value='other'>Other...</option></select></td>"
@@ -508,7 +508,7 @@ module ApplicationHelper
                                     value = 'value="' + val.to_s + '"'
                                 end
                             end
-                            retVal += "<input type='text' name='#{dropdown_name}' id='#{dropdown_id}' style='width:100px !important;' " + value.to_s + "/></td>"
+                            retVal += "<input aria-label='Question Answer Field' type='text' name='#{dropdown_name}' id='#{dropdown_id}' style='width:100px !important;' " + value.to_s + "/></td>"
                         rescue Exception=>e
                             puts "AN ERROR OCCURED: #{e.message}\n\n#{e.backtrace}\n\n"
                         end
@@ -547,7 +547,7 @@ module ApplicationHelper
                 #puts "OTHER val is #{other_val}\n\n"
             end
 
-            retVal += "<tr><td>Other<br/>(please specify):<label class='hidden-label'>Provide rows not specified in the list:</label></td><td colspan='#{cols.length}'><textarea rows=4 cols=40 name='#{model_name}[#{question.id}_#{row.id}_0#{current_arm}]' id='#{model_name}_#{question.id}_#{row.id}_0#{current_arm}'>" + other_val + "</textarea></td></tr>"
+            retVal += "<tr><td><label for='#{model_name}_#{question.id}_#{row.id}_0#{current_arm}'>Other<br/>(please specify):</label<label class='hidden-label'>Provide rows not specified in the list:</label></td><td colspan='#{cols.length}'><textarea rows=4 cols=40 name='#{model_name}[#{question.id}_#{row.id}_0#{current_arm}]' id='#{model_name}_#{question.id}_#{row.id}_0#{current_arm}'>" + other_val + "</textarea></td></tr>"
         end
         retVal += "</table>"
 
@@ -569,7 +569,7 @@ module ApplicationHelper
         subq_text = " " if subq_text.nil?
         subq_val = subq_val.nil? ? "" : 'value="' + coder.encode(subq_val) + '"'
         disabled = status == "disabled" ? "disabled = 'disabled' class='disabled_text'" : ""
-        retVal += subq_text + " <input class='editable_field' name='#{subq_field_name}' #{subq_val} #{disabled} /></span>"
+        retVal += subq_text + " <input aria-label='Subquestion' class='editable_field' name='#{subq_field_name}' #{subq_val} #{disabled} /></span>"
     end
 
     # get_selected
@@ -755,7 +755,7 @@ module ApplicationHelper
                         checked = "checked"
                     end
                     puts "Trying to encode the string. Option is #{option} and encoded it's #{coder.encode(option.to_s.gsub('"','\"'))}\n\n"
-                    retVal += '<input class="cbox question_checkbox_input editable_field" title="option" section_name="'+model_name+'" type="checkbox" ' + checked + ' obj_id="'+obj_id.to_s+'" option_id="' + question_choices[i].id.to_s + '" name="'+model_name+'['+obj_id.to_s+'-'+arm_id.to_s+'][]" arm_id="'+arm_id.to_s+'" id="'+model_name+'_'+obj_id.to_s+'" value="' + coder.encode(option.to_s.gsub('"','\"')) + '"> ' + option.to_s
+                    retVal += '<input class="cbox question_checkbox_input editable_field" title="option" section_name="'+model_name+'" type="checkbox" ' + checked + ' obj_id="'+obj_id.to_s+'" option_id="' + question_choices[i].id.to_s + '" name="'+model_name+'['+obj_id.to_s+'-'+arm_id.to_s+'][]" arm_id="'+arm_id.to_s+'" id="'+model_name+'_'+obj_id.to_s+'_'+question_choices[i].id.to_s+'" value="' + coder.encode(option.to_s.gsub('"','\"')) + '"> ' + option.to_s
 
                     if question_choices[i].has_subquestion
                         retVal += '... <span class="checkbox_group_'+obj_id.to_s+'_'+arm_id.to_s+'" id="option_' + question_choices[i].id.to_s + '_' + arm_id.to_s + '_sq_span">'
@@ -778,7 +778,7 @@ module ApplicationHelper
                 unless chosen_values.empty?
                     value = "#{chosen_values[0]}"
                 end
-                retVal += "<textarea cols='75' rows='1' class='editable_field' name='#{model_name}[#{obj_id.to_s}-#{arm_id.to_s}]' id='#{model_name}_#{obj_id.to_s}-#{arm_id.to_s}' value='#{value}'>#{value}</textarea><br/>"
+                retVal += "<textarea aria-label='Question Answer Field' cols='75' rows='1' class='editable_field' name='#{model_name}[#{obj_id.to_s}-#{arm_id.to_s}]' id='#{model_name}_#{obj_id.to_s}-#{arm_id.to_s}' value='#{value}'>#{value}</textarea><br/>"
             end
         end
         return retVal

@@ -54,7 +54,7 @@ Existing Results Session:<br/>
 		<%#-----------------------------------------------------------%>
 		
 		<tr id="existing_header_tr">
-			<th scope='col' colspan="<%= 2 + @study_arms.length %>" class='title_row'>
+                  <th scope='col' colspan="<%= 2 + @study_arms.length %>" class='title_row' id="<%='title_row_'+ocid+'_'+sgid%>">
 				<strong>Outcome:</strong> <%= oc_title %>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<strong>Population:</strong> <%= sg_title %>
@@ -71,7 +71,7 @@ Existing Results Session:<br/>
 			</th>	
 
 			<% unless btwn_comparisons.empty? %>
-			  <th scope='col' class='title_row' colspan="<%= btwn_comparators.empty? ? 1 : btwn_comparators.length + 1 %>">
+			  <th scope='col' class='title_row' colspan="<%= btwn_comparators.empty? ? 1 : btwn_comparators.length + 1 %>" id="<%='bac_'+ocid+'_'+sgid%>">
 	  			<strong>Between-Arm Comparisons
 	  			<% unless defined? no_links %>
 	  			<span style='float:right;'>
@@ -88,17 +88,17 @@ Existing Results Session:<br/>
 		<%# BUILD THE FIRST ROW COLUMN TITLES AND COMPARISON DROPDOWNS %>
 		<%#------------------------------------------------------------%>
 		<tr >
-	  	<th scope='col' class='head_col' style='min-width:100px;'>Time Point</th>
-	  	<th scope='col' class='head_col'>Measure</th>
+	  	<th scope='col' class='head_col' style='min-width:100px;' id="<%='tps_'+ocid+'_'+sgid%>" headers="<%='title_row_'+ocid+'_'+sgid%>">Time Point</th>
+	  	<th scope='col' class='head_col' id="<%='measures_'+ocid+'_'+sgid%>" headers="<%='title_row_'+ocid+'_'+sgid%>">Measure</th>
 	  	<% @study_arms.each do |arm| %>
-	  		<th scope='col' class='head_col'><%= arm.title %></th>
+                  <th scope='col' class='head_col' id="<%='arm_'+arm.id.to_s+'_'+ocid+'_'+sgid%>" headers="<%='title_row_'+ocid+'_'+sgid%>"><%= arm.title %></th>
 	  	<% end %>
 			<% unless btwn_comparisons.empty? %>
 				<%# get the comparators %>
-				<th scope='col' class='head_col'>Comparison Measure</th>
+				<th scope='col' class='head_col' id="<%='bac_cm_'+ocid+'_'+sgid%>" headers="<%='bac_'+ocid+'_'+sgid%>">Comparison Measure</th>
 				<% unless btwn_comparators.empty? %>
-					<% btwn_comparators.each do |c| %>
-					  <th scope='col' class='head_col'><%= c.to_s %></th>
+					<% btwn_comparators.each_with_index do |c,ii| %>
+					  <th scope='col' id="<%='bac_comparator_'+ii.to_s+'_'+ocid+'_'+sgid%>"  headers="<%='bac_'+ocid+'_'+sgid%>" class='head_col'><%= c.to_s %></th>
 					<% end %>
 				<% end %>
 			<% end %> <%# end unless btwn_comparisons.empty? %>
@@ -134,7 +134,7 @@ Existing Results Session:<br/>
 			<% datapoints_hash = ocde[2] %>
 	  	<tr>
   		<!-- THE TIME POINT -->
-  		<td scope='row' rowspan="<%= num_rows %>" align='center'>
+  		<td scope='row' rowspan="<%= num_rows %>" align='center' id="<%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>" headers="<%='title_row_'+ocid+'_'+sgid%> <%='tps_'+ocid+'_'+sgid%>">
   			<br/><br/>
   			<strong><%= tp_title %></strong><br/><br/>
   		</td>
@@ -143,7 +143,7 @@ Existing Results Session:<br/>
   		  <% unless i == 0 %>
   		    <tr>
   		  <% end %>
-  		  <td scope='row' ><%= measure_objs[i].nil? ? "" : measure_objs[i].title %></td>
+                  <td scope='row' headers="<%='title_row_'+ocid+'_'+sgid%> <%='measures_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>"><%= measure_objs[i].nil? ? "" : measure_objs[i].title %></td>
   		  
   		  <!-- ADDING COLUMNS FOR EACH ARM -->
   		  <% for j in 0..@study_arms.length-1 %>
@@ -153,7 +153,7 @@ Existing Results Session:<br/>
 	  		    <% dp_val = dp.nil? ? '' : dp.value %>
 	  		    <% td_style = dp.nil? ? "" : (dp.is_calculated == true ? "style='background-color:yellow;'" : "style='background-color:#fff;'") %>
 	  		    <% footnote_num = dp.nil? ? 0 : dp.footnote_number %>
-	  		    <td scope='row'  <%= td_style %> >
+	  		    <td scope='row'  <%= td_style %>  headers="<%='title_row_'+ocid+'_'+sgid%> <%='arm_'+@study_arms[j].id.to_s+'_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>">
 	  		    	<%= dp_val %>
 	  		    	<% unless footnote_num == 0 %>
 	  		    	  <% footnote_texts[footnote_num.to_i - 1] = dp.footnote.to_s %>
@@ -161,7 +161,7 @@ Existing Results Session:<br/>
 	  		    	<% end %>
   		    	</td>
 	  		  <% else %>
-	  		    <td scope='row' ></td>
+                            <td scope='row' headers="<%='title_row_'+ocid+'_'+sgid%> <%='arm_'+@study_arms[j].id.to_s+'_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>"></td>
 	  		  <% end %>
   		  <% end %> <%# end for j in 0..study_arms.length %>
 
@@ -173,17 +173,17 @@ Existing Results Session:<br/>
                         <%# TODO - figure out why cmp_measures[] contains the other unexpected objects.                               %>
   		  	<% unless cmp_measures[i].nil? || !(cmp_measures[i].class.name.eql? "ComparisonMeasure") %>
   		  	  <%# add in the measure title %>
-  		  		<td scope='row' ><%= cmp_measures[i].title %></td>
+  		  		<td scope='row'headers="<%='bac_'+ocid+'_'+sgid%> <%='bac_cm_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>"><%= cmp_measures[i].title %></td>
   		  		<%# 
   		  			for each comparator associated with this comparison, 
   		  			find a datapoint and if it exists, insert the value to the table.
   		  			If it does not exist, enter a blank table cell. 
   		  		%>
-  		  		<% cmp_comparator_ids.each do |cid| %>
+  		  		<% cmp_comparator_ids.each_with_index do |cid, ii| %>
   		  			<% dp = cmp_datapoints.keys.empty? ? nil : cmp_datapoints["#{cmp_measures[i].id}_#{cid}"] %>
   		  			<% if dp.class == ComparisonDataPoint %>
   		  			  <% style = dp.is_calculated==true ? "style='background-color:yellow;'" : '' %>
-  		  				<td scope='row' <%= style %>>
+  		  				<td scope='row' headers="<%='bac_'+ocid+'_'+sgid%> <%='bac_comparator_'+ii.to_s+'_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>" <%= style %>>
   		  					<%= dp.value %>
   		  					<% if dp.footnote_number > 0 %>
 										<% footnote_texts[dp.footnote_number - 1] = dp.footnote.to_s %>
@@ -191,13 +191,13 @@ Existing Results Session:<br/>
   		  					<% end %>
   		  				</td>
   		  			<% else %>
-  		  			  <td scope='row' ></td>
+  		  			  <td scope='row' headers="<%='bac_'+ocid+'_'+sgid%> <%='bac_comparator_'+ii.to_s+'_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>" ></td>
   		  			<% end %>
   		  		<% end %>
   		  	<% else %>
-  		  		<td scope='row' ></td>
+  		  		<td scope='row' headers="<%='bac_'+ocid+'_'+sgid%> <%='bac_cm_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>" ></td>
   		  		<% for i in 0..(btwn_comparators.length - 1) %>
-  		  			<td scope='row' ></td>
+                                  <td scope='row' headers="<%='bac_'+ocid+'_'+sgid%> <%='bac_comparator_'+i.to_s+'_'+ocid+'_'+sgid%> <%='tp_'+ocde_obj.timepoint_id.to_s+'_'+ocid+'_'+sgid%>" ></td>
   		  		<% end %>
   		  	<% end %>
   		  	<% end %> <%# end if !cmp_measures.nil? %>
@@ -215,22 +215,22 @@ Existing Results Session:<br/>
 			-------------------------------------%>
 			<%# the within-arm comparison header %>
 			<tr>
-				<th scope='col' class='head_col' colspan="<%= 2 + @study_arms.length %>">
+				<th scope='col' class='head_col' colspan="<%= 2 + @study_arms.length %>" id="<%='wac_'+ocid+'_'+sgid%>">
 					Within-Arm Comparisons
 				</th>
 				<% unless btwn_comparators.empty? %>
-					<th colspan="<%= 1 + btwn_comparators.length %>"> </th>
+                                  <th colspan="<%= 1 + btwn_comparators.length %>" id="<%='wac_btwn_'+ocid+'_'+sgid%>"> </th>
 				<% end %>
 			</tr>
 			<%# the comparison, measures and arms column headers %>
 			<tr>
-				<th scope='col' class='head_col'>Comparison</th>
-				<th scope='col' class='head_col'>Measure</th>
+				<th scope='col' class='head_col' id="<%='wac_comparisons_'+ocid+'_'+sgid%>" headers="<%='wac_'+ocid+'_'+sgid%>">Comparison</th>
+				<th scope='col' class='head_col' id="<%='wac_measures_'+ocid+'_'+sgid%>" headers="<%='wac_'+ocid+'_'+sgid%>">Measure</th>
 				<% @study_arms.each do |sa| %>
-					<th scope='col' ><%= sa.title %></th>
+					<th scope='col' id="<%='wac_arm_'+sa.id.to_s+'_'+ocid+'_'+sgid%>" headers="<%='wac_'+ocid+'_'+sgid%>"><%= sa.title %></th>
 				<% end %>
 				<% unless btwn_comparators.empty? %>
-					<th scope='col' colspan="<%= 1 + btwn_comparators.length %>"> </th>
+					<th scope='col' colspan="<%= 1 + btwn_comparators.length %>" id="<%='wac_comparators_'+ocid+'_'+sgid%>" headers="<%='wac_btwn_'+ocid+'_'+sgid%>"> </th>
 				<% end %>
 			</tr>
 			<% wthn_comparisons.each do |wac| %>
@@ -248,7 +248,7 @@ Existing Results Session:<br/>
 				---------------------------------------%>
 				<%# the comparator %>
 				<tr>
-					<td scope='row' rowspan="<%= wac_measures.length %>"><%= comparatorTitle %></td>
+					<td scope='row' rowspan="<%= wac_measures.length %>" id="<%='wac_comparison_'+obj.id.to_s+'_'+ocid+'_'+sgid%>" headers="<%='wac_comparisons_'+ocid+'_'+sgid%> <%='wac_'+ocid+'_'+sgid%>"><%= comparatorTitle %></td>
 					<%# for each comparison measure %>
 					<% wac_measures.each_with_index do |wm,index| %>
 					  <%# print the new row unless it's the first entry %>
@@ -256,7 +256,7 @@ Existing Results Session:<br/>
 					  	<tr>
 					  <% end %>
 						<%# print the measure title cell %>
-						<td scope='row' ><%= wm.title %></td>
+                                                <td scope='row' headers="<%='wac_comparison_'+obj.id.to_s+'_'+ocid+'_'+sgid%> <%='wac_measures_'+ocid+'_'+sgid%> <%='wac_'+ocid+'_'+sgid%>"><%= wm.title %></td>
 						<%# for each study arm %>
 						<% @study_arms.each do |sa| %>
 							<%# print the datapoint cell for the arm %>
@@ -264,9 +264,9 @@ Existing Results Session:<br/>
 							<% dp = wac_datapoints[key] %>
 							<% if dp.class == ComparisonDataPoint %>
 								<% value = dp.value %>
-								<% style = dp.is_calculated==true ? "style='background-color:yellow;'" : '' %>
+								<% style = dp.is_calculated==true ? "style=background-color:yellow;" : '' %>
 								<% fnum = dp.footnote_number %>
-								<td scope='row' <%= style %>>
+								<td scope='row' headers="<%='wac_comparison_'+obj.id.to_s+'_'+ocid+'_'+sgid%> <%='wac_arm_'+sa.id.to_s+'_'+ocid+'_'+sgid%> <%='wac_'+ocid+'_'+sgid%>" <%= style %>>
   		  					<%= value %>
   		  					<% if fnum > 0 %>
 										<% footnote_texts[dp.footnote_number - 1] = dp.footnote.to_s %>
@@ -274,11 +274,11 @@ Existing Results Session:<br/>
   		  					<% end %>
   		  				</td>
  							<% else %>
- 							  <td scope='row' ></td> 		  				
+ 							  <td scope='row' headers="<%='wac_comparison_'+obj.id.to_s+'_'+ocid+'_'+sgid%> <%='wac_arm_'+sa.id.to_s+'_'+ocid+'_'+sgid%> <%='wac_'+ocid+'_'+sgid%>"></td> 		  				
  							<% end %>
 						<% end %> <%# end study_arms.each do %>
 						<% unless btwn_comparators.empty? %>
-							<th scope='col' colspan="<%= 1 + btwn_comparators.length %>"> </th>
+							<td scope='col' colspan="<%= 1 + btwn_comparators.length %>" headers="<%='wac_comparison_'+obj.id.to_s+'_'+ocid+'_'+sgid%> <%='wac_comparators_'+ocid+'_'+sgid%> <%='wac_'+ocid+'_'+sgid%>"> </th>
 						<% end %> 
 						</tr>
 				<% end %> <%# end wac_measures.each do %>
