@@ -54,7 +54,7 @@
     <% if @sections_list.include?("arm_details") %>
       <!-- ARM DETAILS DIV SECTION -->
       <% @questions = ArmDetail.where(:extraction_form_id => @extraction_form.id).order("question_number ASC") %>
-      <div id="extraction_form_view_design" style="display:block">
+      <div id="extraction_form_view_arm_details" style="display:block">
         <div class="summary_heading">Arm Details</div>
         <div id="arm_detail_text"><br/>
           <% @model = "arm_detail" %>

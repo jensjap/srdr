@@ -39,7 +39,7 @@ Description
 		<% for one_arm in @arms %>
 			
 			<tr class='<%= classname %>'>
-                <td scope='row' class="title_td" title="<%= one_arm.description %>"><%= one_arm.title %></td>
+                <td class="title_td" title="<%= one_arm.description %>"><%= one_arm.title %></td>
 				
 				<% if first %>
 					<% is_other = false %>
@@ -107,7 +107,7 @@ Description
 
 	<% if @extraction_form.adverse_event_display_total == true %>
 	<tr class='<%= classname %>'>
-		<td scope='row' class="title_td">Total</td>
+		<td class="title_td">Total</td>
 			
 		<% if first %>
 			<td rowspan="<%= @num_rows %>">
@@ -162,7 +162,7 @@ Description
 			
 		<% if !@extraction_form_adverse_event_columns.nil? && @extraction_form_adverse_event_columns.length > 0 %>
 			<% for col in @extraction_form_adverse_event_columns %>
-				<td scope='row' >
+				<td >
 						<% val = AdverseEventResult.get_data_point(ae.id, col.id, "total") %>
 					<%= text_field "result_total_" + ae.id.to_s, col.id, :value=>val, :class => "editable_field", :size=>10, :title => "Enter data for adverse event: #{ae.title} and arm: Total" %>
 				</td>

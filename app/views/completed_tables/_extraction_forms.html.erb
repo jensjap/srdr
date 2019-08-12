@@ -9,7 +9,7 @@
   <% unless @extraction_forms.empty? %>
     <% @extraction_forms.each do |extraction_form| %>
       <tr class="<%= cycle("even", "odd") %>">
-        <td scope='row'>
+        <td>
           <a href="/projects/<%= @project.id %>/extraction_forms/<%= extraction_form.id %>" target="_blank" title="Preview Extraction Form: <%= extraction_form.title %>"><%= extraction_form.title %></a>
           </td>
         <td><%= User.get_name(extraction_form.creator_id) %></td>

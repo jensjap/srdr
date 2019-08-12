@@ -7,8 +7,8 @@
 <%# CREATE THE LIST OF QUESTIONS AND ANSWERS JUST LIKE THEY WOULD APPEAR IN AN EXTRACTION FORM. %>
 <% unless @questions.empty? %>
   <% @questions.each do |q| %>
-    <div class='field' id="<%= 'question_' + q.question_number.to_s + '_div' %>">
-      <label style="font-weight: bold;" for="<%= @model + '_' + q.id.to_s %>"><%= q.question%></label><br />
+    <label style="font-weight: bold;" for="<%= @model + '_question_' + q.question_number.to_s + '_div' %>"><%= q.question%></label>
+    <div class='field' id="<%= @model + '_question_' + q.question_number.to_s + '_div' %>">
       <%= render :inline=>create_input(q.id, @model) %>
     </div>
   <% end %>

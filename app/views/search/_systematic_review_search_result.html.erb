@@ -101,11 +101,11 @@
             <th scope="col">Journal</th>
 <%              for pub in publist %>
             <tr class="<%= cycle("even", "odd") %>">	
-                <td scope="row"><%= pub.pmid %></td>
-	        <td scope="row"><%= pub.title %></td>
-	        <td scope="row"><%= pub.author %></td>
-	        <td scope="row"><%= pub.year %></td>
-	        <td scope="row"><%= pub.journal %></td>
+                <td><%= pub.pmid %></td>
+	        <td><%= pub.title %></td>
+	        <td><%= pub.author %></td>
+	        <td><%= pub.year %></td>
+	        <td><%= pub.journal %></td>
             </tr>
 
 <%              end %>

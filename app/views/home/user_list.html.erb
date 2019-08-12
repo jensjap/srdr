@@ -12,26 +12,26 @@
 %>
 <table class='list_table'>
 	<tr>
-		<td scope='col'>ID</td>
-		<td scope='col'>Username</td>
-		<td scope='col'>FirstName</td>
-		<td scope='col'>LastName</td>
-		<td scope='col'>Email</td>
-		<td scope='col'>Organization</td>
-		<td scope='col'>User Type</td>
-		<td scope='col'>Login Count</td>
-    <td scope='col'>Creation Date</td>
+		<td>ID</td>
+		<td>Username</td>
+		<td>FirstName</td>
+		<td>LastName</td>
+		<td>Email</td>
+		<td>Organization</td>
+		<td>User Type</td>
+		<td>Login Count</td>
+    <td>Creation Date</td>
 <%
     if show_admin
 %>
-		<td scope='col'>Admin</td>
+		<td>Admin</td>
 <%
     end
 %>
 	</tr>
 	<% @users.each do |user| %>
 		<tr>
-			<td scope='row'><%= user.id %></td>
+			<td><%= user.id %></td>
 			<td><%=user.login%></td>
 			<td><%= user.fname.force_encoding("UTF-8") %></td>
 			<td><%= user.lname.force_encoding("UTF-8") %></td>
