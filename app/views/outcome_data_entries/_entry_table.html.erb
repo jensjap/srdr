@@ -192,7 +192,7 @@
       <% end %> <%# end unless comparisons.empty? %>
       <tr class='comparison_measure_row'>
         <!-- THE TIME POINT -->
-        <td scope='row' rowspan="<%= rows_required %>" align='center'>
+        <td rowspan="<%= rows_required %>" align='center'>
           <br/>
           <%# GIVE THE USER THE ABILITY TO SORT THE OCDE ROWS USING A DROPDOWN %>
           <strong><%= timepoint.number %> <%= timepoint.time_unit %></strong><br/><br/>
@@ -213,7 +213,7 @@
           <% unless i == 0 %>
             <tr class='comparison_measure_row'>
           <% end %>
-          <td scope='row' ><%= measures[i].nil? ? "" : measures[i].title %></td>
+          <td ><%= measures[i].nil? ? "" : measures[i].title %></td>
           
           <!-- ADDING COLUMNS FOR EACH ARM -->
           <% for j in 1..@arms.length %>
@@ -236,7 +236,7 @@
                 <% end %>
               </td>
             <% else %>
-              <td scope='row' ></td>
+              <td ></td>
             <% end %>
           <% end %>
           <% outcome_tabindex += 1%>
@@ -326,7 +326,7 @@
         <% unless comparison.nil? %>
           <tr class='remove_column_link_row'>
             <% numTDs = 2 + @arms.length %>
-            <td scope='row' colspan="<%= numTDs %>"></td>
+            <td colspan="<%= numTDs %>"></td>
             <td class='btwn_arm_comparison'></td>
             <% unless @all_comparators.empty? %>
               <% for i in 1..@all_comparators.length %>
@@ -397,7 +397,7 @@
               <% wac_measures = @wa_measures[wac.id] %>
               <% wac_comparator = @wa_comparators[wac.id].first %>
               <tr wac_row="<%= wac.group_id %>" class='wa_comparison'>
-                <td scope='row' rowspan="<%= wac_measures.length %>">
+                <td rowspan="<%= wac_measures.length %>">
                   <% unless wac_comparator.nil? %>
                     <% comparator_parts = wac_comparator.comparator.split("_")%>
                     
@@ -421,7 +421,7 @@
                   <% unless wac_measures.index(m) == 0 %>
                     <tr class='wa_comparison'>
                   <% end %>
-                  <td scope='row' ><%= m.title%></td>
+                  <td ><%= m.title%></td>
                   <% @arms.each do |arm|%>
                     <% unless wac_comparator.nil? %>
                       <% val = @wa_datapoints[wac.id][wac_comparator.id][m.id][arm.id] %>
@@ -431,7 +431,7 @@
                       <% val = ""%>
                       <% td_style = ""%>
                     <% end %>
-                    <td scope='row' <%= td_style %>>
+                    <td <%= td_style %>>
                       <% fieldID = "wac_datapoints__#{wac.id}_#{wac_comparator.nil? ? (next_wac_comparator_id + 1) : wac_comparator.id}_#{m.id}_#{arm.id}" %>
                       <div class='hidden-label'><label for="<%= fieldID %>"><%= "Comparison Data Point for Row: #{i+1}, Measure: #{m.title}, Arm: #{arm.title}"%></label></div>
                       <input type='text' class='editable_field' name="<%= "wac_datapoints[#{wac.id}[#{wac_comparator.nil? ? (next_wac_comparator_id + 1) : wac_comparator.id}[#{m.id}[#{arm.id}]]]]" %>" id="<%= fieldID %>"  value='<%= data_value %>' />
@@ -447,7 +447,7 @@
                 <% end %>
                 <%# THE EDIT MEASURES BUTTON FOR WACs %>
                 <tr wac_row="<%= wac.group_id %>" class='wa_comparison'>
-                  <td scope='row' class='th' colspan="<%= @arms.length + 2 %>" align='center'>
+                  <td class='th' colspan="<%= @arms.length + 2 %>" align='center'>
                     <% unless (@project_id.to_i == 427 || @project_id.to_i == 553) %>
                     <a href="#" class='edit_wac_measures_btn' wac_id="<%= wac.id %>" title="<%= "Edit Measures for Within-Arm Comparison Row #{i+1}"%>">Edit Measures</a>
                     <% end %>
@@ -460,7 +460,7 @@
           <input type="hidden" id="next_wac_row" value="<%= @wa_comparisons.length + 1 %>">
 
           <tr id="show_hide_wa_row" class='wa_comparison'>
-            <td scope='row' class='th' id="show_hide_wa_links" colspan="<%= @arms.length + 2 %>">
+            <td class='th' id="show_hide_wa_links" colspan="<%= @arms.length + 2 %>">
             <% if @wa_comparisons.empty? %> 
               <% if @timepoints.length > 1 %>
                 <a href="#" id="wa_comparison_link">
@@ -483,7 +483,7 @@
           </tr>
         <% end %>
         <tr id="wa_save_button_row" >
-          <td scope='row' colspan="<%= (2 + @arms.length) + (@num_comparators + 1) %>" align='center' style='position:relative;' class='comparison_btn_row'>
+          <td colspan="<%= (2 + @arms.length) + (@num_comparators + 1) %>" align='center' style='position:relative;' class='comparison_btn_row'>
             <button id="save" type="submit" title="Save Outcome Results Table Data" class="saving" data-disable-with='<%= ajax_wait_msg %>' >
               <%= image_tag "Add.png", :alt => "Add" %>Save Table Data
             </button>

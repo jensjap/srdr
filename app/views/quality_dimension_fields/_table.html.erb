@@ -11,10 +11,10 @@
 <tr>
 <% num_options = (1..@quality_dimension_fields.length).to_a.collect{|x| [x,x]} %>
 <% qnum = qa.question_number.blank? ? i+1 : qa.question_number %>
-<td scope='row'><%= select_tag "question_number_#{qnum}", options_for_select(num_options,qnum), :class=>'qdfield_qnum_select', :title => "question number", :id => qa.id %></td>
-<td scope='row'><%= qa.title %></td>
-<td scope='row'><%= raw(qa.field_notes) %></td>
-<td scope='row'>
+<td><%= select_tag "question_number_#{qnum}", options_for_select(num_options,qnum), :class=>'qdfield_qnum_select', :title => "question number", :id => qa.id %></td>
+<td><%= qa.title %></td>
+<td><%= raw(qa.field_notes) %></td>
+<td>
 <%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt => "Edit") + "Edit Quality Dimension", edit_quality_dimension_field_path(qa, :extraction_form_id => @extraction_form.id), :remote=>true, :class => "tooltip_edit inline-block",:title=>"Edit Quality Dimension: #{qa.title}" %><br/>
 <%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Quality Dimension", quality_dimension_field_path(qa), :method=>:delete, :confirm=>"Are you sure? This operation will also remove any data already associated with this dimension.", :remote => true, :class => "inline-block", :title=>"Remove Quality Dimension: #{qa.title}" %>
 </td>

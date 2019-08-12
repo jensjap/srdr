@@ -108,8 +108,8 @@
 		<td colspan='2'>
 			<table style="width:100%;" class='no-border'>
 				<tr class='timepoint_title_row '>
-					<td scope='col' style='text-decoration:underline;font-weight:bold;width:55%;'>Numeric Value or Name</td>
-					<td scope='col' colspan='2'style='text-decoration:underline; font-weight:bold;width:75%;'>Time Unit</td>
+					<td style='text-decoration:underline;font-weight:bold;width:55%;'>Numeric Value or Name</td>
+					<td colspan='2'style='text-decoration:underline; font-weight:bold;width:75%;'>Time Unit</td>
 					
 				</tr>
 				<% unless @outcome_timepoints.empty? %>
@@ -117,7 +117,7 @@
 				    <% tp_has_data = OutcomeTimepoint.has_data(tp.id) %>
 				    <%# Set the default option (created first) to be readonly and not editable %>
 				    <tr class='timepoint_row'>
-				    	<td scope='row'>
+				    	<td>
 				    		<input type='text' name="<%= "timepoint_numbers[#{tp.id}]"%>" value="<%= tp.number %>" size=15 >
 				    	</td>
 				    	<td>
@@ -156,7 +156,7 @@
 					<% if defined?(@previous_outcome_timepoints) && @editing == false %>
 						<% @previous_outcome_timepoints.each_with_index do |tp,index| %>
 							<tr class='timepoint_row'>
-								<td scope="row">
+								<td>
 									<input type='text' name="<%= "timepoint_numbers[#{index*-1}]" %>" value="<%= tp.number %>" size=15 >
 								</td>
 								<td>
@@ -179,7 +179,7 @@
 						<% end %>
 					<% else %>
 					    <tr class='timepoint_row'>
-							<td scope="row">
+							<td>
 								<input class='new_row_title' type='text' name='timepoint_numbers[0]' value='Enter a numeric value or title (required)' >
 							</td>
 							<td>
@@ -209,8 +209,8 @@
 		<td colspan='2'>
 			<table style="width:100%;" class='no-border'>
 				<tr class='subgroup_title_row '>
-					<td scope='col' style='text-decoration:underline;font-weight:bold;width:25%;'>Name</td>
-					<td scope='col' colspan='2'style='text-decoration:underline; font-weight:bold;width:75%;'>Description</td>
+					<td style='text-decoration:underline;font-weight:bold;width:25%;'>Name</td>
+					<td colspan='2'style='text-decoration:underline; font-weight:bold;width:75%;'>Description</td>
 					
 				</tr>
 				<% unless @outcome_subgroups.empty? %>
@@ -219,7 +219,7 @@
 				    <%# Set the default option (created first) to be readonly and not editable %>
 				    <% type = sg.title=="All Participants" ? "hidden" : "text" %>
 				    <tr class='subgroup_row'>
-				    	<td scope='row'>
+				    	<td>
 				    		<%= "All Participants" unless type == "text" %>
 				    		<input type="<%= type %>" name="<%= "subgroup_names[#{sg.id}]"%>" value="<%= sg.title %>" size=8 >
 				    	</td>
@@ -251,7 +251,7 @@
 							<%# Set the default option (created first) to be readonly and not editable %>
 					    <% type = sg.title=="All Participants" ? "hidden" : "text" %>
 					    <tr class='subgroup_row'>
-					    	<td scope='row'>
+					    	<td>
 					    		<%= "All Participants" unless type == "text" %>
 					    		<input type="<%= type %>" name="<%= "subgroup_names[#{index}]"%>" value="<%= sg.title %>" size=8>
 					    	</td>
@@ -270,7 +270,7 @@
 						<% end %> <%# end previous outcome subrgoups.each do %>
 					<% else %>  <%# if defined? previous outcome subgroups...%>
 						<tr class='subgroup_row'>
-							<td scope='row'>
+							<td>
 								All Participants
 								<input type='hidden' name='subgroup_names[0]' value='All Participants'>
 							</td>

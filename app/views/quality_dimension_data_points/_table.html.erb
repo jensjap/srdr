@@ -27,19 +27,19 @@
 <% arr = QualityDimensionField.get_dropdown_options(qa) %>
 <% selected_other = !arr.collect{|x| x[1]}.include?(val) && !val.blank? %>
 
-<td scope='row' valign="top">
+<td valign="top">
 
    <%=select :quality_value, qa.id.to_s, arr, {:selected=> selected_other ? "other" : val}, :value => selected_other ? "other" : val, :class => "inline-field", :title =>"Select Value for Dimensoin: #{qa.title}" , :style => "width: 100px"%>
    <% if selected_other %>
 		<%= render :inline => show_other_filled("quality_value_#{qa.id.to_s}", val, "quality_value[#{qa.id.to_s}]") %>
 	<% end %>
 </td>
-<td scope='row' valign="top">
+<td valign="top">
 <% val = QualityDimensionDataPoint.get_data_point(qa, @study.id, "notes") %>
 <%= text_area "quality_notes", qa.id.to_s, :value => val, :title => "Enter notes for Dimension: #{qa.title}", :id => "quality_notes_" + qa.id.to_s, :rows => 3, :cols => 15 %>
 </td>
-<td scope='row' valign="top"><%= raw(qa.field_notes) %><%# render "shared/notes_tooltip", :section_name => "quality_fnotes", :item_id => qa.id, :item_notes => qa.field_notes %></td>
-<td scope='row' valign="top">
+<td valign="top"><%= raw(qa.field_notes) %><%# render "shared/notes_tooltip", :section_name => "quality_fnotes", :item_id => qa.id, :item_notes => qa.field_notes %></td>
+<td valign="top">
 <%= render :partial => "comments/field_comments", :locals => {:section_name => "qualitydimensions", :section_id => qa.id, :field_name => "dimension", :study_id => @study.id, :project_id => @project.id} %>
 </td>
 </tr>

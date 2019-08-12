@@ -12,10 +12,10 @@
     <% for onearm in @arms %>
       <tr class="<%= cycle("even", "odd") %>" id="arm_row_<%=onearm.id.to_s %>">
 				
-				<td scope='col'><%= onearm.name %></td>
-				<td scope='col'><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
+				<td><%= onearm.name %></td>
+				<td><%= render "shared/notes_tooltip", :section_name => "arms", :item_id => onearm.id, :item_notes => onearm.description %></td>
 				<!-- <td><%= onearm.note %></td> -->
-				<td scope='col'>
+				<td>
 
 					<%= link_to image_tag("Pencil.png", :style=>"border:0px", :alt=>"Edit") + "Edit Arm Suggestion", "/extraction_form_arms/#{onearm.id}/edit",{:project_id => params[:project_id],:remote=>true,:class => "tooltip_edit edit_btn edit_arm", :title=>"Edit Suggested Arm: #{onearm.name}"} %><br/>
 					<%= link_to image_tag("Bin_closed.png", :style=>"border:0px", :alt => "Delete") + "Delete Arm Suggestion", onearm, {:project_id => params[:project_id], :remote => true, :confirm => 'Are you sure?', :method => :delete, :class => "tooltip_delete", :title=>"Remove Suggested Arm: #{onearm.name}"} %>

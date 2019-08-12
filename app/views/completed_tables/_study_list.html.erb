@@ -18,7 +18,7 @@
  <% if !study_pub_info.nil? %> 
  <tr>
 	
-    <td scope='row'>
+    <td>
       <% title = study_pub_info.title.nil? ? "Untitled" : study_pub_info.title %>
       <a target="_blank" href="/projects/<%= params[:id].to_s %>/studies/<%= study.id.to_s %>" title="Preview Study: <%= title %>"><%= title %></a>
 
