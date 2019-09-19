@@ -1,4 +1,417 @@
 - section:
+  id: 12
+  section-title: "Revised Cochrane risk-of-bias tool for randomized trials (RoB 2)"
+  section-description: ""
+  dimensions:
+    - dimension: #dimension 1
+      id: 175
+      question: "1.1 Was the allocation sequence random?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 2
+      id: 176
+      question: "1.2 Was the allocation sequence concealed until participants were enrolled and assigned to interventions?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 3
+      id: 177
+      question: "1.3 Did baseline differences between intervention groups suggest a problem with the randomization process?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 4
+      id: 178
+      question: "Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 5
+      id: 179
+      question: "Optional: What is the predicted direction of bias arising from the randomization process?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Favours experimental"
+        - option: "Favours comparator"
+        - option: "Towards null"
+        - option: "Away from null"
+        - option: "Unpredictable"
+    - dimension: #dimension 6
+      id: 180
+      question: "2.1. (effect of assignment to intervention) Were participants aware of their assigned intervention during the trial?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 7
+      id: 181
+      question: "2.2. (effect of assignment to intervention) Were carers and people delivering the interventions aware of participants' assigned intervention during the trial?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 8
+      id: 182
+      question: "2.3. (effect of assignment to intervention) If Y/PY/NI to 2.1 or 2.2: Were there deviations from the intended intervention that arose because of the experimental context?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "NI"
+    - dimension: #dimension 9
+      id: 183
+      question: "2.4. (effect of assignment to intervention) If Y/PY to 2.3: Were these deviations from intended intervention balanced between groups?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 10
+      id: 184
+      question: "2.5. (effect of assignment to intervention) If N/PN/NI to 2.4: Were these deviations likely to have affected the outcome?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 11
+      id: 185
+      question: "2.6. (effect of assignment to intervention) Was an appropriate analysis used to estimate the effect of assignment to intervention?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 12
+      id: 186
+      question: "2.7. (effect of assignment to intervention) If N/PN/NI to 2.6: Was there potential for a substantial impact (on the result) of the failure to analyse participants in the group to which they were randomized?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 13
+      id: 187
+      question: "Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 14
+      id: 188
+      question: "Optional: (effect of assignment to intervention) What is the predicted direction of bias due to deviations from intended interventions?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Favours experimental"
+        - option: "Favours comparator"
+        - option: "Towards null"
+        - option: "Away from null"
+        - option: "Unpredictable"
+    - dimension: #dimension 15
+      id: 189
+      question: "2.1. (effect of adhering to intervention) Were participants aware of their assigned intervention during the trial?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 16
+      id: 190
+      question: "2.2. (effect of adhering to intervention) Were carers and people delivering the interventions aware of participants' assigned intervention during the trial?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 17
+      id: 191
+      question: "2.3. (effect of adhering to intervention) If Y/PY/NI to 2.1 or 2.2: Were important co-interventions balanced across intervention groups?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 18
+      id: 192
+      question: "2.4. (effect of adhering to intervention) Were there failures in implementing the intervention that could have affected the outcome?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 19
+      id: 193
+      question: "2.5. (effect of adhering to intervention) Was there non-adherence to the assigned intervention regimen that could have affected participants’ outcomes?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 20
+      id: 194
+      question: "2.6. (effect of adhering to intervention) If N/PN/NI to 2.3 or 2.5 or Y/PY/NI to 2.4: Was an appropriate analysis used to estimate the effect of adhering to the intervention?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 21
+      id: 195
+      question: "Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 23
+      id: 196
+      question: "3.1. Were data for this outcome available for all, or nearly all, participants randomized?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 24
+      id: 197
+      question: "3.2. If N/PN/NI to 3.1: Is there evidence that the result was not biased by missing outcome data?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+    - dimension: #dimension 25
+      id: 198
+      question: "3.3. If N/PN to 3.2: Could missingness in the outcome depend on its true value?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 26
+      id: 199
+      question: "3.4. If Y/PY/NI to 3.3: Is it likely that missingness in the outcome depended on its true value?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 27
+      id: 200
+      question: "Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 28
+      id: 201
+      question: "Optional: What is the predicted direction of bias due to missing outcome data?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Favours experimental"
+        - option: "Favours comparator"
+        - option: "Towards null"
+        - option: "Away from null"
+        - option: "Unpredictable"
+    - dimension: #dimension 29
+      id: 202
+      question: "4.1. Was the method of measuring the outcome inappropriate?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 30
+      id: 203
+      question: "4.2. Could measurement or ascertainment of the outcome have differed between intervention groups?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 31
+      id: 204
+      question: "4.3. If N/PN/NI to 4.1 and 4.2: Were outcome assessors aware of the intervention received by study participants?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 32
+      id: 205
+      question: "4.4. If Y/PY/NI to 4.3: Could assessment of the outcome have been influenced by knowledge of intervention received?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 33
+      id: 206
+      question: "4.5. If Y/PY/NI to 4.4: Is it likely that assessment of the outcome was influenced by knowledge of intervention received?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 34
+      id: 207
+      question: "Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 35
+      id: 208
+      question: "Optional: What is the predicted direction of bias in measurement of the outcome?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Favours experimental"
+        - option: "Favours comparator"
+        - option: "Towards null"
+        - option: "Away from null"
+        - option: "Unpredictable"
+    - dimension: #dimension 36
+      id: 209
+      question: "5.1. Were the data that produced this result analysed in accordance with a pre-specified analysis plan that was finalized before unblinded outcome data were available for analysis?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 37
+      id: 210
+      question: "5.2. Is the numerical result being assessed likely to have been selected, on the basis of the results, from multiple outcome measurements (e.g. scales, definitions, time points) within the outcome domain?"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 38
+      id: 211
+      question: "5.3. Is the numerical result being assessed likely to have been selected, on the basis of the results, from multiple analyses of the data"
+      description: ""
+      options:
+        - option: "Y"
+        - option: "PY"
+        - option: "PN"
+        - option: "N"
+        - option: "NI"
+    - dimension: #dimension 39
+      id: 212
+      question: "Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 40
+      id: 213
+      question: "Optional: What is the predicted direction of bias due to selection of the reported result?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Favours experimental"
+        - option: "Favours comparator"
+        - option: "Towards null"
+        - option: "Away from null"
+        - option: "Unpredictable"
+    - dimension: #dimension 41
+      id: 214
+      question: "Overall Risk-of-bias judgement"
+      description: ""
+      options:
+        - option: "Low"
+        - option: "High"
+        - option: "Some concerns"
+    - dimension: #dimension 42
+      id: 215
+      question: "Optional: What is the predicted direction of bias due to selection of the reported result?"
+      description: ""
+      options:
+        - option: "NA"
+        - option: "Favours experimental"
+        - option: "Favours comparator"
+        - option: "Towards null"
+        - option: "Away from null"
+        - option: "Unpredictable"
+- section:
   id: 1
   section-title: "Cochrane ROB"
   section-description: "The Cochrane risk of bias items are adapted from the Cochrane Back Review Group 2011 (https://back.cochrane.org/sites/back.cochrane.org/files/uploads/PDF/ROB%20criteria_Aug2011.pdf)"
