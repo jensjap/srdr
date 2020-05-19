@@ -21,254 +21,256 @@ margin: 0;
 display: inline;">
   Advanced Search
 </div>
-<table id="adv_search_table" role="presentation">
-    <tbody>
-        <tr>
-            <td colspan="3" align="left" style="font: 10pt">
-            Use this form to modify your Search. At least one field must be filled out.
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="center">
-            <button id="advsearch_button">
-                <%= image_tag("Zoom.png", :alt => "Advance Search" ) %> Search
-            </button>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left" bgcolor="#313539">
-            <h3><font color="white">By Project</font></h3>
-            </td>
-            <td>
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="left">
-            <hr width="100%">
-            &nbsp;<br/>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_title'><b>Title</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_project_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_description'><b>Description</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_project_description', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_arm'><b>Arm(s)</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_project_arm', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_pubid'><b>PubMed ID</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_project_pubid', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_author'><b>Author</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_project_author', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_sponsor'><b>Funding Source</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_project_sponsor', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label><b>Year</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-                <label for='advsearch_project_fromyear'>From Year</label>
-                <%= text_field_tag 'advsearch_project_fromyear', nil, :placeholder => 'YYYY', :size => 4, :aria_labelledby => 'Search Project From Date' %>
-                <label for='advsearch_project_toyear'>End Year</label>
-                <%= text_field_tag 'advsearch_project_toyear', nil, :placeholder => 'YYYY', :size => 4, :aria_labelledby => 'Search Project To Date' %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_project_status'><b>Status</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= check_box_tag 'advsearch_project_status_on',  '1', false, title: 'Published Project' %>Published<br/>
-            <%= check_box_tag 'advsearch_project_status_off', '0', false, title: 'Unpublished Project' %>Unpublished
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP" colspan="3">
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left" bgcolor="#313539">
-            <h3><font color="white">By Study/Publication</font></h3>
-            </td>
-            <td>
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="left">
-            <hr width="100%">
-            &nbsp;<br/>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_study_pubid'><b>PubMed ID</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_study_pubid', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_study_title'><b>Title</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_study_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_study_journal'><b>Journal</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_study_journal', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-                <label ><b>Year</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-                <label for='advsearch_study_fromyear'>From Year</label>
-                <%= text_field_tag 'advsearch_study_fromyear', nil, :placeholder => 'YYYY', :size => 4 %>
-                <label for='advsearch_study_toyear'>End Year</label>
-                <%= text_field_tag 'advsearch_study_toyear', nil, :placeholder => 'YYYY', :size => 4 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP" colspan="3">
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left" bgcolor="#313539">
-            <h3><font color="white">By Outcomes</font></h3>
-            </td>
-            <td>
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="left">
-            <hr width="100%">
-            &nbsp;<br/>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_outcomes_title'><b>Title</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_outcomes_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_outcomes_description'><b>Description</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_outcomes_description', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP" colspan="3">
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left" bgcolor="#313539">
-            <h3><font color="white">By Adverse Events</font></h3>
-            </td>
-            <td>
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="left">
-            <hr width="100%">
-            &nbsp;<br/>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_adverse_title'><b>Title</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_adverse_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_adverse_description'><b>Description</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_adverse_description', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP" colspan="3">
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="left" bgcolor="#313539">
-            <h3><font color="white">By Quality Dimensions</font></h3>
-            </td>
-            <td>
-            &nbsp;
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" align="left">
-            <hr width="100%">
-            &nbsp;<br/>
-            </td>
-        </tr>
-        <tr>
-            <td align="LEFT" valign="TOP">
-            <label for='advsearch_quality_dimension'><b>Dimension</b></label>
-            </td>
-            <td align="LEFT" valign="TOP" colspan="2">
-            <%= text_field_tag 'advsearch_quality_dimension', nil, :placeholder => 'Enter search terms...', :size => 50 %>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<fieldset>
+    <table id="adv_search_table" role="presentation">
+        <tbody>
+            <tr>
+                <td colspan="3" align="left" style="font: 10pt">
+                Use this form to modify your Search. At least one field must be filled out.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">
+                <button id="advsearch_button">
+                    <%= image_tag("Zoom.png", :alt => "Advance Search" ) %> Search
+                </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left" bgcolor="#313539">
+                  <h3><legend style="color: white;">By Project</legend></h3>
+                </td>
+                <td>
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="left">
+                <hr width="100%">
+                &nbsp;<br/>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_title'><b>Title</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_project_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_description'><b>Description</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_project_description', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_arm'><b>Arm(s)</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_project_arm', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_pubid'><b>PubMed ID</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_project_pubid', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_author'><b>Author</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_project_author', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_sponsor'><b>Funding Source</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_project_sponsor', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label><b>Year</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                    <label for='advsearch_project_fromyear'>From Year</label>
+                    <%= text_field_tag 'advsearch_project_fromyear', nil, :placeholder => 'YYYY', :size => 4, :aria_labelledby => 'Search Project From Date' %>
+                    <label for='advsearch_project_toyear'>End Year</label>
+                    <%= text_field_tag 'advsearch_project_toyear', nil, :placeholder => 'YYYY', :size => 4, :aria_labelledby => 'Search Project To Date' %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_project_status'><b>Status</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= check_box_tag 'advsearch_project_status_on',  '1', false, title: 'Published Project' %>Published<br/>
+                <%= check_box_tag 'advsearch_project_status_off', '0', false, title: 'Unpublished Project' %>Unpublished
+                </td>
+              </tr>
+            <tr>
+                <td align="LEFT" valign="TOP" colspan="3">
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left" bgcolor="#313539">
+                <h3><legend style="color: white;">By Study/Publication</legend></h3>
+                </td>
+                <td>
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="left">
+                <hr width="100%">
+                &nbsp;<br/>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_study_pubid'><b>PubMed ID</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_study_pubid', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_study_title'><b>Title</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_study_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_study_journal'><b>Journal</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_study_journal', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                    <label ><b>Year</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                    <label for='advsearch_study_fromyear'>From Year</label>
+                    <%= text_field_tag 'advsearch_study_fromyear', nil, :placeholder => 'YYYY', :size => 4 %>
+                    <label for='advsearch_study_toyear'>End Year</label>
+                    <%= text_field_tag 'advsearch_study_toyear', nil, :placeholder => 'YYYY', :size => 4 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP" colspan="3">
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left" bgcolor="#313539">
+                <h3><legend style="color: white;">By Outcomes</legend></h3>
+                </td>
+                <td>
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="left">
+                <hr width="100%">
+                &nbsp;<br/>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_outcomes_title'><b>Title</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_outcomes_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_outcomes_description'><b>Description</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_outcomes_description', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP" colspan="3">
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left" bgcolor="#313539">
+                <h3><legend style="color: white;">By Adverse Events</legend></h3>
+                </td>
+                <td>
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="left">
+                <hr width="100%">
+                &nbsp;<br/>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_adverse_title'><b>Title</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_adverse_title', nil, :placeholder => 'Enter search terms...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_adverse_description'><b>Description</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_adverse_description', nil, :placeholder => 'Enter search term(s)...', :size => 50 %>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP" colspan="3">
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="left" bgcolor="#313539">
+                <h3><legend style="color: white;">By Quality Dimensions</legend></h3>
+                </td>
+                <td>
+                &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" align="left">
+                <hr width="100%">
+                &nbsp;<br/>
+                </td>
+            </tr>
+            <tr>
+                <td align="LEFT" valign="TOP">
+                <label for='advsearch_quality_dimension'><b>Dimension</b></label>
+                </td>
+                <td align="LEFT" valign="TOP" colspan="2">
+                <%= text_field_tag 'advsearch_quality_dimension', nil, :placeholder => 'Enter search terms...', :size => 50 %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</fieldset>
 <p>
 </div>

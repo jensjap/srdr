@@ -6,12 +6,15 @@
 
 <%# CREATE THE LIST OF QUESTIONS AND ANSWERS JUST LIKE THEY WOULD APPEAR IN AN EXTRACTION FORM. %>
 <% unless @questions.empty? %>
-  <% @questions.each do |q| %>
-    <label style="font-weight: bold;" for="<%= @model + '_question_' + q.question_number.to_s + '_div' %>"><%= q.question%></label>
-    <div class='field' id="<%= @model + '_question_' + q.question_number.to_s + '_div' %>">
-      <%= render :inline=>create_input(q.id, @model) %>
-    </div>
-  <% end %>
+  <fieldset>
+    <% @questions.each do |q| %>
+      <legend>Question <%= q.question_number.to_s %></legend>
+      <label style="font-weight: bold;" for="<%= @model + '_question_' + q.question_number.to_s + '_div' %>"><%= q.question%></label>
+      <div class='field' id="<%= @model + '_question_' + q.question_number.to_s + '_div' %>">
+        <%= render :inline=>create_input(q.id, @model) %>
+      </div>
+    <% end %>
+  </fieldset>
 
 <% else %>
 
