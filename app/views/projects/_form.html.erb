@@ -22,7 +22,7 @@
                 </td>
                 <td class='input top'>
                     <%= f.text_area :attribution, :rows => 4, :style => "width: 100%", :class=>"editable_field" %>
-                    <% unless @project.parent_id.nil? %>
+                    <% if @project.parent.present? %>
                       <span id='parent_info'>
                       <br/>
                       <% parent = @project.parent %>
