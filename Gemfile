@@ -31,7 +31,7 @@ gem 'axlsx'
 gem 'daemons'
 gem 'fuzzy-string-match'
 gem 'httparty', '0.11.0'
-gem 'wicked_pdf'
+gem 'wicked_pdf', '1.0.4'
 gem 'wkhtmltopdf-binary'
 gem 'jbuilder'
 
