@@ -53,7 +53,7 @@
         <div id="page-wrap">
 
             <!-- THE AHRQ BANNER MARKUP -->
-            <iframe src="/ahrq_header.html" text="AHRQ Header" title="AHRQ Header" height="130" width="1260" frameborder="0" scrolling="no" seemless>
+            <iframe src="/ahrq_header.html" text="AHRQ Header" title="AHRQ Header" height="76" width="1260" frameborder="0" scrolling="no" seemless>
                 <p>Browser does not support iframes. Please update your browser to for a better viewing experience.</p>
             </iframe>
 
@@ -77,13 +77,16 @@
                     <div id="feedback_form" style="display:none">
                         <%= render :partial => "feedback_items/feedback_form" %>
                     </div>
+
+                    <div id='main-content'></div>
                     <%= yield %>
+
                 </div>
                 <div style="clear: both;"></div>
 
                 <!-- THE AHRQ FOOTER -->
                 <div id="footer">
-                    <iframe src="/ahrq_footer.html" text="AHRQ Footer" title="AHRQ Footer" height="350" width="1260" frameborder="0" scrolling="no" seemless>
+                    <iframe src="/ahrq_footer.html" text="AHRQ Footer" title="AHRQ Footer" height="570" width="1260" frameborder="0" scrolling="no" seemless>
                         <p>Browser does not support iframes. Please update your browser to for a better viewing experience.</p>
                     </iframe>
                 </div>
