@@ -10,6 +10,8 @@ class ProjectsController < ApplicationController
     @projects = Project.where(:is_public=>true).order("updated_at DESC").limit(3)
     @projects.each_with_index do |p, idx|
       projects_json[idx] = {}
+      projects_json[idx][:created_at] = p.created_at
+      projects_json[idx][:updated_at] = p.updated_at
       projects_json[idx][:publication_requested_at] = p.publication_requested_at
       projects_json[idx][:title] = p.title
       projects_json[idx][:description] = p.description
