@@ -39,7 +39,8 @@
         <td class="data">
           <% if File.exist?("#{Rails.root}/#{excel_cache_path}project-#{@project.id}-#{ef.id}.xlsx") %>
             <% timestamp = File.mtime("#{Rails.root}#{excel_cache_path}project-#{@project.id}-#{ef.id}.xlsx") %>
-            <% url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=xlsx&dl_type=ef" %>
+            <%# url = "/projects/#{@project.id}/extraction_forms/#{ef.id}/download?format=xlsx&dl_type=ef" %>
+            <% url = "/cache/projects/project-#{@project.id}-#{ef.id}.xlsx" %>
             <a href="<%= url %>" class='download_link'><IMG SRC="/images/Disk.png" border="0"> Excel</a>
           <% else %>
             - Not Found -
