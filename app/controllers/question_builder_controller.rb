@@ -37,10 +37,10 @@ class QuestionBuilderController < ApplicationController
         @model = params[:page_name]
         @model_name = @model.dup
         @model_title = @model_name.split("_").collect{|x| x.capitalize}.join(" ")
-        @class_name = get_camel_caps(@model)
-        @question = eval(@class_name).find(qid)
+        @class = get_camel_caps(@model).constantize
+        @question = @class.find(qid)
         @fields = @question.get_fields
-        @has_study_data = eval(@class_name).has_study_data(qid)
+        @has_study_data = @class.has_study_data(qid)
         @editing = true
         puts "------------------\nleaving edit question\n----------------"
     end
