@@ -1,5 +1,5 @@
 class QuestionBuilderController < ApplicationController
-    
+
     def add_instr
         @editing = false
         @model_title = params[:model_title]
@@ -44,7 +44,7 @@ class QuestionBuilderController < ApplicationController
         @editing = true
         puts "------------------\nleaving edit question\n----------------"
     end
- 
+
     # remove_question
     # remove a given question from an extraction form
     # called by question_builder/destroy
@@ -132,18 +132,18 @@ class QuestionBuilderController < ApplicationController
         if params[@model_name.to_s][:field_type] == 'text'
             choices = []
         elsif is_matrix
-            choices = params["#{@model_name}_matrix"] 
+            choices = params["#{@model_name}_matrix"]
         else
-            choices = params["#{@model_name}_choices"] ||= []    
+            choices = params["#{@model_name}_choices"] ||= []
         end
         errors = QuestionBuilder.check_inputs(params[@model_name.to_s], choices)
 
-        if errors.length == 0 
+        if errors.length == 0
             if @saved = @model_obj.save
-            
+
                 # If it's a normally-formatted question, save the question choices and subquestions
                 unless params["#{@model_name}_choices"].nil? || @extraction_form.id.nil?
-                    QuestionBuilder.save_question_choices(params["#{@model_name}_choices"], @model_obj.id, false,params[:subquestion_text],params[:gets_sub],params[:has_subquestion], @model_name, @class_name)  
+                    QuestionBuilder.save_question_choices(params["#{@model_name}_choices"], @model_obj.id, false,params[:subquestion_text],params[:gets_sub],params[:has_subquestion], @model_name, @class_name)
                 end
 
                 # If it's a matrix question, set up the matrix options
@@ -155,14 +155,14 @@ class QuestionBuilderController < ApplicationController
                 end
                 @questions = eval(@class_name).where(:extraction_form_id => @extraction_form.id).all.sort_by{|q| q.question_number}
                 @model = @model_name.dup
-                @model_obj = eval(@class_name).new   
+                @model_obj = eval(@class_name).new
             else
                 # This will utilize built in error checking from rails (defined in the model) if they exist
                 errors << "#{@model_obj[0].to_s} #{@model_obj[0][0]}"
-                @error_html = get_error_HTML(errors)  
+                @error_html = get_error_HTML(errors)
             end
         else
-            @error_html = get_error_HTML(errors) 
+            @error_html = get_error_HTML(errors)
         end
     end
 
@@ -171,7 +171,7 @@ class QuestionBuilderController < ApplicationController
         @model_title = @model_name.split("_").collect{|x| x.capitalize}.join(" ")
         @class_name = @model_title.gsub(" ","")
         @model_obj = eval(@class_name).find(params[:qid])
-        @extraction_form = ExtractionForm.find(@model_obj.extraction_form_id) 
+        @extraction_form = ExtractionForm.find(@model_obj.extraction_form_id)
         is_matrix = params["#{@model_name}_matrix"].nil? ? false : true
         @model_obj.is_matrix = is_matrix
 
@@ -179,19 +179,19 @@ class QuestionBuilderController < ApplicationController
         if params[@model_name.to_s][:field_type] == 'text'
             choices = []
         elsif is_matrix
-            choices = params["#{@model_name}_matrix"] 
+            choices = params["#{@model_name}_matrix"]
         else
-            choices = params["#{@model_name}_choices"] ||= []    
+            choices = params["#{@model_name}_choices"] ||= []
         end
 
         errors = QuestionBuilder.check_inputs(params[@model_name.to_s], choices)
         if errors.length == 0
-            if @saved = @model_obj.update_attributes(params[@model_name])  
+            if @saved = @model_obj.update_attributes(params[@model_name])
 
                 unless @model_obj.field_type == "text"
                     # If it's a normally-formatted question, save the question choices and subquestions
                     unless params["#{@model_name}_choices"].nil? || @extraction_form.id.nil?
-                        QuestionBuilder.save_question_choices(params["#{@model_name}_choices"], @model_obj.id, true, params[:subquestion_text],params[:gets_sub],params["has_subquestion_#{@model_name}"], @model_name, @class_name)  
+                        QuestionBuilder.save_question_choices(params["#{@model_name}_choices"], @model_obj.id, true, params[:subquestion_text],params[:gets_sub],params["has_subquestion_#{@model_name}"], @model_name, @class_name)
                     end
 
                     # If it's a matrix question, set up the matrix options
@@ -207,18 +207,18 @@ class QuestionBuilderController < ApplicationController
                     fields.each do |field|
                     field.destroy
                 end
-            end   
+            end
             @model= @model_name
             @question = eval(@class_name).find(@model_obj.id)
             @questions = eval(@class_name).where(:extraction_form_id=>@extraction_form.id).order("question_number ASC")
-              
+
         else
             # This will utilize built in error checking from rails (defined in the model) if they exist
             errors << "#{@model_obj[0].to_s} #{@model_obj[0][0]}"
             @error_html = get_error_HTML(errors)
         end
     else
-          @error_html = get_error_HTML(errors) 
+          @error_html = get_error_HTML(errors)
         end
     end
 
@@ -251,12 +251,12 @@ class QuestionBuilderController < ApplicationController
     end
 
     # show_matrix_options
-    # Show options for when a user decides they want to build a matrix-style question. 
+    # Show options for when a user decides they want to build a matrix-style question.
     def show_matrix_options
         @checked = params[:checked]=='true' ? true : false
-        @column_id = 1 
+        @column_id = 1
     end
- 
+
     # Show options associated with the input method they choose.
     # for this method they are updating an already existing question/answer set
     def show_input_options_during_edit
@@ -276,7 +276,7 @@ class QuestionBuilderController < ApplicationController
     		render 'question_builder/show_choices_entry_during_edit.js.erb'
     	end
     end
- 
+
     # add_choice
     # add a choice for the given question
     def add_choice
@@ -295,7 +295,7 @@ class QuestionBuilderController < ApplicationController
         end
         render 'question_builder/add_choice.js.erb'
     end
- 
+
     # remove_choice
     # remove a choice from the question
     def remove_choice
@@ -310,17 +310,17 @@ class QuestionBuilderController < ApplicationController
             print "\n\n\nPARAMS[:FIELD ID] is #{params[:field_id].to_s}\n\n\n"
             unless params[:field_id].nil? || params[:field_id] == "0"
             	tmp = eval(field_obj).find(params[:field_id])
-            	
+
             	tmp.destroy()
             end
         end
         render 'question_builder/remove_choice.js.erb'
     end
- 
- 
-  
+
+
+
     #shift_numbers
-    # when a user selects to move a question up or down the list, update the ordering 
+    # when a user selects to move a question up or down the list, update the ordering
     def shift_numbers
         # get the number (X) off of 'question_number_X'
         @extraction_form = ExtractionForm.find(params[:extraction_form_id])
@@ -336,15 +336,15 @@ class QuestionBuilderController < ApplicationController
         @partial_name = "question_builder/extraction_form_preview"
         render "shared/render_partial.js.erb"
     end
-  
-  
+
+
     # cancel_editing
     # cancel the editing of question
     def cancel_editing
-        @model=params[:page_name]	
+        @model=params[:page_name]
         @question = eval(get_camel_caps(@model)).find(params[:qid])
 
-        # this partial will make use of the @question and @model defined above	
+        # this partial will make use of the @question and @model defined above
         @table_container = 'question_' + @question.question_number.to_s + "_div"
         @table_partial = "question_builder/show_question"
         render "shared/saved.js.erb"
@@ -357,12 +357,12 @@ class QuestionBuilderController < ApplicationController
         @div_id = params[:div_id].nil? ? "#subquestion_text_div" : params[:div_id]
         render 'question_builder/subquestions/show_subquestion_assignment'
     end
-  
+
     # show_subquestion
-    # when a user selects an radio-button-formatted answer to the question, check to see 
-    # if that field has an associated subquestion. If it does, hide any previously shown 
+    # when a user selects an radio-button-formatted answer to the question, check to see
+    # if that field has an associated subquestion. If it does, hide any previously shown
     # fields and show the correct one.
-    # The javascript rendered will change depending on the type of input being used. For 
+    # The javascript rendered will change depending on the type of input being used. For
     # example, a select element will require different actions than a radio button or checkbox.
     def show_subquestion
         @model = params[:model]
@@ -370,7 +370,7 @@ class QuestionBuilderController < ApplicationController
         @obj_id = params[:obj_id]
 
         # only the baseline characteristic will use the arm_id. leave it blank otherwise
-        @group_id = params[:group_id].empty? ? params[:group_id] : "_"+params[:group_id].to_s 
+        @group_id = params[:group_id].empty? ? params[:group_id] : "_"+params[:group_id].to_s
 
         db_table = get_camel_caps(@model)
         @input_type = params[:input_type]
@@ -391,7 +391,7 @@ class QuestionBuilderController < ApplicationController
         if @input_type == "select-one"
             @element_to_fill = "#select_#{@obj_id.to_s + @group_id}_sq_span"
         else
-            @element_to_fill = "#option_"+@option_id + @group_id+"_sq_span"	
+            @element_to_fill = "#option_"+@option_id + @group_id+"_sq_span"
         end
         unless data_field.nil?
             puts "DATA FIELD WAS FOUND\n\n"
@@ -422,7 +422,7 @@ class QuestionBuilderController < ApplicationController
             ""
         end
         render js_partial.to_s
-    end 
+    end
 
     # FAQ
     def faq
