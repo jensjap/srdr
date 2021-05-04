@@ -122,14 +122,14 @@ class ExtractionFormsController < ApplicationController
       @model = @model_name.dup  # this can be done away with but need to find all occurances and switch them to @model_name
       @model_title = @model_name.split("_").collect{|x| x.capitalize}.join(" ")
       class_name = @model_title.gsub(" ", "")
-      @model_obj = eval(class_name).new
+      @model_obj = class_name.constantize.new
       @editing = true
 
       section_lookup = {'baseline_characteristic'=>'baselines', 'design_detail' => 'design', 'arm_detail'=>'arm_details', 'outcome_detail'=>'outcome_details', 'diagnostic_test_detail'=>'diagnostic_test_details', 'quality_detail'=>'quality'}
       @extraction_form_section = ExtractionFormSection.where(:extraction_form_id => params[:extraction_form_id], :section_name => section_lookup[@model_name]).first 
       @extraction_form = ExtractionForm.find(params[:extraction_form_id])
       @extraction_form_id = @extraction_form.id
-      @questions = eval(class_name).where(:extraction_form_id => params[:extraction_form_id]).order("question_number ASC")
+      @questions = class_name.constantize.where(:extraction_form_id => params[:extraction_form_id]).order("question_number ASC")
       @section = section_lookup[@model_name]
 
       # get user-instuctions defined by the extraction form creator
