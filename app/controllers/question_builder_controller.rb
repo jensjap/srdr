@@ -120,7 +120,7 @@ class QuestionBuilderController < ApplicationController
         @model_name = params[:page_name]
         @model_title = params[:page_title]
         @class_name = @model_title.gsub(" ","")
-        @model_obj = eval(@class_name).new(params[@model_name.to_s])
+        @model_obj = @class_name.constantize.new(params[@model_name.to_s])
         is_matrix = params["#{@model_name}_matrix"].nil? ? false : true
         @model_obj.is_matrix = is_matrix
 
@@ -155,7 +155,7 @@ class QuestionBuilderController < ApplicationController
                 end
                 @questions = eval(@class_name).where(:extraction_form_id => @extraction_form.id).all.sort_by{|q| q.question_number}
                 @model = @model_name.dup
-                @model_obj = eval(@class_name).new
+                @model_obj = @class_name.constantize.new
             else
                 # This will utilize built in error checking from rails (defined in the model) if they exist
                 errors << "#{@model_obj[0].to_s} #{@model_obj[0][0]}"
