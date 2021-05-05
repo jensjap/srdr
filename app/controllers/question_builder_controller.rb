@@ -88,7 +88,7 @@ class QuestionBuilderController < ApplicationController
         @model = @model_name.dup
         class_name = get_camel_caps(@model_name)
         @question, @fields = QuestionBuilder.create_duplicate_question(params[:qid], @model_name, class_name)
-        @questions = eval(class_name).where(:extraction_form_id=>params[:efid]).order("question_number ASC")
+        @questions = class_name.constantize.where(:extraction_form_id=>params[:efid]).order("question_number ASC")
         @model_title = @model_name.split("_").collect{|x| x.capitalize}.join(" ")
         @extraction_form = ExtractionForm.find(params[:efid])
         @editing = true
@@ -103,7 +103,7 @@ class QuestionBuilderController < ApplicationController
 
     # get_camel_caps
     # a camelcaps function to accept the model as input and return a representation that can be called
-    # with eval to hit the database table.
+    # with constantize to hit the database table.
     # example: design_detail would give DesignDetail
     def get_camel_caps input
         tmp = input.split("_")
@@ -153,7 +153,7 @@ class QuestionBuilderController < ApplicationController
                     @model_obj.save
                     QuestionBuilder.save_matrix_setup(params["#{@model_name}_matrix"], @model_obj.id, @model_name, @class_name)
                 end
-                @questions = eval(@class_name).where(:extraction_form_id => @extraction_form.id).all.sort_by{|q| q.question_number}
+                @questions = @class_name.constantize.where(:extraction_form_id => @extraction_form.id).all.sort_by{|q| q.question_number}
                 @model = @model_name.dup
                 @model_obj = @class_name.constantize.new
             else
@@ -170,7 +170,7 @@ class QuestionBuilderController < ApplicationController
         @model_name = params[:page_name]
         @model_title = @model_name.split("_").collect{|x| x.capitalize}.join(" ")
         @class_name = @model_title.gsub(" ","")
-        @model_obj = eval(@class_name).find(params[:qid])
+        @model_obj = @class_name.constantize.find(params[:qid])
         @extraction_form = ExtractionForm.find(@model_obj.extraction_form_id)
         is_matrix = params["#{@model_name}_matrix"].nil? ? false : true
         @model_obj.is_matrix = is_matrix
@@ -203,14 +203,14 @@ class QuestionBuilderController < ApplicationController
                     end
                 else
                     # remove any fields associated with this question object in case there were any previously saved.
-                    fields = eval("#{@class_name}Field").where("#{@model_name}_id"=>@model_obj.id)
+                    fields = "#{@class_name}Field".constantize.where("#{@model_name}_id"=>@model_obj.id)
                     fields.each do |field|
                     field.destroy
                 end
             end
             @model= @model_name
-            @question = eval(@class_name).find(@model_obj.id)
-            @questions = eval(@class_name).where(:extraction_form_id=>@extraction_form.id).order("question_number ASC")
+            @question = @class_name.constantize.find(@model_obj.id)
+            @questions = @class_name.constantize.where(:extraction_form_id=>@extraction_form.id).order("question_number ASC")
 
         else
             # This will utilize built in error checking from rails (defined in the model) if they exist
@@ -309,7 +309,7 @@ class QuestionBuilderController < ApplicationController
             field_obj = obj+"Field"
             print "\n\n\nPARAMS[:FIELD ID] is #{params[:field_id].to_s}\n\n\n"
             unless params[:field_id].nil? || params[:field_id] == "0"
-            	tmp = eval(field_obj).find(params[:field_id])
+            	tmp = field_obj.constantize.find(params[:field_id])
 
             	tmp.destroy()
             end
@@ -331,7 +331,7 @@ class QuestionBuilderController < ApplicationController
         @obj_name = get_camel_caps(@model)
         extraction_form = params[:extraction_form_id]
         ExtractionForm.shift_questions(current_number, desired_number, @obj_name, extraction_form)
-        @questions = eval(@obj_name).where(:extraction_form_id=>params[:extraction_form_id]).order("question_number ASC")
+        @questions = @obj_name.constantize.where(:extraction_form_id=>params[:extraction_form_id]).order("question_number ASC")
         @div_name = "#{@model}_extraction_form_preview_table"
         @partial_name = "question_builder/extraction_form_preview"
         render "shared/render_partial.js.erb"
@@ -342,7 +342,7 @@ class QuestionBuilderController < ApplicationController
     # cancel the editing of question
     def cancel_editing
         @model=params[:page_name]
-        @question = eval(get_camel_caps(@model)).find(params[:qid])
+        @question = get_camel_caps(@model).constantize.find(params[:qid])
 
         # this partial will make use of the @question and @model defined above
         @table_container = 'question_' + @question.question_number.to_s + "_div"
@@ -378,10 +378,10 @@ class QuestionBuilderController < ApplicationController
         @has_sq = false
         data_field = nil
         unless @input_type == "select-one"
-            data_field = eval(db_table+"Field").find(@option_id)
+            data_field = "#{db_table}Field".constantize.find(@option_id)
         else
             ref_id = @model+"_id"
-            data_field = eval(db_table+"Field").where(ref_id=>@obj_id, :option_text=>@option_id)
+            data_field = "#{db_table}Field".constantize.where(ref_id=>@obj_id, :option_text=>@option_id)
             unless data_field.empty?
                 data_field = data_field.first
             else
