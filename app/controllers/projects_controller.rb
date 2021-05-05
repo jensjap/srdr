@@ -101,6 +101,13 @@ class ProjectsController < ApplicationController
   # show a list of extraction forms that are associated with this project
   def extractionforms
 		@project = Project.find(params[:id])
+
+    # Check authorization
+    unless User.current_user_is_collaborator(@project.id, current_user)
+      flash[:error] = "You are not authorized to access this project"
+      redirect_to projects_path
+    end
+
     @studies = @project.studies
 		@key_questions = KeyQuestion.where(:project_id => @project.id).all	
 		@extraction_forms = ExtractionForm.where(:project_id => @project.id).all

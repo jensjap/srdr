@@ -493,8 +493,9 @@ class ExtractionFormsController < ApplicationController
     # has studies associated to it, either directly or indirectly (by being associated
     # with another extraction form borrowing information from it that has studies)
     ok_to_delete = @extraction_form.can_be_removed?
+    authorized_to_edit = User.current_user_has_project_edit_privilege(@project.id, current_user)
 
-    if ok_to_delete
+    if ok_to_delete && authorized_to_edit
       @ef_outcome_columns = OutcomeColumn.where(:extraction_form_id => @extraction_form.id).all
       for tc in @ef_outcome_columns
         tc.destroy
@@ -549,7 +550,11 @@ class ExtractionFormsController < ApplicationController
       @extraction_form.destroy
       flash[:success] = "Extraction form deleted successfully."   
     else
-      flash[:error] = "You cannot delete this extraction form until any associated studies have been removed and no other extraction forms are importing data from it." 
+      if authorized_to_edit
+        flash[:error] = "You cannot delete this extraction form until any associated studies have been removed and no other extraction forms are importing data from it."
+      else
+        flash[:error] = "You are not authorized to perform this action."
+      end
     end
 
     redirect_to(project_path(@project.id) + "/extraction_forms")
