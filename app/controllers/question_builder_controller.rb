@@ -53,7 +53,7 @@ class QuestionBuilderController < ApplicationController
         question_id = params["qid"]
         page_name = params["page_name"]
         obj_name = get_camel_caps(page_name)
-        @obj = eval(obj_name).find(question_id)
+        @obj = obj_name.constantize.find(question_id)
         # if this object is a matrix dropdown, we need to remove all associated options
         if @obj.field_type == 'matrix_select'
             all_row_fields = QuestionBuilder.remove_all_matrix_dropdowns(page_name, obj_name, @obj.id)
@@ -63,13 +63,13 @@ class QuestionBuilderController < ApplicationController
         unless @obj.nil?
             ExtractionForm.update_question_numbers_after_delete(obj_name,@obj.id, @extraction_form.id)
             # remove any fields and data points that are associated with this question
-            field_ids = eval("#{obj_name}Field").where("#{page_name}_id"=>@obj.id).select("id").collect{|f| f.id}
-            dp_ids = eval("#{obj_name}DataPoint").where("#{page_name}_field_id"=>@obj.id).select("id").collect{|dps| dps.id}
-            eval("#{obj_name}Field").destroy(field_ids)
-            eval("#{obj_name}DataPoint").destroy(dp_ids)
+            field_ids = "#{obj_name}Field".constantize.where("#{page_name}_id"=>@obj.id).select("id").collect{|f| f.id}
+            dp_ids = "#{obj_name}DataPoint".constantize.where("#{page_name}_field_id"=>@obj.id).select("id").collect{|dps| dps.id}
+            "#{obj_name}Field".constantize.destroy(field_ids)
+            "#{obj_name}DataPoint".constantize.destroy(dp_ids)
             @obj.destroy
         end
-        @questions = eval(obj_name).where(:extraction_form_id=>@obj.extraction_form_id).order("question_number ASC")
+        @questions = obj_name.constantize.where(:extraction_form_id=>@obj.extraction_form_id).order("question_number ASC")
         @model = page_name
         @model_name = @model.dup
         @model_title = @model_name.split("_").collect{|x| x.capitalize}.join(" ")
