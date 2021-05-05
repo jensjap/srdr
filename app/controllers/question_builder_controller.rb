@@ -19,7 +19,7 @@ class QuestionBuilderController < ApplicationController
     def new
         @model_name = params[:model_name]
         @model_title = params[:model_title]
-        @model_obj = eval(@model_title.gsub(" ","")).new
+        @model_obj = @model_title.gsub(" ","").constantize.new
         @question = @model_obj.dup
         @editing=false
         @extraction_form = ExtractionForm.find(params[:extraction_form_id])
