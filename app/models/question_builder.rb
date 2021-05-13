@@ -19,7 +19,7 @@ class QuestionBuilder
 	# that are not in the id list
 	# HOW WILL THIS WORK IF PEOPLE HAVE ALREADY SAVED DATA??
 	def self.remove_old_choices obj_id, id_list, obj_type, obj_class
-		choices = eval("#{obj_class}Field").where("#{obj_type}_id"=>obj_id)
+		choices = "#{obj_class}Field".constantize.where("#{obj_type}_id"=>obj_id)
 		unless choices.empty?
 			choices.each do |choice|
 				#print "CHOICE: #{choice.id.to_s}, IDS: #{id_list}\n\n"
@@ -59,7 +59,7 @@ class QuestionBuilder
 				field_id = key_parts[key_parts.length-1] #the id of the field itself was on the end of the id
 				option_number = key_parts[1]
 				begin
-					tmp = eval("#{obj_class}Field").find(field_id.to_i)
+					tmp = "#{obj_class}Field".constantize.find(field_id.to_i)
 				rescue
 					tmp = nil
 				end
@@ -78,7 +78,7 @@ class QuestionBuilder
 						has_subquestion=true	
 					end
 				end
-				tmp = eval("#{obj_class}Field").new("#{obj_type}_id"=>obj_id, :option_text=>choices_hash[key], :subquestion=>subquestion_text, :has_subquestion=>has_subquestion, :row_number=>option_number)
+				tmp = "#{obj_class}Field".constantize.new("#{obj_type}_id"=>obj_id, :option_text=>choices_hash[key], :subquestion=>subquestion_text, :has_subquestion=>has_subquestion, :row_number=>option_number)
 				if !tmp.save
 					print " Saving failed.\n\n"
 					success = false
@@ -100,17 +100,17 @@ class QuestionBuilder
 				previous_row_num = tmp.row_number
 
 				# Use transactions to ensure atomicity of this update
-				eval("#{obj_class}Field").transaction do					
+				"#{obj_class}Field".constantize.transaction do					
 					if tmp.update_attributes(:option_text => choices_hash[key], :subquestion=>subquestion_text, :has_subquestion=>has_subquestion, :row_number=>option_number)
 						# update any data points that should remain associated with the new change
-						dps = eval("#{obj_class}DataPoint").find(:all, 
+						dps = "#{obj_class}DataPoint".constantize.find(:all, 
 							:conditions=>["#{obj_type}_field_id=? and value=?", tmp["#{obj_type}_id"], previous_text],
 							:select=>["id","value"])
 						unless dps.empty?
 							dp_ids = dps.collect{|dp| dp.id}
 							puts "Datapoint IDs: #{dp_ids}\n\n"
 							begin
-								eval("#{obj_class}DataPoint").update(dp_ids, [{:value=>tmp.option_text}] * dp_ids.length)
+								"#{obj_class}DataPoint".constantize.update(dp_ids, [{:value=>tmp.option_text}] * dp_ids.length)
 							rescue Exception => e
 								raise ActiveRecord::Rollback
 							end
@@ -156,8 +156,8 @@ class QuestionBuilder
 			puts "----------------\nSubmitted Rows:\n#{rows_array.join(', ')}\n\n" +
                 "Submitted Cols:\n#{columns_array.join(', ')}\n\n-------------\n"
 			# get the pre-existing rows and columns
-			existing_columns = eval("#{obj_class}Field").find(:all, :conditions=>["#{obj_type}_id = ? AND column_number > ?",obj_id, 0], :order=>"column_number ASC")
-			existing_rows = eval("#{obj_class}Field").find(:all, :conditions=>["#{obj_type}_id = ? AND (column_number = ? OR column_number IS NULL)",obj_id, 0],:order=>"row_number ASC")
+			existing_columns = "#{obj_class}Field".constantize.find(:all, :conditions=>["#{obj_type}_id = ? AND column_number > ?",obj_id, 0], :order=>"column_number ASC")
+			existing_rows = "#{obj_class}Field".constantize.find(:all, :conditions=>["#{obj_type}_id = ? AND (column_number = ? OR column_number IS NULL)",obj_id, 0],:order=>"row_number ASC")
             puts "EXISTING: \ncolumns: #{existing_columns.join(",")}\nrows:#{existing_rows.join(",")}\n\n"
 
 			# START WITH THE EXISTING ROWS
@@ -181,12 +181,12 @@ class QuestionBuilder
                         # if there are a greater number of previously entered
                         # rows than what is currently submitted, remove the old
                         # ones along with data points
-                        eval("#{obj_class}DataPoint").transaction do
-                            datapoints = eval("#{obj_class}DataPoint").find(:all, 
+                        "#{obj_class}DataPoint".constantize.transaction do
+                            datapoints = "#{obj_class}DataPoint".constantize.find(:all, 
                                 :conditions=>["row_field_id = ?", er.id], :select=>["id"])
                             unless datapoints.empty?
                                 dp_ids = datapoints.collect{|dps| dps.id}
-                                eval("#{obj_class}DataPoint").destroy(dp_ids)
+                                "#{obj_class}DataPoint".constantize.destroy(dp_ids)
                             end
 
                             er.destroy
@@ -211,7 +211,7 @@ class QuestionBuilder
                     r = rows_array[i].strip
                     unless r.blank?
                         row_total += 1
-                        newRow = eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>r, :column_number=>0, :row_number=>row_total)
+                        newRow = "#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>r, :column_number=>0, :row_number=>row_total)
                         row_ids[newRow.row_number] = newRow.id
                     end
                 end
@@ -219,7 +219,7 @@ class QuestionBuilder
 
             # DETERMINE IF WE ALREADY FOUND THE OTHER ROW AND IF NOT, CREATE IT IF NECESSARY
             if is_other && !found_other
-                eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>"Other (please specify):", :column_number=>0, :row_number=>-1)
+                "#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>"Other (please specify):", :column_number=>0, :row_number=>-1)
             end
 
             # NOW THE EXISTING COLUMNS
@@ -230,22 +230,22 @@ class QuestionBuilder
                 # if the existing columns list has grown longer than that submitted, 
                 # then we will be deleting the older ones as well as associated data points
                 if columns_array[index].nil?
-                    eval("#{obj_class}DataPoint").transaction do
+                    "#{obj_class}DataPoint".constantize.transaction do
                         # DROPDOWN COLUMNS
                         if is_dropdown
                             # for dropdown matrices
-                            datapoints = eval("#{obj_class}DataPoint").find(:all, 
+                            datapoints = "#{obj_class}DataPoint".constantize.find(:all, 
                                 :conditions=>["column_field_id = ?", ec.id], :select=>["id"])
                             unless datapoints.empty?
-                                eval("#{obj_class}DataPoint").destroy(datapoints.collect{|x| x.id})
+                                "#{obj_class}DataPoint".constantize.destroy(datapoints.collect{|x| x.id})
                             end
                         # NON-DROPDOWN columns
                         else
                             # for non-dropdown matrices (radio button or checkbox)
-                            datapoints = eval("#{obj_class}DataPoint").find(:all,
+                            datapoints = "#{obj_class}DataPoint".constantize.find(:all,
                                 :conditions=>["#{obj_type}_field_id=? AND value=?",obj_id,ec.option_text],:select=>["id"])
                             unless datapoints.empty?
-                                eval("#{obj_class}DataPoint").destroy(datapoints.collect{|x| x.id})
+                                "#{obj_class}DataPoint".constantize.destroy(datapoints.collect{|x| x.id})
                             end
                         end
                         # and once the datapoints are gone, destroy the option itself
@@ -256,16 +256,16 @@ class QuestionBuilder
                 # simply update the associated values
                     columns_array[index].strip!
                     unless ec.option_text == columns_array[index]
-                        eval("#{obj_class}Field").transaction do
+                        "#{obj_class}Field".constantize.transaction do
                             # update values for any data points saved with this column
                             # (this does not apply to dropdowns since they have their own
                             #  sets of values that users choose from)
                             unless is_dropdown
-                                datapoints = eval("#{obj_class}DataPoint").find(:all, 
+                                datapoints = "#{obj_class}DataPoint".constantize.find(:all, 
                                     :conditions=>["#{obj_type}_field_id=? AND value = ?",obj_id,ec.option_text],:select=>['id'])
                                 # update the existing datapoints to reflect the change in value
                                 unless datapoints.empty?
-                                    eval("#{obj_class}DataPoint").update(datapoints.collect{|x| x.id}, 
+                                    "#{obj_class}DataPoint".constantize.update(datapoints.collect{|x| x.id}, 
                                         [{:value=>columns_array[index]}] * datapoints.length)
                                 end
                             end
@@ -283,7 +283,7 @@ class QuestionBuilder
                     c = columns_array[i].strip
                     unless c.blank?
                         column_total += 1
-                        newColumn= eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>c, :column_number=>column_total, :row_number=>0)
+                        newColumn= "#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>c, :column_number=>column_total, :row_number=>0)
                         column_ids[newColumn.column_number] = newColumn.id
                     end
                 end
@@ -315,10 +315,10 @@ class QuestionBuilder
                                 if cell_options[index].nil?
                                     puts "The new cell options don't have an index of #{index}. Should delete this one...\n"
                                     MatrixDropdownOption.transaction do
-                                        datapoints = eval("#{obj_class}DataPoint").find(:all, 
+                                        datapoints = "#{obj_class}DataPoint".constantize.find(:all, 
                                             :conditions=>["row_field_id=? AND column_field_id=? AND value=?",r_id,c_id,eo.option_text],
                                             :select=>["id"])
-                                        eval("#{obj_class}DataPoint").destroy_all(:id => datapoints.collect{|x| x.id}) unless datapoints.empty?
+                                        "#{obj_class}DataPoint".constantize.destroy_all(:id => datapoints.collect{|x| x.id}) unless datapoints.empty?
                                         puts "DESTROYING #{eo.option_text} - #{eo.id}\n\n"    
                                         eo.destroy   
 
@@ -329,12 +329,12 @@ class QuestionBuilder
                                     cell_options[index].strip!
                                     unless eo.option_text == cell_options[index]
                                         MatrixDropdownOption.transaction do 
-                                            datapoints = eval("#{obj_class}DataPoint").find(:all, 
+                                            datapoints = "#{obj_class}DataPoint".constantize.find(:all, 
                                             :conditions=>["row_field_id=? AND column_field_id=? AND value=?",r_id,c_id,eo.option_text.to_s],
                                             :select=>["id"])
                                             # update datapoints if there are any
                                             unless datapoints.empty?
-                                                eval("#{obj_class}DataPoint").update(datapoints.collect{|x| x.id},
+                                                "#{obj_class}DataPoint".constantize.update(datapoints.collect{|x| x.id},
                                                     [{:value=>cell_options[index]}] * datapoints.length)
                                             end
                                             eo.option_text = cell_options[index]
@@ -374,7 +374,7 @@ class QuestionBuilder
 				row_num = 1
 				rows_array.each do |r|
 					unless r.blank?
-						eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>r.strip, :column_number=>0, :row_number=>row_num)
+						"#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>r.strip, :column_number=>0, :row_number=>row_num)
 						row_num += 1
 					end
 				end
@@ -383,14 +383,14 @@ class QuestionBuilder
 				col_num = 1
 				columns_array.each do |c|
 					unless c.blank?
-						eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>c.strip, :column_number=>col_num, :row_number=>0)
+						"#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>c.strip, :column_number=>col_num, :row_number=>0)
 						col_num += 1
 					end
 				end
 				# determine if the creator wanted their users the ability to enter 'other' information for the matrix
 				provide_other_row = matrix_options["allow_other_row"].nil? ? false : matrix_options["allow_other_row"] == "on" ? true : false
 				if provide_other_row
-					eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>"Other (please specify):", :row_number=>-1, :column_number=>0)
+					"#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>"Other (please specify):", :row_number=>-1, :column_number=>0)
 				end	
 			else
 			# if there are dropdown options then we need to save the dropdown matrix
@@ -399,13 +399,13 @@ class QuestionBuilder
 				new_columns = Hash.new()
 				rows.keys.each do |rowkey|
 					rowtext = rows[rowkey].blank? ? "Row #{rowkey}" : rows[rowkey]
-					row_field = eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>rowtext, :column_number=>0, :row_number=>rowkey.to_i)
+					row_field = "#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>rowtext, :column_number=>0, :row_number=>rowkey.to_i)
 					
 					# for each column create a new field option with the proper column number
 					columns.keys.each do |columnkey|
 						unless new_columns.keys.include?(columnkey)
 							optText = columns[columnkey].blank? ? "Column #{columnkey}" : columns[columnkey]
-							column_field = eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>optText, :column_number=>columnkey, :row_number=>0)
+							column_field = "#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>optText, :column_number=>columnkey, :row_number=>0)
 							new_columns[columnkey] = column_field
 						end
 						
@@ -423,7 +423,7 @@ class QuestionBuilder
 				# determine if the creator wanted their users the ability to enter 'other' information for the matrix
 				provide_other_row = matrix_options["allow_other_row"].nil? ? false : matrix_options["allow_other_row"] == "on" ? true : false
 				if provide_other_row
-					eval("#{obj_class}Field").create("#{obj_type}_id"=>obj_id, :option_text=>"Other (please specify):", :row_number=>-1, :column_number=>0)
+					"#{obj_class}Field".constantize.create("#{obj_type}_id"=>obj_id, :option_text=>"Other (please specify):", :row_number=>-1, :column_number=>0)
 				end	
 			
 			end
@@ -441,13 +441,13 @@ class QuestionBuilder
 	# @return question   - the newly created question object
 	# @return fields     - the fields associated with the new question
 	def self.create_duplicate_question question_id, model, class_name
-		question = eval(class_name).find(question_id)
+		question = class_name.constantize.find(question_id)
 		
 		# get attributes associated with the object
 		attrs = question.attributes
 
 		# create a new, duplicate copy of this object
-		new_question = eval(class_name).new()
+		new_question = class_name.constantize.new()
 		new_question.question = "#{attrs['question']} (DUPLICATED)"
 		new_question.extraction_form_id = attrs["extraction_form_id"]
 		new_question.field_type = attrs["field_type"]
@@ -462,10 +462,10 @@ class QuestionBuilder
 		new_options = []
 		field_map = Hash.new()
 
-		fields = eval("#{class_name}Field").where("#{model}_id" => question.id)
+		fields = "#{class_name}Field".constantize.where("#{model}_id" => question.id)
 		fields.each do |field|
 			f_attrs = field.attributes
-			new_field = eval("#{class_name}Field").new()
+			new_field = "#{class_name}Field".constantize.new()
 			new_field["#{model}_id"] = new_question.id
 			new_field.option_text = field.option_text
 			new_field.subquestion = field.subquestion
@@ -495,7 +495,7 @@ class QuestionBuilder
 	# row fields associated with the matrix, and destroy any matching MatricDropdownOption values.
 	def self.remove_all_matrix_dropdowns model_name, class_name, obj_id
 
-		rows = eval("#{class_name}Field").find(:all, :conditions=>["#{model_name}_id=? AND row_number > ?",obj_id, 0], :select=>"id")
+		rows = "#{class_name}Field".constantize.find(:all, :conditions=>["#{model_name}_id=? AND row_number > ?",obj_id, 0], :select=>"id")
 		options = MatrixDropdownOption.where(:model_name=>model_name, :row_id=>rows.collect{|x| x.id})
 		options.each do |opt|
 			opt.destroy
@@ -578,7 +578,7 @@ class QuestionBuilder
 		hashed_questions[:page_title] = "Study " + model_name.gsub("_"," ").titleize + "s"
 		
 		model = STRING_TO_MODEL[model_name].to_s
-		questions = eval(model).questions_for_ef(extraction_form_id)
+		questions = model.constantize.questions_for_ef(extraction_form_id)
 
 		hashed_questions[:num_questions] = questions.length
 		hashed_questions[:questions] = Array.new()
@@ -590,10 +590,10 @@ class QuestionBuilder
 		
 		question_ids = questions.collect{|q| q.id}
 		# get fields assocated with all of the questions
-		fields = eval("#{model}Field").all_fields_for_questions(question_ids, model_name)
+		fields = "#{model}Field".constantize.all_fields_for_questions(question_ids, model_name)
 
 		# get datapoints associated with all of the questions
-		datapoints = eval("#{model}DataPoint").all_datapoints_for_study(question_ids, study_id, model_name)
+		datapoints = "#{model}DataPoint".constantize.all_datapoints_for_study(question_ids, study_id, model_name)
 
 		section_name = model_name.gsub("_","").pluralize
 		comments = Comment.find(:all, :conditions=>["section_name=? AND section_id IN (?) AND study_id=? "\
@@ -619,6 +619,7 @@ class QuestionBuilder
 			}
 			
 			# now add the fields and answers to the hash
+            model_name = model_name.gsub("`", "")
 			q_fields = fields.select{|f| eval("f.#{model_name}_id == q.id")}
 			q_datapoints = datapoints.select{|dp| eval("dp.#{model_name}_field_id == q.id")}
 
