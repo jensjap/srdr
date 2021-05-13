@@ -1,6 +1,6 @@
 <%# find out how many questions there are total for this particular list %>
 <% obj_type = get_camel_caps(@model) %>
-<% max_num = eval(obj_type).where(:extraction_form_id=>@extraction_form.id).maximum("question_number") %>
+<% max_num = obj_type.constantize.where(:extraction_form_id=>@extraction_form.id).maximum("question_number") %>
 <% max_num = max_num.nil? ? 1 : max_num %>
 <% num_options = (1..max_num).to_a.collect{|x| [x,x]} %>
 <% display = @extraction_form_section.nil? ? 'block' : @extraction_form_section.included ? 'block' : 'none' %>
