@@ -270,7 +270,7 @@ module ApplicationHelper
 
         obj_id = object_id
         obj_string = get_camel_caps(model_name)
-        obj = eval(obj_string).find(obj_id)
+        obj = obj_string.constantize.find(obj_id)
         obj_type = obj.field_type
         subq_field_name = model_name + "_sub[" + obj_id.to_s + "]"
         editing = @study.nil?
@@ -282,7 +282,7 @@ module ApplicationHelper
             # if this is a text field there are no options. otherwise, get the options
             unless obj_type == "text"
                 # gather options for this field
-                question_choices = eval(obj_string + "Field").where(model_name + "_id" => obj_id).order("row_number ASC")
+                question_choices = (obj_string + "Field").constantize.where(model_name + "_id" => obj_id).order("row_number ASC")
                 options = question_choices.collect{|opt| opt.option_text}
 
             end
@@ -424,10 +424,9 @@ module ApplicationHelper
 
         input_type = question_type.split("_")[1]
         array_indicator = input_type == "checkbox" ? "[]" : ""
-        rows = eval("#{classname}Field").find(:all, :conditions=>["#{model_name}_id=? AND row_number > ?",question.id, 0], :order=>"row_number ASC")
-        cols = eval("#{classname}Field").find(:all, :conditions=>["#{model_name}_id=? AND column_number > ?",question.id, 0], :order=>"column_number ASC")
-        other_rows = eval("#{classname}Field").find(:all, :conditions=>["#{model_name}_id=? AND row_number < ?",question.id, 0], :order=>"row_number DESC")
-        # other_col = eval("#{classname}Field").find(:all, :conditions=>["#{model_name}_id=? AND column_number < ?",question.id, 0], :order=>"column_number DESC")
+        rows = ("#{classname}Field").constantize.find(:all, :conditions=>["#{model_name}_id=? AND row_number > ?",question.id, 0], :order=>"row_number ASC")
+        cols = ("#{classname}Field").constantize.find(:all, :conditions=>["#{model_name}_id=? AND column_number > ?",question.id, 0], :order=>"column_number ASC")
+        other_rows = ("#{classname}Field").constantize.find(:all, :conditions=>["#{model_name}_id=? AND row_number < ?",question.id, 0], :order=>"row_number DESC")
         retVal = "<table class='matrix_question' id='question_#{question.id}_matrix'>"
         unless editing
             selected_options = input_type=='select' ? get_selected_for_dropdown_matrix(question,model_name,arm_id) : get_selected_for_matrix(question,model_name,arm_id)
@@ -576,7 +575,7 @@ module ApplicationHelper
     # get the value of the item that should be selected for any
     # of the input methods above.
     def get_selected(id, model, obj_string)
-        selection = eval(obj_string + "DataPoint").where(model+"_field_id"=>id, :study_id=>session[:study_id])
+        selection = (obj_string + "DataPoint").constantize.where(model+"_field_id"=>id, :study_id=>session[:study_id])
         retVal = []
         unless selection.empty? || selection.nil?
             selection.each do |detail|
@@ -594,9 +593,9 @@ module ApplicationHelper
         obj_string = get_camel_caps(model)
         selections = ""
         if arm_id.nil?
-            selections = eval(obj_string + "DataPoint").where(model+"_field_id"=>qid, :study_id=>session[:study_id])
+            selections = (obj_string + "DataPoint").constantize.where(model+"_field_id"=>qid, :study_id=>session[:study_id])
         else
-            selections = eval(obj_string + "DataPoint").where(model+"_field_id"=>qid, :study_id=>session[:study_id], :arm_id=>arm_id)
+            selections = (obj_string + "DataPoint").constantize.where(model+"_field_id"=>qid, :study_id=>session[:study_id], :arm_id=>arm_id)
         end
 
         selections.each do |sel|
@@ -619,9 +618,9 @@ module ApplicationHelper
         arm_string = arm_id.nil? ? "" : "-#{arm_id}"
         selections = ""
         if arm_id.nil?
-            selections = eval(obj_string + "DataPoint").where(model+"_field_id"=>qid, :study_id=>session[:study_id])
+            selections = (obj_string + "DataPoint").constantize.where(model+"_field_id"=>qid, :study_id=>session[:study_id])
         else
-            selections = eval(obj_string + "DataPoint").where(model+"_field_id"=>qid, :study_id=>session[:study_id], :arm_id=>arm_id)
+            selections = (obj_string + "DataPoint").constantize.where(model+"_field_id"=>qid, :study_id=>session[:study_id], :arm_id=>arm_id)
         end
 
         selections.each do |sel|
@@ -649,7 +648,7 @@ module ApplicationHelper
         coder = HTMLEntities.new # create a coder to code value fields for each question
         obj_id = object_id.to_s
         obj_string = get_camel_caps(model_name)
-        obj = eval(obj_string).find(obj_id)
+        obj = obj_string.constantize.find(obj_id)
         obj_type = obj.field_type
         subq_field_name = "#{model_name}_sub[#{obj_id.to_s}-#{arm_id.to_s}]"
 
@@ -661,7 +660,7 @@ module ApplicationHelper
             # if this is a text field there are no options. otherwise, get the options
             unless obj_type == "text"
                 # gather options for this field
-                question_choices = eval(obj_string + "Field").where(model_name + "_id" => obj_id).order("row_number ASC")
+                question_choices = (obj_string + "Field").constantize.where(model_name + "_id" => obj_id).order("row_number ASC")
                 options = question_choices.collect{|opt| opt.option_text}
             end
             chosen_values = []
@@ -810,7 +809,7 @@ module ApplicationHelper
     # @param [string] obj_string
     # @return [string]
     def get_selected_by_arm(id, arm, model, obj_string)
-        selection = eval(obj_string + "DataPoint").where(model+"_field_id"=>id, :arm_id=>arm,:study_id=>session[:study_id])
+        selection = (obj_string + "DataPoint").constantize.where(model+"_field_id"=>id, :arm_id=>arm,:study_id=>session[:study_id])
 
         retVal = []
         unless selection.empty?

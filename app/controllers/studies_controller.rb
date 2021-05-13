@@ -615,7 +615,7 @@ class StudiesController < ApplicationController
             @project = Project.find(params[:project_id])
             model = @ef.is_diagnostic == true ? "DiagnosticTest" : "Arm"
             puts "\n\n-----------------\n\nStudy: #{@study.id}\nEF: #{@ef.id}\n\n"
-            @arms_or_tests = eval(model).where(:study_id=>@study.id, :extraction_form_id=>@ef.id)
+            @arms_or_tests = model.constantize.where(:study_id=>@study.id, :extraction_form_id=>@ef.id)
             @outcomes = Outcome.find(:all, :conditions=>["study_id=? AND extraction_form_id=?",@study.id, @ef.id], :order=>["outcome_type ASC, title ASC"])
             @cont_outcomes = @outcomes.select{|x| x.outcome_type == "Continuous"}
             @cat_outcomes = @outcomes.select{|x| x.outcome_type == "Categorical"}

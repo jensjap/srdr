@@ -475,7 +475,7 @@ class ExcelExport
 		current_col = 5
 
 		# GET ALL OF THE QUESTIONS 
-		questions = eval(db_model).where(:extraction_form_id=>ef.id).order("question_number ASC")
+		questions = db_model.constantize.where(:extraction_form_id=>ef.id).order("question_number ASC")
 		unless questions.empty?
 		    
 			# LOOP THROUGH THE DESIGN DETAILS
@@ -493,9 +493,9 @@ class ExcelExport
 				
 				# IF IT'S A MATRIX QUESTION, SET UP THE MERGED HEADER AND COLUMN/ROW COMBINATIONS
 				if ques.field_type.match("matrix")
-					matrix_rows = eval("#{db_model}Field").find(:all, :conditions=>["#{model_name}_id=? AND row_number > ?",ques.id, 0], :order=>"row_number ASC")
-  					matrix_cols = eval("#{db_model}Field").find(:all, :conditions=>["#{model_name}_id=? AND column_number > ?",ques.id, 0], :order=>"column_number ASC")
-  					matrix_other = eval("#{db_model}Field").find(:all, :conditions=>["#{model_name}_id=? AND row_number < ?",ques.id, 0], :order=>"row_number DESC")
+					matrix_rows = "#{db_model}Field".constantize.find(:all, :conditions=>["#{model_name}_id=? AND row_number > ?",ques.id, 0], :order=>"row_number ASC")
+  					matrix_cols = "#{db_model}Field".constantize.find(:all, :conditions=>["#{model_name}_id=? AND column_number > ?",ques.id, 0], :order=>"column_number ASC")
+  					matrix_other = "#{db_model}Field".constantize.find(:all, :conditions=>["#{model_name}_id=? AND row_number < ?",ques.id, 0], :order=>"row_number DESC")
   					if ques.field_type == 'matrix_select'
 	  					num_columns_needed = matrix_cols.length * matrix_rows.length + matrix_other.length
 	  					
