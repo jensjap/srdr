@@ -157,7 +157,7 @@ class ExtractionForm < ActiveRecord::Base
     # @return [integer] the next question number
     def self.get_next_question_number obj_type, extraction_form_id
         next_num = 1
-        last = eval(obj_type).where(:extraction_form_id=>extraction_form_id).order("question_number ASC").last
+        last = obj_type.constantize.where(:extraction_form_id=>extraction_form_id).order("question_number ASC").last
         unless last.nil?
             next_num = last.question_number + 1
         end
@@ -174,12 +174,12 @@ class ExtractionForm < ActiveRecord::Base
     def self.shift_questions(current_num, new_num, obj_type, extraction_form_id)
         current_num = current_num.to_i
         new_num = new_num.to_i
-        question_to_change = eval(obj_type).where(:extraction_form_id=>extraction_form_id, :question_number=>current_num).first
+        question_to_change = obj_type.constantize.where(:extraction_form_id=>extraction_form_id, :question_number=>current_num).first
         unless question_to_change.nil?
             if new_num < current_num
                 n = current_num - 1
                 while(n > new_num-1)
-                    tmp = eval(obj_type).where(:extraction_form_id=>extraction_form_id, :question_number => n).first
+                    tmp = obj_type.constantize.where(:extraction_form_id=>extraction_form_id, :question_number => n).first
                     unless tmp.nil?
                         tmp.question_number = n + 1
                         tmp.save
@@ -188,7 +188,7 @@ class ExtractionForm < ActiveRecord::Base
                 end
             elsif new_num > current_num
                 for n in current_num+1..new_num
-                    tmp=eval(obj_type).where(:extraction_form_id=>extraction_form_id,:question_number=>n).first
+                    tmp=obj_type.constantize.where(:extraction_form_id=>extraction_form_id,:question_number=>n).first
                     unless tmp.nil?
                         tmp.question_number = n-1
                         tmp.save
@@ -207,11 +207,11 @@ class ExtractionForm < ActiveRecord::Base
     # @param [integer] extraction_form_id
     def self.update_question_numbers_after_delete(obj, obj_id, extraction_form_id)
         # get the question number of the object being deleted
-        q = eval(obj).find(obj_id)
+        q = obj.constantize.find(obj_id)
         current = q.question_number.to_i
-        max = eval(obj).where(:extraction_form_id=>extraction_form_id).maximum("question_number").to_i
+        max = obj.constantize.where(:extraction_form_id=>extraction_form_id).maximum("question_number").to_i
         for n in current+1..max
-            tmp = eval(obj).where(:extraction_form_id=>extraction_form_id, :question_number=>n).first
+            tmp = obj.constantize.where(:extraction_form_id=>extraction_form_id, :question_number=>n).first
             unless tmp.nil?
                 tmp.question_number = n-1
                 tmp.save
@@ -758,18 +758,20 @@ class ExtractionForm < ActiveRecord::Base
                 puts "---------------------------\n"
                 puts "---------------------------\n"
                 puts "STARTING ON #{section} -- #{model}\n\n"
-                questions = eval("#{model}").find(:all, :conditions=>["extraction_form_id=?",ef.id])
-                fields = eval("#{model}Field").find(:all, :conditions=>["#{section}_id IN (?)",questions.collect{|x| x.id}])
+                questions = "#{model}".constantize.find(:all, :conditions=>["extraction_form_id=?",ef.id])
+                fields = "#{model}Field".constantize.find(:all, :conditions=>["#{section}_id IN (?)",questions.collect{|x| x.id}])
                 questions.each do |q|
                     # clone the question
-                    myq = eval("#{model}").create(:extraction_form_id => new_ef.id, :question=>q.question, 
+                    myq = "#{model}".constantize.create(:extraction_form_id => new_ef.id, :question=>q.question, 
                         :field_type=>q.field_type, :question_number=>q.question_number, 
                         :instruction=>q.instruction, :is_matrix=>q.is_matrix, :include_other_as_option=>q.include_other_as_option)
+                    section = section.gsub("`", "")
                     eval("#{section}_id_map")[q.id] = myq.id
                     # find any associated fields and clone them as well
                     myfields = fields.select{|f| f["#{section}_id"] == q.id}
                     unless myfields.empty?
                         myfields.each do |field|
+                            model = model.gsub("`", "")
                             newField = eval("#{model}Field").create("#{section}_id"=>myq.id, :option_text=>field.option_text,
                                 :subquestion=>field.subquestion,:has_subquestion=>field.has_subquestion,
                                 :row_number=>field.row_number,:column_number=>field.column_number)
@@ -895,11 +897,11 @@ class ExtractionForm < ActiveRecord::Base
             puts "---------------------------\n"
             puts "---------------------------\n"
             puts "STARTING ON #{section} -- #{model}\n\n"
-            questions = eval("#{model}").find(:all, :conditions=>["extraction_form_id=?",self.id])
-            fields = eval("#{model}Field").find(:all, :conditions=>["#{section}_id IN (?)",questions.collect{|x| x.id}])
+            questions = "#{model}".constantize.find(:all, :conditions=>["extraction_form_id=?",self.id])
+            fields = "#{model}Field".constantize.find(:all, :conditions=>["#{section}_id IN (?)",questions.collect{|x| x.id}])
             questions.each do |q|
                 # clone the question
-                myq = eval("Eft#{model}").create(:extraction_form_template_id => eft.id, :question=>q.question, 
+                myq = "Eft#{model}".constantize.create(:extraction_form_template_id => eft.id, :question=>q.question, 
                     :field_type=>q.field_type, :question_number=>q.question_number, 
                     :instruction=>q.instruction, :is_matrix=>q.is_matrix, :include_other_as_option=>q.include_other_as_option)
 
@@ -908,7 +910,7 @@ class ExtractionForm < ActiveRecord::Base
                 unless myfields.empty?
                     myfields.each do |field|
                         puts ("OPTION TEXT: "+field.option_text)
-                        newField = eval("Eft#{model}Field").create("eft_#{section}_id"=>myq.id, :option_text=>"#{field.option_text}",
+                        newField = "Eft#{model}Field".constantize.create("eft_#{section}_id"=>myq.id, :option_text=>"#{field.option_text}",
                             :subquestion=>field.subquestion,:has_subquestion=>field.has_subquestion,
                             :row_number=>field.row_number,:column_number=>field.column_number)
                         field_id_map[field.id] = newField.id # record the mapping between old and new ids
