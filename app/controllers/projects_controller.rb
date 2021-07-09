@@ -297,14 +297,14 @@ class ProjectsController < ApplicationController
   # new
   # create a new systematic review project
   def new
-    @project = Project.new
-		@key_question = KeyQuestion.new
-		num = current_user.id * -1
-		@key_questions = KeyQuestion.where(:project_id => num).all.sort_by{|obj|obj.question_number}
-		@key_questions.each do |kq|
-			kq.destroy
-		end
-		@key_questions = KeyQuestion.where(:project_id => num).all.sort_by{|obj|obj.question_number}
+  #   @project = Project.new
+		# @key_question = KeyQuestion.new
+		# num = current_user.id * -1
+		# @key_questions = KeyQuestion.where(:project_id => num).all.sort_by{|obj|obj.question_number}
+		# @key_questions.each do |kq|
+		# 	kq.destroy
+		# end
+		# @key_questions = KeyQuestion.where(:project_id => num).all.sort_by{|obj|obj.question_number}
   end
 
   # edit
@@ -325,45 +325,46 @@ class ProjectsController < ApplicationController
   # create
   # create a new systematic review project
   def create
-  	@project = Project.new(params[:project])
-    if defined?(params[:key_questions]) && !params[:key_questions].nil?
-	    if @saved = @project.save
-				#params[:key_questions].each do |keyq|
-				#	kq = KeyQuestion.find(keyq[0].to_s)
-				#	kq.project_id = @project.id
-				#	kq.save
-				#end
-				@project_kqs = KeyQuestion.where(:project_id => current_user.id * -1).all
+    redirect_to action: "index"
+  	# @project = Project.new(params[:project])
+   #  if defined?(params[:key_questions]) && !params[:key_questions].nil?
+	  #   if @saved = @project.save
+			# 	#params[:key_questions].each do |keyq|
+			# 	#	kq = KeyQuestion.find(keyq[0].to_s)
+			# 	#	kq.project_id = @project.id
+			# 	#	kq.save
+			# 	#end
+			# 	@project_kqs = KeyQuestion.where(:project_id => current_user.id * -1).all
 				
-				@project_kqs.each do |keyq|
-					keyq.project_id = @project.id
-					keyq.save
-				end
+			# 	@project_kqs.each do |keyq|
+			# 		keyq.project_id = @project.id
+			# 		keyq.save
+			# 	end
 				
-				#save user as creator and create user role
-				if !current_user.nil?
-					@project.creator_id = current_user.id
-					@project.save
-					@user_role = UserProjectRole.new
-					@user_role.user_id = current_user.id
-					@user_role.project_id = @project.id
-					@user_role.role = "lead"
-					@user_role.save
-				end
+			# 	#save user as creator and create user role
+			# 	if !current_user.nil?
+			# 		@project.creator_id = current_user.id
+			# 		@project.save
+			# 		@user_role = UserProjectRole.new
+			# 		@user_role.user_id = current_user.id
+			# 		@user_role.project_id = @project.id
+			# 		@user_role.role = "lead"
+			# 		@user_role.save
+			# 	end
 
-				@key_questions = KeyQuestion.where(:project_id => @project.id).all.sort_by{|obj|obj.question_number}
-        @key_question = KeyQuestion.new
-			else		
-				params[:key_questions].each do |keyq|
-					kq = KeyQuestion.find(keyq[0].to_s)
-					kq.destroy
-				end
-				problem_html = create_error_message_html(@project.errors)
-				flash[:error] = problem_html
-    	end
- 		else
-    	flash[:error] = "- A project is required to have at least one associated key question."
-    end
+			# 	@key_questions = KeyQuestion.where(:project_id => @project.id).all.sort_by{|obj|obj.question_number}
+   #      @key_question = KeyQuestion.new
+			# else		
+			# 	params[:key_questions].each do |keyq|
+			# 		kq = KeyQuestion.find(keyq[0].to_s)
+			# 		kq.destroy
+			# 	end
+			# 	problem_html = create_error_message_html(@project.errors)
+			# 	flash[:error] = problem_html
+   #  	end
+ 		# else
+   #  	flash[:error] = "- A project is required to have at least one associated key question."
+   #  end
   end
   
   # update

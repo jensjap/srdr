@@ -59,7 +59,7 @@
 
     <div id='login-window'>
         <div id='login-div'>
-            To contribute data or comment on deposited projects, simply <%= link_to "Register", register_path, {:title=>"Register for a new account", :class=>'register_link'} %> for an account.<br/><br/><br/>
+            To contribute data or comment on deposited projects, simply <%= link_to "Register", "https://srdrplus.ahrq.gov/users/sign_up", {:title=>"Register for a new account", :class=>'register_link'} %> for an account.<br/><br/><br/>
             <div id='login_form_div'>
                 <%  if !defined?(current_user) || current_user.nil? %>
                     <%= render "user_sessions/login_form", :locals => {:user_session => @user_session} %>

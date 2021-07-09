@@ -11,9 +11,9 @@ class UsersController < ApplicationController
 
     # show the user registration screen
     def new
-        @user = User.new
-        @page_title = "Register"
-        @editing = false
+        # @user = User.new
+        # @page_title = "Register"
+        # @editing = false
     end
 
     # register a new user

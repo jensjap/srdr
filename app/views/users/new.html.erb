@@ -1,57 +1,7 @@
 <% content_for :title, content='Registration' %>
 
-<%
-
-    # Get site properties
-    siteproperties = session[:guiproperties]
-    siteproperties = nil
-    if siteproperties.nil?
-        siteproperties = Guiproperties.new
-        session[:guiproperties] = siteproperties
-    end
-%>
-<div id='left-navigation-div' tabindex=100>
-
-</div>
-<div id='content' tabindex=200>
-
-<%= render "layouts/info_messages" %>
-<%
-    if (siteproperties.isSiteTypeProduction())
-%>
-<div style='width:150px;float:right;border:1px solid black;padding:5px;'>
-  <p>Form Approved</p>
-  <p>OMB No. 0935-0244</p>
-  <p>Exp. Date 10/31/2022</p>
-</div> 
-<h1>Want to try SRDR before registering?</h1><br/>
-<div class='indented-text' style='width: 500px;'>
-<br/>The SRDR training site gives users an unrestricted space for exploring what the system has to offer. Unlike the regular SRDR site, no certification is required to use this service and to access the data extraction interface. <br/><br/>
-To access the training site, visit <a href='https://srdr.training.ahrq.gov' target='_blank'>https://srdr.training.ahrq.gov</a>.
-<br/><br/><strong>WARNING</strong>: the training site cannot be relied upon for permanent data storage and sharing, and should be used only for training and exploration purposes.<br/><br/>
-Any questions regarding the training site can be directed to the SRDR team at <a href='mailto: SRDR@ahrq.hhs.gov'>SRDR@ahrq.hhs.gov</a>
-<br/> 
-</div><br/>
-<%
-    else
-%>
-<h1>Training SRDR Account Registration</h1><br/>
-<div class='indented-text' style='width: 500px;'>
-<strong>WARNING</strong>: the training site cannot be relied upon for permanent data storage and sharing, and should be used only for training and exploration purposes.<br/><br/>
-Any questions regarding the training site can be directed to the SRDR team at <a href='mailto: SRDR@ahrq.hhs.gov'>SRDR@ahrq.hhs.gov</a>
-<br/> 
-</div><br/>
-<%
-    end
-%>
-<h1>Create A New SRDR User Account</h1>
-<br/>
-<div class="indented-text">
-To begin creating and collaborating on systematic reviews in SRDR, fill out the form below.
-<br/><br/>
-
-<%= render 'users/form' %>
-
-</div>
-
+<div style="height: 500px; margin-left: 200px;">
+    <h1>SRDR no longer accepts creation of New User Accounts.</h1>
+    <br>
+    <h2>Please use the new website at <a href="https://srdrplus.ahrq.gov">https://srdrplus.ahrq.gov</a> to register a new account.</h2>
 </div>

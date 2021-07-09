@@ -1,54 +1,5 @@
-<div id='left-navigation-div' tabindex=100>
-	<%= render :partial => "sidebars/project_sidebar" %>
+<div style="height: 500px; margin-left: 200px;">
+    <h1>SRDR no longer accepts creation of New Projects.</h1>
+    <br>
+    <h2>Please use the new website at <a href="https://srdrplus.ahrq.gov">https://srdrplus.ahrq.gov</a> to start a new project.</h2>
 </div>
-<div id='content' tabindex=200>
-
-	<%= render :partial => "page_title", :locals => {:page_title => "Project Information"} %>
-	<br/><br/>
-
-
-
-	To start your project, fill out this screen and scroll down to click the "Save and Continue" button to follow the process shown at the right.
-
-	<br/><br/>
-	<div id="info_messages">
-		<%= render "layouts/info_messages" %>
-	</div>
-	<div id='project_form_div'>
-		<%= render "projects/form" %>
-	</div>
-	<div id="add_keyquestion_box">		
-	</div>
-
-</div>
-
-<script type="text/javascript">
-
-$(document).ready(function() {
-    var is_edit_page = true;
-    $("#cancel_create_project").on("click", function(e){
-        $.ajax({
-            type: 'GET',
-            url: "/projects/cancel_new"
-        });
-    });
-
-    $("#add_keyquestion_box").dialog({
-        autoOpen: false,
-        minWidth: 600,
-        minHeight: 200,
-        modal:true
-    });
-
-    $("#add_kq_button").on("click", function(e){
-        e.preventDefault();
-        $.ajax({
-          url: 'key_questions/new',
-          type: "POST",
-          cache: false,
-          dataType: "script"
-        });
-    });
-});
-
-</script>
