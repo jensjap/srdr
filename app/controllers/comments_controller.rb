@@ -154,30 +154,35 @@ end
   # remove the comment from the list. 
   # after it is removed, refresh the view partial and show the updated list of comments.
   def remove
-	@div_id = params[:div_id]
-	@div_id_arr = @div_id.split("_")
-  	@comment_id = @div_id_arr[2]  
+    @div_id = params[:div_id]
+    @div_id_arr = @div_id.split("_")
+    @comment_id = @div_id_arr[2]  
     puts "...................... comments_controller::remove on @comment_id "+@comment_id.to_s
- 	comment = Comment.find(@comment_id)
-	@section_name = comment.section_name
-	@section_id = comment.section_id
-	@field_name = comment.field_name
-	@study_id = comment.study_id
-	@project_id = comment.project_id
+    comment = Comment.find(@comment_id)
+    @section_name = comment.section_name
+    @section_id = comment.section_id
+    @field_name = comment.field_name
+    @study_id = comment.study_id
+    @project_id = comment.project_id
     @value_at_comment_time = comment.value_at_comment_time
     puts "...................... comments_controller::remove found and now removing comment"
- 	# delete the note and all associated replies
-	if !comment.is_reply
-		replies = Comment.where(:is_reply => true, :reply_to=>comment.id).all
-		replies.each do |reply|
-			reply.destroy
-		end
-	end
-    
- 	@saved = comment.destroy
-	@current_sorting_order = "recent"	
-	@show_both = User.current_user_is_collaborator(@project_id, current_user)
-	@comments = Comment.get_comments_and_flags(@section_name, @section_id, @field_name, @study_id, @project_id, @show_both, @current_sorting_order)
+
+    # Only allow the comment owner or admin to destroy
+    if comment.commenter_id.eql?(current_user.id) || current_user.is_admin?
+     	# delete the note and all associated replies
+      if !comment.is_reply
+        replies = Comment.where(:is_reply => true, :reply_to=>comment.id).all
+        replies.each do |reply|
+          reply.destroy
+        end
+      end
+        
+      @saved = comment.destroy
+    end
+    @current_sorting_order = "recent"	
+    @show_both = User.current_user_is_collaborator(@project_id, current_user)
+    @comments = Comment.get_comments_and_flags(@section_name, @section_id, @field_name, @study_id, @project_id, @show_both, @current_sorting_order)
+
     render "comments/create.js.erb", :locals => {:comments => @comments, :section_name => @section_name, :section_id => @section_id, :field_name => @field_name, :study_id => @study_id, :value_at_comment_time => @value_at_comment_time, :project_id => @project_id}
   end
   
