@@ -14,21 +14,21 @@
 		<td><%= pub.display_number %></td>
 		<% @ui_list = SecondaryPublication.get_pub_uis(pub.id) %>
 		
-		<td><%= pub.title %> (<%= pub.pmid %>)
+		<td><%= sanitize(pub.title) %> (<%= sanitize(pub.pmid) %>)
 			<% if !@ui_list.nil? %><br/>
 			<% for i in @ui_list %>
-				<%= i.number %> (<%= i.number_type %>)<br/>
+				<%= sanitize(i.number) %> (<%= sanitize(i.number_type) %>)<br/>
 			<% end %>
 			<% end %>
 		</td>
-		<td><%= pub.author %></td>
+		<td><%= sanitize(pub.author) %></td>
 		<td>
-			<%= pub.journal %><% unless pub.journal.ends_with?(".")%>.<% end %> <%=pub.year%> 
-			<% unless pub.volume == "--" %>Vol.<%=pub.volume%><% end %>
-			<% unless pub.issue == "--" %>Issue:<%=pub.issue%><% end %>
+			<%= sanitize(pub.journal) %><% unless pub.journal.ends_with?(".")%>.<% end %> <%= sanitize(pub.year) %> 
+			<% unless pub.volume == "--" %>Vol.<%= sanitize(pub.volume) %><% end %>
+			<% unless pub.issue == "--" %>Issue:<%= sanitize(pub.issue) %><% end %>
 		</td>
-		<td><%= pub.country %></td>
-		<td><%= pub.association.gsub("_", " ")%></td>
+		<td><%= sanitize(pub.country) %></td>
+		<td><%= sanitize(pub.association.gsub("_", " ")) %></td>
 		<td>
 		<% unless pub.display_number.nil? %>
 			<% if pub.display_number > 1 %>

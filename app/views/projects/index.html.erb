@@ -11,52 +11,54 @@
     <%= render :partial => "sidebars/mySRDR_sidebar" %>
 </div>
 <div id="content" tabindex=200>
-	<% unless !["member","admin","super-admin"].include?(current_user.user_type) %>
-	<div id='modal_div'></div>
+
+	<% if ["member","admin","super-admin"].include?(current_user.user_type) %>
+  	<div id='modal_div'></div>
     <%= render :partial=>"projects_tabs"%>
-    <% end %>
-    <% unless !["public"].include?(current_user.user_type) %>
+  <% end %>
+
+  <% if ["public"].include?(current_user.user_type) %>
     As a member of the registered public, you have limited access to published reports and your comments. If you would like to become a SRDR contributor,
     please contact your organization director or make a request through our Registration process link above.
-    <% end %>
+  <% end %>
 </div> <!-- end the content div -->
 
 <script>
 <!--
-$(function() {
-	$("#tabs").tabs();
-});
-$(document).ready(function(){
+  $(function() {
+  	$("#tabs").tabs();
+  });
+  $(document).ready(function(){
 
-	var myMenu = new SDMenu("nav-menu"); // ID of the menu element
-	// Default values...
-	myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
-	myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
-	myMenu.oneSmOnly = false;             // One expanded submenu at a time
-	myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
+  	var myMenu = new SDMenu("nav-menu"); // ID of the menu element
+  	// Default values...
+  	myMenu.speed = 4;                     // Menu sliding speed (1 - 5 recomended)
+  	myMenu.remember = true;               // Store menu states (expanded or collapsed) in cookie and restore later
+  	myMenu.oneSmOnly = false;             // One expanded submenu at a time
+  	myMenu.markCurrent = true;            // Mark current link / page (link.href == location.href)
 
-	myMenu.init();
+  	myMenu.init();
 
-	// SEPARATE FROM THE MENU ITSELF...
-	$("a.nav_active").first().addClass("nav-active");
-	$("a.nav_active").first().addClass("nav-selected");
-	activate_section($("a.nav_active").first());
+  	// SEPARATE FROM THE MENU ITSELF...
+  	$("a.nav_active").first().addClass("nav-active");
+  	$("a.nav_active").first().addClass("nav-selected");
+  	activate_section($("a.nav_active").first());
 
-	$("#modal_div").dialog({ autoOpen: false });
-	$("#tabs").tabs();
+  	$("#modal_div").dialog({ autoOpen: false });
+  	$("#tabs").tabs();
 
-	$(".copy_project_link").unbind("");
-	$(".copy_project_link").bind("click",function(event){
-		event.preventDefault();
-		projID = $(this).attr("project_id");
-		$.ajax({
-			type: 'POST',
-			url: "projects/show_copy_form",
-			data:({
-				project_id: projID
-			})
-		});
-	});
-});
+  	$(".copy_project_link").unbind("");
+  	$(".copy_project_link").bind("click",function(event){
+  		event.preventDefault();
+  		projID = $(this).attr("project_id");
+  		$.ajax({
+  			type: 'POST',
+  			url: "projects/show_copy_form",
+  			data:({
+  				project_id: projID
+  			})
+  		});
+  	});
+  });
 //-->
 </script>
