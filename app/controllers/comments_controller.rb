@@ -57,27 +57,28 @@ before_filter :require_user, :except => [:show, :sort, :show_summary]
         
         # save comment
 		@comment.study_id = @study_id
-		@saved = @comment.save	
-        puts "-------------------------- comments_controller::create - @saved = "+@saved.to_s
-        
-        if post_user.user_type == "public"
-            # Now send an E-mail to admin notifying a public comment has been posted
-            # Get site properties
-            siteproperties = session[:guiproperties]
-            if siteproperties.nil?
-                siteproperties = Guiproperties.new
-                session[:guiproperties] = siteproperties
-            end
-            puts ".......... now get user via id "+@comment.commenter_id.to_s
-            @user = User.find(:first,:conditions=>["id = ?",@comment.commenter_id])
-            if @user.nil?
-                puts "............ cannot locate user"
-            else
-                puts "............ found user login "+@user.login
-            end
-            ConfirmationMailer.notifyComment(siteproperties.getCommentsNotificationEmail(), @user, @comment).deliver
+		@saved = @comment.save
+    puts "-------------------------- comments_controller::create - @saved = "+@saved.to_s
+    
+    if post_user.user_type == "public"
+        # Now send an E-mail to admin notifying a public comment has been posted
+        # Get site properties
+        siteproperties = session[:guiproperties]
+        if siteproperties.nil?
+            siteproperties = Guiproperties.new
+            session[:guiproperties] = siteproperties
         end
-	
+
+        puts ".......... now get user via id "+ current_user.id.to_s
+        @user = User.find(:first,:conditions=>["id = ?", current_user.id.to_s])
+        if @user.nil?
+            puts "............ cannot locate user"
+        else
+            puts "............ found user login "+@user.login
+        end
+        ConfirmationMailer.notifyComment(siteproperties.getCommentsNotificationEmail(), @user, @comment).deliver
+    end
+
 	# Below is the code to choose whether to "post and email user" or just "post" a comment.
 	# as of 1-19-2012 this feature is not being used
 	#	@how_to_comment = params[:how_to_comment]
