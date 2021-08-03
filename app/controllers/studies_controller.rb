@@ -1063,17 +1063,23 @@ class StudiesController < ApplicationController
                 project_id        = params[:project_id].to_i
                 my_file           = params[:file_upload][:my_file]
                 original_filename = my_file.original_filename.gsub(/`/, '')
-                tmp               = my_file.tempfile
-                t                 = Time.now()
-                file              = File.join("#{Rails.root.to_s}","public", [t.month, t.day, t.year, t.hour, t.min, t.sec].join("") + original_filename)
-                puts "------------UPLOAD------\nFile is #{file}\n"
-                FileUtils.cp tmp.path, file
-                puts "done uploading\n\nStarting assignment job."
-                importer = AssignmentJob.new(file, project_id, current_user)
-                importer.run
-                puts "importer is complete.\n"
-                flash[:success] = "Thanks! We're working on your file now and will email you to let you know that everything goes smoothly. If so, you should see your studies within a few minutes."
-                redirect_to "/projects/#{ project_id }/studies"
+
+                if original_filename.end_with?('txt', 'csv', 'xls') && ["text/plain", "text/csv", "application/vnd.ms-excel"].include?(my_file.content_type)
+                    tmp               = my_file.tempfile
+                    t                 = Time.now()
+                    file              = File.join("#{Rails.root.to_s}","public", [t.month, t.day, t.year, t.hour, t.min, t.sec].join("") + original_filename)
+                    puts "------------UPLOAD------\nFile is #{file}\n"
+                    FileUtils.cp tmp.path, file
+                    puts "done uploading\n\nStarting assignment job."
+                    importer = AssignmentJob.new(file, project_id, current_user)
+                    importer.run
+                    puts "importer is complete.\n"
+                    flash[:success] = "Thanks! We're working on your file now and will email you to let you know that everything goes smoothly. If so, you should see your studies within a few minutes."
+                    redirect_to "/projects/#{ project_id }/studies"
+                else
+                    flash[:error] = "The file format or content-type of your upload is invalid. Please use a file with the proper extension and file type content."
+                    redirect_to "/projects/#{ project_id }/studies"
+                end
             rescue Exception=>e
                 puts "ERROR: #{e.message}\n#{e.backtrace}"
                 render :study_assignment
