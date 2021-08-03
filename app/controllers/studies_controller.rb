@@ -1058,20 +1058,22 @@ class StudiesController < ApplicationController
     end
 
     def batch_assignment
-        unless params[:project_id].nil?
+        if params[:project_id].present?
             begin
-                tmp = params[:file_upload][:my_file].tempfile
-                t = Time.now()
-                file = File.join("#{Rails.root.to_s}","public", [t.month, t.day, t.year, t.hour, t.min, t.sec].join("") + params[:file_upload][:my_file].original_filename)
+                project_id        = params[:project_id].to_i
+                my_file           = params[:file_upload][:my_file]
+                original_filename = my_file.original_filename.gsub(/`/, '')
+                tmp               = my_file.tempfile
+                t                 = Time.now()
+                file              = File.join("#{Rails.root.to_s}","public", [t.month, t.day, t.year, t.hour, t.min, t.sec].join("") + original_filename)
                 puts "------------UPLOAD------\nFile is #{file}\n"
                 FileUtils.cp tmp.path, file
                 puts "done uploading\n\nStarting assignment job."
-                importer = AssignmentJob.new(file,params[:project_id],current_user)
+                importer = AssignmentJob.new(file, project_id, current_user)
                 importer.run
                 puts "importer is complete.\n"
                 flash[:success] = "Thanks! We're working on your file now and will email you to let you know that everything goes smoothly. If so, you should see your studies within a few minutes."
-                redirect_to "/projects/#{params[:project_id]}/studies"    
-                #render action: "/home/study_assignment", msg: "Your file is being processed."
+                redirect_to "/projects/#{ project_id }/studies"
             rescue Exception=>e
                 puts "ERROR: #{e.message}\n#{e.backtrace}"
                 render :study_assignment
