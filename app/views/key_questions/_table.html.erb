@@ -9,7 +9,7 @@
 		<%= hidden_field_tag "key_questions[" + keyq.id.to_s + "]", "id", :value => keyq.id.to_s %>
 		<% borderStyle = key_questions.index(keyq) == 0 ? "border-top: none;" : "border-top: solid 1px #000" %>
 		<tr id=<%= "kq_row_"+keyq.question_number.to_s %>>
-			<td style="<%= borderStyle %>"><%= keyq.question_number %>. <%= render :inline => keyq.question %></td>
+			<td style="<%= borderStyle %>"><%= keyq.question_number %>. <%= render :inline => sanitize(keyq.question) %></td>
 		</tr>
 
 		<tr>
