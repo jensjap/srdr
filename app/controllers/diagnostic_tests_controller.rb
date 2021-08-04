@@ -51,15 +51,18 @@ class DiagnosticTestsController < ApplicationController
     # update the diagnostic test object
     def update
         dt = DiagnosticTest.find(params[:id])
-        if dt.update_attributes(params[:diagnostic_test])
-            dt.assign_thresholds(params[:thresholds])     # assign test thresholds
-            @efid = dt.extraction_form_id
-            @extraction_form = ExtractionForm.find(@efid)
-            @title,@table_container = get_table_title(dt)
-            @thresholds = dt.diagnostic_test_thresholds
-            @tests = DiagnosticTest.where(:extraction_form_id=>@efid,:study_id=>dt.study_id, :test_type=>dt.test_type)
-            # render create.js.erb
-            render 'create'
+        ef = ExtractionForm.find(dt.extraction_form_id)
+        if current_user.id.eql?(ef.creator_id) || current_user.is_admin?
+            if dt.update_attributes(params[:diagnostic_test])
+                dt.assign_thresholds(params[:thresholds])     # assign test thresholds
+                @efid = dt.extraction_form_id
+                @extraction_form = ExtractionForm.find(@efid)
+                @title,@table_container = get_table_title(dt)
+                @thresholds = dt.diagnostic_test_thresholds
+                @tests = DiagnosticTest.where(:extraction_form_id=>@efid,:study_id=>dt.study_id, :test_type=>dt.test_type)
+                # render create.js.erb
+                render 'create'
+            end
         end
     end
 
@@ -70,7 +73,9 @@ class DiagnosticTestsController < ApplicationController
         @extraction_form = ExtractionForm.find(@efid)
         @title,@table_container = get_table_title(@obj)
         @tests = DiagnosticTest.where(:extraction_form_id=>@efid,:study_id=>@obj.study_id, :test_type=>@obj.test_type)
-        @obj.destroy
+        if current_user.id.eql?(@extraction_form.creator_id) || current_user.is_admin?
+          @obj.destroy
+        end
     end
 
 	#-----------------------------------------
