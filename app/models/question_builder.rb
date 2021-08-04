@@ -34,6 +34,7 @@ class QuestionBuilder
 	# save_question_choices
 	# save the choices for any question being entered
 	def self.save_question_choices(choices_hash, obj_id, editing, subquestion, options_with_subs, has_subquestion, obj_type, obj_class) 
+        choices_hash = self.sanitize_choices(choices_hash)
 		success = true
 		objid = obj_id
 		good_ids = []
@@ -134,6 +135,10 @@ class QuestionBuilder
 	# ModelObjField database. Any rows will not utilize this field.
 	def self.save_matrix_setup(matrix_options, obj_id, obj_type, obj_class, editing = false)
 		begin
+        matrix_options["rows"]            = self.sanitize_choices(matrix_options["rows"])
+        matrix_options["columns"]         = self.sanitize_choices(matrix_options["columns"])
+        matrix_options[:dropdown_options] = self.sanitize_choices(matrix_options[:dropdown_options])
+
 		# get row and column options
 		rows = matrix_options["rows"]
 		columns = matrix_options["columns"]
@@ -671,6 +676,17 @@ class QuestionBuilder
 	end
 
 	private
+
+    def self.sanitize_choices(choices_hash)
+        sanitized_choices = {}
+        choices_hash.each do |key, value|
+            value = value.gsub("t>", "")
+            value = value.gsub("<s", "")
+            sanitized_choices[key] = value
+        end
+
+        return sanitized_choices
+    end
 	
 	# create_multi_choice_field_hash
 	# create and return a hash to represent fields and datapoints for a particular question

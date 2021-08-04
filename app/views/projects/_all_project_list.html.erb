@@ -44,7 +44,7 @@
     <tr>
         <td class='data' style='position:relative;'>
             <span style='float:left;width:75%'>
-               <h2><%= project.title %></h2><br/>
+               <h2><%= sanitize(project.title) %></h2><br/>
             </span>
             <span style='float:right;position:relative; right:30px; top:0px;' class='status'>
                 <%= access_state %> 
