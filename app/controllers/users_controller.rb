@@ -133,18 +133,24 @@ class UsersController < ApplicationController
 
     # update the user's account information
     def update
-        @user = @current_user # makes our views "cleaner" and more consistent
-        params[:user][:email].downcase!
-        params[:user].delete("user_type")
-        if @user.update_attributes(params[:user])
-            flash[:notice] = "Account updated!"
-            redirect_to account_url
-        else
-            error_string = ""
-            @user.errors.each do |key, value|
-              error_string += ("#{key } #{value}; ").titleize
+        if verified_request?
+            @user = @current_user # makes our views "cleaner" and more consistent
+            params[:user][:email].downcase!
+            params[:user].delete("user_type")
+            if @user.update_attributes(params[:user])
+                flash[:notice] = "Account updated!"
+                redirect_to account_url
+            else
+                error_string = ""
+                @user.errors.each do |key, value|
+                  error_string += ("#{key } #{value}; ").titleize
+                end
+                flash.now[:error] = error_string
+                render :action => :edit
             end
-            flash.now[:error] = error_string
+        else
+            @user = @current_user # makes our views "cleaner" and more consistent
+            flash.now[:error] = "Unverified Request. Potentional CSRF."
             render :action => :edit
         end
     end
