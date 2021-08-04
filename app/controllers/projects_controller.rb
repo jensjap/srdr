@@ -137,8 +137,12 @@ class ProjectsController < ApplicationController
   # manage users for a project 
   def manage
   	@project = Project.find(params[:project_id])
-  	@project_users = User.get_users_for_project(@project.id, current_user)
-  	@user_project_roles = UserProjectRole.new		
+    if @project.lead_users.include? current_user || current_user.is_admin?
+    	@project_users = User.get_users_for_project(@project.id, current_user)
+    	@user_project_roles = UserProjectRole.new		
+    else
+      render inline: "<h3> You are not authorized to perform this action.</h2>"
+    end
   end
   
   # studies  
