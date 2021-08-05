@@ -1,4 +1,5 @@
 class DiagnosticTestsController < ApplicationController
+    before_filter :require_editor_role, :only => [:create, :update, :destroy]
 
 	# initialize a new diagnostic test
 	def new

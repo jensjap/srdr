@@ -1,5 +1,6 @@
 # this controller handles creation and editing of arm suggestions - when a contributor adds arm names to the extraction form.
 class ExtractionFormDiagnosticTestsController < ApplicationController
+    before_filter :require_editor_role, :only => [:create, :update, :destroy]
     # new
     # create a new extraction form diagnostic test suggestion. First determine which type of
     # test needs to be created (index or reference) and create an object for the form to work on.
