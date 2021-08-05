@@ -680,8 +680,8 @@ class QuestionBuilder
     def self.sanitize_choices(choices_hash)
         sanitized_choices = {}
         choices_hash.each do |key, value|
-            value = value.gsub("t>", "")
-            value = value.gsub("<s", "")
+            value = value.gsub(">", "&gt;")
+            value = value.gsub("<", "&lt;")
             sanitized_choices[key] = value
         end
 

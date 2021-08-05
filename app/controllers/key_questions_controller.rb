@@ -152,8 +152,8 @@ before_filter :require_user
 	  	retVal = retVal.sub(/(<br>)*<p>\s*<\/p>$/,"")
 	  	retVal = retVal.sub(/^<p>/,"")
 	  	retVal = retVal.sub(/<\/p>$/,"")
-	  	retVal = retVal.gsub(/<s/,"")
-	  	retVal = retVal.gsub(/t>/,"")
+	  	retVal = retVal.gsub(/</,"&lt;")
+	  	retVal = retVal.gsub(/>/,"&gt;")
 	  	return retVal
 	  end
 	end
